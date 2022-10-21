@@ -1,0 +1,15 @@
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\bin\Release\InventoryManagmentSystem.exe.config
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\bin\Release\InventoryManagmentSystem.exe
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\bin\Release\InventoryManagmentSystem.pdb
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Release\InventoryManagmentSystem.csproj.AssemblyReference.cache
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Release\InventoryManagmentSystem.csproj.SuggestedBindingRedirects.cache
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Release\InventoryManagmentSystem.CustomButton.resources
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Release\InventoryManagmentSystem.Login.resources
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Release\InventoryManagmentSystem.MainForm.resources
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Release\InventoryManagmentSystem.Properties.Resources.resources
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Release\InventoryManagmentSystem.UserForm.resources
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Release\InventoryManagmentSystem.UserModuleForm.resources
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Release\InventoryManagmentSystem.csproj.GenerateResource.cache
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Release\InventoryManagmentSystem.csproj.CoreCompileInputs.cache
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Release\InventoryManagmentSystem.exe
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Release\InventoryManagmentSystem.pdb
