@@ -92,31 +92,31 @@
             // 
             this.PasswordLable.AutoSize = true;
             this.PasswordLable.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PasswordLable.Location = new System.Drawing.Point(60, 145);
+            this.PasswordLable.Location = new System.Drawing.Point(84, 124);
             this.PasswordLable.Name = "PasswordLable";
-            this.PasswordLable.Size = new System.Drawing.Size(78, 20);
+            this.PasswordLable.Size = new System.Drawing.Size(72, 20);
             this.PasswordLable.TabIndex = 7;
-            this.PasswordLable.Text = "Password:";
+            this.PasswordLable.Text = "Password";
             // 
             // UserNameLable
             // 
             this.UserNameLable.AutoSize = true;
             this.UserNameLable.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UserNameLable.Location = new System.Drawing.Point(47, 100);
+            this.UserNameLable.Location = new System.Drawing.Point(84, 79);
             this.UserNameLable.Name = "UserNameLable";
-            this.UserNameLable.Size = new System.Drawing.Size(91, 20);
+            this.UserNameLable.Size = new System.Drawing.Size(85, 20);
             this.UserNameLable.TabIndex = 5;
-            this.UserNameLable.Text = "User Name:";
+            this.UserNameLable.Text = "User Name";
             // 
             // e
             // 
             this.e.AutoSize = true;
             this.e.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.e.Location = new System.Drawing.Point(-1, 190);
+            this.e.Location = new System.Drawing.Point(84, 169);
             this.e.Name = "e";
-            this.e.Size = new System.Drawing.Size(139, 20);
+            this.e.Size = new System.Drawing.Size(133, 20);
             this.e.TabIndex = 9;
-            this.e.Text = "Re-type Password:";
+            this.e.Text = "Re-type Password";
             // 
             // SaveButton
             // 
@@ -159,28 +159,28 @@
             // 
             // UserNameTxt
             // 
-            this.UserNameTxt.Location = new System.Drawing.Point(137, 100);
+            this.UserNameTxt.Location = new System.Drawing.Point(88, 102);
             this.UserNameTxt.Name = "UserNameTxt";
             this.UserNameTxt.Size = new System.Drawing.Size(379, 20);
             this.UserNameTxt.TabIndex = 15;
             // 
             // PasswordTxt
             // 
-            this.PasswordTxt.Location = new System.Drawing.Point(137, 145);
+            this.PasswordTxt.Location = new System.Drawing.Point(88, 147);
             this.PasswordTxt.Name = "PasswordTxt";
             this.PasswordTxt.Size = new System.Drawing.Size(379, 20);
             this.PasswordTxt.TabIndex = 16;
             // 
             // PasswordConfTxt
             // 
-            this.PasswordConfTxt.Location = new System.Drawing.Point(137, 190);
+            this.PasswordConfTxt.Location = new System.Drawing.Point(88, 192);
             this.PasswordConfTxt.Name = "PasswordConfTxt";
             this.PasswordConfTxt.Size = new System.Drawing.Size(379, 20);
             this.PasswordConfTxt.TabIndex = 17;
             // 
             // NameTxtBox
             // 
-            this.NameTxtBox.Location = new System.Drawing.Point(137, 235);
+            this.NameTxtBox.Location = new System.Drawing.Point(88, 237);
             this.NameTxtBox.Name = "NameTxtBox";
             this.NameTxtBox.Size = new System.Drawing.Size(379, 20);
             this.NameTxtBox.TabIndex = 19;
@@ -189,16 +189,16 @@
             // 
             this.NameLable.AutoSize = true;
             this.NameLable.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NameLable.Location = new System.Drawing.Point(83, 235);
+            this.NameLable.Location = new System.Drawing.Point(84, 214);
             this.NameLable.Name = "NameLable";
-            this.NameLable.Size = new System.Drawing.Size(55, 20);
+            this.NameLable.Size = new System.Drawing.Size(49, 20);
             this.NameLable.TabIndex = 18;
-            this.NameLable.Text = "Name:";
+            this.NameLable.Text = "Name";
             // 
             // ShowPassword
             // 
             this.ShowPassword.AutoSize = true;
-            this.ShowPassword.Location = new System.Drawing.Point(414, 261);
+            this.ShowPassword.Location = new System.Drawing.Point(365, 263);
             this.ShowPassword.Name = "ShowPassword";
             this.ShowPassword.Size = new System.Drawing.Size(102, 17);
             this.ShowPassword.TabIndex = 20;
@@ -244,7 +244,6 @@
         private System.Windows.Forms.Label PasswordLable;
         private System.Windows.Forms.Label UserNameLable;
         private System.Windows.Forms.Label e;
-        private CustomButton CloseButton;
         public System.Windows.Forms.Button SaveButton;
         public System.Windows.Forms.Button UpdateButton;
         public System.Windows.Forms.Button ClearButton;

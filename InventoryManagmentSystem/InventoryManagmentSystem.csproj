@@ -52,6 +52,12 @@
     <Compile Include="CustomButton.Designer.cs">
       <DependentUpon>CustomButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="DeptModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeptModuleForm.Designer.cs">
+      <DependentUpon>DeptModuleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     </Compile>
     <EmbeddedResource Include="CustomButton.resx">
       <DependentUpon>CustomButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeptModuleForm.resx">
+      <DependentUpon>DeptModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
