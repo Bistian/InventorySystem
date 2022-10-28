@@ -14,3 +14,4 @@ C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\ob
 C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.CoreCompileInputs.cache
 C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.exe
 C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.pdb
+C:\Users\sebas\source\repos\InventoryManagmentSystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.DepartmentForm.resources

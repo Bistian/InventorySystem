@@ -78,5 +78,14 @@ namespace InventoryManagmentSystem
             LoadUser();
 
         }
+
+        private void customButton1_Click(object sender, EventArgs e)
+        {
+            UserModuleForm ModForm = new UserModuleForm();
+            ModForm.SaveButton.Enabled = true;
+            ModForm.UpdateButton.Enabled = false;
+            ModForm.ShowDialog();
+            LoadUser();
+        }
     }
 }

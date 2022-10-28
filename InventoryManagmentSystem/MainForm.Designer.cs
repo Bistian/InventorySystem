@@ -140,6 +140,7 @@
             this.DepatmensButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.DepatmensButton.TabIndex = 12;
             this.DepatmensButton.TabStop = false;
+            this.DepatmensButton.Click += new System.EventHandler(this.DepatmensButton_Click);
             // 
             // InventoryTxt
             // 
