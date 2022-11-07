@@ -86,12 +86,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DepartmentsTxt.AutoSize = true;
-            this.DepartmentsTxt.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DepartmentsTxt.Font = new System.Drawing.Font("Blade Runner Movie Font", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DepartmentsTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.DepartmentsTxt.Location = new System.Drawing.Point(12, 13);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(200, 24);
+            this.DepartmentsTxt.Size = new System.Drawing.Size(304, 21);
             this.DepartmentsTxt.TabIndex = 15;
             this.DepartmentsTxt.Text = "Departments Moduel ";
             this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -310,6 +310,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DeptModuleForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DeptModuleForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

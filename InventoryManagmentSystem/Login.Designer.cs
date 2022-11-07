@@ -78,14 +78,13 @@
             // 
             // Title
             // 
-            this.Title.AutoSize = true;
-            this.Title.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Title.Font = new System.Drawing.Font("Blade Runner Movie Font", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Title.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Title.Location = new System.Drawing.Point(89, 26);
+            this.Title.Location = new System.Drawing.Point(97, 9);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(164, 20);
+            this.Title.Size = new System.Drawing.Size(151, 43);
             this.Title.TabIndex = 7;
-            this.Title.Text = "Inventory Managment";
+            this.Title.Text = " Inventory Managment";
             // 
             // MyLogo
             // 
@@ -223,7 +222,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MyLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FireTecLogo)).EndInit();
