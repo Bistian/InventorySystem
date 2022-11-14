@@ -13,10 +13,16 @@ namespace InventoryManagmentSystem
 {
     public partial class Login : Form
     {
+        #region SQL_Variables
+        //Creating and linking connection
         SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\sebas\source\repos\InventorySystem\Tables\dbMS.mdf;Integrated Security=True;Connect Timeout=30");
+        //Creating command
         SqlCommand cm = new SqlCommand();
+        //Creatinng Reader
         SqlDataReader dr;
+        #endregion SQL_Variables
 
+        //Initialize
         public Login()
         {
             InitializeComponent();
@@ -64,7 +70,7 @@ namespace InventoryManagmentSystem
                 dr = cm.ExecuteReader();
                 dr.Read();
 
-                if(dr.HasRows)
+                if (dr.HasRows)
                 {
                     //MessageBox.Show("Welcome " + dr["fullname"].ToString(), "ACCESS GRANTED", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     MainForm main = new MainForm();
@@ -76,12 +82,13 @@ namespace InventoryManagmentSystem
                 }
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
             this.Dispose();
         }
+
         private void input_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)

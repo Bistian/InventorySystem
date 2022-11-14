@@ -14,9 +14,15 @@ namespace InventoryManagmentSystem
 {
     public partial class UserModuleForm : Form
     {
+        #region SQL_Variables
+        //Creating and linking connection
         SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\sebas\source\repos\InventorySystem\Tables\dbMS.mdf;Integrated Security=True;Connect Timeout=30");
+        //Creating command
         SqlCommand cm = new SqlCommand();
-    
+
+        #endregion SQL_Variables
+
+        //Initialize
         public UserModuleForm()
         {
             InitializeComponent();
@@ -33,13 +39,13 @@ namespace InventoryManagmentSystem
         {
             try
             {
-                if(PasswordTxt.Text != PasswordConfTxt.Text)
+                if (PasswordTxt.Text != PasswordConfTxt.Text)
                 {
                     MessageBox.Show("Passwords did not Match", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                if(MessageBox.Show("Are you sure you want to save this user?", "Saving User", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)                 
+                if (MessageBox.Show("Are you sure you want to save this user?", "Saving User", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     cm = new SqlCommand("INSERT INTO tbUser(username,password,fullname)VALUES(@username,@password,@fullname)", con);
                     cm.Parameters.AddWithValue("@username", UserNameTxt.Text);
@@ -53,7 +59,7 @@ namespace InventoryManagmentSystem
                     this.Dispose();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -66,10 +72,10 @@ namespace InventoryManagmentSystem
 
         public void Clear()
         {
-           if(SaveButton.Enabled == true)
-           {
-            UserNameTxt.Clear();
-           }
+            if (SaveButton.Enabled == true)
+            {
+                UserNameTxt.Clear();
+            }
 
             PasswordTxt.Clear();
             PasswordConfTxt.Clear();
@@ -78,8 +84,8 @@ namespace InventoryManagmentSystem
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
-             try
-             {
+            try
+            {
                 if (PasswordTxt.Text != PasswordConfTxt.Text)
                 {
                     MessageBox.Show("Passwords did not Match", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -87,7 +93,7 @@ namespace InventoryManagmentSystem
                 }
                 if (MessageBox.Show("Are you sure you want to update this user?", "Update User", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cm = new SqlCommand("UPDATE tbUser SET password = @password,fullname = @fullname WHERE username LIKE '" +UserNameTxt.Text+ "' ", con);
+                    cm = new SqlCommand("UPDATE tbUser SET password = @password,fullname = @fullname WHERE username LIKE '" + UserNameTxt.Text + "' ", con);
                     cm.Parameters.AddWithValue("@password", PasswordTxt.Text);
                     cm.Parameters.AddWithValue("@fullname", NameTxtBox.Text);
                     con.Open();
@@ -96,7 +102,7 @@ namespace InventoryManagmentSystem
                     MessageBox.Show("User has been successfully updated");
                     this.Dispose();
                 }
-             }
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

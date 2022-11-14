@@ -13,10 +13,16 @@ namespace InventoryManagmentSystem
 {
     public partial class UserForm : Form
     {
+        #region SQL_Variables
+        //Creating and linking connection
         SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\sebas\source\repos\InventorySystem\Tables\dbMS.mdf;Integrated Security=True;Connect Timeout=30");
+        //Creating command
         SqlCommand cm = new SqlCommand();
+        //Creatinng Reader
         SqlDataReader dr;
+        #endregion SQL_Variables
 
+        //Initialize
         public UserForm()
         {
             InitializeComponent();
@@ -31,7 +37,7 @@ namespace InventoryManagmentSystem
             con.Open();
             dr = cm.ExecuteReader();
 
-            while(dr.Read())
+            while (dr.Read())
             {
                 i++;
                 dataGridUser.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString());
@@ -64,9 +70,9 @@ namespace InventoryManagmentSystem
                 userModule.UserNameTxt.Enabled = false;
                 userModule.ShowDialog();
             }
-            else if(colName == "Delete")
+            else if (colName == "Delete")
             {
-                if(MessageBox.Show("Are you sure you want to delete this user?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Are you sure you want to delete this user?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     con.Open();
                     cm = new SqlCommand("DELETE FROM tbUser WHERE username LIKE '" + dataGridUser.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);

@@ -13,9 +13,14 @@ namespace InventoryManagmentSystem
 {
     public partial class DeptModuleForm : Form
     {
+        #region SQL_Variables
+        //Creating and linking connection
         SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\sebas\source\repos\InventorySystem\Tables\dbMS.mdf;Integrated Security=True;Connect Timeout=30");
+        //Creating command
         SqlCommand cm = new SqlCommand();
+        #endregion SQL_Variables
 
+        //Initialize
         public DeptModuleForm()
         {
             InitializeComponent();

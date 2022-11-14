@@ -13,11 +13,16 @@ namespace InventoryManagmentSystem
 {
     public partial class DepartmentForm : Form
     {
-
+        #region SQL_Variables
+        //Creating command
         SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\sebas\source\repos\InventorySystem\Tables\dbMS.mdf;Integrated Security=True;Connect Timeout=30");
+        //Creating command
         SqlCommand cm = new SqlCommand();
+        //Creatinng Reader
         SqlDataReader dr;
+        #endregion SQL_Variables
 
+        //Initialize
         public DepartmentForm()
         {
 

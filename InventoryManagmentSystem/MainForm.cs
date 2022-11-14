@@ -12,30 +12,31 @@ namespace InventoryManagmentSystem
 {
     public partial class MainForm : Form
     {
+
+        //Initialize
         public MainForm()
         {
             InitializeComponent();
         }
 
         //to show subform in mainform
-
         private Form activeForm = null;
-        
+
         private void openChildForm(Form childForm)
         {
             if (activeForm != null)
             {
                 activeForm.Close();
             }
-                activeForm = childForm;
-                childForm.TopLevel = false;
-                childForm.FormBorderStyle = FormBorderStyle.None;
-                childForm.Dock = DockStyle.Fill;
-                MainPanel.Controls.Add(childForm);
-                MainPanel.Tag = childForm;
-                childForm.BringToFront();
-                childForm.Show();
-            
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            MainPanel.Controls.Add(childForm);
+            MainPanel.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+
         }
 
         private void UsersButton_Click(object sender, EventArgs e)
