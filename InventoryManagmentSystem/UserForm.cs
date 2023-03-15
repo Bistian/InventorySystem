@@ -52,7 +52,6 @@ namespace InventoryManagmentSystem
         {
             UserModuleForm userModuel = new UserModuleForm();
             userModuel.SaveButton.Enabled = true;
-            userModuel.UpdateButton.Enabled = false;
             userModuel.ShowDialog();
             LoadUser();
         }
@@ -64,11 +63,9 @@ namespace InventoryManagmentSystem
             {
                 UserModuleForm userModule = new UserModuleForm();
                 userModule.UserNameTxt.Text = dataGridUser.Rows[e.RowIndex].Cells[1].Value.ToString();
-                userModule.PasswordTxt.Text = dataGridUser.Rows[e.RowIndex].Cells[2].Value.ToString();
                 userModule.NameTxtBox.Text = dataGridUser.Rows[e.RowIndex].Cells[3].Value.ToString();
 
-                userModule.SaveButton.Enabled = false;
-                userModule.UpdateButton.Enabled = true;
+                userModule.SaveButton.Enabled = true;
                 userModule.UserNameTxt.Enabled = false;
                 userModule.ShowDialog();
             }
@@ -87,11 +84,12 @@ namespace InventoryManagmentSystem
 
         }
 
+        // Add New User
+        // Redirect to adding user form.
         private void customButton1_Click(object sender, EventArgs e)
         {
-            UserModuleForm ModForm = new UserModuleForm();
+            UserModuleForm ModForm = new UserModuleForm(true);
             ModForm.SaveButton.Enabled = true;
-            ModForm.UpdateButton.Enabled = false;
             ModForm.ShowDialog();
             LoadUser();
         }

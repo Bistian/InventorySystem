@@ -21,15 +21,18 @@ namespace InventoryManagmentSystem
         SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename=" + dbPath + " Integrated Security=True;Connect Timeout=30");
         //Creating command
         SqlCommand cm = new SqlCommand();
+        //Flag to switch between adding new user or updating.
+        bool isNewUser;
 
         #endregion SQL_Variables
 
         //Initialize
-        public UserModuleForm()
+        public UserModuleForm(bool newUser = false)
         {
             InitializeComponent();
             PasswordTxt.UseSystemPasswordChar = true;
             PasswordConfTxt.UseSystemPasswordChar = true;
+            isNewUser = newUser;
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -38,6 +41,19 @@ namespace InventoryManagmentSystem
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
+        {
+            if(isNewUser)
+            {
+                CreateNewUser();
+            }
+            else
+            {
+                UpdateUser();
+            }
+        }
+
+        // Creates a new user in the database.
+        private void CreateNewUser()
         {
             try
             {
@@ -66,25 +82,9 @@ namespace InventoryManagmentSystem
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void ClearButton_Click(object sender, EventArgs e)
-        {
-            Clear();
-        }
-
-        public void Clear()
-        {
-            if (SaveButton.Enabled == true)
-            {
-                UserNameTxt.Clear();
-            }
-
-            PasswordTxt.Clear();
-            PasswordConfTxt.Clear();
-            NameTxtBox.Clear();
-        }
-
-        private void UpdateButton_Click(object sender, EventArgs e)
+        
+        // Update an existing user in the database.
+        private void UpdateUser()
         {
             try
             {
@@ -111,6 +111,24 @@ namespace InventoryManagmentSystem
             }
         }
 
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
+
+        public void Clear()
+        {
+            if (isNewUser == true)
+            {
+                UserNameTxt.Clear();
+            }
+
+            PasswordTxt.Clear();
+            PasswordConfTxt.Clear();
+            NameTxtBox.Clear();
+        }
+
+        // Hide password.
         private void ShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if (ShowPassword.Checked == false)

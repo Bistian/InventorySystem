@@ -36,7 +36,6 @@
             this.UserNameLable = new System.Windows.Forms.Label();
             this.e = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
-            this.UpdateButton = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
             this.UserNameTxt = new System.Windows.Forms.TextBox();
             this.PasswordTxt = new System.Windows.Forms.TextBox();
@@ -78,12 +77,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DepartmentsTxt.AutoSize = true;
-            this.DepartmentsTxt.Font = new System.Drawing.Font("Blade Runner Movie Font", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DepartmentsTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DepartmentsTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.DepartmentsTxt.Location = new System.Drawing.Point(12, 13);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(192, 21);
+            this.DepartmentsTxt.Size = new System.Drawing.Size(135, 24);
             this.DepartmentsTxt.TabIndex = 15;
             this.DepartmentsTxt.Text = "User Moduel ";
             this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -130,19 +129,6 @@
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = false;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
-            // 
-            // UpdateButton
-            // 
-            this.UpdateButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.UpdateButton.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UpdateButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.UpdateButton.Location = new System.Drawing.Point(245, 296);
-            this.UpdateButton.Name = "UpdateButton";
-            this.UpdateButton.Size = new System.Drawing.Size(87, 43);
-            this.UpdateButton.TabIndex = 11;
-            this.UpdateButton.Text = "Update";
-            this.UpdateButton.UseVisualStyleBackColor = false;
-            this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
             // ClearButton
             // 
@@ -219,7 +205,6 @@
             this.Controls.Add(this.PasswordConfTxt);
             this.Controls.Add(this.UserNameTxt);
             this.Controls.Add(this.ClearButton);
-            this.Controls.Add(this.UpdateButton);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.e);
             this.Controls.Add(this.PasswordLable);
@@ -245,7 +230,6 @@
         private System.Windows.Forms.Label UserNameLable;
         private System.Windows.Forms.Label e;
         public System.Windows.Forms.Button SaveButton;
-        public System.Windows.Forms.Button UpdateButton;
         public System.Windows.Forms.Button ClearButton;
         public System.Windows.Forms.TextBox UserNameTxt;
         public System.Windows.Forms.TextBox PasswordTxt;

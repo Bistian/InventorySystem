@@ -50,6 +50,3 @@ C:\Code\Projects\Firetec\InventoryManagmentSystem\obj\Debug\InventoryManagmentSy
 C:\Code\Projects\Firetec\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.pdb
 C:\Code\Projects\Firetec\InventoryManagmentSystem\bin\Debug\Database\dbMS.mdf
 C:\Code\Projects\Firetec\InventoryManagmentSystem\bin\Debug\Database\dbMS_log.ldf
-C:\Code\Projects\Firetec\InventoryManagmentSystem\bin\Debug\Database\Tables.mdf
-C:\Code\Projects\Firetec\InventoryManagmentSystem\bin\Debug\Database\Tables_log.ldf
-C:\Code\Projects\Firetec\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.AssemblyReference.cache
