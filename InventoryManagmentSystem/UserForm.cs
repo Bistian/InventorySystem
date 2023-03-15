@@ -14,8 +14,10 @@ namespace InventoryManagmentSystem
     public partial class UserForm : Form
     {
         #region SQL_Variables
-        //Creating and linking connection
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\sebas\source\repos\InventorySystem\Tables\dbMS.mdf;Integrated Security=True;Connect Timeout=30");
+        //Database Path
+        static string dbPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database\\dbMS.mdf;");
+        //Creating command
+        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename=" + dbPath + " Integrated Security=True;Connect Timeout=30");
         //Creating command
         SqlCommand cm = new SqlCommand();
         //Creatinng Reader
