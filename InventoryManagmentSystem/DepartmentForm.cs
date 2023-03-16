@@ -52,9 +52,8 @@ namespace InventoryManagmentSystem
 
         private void UsersButton_Click(object sender, EventArgs e)
         {
-            DeptModuleForm ModForm = new DeptModuleForm();
+            DeptModuleForm ModForm = new DeptModuleForm(true);
             ModForm.SaveButton.Enabled = true;
-            ModForm.UpdateButton.Enabled = false;
             ModForm.ShowDialog();
             LoadDepartment();
         }
@@ -74,8 +73,7 @@ namespace InventoryManagmentSystem
                 DepartmentModule.DeptStateTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[7].Value.ToString();
                 DepartmentModule.DeptZipTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[8].Value.ToString();
 
-                DepartmentModule.SaveButton.Enabled = false;
-                DepartmentModule.UpdateButton.Enabled = true;
+                DepartmentModule.SaveButton.Enabled = true;
                 DepartmentModule.DeptNameTxtBox.Enabled = false;
                 DepartmentModule.ShowDialog();
             }

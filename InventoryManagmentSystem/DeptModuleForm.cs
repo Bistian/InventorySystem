@@ -20,15 +20,30 @@ namespace InventoryManagmentSystem
         SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename=" + dbPath + " Integrated Security=True;Connect Timeout=30");
         //Creating command
         SqlCommand cm = new SqlCommand();
+        bool isNewItem;
         #endregion SQL_Variables
 
         //Initialize
-        public DeptModuleForm()
+        public DeptModuleForm(bool newItem = false)
         {
             InitializeComponent();
+            isNewItem = newItem;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
+        {
+            if(isNewItem == true)
+            {
+                CreateItem();
+            }
+            else
+            {
+                UpdateItem();
+            }
+        }
+
+        // Helper function: adds new item to database.
+        private void CreateItem()
         {
             try
             {
@@ -57,42 +72,13 @@ namespace InventoryManagmentSystem
             }
         }
 
-        public void Clear()
-        {
-            DeptNameTxtBox.Clear();
-            DeptContactTxtBox.Clear();
-            DepPhoneTxtBox.Clear();
-            DeptEmailTxtBox.Clear();
-            DeptAddressTxtBox.Clear();
-            DeptCityTxtBox.Clear();
-            DeptStateTxtBox.Clear();
-            DeptZipTxtBox.Clear();
-        }
-
-        private void ClearButton_Click(object sender, EventArgs e)
-        {
-            Clear();
-            SaveButton.Enabled = true;
-            UpdateButton.Enabled = false;
-        }
-
-        private void CloseUserModuel_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Exit Module?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                this.Dispose();
-            }
-        }
-
-        private void UpdateButton_Click(object sender, EventArgs e)
+        // Helper function: updates existing item in the database.
+        private void UpdateItem()
         {
             try
             {
                 if (MessageBox.Show("Are you sure you want to update this Department?", "Update Department", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-
-
-
                     cm = new SqlCommand("UPDATE tbDepartment SET ContactName = @ContactName,Phone = @Phone, Email = @Email, Address = @Address, City = @City, State = @State, Zip = @Zip WHERE DeptID LIKE '" + DeptNameTxtBox.Text + "' ", con);
                     cm.Parameters.AddWithValue("@ContactName", DeptContactTxtBox.Text);
                     cm.Parameters.AddWithValue("@Phone", DepPhoneTxtBox.Text);
@@ -109,11 +95,38 @@ namespace InventoryManagmentSystem
 
                 }
             }
-        
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
+        public void Clear()
+        {
+            DeptNameTxtBox.Clear();
+            DeptContactTxtBox.Clear();
+            DepPhoneTxtBox.Clear();
+            DeptEmailTxtBox.Clear();
+            DeptAddressTxtBox.Clear();
+            DeptCityTxtBox.Clear();
+            DeptStateTxtBox.Clear();
+            DeptZipTxtBox.Clear();
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            Clear();
+            SaveButton.Enabled = true;
+        }
+
+        private void CloseUserModuel_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Exit Module?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Dispose();
+            }
+        }
+
     }
 }
