@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeptModuleForm));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.CloseUserModuel = new InventoryManagmentSystem.CustomButton();
             this.DepartmentsTxt = new System.Windows.Forms.Label();
             this.DeptNameTxtBox = new System.Windows.Forms.TextBox();
             this.DeptNameLable = new System.Windows.Forms.Label();
@@ -44,13 +43,14 @@
             this.DeptZipLable = new System.Windows.Forms.Label();
             this.DeptContactTxtBox = new System.Windows.Forms.TextBox();
             this.DeptContactLable = new System.Windows.Forms.Label();
-            this.DepPhoneTxtBox = new System.Windows.Forms.TextBox();
+            this.DeptPhoneTxtBox = new System.Windows.Forms.TextBox();
             this.DeptPhoneLable = new System.Windows.Forms.Label();
             this.DeptEmailTxtBox = new System.Windows.Forms.TextBox();
             this.DeptEmailLable = new System.Windows.Forms.Label();
             this.ClearButton = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
             this.DeptIDLable = new System.Windows.Forms.Label();
+            this.CloseUserModuel = new InventoryManagmentSystem.CustomButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CloseUserModuel)).BeginInit();
             this.SuspendLayout();
@@ -65,19 +65,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(566, 52);
             this.panel1.TabIndex = 21;
-            // 
-            // CloseUserModuel
-            // 
-            this.CloseUserModuel.Image = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.Image")));
-            this.CloseUserModuel.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.ImageHover")));
-            this.CloseUserModuel.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.ImageNormal")));
-            this.CloseUserModuel.Location = new System.Drawing.Point(529, 12);
-            this.CloseUserModuel.Name = "CloseUserModuel";
-            this.CloseUserModuel.Size = new System.Drawing.Size(25, 23);
-            this.CloseUserModuel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CloseUserModuel.TabIndex = 21;
-            this.CloseUserModuel.TabStop = false;
-            this.CloseUserModuel.Click += new System.EventHandler(this.CloseUserModuel_Click);
             // 
             // DepartmentsTxt
             // 
@@ -197,12 +184,12 @@
             this.DeptContactLable.TabIndex = 43;
             this.DeptContactLable.Text = "Contact Name";
             // 
-            // DepPhoneTxtBox
+            // DeptPhoneTxtBox
             // 
-            this.DepPhoneTxtBox.Location = new System.Drawing.Point(329, 135);
-            this.DepPhoneTxtBox.Name = "DepPhoneTxtBox";
-            this.DepPhoneTxtBox.Size = new System.Drawing.Size(216, 20);
-            this.DepPhoneTxtBox.TabIndex = 48;
+            this.DeptPhoneTxtBox.Location = new System.Drawing.Point(329, 135);
+            this.DeptPhoneTxtBox.Name = "DeptPhoneTxtBox";
+            this.DeptPhoneTxtBox.Size = new System.Drawing.Size(216, 20);
+            this.DeptPhoneTxtBox.TabIndex = 48;
             // 
             // DeptPhoneLable
             // 
@@ -267,6 +254,19 @@
             this.DeptIDLable.TabIndex = 54;
             this.DeptIDLable.Text = "Dept ID";
             // 
+            // CloseUserModuel
+            // 
+            this.CloseUserModuel.Image = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.Image")));
+            this.CloseUserModuel.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.ImageHover")));
+            this.CloseUserModuel.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.ImageNormal")));
+            this.CloseUserModuel.Location = new System.Drawing.Point(529, 12);
+            this.CloseUserModuel.Name = "CloseUserModuel";
+            this.CloseUserModuel.Size = new System.Drawing.Size(25, 23);
+            this.CloseUserModuel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CloseUserModuel.TabIndex = 21;
+            this.CloseUserModuel.TabStop = false;
+            this.CloseUserModuel.Click += new System.EventHandler(this.CloseUserModuel_Click);
+            // 
             // DeptModuleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,7 +278,7 @@
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.DeptEmailTxtBox);
             this.Controls.Add(this.DeptEmailLable);
-            this.Controls.Add(this.DepPhoneTxtBox);
+            this.Controls.Add(this.DeptPhoneTxtBox);
             this.Controls.Add(this.DeptPhoneLable);
             this.Controls.Add(this.DeptContactTxtBox);
             this.Controls.Add(this.DeptContactLable);
@@ -321,7 +321,7 @@
         private System.Windows.Forms.Label DeptZipLable;
         public System.Windows.Forms.TextBox DeptContactTxtBox;
         private System.Windows.Forms.Label DeptContactLable;
-        public System.Windows.Forms.TextBox DepPhoneTxtBox;
+        public System.Windows.Forms.TextBox DeptPhoneTxtBox;
         private System.Windows.Forms.Label DeptPhoneLable;
         public System.Windows.Forms.TextBox DeptEmailTxtBox;
         private System.Windows.Forms.Label DeptEmailLable;

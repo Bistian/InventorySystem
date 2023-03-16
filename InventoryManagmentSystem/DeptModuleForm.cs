@@ -52,7 +52,7 @@ namespace InventoryManagmentSystem
                     cm = new SqlCommand("INSERT INTO tbDepartment(DeptName,ContactName,Phone,Email,Address,City,State,Zip)VALUES(@DeptName,@ContactName,@Phone,@Email,@Address,@City,@State,@Zip)", con);
                     cm.Parameters.AddWithValue("@DeptName", DeptNameTxtBox.Text);
                     cm.Parameters.AddWithValue("@ContactName", DeptContactTxtBox.Text);
-                    cm.Parameters.AddWithValue("@Phone", DepPhoneTxtBox.Text);
+                    cm.Parameters.AddWithValue("@Phone", DeptPhoneTxtBox.Text);
                     cm.Parameters.AddWithValue("@Email", DeptEmailTxtBox.Text);
                     cm.Parameters.AddWithValue("@Address", DeptAddressTxtBox.Text);
                     cm.Parameters.AddWithValue("@City", DeptCityTxtBox.Text);
@@ -81,7 +81,7 @@ namespace InventoryManagmentSystem
                 {
                     cm = new SqlCommand("UPDATE tbDepartment SET ContactName = @ContactName,Phone = @Phone, Email = @Email, Address = @Address, City = @City, State = @State, Zip = @Zip WHERE DeptID LIKE '" + DeptNameTxtBox.Text + "' ", con);
                     cm.Parameters.AddWithValue("@ContactName", DeptContactTxtBox.Text);
-                    cm.Parameters.AddWithValue("@Phone", DepPhoneTxtBox.Text);
+                    cm.Parameters.AddWithValue("@Phone", DeptPhoneTxtBox.Text);
                     cm.Parameters.AddWithValue("@Email", DeptEmailTxtBox.Text);
                     cm.Parameters.AddWithValue("@Address", DeptAddressTxtBox.Text);
                     cm.Parameters.AddWithValue("@City", DeptCityTxtBox.Text);
@@ -106,7 +106,7 @@ namespace InventoryManagmentSystem
         {
             DeptNameTxtBox.Clear();
             DeptContactTxtBox.Clear();
-            DepPhoneTxtBox.Clear();
+            DeptPhoneTxtBox.Clear();
             DeptEmailTxtBox.Clear();
             DeptAddressTxtBox.Clear();
             DeptCityTxtBox.Clear();

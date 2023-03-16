@@ -34,16 +34,16 @@
             this.DepartmentsTxt = new System.Windows.Forms.Label();
             this.dataGridDept = new System.Windows.Forms.DataGridView();
             this.BottomPanel = new System.Windows.Forms.Panel();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ziip = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
@@ -96,16 +96,16 @@
             this.dataGridDept.ColumnHeadersHeight = 30;
             this.dataGridDept.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridDept.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column4,
+            this.Column0,
             this.Column1,
             this.Column2,
             this.Column3,
-            this.Phone,
+            this.Column4,
             this.Column5,
             this.Column6,
             this.Column7,
             this.Column8,
-            this.ziip,
+            this.Column9,
             this.Edit,
             this.Delete});
             this.dataGridDept.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -127,11 +127,11 @@
             this.BottomPanel.Size = new System.Drawing.Size(1034, 53);
             this.BottomPanel.TabIndex = 2;
             // 
-            // Column4
+            // Column0
             // 
-            this.Column4.HeaderText = "#";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 25;
+            this.Column0.HeaderText = "#";
+            this.Column0.Name = "Column0";
+            this.Column0.Width = 25;
             // 
             // Column1
             // 
@@ -157,12 +157,12 @@
             this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column3.Width = 116;
             // 
-            // Phone
+            // Column4
             // 
-            this.Phone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Phone.HeaderText = "Phone";
-            this.Phone.Name = "Phone";
-            this.Phone.Width = 69;
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column4.HeaderText = "Phone";
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 69;
             // 
             // Column5
             // 
@@ -191,12 +191,12 @@
             this.Column8.Name = "Column8";
             this.Column8.Width = 62;
             // 
-            // ziip
+            // Column9
             // 
-            this.ziip.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ziip.HeaderText = "Zip";
-            this.ziip.Name = "ziip";
-            this.ziip.Width = 50;
+            this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column9.HeaderText = "Zip";
+            this.Column9.Name = "Column9";
+            this.Column9.Width = 50;
             // 
             // Edit
             // 
@@ -238,16 +238,16 @@
         private System.Windows.Forms.Label DepartmentsTxt;
         private System.Windows.Forms.DataGridView dataGridDept;
         private System.Windows.Forms.Panel BottomPanel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column0;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ziip;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Delete;
     }

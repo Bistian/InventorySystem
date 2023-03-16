@@ -66,7 +66,7 @@ namespace InventoryManagmentSystem
                 DeptModuleForm DepartmentModule = new DeptModuleForm();
                 DepartmentModule.DeptNameTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[1].Value.ToString();
                 DepartmentModule.DeptContactTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[2].Value.ToString();
-                DepartmentModule.DepPhoneTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[3].Value.ToString();
+                DepartmentModule.DeptPhoneTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[3].Value.ToString();
                 DepartmentModule.DeptEmailTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[4].Value.ToString();
                 DepartmentModule.DeptAddressTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[5].Value.ToString();
                 DepartmentModule.DeptCityTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[6].Value.ToString();
