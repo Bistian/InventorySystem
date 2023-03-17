@@ -64,14 +64,14 @@ namespace InventoryManagmentSystem
             if (colName == "Edit")
             {
                 DeptModuleForm DepartmentModule = new DeptModuleForm();
-                DepartmentModule.DeptNameTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[1].Value.ToString();
-                DepartmentModule.DeptContactTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[2].Value.ToString();
-                DepartmentModule.DeptPhoneTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[3].Value.ToString();
-                DepartmentModule.DeptEmailTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[4].Value.ToString();
-                DepartmentModule.DeptAddressTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[5].Value.ToString();
-                DepartmentModule.DeptCityTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[6].Value.ToString();
-                DepartmentModule.DeptStateTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[7].Value.ToString();
-                DepartmentModule.DeptZipTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[8].Value.ToString();
+                DepartmentModule.DeptNameTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[2].Value.ToString();
+                DepartmentModule.DeptContactTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[3].Value.ToString();
+                DepartmentModule.DeptPhoneTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[4].Value.ToString();
+                DepartmentModule.DeptEmailTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[5].Value.ToString();
+                DepartmentModule.DeptAddressTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[6].Value.ToString();
+                DepartmentModule.DeptCityTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[7].Value.ToString();
+                DepartmentModule.DeptStateTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[8].Value.ToString();
+                DepartmentModule.DeptZipTxtBox.Text = dataGridDept.Rows[e.RowIndex].Cells[9].Value.ToString();
 
                 DepartmentModule.SaveButton.Enabled = true;
                 DepartmentModule.DeptNameTxtBox.Enabled = false;
