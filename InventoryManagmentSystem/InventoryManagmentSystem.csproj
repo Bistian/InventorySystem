@@ -79,6 +79,12 @@
     <Compile Include="DeptModuleForm.Designer.cs">
       <DependentUpon>DeptModuleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InventoryModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InventoryModuleForm.Designer.cs">
+      <DependentUpon>InventoryModuleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DeptModuleForm.resx">
       <DependentUpon>DeptModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InventoryModuleForm.resx">
+      <DependentUpon>InventoryModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
