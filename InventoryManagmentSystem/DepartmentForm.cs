@@ -91,5 +91,28 @@ namespace InventoryManagmentSystem
             LoadDepartment();
 
         }
+
+        //Search Bar
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = searchBar.Text;
+            if (string.IsNullOrEmpty(searchTerm)) { LoadDepartment(); }
+
+            //SQL
+            int i = 0;
+            dataGridDept.Rows.Clear();
+            cm = new SqlCommand("SELECT * FROM tbDepartment WHERE DeptName LIKE '%" + searchTerm + "%'", con);
+            con.Open();
+            dr = cm.ExecuteReader();
+
+            while (dr.Read())
+            {
+                i++;
+                dataGridDept.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString(), dr[7].ToString(), dr[8].ToString());
+            }
+
+            dr.Close();
+            con.Close();
+        }
     }
 }
