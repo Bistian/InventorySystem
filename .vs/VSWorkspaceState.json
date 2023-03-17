@@ -1,9 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\InventoryManagmentSystem",
-    "\\InventoryManagmentSystem\\Database"
+    "\\InventoryManagmentSystem"
   ],
-  "SelectedNode": "\\InventoryManagmentSystem\\UserModuleForm.cs",
+  "SelectedNode": "\\InventoryManagmentSystem\\DepartmentForm.cs",
   "PreviewInSolutionExplorer": false
 }

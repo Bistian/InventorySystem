@@ -93,7 +93,7 @@ namespace InventoryManagmentSystem
         }
 
         //Search Bar
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void searchBar_TextChanged(object sender, EventArgs e)
         {
             string searchTerm = searchBar.Text;
             if (string.IsNullOrEmpty(searchTerm)) { LoadDepartment(); }
