@@ -62,7 +62,7 @@
             this.DepartmentPanel.Controls.Add(this.DepartmentsTxt);
             this.DepartmentPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.DepartmentPanel.Location = new System.Drawing.Point(0, 0);
-            this.DepartmentPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DepartmentPanel.Margin = new System.Windows.Forms.Padding(4);
             this.DepartmentPanel.Name = "DepartmentPanel";
             this.DepartmentPanel.Size = new System.Drawing.Size(755, 64);
             this.DepartmentPanel.TabIndex = 21;
@@ -73,7 +73,7 @@
             this.CloseUserModuel.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.ImageHover")));
             this.CloseUserModuel.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.ImageNormal")));
             this.CloseUserModuel.Location = new System.Drawing.Point(705, 15);
-            this.CloseUserModuel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CloseUserModuel.Margin = new System.Windows.Forms.Padding(4);
             this.CloseUserModuel.Name = "CloseUserModuel";
             this.CloseUserModuel.Size = new System.Drawing.Size(33, 28);
             this.CloseUserModuel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -101,7 +101,7 @@
             // DeptNameTxtBox
             // 
             this.DeptNameTxtBox.Location = new System.Drawing.Point(21, 113);
-            this.DeptNameTxtBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DeptNameTxtBox.Margin = new System.Windows.Forms.Padding(4);
             this.DeptNameTxtBox.Name = "DeptNameTxtBox";
             this.DeptNameTxtBox.Size = new System.Drawing.Size(381, 22);
             this.DeptNameTxtBox.TabIndex = 28;
@@ -120,7 +120,7 @@
             // DeptAddressTxtBox
             // 
             this.DeptAddressTxtBox.Location = new System.Drawing.Point(21, 166);
-            this.DeptAddressTxtBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DeptAddressTxtBox.Margin = new System.Windows.Forms.Padding(4);
             this.DeptAddressTxtBox.Name = "DeptAddressTxtBox";
             this.DeptAddressTxtBox.Size = new System.Drawing.Size(381, 22);
             this.DeptAddressTxtBox.TabIndex = 34;
@@ -139,7 +139,7 @@
             // DeptCityTxtBox
             // 
             this.DeptCityTxtBox.Location = new System.Drawing.Point(21, 219);
-            this.DeptCityTxtBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DeptCityTxtBox.Margin = new System.Windows.Forms.Padding(4);
             this.DeptCityTxtBox.Name = "DeptCityTxtBox";
             this.DeptCityTxtBox.Size = new System.Drawing.Size(149, 22);
             this.DeptCityTxtBox.TabIndex = 38;
@@ -158,7 +158,7 @@
             // DeptStateTxtBox
             // 
             this.DeptStateTxtBox.Location = new System.Drawing.Point(180, 219);
-            this.DeptStateTxtBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DeptStateTxtBox.Margin = new System.Windows.Forms.Padding(4);
             this.DeptStateTxtBox.Name = "DeptStateTxtBox";
             this.DeptStateTxtBox.Size = new System.Drawing.Size(76, 22);
             this.DeptStateTxtBox.TabIndex = 40;
@@ -177,7 +177,7 @@
             // DeptZipTxtBox
             // 
             this.DeptZipTxtBox.Location = new System.Drawing.Point(265, 219);
-            this.DeptZipTxtBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DeptZipTxtBox.Margin = new System.Windows.Forms.Padding(4);
             this.DeptZipTxtBox.Name = "DeptZipTxtBox";
             this.DeptZipTxtBox.Size = new System.Drawing.Size(137, 22);
             this.DeptZipTxtBox.TabIndex = 42;
@@ -196,7 +196,7 @@
             // DeptContactTxtBox
             // 
             this.DeptContactTxtBox.Location = new System.Drawing.Point(439, 113);
-            this.DeptContactTxtBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DeptContactTxtBox.Margin = new System.Windows.Forms.Padding(4);
             this.DeptContactTxtBox.Name = "DeptContactTxtBox";
             this.DeptContactTxtBox.Size = new System.Drawing.Size(287, 22);
             this.DeptContactTxtBox.TabIndex = 44;
@@ -215,7 +215,7 @@
             // DeptPhoneTxtBox
             // 
             this.DeptPhoneTxtBox.Location = new System.Drawing.Point(439, 166);
-            this.DeptPhoneTxtBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DeptPhoneTxtBox.Margin = new System.Windows.Forms.Padding(4);
             this.DeptPhoneTxtBox.Name = "DeptPhoneTxtBox";
             this.DeptPhoneTxtBox.Size = new System.Drawing.Size(287, 22);
             this.DeptPhoneTxtBox.TabIndex = 48;
@@ -234,7 +234,7 @@
             // DeptEmailTxtBox
             // 
             this.DeptEmailTxtBox.Location = new System.Drawing.Point(439, 223);
-            this.DeptEmailTxtBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DeptEmailTxtBox.Margin = new System.Windows.Forms.Padding(4);
             this.DeptEmailTxtBox.Name = "DeptEmailTxtBox";
             this.DeptEmailTxtBox.Size = new System.Drawing.Size(287, 22);
             this.DeptEmailTxtBox.TabIndex = 50;
@@ -255,8 +255,8 @@
             this.ClearButton.BackColor = System.Drawing.Color.Maroon;
             this.ClearButton.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClearButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClearButton.Location = new System.Drawing.Point(429, 278);
-            this.ClearButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClearButton.Location = new System.Drawing.Point(382, 277);
+            this.ClearButton.Margin = new System.Windows.Forms.Padding(4);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(116, 53);
             this.ClearButton.TabIndex = 53;
@@ -269,8 +269,8 @@
             this.SaveButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.SaveButton.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SaveButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.SaveButton.Location = new System.Drawing.Point(181, 278);
-            this.SaveButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SaveButton.Location = new System.Drawing.Point(228, 277);
+            this.SaveButton.Margin = new System.Windows.Forms.Padding(4);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(116, 53);
             this.SaveButton.TabIndex = 51;
@@ -316,7 +316,7 @@
             this.Controls.Add(this.DeptNameLable);
             this.Controls.Add(this.DepartmentPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DeptModuleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DeptModuleForm";

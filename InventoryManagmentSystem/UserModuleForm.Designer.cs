@@ -54,8 +54,9 @@
             this.panel1.Controls.Add(this.DepartmentsTxt);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(566, 52);
+            this.panel1.Size = new System.Drawing.Size(755, 64);
             this.panel1.TabIndex = 0;
             // 
             // CloseUserModuel
@@ -63,9 +64,10 @@
             this.CloseUserModuel.Image = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.Image")));
             this.CloseUserModuel.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.ImageHover")));
             this.CloseUserModuel.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.ImageNormal")));
-            this.CloseUserModuel.Location = new System.Drawing.Point(529, 12);
+            this.CloseUserModuel.Location = new System.Drawing.Point(705, 15);
+            this.CloseUserModuel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CloseUserModuel.Name = "CloseUserModuel";
-            this.CloseUserModuel.Size = new System.Drawing.Size(25, 23);
+            this.CloseUserModuel.Size = new System.Drawing.Size(33, 28);
             this.CloseUserModuel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.CloseUserModuel.TabIndex = 21;
             this.CloseUserModuel.TabStop = false;
@@ -80,9 +82,10 @@
             this.DepartmentsTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DepartmentsTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.DepartmentsTxt.Location = new System.Drawing.Point(12, 13);
+            this.DepartmentsTxt.Location = new System.Drawing.Point(16, 16);
+            this.DepartmentsTxt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(135, 24);
+            this.DepartmentsTxt.Size = new System.Drawing.Size(169, 29);
             this.DepartmentsTxt.TabIndex = 15;
             this.DepartmentsTxt.Text = "User Moduel ";
             this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -91,9 +94,10 @@
             // 
             this.PasswordLable.AutoSize = true;
             this.PasswordLable.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PasswordLable.Location = new System.Drawing.Point(84, 124);
+            this.PasswordLable.Location = new System.Drawing.Point(112, 153);
+            this.PasswordLable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PasswordLable.Name = "PasswordLable";
-            this.PasswordLable.Size = new System.Drawing.Size(72, 20);
+            this.PasswordLable.Size = new System.Drawing.Size(92, 24);
             this.PasswordLable.TabIndex = 7;
             this.PasswordLable.Text = "Password";
             // 
@@ -101,9 +105,10 @@
             // 
             this.UserNameLable.AutoSize = true;
             this.UserNameLable.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UserNameLable.Location = new System.Drawing.Point(84, 79);
+            this.UserNameLable.Location = new System.Drawing.Point(112, 97);
+            this.UserNameLable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UserNameLable.Name = "UserNameLable";
-            this.UserNameLable.Size = new System.Drawing.Size(85, 20);
+            this.UserNameLable.Size = new System.Drawing.Size(106, 24);
             this.UserNameLable.TabIndex = 5;
             this.UserNameLable.Text = "User Name";
             // 
@@ -111,9 +116,10 @@
             // 
             this.e.AutoSize = true;
             this.e.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.e.Location = new System.Drawing.Point(84, 169);
+            this.e.Location = new System.Drawing.Point(112, 208);
+            this.e.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.e.Name = "e";
-            this.e.Size = new System.Drawing.Size(133, 20);
+            this.e.Size = new System.Drawing.Size(168, 24);
             this.e.TabIndex = 9;
             this.e.Text = "Re-type Password";
             // 
@@ -122,9 +128,10 @@
             this.SaveButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.SaveButton.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SaveButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.SaveButton.Location = new System.Drawing.Point(152, 296);
+            this.SaveButton.Location = new System.Drawing.Point(231, 364);
+            this.SaveButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(87, 43);
+            this.SaveButton.Size = new System.Drawing.Size(116, 53);
             this.SaveButton.TabIndex = 10;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = false;
@@ -135,9 +142,10 @@
             this.ClearButton.BackColor = System.Drawing.Color.Maroon;
             this.ClearButton.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClearButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClearButton.Location = new System.Drawing.Point(338, 296);
+            this.ClearButton.Location = new System.Drawing.Point(413, 364);
+            this.ClearButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ClearButton.Name = "ClearButton";
-            this.ClearButton.Size = new System.Drawing.Size(87, 43);
+            this.ClearButton.Size = new System.Drawing.Size(116, 53);
             this.ClearButton.TabIndex = 12;
             this.ClearButton.Text = "Clear";
             this.ClearButton.UseVisualStyleBackColor = false;
@@ -145,48 +153,54 @@
             // 
             // UserNameTxt
             // 
-            this.UserNameTxt.Location = new System.Drawing.Point(88, 102);
+            this.UserNameTxt.Location = new System.Drawing.Point(117, 126);
+            this.UserNameTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.UserNameTxt.Name = "UserNameTxt";
-            this.UserNameTxt.Size = new System.Drawing.Size(379, 20);
+            this.UserNameTxt.Size = new System.Drawing.Size(504, 22);
             this.UserNameTxt.TabIndex = 15;
             // 
             // PasswordTxt
             // 
-            this.PasswordTxt.Location = new System.Drawing.Point(88, 147);
+            this.PasswordTxt.Location = new System.Drawing.Point(117, 181);
+            this.PasswordTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PasswordTxt.Name = "PasswordTxt";
-            this.PasswordTxt.Size = new System.Drawing.Size(379, 20);
+            this.PasswordTxt.Size = new System.Drawing.Size(504, 22);
             this.PasswordTxt.TabIndex = 16;
             // 
             // PasswordConfTxt
             // 
-            this.PasswordConfTxt.Location = new System.Drawing.Point(88, 192);
+            this.PasswordConfTxt.Location = new System.Drawing.Point(117, 236);
+            this.PasswordConfTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PasswordConfTxt.Name = "PasswordConfTxt";
-            this.PasswordConfTxt.Size = new System.Drawing.Size(379, 20);
+            this.PasswordConfTxt.Size = new System.Drawing.Size(504, 22);
             this.PasswordConfTxt.TabIndex = 17;
             // 
             // NameTxtBox
             // 
-            this.NameTxtBox.Location = new System.Drawing.Point(88, 237);
+            this.NameTxtBox.Location = new System.Drawing.Point(117, 292);
+            this.NameTxtBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.NameTxtBox.Name = "NameTxtBox";
-            this.NameTxtBox.Size = new System.Drawing.Size(379, 20);
+            this.NameTxtBox.Size = new System.Drawing.Size(504, 22);
             this.NameTxtBox.TabIndex = 19;
             // 
             // NameLable
             // 
             this.NameLable.AutoSize = true;
             this.NameLable.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NameLable.Location = new System.Drawing.Point(84, 214);
+            this.NameLable.Location = new System.Drawing.Point(112, 263);
+            this.NameLable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.NameLable.Name = "NameLable";
-            this.NameLable.Size = new System.Drawing.Size(49, 20);
+            this.NameLable.Size = new System.Drawing.Size(60, 24);
             this.NameLable.TabIndex = 18;
             this.NameLable.Text = "Name";
             // 
             // ShowPassword
             // 
             this.ShowPassword.AutoSize = true;
-            this.ShowPassword.Location = new System.Drawing.Point(365, 263);
+            this.ShowPassword.Location = new System.Drawing.Point(487, 324);
+            this.ShowPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ShowPassword.Name = "ShowPassword";
-            this.ShowPassword.Size = new System.Drawing.Size(102, 17);
+            this.ShowPassword.Size = new System.Drawing.Size(125, 20);
             this.ShowPassword.TabIndex = 20;
             this.ShowPassword.Text = "Show Password";
             this.ShowPassword.UseVisualStyleBackColor = true;
@@ -194,10 +208,10 @@
             // 
             // UserModuleForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(566, 351);
+            this.ClientSize = new System.Drawing.Size(755, 432);
             this.Controls.Add(this.ShowPassword);
             this.Controls.Add(this.NameTxtBox);
             this.Controls.Add(this.NameLable);
@@ -211,6 +225,7 @@
             this.Controls.Add(this.UserNameLable);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "UserModuleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UserModuleForm";

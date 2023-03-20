@@ -79,11 +79,11 @@
     <Compile Include="DeptModuleForm.Designer.cs">
       <DependentUpon>DeptModuleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewHelmetModule.cs">
+    <Compile Include="NewHelmetModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewHelmetModule.Designer.cs">
-      <DependentUpon>NewHelmetModule.cs</DependentUpon>
+    <Compile Include="NewHelmetModuleForm.Designer.cs">
+      <DependentUpon>NewHelmetModuleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -120,8 +120,8 @@
     <EmbeddedResource Include="DeptModuleForm.resx">
       <DependentUpon>DeptModuleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewHelmetModule.resx">
-      <DependentUpon>NewHelmetModule.cs</DependentUpon>
+    <EmbeddedResource Include="NewHelmetModuleForm.resx">
+      <DependentUpon>NewHelmetModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
