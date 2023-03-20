@@ -48,8 +48,6 @@ C:\Code\Projects\Firetec\InventoryManagmentSystem\obj\Debug\InventoryManagmentSy
 C:\Code\Projects\Firetec\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.CoreCompileInputs.cache
 C:\Code\Projects\Firetec\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.exe
 C:\Code\Projects\Firetec\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.pdb
-C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\Database\dbMS.mdf
-C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\Database\dbMS_log.ldf
 C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\InventoryManagmentSystem.exe.config
 C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\InventoryManagmentSystem.exe
 C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\InventoryManagmentSystem.pdb
@@ -70,3 +68,4 @@ C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\Invent
 C:\Code\Projects\Firetec\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.AssemblyReference.cache
 C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.NewHelmetModuleForm.resources
 C:\Code\Projects\Firetec\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.NewHelmetModuleForm.resources
+C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.NewBootModuleForm.resources

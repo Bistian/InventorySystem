@@ -132,9 +132,6 @@
     <EmbeddedResource Include="DeptModuleForm.resx">
       <DependentUpon>DeptModuleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewBootModuleForm.aa.resx">
-      <DependentUpon>NewBootModuleForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="NewBootModuleForm.resx">
       <DependentUpon>NewBootModuleForm.cs</DependentUpon>
     </EmbeddedResource>
