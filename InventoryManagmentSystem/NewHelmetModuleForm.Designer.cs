@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.InventoryPanel = new System.Windows.Forms.Panel();
+            this.NewHelmetTxt = new System.Windows.Forms.Label();
             this.InventoryTxt = new System.Windows.Forms.Label();
             this.txtBoxSerialNumber = new System.Windows.Forms.TextBox();
             this.LableSerialNumber = new System.Windows.Forms.Label();
@@ -44,19 +45,35 @@
             this.dateTimePickerManufactureDate = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
-            this.DepartmentsTxt = new System.Windows.Forms.Label();
             this.InventoryPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // InventoryPanel
             // 
             this.InventoryPanel.BackColor = System.Drawing.Color.Maroon;
-            this.InventoryPanel.Controls.Add(this.DepartmentsTxt);
+            this.InventoryPanel.Controls.Add(this.NewHelmetTxt);
             this.InventoryPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.InventoryPanel.Location = new System.Drawing.Point(0, 0);
             this.InventoryPanel.Name = "InventoryPanel";
             this.InventoryPanel.Size = new System.Drawing.Size(755, 64);
             this.InventoryPanel.TabIndex = 21;
+            // 
+            // NewHelmetTxt
+            // 
+            this.NewHelmetTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NewHelmetTxt.AutoSize = true;
+            this.NewHelmetTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NewHelmetTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.NewHelmetTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.NewHelmetTxt.Location = new System.Drawing.Point(16, 16);
+            this.NewHelmetTxt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.NewHelmetTxt.Name = "NewHelmetTxt";
+            this.NewHelmetTxt.Size = new System.Drawing.Size(156, 29);
+            this.NewHelmetTxt.TabIndex = 16;
+            this.NewHelmetTxt.Text = "New Helmet";
+            this.NewHelmetTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // InventoryTxt
             // 
@@ -77,7 +94,7 @@
             // 
             // txtBoxSerialNumber
             // 
-            this.txtBoxSerialNumber.Location = new System.Drawing.Point(21, 113);
+            this.txtBoxSerialNumber.Location = new System.Drawing.Point(18, 113);
             this.txtBoxSerialNumber.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxSerialNumber.Name = "txtBoxSerialNumber";
             this.txtBoxSerialNumber.Size = new System.Drawing.Size(241, 22);
@@ -87,7 +104,7 @@
             // 
             this.LableSerialNumber.AutoSize = true;
             this.LableSerialNumber.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LableSerialNumber.Location = new System.Drawing.Point(16, 85);
+            this.LableSerialNumber.Location = new System.Drawing.Point(13, 85);
             this.LableSerialNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LableSerialNumber.Name = "LableSerialNumber";
             this.LableSerialNumber.Size = new System.Drawing.Size(137, 24);
@@ -98,7 +115,7 @@
             // 
             this.labelSize.AutoSize = true;
             this.labelSize.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSize.Location = new System.Drawing.Point(277, 84);
+            this.labelSize.Location = new System.Drawing.Point(274, 84);
             this.labelSize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelSize.Name = "labelSize";
             this.labelSize.Size = new System.Drawing.Size(47, 24);
@@ -128,7 +145,7 @@
             "13",
             "13.5",
             "14"});
-            this.comboBox1.Location = new System.Drawing.Point(281, 111);
+            this.comboBox1.Location = new System.Drawing.Point(278, 111);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 56;
@@ -137,7 +154,7 @@
             // 
             this.LableBrand.AutoSize = true;
             this.LableBrand.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LableBrand.Location = new System.Drawing.Point(17, 143);
+            this.LableBrand.Location = new System.Drawing.Point(14, 143);
             this.LableBrand.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LableBrand.Name = "LableBrand";
             this.LableBrand.Size = new System.Drawing.Size(60, 24);
@@ -157,14 +174,14 @@
             "LION",
             "Team Wendy",
             "PMI"});
-            this.comboBoxBrand.Location = new System.Drawing.Point(21, 170);
+            this.comboBoxBrand.Location = new System.Drawing.Point(18, 170);
             this.comboBoxBrand.Name = "comboBoxBrand";
             this.comboBoxBrand.Size = new System.Drawing.Size(121, 24);
             this.comboBoxBrand.TabIndex = 58;
             // 
             // textBoxModel
             // 
-            this.textBoxModel.Location = new System.Drawing.Point(160, 170);
+            this.textBoxModel.Location = new System.Drawing.Point(157, 170);
             this.textBoxModel.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxModel.Name = "textBoxModel";
             this.textBoxModel.Size = new System.Drawing.Size(102, 22);
@@ -174,7 +191,7 @@
             // 
             this.LableModel.AutoSize = true;
             this.LableModel.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LableModel.Location = new System.Drawing.Point(156, 141);
+            this.LableModel.Location = new System.Drawing.Point(153, 141);
             this.LableModel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LableModel.Name = "LableModel";
             this.LableModel.Size = new System.Drawing.Size(63, 24);
@@ -185,7 +202,7 @@
             // 
             this.labelColor.AutoSize = true;
             this.labelColor.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelColor.Location = new System.Drawing.Point(277, 141);
+            this.labelColor.Location = new System.Drawing.Point(274, 141);
             this.labelColor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelColor.Name = "labelColor";
             this.labelColor.Size = new System.Drawing.Size(58, 24);
@@ -201,7 +218,7 @@
             "Yellow",
             "Black",
             "White"});
-            this.comboBoxColor.Location = new System.Drawing.Point(281, 168);
+            this.comboBoxColor.Location = new System.Drawing.Point(278, 168);
             this.comboBoxColor.Name = "comboBoxColor";
             this.comboBoxColor.Size = new System.Drawing.Size(121, 24);
             this.comboBoxColor.TabIndex = 62;
@@ -210,7 +227,7 @@
             // 
             this.labelManufactureDate.AutoSize = true;
             this.labelManufactureDate.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelManufactureDate.Location = new System.Drawing.Point(492, 117);
+            this.labelManufactureDate.Location = new System.Drawing.Point(489, 117);
             this.labelManufactureDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelManufactureDate.Name = "labelManufactureDate";
             this.labelManufactureDate.Size = new System.Drawing.Size(168, 24);
@@ -219,7 +236,7 @@
             // 
             // dateTimePickerManufactureDate
             // 
-            this.dateTimePickerManufactureDate.Location = new System.Drawing.Point(478, 145);
+            this.dateTimePickerManufactureDate.Location = new System.Drawing.Point(475, 145);
             this.dateTimePickerManufactureDate.Name = "dateTimePickerManufactureDate";
             this.dateTimePickerManufactureDate.Size = new System.Drawing.Size(200, 22);
             this.dateTimePickerManufactureDate.TabIndex = 64;
@@ -229,7 +246,7 @@
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.button1.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(228, 217);
+            this.button1.Location = new System.Drawing.Point(225, 217);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(116, 53);
@@ -243,7 +260,7 @@
             this.ClearButton.BackColor = System.Drawing.Color.Maroon;
             this.ClearButton.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClearButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClearButton.Location = new System.Drawing.Point(383, 217);
+            this.ClearButton.Location = new System.Drawing.Point(380, 217);
             this.ClearButton.Margin = new System.Windows.Forms.Padding(4);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(116, 53);
@@ -252,24 +269,7 @@
             this.ClearButton.UseVisualStyleBackColor = false;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
-            // DepartmentsTxt
-            // 
-            this.DepartmentsTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DepartmentsTxt.AutoSize = true;
-            this.DepartmentsTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DepartmentsTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.DepartmentsTxt.Location = new System.Drawing.Point(16, 16);
-            this.DepartmentsTxt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(156, 29);
-            this.DepartmentsTxt.TabIndex = 16;
-            this.DepartmentsTxt.Text = "New Helmet";
-            this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // NewHelmetModule
+            // NewHelmetModuleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -291,7 +291,7 @@
             this.Controls.Add(this.LableSerialNumber);
             this.Controls.Add(this.InventoryPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "NewHelmetModule";
+            this.Name = "NewHelmetModuleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InventoryModuleForm";
             this.InventoryPanel.ResumeLayout(false);
@@ -320,6 +320,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
         public System.Windows.Forms.Button button1;
         public System.Windows.Forms.Button ClearButton;
-        private System.Windows.Forms.Label DepartmentsTxt;
+        private System.Windows.Forms.Label NewHelmetTxt;
     }
 }

@@ -23,9 +23,10 @@ namespace InventoryManagmentSystem
         bool isNewItem;
         #endregion SQL_Variables
 
-        public NewHelmetModuleForm()
+        public NewHelmetModuleForm(bool newItem = false)
         {
             InitializeComponent();
+            isNewItem = newItem;
         }
 
         public void Clear()
@@ -43,6 +44,19 @@ namespace InventoryManagmentSystem
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            if (isNewItem == true)
+            {
+                CreateItem();
+            }
+            else
+            {
+                UpdateItem();
+            }
+        }
+
+        //helper functions
+        private void CreateItem()
         {
             try
             {
@@ -63,6 +77,34 @@ namespace InventoryManagmentSystem
                     this.Dispose();
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void UpdateItem()
+        {
+            try
+            {
+                if (MessageBox.Show("Are you sure you want to update this Item?", "Update Item", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    cm = new SqlCommand("UPDATE tbHelmets SET SerialNum = @SerialNum,Brand = @Brand, Model = @Model, Color = @Color, Size = @Size, ManufactureDate = @ManufactureDate WHERE HelmetID LIKE '" + txtBoxSerialNumber.Text + "' ", con);
+                    cm.Parameters.AddWithValue("@SerialNum", txtBoxSerialNumber.Text);
+                    cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
+                    cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
+                    cm.Parameters.AddWithValue("@Color", comboBoxColor.Text);
+                    cm.Parameters.AddWithValue("@Size", comboBox1.Text);
+                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Text);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Item has been successfully updated");
+                    this.Dispose();
+
+                }
+            }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
