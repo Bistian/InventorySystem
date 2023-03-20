@@ -95,12 +95,12 @@ namespace InventoryManagmentSystem
         }
 
         // Search Bar
-        private void searchBar_TextChanged(object sender, EventArgs e)
+        private void searchBar_TextChanged_1(object sender, EventArgs e)
         {
             string searchTerm = searchBar.Text;
             if (string.IsNullOrEmpty(searchTerm)) { LoadUser(); }
 
-            //SQL
+            // SQL
             int i = 0;
             dataGridUser.Rows.Clear();
             cm = new SqlCommand("SELECT * FROM tbUser WHERE FullName LIKE '%" + searchTerm + "%'", con);
@@ -112,7 +112,6 @@ namespace InventoryManagmentSystem
                 i++;
                 dataGridUser.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString());
             }
-
             dr.Close();
             con.Close();
         }

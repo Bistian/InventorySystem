@@ -68,5 +68,5 @@ C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\Invent
 C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.exe
 C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.pdb
 C:\Code\Projects\Firetec\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.AssemblyReference.cache
-C:\Code\Projects\Firetec\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.InventoryModuleForm.resources
 C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.NewHelmetModule.resources
+C:\Code\Projects\Firetec\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.NewHelmetModule.resources
