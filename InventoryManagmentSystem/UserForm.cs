@@ -93,5 +93,27 @@ namespace InventoryManagmentSystem
             ModForm.ShowDialog();
             LoadUser();
         }
+
+        // Search Bar
+        private void searchBar_TextChanged_1(object sender, EventArgs e)
+        {
+            string searchTerm = searchBar.Text;
+            if (string.IsNullOrEmpty(searchTerm)) { LoadUser(); }
+
+            // SQL
+            int i = 0;
+            dataGridUser.Rows.Clear();
+            cm = new SqlCommand("SELECT * FROM tbUser WHERE FullName LIKE '%" + searchTerm + "%'", con);
+            con.Open();
+            dr = cm.ExecuteReader();
+
+            while (dr.Read())
+            {
+                i++;
+                dataGridUser.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString());
+            }
+            dr.Close();
+            con.Close();
+        }
     }
 }

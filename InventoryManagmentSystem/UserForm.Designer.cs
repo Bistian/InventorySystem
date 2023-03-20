@@ -41,6 +41,8 @@
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.DepartmentsTxt = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.searchBar = new System.Windows.Forms.TextBox();
             this.customButton1 = new InventoryManagmentSystem.CustomButton();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.BottomPanel.SuspendLayout();
@@ -171,6 +173,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.searchBar);
             this.panel1.Controls.Add(this.customButton1);
             this.panel1.Controls.Add(this.DepartmentsTxt);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -178,6 +182,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1034, 53);
             this.panel1.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.Location = new System.Drawing.Point(686, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 17);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Search";
+            // 
+            // searchBar
+            // 
+            this.searchBar.Location = new System.Drawing.Point(764, 18);
+            this.searchBar.Name = "searchBar";
+            this.searchBar.Size = new System.Drawing.Size(208, 23);
+            this.searchBar.TabIndex = 18;
+            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged_1);
             // 
             // customButton1
             // 
@@ -244,5 +267,7 @@
         private CustomButton customButton1;
         private System.Windows.Forms.Label DepartmentsTxt;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox searchBar;
     }
 }
