@@ -1,6 +1,6 @@
 ﻿namespace InventoryManagmentSystem
 {
-    partial class NewHelmetModule
+    partial class NewHelmetModuleForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewHelmetModule));
             this.InventoryPanel = new System.Windows.Forms.Panel();
             this.InventoryTxt = new System.Windows.Forms.Label();
             this.txtBoxSerialNumber = new System.Windows.Forms.TextBox();
@@ -37,24 +36,22 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.LableBrand = new System.Windows.Forms.Label();
             this.comboBoxBrand = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxModel = new System.Windows.Forms.TextBox();
             this.LableModel = new System.Windows.Forms.Label();
             this.labelColor = new System.Windows.Forms.Label();
             this.comboBoxColor = new System.Windows.Forms.ComboBox();
             this.labelManufactureDate = new System.Windows.Forms.Label();
             this.dateTimePickerManufactureDate = new System.Windows.Forms.DateTimePicker();
-            this.CloseUserModuel = new InventoryManagmentSystem.CustomButton();
             this.button1 = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
+            this.DepartmentsTxt = new System.Windows.Forms.Label();
             this.InventoryPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CloseUserModuel)).BeginInit();
             this.SuspendLayout();
             // 
             // InventoryPanel
             // 
             this.InventoryPanel.BackColor = System.Drawing.Color.Maroon;
-            this.InventoryPanel.Controls.Add(this.CloseUserModuel);
-            this.InventoryPanel.Controls.Add(this.InventoryTxt);
+            this.InventoryPanel.Controls.Add(this.DepartmentsTxt);
             this.InventoryPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.InventoryPanel.Location = new System.Drawing.Point(0, 0);
             this.InventoryPanel.Name = "InventoryPanel";
@@ -165,13 +162,13 @@
             this.comboBoxBrand.Size = new System.Drawing.Size(121, 24);
             this.comboBoxBrand.TabIndex = 58;
             // 
-            // textBox1
+            // textBoxModel
             // 
-            this.textBox1.Location = new System.Drawing.Point(160, 170);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(102, 22);
-            this.textBox1.TabIndex = 61;
+            this.textBoxModel.Location = new System.Drawing.Point(160, 170);
+            this.textBoxModel.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxModel.Name = "textBoxModel";
+            this.textBoxModel.Size = new System.Drawing.Size(102, 22);
+            this.textBoxModel.TabIndex = 61;
             // 
             // LableModel
             // 
@@ -227,20 +224,6 @@
             this.dateTimePickerManufactureDate.Size = new System.Drawing.Size(200, 22);
             this.dateTimePickerManufactureDate.TabIndex = 64;
             // 
-            // CloseUserModuel
-            // 
-            this.CloseUserModuel.Image = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.Image")));
-            this.CloseUserModuel.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.ImageHover")));
-            this.CloseUserModuel.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseUserModuel.ImageNormal")));
-            this.CloseUserModuel.Location = new System.Drawing.Point(709, 13);
-            this.CloseUserModuel.Margin = new System.Windows.Forms.Padding(4);
-            this.CloseUserModuel.Name = "CloseUserModuel";
-            this.CloseUserModuel.Size = new System.Drawing.Size(33, 28);
-            this.CloseUserModuel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CloseUserModuel.TabIndex = 22;
-            this.CloseUserModuel.TabStop = false;
-            this.CloseUserModuel.Click += new System.EventHandler(this.CloseUserModuel_Click);
-            // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
@@ -253,6 +236,7 @@
             this.button1.TabIndex = 66;
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ClearButton
             // 
@@ -266,6 +250,24 @@
             this.ClearButton.TabIndex = 67;
             this.ClearButton.Text = "Clear";
             this.ClearButton.UseVisualStyleBackColor = false;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
+            // 
+            // DepartmentsTxt
+            // 
+            this.DepartmentsTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DepartmentsTxt.AutoSize = true;
+            this.DepartmentsTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DepartmentsTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.DepartmentsTxt.Location = new System.Drawing.Point(16, 16);
+            this.DepartmentsTxt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.DepartmentsTxt.Name = "DepartmentsTxt";
+            this.DepartmentsTxt.Size = new System.Drawing.Size(156, 29);
+            this.DepartmentsTxt.TabIndex = 16;
+            this.DepartmentsTxt.Text = "New Helmet";
+            this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // NewHelmetModule
             // 
@@ -279,7 +281,7 @@
             this.Controls.Add(this.dateTimePickerManufactureDate);
             this.Controls.Add(this.labelColor);
             this.Controls.Add(this.comboBoxColor);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxModel);
             this.Controls.Add(this.LableModel);
             this.Controls.Add(this.LableBrand);
             this.Controls.Add(this.comboBoxBrand);
@@ -294,7 +296,6 @@
             this.Text = "InventoryModuleForm";
             this.InventoryPanel.ResumeLayout(false);
             this.InventoryPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CloseUserModuel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -311,7 +312,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label LableBrand;
         private System.Windows.Forms.ComboBox comboBoxBrand;
-        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox textBoxModel;
         private System.Windows.Forms.Label LableModel;
         private System.Windows.Forms.Label labelColor;
         private System.Windows.Forms.ComboBox comboBoxColor;
@@ -319,5 +320,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
         public System.Windows.Forms.Button button1;
         public System.Windows.Forms.Button ClearButton;
+        private System.Windows.Forms.Label DepartmentsTxt;
     }
 }
