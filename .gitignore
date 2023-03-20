@@ -3,3 +3,6 @@
 ################################################################################
 
 /.gitignore .txt
+*.vsidx
+/.vs/Firetec/FileContentIndex/write.lock
+/.vs/slnx.sqlite
