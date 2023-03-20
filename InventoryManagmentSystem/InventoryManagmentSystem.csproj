@@ -79,6 +79,18 @@
     <Compile Include="DeptModuleForm.Designer.cs">
       <DependentUpon>DeptModuleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="HomeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HomeForm.Designer.cs">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewBootModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewBootModuleForm.Designer.cs">
+      <DependentUpon>NewBootModuleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewHelmetModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +131,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DeptModuleForm.resx">
       <DependentUpon>DeptModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewBootModuleForm.aa.resx">
+      <DependentUpon>NewBootModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewBootModuleForm.resx">
+      <DependentUpon>NewBootModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewHelmetModuleForm.resx">
       <DependentUpon>NewHelmetModuleForm.cs</DependentUpon>
