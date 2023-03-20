@@ -16,7 +16,7 @@ namespace InventoryManagmentSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new NewHelmetModuleForm());
+            Application.Run(new MainForm());
         }
     }
 }
