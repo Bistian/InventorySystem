@@ -30,7 +30,21 @@ namespace InventoryManagmentSystem
             isNewItem = newItem;
         }
 
-        public void Clear()
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (isNewItem == true)
+            {
+                CreateItem();
+            }
+            else
+            {
+                UpdateItem();
+            }
+        }
+    
+
+
+    public void Clear()
         {
             txtBoxSerialNumber.Clear();
             comboBoxBrand.SelectedIndex = -1;
@@ -66,16 +80,37 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void UpdateItem()
         {
-            if (isNewItem == true)
+            try
             {
-                CreateItem();
+                if (MessageBox.Show("Are you sure you want to update this Item?", "Update Item", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    cm = new SqlCommand("UPDATE tbBoots SET SerialNum = @SerialNum,Brand = @Brand, Model = @Model, Material = @Material, Size = @Size, ManufactureDate = @ManufactureDate WHERE BootID LIKE '" + txtBoxSerialNumber.Text + "' ", con);
+                    cm.Parameters.AddWithValue("@SerialNum", txtBoxSerialNumber.Text);
+                    cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
+                    cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
+                    cm.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
+                    cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
+                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Text);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Item has been successfully updated");
+                    this.Dispose();
+
+                }
             }
-            else
+
+            catch (Exception ex)
             {
-                UpdateItem();
+                MessageBox.Show(ex.Message);
             }
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            Clear();
         }
     }
 }
