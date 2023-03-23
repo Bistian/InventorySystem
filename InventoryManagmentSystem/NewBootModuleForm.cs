@@ -32,14 +32,14 @@ namespace InventoryManagmentSystem
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (isNewItem == true)
-            {
+            //if (isNewItem == true)
+            //{
                 CreateItem();
-            }
-            else
-            {
-                UpdateItem();
-            }
+            //}
+            //else
+            //{
+            //    UpdateItem();
+            //}
         }
     
 
@@ -59,8 +59,8 @@ namespace InventoryManagmentSystem
             {
                 if (MessageBox.Show("Are you sure you want to save this Item?", "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cm = new SqlCommand("INSERT INTO tbBoots(SerialNum,Brand,Model,Material,Size,ManufactureDate)VALUES(@SerialNum,@Brand,@Model,@Material,@Size,@ManufactureDate)", con);
-                    cm.Parameters.AddWithValue("@SerialNum", txtBoxSerialNumber.Text);
+                    cm = new SqlCommand("INSERT INTO tbBoots(SerialNumber,Brand,Model,Material,Size,ManufactureDate)VALUES(@SerialNumber,@Brand,@Model,@Material,@Size,@ManufactureDate)", con);
+                    cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                     cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
                     cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
                     cm.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
@@ -86,8 +86,8 @@ namespace InventoryManagmentSystem
             {
                 if (MessageBox.Show("Are you sure you want to update this Item?", "Update Item", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cm = new SqlCommand("UPDATE tbBoots SET SerialNum = @SerialNum,Brand = @Brand, Model = @Model, Material = @Material, Size = @Size, ManufactureDate = @ManufactureDate WHERE BootID LIKE '" + txtBoxSerialNumber.Text + "' ", con);
-                    cm.Parameters.AddWithValue("@SerialNum", txtBoxSerialNumber.Text);
+                    cm = new SqlCommand("UPDATE tbBoots SET SerialNumber = @SerialNum,Brand = @Brand, Model = @Model, Material = @Material, Size = @Size, ManufactureDate = @ManufactureDate WHERE BootID LIKE '" + txtBoxSerialNumber.Text + "' ", con);
+                    cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                     cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
                     cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
                     cm.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
