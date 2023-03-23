@@ -7,3 +7,16 @@
 /.vs/Firetec/FileContentIndex/write.lock
 /.vs/slnx.sqlite
 /.vs/Firetec/FileContentIndex/54d46524-c2bc-4dab-9856-40106ef7bacd.vsidx
+/.vs/InventoryManagmentSystem/v17/.suo
+/.vs/InventorySystem/v17/.wsuo
+/.vs/VSWorkspaceState.json
+/InventoryManagmentSystem/obj/Debug/DesignTimeResolveAssemblyReferences.cache
+/InventoryManagmentSystem/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/InventoryManagmentSystem/obj/Debug/InventoryManagmentSystem.csproj.AssemblyReference.cache
+/InventoryManagmentSystem/obj/Debug/InventoryManagmentSystem.csproj.FileListAbsolute.txt
+/InventoryManagmentSystem/obj/Debug/InventoryManagmentSystem.csproj.GenerateResource.cache
+/InventoryManagmentSystem/obj/Debug/InventoryManagmentSystem.exe
+*.resources
+/InventoryManagmentSystem/obj/Debug/InventoryManagmentSystem.pdb
+/InventoryManagmentSystem/bin/Debug/InventoryManagmentSystem.exe
+/InventoryManagmentSystem/bin/Debug/InventoryManagmentSystem.pdb
