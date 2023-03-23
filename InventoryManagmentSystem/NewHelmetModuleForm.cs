@@ -35,7 +35,7 @@ namespace InventoryManagmentSystem
             comboBoxBrand.SelectedIndex = -1;
             textBoxModel.Clear();
             comboBoxColor.SelectedIndex = -1;
-            comboBox1.SelectedIndex = -1;
+            comboBoxSize.SelectedIndex = -1;
         }
 
         private void CloseUserModuel_Click(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace InventoryManagmentSystem
                     cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
                     cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
                     cm.Parameters.AddWithValue("@Color", comboBoxColor.Text);
-                    cm.Parameters.AddWithValue("@Size", comboBox1.Text);
+                    cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
                     cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Text);
                     con.Open();
                     cm.ExecuteNonQuery();
@@ -94,7 +94,7 @@ namespace InventoryManagmentSystem
                     cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
                     cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
                     cm.Parameters.AddWithValue("@Color", comboBoxColor.Text);
-                    cm.Parameters.AddWithValue("@Size", comboBox1.Text);
+                    cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
                     cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Text);
                     con.Open();
                     cm.ExecuteNonQuery();

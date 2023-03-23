@@ -34,7 +34,7 @@
             this.txtBoxSerialNumber = new System.Windows.Forms.TextBox();
             this.LableSerialNumber = new System.Windows.Forms.Label();
             this.labelSize = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxSize = new System.Windows.Forms.ComboBox();
             this.LableBrand = new System.Windows.Forms.Label();
             this.comboBoxBrand = new System.Windows.Forms.ComboBox();
             this.textBoxModel = new System.Windows.Forms.TextBox();
@@ -122,10 +122,10 @@
             this.labelSize.TabIndex = 57;
             this.labelSize.Text = "Size";
             // 
-            // comboBox1
+            // comboBoxSize
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.comboBoxSize.FormattingEnabled = true;
+            this.comboBoxSize.Items.AddRange(new object[] {
             "5",
             "5.5",
             "6",
@@ -145,10 +145,10 @@
             "13",
             "13.5",
             "14"});
-            this.comboBox1.Location = new System.Drawing.Point(278, 111);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 56;
+            this.comboBoxSize.Location = new System.Drawing.Point(278, 111);
+            this.comboBoxSize.Name = "comboBoxSize";
+            this.comboBoxSize.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxSize.TabIndex = 56;
             // 
             // LableBrand
             // 
@@ -286,7 +286,7 @@
             this.Controls.Add(this.LableBrand);
             this.Controls.Add(this.comboBoxBrand);
             this.Controls.Add(this.labelSize);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxSize);
             this.Controls.Add(this.txtBoxSerialNumber);
             this.Controls.Add(this.LableSerialNumber);
             this.Controls.Add(this.InventoryPanel);
@@ -309,7 +309,7 @@
         private System.Windows.Forms.Label LableSerialNumber;
         private CustomButton CloseUserModuel;
         private System.Windows.Forms.Label labelSize;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxSize;
         private System.Windows.Forms.Label LableBrand;
         private System.Windows.Forms.ComboBox comboBoxBrand;
         public System.Windows.Forms.TextBox textBoxModel;
