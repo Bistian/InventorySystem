@@ -45,12 +45,15 @@
             this.comboBoxSize = new System.Windows.Forms.ComboBox();
             this.txtBoxSerialNumber = new System.Windows.Forms.TextBox();
             this.LableSerialNumber = new System.Windows.Forms.Label();
+            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Maroon;
+            this.panel1.Controls.Add(this.CloseButton);
             this.panel1.Controls.Add(this.NewBootTxt);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.SystemColors.ActiveBorder;
@@ -172,6 +175,15 @@
             resources.ApplyResources(this.LableSerialNumber, "LableSerialNumber");
             this.LableSerialNumber.Name = "LableSerialNumber";
             // 
+            // CloseButton
+            // 
+            resources.ApplyResources(this.CloseButton, "CloseButton");
+            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
+            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.TabStop = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
             // NewBootModuleForm
             // 
             resources.ApplyResources(this, "$this");
@@ -196,6 +208,7 @@
             this.Name = "NewBootModuleForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,5 +232,6 @@
         private System.Windows.Forms.ComboBox comboBoxSize;
         public System.Windows.Forms.TextBox txtBoxSerialNumber;
         private System.Windows.Forms.Label LableSerialNumber;
+        private CustomButton CloseButton;
     }
 }

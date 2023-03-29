@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewHelmetModuleForm));
             this.InventoryPanel = new System.Windows.Forms.Panel();
             this.NewHelmetTxt = new System.Windows.Forms.Label();
             this.InventoryTxt = new System.Windows.Forms.Label();
@@ -45,12 +46,15 @@
             this.dateTimePickerManufactureDate = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
+            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.InventoryPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
             // 
             // InventoryPanel
             // 
             this.InventoryPanel.BackColor = System.Drawing.Color.Maroon;
+            this.InventoryPanel.Controls.Add(this.CloseButton);
             this.InventoryPanel.Controls.Add(this.NewHelmetTxt);
             this.InventoryPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.InventoryPanel.Location = new System.Drawing.Point(0, 0);
@@ -227,7 +231,7 @@
             // 
             this.labelManufactureDate.AutoSize = true;
             this.labelManufactureDate.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelManufactureDate.Location = new System.Drawing.Point(489, 117);
+            this.labelManufactureDate.Location = new System.Drawing.Point(514, 118);
             this.labelManufactureDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelManufactureDate.Name = "labelManufactureDate";
             this.labelManufactureDate.Size = new System.Drawing.Size(168, 24);
@@ -238,8 +242,9 @@
             // 
             this.dateTimePickerManufactureDate.Location = new System.Drawing.Point(475, 145);
             this.dateTimePickerManufactureDate.Name = "dateTimePickerManufactureDate";
-            this.dateTimePickerManufactureDate.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePickerManufactureDate.Size = new System.Drawing.Size(246, 22);
             this.dateTimePickerManufactureDate.TabIndex = 64;
+            this.dateTimePickerManufactureDate.Value = new System.DateTime(2023, 3, 23, 16, 23, 38, 0);
             // 
             // button1
             // 
@@ -269,6 +274,20 @@
             this.ClearButton.UseVisualStyleBackColor = false;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
+            // CloseButton
+            // 
+            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
+            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
+            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
+            this.CloseButton.Location = new System.Drawing.Point(715, 4);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(4);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(36, 42);
+            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CloseButton.TabIndex = 68;
+            this.CloseButton.TabStop = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
             // NewHelmetModuleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -296,6 +315,7 @@
             this.Text = "InventoryModuleForm";
             this.InventoryPanel.ResumeLayout(false);
             this.InventoryPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -321,5 +341,6 @@
         public System.Windows.Forms.Button button1;
         public System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Label NewHelmetTxt;
+        private CustomButton CloseButton;
     }
 }

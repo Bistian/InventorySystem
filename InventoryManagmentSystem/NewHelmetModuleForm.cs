@@ -38,11 +38,6 @@ namespace InventoryManagmentSystem
             comboBoxSize.SelectedIndex = -1;
         }
 
-        private void CloseUserModuel_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             //if (isNewItem == true)
@@ -68,7 +63,7 @@ namespace InventoryManagmentSystem
                     cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
                     cm.Parameters.AddWithValue("@Color", comboBoxColor.Text);
                     cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Text);
+                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
@@ -95,7 +90,7 @@ namespace InventoryManagmentSystem
                     cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
                     cm.Parameters.AddWithValue("@Color", comboBoxColor.Text);
                     cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Text);
+                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
@@ -114,6 +109,11 @@ namespace InventoryManagmentSystem
         private void ClearButton_Click(object sender, EventArgs e)
         {
             Clear();
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }
