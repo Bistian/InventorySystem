@@ -119,5 +119,23 @@ namespace InventoryManagmentSystem
             //Change cell color.
             e.CellStyle.ForeColor = Color.Red;
         }
+
+        private void dataGridRented_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if the clicked cell is in a row
+            if (e.RowIndex < 0) { return; }
+
+            if (e.ColumnIndex != 2) { return; }
+
+            // Get the data from rentee at that row.
+            DataGridViewRow row = dataGridRented.Rows[e.RowIndex];
+            string rentee = row.Cells[2].Value.ToString();
+
+            if(rentee == "Fire-Tec") { return; }
+
+            // Show the details of the row in a new form or dialog
+            DialogBoxClient dialogBoxClient = new DialogBoxClient(rentee);
+            dialogBoxClient.ShowDialog();
+        }
     }
 }
