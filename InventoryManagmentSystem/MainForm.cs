@@ -53,5 +53,10 @@ namespace InventoryManagmentSystem
         {
             openChildForm(new DepartmentForm());
         }
+
+        private void HomeButton_Click(object sender, EventArgs e)
+        {
+            openChildForm(new HomeForm());
+        }
     }
 }

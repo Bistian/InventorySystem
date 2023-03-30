@@ -32,8 +32,8 @@ namespace InventoryManagmentSystem
         public HomeForm()
         {
             InitializeComponent();
-            LoadRented();
-            LoadPostDue();
+            LoadTables(dataGridRented, QueryRented(), "DueDate");
+            LoadTables(dataGridPastDue, QueryPastDue(), "DDate");
         }
 
         private string QueryRented()
@@ -49,7 +49,7 @@ namespace InventoryManagmentSystem
                 "ORDER BY DueDate");
         }
 
-        private string QueryPostDue()
+        private string QueryPastDue()
         {
             return ("SELECT Type, Location, DueDate, SerialNumber FROM tbPants " +
                 "WHERE DueDate IS NOT NULL AND DueDate < CONVERT(DATE, GETDATE()) " +
@@ -62,25 +62,31 @@ namespace InventoryManagmentSystem
                 "ORDER BY DueDate");
         }
 
-        public void LoadRented()
+        /* Render the tables.
+         * grid: which table you are going to render.
+         * query: SQL code for the table.
+         * columnName: name of the column as it is in Edit Columns.
+        */
+        private void LoadTables(DataGridView grid, string query, string columnName)
         {
-            dataGridRented.Rows.Clear();
-            cm = new SqlCommand(QueryRented(), con);
+            // Change the styling for the date column.
+            grid.Columns[columnName].DefaultCellStyle.Format = "d";
+
+            grid.Rows.Clear();
+            cm = new SqlCommand(query, con);
             con.Open();
             dr = cm.ExecuteReader();
 
             int i = 0;
+            DateTime date;
             while (dr.Read())
             {
-                /*string s = DateTime.ParseExact(
-                    dr[3].ToString(), 
-                    "yyyy-MM-dd", 
-                    CultureInfo.InvariantCulture).ToString();*/
                 ++i;
-                dataGridRented.Rows.Add(i,
+                date = (DateTime)dr[2];
+                grid.Rows.Add(i,
                     dr[0].ToString(),
                     dr[1].ToString(),
-                    dr[2].ToString(),
+                    date.Date,
                     dr[3].ToString()
                 );
             }
@@ -89,24 +95,7 @@ namespace InventoryManagmentSystem
             con.Close();
         }
 
-        public void LoadPostDue()
-        {
-            dataGridPostDue.Rows.Clear();
-            cm = new SqlCommand(QueryPostDue(), con);
-            con.Open();
-            dr = cm.ExecuteReader();
-
-            int i = 0;
-            while (dr.Read())
-            {
-                ++i;
-                dataGridPostDue.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString());
-            }
-
-            dr.Close();
-            con.Close();
-        }
-
+        // Check if rented due date is getting closer and turns date red.
         private void dataGridRented_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             //Is this the Due Date column?
@@ -122,20 +111,58 @@ namespace InventoryManagmentSystem
 
         private void dataGridRented_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            ClientPopUp(e, false);
+        }
+
+        private void dataGridPastDue_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ClientPopUp(e, true);
+        }
+
+        /* Makes the pop up window with the client's information.
+         * e: is the event from the click.
+         * isPastDue: a flag checking if the function is working with the rented table or the past due.
+         */
+        private void ClientPopUp(DataGridViewCellEventArgs e, bool isPastDue)
+        {
             // Check if the clicked cell is in a row
             if (e.RowIndex < 0) { return; }
 
+            // Column 2 is the only one this function should operate on.
             if (e.ColumnIndex != 2) { return; }
 
             // Get the data from rentee at that row.
-            DataGridViewRow row = dataGridRented.Rows[e.RowIndex];
+            DataGridViewRow row;
+            if (isPastDue)
+            {
+                row = dataGridPastDue.Rows[e.RowIndex];
+            }
+            else
+            {
+                row = dataGridRented.Rows[e.RowIndex];
+            }
+
             string rentee = row.Cells[2].Value.ToString();
 
-            if(rentee == "Fire-Tec") { return; }
+            // Check if there is at least one item with that name on the clints table.
+            string query = (
+                "SELECT COUNT(*) FROM tbClients " +
+                "WHERE Name ='" + rentee + "'");
+
+            cm = new SqlCommand(query, con);
+            con.Open();
+            
+            // If there are no matches with that name, return.
+            if((int) cm.ExecuteScalar() <= 0) {
+                con.Close();
+                return; 
+            }
+            con.Close();
 
             // Show the details of the row in a new form or dialog
             DialogBoxClient dialogBoxClient = new DialogBoxClient(rentee);
             dialogBoxClient.ShowDialog();
         }
     }
+
 }

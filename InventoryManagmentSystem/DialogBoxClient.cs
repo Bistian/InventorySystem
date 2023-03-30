@@ -66,9 +66,9 @@ namespace InventoryManagmentSystem
 
             while(dr.Read())
             {
-                LabelClient.Text = "Client: " + client;
-                LabelPhone.Text = "Phone: " + dr[0].ToString();
-                LabelEmail.Text = "Email: " + dr[1].ToString();
+                textClient.Text = client;
+                textPhone.Text = dr[0].ToString();
+                textEmail.Text = dr[1].ToString();
             }
 
             dr.Close();
