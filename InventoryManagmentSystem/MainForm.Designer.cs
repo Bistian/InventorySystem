@@ -169,6 +169,7 @@
             this.HomeButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.HomeButton.TabIndex = 10;
             this.HomeButton.TabStop = false;
+            this.HomeButton.Click += new System.EventHandler(this.HomeButton_Click);
             // 
             // InventoryButton
             // 
