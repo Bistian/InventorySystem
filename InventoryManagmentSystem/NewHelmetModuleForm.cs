@@ -35,24 +35,19 @@ namespace InventoryManagmentSystem
             comboBoxBrand.SelectedIndex = -1;
             textBoxModel.Clear();
             comboBoxColor.SelectedIndex = -1;
-            comboBox1.SelectedIndex = -1;
-        }
-
-        private void CloseUserModuel_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
+            comboBoxSize.SelectedIndex = -1;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (isNewItem == true)
-            {
+            //if (isNewItem == true)
+            //{
                 CreateItem();
-            }
-            else
-            {
-                UpdateItem();
-            }
+            //}
+            //else
+            //{
+            //    UpdateItem();
+            //}
         }
 
         //helper functions
@@ -62,13 +57,13 @@ namespace InventoryManagmentSystem
             {
                 if (MessageBox.Show("Are you sure you want to save this Item?", "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cm = new SqlCommand("INSERT INTO tbHelmets(SerialNum,Brand,Model,Color,Size,ManufactureDate)VALUES(@SerialNum,@Brand,@Model,@Color,@Size,@ManufactureDate)", con);
-                    cm.Parameters.AddWithValue("@SerialNum", txtBoxSerialNumber.Text);
+                    cm = new SqlCommand("INSERT INTO tbHelmets(SerialNumber,Brand,Model,Color,Size,ManufactureDate)VALUES(@SerialNumber,@Brand,@Model,@Color,@Size,@ManufactureDate)", con);
+                    cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                     cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
                     cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
                     cm.Parameters.AddWithValue("@Color", comboBoxColor.Text);
-                    cm.Parameters.AddWithValue("@Size", comboBox1.Text);
-                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Text);
+                    cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
+                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
@@ -89,13 +84,13 @@ namespace InventoryManagmentSystem
             {
                 if (MessageBox.Show("Are you sure you want to update this Item?", "Update Item", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cm = new SqlCommand("UPDATE tbHelmets SET SerialNum = @SerialNum,Brand = @Brand, Model = @Model, Color = @Color, Size = @Size, ManufactureDate = @ManufactureDate WHERE HelmetID LIKE '" + txtBoxSerialNumber.Text + "' ", con);
-                    cm.Parameters.AddWithValue("@SerialNum", txtBoxSerialNumber.Text);
+                    cm = new SqlCommand("UPDATE tbHelmets SET SerialNumber = @SerialNumber,Brand = @Brand, Model = @Model, Color = @Color, Size = @Size, ManufactureDate = @ManufactureDate WHERE HelmetID LIKE '" + txtBoxSerialNumber.Text + "' ", con);
+                    cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                     cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
                     cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
                     cm.Parameters.AddWithValue("@Color", comboBoxColor.Text);
-                    cm.Parameters.AddWithValue("@Size", comboBox1.Text);
-                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Text);
+                    cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
+                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
@@ -114,6 +109,11 @@ namespace InventoryManagmentSystem
         private void ClearButton_Click(object sender, EventArgs e)
         {
             Clear();
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }
