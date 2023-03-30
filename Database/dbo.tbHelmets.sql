@@ -5,10 +5,10 @@
     [Model]           VARCHAR (50) NOT NULL,
     [Color]           VARCHAR (50) NOT NULL,
     [Size]            VARCHAR (50) NOT NULL,
-    [ManufactureDate] VARCHAR (50) NOT NULL,
-    [Due Date]        VARCHAR (50) NULL,
-    [Location] VARCHAR(50) NOT NULL, 
-    [Type] VARCHAR(50) NOT NULL, 
+    [ManufactureDate] DATE NOT NULL,
+    [DueDate]        DATE NULL,
+    [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL,
+    [Type]            VARCHAR (50) DEFAULT ('Helmet') NOT NULL,
     PRIMARY KEY CLUSTERED ([HelmetID] ASC)
 );
 

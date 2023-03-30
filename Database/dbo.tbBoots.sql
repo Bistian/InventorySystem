@@ -4,11 +4,11 @@
     [Brand]           VARCHAR (50) NOT NULL,
     [Size]            VARCHAR (50) NOT NULL,
     [ManufactureDate] DATE NOT NULL,
-    [Location]        VARCHAR(50) NOT NULL DEFAULT 'Fire-Tec',
+    [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL,
     [Material]        VARCHAR (50) NOT NULL,
-    [Type]            VARCHAR (50) NOT NULL DEFAULT 'Boot',
+    [Type]            VARCHAR (50) DEFAULT ('Boot') NOT NULL,
     [DueDate]         DATE NULL,
-    [Model]           VARCHAR(50)   NOT NULL,
+    [Model]           VARCHAR (50) NOT NULL,
     PRIMARY KEY CLUSTERED ([BootID] ASC)
 );
 

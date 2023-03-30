@@ -182,7 +182,6 @@
             this.InventoryButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.InventoryButton.TabIndex = 0;
             this.InventoryButton.TabStop = false;
-            this.InventoryButton.Click += new System.EventHandler(this.InventoryButton_Click);
             // 
             // MyLogo
             // 
