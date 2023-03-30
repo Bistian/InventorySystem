@@ -65,7 +65,7 @@ namespace InventoryManagmentSystem
                     cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
                     cm.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
                     cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
+                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value.Date);
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();

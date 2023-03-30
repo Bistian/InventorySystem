@@ -73,7 +73,7 @@
             this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
             this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
             this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
-            this.UsersButton.Location = new System.Drawing.Point(512, 3);
+            this.UsersButton.Location = new System.Drawing.Point(469, 3);
             this.UsersButton.Name = "UsersButton";
             this.UsersButton.Size = new System.Drawing.Size(55, 67);
             this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -90,9 +90,9 @@
             this.UsersTxt.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UsersTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.UsersTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.UsersTxt.Location = new System.Drawing.Point(509, 65);
+            this.UsersTxt.Location = new System.Drawing.Point(461, 63);
             this.UsersTxt.Name = "UsersTxt";
-            this.UsersTxt.Size = new System.Drawing.Size(58, 24);
+            this.UsersTxt.Size = new System.Drawing.Size(73, 29);
             this.UsersTxt.TabIndex = 15;
             this.UsersTxt.Text = "Users";
             this.UsersTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -106,11 +106,11 @@
             this.DepartmentsTxt.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DepartmentsTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.DepartmentsTxt.Location = new System.Drawing.Point(356, 64);
+            this.DepartmentsTxt.Location = new System.Drawing.Point(348, 61);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(124, 24);
+            this.DepartmentsTxt.Size = new System.Drawing.Size(66, 29);
             this.DepartmentsTxt.TabIndex = 13;
-            this.DepartmentsTxt.Text = "Departments";
+            this.DepartmentsTxt.Text = "Dept";
             this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // HomeTex
@@ -122,9 +122,9 @@
             this.HomeTex.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HomeTex.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.HomeTex.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.HomeTex.Location = new System.Drawing.Point(125, 64);
+            this.HomeTex.Location = new System.Drawing.Point(117, 62);
             this.HomeTex.Name = "HomeTex";
-            this.HomeTex.Size = new System.Drawing.Size(61, 24);
+            this.HomeTex.Size = new System.Drawing.Size(78, 29);
             this.HomeTex.TabIndex = 11;
             this.HomeTex.Text = "Home";
             this.HomeTex.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -134,7 +134,7 @@
             this.DepatmensButton.Image = ((System.Drawing.Image)(resources.GetObject("DepatmensButton.Image")));
             this.DepatmensButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("DepatmensButton.ImageHover")));
             this.DepatmensButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("DepatmensButton.ImageNormal")));
-            this.DepatmensButton.Location = new System.Drawing.Point(387, 12);
+            this.DepatmensButton.Location = new System.Drawing.Point(353, 12);
             this.DepatmensButton.Name = "DepatmensButton";
             this.DepatmensButton.Size = new System.Drawing.Size(55, 50);
             this.DepatmensButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -151,11 +151,11 @@
             this.InventoryTxt.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InventoryTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.InventoryTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.InventoryTxt.Location = new System.Drawing.Point(234, 64);
+            this.InventoryTxt.Location = new System.Drawing.Point(241, 62);
             this.InventoryTxt.Name = "InventoryTxt";
-            this.InventoryTxt.Size = new System.Drawing.Size(102, 24);
+            this.InventoryTxt.Size = new System.Drawing.Size(47, 29);
             this.InventoryTxt.TabIndex = 9;
-            this.InventoryTxt.Text = "Inventory ";
+            this.InventoryTxt.Text = "Inv";
             this.InventoryTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // HomeButton
@@ -175,12 +175,13 @@
             this.InventoryButton.Image = ((System.Drawing.Image)(resources.GetObject("InventoryButton.Image")));
             this.InventoryButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("InventoryButton.ImageHover")));
             this.InventoryButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("InventoryButton.ImageNormal")));
-            this.InventoryButton.Location = new System.Drawing.Point(252, 12);
+            this.InventoryButton.Location = new System.Drawing.Point(235, 12);
             this.InventoryButton.Name = "InventoryButton";
             this.InventoryButton.Size = new System.Drawing.Size(55, 50);
             this.InventoryButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.InventoryButton.TabIndex = 0;
             this.InventoryButton.TabStop = false;
+            this.InventoryButton.Click += new System.EventHandler(this.InventoryButton_Click);
             // 
             // MyLogo
             // 
@@ -213,7 +214,7 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 651);
             this.Controls.Add(this.MainPanel);
