@@ -140,6 +140,7 @@
             this.dataGridInv.RowHeadersWidth = 51;
             this.dataGridInv.RowTemplate.Height = 24;
             this.dataGridInv.RowTemplate.ReadOnly = true;
+            this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridInv.Size = new System.Drawing.Size(1034, 450);
             this.dataGridInv.TabIndex = 1;
             // 

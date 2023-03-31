@@ -33,6 +33,11 @@
             this.PastDue = new System.Windows.Forms.Label();
             this.Rented = new System.Windows.Forms.Label();
             this.dataGridPastDue = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridRented = new System.Windows.Forms.DataGridView();
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Product = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,11 +45,6 @@
             this.DueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPastDue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRented)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -56,9 +56,10 @@
             this.PastDue.AutoSize = true;
             this.PastDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PastDue.ForeColor = System.Drawing.SystemColors.Window;
-            this.PastDue.Location = new System.Drawing.Point(520, 9);
+            this.PastDue.Location = new System.Drawing.Point(693, 10);
+            this.PastDue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PastDue.Name = "PastDue";
-            this.PastDue.Size = new System.Drawing.Size(83, 20);
+            this.PastDue.Size = new System.Drawing.Size(100, 25);
             this.PastDue.TabIndex = 5;
             this.PastDue.Text = "Past Due";
             // 
@@ -69,9 +70,10 @@
             this.Rented.BackColor = System.Drawing.Color.Maroon;
             this.Rented.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Rented.ForeColor = System.Drawing.SystemColors.Window;
-            this.Rented.Location = new System.Drawing.Point(3, 9);
+            this.Rented.Location = new System.Drawing.Point(4, 10);
+            this.Rented.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Rented.Name = "Rented";
-            this.Rented.Size = new System.Drawing.Size(68, 20);
+            this.Rented.Size = new System.Drawing.Size(80, 25);
             this.Rented.TabIndex = 4;
             this.Rented.Text = "Rented";
             // 
@@ -98,12 +100,50 @@
             this.dataGridViewTextBoxColumn4});
             this.dataGridPastDue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridPastDue.EnableHeadersVisualStyles = false;
-            this.dataGridPastDue.Location = new System.Drawing.Point(520, 32);
+            this.dataGridPastDue.Location = new System.Drawing.Point(693, 39);
+            this.dataGridPastDue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridPastDue.Name = "dataGridPastDue";
             this.dataGridPastDue.RowHeadersVisible = false;
-            this.dataGridPastDue.Size = new System.Drawing.Size(511, 507);
+            this.dataGridPastDue.RowHeadersWidth = 51;
+            this.dataGridPastDue.Size = new System.Drawing.Size(682, 624);
             this.dataGridPastDue.TabIndex = 3;
             this.dataGridPastDue.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPastDue_CellClick);
+            // 
+            // Id
+            // 
+            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Id.FillWeight = 30F;
+            this.Id.HeaderText = "#";
+            this.Id.MinimumWidth = 6;
+            this.Id.Name = "Id";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Product";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Rentee";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // DDate
+            // 
+            this.DDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DDate.HeaderText = "Due Date";
+            this.DDate.MinimumWidth = 6;
+            this.DDate.Name = "DDate";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn4.HeaderText = "Serial #";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
             // dataGridRented
             // 
@@ -128,10 +168,13 @@
             this.Serial});
             this.dataGridRented.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridRented.EnableHeadersVisualStyles = false;
-            this.dataGridRented.Location = new System.Drawing.Point(3, 32);
+            this.dataGridRented.Location = new System.Drawing.Point(4, 39);
+            this.dataGridRented.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridRented.Name = "dataGridRented";
             this.dataGridRented.RowHeadersVisible = false;
-            this.dataGridRented.Size = new System.Drawing.Size(511, 507);
+            this.dataGridRented.RowHeadersWidth = 51;
+            this.dataGridRented.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridRented.Size = new System.Drawing.Size(681, 624);
             this.dataGridRented.TabIndex = 2;
             this.dataGridRented.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRented_CellClick);
             this.dataGridRented.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridRented_CellFormatting);
@@ -141,30 +184,35 @@
             this.Num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Num.FillWeight = 30F;
             this.Num.HeaderText = "#";
+            this.Num.MinimumWidth = 6;
             this.Num.Name = "Num";
             // 
             // Product
             // 
             this.Product.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Product.HeaderText = "Product";
+            this.Product.MinimumWidth = 6;
             this.Product.Name = "Product";
             // 
             // Rentee
             // 
             this.Rentee.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Rentee.HeaderText = "Rentee";
+            this.Rentee.MinimumWidth = 6;
             this.Rentee.Name = "Rentee";
             // 
             // DueDate
             // 
             this.DueDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.DueDate.HeaderText = "Due Date";
+            this.DueDate.MinimumWidth = 6;
             this.DueDate.Name = "DueDate";
             // 
             // Serial
             // 
             this.Serial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Serial.HeaderText = "Serial #";
+            this.Serial.MinimumWidth = 6;
             this.Serial.Name = "Serial";
             // 
             // tableLayoutPanel1
@@ -180,53 +228,23 @@
             this.tableLayoutPanel1.Controls.Add(this.PastDue, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.350554F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.64944F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1034, 542);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1379, 667);
             this.tableLayoutPanel1.TabIndex = 5;
-            // 
-            // Id
-            // 
-            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Id.FillWeight = 30F;
-            this.Id.HeaderText = "#";
-            this.Id.Name = "Id";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Product";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Rentee";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // DDate
-            // 
-            this.DDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DDate.HeaderText = "Due Date";
-            this.DDate.Name = "DDate";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Serial #";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
             // HomeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 542);
+            this.ClientSize = new System.Drawing.Size(1379, 667);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "HomeForm";
             this.Text = "HomeForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPastDue)).EndInit();
