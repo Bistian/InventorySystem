@@ -35,6 +35,7 @@ namespace InventoryManagmentSystem
             //if (isNewItem == true)
             //{
                 CreateItem();
+            
             //}
             //else
             //{

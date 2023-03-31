@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewHelmetModuleForm));
             this.InventoryPanel = new System.Windows.Forms.Panel();
+            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.NewHelmetTxt = new System.Windows.Forms.Label();
             this.InventoryTxt = new System.Windows.Forms.Label();
             this.txtBoxSerialNumber = new System.Windows.Forms.TextBox();
@@ -46,7 +47,6 @@
             this.dateTimePickerManufactureDate = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
-            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.InventoryPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
@@ -61,6 +61,20 @@
             this.InventoryPanel.Name = "InventoryPanel";
             this.InventoryPanel.Size = new System.Drawing.Size(755, 64);
             this.InventoryPanel.TabIndex = 21;
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
+            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
+            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
+            this.CloseButton.Location = new System.Drawing.Point(715, 4);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(4);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(36, 42);
+            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CloseButton.TabIndex = 68;
+            this.CloseButton.TabStop = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // NewHelmetTxt
             // 
@@ -240,6 +254,7 @@
             // 
             // dateTimePickerManufactureDate
             // 
+            this.dateTimePickerManufactureDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerManufactureDate.Location = new System.Drawing.Point(475, 145);
             this.dateTimePickerManufactureDate.Name = "dateTimePickerManufactureDate";
             this.dateTimePickerManufactureDate.Size = new System.Drawing.Size(246, 22);
@@ -273,20 +288,6 @@
             this.ClearButton.Text = "Clear";
             this.ClearButton.UseVisualStyleBackColor = false;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
-            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
-            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(715, 4);
-            this.CloseButton.Margin = new System.Windows.Forms.Padding(4);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(36, 42);
-            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CloseButton.TabIndex = 68;
-            this.CloseButton.TabStop = false;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // NewHelmetModuleForm
             // 

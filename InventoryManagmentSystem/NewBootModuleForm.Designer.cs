@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewBootModuleForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.NewBootTxt = new System.Windows.Forms.Label();
             this.ClearButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -45,7 +46,6 @@
             this.comboBoxSize = new System.Windows.Forms.ComboBox();
             this.txtBoxSerialNumber = new System.Windows.Forms.TextBox();
             this.LableSerialNumber = new System.Windows.Forms.Label();
-            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
@@ -58,6 +58,15 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.panel1.Name = "panel1";
+            // 
+            // CloseButton
+            // 
+            resources.ApplyResources(this.CloseButton, "CloseButton");
+            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
+            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.TabStop = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // NewBootTxt
             // 
@@ -89,6 +98,7 @@
             // 
             // dateTimePickerManufactureDate
             // 
+            this.dateTimePickerManufactureDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             resources.ApplyResources(this.dateTimePickerManufactureDate, "dateTimePickerManufactureDate");
             this.dateTimePickerManufactureDate.Name = "dateTimePickerManufactureDate";
             // 
@@ -174,15 +184,6 @@
             // 
             resources.ApplyResources(this.LableSerialNumber, "LableSerialNumber");
             this.LableSerialNumber.Name = "LableSerialNumber";
-            // 
-            // CloseButton
-            // 
-            resources.ApplyResources(this.CloseButton, "CloseButton");
-            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
-            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.TabStop = false;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // NewBootModuleForm
             // 

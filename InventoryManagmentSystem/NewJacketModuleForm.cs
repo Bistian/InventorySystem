@@ -23,9 +23,10 @@ namespace InventoryManagmentSystem
         bool isNewItem;
         #endregion SQL_Variables
 
-        public NewJacketModuleForm()
+        public NewJacketModuleForm(bool newItem = false)
         {
             InitializeComponent();
+            isNewItem = newItem;
         }
 
         public void Clear()

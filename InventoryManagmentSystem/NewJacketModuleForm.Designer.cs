@@ -131,6 +131,7 @@
             // 
             // dateTimePickerManufactureDate
             // 
+            this.dateTimePickerManufactureDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerManufactureDate.Location = new System.Drawing.Point(486, 146);
             this.dateTimePickerManufactureDate.Name = "dateTimePickerManufactureDate";
             this.dateTimePickerManufactureDate.Size = new System.Drawing.Size(246, 22);

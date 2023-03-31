@@ -24,9 +24,10 @@ namespace InventoryManagmentSystem
         #endregion SQL_Variables
 
 
-        public NewPantsModuleForm()
+        public NewPantsModuleForm(bool newItem = false)
         {
             InitializeComponent();
+            isNewItem = newItem;
         }
 
         public void Clear()

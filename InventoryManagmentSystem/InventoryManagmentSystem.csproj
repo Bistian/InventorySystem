@@ -121,6 +121,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewItemModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewItemModuleForm.Designer.cs">
+      <DependentUpon>NewItemModuleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewJacketModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewItemModuleForm.resx">
+      <DependentUpon>NewItemModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewJacketModuleForm.resx">
       <DependentUpon>NewJacketModuleForm.cs</DependentUpon>
