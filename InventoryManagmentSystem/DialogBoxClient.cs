@@ -77,6 +77,9 @@ namespace InventoryManagmentSystem
 
         private void SetTable()
         {
+            // Change the styling for the date column.
+            dataGridView1.Columns["DueDate"].DefaultCellStyle.Format = "d";
+
             dataGridView1.Rows.Clear();
             cm = new SqlCommand(QueryItems(), con);
             con.Open();
@@ -88,7 +91,7 @@ namespace InventoryManagmentSystem
                 ++i;
                 dataGridView1.Rows.Add(i,
                     dr[0].ToString(),
-                    dr[1].ToString(),
+                    dr[1],
                     dr[2].ToString()
                 );
             }

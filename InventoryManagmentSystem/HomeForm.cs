@@ -78,15 +78,13 @@ namespace InventoryManagmentSystem
             dr = cm.ExecuteReader();
 
             int i = 0;
-            DateTime date;
             while (dr.Read())
             {
                 ++i;
-                date = (DateTime)dr[2];
                 grid.Rows.Add(i,
                     dr[0].ToString(),
                     dr[1].ToString(),
-                    date.Date,
+                    dr[2],
                     dr[3].ToString()
                 );
             }
