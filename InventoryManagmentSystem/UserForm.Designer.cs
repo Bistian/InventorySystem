@@ -117,6 +117,7 @@
             this.dataGridUser.EnableHeadersVisualStyles = false;
             this.dataGridUser.Location = new System.Drawing.Point(0, 0);
             this.dataGridUser.Name = "dataGridUser";
+            this.dataGridUser.ReadOnly = true;
             this.dataGridUser.RowHeadersWidth = 51;
             this.dataGridUser.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridUser.Size = new System.Drawing.Size(1034, 542);
@@ -128,6 +129,7 @@
             this.Column4.HeaderText = "#";
             this.Column4.MinimumWidth = 6;
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             this.Column4.Width = 25;
             // 
             // Column1
@@ -136,6 +138,7 @@
             this.Column1.HeaderText = "User Name";
             this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column1.Width = 123;
             // 
@@ -145,6 +148,7 @@
             this.Column2.HeaderText = "Password";
             this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column2.Width = 110;
             // 
@@ -154,6 +158,7 @@
             this.Column3.HeaderText = "Full Name";
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Edit
@@ -163,6 +168,7 @@
             this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
             this.Edit.MinimumWidth = 6;
             this.Edit.Name = "Edit";
+            this.Edit.ReadOnly = true;
             this.Edit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Edit.Width = 6;
             // 
@@ -172,6 +178,7 @@
             this.Delete.HeaderText = "";
             this.Delete.MinimumWidth = 6;
             this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
             this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Delete.Width = 6;
             // 

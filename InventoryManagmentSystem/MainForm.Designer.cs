@@ -41,18 +41,23 @@
             this.MyLogo = new System.Windows.Forms.PictureBox();
             this.BottomPanel = new System.Windows.Forms.Panel();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.RentalLable = new System.Windows.Forms.Label();
+            this.RentalButton = new InventoryManagmentSystem.CustomButton();
             this.TopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DepatmensButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HomeButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MyLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RentalButton)).BeginInit();
             this.SuspendLayout();
             // 
             // TopPanel
             // 
             this.TopPanel.BackColor = System.Drawing.Color.Maroon;
+            this.TopPanel.Controls.Add(this.RentalLable);
             this.TopPanel.Controls.Add(this.UsersButton);
+            this.TopPanel.Controls.Add(this.RentalButton);
             this.TopPanel.Controls.Add(this.UsersTxt);
             this.TopPanel.Controls.Add(this.DepartmentsTxt);
             this.TopPanel.Controls.Add(this.HomeTex);
@@ -73,7 +78,7 @@
             this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
             this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
             this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
-            this.UsersButton.Location = new System.Drawing.Point(469, 3);
+            this.UsersButton.Location = new System.Drawing.Point(546, 3);
             this.UsersButton.Name = "UsersButton";
             this.UsersButton.Size = new System.Drawing.Size(55, 67);
             this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -90,7 +95,7 @@
             this.UsersTxt.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UsersTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.UsersTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.UsersTxt.Location = new System.Drawing.Point(461, 63);
+            this.UsersTxt.Location = new System.Drawing.Point(538, 63);
             this.UsersTxt.Name = "UsersTxt";
             this.UsersTxt.Size = new System.Drawing.Size(73, 29);
             this.UsersTxt.TabIndex = 15;
@@ -106,7 +111,7 @@
             this.DepartmentsTxt.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DepartmentsTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.DepartmentsTxt.Location = new System.Drawing.Point(348, 61);
+            this.DepartmentsTxt.Location = new System.Drawing.Point(431, 61);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
             this.DepartmentsTxt.Size = new System.Drawing.Size(66, 29);
             this.DepartmentsTxt.TabIndex = 13;
@@ -134,7 +139,7 @@
             this.DepatmensButton.Image = ((System.Drawing.Image)(resources.GetObject("DepatmensButton.Image")));
             this.DepatmensButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("DepatmensButton.ImageHover")));
             this.DepatmensButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("DepatmensButton.ImageNormal")));
-            this.DepatmensButton.Location = new System.Drawing.Point(353, 12);
+            this.DepatmensButton.Location = new System.Drawing.Point(436, 12);
             this.DepatmensButton.Name = "DepatmensButton";
             this.DepatmensButton.Size = new System.Drawing.Size(55, 50);
             this.DepatmensButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -151,7 +156,7 @@
             this.InventoryTxt.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InventoryTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.InventoryTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.InventoryTxt.Location = new System.Drawing.Point(241, 62);
+            this.InventoryTxt.Location = new System.Drawing.Point(336, 62);
             this.InventoryTxt.Name = "InventoryTxt";
             this.InventoryTxt.Size = new System.Drawing.Size(47, 29);
             this.InventoryTxt.TabIndex = 9;
@@ -176,7 +181,7 @@
             this.InventoryButton.Image = ((System.Drawing.Image)(resources.GetObject("InventoryButton.Image")));
             this.InventoryButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("InventoryButton.ImageHover")));
             this.InventoryButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("InventoryButton.ImageNormal")));
-            this.InventoryButton.Location = new System.Drawing.Point(235, 12);
+            this.InventoryButton.Location = new System.Drawing.Point(330, 12);
             this.InventoryButton.Name = "InventoryButton";
             this.InventoryButton.Size = new System.Drawing.Size(55, 50);
             this.InventoryButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -213,6 +218,35 @@
             this.MainPanel.Size = new System.Drawing.Size(1034, 542);
             this.MainPanel.TabIndex = 0;
             // 
+            // RentalLable
+            // 
+            this.RentalLable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RentalLable.AutoSize = true;
+            this.RentalLable.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RentalLable.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.RentalLable.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.RentalLable.Location = new System.Drawing.Point(216, 62);
+            this.RentalLable.Name = "RentalLable";
+            this.RentalLable.Size = new System.Drawing.Size(96, 29);
+            this.RentalLable.TabIndex = 13;
+            this.RentalLable.Text = "Rentals";
+            this.RentalLable.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // RentalButton
+            // 
+            this.RentalButton.Image = ((System.Drawing.Image)(resources.GetObject("RentalButton.Image")));
+            this.RentalButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("RentalButton.ImageHover")));
+            this.RentalButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("RentalButton.ImageNormal")));
+            this.RentalButton.Location = new System.Drawing.Point(225, 12);
+            this.RentalButton.Name = "RentalButton";
+            this.RentalButton.Size = new System.Drawing.Size(63, 51);
+            this.RentalButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.RentalButton.TabIndex = 12;
+            this.RentalButton.TabStop = false;
+            this.RentalButton.Click += new System.EventHandler(this.RentalButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
@@ -234,6 +268,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.HomeButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MyLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RentalButton)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -252,5 +287,7 @@
         private CustomButton DepatmensButton;
         private CustomButton UsersButton;
         private System.Windows.Forms.Label UsersTxt;
+        private System.Windows.Forms.Label RentalLable;
+        private CustomButton RentalButton;
     }
 }

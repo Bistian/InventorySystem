@@ -28,249 +28,135 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.PastDue = new System.Windows.Forms.Label();
-            this.Rented = new System.Windows.Forms.Label();
-            this.dataGridPastDue = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridRented = new System.Windows.Forms.DataGridView();
-            this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Product = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rentee = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridPastDue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridRented)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.CurrentlyRentedJackets = new System.Windows.Forms.Button();
+            this.Button30DaysPast = new System.Windows.Forms.Button();
+            this.CurrentlyRentedPants = new System.Windows.Forms.Button();
+            this.flowLayoutPanelHome = new System.Windows.Forms.FlowLayoutPanel();
+            this.dataGridViewDueIn10 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewPast30 = new System.Windows.Forms.DataGridView();
+            this.DueIn10 = new System.Windows.Forms.Label();
+            this.flowLayoutPanelHome.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDueIn10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPast30)).BeginInit();
             this.SuspendLayout();
             // 
-            // PastDue
+            // CurrentlyRentedJackets
             // 
-            this.PastDue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.PastDue.AutoSize = true;
-            this.PastDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PastDue.ForeColor = System.Drawing.SystemColors.Window;
-            this.PastDue.Location = new System.Drawing.Point(693, 10);
-            this.PastDue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.PastDue.Name = "PastDue";
-            this.PastDue.Size = new System.Drawing.Size(100, 25);
-            this.PastDue.TabIndex = 5;
-            this.PastDue.Text = "Past Due";
+            this.CurrentlyRentedJackets.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CurrentlyRentedJackets.BackColor = System.Drawing.Color.MidnightBlue;
+            this.CurrentlyRentedJackets.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CurrentlyRentedJackets.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.CurrentlyRentedJackets.Location = new System.Drawing.Point(342, 113);
+            this.CurrentlyRentedJackets.Margin = new System.Windows.Forms.Padding(100, 50, 100, 0);
+            this.CurrentlyRentedJackets.Name = "CurrentlyRentedJackets";
+            this.CurrentlyRentedJackets.Size = new System.Drawing.Size(340, 150);
+            this.CurrentlyRentedJackets.TabIndex = 2;
+            this.CurrentlyRentedJackets.Text = "Currently Rented";
+            this.CurrentlyRentedJackets.UseVisualStyleBackColor = false;
+            this.CurrentlyRentedJackets.Click += new System.EventHandler(this.CurrentlyRentedJackets_Click);
             // 
-            // Rented
+            // Button30DaysPast
             // 
-            this.Rented.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Rented.AutoSize = true;
-            this.Rented.BackColor = System.Drawing.Color.Maroon;
-            this.Rented.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Rented.ForeColor = System.Drawing.SystemColors.Window;
-            this.Rented.Location = new System.Drawing.Point(4, 10);
-            this.Rented.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Rented.Name = "Rented";
-            this.Rented.Size = new System.Drawing.Size(80, 25);
-            this.Rented.TabIndex = 4;
-            this.Rented.Text = "Rented";
+            this.Button30DaysPast.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.Button30DaysPast.BackColor = System.Drawing.Color.MidnightBlue;
+            this.Button30DaysPast.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button30DaysPast.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Button30DaysPast.Location = new System.Drawing.Point(542, 263);
+            this.Button30DaysPast.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
+            this.Button30DaysPast.Name = "Button30DaysPast";
+            this.Button30DaysPast.Size = new System.Drawing.Size(170, 100);
+            this.Button30DaysPast.TabIndex = 1;
+            this.Button30DaysPast.Text = "Coats";
+            this.Button30DaysPast.UseVisualStyleBackColor = false;
             // 
-            // dataGridPastDue
+            // CurrentlyRentedPants
             // 
-            this.dataGridPastDue.AllowUserToAddRows = false;
-            this.dataGridPastDue.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridPastDue.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridPastDue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridPastDue.ColumnHeadersHeight = 30;
-            this.dataGridPastDue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridPastDue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.DDate,
-            this.dataGridViewTextBoxColumn4});
-            this.dataGridPastDue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridPastDue.EnableHeadersVisualStyles = false;
-            this.dataGridPastDue.Location = new System.Drawing.Point(693, 39);
-            this.dataGridPastDue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dataGridPastDue.Name = "dataGridPastDue";
-            this.dataGridPastDue.RowHeadersVisible = false;
-            this.dataGridPastDue.RowHeadersWidth = 51;
-            this.dataGridPastDue.Size = new System.Drawing.Size(682, 624);
-            this.dataGridPastDue.TabIndex = 3;
-            this.dataGridPastDue.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPastDue_CellClick);
+            this.CurrentlyRentedPants.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CurrentlyRentedPants.BackColor = System.Drawing.Color.MidnightBlue;
+            this.CurrentlyRentedPants.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CurrentlyRentedPants.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.CurrentlyRentedPants.Location = new System.Drawing.Point(312, 263);
+            this.CurrentlyRentedPants.Margin = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.CurrentlyRentedPants.Name = "CurrentlyRentedPants";
+            this.CurrentlyRentedPants.Size = new System.Drawing.Size(170, 100);
+            this.CurrentlyRentedPants.TabIndex = 4;
+            this.CurrentlyRentedPants.Text = "Pants";
+            this.CurrentlyRentedPants.UseVisualStyleBackColor = false;
             // 
-            // Id
+            // flowLayoutPanelHome
             // 
-            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Id.FillWeight = 30F;
-            this.Id.HeaderText = "#";
-            this.Id.MinimumWidth = 6;
-            this.Id.Name = "Id";
+            this.flowLayoutPanelHome.BackColor = System.Drawing.Color.MidnightBlue;
+            this.flowLayoutPanelHome.Controls.Add(this.DueIn10);
+            this.flowLayoutPanelHome.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanelHome.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanelHome.Name = "flowLayoutPanelHome";
+            this.flowLayoutPanelHome.Size = new System.Drawing.Size(1016, 35);
+            this.flowLayoutPanelHome.TabIndex = 5;
             // 
-            // dataGridViewTextBoxColumn1
+            // dataGridViewDueIn10
             // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Product";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewDueIn10.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDueIn10.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dataGridViewDueIn10.Location = new System.Drawing.Point(0, 35);
+            this.dataGridViewDueIn10.Name = "dataGridViewDueIn10";
+            this.dataGridViewDueIn10.RowHeadersWidth = 51;
+            this.dataGridViewDueIn10.RowTemplate.Height = 24;
+            this.dataGridViewDueIn10.Size = new System.Drawing.Size(303, 454);
+            this.dataGridViewDueIn10.TabIndex = 6;
             // 
-            // dataGridViewTextBoxColumn2
+            // dataGridViewPast30
             // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Rentee";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewPast30.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPast30.Dock = System.Windows.Forms.DockStyle.Right;
+            this.dataGridViewPast30.Location = new System.Drawing.Point(715, 35);
+            this.dataGridViewPast30.Name = "dataGridViewPast30";
+            this.dataGridViewPast30.RowHeadersWidth = 51;
+            this.dataGridViewPast30.RowTemplate.Height = 24;
+            this.dataGridViewPast30.Size = new System.Drawing.Size(301, 454);
+            this.dataGridViewPast30.TabIndex = 7;
             // 
-            // DDate
+            // DueIn10
             // 
-            this.DDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DDate.HeaderText = "Due Date";
-            this.DDate.MinimumWidth = 6;
-            this.DDate.Name = "DDate";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Serial #";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridRented
-            // 
-            this.dataGridRented.AllowUserToAddRows = false;
-            this.dataGridRented.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridRented.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridRented.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridRented.ColumnHeadersHeight = 30;
-            this.dataGridRented.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridRented.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Num,
-            this.Product,
-            this.Rentee,
-            this.DueDate,
-            this.Serial});
-            this.dataGridRented.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridRented.EnableHeadersVisualStyles = false;
-            this.dataGridRented.Location = new System.Drawing.Point(4, 39);
-            this.dataGridRented.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dataGridRented.Name = "dataGridRented";
-            this.dataGridRented.RowHeadersVisible = false;
-            this.dataGridRented.RowHeadersWidth = 51;
-            this.dataGridRented.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridRented.Size = new System.Drawing.Size(681, 624);
-            this.dataGridRented.TabIndex = 2;
-            this.dataGridRented.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRented_CellClick);
-            this.dataGridRented.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridRented_CellFormatting);
-            // 
-            // Num
-            // 
-            this.Num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Num.FillWeight = 30F;
-            this.Num.HeaderText = "#";
-            this.Num.MinimumWidth = 6;
-            this.Num.Name = "Num";
-            // 
-            // Product
-            // 
-            this.Product.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Product.HeaderText = "Product";
-            this.Product.MinimumWidth = 6;
-            this.Product.Name = "Product";
-            // 
-            // Rentee
-            // 
-            this.Rentee.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Rentee.HeaderText = "Rentee";
-            this.Rentee.MinimumWidth = 6;
-            this.Rentee.Name = "Rentee";
-            // 
-            // DueDate
-            // 
-            this.DueDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DueDate.HeaderText = "Due Date";
-            this.DueDate.MinimumWidth = 6;
-            this.DueDate.Name = "DueDate";
-            // 
-            // Serial
-            // 
-            this.Serial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Serial.HeaderText = "Serial #";
-            this.Serial.MinimumWidth = 6;
-            this.Serial.Name = "Serial";
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Maroon;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.dataGridRented, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridPastDue, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.Rented, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.PastDue, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.350554F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.64944F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1379, 667);
-            this.tableLayoutPanel1.TabIndex = 5;
+            this.DueIn10.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.DueIn10.AutoSize = true;
+            this.DueIn10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DueIn10.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.DueIn10.Location = new System.Drawing.Point(30, 10);
+            this.DueIn10.Margin = new System.Windows.Forms.Padding(30, 10, 0, 0);
+            this.DueIn10.Name = "DueIn10";
+            this.DueIn10.Size = new System.Drawing.Size(215, 25);
+            this.DueIn10.TabIndex = 0;
+            this.DueIn10.Text = "Due Withinn 10 Days";
             // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1379, 667);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClientSize = new System.Drawing.Size(1016, 489);
+            this.Controls.Add(this.dataGridViewPast30);
+            this.Controls.Add(this.dataGridViewDueIn10);
+            this.Controls.Add(this.flowLayoutPanelHome);
+            this.Controls.Add(this.CurrentlyRentedJackets);
+            this.Controls.Add(this.CurrentlyRentedPants);
+            this.Controls.Add(this.Button30DaysPast);
             this.Name = "HomeForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HomeForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridPastDue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridRented)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.flowLayoutPanelHome.ResumeLayout(false);
+            this.flowLayoutPanelHome.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDueIn10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPast30)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label PastDue;
-        private System.Windows.Forms.Label Rented;
-        private System.Windows.Forms.DataGridView dataGridPastDue;
-        private System.Windows.Forms.DataGridView dataGridRented;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Num;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Product;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rentee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Serial;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.Button CurrentlyRentedJackets;
+        private System.Windows.Forms.Button Button30DaysPast;
+        private System.Windows.Forms.Button CurrentlyRentedPants;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelHome;
+        private System.Windows.Forms.DataGridView dataGridViewDueIn10;
+        private System.Windows.Forms.DataGridView dataGridViewPast30;
+        private System.Windows.Forms.Label DueIn10;
     }
 }
