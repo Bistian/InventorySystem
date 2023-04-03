@@ -140,8 +140,8 @@ namespace InventoryManagmentSystem
                 row = dataGridRented.Rows[e.RowIndex];
             }
 
-            string rentee = row.Cells[2].Value.ToString();
 
+            string rentee = row.Cells[2].Value.ToString();
             // Check if there is at least one item with that name on the clints table.
             string query = (
                 "SELECT COUNT(*) FROM tbClients " +

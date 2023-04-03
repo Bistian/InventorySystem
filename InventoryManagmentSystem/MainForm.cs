@@ -17,12 +17,13 @@ namespace InventoryManagmentSystem
         public MainForm()
         {
             InitializeComponent();
+
         }
 
         //to show subform in mainform
         private Form activeForm = null;
 
-        private void openChildForm(Form childForm)
+        public void openChildForm(Form childForm)
         {
             if (activeForm != null)
             {
@@ -67,6 +68,11 @@ namespace InventoryManagmentSystem
         public void RentalButton_Click(object sender, EventArgs e)
         {
             openChildForm(new RentalForm());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
