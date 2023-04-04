@@ -33,8 +33,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ButtonCurrentlyRented = new System.Windows.Forms.Button();
             this.ButtonCurrentlyRentedJackets = new System.Windows.Forms.Button();
             this.ButtonCurrentlyRentedPants = new System.Windows.Forms.Button();
@@ -42,17 +40,17 @@
             this.DueIn10 = new System.Windows.Forms.Label();
             this.over30 = new System.Windows.Forms.Label();
             this.dataGridViewDueIn10 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewPast30 = new System.Windows.Forms.DataGridView();
-            this.panelTotal = new System.Windows.Forms.Panel();
-            this.splitContainerPantsJackets = new System.Windows.Forms.SplitContainer();
             this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Product = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rentee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Due = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewPast30 = new System.Windows.Forms.DataGridView();
             this.nums = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Product2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rentee2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DueDate2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panelTotal = new System.Windows.Forms.Panel();
+            this.splitContainerPantsJackets = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanelHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDueIn10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPast30)).BeginInit();
@@ -72,7 +70,7 @@
             this.ButtonCurrentlyRented.Location = new System.Drawing.Point(15, 15);
             this.ButtonCurrentlyRented.Margin = new System.Windows.Forms.Padding(100, 50, 100, 0);
             this.ButtonCurrentlyRented.Name = "ButtonCurrentlyRented";
-            this.ButtonCurrentlyRented.Size = new System.Drawing.Size(382, 135);
+            this.ButtonCurrentlyRented.Size = new System.Drawing.Size(384, 135);
             this.ButtonCurrentlyRented.TabIndex = 2;
             this.ButtonCurrentlyRented.Text = "Currently Rented";
             this.ButtonCurrentlyRented.UseVisualStyleBackColor = false;
@@ -87,7 +85,7 @@
             this.ButtonCurrentlyRentedJackets.Location = new System.Drawing.Point(0, 0);
             this.ButtonCurrentlyRentedJackets.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.ButtonCurrentlyRentedJackets.Name = "ButtonCurrentlyRentedJackets";
-            this.ButtonCurrentlyRentedJackets.Size = new System.Drawing.Size(202, 100);
+            this.ButtonCurrentlyRentedJackets.Size = new System.Drawing.Size(203, 100);
             this.ButtonCurrentlyRentedJackets.TabIndex = 1;
             this.ButtonCurrentlyRentedJackets.Text = "Coats";
             this.ButtonCurrentlyRentedJackets.UseVisualStyleBackColor = false;
@@ -103,7 +101,7 @@
             this.ButtonCurrentlyRentedPants.Margin = new System.Windows.Forms.Padding(15);
             this.ButtonCurrentlyRentedPants.Name = "ButtonCurrentlyRentedPants";
             this.ButtonCurrentlyRentedPants.Padding = new System.Windows.Forms.Padding(15);
-            this.ButtonCurrentlyRentedPants.Size = new System.Drawing.Size(206, 100);
+            this.ButtonCurrentlyRentedPants.Size = new System.Drawing.Size(207, 100);
             this.ButtonCurrentlyRentedPants.TabIndex = 4;
             this.ButtonCurrentlyRentedPants.Text = "Pants";
             this.ButtonCurrentlyRentedPants.UseVisualStyleBackColor = false;
@@ -151,114 +149,42 @@
             this.dataGridViewDueIn10.AllowUserToAddRows = false;
             this.dataGridViewDueIn10.AllowUserToDeleteRows = false;
             this.dataGridViewDueIn10.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            this.dataGridViewDueIn10.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewDueIn10.BackgroundColor = System.Drawing.Color.Maroon;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewDueIn10.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewDueIn10.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewDueIn10.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDueIn10.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.num,
             this.Product,
             this.Rentee,
             this.Due});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewDueIn10.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewDueIn10.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewDueIn10.Dock = System.Windows.Forms.DockStyle.Left;
             this.dataGridViewDueIn10.Location = new System.Drawing.Point(0, 35);
             this.dataGridViewDueIn10.Name = "dataGridViewDueIn10";
             this.dataGridViewDueIn10.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewDueIn10.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewDueIn10.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewDueIn10.RowHeadersVisible = false;
             this.dataGridViewDueIn10.RowHeadersWidth = 51;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            this.dataGridViewDueIn10.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewDueIn10.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridViewDueIn10.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dataGridViewDueIn10.RowTemplate.Height = 24;
-            this.dataGridViewDueIn10.Size = new System.Drawing.Size(303, 454);
-            this.dataGridViewDueIn10.TabIndex = 6;
-            // 
-            // dataGridViewPast30
-            // 
-            this.dataGridViewPast30.AllowUserToAddRows = false;
-            this.dataGridViewPast30.AllowUserToDeleteRows = false;
-            this.dataGridViewPast30.AllowUserToResizeRows = false;
-            this.dataGridViewPast30.BackgroundColor = System.Drawing.Color.Maroon;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewPast30.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridViewPast30.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewPast30.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nums,
-            this.Product2,
-            this.Rentee2,
-            this.DueDate2});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewPast30.DefaultCellStyle = dataGridViewCellStyle7;
-            this.dataGridViewPast30.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dataGridViewPast30.Location = new System.Drawing.Point(715, 35);
-            this.dataGridViewPast30.Name = "dataGridViewPast30";
-            this.dataGridViewPast30.ReadOnly = true;
-            this.dataGridViewPast30.RowHeadersVisible = false;
-            this.dataGridViewPast30.RowHeadersWidth = 51;
-            this.dataGridViewPast30.RowTemplate.Height = 24;
-            this.dataGridViewPast30.Size = new System.Drawing.Size(301, 454);
-            this.dataGridViewPast30.TabIndex = 7;
-            // 
-            // panelTotal
-            // 
-            this.panelTotal.Controls.Add(this.ButtonCurrentlyRented);
-            this.panelTotal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTotal.Location = new System.Drawing.Point(303, 35);
-            this.panelTotal.Margin = new System.Windows.Forms.Padding(20);
-            this.panelTotal.Name = "panelTotal";
-            this.panelTotal.Padding = new System.Windows.Forms.Padding(15, 15, 15, 0);
-            this.panelTotal.Size = new System.Drawing.Size(412, 150);
-            this.panelTotal.TabIndex = 8;
-            // 
-            // splitContainerPantsJackets
-            // 
-            this.splitContainerPantsJackets.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitContainerPantsJackets.Location = new System.Drawing.Point(303, 185);
-            this.splitContainerPantsJackets.Margin = new System.Windows.Forms.Padding(15);
-            this.splitContainerPantsJackets.Name = "splitContainerPantsJackets";
-            // 
-            // splitContainerPantsJackets.Panel1
-            // 
-            this.splitContainerPantsJackets.Panel1.Controls.Add(this.ButtonCurrentlyRentedPants);
-            // 
-            // splitContainerPantsJackets.Panel2
-            // 
-            this.splitContainerPantsJackets.Panel2.Controls.Add(this.ButtonCurrentlyRentedJackets);
-            this.splitContainerPantsJackets.Size = new System.Drawing.Size(412, 100);
-            this.splitContainerPantsJackets.SplitterDistance = 206;
-            this.splitContainerPantsJackets.TabIndex = 0;
+            this.dataGridViewDueIn10.Size = new System.Drawing.Size(301, 454);
+            this.dataGridViewDueIn10.TabIndex = 7;
             // 
             // num
             // 
@@ -293,6 +219,44 @@
             this.Due.Name = "Due";
             this.Due.ReadOnly = true;
             // 
+            // dataGridViewPast30
+            // 
+            this.dataGridViewPast30.AllowUserToAddRows = false;
+            this.dataGridViewPast30.AllowUserToDeleteRows = false;
+            this.dataGridViewPast30.AllowUserToResizeRows = false;
+            this.dataGridViewPast30.BackgroundColor = System.Drawing.Color.Maroon;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Empty;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Empty;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Empty;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPast30.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewPast30.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPast30.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nums,
+            this.Product2,
+            this.Rentee2,
+            this.DueDate2});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewPast30.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewPast30.Dock = System.Windows.Forms.DockStyle.Right;
+            this.dataGridViewPast30.Location = new System.Drawing.Point(715, 35);
+            this.dataGridViewPast30.Name = "dataGridViewPast30";
+            this.dataGridViewPast30.ReadOnly = true;
+            this.dataGridViewPast30.RowHeadersVisible = false;
+            this.dataGridViewPast30.RowHeadersWidth = 51;
+            this.dataGridViewPast30.RowTemplate.Height = 24;
+            this.dataGridViewPast30.Size = new System.Drawing.Size(301, 454);
+            this.dataGridViewPast30.TabIndex = 7;
+            // 
             // nums
             // 
             this.nums.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -325,6 +289,35 @@
             this.DueDate2.MinimumWidth = 6;
             this.DueDate2.Name = "DueDate2";
             this.DueDate2.ReadOnly = true;
+            // 
+            // panelTotal
+            // 
+            this.panelTotal.Controls.Add(this.ButtonCurrentlyRented);
+            this.panelTotal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTotal.Location = new System.Drawing.Point(301, 35);
+            this.panelTotal.Margin = new System.Windows.Forms.Padding(20);
+            this.panelTotal.Name = "panelTotal";
+            this.panelTotal.Padding = new System.Windows.Forms.Padding(15, 15, 15, 0);
+            this.panelTotal.Size = new System.Drawing.Size(414, 150);
+            this.panelTotal.TabIndex = 8;
+            // 
+            // splitContainerPantsJackets
+            // 
+            this.splitContainerPantsJackets.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitContainerPantsJackets.Location = new System.Drawing.Point(301, 185);
+            this.splitContainerPantsJackets.Margin = new System.Windows.Forms.Padding(15);
+            this.splitContainerPantsJackets.Name = "splitContainerPantsJackets";
+            // 
+            // splitContainerPantsJackets.Panel1
+            // 
+            this.splitContainerPantsJackets.Panel1.Controls.Add(this.ButtonCurrentlyRentedPants);
+            // 
+            // splitContainerPantsJackets.Panel2
+            // 
+            this.splitContainerPantsJackets.Panel2.Controls.Add(this.ButtonCurrentlyRentedJackets);
+            this.splitContainerPantsJackets.Size = new System.Drawing.Size(414, 100);
+            this.splitContainerPantsJackets.SplitterDistance = 207;
+            this.splitContainerPantsJackets.TabIndex = 0;
             // 
             // HomeForm
             // 

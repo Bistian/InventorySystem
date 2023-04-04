@@ -19,6 +19,7 @@ namespace InventoryManagmentSystem
             InitializeComponent();
             PrintRented();
             LoadTables(dataGridViewDueIn10, QueryWithin10Days(), "Due");
+            LoadTables(dataGridViewPast30, QueryOver30Days(), "DueDate2");
         }
 
         #region SQL_Variables
@@ -60,6 +61,23 @@ namespace InventoryManagmentSystem
                    "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE))  " +
                    "ORDER BY DueDate");
         }
+
+        private string QueryOver30Days()
+        {
+            return ("SELECT Type, Location, DueDate, SerialNumber FROM tbPants " +
+                   "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 30 " +
+
+                   "UNION SELECT Type, Location, DueDate, SerialNumber FROM tbBoots " +
+                   "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 30 " +
+
+                   "UNION SELECT Type, Location, DueDate, SerialNumber FROM tbHelmets " +
+                   "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 30  " +
+
+                   "UNION SELECT Type, Location, DueDate, SerialNumber FROM tbJackets " +
+                   "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 30  " +
+                   "ORDER BY DueDate");
+        }
+
         private void LoadTables(DataGridView grid, string query, string columnName)
         {
             // Change the styling for the date column.
