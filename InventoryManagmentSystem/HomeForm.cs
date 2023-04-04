@@ -18,6 +18,7 @@ namespace InventoryManagmentSystem
         {
             InitializeComponent();
             PrintRented();
+            LoadTables(dataGridViewDueIn10, QueryWithin10Days(), "Due");
         }
 
         #region SQL_Variables
@@ -37,16 +38,57 @@ namespace InventoryManagmentSystem
 
         private int CountRented(string tableName)
         {
-            cm = new SqlCommand("Select Count (*) FROM " +tableName+ " WHERE Location NOT IN ('Fire-Tec')", con);
+            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE Location NOT IN ('Fire-Tec') AND Location IS NOT NULL", con);
             con.Open();
             int count = (int)cm.ExecuteScalar();
             con.Close();
             return count;
         }
 
+        private string QueryWithin10Days()
+        {
+            return ("SELECT Type, Location, DueDate, SerialNumber FROM tbPants " +
+                   "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE))" +
+
+                   "UNION SELECT Type, Location, DueDate, SerialNumber FROM tbBoots " +
+                   "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE)) " +
+
+                   "UNION SELECT Type, Location, DueDate, SerialNumber FROM tbHelmets " +
+                   "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE))  " +
+
+                   "UNION SELECT Type, Location, DueDate, SerialNumber FROM tbJackets " +
+                   "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE))  " +
+                   "ORDER BY DueDate");
+        }
+        private void LoadTables(DataGridView grid, string query, string columnName)
+        {
+            // Change the styling for the date column.
+            grid.Columns[columnName].DefaultCellStyle.Format = "d";
+
+            grid.Rows.Clear();
+            cm = new SqlCommand(query, con);
+            con.Open();
+            dr = cm.ExecuteReader();
+
+            int i = 0;
+            while (dr.Read())
+            {
+                ++i;
+                grid.Rows.Add(i,
+                    dr[0].ToString(),
+                    dr[1].ToString(),
+                    dr[2]
+                    );
+            }
+
+            dr.Close();
+            con.Close();
+        }
+
+
         private int CountTotalRented()
         {
-           return CountRented("tbPants") + CountRented("tbJackets");
+            return CountRented("tbPants") + CountRented("tbJackets");
         }
 
         private void PrintRented()
