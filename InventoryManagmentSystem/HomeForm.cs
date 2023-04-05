@@ -137,17 +137,17 @@ namespace InventoryManagmentSystem
             this.Dispose();
         }
 
-        private void ButtonCurrentlyRented_Click(object sender, EventArgs e)
-        {
-            OpenRented();
-        }
-
-        private void ButtonCurrentlyRentedJackets_Click(object sender, EventArgs e)
+        private void ButtonCurrentlyRented_Click_1(object sender, EventArgs e)
         {
             OpenRented();
         }
 
         private void ButtonCurrentlyRentedPants_Click(object sender, EventArgs e)
+        {
+            OpenRented();
+        }
+
+        private void ButtonCurrentlyRentedJackets_Click(object sender, EventArgs e)
         {
             OpenRented();
         }

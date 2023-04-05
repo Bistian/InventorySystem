@@ -55,9 +55,7 @@
             // 
             // DepartmentsTxt
             // 
-            this.DepartmentsTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DepartmentsTxt.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.DepartmentsTxt.AutoSize = true;
             this.DepartmentsTxt.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DepartmentsTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -222,7 +220,7 @@
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -234,7 +232,7 @@
             // 
             // searchBar
             // 
-            this.searchBar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.searchBar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.searchBar.Location = new System.Drawing.Point(766, 18);
             this.searchBar.Name = "searchBar";
             this.searchBar.Size = new System.Drawing.Size(208, 22);
@@ -243,7 +241,7 @@
             // 
             // UsersButton
             // 
-            this.UsersButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.UsersButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
             this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
             this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
