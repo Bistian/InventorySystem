@@ -45,8 +45,8 @@
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridInv = new System.Windows.Forms.DataGridView();
             this.panelBottom = new System.Windows.Forms.Panel();
-            this.labelInv = new System.Windows.Forms.Label();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
+            this.labelInv = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.panelBottom.SuspendLayout();
@@ -226,6 +226,21 @@
             this.panelBottom.Size = new System.Drawing.Size(1034, 53);
             this.panelBottom.TabIndex = 6;
             // 
+            // UsersButton
+            // 
+            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
+            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
+            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
+            this.UsersButton.Location = new System.Drawing.Point(950, 15);
+            this.UsersButton.Margin = new System.Windows.Forms.Padding(750, 15, 3, 3);
+            this.UsersButton.Name = "UsersButton";
+            this.UsersButton.Size = new System.Drawing.Size(51, 26);
+            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.UsersButton.TabIndex = 17;
+            this.UsersButton.TabStop = false;
+            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click_1);
+            // 
             // labelInv
             // 
             this.labelInv.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -240,20 +255,6 @@
             this.labelInv.TabIndex = 15;
             this.labelInv.Text = "Manage Inventory";
             this.labelInv.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // UsersButton
-            // 
-            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
-            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
-            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
-            this.UsersButton.Location = new System.Drawing.Point(950, 15);
-            this.UsersButton.Margin = new System.Windows.Forms.Padding(750, 15, 3, 3);
-            this.UsersButton.Name = "UsersButton";
-            this.UsersButton.Size = new System.Drawing.Size(51, 26);
-            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.UsersButton.TabIndex = 17;
-            this.UsersButton.TabStop = false;
             // 
             // InventoryForm
             // 
