@@ -164,8 +164,8 @@ namespace InventoryManagmentSystem
 
         private void ButtonNewRental_Click(object sender, EventArgs e)
         {
-            NewRentalModuleForm ModForm = new NewRentalModuleForm();
-            ModForm.ShowDialog();
+                NewRentalModuleForm ModForm = new NewRentalModuleForm();
+                ModForm.ShowDialog();
         }
     }
 

@@ -95,9 +95,9 @@ namespace InventoryManagmentSystem
 
         private void UsersButton_Click_1(object sender, EventArgs e)
         {
-            NewItemModuleForm ModForm = new NewItemModuleForm(true);
-            ModForm.ShowDialog();
-            LoadInventory();
+                NewItemModuleForm ModForm = new NewItemModuleForm(true);
+                ModForm.ShowDialog();
+                LoadInventory();
         }
     }
 }

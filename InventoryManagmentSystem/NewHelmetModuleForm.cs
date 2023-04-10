@@ -113,7 +113,10 @@ namespace InventoryManagmentSystem
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            if (MessageBox.Show("Exit Module?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Dispose();
+            }
         }
     }
 }

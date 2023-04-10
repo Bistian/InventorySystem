@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewRentalModuleForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.TxtCustomerInfo = new System.Windows.Forms.Label();
             this.labelAcademy = new System.Windows.Forms.Label();
             this.comboBoxAcademy = new System.Windows.Forms.ComboBox();
@@ -37,19 +38,18 @@
             this.comboDayNight = new System.Windows.Forms.ComboBox();
             this.txtBoxCustomerName = new System.Windows.Forms.TextBox();
             this.LableCustomerName = new System.Windows.Forms.Label();
-            this.textBoxPhone = new System.Windows.Forms.TextBox();
+            this.txtBoxPhone = new System.Windows.Forms.TextBox();
             this.labelPhone = new System.Windows.Forms.Label();
-            this.textBoxEmail = new System.Windows.Forms.TextBox();
+            this.txtBoxEmail = new System.Windows.Forms.TextBox();
             this.labelEmail = new System.Windows.Forms.Label();
-            this.textBoxDriversLicense = new System.Windows.Forms.TextBox();
+            this.txtBoxDriversLicense = new System.Windows.Forms.TextBox();
             this.labelDriversLicense = new System.Windows.Forms.Label();
-            this.textBoxAddress = new System.Windows.Forms.TextBox();
+            this.txtBoxAddress = new System.Windows.Forms.TextBox();
             this.labelAddress = new System.Windows.Forms.Label();
-            this.textBoxRep = new System.Windows.Forms.TextBox();
+            this.txtBoxRep = new System.Windows.Forms.TextBox();
             this.labelRep = new System.Windows.Forms.Label();
             this.ClearButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.CloseButton = new InventoryManagmentSystem.CustomButton();
+            this.ButtonContinue = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
@@ -64,6 +64,20 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(534, 67);
             this.panel1.TabIndex = 0;
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
+            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
+            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
+            this.CloseButton.Location = new System.Drawing.Point(485, 13);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(4);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(36, 42);
+            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CloseButton.TabIndex = 69;
+            this.CloseButton.TabStop = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // TxtCustomerInfo
             // 
@@ -113,9 +127,9 @@
             this.labelDayNight.Location = new System.Drawing.Point(144, 102);
             this.labelDayNight.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDayNight.Name = "labelDayNight";
-            this.labelDayNight.Size = new System.Drawing.Size(107, 24);
+            this.labelDayNight.Size = new System.Drawing.Size(109, 24);
             this.labelDayNight.TabIndex = 89;
-            this.labelDayNight.Text = "Dat / Night";
+            this.labelDayNight.Text = "Day / Night";
             // 
             // comboDayNight
             // 
@@ -147,13 +161,13 @@
             this.LableCustomerName.TabIndex = 90;
             this.LableCustomerName.Text = "Customer Name";
             // 
-            // textBoxPhone
+            // txtBoxPhone
             // 
-            this.textBoxPhone.Location = new System.Drawing.Point(29, 184);
-            this.textBoxPhone.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxPhone.Name = "textBoxPhone";
-            this.textBoxPhone.Size = new System.Drawing.Size(222, 22);
-            this.textBoxPhone.TabIndex = 93;
+            this.txtBoxPhone.Location = new System.Drawing.Point(29, 184);
+            this.txtBoxPhone.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxPhone.Name = "txtBoxPhone";
+            this.txtBoxPhone.Size = new System.Drawing.Size(222, 22);
+            this.txtBoxPhone.TabIndex = 93;
             // 
             // labelPhone
             // 
@@ -166,13 +180,13 @@
             this.labelPhone.TabIndex = 92;
             this.labelPhone.Text = "Phone";
             // 
-            // textBoxEmail
+            // txtBoxEmail
             // 
-            this.textBoxEmail.Location = new System.Drawing.Point(274, 184);
-            this.textBoxEmail.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxEmail.Name = "textBoxEmail";
-            this.textBoxEmail.Size = new System.Drawing.Size(224, 22);
-            this.textBoxEmail.TabIndex = 95;
+            this.txtBoxEmail.Location = new System.Drawing.Point(274, 184);
+            this.txtBoxEmail.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxEmail.Name = "txtBoxEmail";
+            this.txtBoxEmail.Size = new System.Drawing.Size(224, 22);
+            this.txtBoxEmail.TabIndex = 95;
             // 
             // labelEmail
             // 
@@ -185,13 +199,13 @@
             this.labelEmail.TabIndex = 94;
             this.labelEmail.Text = "Email";
             // 
-            // textBoxDriversLicense
+            // txtBoxDriversLicense
             // 
-            this.textBoxDriversLicense.Location = new System.Drawing.Point(28, 239);
-            this.textBoxDriversLicense.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxDriversLicense.Name = "textBoxDriversLicense";
-            this.textBoxDriversLicense.Size = new System.Drawing.Size(223, 22);
-            this.textBoxDriversLicense.TabIndex = 97;
+            this.txtBoxDriversLicense.Location = new System.Drawing.Point(28, 239);
+            this.txtBoxDriversLicense.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxDriversLicense.Name = "txtBoxDriversLicense";
+            this.txtBoxDriversLicense.Size = new System.Drawing.Size(223, 22);
+            this.txtBoxDriversLicense.TabIndex = 97;
             // 
             // labelDriversLicense
             // 
@@ -204,13 +218,13 @@
             this.labelDriversLicense.TabIndex = 96;
             this.labelDriversLicense.Text = "Drivers License #";
             // 
-            // textBoxAddress
+            // txtBoxAddress
             // 
-            this.textBoxAddress.Location = new System.Drawing.Point(275, 239);
-            this.textBoxAddress.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxAddress.Name = "textBoxAddress";
-            this.textBoxAddress.Size = new System.Drawing.Size(223, 22);
-            this.textBoxAddress.TabIndex = 99;
+            this.txtBoxAddress.Location = new System.Drawing.Point(275, 239);
+            this.txtBoxAddress.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxAddress.Name = "txtBoxAddress";
+            this.txtBoxAddress.Size = new System.Drawing.Size(223, 22);
+            this.txtBoxAddress.TabIndex = 99;
             // 
             // labelAddress
             // 
@@ -223,13 +237,13 @@
             this.labelAddress.TabIndex = 98;
             this.labelAddress.Text = "Address";
             // 
-            // textBoxRep
+            // txtBoxRep
             // 
-            this.textBoxRep.Location = new System.Drawing.Point(148, 321);
-            this.textBoxRep.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxRep.Name = "textBoxRep";
-            this.textBoxRep.Size = new System.Drawing.Size(223, 22);
-            this.textBoxRep.TabIndex = 101;
+            this.txtBoxRep.Location = new System.Drawing.Point(148, 321);
+            this.txtBoxRep.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxRep.Name = "txtBoxRep";
+            this.txtBoxRep.Size = new System.Drawing.Size(223, 22);
+            this.txtBoxRep.TabIndex = 101;
             // 
             // labelRep
             // 
@@ -254,33 +268,21 @@
             this.ClearButton.TabIndex = 103;
             this.ClearButton.Text = "Clear";
             this.ClearButton.UseVisualStyleBackColor = false;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
-            // button1
+            // ButtonContinue
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.button1.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(123, 367);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(116, 53);
-            this.button1.TabIndex = 102;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
-            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
-            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(485, 13);
-            this.CloseButton.Margin = new System.Windows.Forms.Padding(4);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(36, 42);
-            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CloseButton.TabIndex = 69;
-            this.CloseButton.TabStop = false;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.ButtonContinue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.ButtonContinue.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonContinue.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.ButtonContinue.Location = new System.Drawing.Point(123, 367);
+            this.ButtonContinue.Margin = new System.Windows.Forms.Padding(4);
+            this.ButtonContinue.Name = "ButtonContinue";
+            this.ButtonContinue.Size = new System.Drawing.Size(116, 53);
+            this.ButtonContinue.TabIndex = 102;
+            this.ButtonContinue.Text = "Continue";
+            this.ButtonContinue.UseVisualStyleBackColor = false;
+            this.ButtonContinue.Click += new System.EventHandler(this.ButtonContinue_Click);
             // 
             // NewRentalModuleForm
             // 
@@ -289,16 +291,16 @@
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(534, 433);
             this.Controls.Add(this.ClearButton);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBoxRep);
+            this.Controls.Add(this.ButtonContinue);
+            this.Controls.Add(this.txtBoxRep);
             this.Controls.Add(this.labelRep);
-            this.Controls.Add(this.textBoxAddress);
+            this.Controls.Add(this.txtBoxAddress);
             this.Controls.Add(this.labelAddress);
-            this.Controls.Add(this.textBoxDriversLicense);
+            this.Controls.Add(this.txtBoxDriversLicense);
             this.Controls.Add(this.labelDriversLicense);
-            this.Controls.Add(this.textBoxEmail);
+            this.Controls.Add(this.txtBoxEmail);
             this.Controls.Add(this.labelEmail);
-            this.Controls.Add(this.textBoxPhone);
+            this.Controls.Add(this.txtBoxPhone);
             this.Controls.Add(this.labelPhone);
             this.Controls.Add(this.txtBoxCustomerName);
             this.Controls.Add(this.LableCustomerName);
@@ -329,18 +331,18 @@
         private System.Windows.Forms.ComboBox comboDayNight;
         public System.Windows.Forms.TextBox txtBoxCustomerName;
         private System.Windows.Forms.Label LableCustomerName;
-        public System.Windows.Forms.TextBox textBoxPhone;
+        public System.Windows.Forms.TextBox txtBoxPhone;
         private System.Windows.Forms.Label labelPhone;
-        public System.Windows.Forms.TextBox textBoxEmail;
+        public System.Windows.Forms.TextBox txtBoxEmail;
         private System.Windows.Forms.Label labelEmail;
-        public System.Windows.Forms.TextBox textBoxDriversLicense;
+        public System.Windows.Forms.TextBox txtBoxDriversLicense;
         private System.Windows.Forms.Label labelDriversLicense;
-        public System.Windows.Forms.TextBox textBoxAddress;
+        public System.Windows.Forms.TextBox txtBoxAddress;
         private System.Windows.Forms.Label labelAddress;
-        public System.Windows.Forms.TextBox textBoxRep;
+        public System.Windows.Forms.TextBox txtBoxRep;
         private System.Windows.Forms.Label labelRep;
         private CustomButton CloseButton;
         public System.Windows.Forms.Button ClearButton;
-        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button ButtonContinue;
     }
 }
