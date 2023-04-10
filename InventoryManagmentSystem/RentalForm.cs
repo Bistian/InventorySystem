@@ -161,6 +161,12 @@ namespace InventoryManagmentSystem
             DialogBoxClient dialogBoxClient = new DialogBoxClient(rentee);
             dialogBoxClient.ShowDialog();
         }
+
+        private void ButtonNewRental_Click(object sender, EventArgs e)
+        {
+            NewRentalModuleForm ModForm = new NewRentalModuleForm();
+            ModForm.ShowDialog();
+        }
     }
 
 }
