@@ -50,7 +50,7 @@ namespace InventoryManagmentSystem
             {
                 FinalColumn = "";
             }
-            return ("SELECT Type, SerialNumber, Size, Brand, Model, ManufactureDate" +FinalColumn+ " FROM " + CurrTable +
+            return ("SELECT ItemType, SerialNumber, Size, Brand, Model, ManufactureDate" + FinalColumn+ " FROM " + CurrTable +
                 " WHERE Location='Fire-Tec'");
         }
 
