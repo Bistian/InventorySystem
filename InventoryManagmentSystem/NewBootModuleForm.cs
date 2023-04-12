@@ -46,15 +46,26 @@ namespace InventoryManagmentSystem
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(txtBoxSerialNumber.Text) && !string.IsNullOrEmpty(textBoxModel.Text) &&
+            !string.IsNullOrEmpty(comboBoxBrand.Text) &&
+            !string.IsNullOrEmpty(comboBoxMaterial.Text) &&
+            !string.IsNullOrEmpty(comboBoxSize.Text))
+            {
             //if (isNewItem == true)
             //{
-            CreateItem();
-
+                CreateItem();
             //}
             //else
             //{
             //    UpdateItem();
             //}
+            }
+            else
+            {
+                MessageBox.Show("Please fill the required fields");
+            }
+
+
         }
 
 

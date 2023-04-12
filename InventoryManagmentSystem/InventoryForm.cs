@@ -41,6 +41,8 @@ namespace InventoryManagmentSystem
             if(comboBoxItem.SelectedIndex == 0)
             {
                 FinalColumn = ", Color";
+                return ("SELECT ItemType, SerialNumber, Brand, Model, ManufactureDate" + FinalColumn + " FROM " + CurrTable +
+                " WHERE Location='Fire-Tec'");
             }
             else if (comboBoxItem.SelectedIndex == 3)
             {
@@ -65,8 +67,16 @@ namespace InventoryManagmentSystem
                 con.Open();
                 dr = cm.ExecuteReader();
 
-                //Check which item was selected 1 = helmets 2 = jackets 3 = pants 4 = boots 0 = nothing
-                if (comboBoxItem.SelectedIndex == 0 || comboBoxItem.SelectedIndex == 3)
+                //Check which item was selected
+                if (comboBoxItem.SelectedIndex == 0)
+                {
+                    while (dr.Read())
+                    {
+                        i++;
+                        dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), "NA", dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
+                    }
+                }
+                else if(comboBoxItem.SelectedIndex == 3)
                 {
                     while (dr.Read())
                     {
