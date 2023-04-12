@@ -109,6 +109,8 @@
             // 
             // comboBoxAcademy
             // 
+            this.comboBoxAcademy.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxAcademy.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxAcademy.FormattingEnabled = true;
             this.comboBoxAcademy.Items.AddRange(new object[] {
             "BFA",
@@ -148,6 +150,8 @@
             // 
             // comboDayNight
             // 
+            this.comboDayNight.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboDayNight.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboDayNight.FormattingEnabled = true;
             this.comboDayNight.Items.AddRange(new object[] {
             "Day",

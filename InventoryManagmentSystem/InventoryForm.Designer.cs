@@ -80,6 +80,8 @@
             // comboBoxItem
             // 
             this.comboBoxItem.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxItem.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxItem.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxItem.FormattingEnabled = true;
             this.comboBoxItem.Items.AddRange(new object[] {
             "Helmets",
