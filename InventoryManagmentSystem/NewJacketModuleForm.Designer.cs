@@ -172,15 +172,18 @@
             // 
             this.comboBoxBrand.FormattingEnabled = true;
             this.comboBoxBrand.Items.AddRange(new object[] {
-            "Bullard",
-            "MSA/Cairns",
-            "Honeywell/Morning Pride",
-            "Phenix",
-            "Pacific",
-            "FIRE-DEX",
-            "LION",
-            "Team Wendy",
-            "PMI"});
+            "Lakeland",
+            "Innotex",
+            "Viking",
+            "Morning Pride",
+            "Globe",
+            "FireDex",
+            "Skold",
+            "Frypel",
+            "Quaker",
+            "Janesville",
+            "Lion",
+            "Sperian"});
             this.comboBoxBrand.Location = new System.Drawing.Point(29, 171);
             this.comboBoxBrand.Name = "comboBoxBrand";
             this.comboBoxBrand.Size = new System.Drawing.Size(121, 24);

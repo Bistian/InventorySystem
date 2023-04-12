@@ -37,6 +37,7 @@ namespace InventoryManagmentSystem
 
         #endregion SQL_Variables
 
+
         private int CountRented(string tableName)
         {
             cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE Location NOT IN ('Fire-Tec') AND Location IS NOT NULL", con);

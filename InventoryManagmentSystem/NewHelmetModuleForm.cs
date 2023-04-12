@@ -29,20 +29,33 @@ namespace InventoryManagmentSystem
             isNewItem = newItem;
         }
 
+        private bool CheckIfExists(string tableName, string SerialNumber)
+        {
+            bool Exists = false;
+            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE SerialNumber = " + SerialNumber, con);
+            con.Open();
+            int count = (int)cm.ExecuteScalar();
+            con.Close();
+            if (count != 0)
+            {
+                Exists = true;
+            }
+            return Exists;
+        }
+
         public void Clear()
         {
             txtBoxSerialNumber.Clear();
             comboBoxBrand.SelectedIndex = -1;
             textBoxModel.Clear();
             comboBoxColor.SelectedIndex = -1;
-            comboBoxSize.SelectedIndex = -1;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //if (isNewItem == true)
             //{
-                CreateItem();
+            CreateItem();
             //}
             //else
             //{
@@ -57,19 +70,30 @@ namespace InventoryManagmentSystem
             {
                 if (MessageBox.Show("Are you sure you want to save this Item?", "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cm = new SqlCommand("INSERT INTO tbHelmets(SerialNumber,Brand,Model,Color,Size,ManufactureDate)VALUES(@SerialNumber,@Brand,@Model,@Color,@Size,@ManufactureDate)", con);
-                    cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-                    cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                    cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
-                    cm.Parameters.AddWithValue("@Color", comboBoxColor.Text);
-                    cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Item has been successfully saved");
-                    Clear();
-                    this.Dispose();
+                    bool exists = CheckIfExists("tbHelmets", txtBoxSerialNumber.Text);
+                    if (!exists)
+                    {
+                        cm = new SqlCommand("IF NOT EXISTS (SELECT * FROM tbHelmets WHERE SerialNumber = " + txtBoxSerialNumber.Text + ")"
+                        + "BEGIN " +
+                        "INSERT INTO tbHelmets(SerialNumber,Brand,Model,Color,ManufactureDate)VALUES(@SerialNumber,@Brand,@Model,@Color,@ManufactureDate)" +
+                        " END", con);
+
+                        cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
+                        cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
+                        cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
+                        cm.Parameters.AddWithValue("@Color", comboBoxColor.Text);
+                        cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+
+                        MessageBox.Show("Item has been successfully saved");
+                        Clear();
+                        this.Dispose();
+                    }
+                    else
+                        MessageBox.Show("Serial Number already in use");
+
                 }
             }
             catch (Exception ex)
@@ -84,12 +108,11 @@ namespace InventoryManagmentSystem
             {
                 if (MessageBox.Show("Are you sure you want to update this Item?", "Update Item", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cm = new SqlCommand("UPDATE tbHelmets SET SerialNumber = @SerialNumber,Brand = @Brand, Model = @Model, Color = @Color, Size = @Size, ManufactureDate = @ManufactureDate WHERE HelmetID LIKE '" + txtBoxSerialNumber.Text + "' ", con);
+                    cm = new SqlCommand("UPDATE tbHelmets SET SerialNumber = @SerialNumber,Brand = @Brand, Model = @Model, Color = @Color, ManufactureDate = @ManufactureDate WHERE HelmetID LIKE '" + txtBoxSerialNumber.Text + "' ", con);
                     cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                     cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
                     cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
                     cm.Parameters.AddWithValue("@Color", comboBoxColor.Text);
-                    cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
                     cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
                     con.Open();
                     cm.ExecuteNonQuery();

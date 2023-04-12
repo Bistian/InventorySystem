@@ -29,6 +29,20 @@ namespace InventoryManagmentSystem
             InitializeComponent();
         }
 
+        private bool CheckIfExists(string tableName, string SerialNumber)
+        {
+            bool Exists = false;
+            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE SerialNumber = " + SerialNumber, con);
+            con.Open();
+            int count = (int)cm.ExecuteScalar();
+            con.Close();
+            if (count != 0)
+            {
+                Exists = true;
+            }
+            return Exists;
+        }
+
         public void Clear()
         {
             txtBoxCustomerName.Clear();
@@ -61,22 +75,30 @@ namespace InventoryManagmentSystem
             {
                 if (MessageBox.Show("Are you sure you want to save this Info?", "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cm = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,DayNight,DriversLicenseNumber,Address,FireTecRepresentative)" +
+                    bool exists = CheckIfExists("tbClients", txtBoxDriversLicense.Text);
+                    if (!exists)
+                    {
+                        cm = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,DayNight,DriversLicenseNumber,Address,FireTecRepresentative)" +
                         "VALUES(@Name,@Phone,@Email,@Academy,@DayNight,@DriversLicenseNumber,@Address,@FireTecRepresentative)", con);
-                    cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
-                    cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
-                    cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
-                    cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
-                    cm.Parameters.AddWithValue("@Address", txtBoxAddress.Text);
-                    cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
-                    cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
-                    cm.Parameters.AddWithValue("@DayNight", comboDayNight.Text);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Info has been successfully saved");
-                    Clear();
-                    this.Dispose();
+                        cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
+                        cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
+                        cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
+                        cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
+                        cm.Parameters.AddWithValue("@Address", txtBoxAddress.Text);
+                        cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
+                        cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
+                        cm.Parameters.AddWithValue("@DayNight", comboDayNight.Text);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Info has been successfully saved");
+                        Clear();
+                        this.Dispose();
+                    }
+                    else
+                    {
+                        MessageBox.Show("License Number already in use");
+                    }
                 }
             }
             catch (Exception ex)

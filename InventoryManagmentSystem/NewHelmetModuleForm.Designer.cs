@@ -35,8 +35,6 @@
             this.InventoryTxt = new System.Windows.Forms.Label();
             this.txtBoxSerialNumber = new System.Windows.Forms.TextBox();
             this.LableSerialNumber = new System.Windows.Forms.Label();
-            this.labelSize = new System.Windows.Forms.Label();
-            this.comboBoxSize = new System.Windows.Forms.ComboBox();
             this.LableBrand = new System.Windows.Forms.Label();
             this.comboBoxBrand = new System.Windows.Forms.ComboBox();
             this.textBoxModel = new System.Windows.Forms.TextBox();
@@ -129,45 +127,6 @@
             this.LableSerialNumber.TabIndex = 29;
             this.LableSerialNumber.Text = "Serial Number";
             // 
-            // labelSize
-            // 
-            this.labelSize.AutoSize = true;
-            this.labelSize.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSize.Location = new System.Drawing.Point(274, 84);
-            this.labelSize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelSize.Name = "labelSize";
-            this.labelSize.Size = new System.Drawing.Size(47, 24);
-            this.labelSize.TabIndex = 57;
-            this.labelSize.Text = "Size";
-            // 
-            // comboBoxSize
-            // 
-            this.comboBoxSize.FormattingEnabled = true;
-            this.comboBoxSize.Items.AddRange(new object[] {
-            "5",
-            "5.5",
-            "6",
-            "6.5",
-            "7",
-            "7.5",
-            "8",
-            "8.5",
-            "9",
-            "9.5",
-            "10",
-            "10.5",
-            "11",
-            "11.5",
-            "12",
-            "12.5",
-            "13",
-            "13.5",
-            "14"});
-            this.comboBoxSize.Location = new System.Drawing.Point(278, 111);
-            this.comboBoxSize.Name = "comboBoxSize";
-            this.comboBoxSize.Size = new System.Drawing.Size(121, 24);
-            this.comboBoxSize.TabIndex = 56;
-            // 
             // LableBrand
             // 
             this.LableBrand.AutoSize = true;
@@ -183,15 +142,9 @@
             // 
             this.comboBoxBrand.FormattingEnabled = true;
             this.comboBoxBrand.Items.AddRange(new object[] {
+            "Cairns",
             "Bullard",
-            "MSA/Cairns",
-            "Honeywell/Morning Pride",
-            "Phenix",
-            "Pacific",
-            "FIRE-DEX",
-            "LION",
-            "Team Wendy",
-            "PMI"});
+            ""});
             this.comboBoxBrand.Location = new System.Drawing.Point(18, 170);
             this.comboBoxBrand.Name = "comboBoxBrand";
             this.comboBoxBrand.Size = new System.Drawing.Size(121, 24);
@@ -231,11 +184,8 @@
             // 
             this.comboBoxColor.FormattingEnabled = true;
             this.comboBoxColor.Items.AddRange(new object[] {
-            "Red",
-            "Orange",
-            "Yellow",
             "Black",
-            "White"});
+            "Yellow"});
             this.comboBoxColor.Location = new System.Drawing.Point(278, 168);
             this.comboBoxColor.Name = "comboBoxColor";
             this.comboBoxColor.Size = new System.Drawing.Size(121, 24);
@@ -305,8 +255,6 @@
             this.Controls.Add(this.LableModel);
             this.Controls.Add(this.LableBrand);
             this.Controls.Add(this.comboBoxBrand);
-            this.Controls.Add(this.labelSize);
-            this.Controls.Add(this.comboBoxSize);
             this.Controls.Add(this.txtBoxSerialNumber);
             this.Controls.Add(this.LableSerialNumber);
             this.Controls.Add(this.InventoryPanel);
@@ -329,8 +277,6 @@
         public System.Windows.Forms.TextBox txtBoxSerialNumber;
         private System.Windows.Forms.Label LableSerialNumber;
         private CustomButton CloseUserModuel;
-        private System.Windows.Forms.Label labelSize;
-        private System.Windows.Forms.ComboBox comboBoxSize;
         private System.Windows.Forms.Label LableBrand;
         private System.Windows.Forms.ComboBox comboBoxBrand;
         public System.Windows.Forms.TextBox textBoxModel;

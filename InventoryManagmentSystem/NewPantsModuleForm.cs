@@ -30,6 +30,20 @@ namespace InventoryManagmentSystem
             isNewItem = newItem;
         }
 
+        private bool CheckIfExists(string tableName, string SerialNumber)
+        {
+            bool Exists = false;
+            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE SerialNumber = " + SerialNumber, con);
+            con.Open();
+            int count = (int)cm.ExecuteScalar();
+            con.Close();
+            if (count != 0)
+            {
+                Exists = true;
+            }
+            return Exists;
+        }
+
         public void Clear()
         {
             txtBoxSerialNumber.Clear();
@@ -44,18 +58,24 @@ namespace InventoryManagmentSystem
             {
                 if (MessageBox.Show("Are you sure you want to save this Item?", "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cm = new SqlCommand("INSERT INTO tbPants(SerialNumber,Brand,Model,Size,ManufactureDate)VALUES(@SerialNumber,@Brand,@Model,@Size,@ManufactureDate)", con);
-                    cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-                    cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                    cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
-                    cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Item has been successfully saved");
-                    Clear();
-                    this.Dispose();
+                    bool exists = CheckIfExists("tbPants", txtBoxSerialNumber.Text);
+                    if (!exists)
+                    {
+                        cm = new SqlCommand("INSERT INTO tbPants(SerialNumber,Brand,Model,Size,ManufactureDate)VALUES(@SerialNumber,@Brand,@Model,@Size,@ManufactureDate)", con);
+                        cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
+                        cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
+                        cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
+                        cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
+                        cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Item has been successfully saved");
+                        Clear();
+                        this.Dispose();
+                    }
+                    else
+                        MessageBox.Show("Serial Number already in use");
                 }
             }
             catch (Exception ex)

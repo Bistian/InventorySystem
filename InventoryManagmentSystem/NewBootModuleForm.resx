@@ -1119,22 +1119,16 @@
     <value>8</value>
   </data>
   <data name="comboBoxBrand.Items" xml:space="preserve">
-    <value>need</value>
+    <value>Croydon</value>
   </data>
   <data name="comboBoxBrand.Items1" xml:space="preserve">
-    <value>to</value>
+    <value>Saber</value>
   </data>
   <data name="comboBoxBrand.Items2" xml:space="preserve">
-    <value>ask</value>
+    <value>Black Diamond</value>
   </data>
   <data name="comboBoxBrand.Items3" xml:space="preserve">
-    <value>for</value>
-  </data>
-  <data name="comboBoxBrand.Items4" xml:space="preserve">
-    <value>boot</value>
-  </data>
-  <data name="comboBoxBrand.Items5" xml:space="preserve">
-    <value>brands</value>
+    <value>Stc</value>
   </data>
   <data name="comboBoxBrand.Location" type="System.Drawing.Point, System.Drawing">
     <value>20, 170</value>
@@ -1249,6 +1243,18 @@
   </data>
   <data name="comboBoxSize.Items18" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="comboBoxSize.Items19" xml:space="preserve">
+    <value>14.5</value>
+  </data>
+  <data name="comboBoxSize.Items20" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="comboBoxSize.Items21" xml:space="preserve">
+    <value>15.5</value>
+  </data>
+  <data name="comboBoxSize.Items22" xml:space="preserve">
+    <value>16</value>
   </data>
   <data name="comboBoxSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>280, 111</value>

@@ -111,10 +111,25 @@
             // 
             this.comboBoxAcademy.FormattingEnabled = true;
             this.comboBoxAcademy.Items.AddRange(new object[] {
-            "still",
-            "need",
-            "to",
-            "ask"});
+            "BFA",
+            "OCALA",
+            "CORAL SPRING",
+            "PASCO HERNANDO",
+            "PALM BEACH",
+            "MIAMI DADE",
+            "EASTERN",
+            "MONROE",
+            "BRAXTON",
+            "BARRY",
+            "CITRUS",
+            "SUNCOAST",
+            "DAYTONA",
+            "RIDGE",
+            "GATEWAY",
+            "APARICIO LEVY",
+            "RESOLVE MARITIME",
+            "SOUTH FL STATE (AVON PARK)",
+            "NORTHWEST"});
             this.comboBoxAcademy.Location = new System.Drawing.Point(28, 129);
             this.comboBoxAcademy.Name = "comboBoxAcademy";
             this.comboBoxAcademy.Size = new System.Drawing.Size(101, 24);
