@@ -32,7 +32,7 @@ namespace InventoryManagmentSystem
         private bool CheckIfExists(string tableName, string SerialNumber)
         {
             bool Exists = false;
-            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE SerialNumber = " + SerialNumber, con);
+            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE DriversLicenseNumber = " + SerialNumber, con);
             con.Open();
             int count = (int)cm.ExecuteScalar();
             con.Close();
@@ -110,7 +110,21 @@ namespace InventoryManagmentSystem
 
         private void ButtonContinue_Click(object sender, EventArgs e)
         {
-            SaveClient();
+            if (!string.IsNullOrEmpty(txtBoxAddress.Text) &&
+         !string.IsNullOrEmpty(txtBoxCustomerName.Text) &&
+         !string.IsNullOrEmpty(txtBoxDriversLicense.Text) &&
+         !string.IsNullOrEmpty(txtBoxEmail.Text) &&
+         !string.IsNullOrEmpty(txtBoxPhone.Text) &&
+         !string.IsNullOrEmpty(txtBoxRep.Text) &&
+         !string.IsNullOrEmpty(comboBoxAcademy.Text) &&
+         !string.IsNullOrEmpty(comboBoxAcademy.Text))
+            {
+                SaveClient();
+            }
+            else
+            {
+                MessageBox.Show("Please fill the required fields");
+            }
         }
     }
 }

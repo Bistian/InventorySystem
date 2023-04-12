@@ -56,6 +56,9 @@ namespace InventoryManagmentSystem
                 " WHERE Location='Fire-Tec'");
         }
 
+        /// <summary>
+        /// loads different tables
+        /// </summary>
         public void LoadInventory()
         {
             if (comboBoxItem.SelectedIndex != -1)
