@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data;
 using System.Data.SqlClient;
 using Excel = Microsoft.Office.Interop.Excel;
-using System.Collections;
-
+using System.Runtime.InteropServices;
 
 namespace InventoryManagmentSystem
 {
@@ -29,18 +23,30 @@ namespace InventoryManagmentSystem
         SqlDataReader dr;
         #endregion SQL_Variables
 
+        #region Excel_Variables
+        Excel.Application excelApp = null;
+        Excel.Workbook workbook = null;
+        Excel.Worksheet worksheet = null;
+        #endregion Excel_Variables
+
         List<TextBox> listTextBox = new List<TextBox>();
         List<string> listColumns = new List<string>();
-        Excel.Application excelApp = null;
         string excelFileName = "";
         int headerRow = -1;
         int selectedWorksheet = 1;
+        int rows = 0;
 
         public ExcelImportForm()
         {
             InitializeComponent();
         }
 
+        ~ExcelImportForm()
+        {
+            workbook.Close();
+            excelApp.Quit();
+            con.Close();
+        }
         private void ExcelImport_Load(object sender, EventArgs e)
         {
             comboBoxTbSelect.Items.Add("Pants");
@@ -50,8 +56,31 @@ namespace InventoryManagmentSystem
             comboBoxTbSelect.Enabled = false;
         }
 
-        // Select Excel file.
+        /// <summary>
+        /// Import Excel file manually.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExcel_Click(object sender, EventArgs e)
+        {
+            ImportExcel(true);
+        }
+
+        /// <summary>
+        /// Import Excel file using standard Excel documents.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnStandard_Click(object sender, EventArgs e)
+        {
+            ImportExcel(false);
+        }
+
+        /// <summary>
+        /// Logic for importing.
+        /// </summary>
+        /// <param name="isManual">Tells is the user is going to import manually</param>
+        private void ImportExcel(bool isManual)
         {
             // Release memory if needed and clean variables.
             if (excelApp != null)
@@ -72,7 +101,7 @@ namespace InventoryManagmentSystem
                 excelApp.Visible = false;
 
                 // Open the selected workbook
-                Excel.Workbook workbook = excelApp.Workbooks.Open(excelFileName);
+                workbook = excelApp.Workbooks.Open(excelFileName);
 
                 // Get all worksheet names available in the selected Excel file.
                 List<string> worksheetNames = new List<string>();
@@ -82,27 +111,185 @@ namespace InventoryManagmentSystem
                 }
 
                 // Get user prompt initialized.
-                var promptForm = new ExcelUserPromptForm(worksheetNames);
+                var promptForm = new ExcelUserPromptForm(worksheetNames, isManual);
 
                 // Subscribe to the event inside of promptForm.
+                // This will listen for user inputs.
                 promptForm.userPrompt += (s, arguments) =>
                 {
-                    // Get the selected item and numeric value from the event arguments
-                    selectedWorksheet = arguments.selectedWorksheet;
+                    // Make sure user selected something before setting worksheet.
+                    if(arguments.selectedWorksheet != "")
+                    {
+                        worksheet = workbook.Worksheets[arguments.selectedWorksheet];
+                    }
                     headerRow = arguments.selectedRow;
                 };
 
                 // This will update the selectedWorksheet and headerRow when the user is done.
                 promptForm.ShowDialog();
 
-                if(selectedWorksheet >= 0 && headerRow > 0) 
-                { 
-                    comboBoxTbSelect.Enabled = true; 
+                // If user cancels the dialog for import, this IF handles it without errors.
+                if(worksheet == null) 
+                {
+                    ClearExcelVar();
+                    return; 
                 }
 
-                workbook.Close();
+                // If it is not manual I know what row the header is.
+                if(isManual == false)
+                {
+                    headerRow = 2;
+                    FindColumnNames();
+                    Excel.Range cell = worksheet.Cells[3, 1];
+                    string table = "tb" + cell.Value.ToString();
+                    UpdateDatabaseStandard(table);
+                }
+
+
+                // Cannot select a worksheet before selecting an Excel file.
+                /*if (selectedWorksheet >= 0 && headerRow > 0)
+                {
+                    comboBoxTbSelect.Enabled = true;
+                }*/
             }
         }
+
+        // Using standar Excel files, update the database.
+        private void UpdateDatabaseStandard(string tableName)
+        {
+
+            List<object[]> rows = new List<object[]>();
+
+            int rowNum = worksheet.UsedRange.Rows.Count;
+            int colNum = worksheet.UsedRange.Columns.Count;
+
+            // Loop through the rows in the worksheet and add them to the rows collection.
+            for (int i = headerRow + 1; i <= worksheet.UsedRange.Rows.Count + 1; i++)
+            {
+                object[] values = new object[colNum];
+                bool isDuplicate = false;
+                for (int j = 1; j <= worksheet.UsedRange.Columns.Count; j++)
+                {
+                    values[j - 1] = worksheet.Cells[i, j].Value;
+                    if (j == 2)
+                    {
+                        isDuplicate = CheckDuplicateSerialNumber(worksheet.Cells[i, j].Value, tableName);
+                    }
+                }
+                Console.WriteLine($"Cell({i}/{rowNum})");
+
+                if (!isDuplicate)
+                {
+                    rows.Add(values);
+                }
+            }
+
+            // Convert the rows collection to a DataTable.
+            DataTable dataTable = new DataTable();
+            for (int i = 0; i < colNum; i++)
+            {
+                var v = worksheet.Cells[headerRow, i + 1].Value;
+                if (v == null) { continue; }
+                dataTable.Columns.Add(v);
+            }
+
+            foreach (var row in rows)
+            {
+                dataTable.Rows.Add(row);
+            }
+
+            string columns = "";
+            string colValues = "";
+            for (int i = 0; i < listColumns.Count; ++i)
+            {
+                columns += listColumns[i].ToString();
+                colValues += "@" + listColumns[i].ToString();
+                if (i < listColumns.Count - 1)
+                {
+                    columns += ", ";
+                    colValues += ", ";
+                }
+            }
+
+            con.Open();
+            try
+            {
+                string query = "INSERT INTO " + tableName +
+                    " (" + columns + ") VALUES (" + colValues + ")";
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    cm = new SqlCommand(query, con);
+                    for (int i = 0; i < dataTable.Columns.Count; ++i)
+                    {
+                        object value = row[i];
+                        SqlDbType dbType = SqlDbType.VarChar;
+
+                        if (value != null && value != DBNull.Value)
+                        {
+                            Type valueType = value.GetType();
+                            if (valueType == typeof(int))
+                                dbType = SqlDbType.Int;
+                            else if (valueType == typeof(double))
+                                dbType = SqlDbType.Float;
+                            else if (valueType == typeof(DateTime))
+                                dbType = SqlDbType.DateTime;
+
+                            // Add more data types as needed
+
+                            SqlParameter parameter = new SqlParameter("@" + dataTable.Columns[i].ColumnName, dbType);
+                            parameter.Value = value;
+                            cm.Parameters.Add(parameter);
+                        }
+                        else
+                        {
+                            // Handle null or DBNull values
+                            SqlParameter parameter = new SqlParameter("@" + dataTable.Columns[i].ColumnName, dbType);
+                            parameter.Value = DBNull.Value;
+                            cm.Parameters.Add(parameter);
+                        }
+                    }
+
+                    /*for(int i = 0; i < listColumns.Count; ++i)
+                    {
+                        string col = listColumns[i].ToString();
+                        cm.Parameters.AddWithValue("@" + col, row[col]);
+                    }*/
+
+                    cm.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            ClearExcelVar();
+        }
+
+        // Return false if serial number does not exist in the database.
+        private bool CheckDuplicateSerialNumber(string serial, string table)
+        {
+            bool result = false;
+            string columnName = "SerialNumber";
+            string query = "SELECT CASE\r\n" +
+                "WHEN EXISTS (SELECT 1 FROM " + table + " " +
+                "WHERE " + columnName + " = '" + serial + "')\r\n " +
+                "THEN CAST(1 AS BIT)\r\n " +
+                "ELSE CAST(0 AS BIT)\r\n" +
+                "END";
+
+            cm = new SqlCommand(query, con);
+            con.Open();
+            dr = cm.ExecuteReader();
+            if (dr.HasRows)
+            {
+                dr.Read();
+                result = dr.GetBoolean(0);
+            }
+            con.Close();
+            return result;
+        }
+
+        #region Manula Import
 
         /* Make a list with the name of all availabe column names.
          * headerRow: Row in which the column names can be found.
@@ -175,10 +362,10 @@ namespace InventoryManagmentSystem
             if(selectedWorksheet < 0 || headerRow < 1) { return; }
 
             // Open the selected workbook
-            Excel.Workbook workbook = excelApp.Workbooks.Open(excelFileName);
+            workbook = excelApp.Workbooks.Open(excelFileName);
 
-            // Get the first worksheet
-            Excel.Worksheet worksheet = workbook.Sheets[selectedWorksheet];
+            // Get the selected worksheet
+            worksheet = workbook.Sheets[selectedWorksheet];
             worksheet.Select();
 
             for (int row = headerRow + 1; row <= worksheet.UsedRange.Rows.Count; row++)
@@ -201,7 +388,232 @@ namespace InventoryManagmentSystem
             workbook.Close();
         }
 
+        // Select which table is going to be used.
+        private void comboBoxTbSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FindColumnNames();
+
+            switch(comboBoxTbSelect.SelectedItem.ToString())
+            {
+                case "Pants":
+                    //ImportPants();
+                    UpdateDatabaseStandard("tbPants");
+                    break;
+
+                case "Jackets":
+
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void ImportPants()
+        {
+            // Get the name of each column in the table.
+            string query = ("SELECT COLUMN_NAME " +
+                "FROM INFORMATION_SCHEMA.COLUMNS " +
+                "WHERE TABLE_NAME = 'tbPants'");
+
+            MakeColumnsManualMethod(query);
+
+        }
+
+        // Make columns from Excel and Database to be filled by the user.
+        private void MakeColumnsManualMethod(string query)
+        {
+            List<TextBox> list = new List<TextBox>();
+
+            cm = new SqlCommand(query, con);
+            con.Open();
+            dr = cm.ExecuteReader();
+
+            // Screen positions.
+            int boxWidth = 100;
+            int boxHeight = 20;
+            int boxSpacing = 10;
+            Point databaseColumnPos = new Point(150, 20);
+            Point excelColumnPos = new Point(150 + boxWidth + boxSpacing, 20);
+
+            // Add Label on top of database columns.
+            Label databse = new Label();
+            databse.Text = "Database";
+            databse.Location = databaseColumnPos;
+            databse.ForeColor = Color.White;
+            this.Controls.Add(databse);
+
+            // Add Label on top of Excel columns.
+            Label excel = new Label();
+            excel.Text = "Excel Table";
+            excel.Location = excelColumnPos;
+            excel.ForeColor = Color.White;
+            this.Controls.Add(excel);
+
+            rows = 0;
+            while (dr.Read())
+            {
+                // Calculate the location of the next Text Box.
+                databaseColumnPos = new Point(
+                    databaseColumnPos.X,
+                    databaseColumnPos.Y + boxHeight);
+
+                // Calculate the location of the next combo box Fill.
+                excelColumnPos = new Point(
+                    databaseColumnPos.X + boxWidth + boxSpacing,
+                    databaseColumnPos.Y);
+
+                // Make text box with info from the database.
+                TextBox textBox = new TextBox();
+                textBox.ReadOnly = true;
+                textBox.Name = "tb" + rows;
+                textBox.Text = dr[0].ToString();
+                textBox.Size = new Size(boxWidth, boxHeight);
+                textBox.Location = databaseColumnPos;
+                this.Controls.Add(textBox);
+
+                // Make combo box with info from Excel.
+                ComboBox comboBox = new ComboBox();
+                comboBox.Name = "cb" + rows;
+                comboBox.Location = excelColumnPos;
+                comboBox.Size = new Size(boxWidth, boxHeight);
+                for (int i = 0; i < listColumns.Count; ++i)
+                {
+                    comboBox.Items.Add(listColumns[i]);
+                }
+                this.Controls.Add(comboBox);
+                ++rows;
+            }
+            listTextBox.Clear();
+            listTextBox = list;
+
+            dr.Close();
+            con.Close();
+        }
+
+        #endregion Manual Import
+
+        #region Helper
+
+        // Convert a value from Excel into the appropriate data type to fit the database column.
+        private object ConvertExcelValueToType(string value, Type targetType)
+        {
+            if (targetType == typeof(int))
+            {
+                int intValue;
+                if (int.TryParse(value, out intValue))
+                {
+                    return intValue;
+                }
+            }
+            else if (targetType == typeof(double))
+            {
+                double doubleValue;
+                if (double.TryParse(value, out doubleValue))
+                {
+                    return doubleValue;
+                }
+            }
+            else if (targetType == typeof(DateTime))
+            {
+                DateTime dateTimeValue;
+                if (DateTime.TryParse(value, out dateTimeValue))
+                {
+                    return dateTimeValue;
+                }
+            }
+            // Handle any additional data types here...
+
+            return value; // Return as string by default
+        }
+
+        // Clear variables related to Excel.
+        private void ClearExcelVar()
+        {
+            /*if(worksheet != null)
+            {
+                Marshal.ReleaseComObject(worksheet);
+                worksheet = null;
+            }
+            workbook.Close();
+            if (workbook != null)
+            {
+                Marshal.ReleaseComObject(workbook);
+                workbook = null;
+            }
+            excelApp.Quit();
+            if (excelApp != null)
+            {
+                Marshal.ReleaseComObject(excelApp);
+                excelApp = null;
+            }
+
+            GC.Collect();*/
+
+            /* This will kill ALL Excel programs, including the ones unrelated to this app.
+                workbook.Close();
+                excelApp.Quit();
+                System.Diagnostics.Process[] processes = System.Diagnostics.Process.GetProcessesByName("EXCEL");
+                foreach (System.Diagnostics.Process process in processes)
+                {
+                    process.Kill();
+                }
+            */
+
+            workbook.Close();
+            excelApp.Quit();
+            con.Close();
+            listColumns.Clear();
+            headerRow = -1;
+            selectedWorksheet = -1;
+            comboBoxTbSelect.Enabled = false;
+        }
+
+        #endregion Helper
+
+
         /*
+        private void UpdateExcelFile(string fileName)
+        {
+            // Create a new Excel Application object
+            Excel.Application excelApp = new Excel.Application();
+            excelApp.Visible = false;
+
+            // Open the selected workbook
+            Excel.Workbook workbook = excelApp.Workbooks.Open(fileName);
+
+            // Get the first worksheet
+            Excel.Worksheet worksheet = workbook.Sheets[1];
+
+            // Get the range of cells containing data
+            Excel.Range range = worksheet.UsedRange;
+
+            // Get a DataTable containing the changes
+            DataTable changesTable = ((DataTable)dataGridView1.DataSource).GetChanges();
+
+            // Update the Excel file with the changes
+            if (changesTable != null)
+            {
+                foreach (DataRow dataRow in changesTable.Rows)
+                {
+                    Excel.Range cell = range.Find(dataRow[0]);
+                    if (cell != null)
+                    {
+                        cell.Offset[0, 1].Value = dataRow[1];
+                    }
+                    else
+                    {
+                        int lastRow = range.Rows.Count;
+                        range.Cells[lastRow + 1, 1].Value = dataRow[0];
+                        range.Cells[lastRow + 1, 2].Value = dataRow[1];
+                    }
+                }
+            }
+        }
+        */
+    }
+
+    /*
         private void LoadExcelFile(string fileName)
         {
             // Create a new Excel Application object
@@ -246,155 +658,6 @@ namespace InventoryManagmentSystem
             System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
         }
         */
-
-
-        private void comboBoxTbSelect_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FindColumnNames();
-
-            switch(comboBoxTbSelect.SelectedItem.ToString())
-            {
-                case "Pants":
-                    ImportPants();
-                    break;
-
-                case "Jackets":
-
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        private void ImportPants()
-        {
-            // Get the name of each column in the table.
-            string query = ("SELECT COLUMN_NAME " +
-                "FROM INFORMATION_SCHEMA.COLUMNS " +
-                "WHERE TABLE_NAME = 'tbPants'");
-
-            MakeTextBoxes(query);
-
-        }
-
-        private void MakeTextBoxes(string query)
-        {
-            List<TextBox> list = new List<TextBox>();
-
-            cm = new SqlCommand(query, con);
-            con.Open();
-            dr = cm.ExecuteReader();
-
-            // Screen positions.
-            int boxWidth = 100;
-            int boxHeight = 20;
-            int boxSpacing = 10;
-            Point databaseColumnPos = new Point(150, 10);
-            Point excelColumnPos = new Point(150 + boxWidth + boxSpacing, 10);
-
-            // Add Label on top of database columns.
-            Label databse = new Label();
-            databse.Text = "Database";
-            databse.Location = databaseColumnPos;
-            databse.ForeColor = Color.White;
-            this.Controls.Add(databse);
-
-            // Add Label on top of Excel columns.
-            Label excel = new Label();
-            excel.Text = "Excel Table";
-            excel.Location = excelColumnPos;
-            excel.ForeColor = Color.White;
-            this.Controls.Add(excel);
-
-            while (dr.Read())
-            {
-                // Calculate the location of the next Text Box.
-                databaseColumnPos = new Point(
-                    databaseColumnPos.X,
-                    databaseColumnPos.Y + boxHeight);
-
-                // Calculate the location of the next combo box Fill.
-                excelColumnPos = new Point(
-                    databaseColumnPos.X + boxWidth + boxSpacing,
-                    databaseColumnPos.Y);
-
-                // Make text box with info from the database.
-                TextBox textBox = new TextBox();
-                textBox.ReadOnly = true;
-                textBox.Name = dr[0].ToString();
-                textBox.Text = dr[0].ToString();
-                textBox.Size = new Size(boxWidth, boxHeight);
-                textBox.Location = databaseColumnPos;
-                this.Controls.Add(textBox);
-
-                // Make combo box with info from Excel.
-                ComboBox comboBox = new ComboBox();
-                comboBox.Location = excelColumnPos;
-                comboBox.Size = new Size(boxWidth, boxHeight);
-                for (int i = 0; i < listColumns.Count; ++i)
-                {
-                    comboBox.Items.Add(listColumns[i]);
-                }
-                this.Controls.Add(comboBox);
-            }
-            listTextBox.Clear();
-            listTextBox = list;
-
-            dr.Close();
-            con.Close();
-        }
-
-        private void ClearExcelVar()
-        {
-            excelApp.Quit();
-            listColumns.Clear();
-            headerRow = -1;
-            selectedWorksheet = -1;
-            comboBoxTbSelect.Enabled = false;
-        }
-
-        /*
-        private void UpdateExcelFile(string fileName)
-        {
-            // Create a new Excel Application object
-            Excel.Application excelApp = new Excel.Application();
-            excelApp.Visible = false;
-
-            // Open the selected workbook
-            Excel.Workbook workbook = excelApp.Workbooks.Open(fileName);
-
-            // Get the first worksheet
-            Excel.Worksheet worksheet = workbook.Sheets[1];
-
-            // Get the range of cells containing data
-            Excel.Range range = worksheet.UsedRange;
-
-            // Get a DataTable containing the changes
-            DataTable changesTable = ((DataTable)dataGridView1.DataSource).GetChanges();
-
-            // Update the Excel file with the changes
-            if (changesTable != null)
-            {
-                foreach (DataRow dataRow in changesTable.Rows)
-                {
-                    Excel.Range cell = range.Find(dataRow[0]);
-                    if (cell != null)
-                    {
-                        cell.Offset[0, 1].Value = dataRow[1];
-                    }
-                    else
-                    {
-                        int lastRow = range.Rows.Count;
-                        range.Cells[lastRow + 1, 1].Value = dataRow[0];
-                        range.Cells[lastRow + 1, 2].Value = dataRow[1];
-                    }
-                }
-            }
-        }
-        */
-    }
-
 }
 
 /* To use Microsoft Office Excel dll:

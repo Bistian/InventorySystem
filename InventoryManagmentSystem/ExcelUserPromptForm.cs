@@ -14,9 +14,15 @@ namespace InventoryManagmentSystem
     {
         public event EventHandler<PromptEventArg> userPrompt;
 
-        public ExcelUserPromptForm(List<string> columns)
+        public ExcelUserPromptForm(List<string> columns, bool isManual)
         {
             InitializeComponent();
+
+            if(isManual == false)
+            {
+                labelRow.Visible = false;
+                numericUpDownRow.Visible = false;
+            }
 
             foreach (string column in columns)
             {
@@ -33,7 +39,7 @@ namespace InventoryManagmentSystem
         {
             var arguments = new PromptEventArg
             {
-                selectedWorksheet = -1,
+                selectedWorksheet = "",
                 selectedRow = -1,
             };
 
@@ -49,8 +55,7 @@ namespace InventoryManagmentSystem
             // Create a new PromptEventArgs object with the selected worksheet and row.
             var arguments = new PromptEventArg
             {
-                // +1 because Excel starts counting from 1 instead of 0.
-                selectedWorksheet = comboBoxColumns.SelectedIndex + 1,
+                selectedWorksheet = comboBoxColumns.Text,
                 selectedRow = (int)numericUpDownRow.Value,
             };
 
@@ -64,7 +69,8 @@ namespace InventoryManagmentSystem
 
     public class PromptEventArg : EventArgs
     {
-        public int selectedWorksheet { get; set; }
+        //public int selectedWorksheet { get; set; }
+        public string selectedWorksheet { get; set; }
         public int selectedRow { get; set; }
     }
 }
