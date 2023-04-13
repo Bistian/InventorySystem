@@ -47,7 +47,7 @@ namespace InventoryManagmentSystem
         {
             txtBoxSerialNumber.Clear();
             comboBoxBrand.SelectedIndex = -1;
-            textBoxModel.Clear();
+            comboBoxUsedNew.SelectedIndex = -1; ;
             comboBoxSize.SelectedIndex = -1;
         }
 
@@ -60,10 +60,10 @@ namespace InventoryManagmentSystem
                     bool exists = CheckIfExists("tbJackets", txtBoxSerialNumber.Text);
                     if (!exists)
                     {
-                        cm = new SqlCommand("INSERT INTO tbJackets(SerialNumber,Brand,Model,Size,ManufactureDate)VALUES(@SerialNumber,@Brand,@Model,@Size,@ManufactureDate)", con);
+                        cm = new SqlCommand("INSERT INTO tbJackets(SerialNumber,Brand,UsedNew,Size,ManufactureDate)VALUES(@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)", con);
                         cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                         cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                        cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
+                        cm.Parameters.AddWithValue("@UsedNew", comboBoxUsedNew.Text);
                         cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
                         cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
                         con.Open();
@@ -89,10 +89,10 @@ namespace InventoryManagmentSystem
             {
                 if (MessageBox.Show("Are you sure you want to update this Item?", "Update Item", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cm = new SqlCommand("UPDATE tbJackets SET SerialNumber = @SerialNumber,Brand = @Brand, Model = @Model, Size = @Size, ManufactureDate = @ManufactureDate WHERE JacketID LIKE '" + txtBoxSerialNumber.Text + "' ", con);
+                    cm = new SqlCommand("UPDATE tbJackets SET SerialNumber = @SerialNumber,Brand = @Brand, UsedNew = @UsedNew, Size = @Size, ManufactureDate = @ManufactureDate WHERE JacketID LIKE '" + txtBoxSerialNumber.Text + "' ", con);
                     cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                     cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                    cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
+                    cm.Parameters.AddWithValue("@Model", comboBoxUsedNew.Text);
                     cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
                     cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
                     con.Open();
@@ -110,7 +110,7 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void CloseButton_Click(object sender, EventArgs e)
+        private void customButton1_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Exit Module?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -118,16 +118,12 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void ClearButton_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
-            Clear();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtBoxSerialNumber.Text) && !string.IsNullOrEmpty(textBoxModel.Text) &&
-           !string.IsNullOrEmpty(comboBoxBrand.Text) &&
-           !string.IsNullOrEmpty(comboBoxSize.Text))
+            if (!string.IsNullOrEmpty(txtBoxSerialNumber.Text) &&
+          !string.IsNullOrEmpty(comboBoxUsedNew.Text) &&
+          !string.IsNullOrEmpty(comboBoxBrand.Text) &&
+          !string.IsNullOrEmpty(comboBoxSize.Text))
             {
                 //if (isNewItem == true)
                 //{
@@ -142,6 +138,11 @@ namespace InventoryManagmentSystem
             {
                 MessageBox.Show("Please fill the required fields");
             }
+        }
+
+        private void ClearButton_Click_1(object sender, EventArgs e)
+        {
+            Clear();
         }
     }
 }

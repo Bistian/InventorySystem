@@ -114,9 +114,9 @@
             this.comboBoxAcademy.FormattingEnabled = true;
             this.comboBoxAcademy.Items.AddRange(new object[] {
             "BFA",
-            "OCALA",
-            "CORAL SPRING",
-            "PASCO HERNANDO",
+            "Ocala",
+            "Coral Springs",
+            "Pasco Hernando ",
             "PALM BEACH",
             "MIAMI DADE",
             "EASTERN",
@@ -134,14 +134,14 @@
             "NORTHWEST"});
             this.comboBoxAcademy.Location = new System.Drawing.Point(28, 129);
             this.comboBoxAcademy.Name = "comboBoxAcademy";
-            this.comboBoxAcademy.Size = new System.Drawing.Size(101, 24);
+            this.comboBoxAcademy.Size = new System.Drawing.Size(123, 24);
             this.comboBoxAcademy.TabIndex = 86;
             // 
             // labelDayNight
             // 
             this.labelDayNight.AutoSize = true;
             this.labelDayNight.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDayNight.Location = new System.Drawing.Point(144, 102);
+            this.labelDayNight.Location = new System.Drawing.Point(155, 102);
             this.labelDayNight.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDayNight.Name = "labelDayNight";
             this.labelDayNight.Size = new System.Drawing.Size(109, 24);
@@ -156,9 +156,9 @@
             this.comboDayNight.Items.AddRange(new object[] {
             "Day",
             "Night"});
-            this.comboDayNight.Location = new System.Drawing.Point(148, 129);
+            this.comboDayNight.Location = new System.Drawing.Point(159, 129);
             this.comboDayNight.Name = "comboDayNight";
-            this.comboDayNight.Size = new System.Drawing.Size(103, 24);
+            this.comboDayNight.Size = new System.Drawing.Size(92, 24);
             this.comboDayNight.TabIndex = 88;
             // 
             // txtBoxCustomerName

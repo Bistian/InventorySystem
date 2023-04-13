@@ -35,18 +35,19 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.ItemLable = new System.Windows.Forms.Label();
             this.comboBoxItem = new System.Windows.Forms.ComboBox();
-            this.ColorMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ManufactureDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Model = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridInv = new System.Windows.Forms.DataGridView();
             this.panelBottom = new System.Windows.Forms.Panel();
-            this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.labelInv = new System.Windows.Forms.Label();
+            this.UsersButton = new InventoryManagmentSystem.CustomButton();
+            this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ManufactureDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UsedNew = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColorMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.panelBottom.SuspendLayout();
@@ -95,75 +96,6 @@
             this.comboBoxItem.TabIndex = 1;
             this.comboBoxItem.SelectedIndexChanged += new System.EventHandler(this.comboBoxItem_SelectedIndexChanged);
             // 
-            // ColorMaterial
-            // 
-            this.ColorMaterial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColorMaterial.FillWeight = 55F;
-            this.ColorMaterial.HeaderText = "Color / Material";
-            this.ColorMaterial.MinimumWidth = 6;
-            this.ColorMaterial.Name = "ColorMaterial";
-            this.ColorMaterial.ReadOnly = true;
-            // 
-            // ManufactureDate
-            // 
-            this.ManufactureDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ManufactureDate.FillWeight = 120F;
-            this.ManufactureDate.HeaderText = "ManufactureDate";
-            this.ManufactureDate.MinimumWidth = 6;
-            this.ManufactureDate.Name = "ManufactureDate";
-            this.ManufactureDate.ReadOnly = true;
-            // 
-            // Model
-            // 
-            this.Model.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Model.HeaderText = "Model";
-            this.Model.MinimumWidth = 6;
-            this.Model.Name = "Model";
-            this.Model.ReadOnly = true;
-            // 
-            // Brand
-            // 
-            this.Brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Brand.HeaderText = "Brand";
-            this.Brand.MinimumWidth = 6;
-            this.Brand.Name = "Brand";
-            this.Brand.ReadOnly = true;
-            // 
-            // Size
-            // 
-            this.Size.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Size.FillWeight = 30F;
-            this.Size.HeaderText = "Size";
-            this.Size.MinimumWidth = 6;
-            this.Size.Name = "Size";
-            this.Size.ReadOnly = true;
-            // 
-            // Serial
-            // 
-            this.Serial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Serial.HeaderText = "Serial #";
-            this.Serial.MinimumWidth = 6;
-            this.Serial.Name = "Serial";
-            this.Serial.ReadOnly = true;
-            // 
-            // Type
-            // 
-            this.Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Type.FillWeight = 50F;
-            this.Type.HeaderText = "Item";
-            this.Type.MinimumWidth = 6;
-            this.Type.Name = "Type";
-            this.Type.ReadOnly = true;
-            // 
-            // Num
-            // 
-            this.Num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Num.FillWeight = 30F;
-            this.Num.HeaderText = "#";
-            this.Num.MinimumWidth = 6;
-            this.Num.Name = "Num";
-            this.Num.ReadOnly = true;
-            // 
             // dataGridInv
             // 
             this.dataGridInv.AllowUserToAddRows = false;
@@ -181,12 +113,13 @@
             this.dataGridInv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Num,
             this.Type,
+            this.Brand,
             this.Serial,
             this.Size,
-            this.Brand,
-            this.Model,
             this.ManufactureDate,
-            this.ColorMaterial});
+            this.UsedNew,
+            this.ColorMaterial,
+            this.Location});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -228,6 +161,21 @@
             this.panelBottom.Size = new System.Drawing.Size(1034, 53);
             this.panelBottom.TabIndex = 6;
             // 
+            // labelInv
+            // 
+            this.labelInv.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelInv.AutoSize = true;
+            this.labelInv.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelInv.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelInv.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelInv.Location = new System.Drawing.Point(12, 15);
+            this.labelInv.Margin = new System.Windows.Forms.Padding(3, 15, 3, 0);
+            this.labelInv.Name = "labelInv";
+            this.labelInv.Size = new System.Drawing.Size(213, 29);
+            this.labelInv.TabIndex = 15;
+            this.labelInv.Text = "Manage Inventory";
+            this.labelInv.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // UsersButton
             // 
             this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -243,20 +191,83 @@
             this.UsersButton.TabStop = false;
             this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click_1);
             // 
-            // labelInv
+            // Num
             // 
-            this.labelInv.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelInv.AutoSize = true;
-            this.labelInv.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInv.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelInv.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.labelInv.Location = new System.Drawing.Point(12, 15);
-            this.labelInv.Margin = new System.Windows.Forms.Padding(3, 15, 3, 0);
-            this.labelInv.Name = "labelInv";
-            this.labelInv.Size = new System.Drawing.Size(213, 29);
-            this.labelInv.TabIndex = 15;
-            this.labelInv.Text = "Manage Inventory";
-            this.labelInv.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.Num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Num.FillWeight = 30F;
+            this.Num.HeaderText = "#";
+            this.Num.MinimumWidth = 6;
+            this.Num.Name = "Num";
+            this.Num.ReadOnly = true;
+            // 
+            // Type
+            // 
+            this.Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Type.FillWeight = 50F;
+            this.Type.HeaderText = "Item";
+            this.Type.MinimumWidth = 6;
+            this.Type.Name = "Type";
+            this.Type.ReadOnly = true;
+            // 
+            // Brand
+            // 
+            this.Brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Brand.HeaderText = "Brand";
+            this.Brand.MinimumWidth = 6;
+            this.Brand.Name = "Brand";
+            this.Brand.ReadOnly = true;
+            // 
+            // Serial
+            // 
+            this.Serial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Serial.HeaderText = "Serial #";
+            this.Serial.MinimumWidth = 6;
+            this.Serial.Name = "Serial";
+            this.Serial.ReadOnly = true;
+            // 
+            // Size
+            // 
+            this.Size.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Size.FillWeight = 30F;
+            this.Size.HeaderText = "Size";
+            this.Size.MinimumWidth = 6;
+            this.Size.Name = "Size";
+            this.Size.ReadOnly = true;
+            // 
+            // ManufactureDate
+            // 
+            this.ManufactureDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ManufactureDate.FillWeight = 120F;
+            this.ManufactureDate.HeaderText = "MFD";
+            this.ManufactureDate.MinimumWidth = 6;
+            this.ManufactureDate.Name = "ManufactureDate";
+            this.ManufactureDate.ReadOnly = true;
+            // 
+            // UsedNew
+            // 
+            this.UsedNew.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.UsedNew.FillWeight = 50F;
+            this.UsedNew.HeaderText = "Used";
+            this.UsedNew.MinimumWidth = 6;
+            this.UsedNew.Name = "UsedNew";
+            this.UsedNew.ReadOnly = true;
+            // 
+            // ColorMaterial
+            // 
+            this.ColorMaterial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColorMaterial.FillWeight = 55F;
+            this.ColorMaterial.HeaderText = "Color / Material";
+            this.ColorMaterial.MinimumWidth = 6;
+            this.ColorMaterial.Name = "ColorMaterial";
+            this.ColorMaterial.ReadOnly = true;
+            // 
+            // Location
+            // 
+            this.Location.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Location.HeaderText = "Location";
+            this.Location.MinimumWidth = 6;
+            this.Location.Name = "Location";
+            this.Location.ReadOnly = true;
             // 
             // InventoryForm
             // 
@@ -284,17 +295,18 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label ItemLable;
         private System.Windows.Forms.ComboBox comboBoxItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColorMaterial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ManufactureDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Model;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Brand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Serial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Num;
         private System.Windows.Forms.DataGridView dataGridInv;
         private System.Windows.Forms.Panel panelBottom;
         private CustomButton UsersButton;
         private System.Windows.Forms.Label labelInv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Brand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Serial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ManufactureDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UsedNew;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColorMaterial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Location;
     }
 }

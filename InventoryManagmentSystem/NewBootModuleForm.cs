@@ -43,38 +43,11 @@ namespace InventoryManagmentSystem
             }
             return Exists;
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtBoxSerialNumber.Text) && !string.IsNullOrEmpty(textBoxModel.Text) &&
-            !string.IsNullOrEmpty(comboBoxBrand.Text) &&
-            !string.IsNullOrEmpty(comboBoxMaterial.Text) &&
-            !string.IsNullOrEmpty(comboBoxSize.Text))
-            {
-            //if (isNewItem == true)
-            //{
-                CreateItem();
-            //}
-            //else
-            //{
-            //    UpdateItem();
-            //}
-            }
-            else
-            {
-                MessageBox.Show("Please fill the required fields");
-            }
-
-
-        }
-
-
-
         public void Clear()
         {
             txtBoxSerialNumber.Clear();
             comboBoxBrand.SelectedIndex = -1;
-            textBoxModel.Clear();
+            comboBoxUsedNew.SelectedIndex = -1;
             comboBoxMaterial.SelectedIndex = -1;
             comboBoxSize.SelectedIndex = -1;
         }
@@ -88,10 +61,10 @@ namespace InventoryManagmentSystem
                     bool exists = CheckIfExists("tbBoots", txtBoxSerialNumber.Text);
                     if (!exists)
                     {
-                        cm = new SqlCommand("INSERT INTO tbBoots(SerialNumber,Brand,Model,Material,Size,ManufactureDate)VALUES(@SerialNumber,@Brand,@Model,@Material,@Size,@ManufactureDate)", con);
+                        cm = new SqlCommand("INSERT INTO tbBoots(SerialNumber,Brand,UsedNew,Material,Size,ManufactureDate)VALUES(@SerialNumber,@Brand,@UsedNew,@Material,@Size,@ManufactureDate)", con);
                         cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                         cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                        cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
+                        cm.Parameters.AddWithValue("@UsedNew", comboBoxUsedNew.Text);
                         cm.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
                         cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
                         cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value.Date);
@@ -118,10 +91,10 @@ namespace InventoryManagmentSystem
             {
                 if (MessageBox.Show("Are you sure you want to update this Item?", "Update Item", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cm = new SqlCommand("UPDATE tbBoots SET SerialNumber = @SerialNum,Brand = @Brand, Model = @Model, Material = @Material, Size = @Size, ManufactureDate = @ManufactureDate WHERE BootID LIKE '" + txtBoxSerialNumber.Text + "' ", con);
+                    cm = new SqlCommand("UPDATE tbBoots SET SerialNumber = @SerialNum,Brand = @Brand, UsedNew = @UsedNew, Material = @Material, Size = @Size, ManufactureDate = @ManufactureDate WHERE BootID LIKE '" + txtBoxSerialNumber.Text + "' ", con);
                     cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                     cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                    cm.Parameters.AddWithValue("@Model", textBoxModel.Text);
+                    cm.Parameters.AddWithValue("@UsedNew", comboBoxUsedNew.Text);
                     cm.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
                     cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
                     cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
@@ -140,17 +113,40 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void ClearButton_Click(object sender, EventArgs e)
-        {
-            Clear();
-        }
-
         private void CloseButton_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Exit Module?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 this.Dispose();
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtBoxSerialNumber.Text) && 
+                !string.IsNullOrEmpty(comboBoxUsedNew.Text) &&
+            !string.IsNullOrEmpty(comboBoxBrand.Text) &&
+            !string.IsNullOrEmpty(comboBoxMaterial.Text) &&
+            !string.IsNullOrEmpty(comboBoxSize.Text))
+            {
+                //if (isNewItem == true)
+                //{
+                CreateItem();
+                //}
+                //else
+                //{
+                //    UpdateItem();
+                //}
+            }
+            else
+            {
+                MessageBox.Show("Please fill the required fields");
+            }  
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            Clear();
         }
     }
 }

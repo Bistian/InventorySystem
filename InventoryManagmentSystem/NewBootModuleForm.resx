@@ -117,7 +117,57 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;CloseButton.Name" xml:space="preserve">
+    <value>CloseButton</value>
+  </data>
+  <data name="&gt;&gt;CloseButton.Type" xml:space="preserve">
+    <value>InventoryManagmentSystem.CustomButton, InventoryManagmentSystem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CloseButton.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;CloseButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;NewBootTxt.Name" xml:space="preserve">
+    <value>NewBootTxt</value>
+  </data>
+  <data name="&gt;&gt;NewBootTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NewBootTxt.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;NewBootTxt.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>755, 64</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
   <data name="CloseButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAPAAAADwCAYAAAA+VemSAAAABGdBTUEAALGPC/xhBQAAPPJJREFUeF7t
@@ -735,7 +785,6 @@
         e9bGAAAAAElFTkSuQmCC
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="CloseButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -751,7 +800,6 @@
   <data name="CloseButton.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="CloseButton.TabIndex" type="System.Int32, mscorlib">
     <value>82</value>
   </data>
@@ -812,153 +860,6 @@
   <data name="&gt;&gt;NewBootTxt.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 64</value>
-  </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="ClearButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 9.75pt, style=Bold</value>
-  </data>
-  <data name="ClearButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ClearButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>382, 217</value>
-  </data>
-  <data name="ClearButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="ClearButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 53</value>
-  </data>
-  <data name="ClearButton.TabIndex" type="System.Int32, mscorlib">
-    <value>81</value>
-  </data>
-  <data name="ClearButton.Text" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="&gt;&gt;ClearButton.Name" xml:space="preserve">
-    <value>ClearButton</value>
-  </data>
-  <data name="&gt;&gt;ClearButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ClearButton.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ClearButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="button1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 9.75pt, style=Bold</value>
-  </data>
-  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 217</value>
-  </data>
-  <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 53</value>
-  </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
-    <value>80</value>
-  </data>
-  <data name="button1.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
-  </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="labelManufactureDate.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelManufactureDate.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 11.25pt, style=Bold</value>
-  </data>
-  <data name="labelManufactureDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>518, 118</value>
-  </data>
-  <data name="labelManufactureDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="labelManufactureDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 24</value>
-  </data>
-  <data name="labelManufactureDate.TabIndex" type="System.Int32, mscorlib">
-    <value>79</value>
-  </data>
-  <data name="labelManufactureDate.Text" xml:space="preserve">
-    <value>Manufacture Date</value>
-  </data>
-  <data name="&gt;&gt;labelManufactureDate.Name" xml:space="preserve">
-    <value>labelManufactureDate</value>
-  </data>
-  <data name="&gt;&gt;labelManufactureDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelManufactureDate.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;labelManufactureDate.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="dateTimePickerManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>477, 145</value>
-  </data>
-  <data name="dateTimePickerManufactureDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 22</value>
-  </data>
-  <data name="dateTimePickerManufactureDate.TabIndex" type="System.Int32, mscorlib">
-    <value>78</value>
-  </data>
-  <data name="&gt;&gt;dateTimePickerManufactureDate.Name" xml:space="preserve">
-    <value>dateTimePickerManufactureDate</value>
-  </data>
-  <data name="&gt;&gt;dateTimePickerManufactureDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dateTimePickerManufactureDate.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;dateTimePickerManufactureDate.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="labelMaterial.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -969,7 +870,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelMaterial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 141</value>
+    <value>152, 143</value>
   </data>
   <data name="labelMaterial.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -993,7 +894,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelMaterial.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="comboBoxMaterial.Items" xml:space="preserve">
     <value>Rubber</value>
@@ -1002,10 +903,10 @@
     <value>Leather</value>
   </data>
   <data name="comboBoxMaterial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 168</value>
+    <value>156, 170</value>
   </data>
   <data name="comboBoxMaterial.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 24</value>
+    <value>105, 24</value>
   </data>
   <data name="comboBoxMaterial.TabIndex" type="System.Int32, mscorlib">
     <value>76</value>
@@ -1020,66 +921,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboBoxMaterial.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="textBoxModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 170</value>
-  </data>
-  <data name="textBoxModel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="textBoxModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 22</value>
-  </data>
-  <data name="textBoxModel.TabIndex" type="System.Int32, mscorlib">
-    <value>75</value>
-  </data>
-  <data name="&gt;&gt;textBoxModel.Name" xml:space="preserve">
-    <value>textBoxModel</value>
-  </data>
-  <data name="&gt;&gt;textBoxModel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxModel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;textBoxModel.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="LableModel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="LableModel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 11.25pt, style=Bold</value>
-  </data>
-  <data name="LableModel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LableModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 141</value>
-  </data>
-  <data name="LableModel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="LableModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 24</value>
-  </data>
-  <data name="LableModel.TabIndex" type="System.Int32, mscorlib">
-    <value>74</value>
-  </data>
-  <data name="LableModel.Text" xml:space="preserve">
-    <value>Model</value>
-  </data>
-  <data name="&gt;&gt;LableModel.Name" xml:space="preserve">
-    <value>LableModel</value>
-  </data>
-  <data name="&gt;&gt;LableModel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LableModel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LableModel.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="LableBrand.AutoSize" type="System.Boolean, mscorlib">
@@ -1336,6 +1177,192 @@
   </data>
   <data name="&gt;&gt;LableSerialNumber.ZOrder" xml:space="preserve">
     <value>13</value>
+  </data>
+  <data name="labelUsedNew.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelUsedNew.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 11.25pt, style=Bold</value>
+  </data>
+  <data name="labelUsedNew.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelUsedNew.Location" type="System.Drawing.Point, System.Drawing">
+    <value>276, 143</value>
+  </data>
+  <data name="labelUsedNew.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="labelUsedNew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 24</value>
+  </data>
+  <data name="labelUsedNew.TabIndex" type="System.Int32, mscorlib">
+    <value>83</value>
+  </data>
+  <data name="labelUsedNew.Text" xml:space="preserve">
+    <value>Used Or New</value>
+  </data>
+  <data name="&gt;&gt;labelUsedNew.Name" xml:space="preserve">
+    <value>labelUsedNew</value>
+  </data>
+  <data name="&gt;&gt;labelUsedNew.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelUsedNew.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelUsedNew.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="comboBoxUsedNew.Items" xml:space="preserve">
+    <value>Used</value>
+  </data>
+  <data name="comboBoxUsedNew.Items1" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="comboBoxUsedNew.Location" type="System.Drawing.Point, System.Drawing">
+    <value>280, 170</value>
+  </data>
+  <data name="comboBoxUsedNew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 24</value>
+  </data>
+  <data name="comboBoxUsedNew.TabIndex" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUsedNew.Name" xml:space="preserve">
+    <value>comboBoxUsedNew</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUsedNew.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUsedNew.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUsedNew.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="labelManufactureDate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelManufactureDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 11.25pt, style=Bold</value>
+  </data>
+  <data name="labelManufactureDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>505, 117</value>
+  </data>
+  <data name="labelManufactureDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="labelManufactureDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 24</value>
+  </data>
+  <data name="labelManufactureDate.TabIndex" type="System.Int32, mscorlib">
+    <value>85</value>
+  </data>
+  <data name="labelManufactureDate.Text" xml:space="preserve">
+    <value>Manufacture Date</value>
+  </data>
+  <data name="&gt;&gt;labelManufactureDate.Name" xml:space="preserve">
+    <value>labelManufactureDate</value>
+  </data>
+  <data name="&gt;&gt;labelManufactureDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelManufactureDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelManufactureDate.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="dateTimePickerManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>464, 144</value>
+  </data>
+  <data name="dateTimePickerManufactureDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 22</value>
+  </data>
+  <data name="dateTimePickerManufactureDate.TabIndex" type="System.Int32, mscorlib">
+    <value>84</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerManufactureDate.Name" xml:space="preserve">
+    <value>dateTimePickerManufactureDate</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerManufactureDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerManufactureDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerManufactureDate.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="button1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 9.75pt, style=Bold</value>
+  </data>
+  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>246, 217</value>
+  </data>
+  <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 53</value>
+  </data>
+  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+    <value>86</value>
+  </data>
+  <data name="button1.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="&gt;&gt;button1.Name" xml:space="preserve">
+    <value>button1</value>
+  </data>
+  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ClearButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 9.75pt, style=Bold</value>
+  </data>
+  <data name="ClearButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ClearButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>370, 217</value>
+  </data>
+  <data name="ClearButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="ClearButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 53</value>
+  </data>
+  <data name="ClearButton.TabIndex" type="System.Int32, mscorlib">
+    <value>87</value>
+  </data>
+  <data name="ClearButton.Text" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="&gt;&gt;ClearButton.Name" xml:space="preserve">
+    <value>ClearButton</value>
+  </data>
+  <data name="&gt;&gt;ClearButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ClearButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ClearButton.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
