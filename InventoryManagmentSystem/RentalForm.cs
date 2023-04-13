@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace InventoryManagmentSystem
 {
-    public partial class HomeForm : Form
+    public partial class RentalForm : Form
     {
         #region SQL_Variables
         //Database Path
@@ -29,7 +29,7 @@ namespace InventoryManagmentSystem
         //Makes date red if it is less than this number.
         int daysForWarning = 14;
 
-        public HomeForm()
+        public RentalForm()
         {
             InitializeComponent();
             LoadTables(dataGridRented, QueryRented(), "DueDate");

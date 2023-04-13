@@ -1,6 +1,6 @@
 ﻿namespace InventoryManagmentSystem
 {
-    partial class HomeForm
+    partial class RentalForm
     {
         /// <summary>
         /// Required designer variable.
