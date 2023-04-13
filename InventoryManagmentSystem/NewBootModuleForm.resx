@@ -168,546 +168,6 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="NewBootTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="NewBootTxt.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="NewBootTxt.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14.25pt, style=Bold</value>
-  </data>
-  <data name="NewBootTxt.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="NewBootTxt.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="NewBootTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="NewBootTxt.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="NewBootTxt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 29</value>
-  </data>
-  <data name="NewBootTxt.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="NewBootTxt.Text" xml:space="preserve">
-    <value>New Boots</value>
-  </data>
-  <data name="NewBootTxt.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;NewBootTxt.Name" xml:space="preserve">
-    <value>NewBootTxt</value>
-  </data>
-  <data name="&gt;&gt;NewBootTxt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;NewBootTxt.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;NewBootTxt.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ClearButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 9.75pt, style=Bold</value>
-  </data>
-  <data name="ClearButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ClearButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>382, 217</value>
-  </data>
-  <data name="ClearButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="ClearButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 53</value>
-  </data>
-  <data name="ClearButton.TabIndex" type="System.Int32, mscorlib">
-    <value>81</value>
-  </data>
-  <data name="ClearButton.Text" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="&gt;&gt;ClearButton.Name" xml:space="preserve">
-    <value>ClearButton</value>
-  </data>
-  <data name="&gt;&gt;ClearButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ClearButton.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ClearButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="button1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 9.75pt, style=Bold</value>
-  </data>
-  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 217</value>
-  </data>
-  <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 53</value>
-  </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
-    <value>80</value>
-  </data>
-  <data name="button1.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
-  </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="labelManufactureDate.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelManufactureDate.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 11.25pt, style=Bold</value>
-  </data>
-  <data name="labelManufactureDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>518, 118</value>
-  </data>
-  <data name="labelManufactureDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="labelManufactureDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 24</value>
-  </data>
-  <data name="labelManufactureDate.TabIndex" type="System.Int32, mscorlib">
-    <value>79</value>
-  </data>
-  <data name="labelManufactureDate.Text" xml:space="preserve">
-    <value>Manufacture Date</value>
-  </data>
-  <data name="&gt;&gt;labelManufactureDate.Name" xml:space="preserve">
-    <value>labelManufactureDate</value>
-  </data>
-  <data name="&gt;&gt;labelManufactureDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelManufactureDate.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;labelManufactureDate.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="dateTimePickerManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>477, 145</value>
-  </data>
-  <data name="dateTimePickerManufactureDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 22</value>
-  </data>
-  <data name="dateTimePickerManufactureDate.TabIndex" type="System.Int32, mscorlib">
-    <value>78</value>
-  </data>
-  <data name="&gt;&gt;dateTimePickerManufactureDate.Name" xml:space="preserve">
-    <value>dateTimePickerManufactureDate</value>
-  </data>
-  <data name="&gt;&gt;dateTimePickerManufactureDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dateTimePickerManufactureDate.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;dateTimePickerManufactureDate.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="labelMaterial.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelMaterial.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 11.25pt, style=Bold</value>
-  </data>
-  <data name="labelMaterial.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelMaterial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 141</value>
-  </data>
-  <data name="labelMaterial.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="labelMaterial.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 24</value>
-  </data>
-  <data name="labelMaterial.TabIndex" type="System.Int32, mscorlib">
-    <value>77</value>
-  </data>
-  <data name="labelMaterial.Text" xml:space="preserve">
-    <value>Material</value>
-  </data>
-  <data name="&gt;&gt;labelMaterial.Name" xml:space="preserve">
-    <value>labelMaterial</value>
-  </data>
-  <data name="&gt;&gt;labelMaterial.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelMaterial.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;labelMaterial.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="comboBoxMaterial.Items" xml:space="preserve">
-    <value>Rubber</value>
-  </data>
-  <data name="comboBoxMaterial.Items1" xml:space="preserve">
-    <value>Leather</value>
-  </data>
-  <data name="comboBoxMaterial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 168</value>
-  </data>
-  <data name="comboBoxMaterial.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 24</value>
-  </data>
-  <data name="comboBoxMaterial.TabIndex" type="System.Int32, mscorlib">
-    <value>76</value>
-  </data>
-  <data name="&gt;&gt;comboBoxMaterial.Name" xml:space="preserve">
-    <value>comboBoxMaterial</value>
-  </data>
-  <data name="&gt;&gt;comboBoxMaterial.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBoxMaterial.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;comboBoxMaterial.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="textBoxModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 170</value>
-  </data>
-  <data name="textBoxModel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="textBoxModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 22</value>
-  </data>
-  <data name="textBoxModel.TabIndex" type="System.Int32, mscorlib">
-    <value>75</value>
-  </data>
-  <data name="&gt;&gt;textBoxModel.Name" xml:space="preserve">
-    <value>textBoxModel</value>
-  </data>
-  <data name="&gt;&gt;textBoxModel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxModel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;textBoxModel.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="LableModel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="LableModel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 11.25pt, style=Bold</value>
-  </data>
-  <data name="LableModel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LableModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 141</value>
-  </data>
-  <data name="LableModel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="LableModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 24</value>
-  </data>
-  <data name="LableModel.TabIndex" type="System.Int32, mscorlib">
-    <value>74</value>
-  </data>
-  <data name="LableModel.Text" xml:space="preserve">
-    <value>Model</value>
-  </data>
-  <data name="&gt;&gt;LableModel.Name" xml:space="preserve">
-    <value>LableModel</value>
-  </data>
-  <data name="&gt;&gt;LableModel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LableModel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LableModel.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="LableBrand.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="LableBrand.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 11.25pt, style=Bold</value>
-  </data>
-  <data name="LableBrand.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LableBrand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 143</value>
-  </data>
-  <data name="LableBrand.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="LableBrand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 24</value>
-  </data>
-  <data name="LableBrand.TabIndex" type="System.Int32, mscorlib">
-    <value>73</value>
-  </data>
-  <data name="LableBrand.Text" xml:space="preserve">
-    <value>Brand</value>
-  </data>
-  <data name="&gt;&gt;LableBrand.Name" xml:space="preserve">
-    <value>LableBrand</value>
-  </data>
-  <data name="&gt;&gt;LableBrand.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LableBrand.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LableBrand.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="comboBoxBrand.Items" xml:space="preserve">
-    <value>need</value>
-  </data>
-  <data name="comboBoxBrand.Items1" xml:space="preserve">
-    <value>to</value>
-  </data>
-  <data name="comboBoxBrand.Items2" xml:space="preserve">
-    <value>ask</value>
-  </data>
-  <data name="comboBoxBrand.Items3" xml:space="preserve">
-    <value>for</value>
-  </data>
-  <data name="comboBoxBrand.Items4" xml:space="preserve">
-    <value>boot</value>
-  </data>
-  <data name="comboBoxBrand.Items5" xml:space="preserve">
-    <value>brands</value>
-  </data>
-  <data name="comboBoxBrand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 170</value>
-  </data>
-  <data name="comboBoxBrand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 24</value>
-  </data>
-  <data name="comboBoxBrand.TabIndex" type="System.Int32, mscorlib">
-    <value>72</value>
-  </data>
-  <data name="&gt;&gt;comboBoxBrand.Name" xml:space="preserve">
-    <value>comboBoxBrand</value>
-  </data>
-  <data name="&gt;&gt;comboBoxBrand.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBoxBrand.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;comboBoxBrand.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="labelSize.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelSize.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 11.25pt, style=Bold</value>
-  </data>
-  <data name="labelSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 84</value>
-  </data>
-  <data name="labelSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="labelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 24</value>
-  </data>
-  <data name="labelSize.TabIndex" type="System.Int32, mscorlib">
-    <value>71</value>
-  </data>
-  <data name="labelSize.Text" xml:space="preserve">
-    <value>Size</value>
-  </data>
-  <data name="&gt;&gt;labelSize.Name" xml:space="preserve">
-    <value>labelSize</value>
-  </data>
-  <data name="&gt;&gt;labelSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;labelSize.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="comboBoxSize.Items" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="comboBoxSize.Items1" xml:space="preserve">
-    <value>5.5</value>
-  </data>
-  <data name="comboBoxSize.Items2" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="comboBoxSize.Items3" xml:space="preserve">
-    <value>6.5</value>
-  </data>
-  <data name="comboBoxSize.Items4" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="comboBoxSize.Items5" xml:space="preserve">
-    <value>7.5</value>
-  </data>
-  <data name="comboBoxSize.Items6" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="comboBoxSize.Items7" xml:space="preserve">
-    <value>8.5</value>
-  </data>
-  <data name="comboBoxSize.Items8" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="comboBoxSize.Items9" xml:space="preserve">
-    <value>9.5</value>
-  </data>
-  <data name="comboBoxSize.Items10" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="comboBoxSize.Items11" xml:space="preserve">
-    <value>10.5</value>
-  </data>
-  <data name="comboBoxSize.Items12" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="comboBoxSize.Items13" xml:space="preserve">
-    <value>11.5</value>
-  </data>
-  <data name="comboBoxSize.Items14" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="comboBoxSize.Items15" xml:space="preserve">
-    <value>12.5</value>
-  </data>
-  <data name="comboBoxSize.Items16" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="comboBoxSize.Items17" xml:space="preserve">
-    <value>13.5</value>
-  </data>
-  <data name="comboBoxSize.Items18" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="comboBoxSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 111</value>
-  </data>
-  <data name="comboBoxSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 24</value>
-  </data>
-  <data name="comboBoxSize.TabIndex" type="System.Int32, mscorlib">
-    <value>70</value>
-  </data>
-  <data name="&gt;&gt;comboBoxSize.Name" xml:space="preserve">
-    <value>comboBoxSize</value>
-  </data>
-  <data name="&gt;&gt;comboBoxSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBoxSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;comboBoxSize.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="txtBoxSerialNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 113</value>
-  </data>
-  <data name="txtBoxSerialNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="txtBoxSerialNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 22</value>
-  </data>
-  <data name="txtBoxSerialNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>69</value>
-  </data>
-  <data name="&gt;&gt;txtBoxSerialNumber.Name" xml:space="preserve">
-    <value>txtBoxSerialNumber</value>
-  </data>
-  <data name="&gt;&gt;txtBoxSerialNumber.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtBoxSerialNumber.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;txtBoxSerialNumber.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="LableSerialNumber.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="LableSerialNumber.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 11.25pt, style=Bold</value>
-  </data>
-  <data name="LableSerialNumber.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LableSerialNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 85</value>
-  </data>
-  <data name="LableSerialNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="LableSerialNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 24</value>
-  </data>
-  <data name="LableSerialNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>68</value>
-  </data>
-  <data name="LableSerialNumber.Text" xml:space="preserve">
-    <value>Serial Number</value>
-  </data>
-  <data name="&gt;&gt;LableSerialNumber.Name" xml:space="preserve">
-    <value>LableSerialNumber</value>
-  </data>
-  <data name="&gt;&gt;LableSerialNumber.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LableSerialNumber.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LableSerialNumber.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
   <data name="CloseButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAPAAAADwCAYAAAA+VemSAAAABGdBTUEAALGPC/xhBQAAPPJJREFUeF7t
@@ -1355,6 +815,555 @@
   <data name="&gt;&gt;CloseButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="NewBootTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="NewBootTxt.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="NewBootTxt.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14.25pt, style=Bold</value>
+  </data>
+  <data name="NewBootTxt.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="NewBootTxt.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="NewBootTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="NewBootTxt.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="NewBootTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 29</value>
+  </data>
+  <data name="NewBootTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="NewBootTxt.Text" xml:space="preserve">
+    <value>New Boots</value>
+  </data>
+  <data name="NewBootTxt.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;NewBootTxt.Name" xml:space="preserve">
+    <value>NewBootTxt</value>
+  </data>
+  <data name="&gt;&gt;NewBootTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NewBootTxt.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;NewBootTxt.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelMaterial.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelMaterial.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 11.25pt, style=Bold</value>
+  </data>
+  <data name="labelMaterial.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelMaterial.Location" type="System.Drawing.Point, System.Drawing">
+    <value>152, 143</value>
+  </data>
+  <data name="labelMaterial.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="labelMaterial.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 24</value>
+  </data>
+  <data name="labelMaterial.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="labelMaterial.Text" xml:space="preserve">
+    <value>Material</value>
+  </data>
+  <data name="&gt;&gt;labelMaterial.Name" xml:space="preserve">
+    <value>labelMaterial</value>
+  </data>
+  <data name="&gt;&gt;labelMaterial.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelMaterial.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelMaterial.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="comboBoxMaterial.Items" xml:space="preserve">
+    <value>Rubber</value>
+  </data>
+  <data name="comboBoxMaterial.Items1" xml:space="preserve">
+    <value>Leather</value>
+  </data>
+  <data name="comboBoxMaterial.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 170</value>
+  </data>
+  <data name="comboBoxMaterial.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
+  </data>
+  <data name="comboBoxMaterial.TabIndex" type="System.Int32, mscorlib">
+    <value>76</value>
+  </data>
+  <data name="&gt;&gt;comboBoxMaterial.Name" xml:space="preserve">
+    <value>comboBoxMaterial</value>
+  </data>
+  <data name="&gt;&gt;comboBoxMaterial.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxMaterial.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxMaterial.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="LableBrand.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LableBrand.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 11.25pt, style=Bold</value>
+  </data>
+  <data name="LableBrand.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LableBrand.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 143</value>
+  </data>
+  <data name="LableBrand.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LableBrand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 24</value>
+  </data>
+  <data name="LableBrand.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
+  <data name="LableBrand.Text" xml:space="preserve">
+    <value>Brand</value>
+  </data>
+  <data name="&gt;&gt;LableBrand.Name" xml:space="preserve">
+    <value>LableBrand</value>
+  </data>
+  <data name="&gt;&gt;LableBrand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LableBrand.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LableBrand.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="comboBoxBrand.Items" xml:space="preserve">
+    <value>Croydon</value>
+  </data>
+  <data name="comboBoxBrand.Items1" xml:space="preserve">
+    <value>Saber</value>
+  </data>
+  <data name="comboBoxBrand.Items2" xml:space="preserve">
+    <value>Black Diamond</value>
+  </data>
+  <data name="comboBoxBrand.Items3" xml:space="preserve">
+    <value>Stc</value>
+  </data>
+  <data name="comboBoxBrand.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 170</value>
+  </data>
+  <data name="comboBoxBrand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 24</value>
+  </data>
+  <data name="comboBoxBrand.TabIndex" type="System.Int32, mscorlib">
+    <value>72</value>
+  </data>
+  <data name="&gt;&gt;comboBoxBrand.Name" xml:space="preserve">
+    <value>comboBoxBrand</value>
+  </data>
+  <data name="&gt;&gt;comboBoxBrand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxBrand.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxBrand.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="labelSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelSize.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 11.25pt, style=Bold</value>
+  </data>
+  <data name="labelSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>276, 84</value>
+  </data>
+  <data name="labelSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="labelSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 24</value>
+  </data>
+  <data name="labelSize.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
+  </data>
+  <data name="labelSize.Text" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="&gt;&gt;labelSize.Name" xml:space="preserve">
+    <value>labelSize</value>
+  </data>
+  <data name="&gt;&gt;labelSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelSize.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="comboBoxSize.Items" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="comboBoxSize.Items1" xml:space="preserve">
+    <value>5.5</value>
+  </data>
+  <data name="comboBoxSize.Items2" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="comboBoxSize.Items3" xml:space="preserve">
+    <value>6.5</value>
+  </data>
+  <data name="comboBoxSize.Items4" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="comboBoxSize.Items5" xml:space="preserve">
+    <value>7.5</value>
+  </data>
+  <data name="comboBoxSize.Items6" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="comboBoxSize.Items7" xml:space="preserve">
+    <value>8.5</value>
+  </data>
+  <data name="comboBoxSize.Items8" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="comboBoxSize.Items9" xml:space="preserve">
+    <value>9.5</value>
+  </data>
+  <data name="comboBoxSize.Items10" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="comboBoxSize.Items11" xml:space="preserve">
+    <value>10.5</value>
+  </data>
+  <data name="comboBoxSize.Items12" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="comboBoxSize.Items13" xml:space="preserve">
+    <value>11.5</value>
+  </data>
+  <data name="comboBoxSize.Items14" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="comboBoxSize.Items15" xml:space="preserve">
+    <value>12.5</value>
+  </data>
+  <data name="comboBoxSize.Items16" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="comboBoxSize.Items17" xml:space="preserve">
+    <value>13.5</value>
+  </data>
+  <data name="comboBoxSize.Items18" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="comboBoxSize.Items19" xml:space="preserve">
+    <value>14.5</value>
+  </data>
+  <data name="comboBoxSize.Items20" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="comboBoxSize.Items21" xml:space="preserve">
+    <value>15.5</value>
+  </data>
+  <data name="comboBoxSize.Items22" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="comboBoxSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>280, 111</value>
+  </data>
+  <data name="comboBoxSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 24</value>
+  </data>
+  <data name="comboBoxSize.TabIndex" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSize.Name" xml:space="preserve">
+    <value>comboBoxSize</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSize.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="txtBoxSerialNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 113</value>
+  </data>
+  <data name="txtBoxSerialNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txtBoxSerialNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="txtBoxSerialNumber.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <data name="&gt;&gt;txtBoxSerialNumber.Name" xml:space="preserve">
+    <value>txtBoxSerialNumber</value>
+  </data>
+  <data name="&gt;&gt;txtBoxSerialNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtBoxSerialNumber.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtBoxSerialNumber.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="LableSerialNumber.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LableSerialNumber.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 11.25pt, style=Bold</value>
+  </data>
+  <data name="LableSerialNumber.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LableSerialNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 85</value>
+  </data>
+  <data name="LableSerialNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="LableSerialNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 24</value>
+  </data>
+  <data name="LableSerialNumber.TabIndex" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <data name="LableSerialNumber.Text" xml:space="preserve">
+    <value>Serial Number</value>
+  </data>
+  <data name="&gt;&gt;LableSerialNumber.Name" xml:space="preserve">
+    <value>LableSerialNumber</value>
+  </data>
+  <data name="&gt;&gt;LableSerialNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LableSerialNumber.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LableSerialNumber.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="labelUsedNew.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelUsedNew.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 11.25pt, style=Bold</value>
+  </data>
+  <data name="labelUsedNew.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelUsedNew.Location" type="System.Drawing.Point, System.Drawing">
+    <value>276, 143</value>
+  </data>
+  <data name="labelUsedNew.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="labelUsedNew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 24</value>
+  </data>
+  <data name="labelUsedNew.TabIndex" type="System.Int32, mscorlib">
+    <value>83</value>
+  </data>
+  <data name="labelUsedNew.Text" xml:space="preserve">
+    <value>Used Or New</value>
+  </data>
+  <data name="&gt;&gt;labelUsedNew.Name" xml:space="preserve">
+    <value>labelUsedNew</value>
+  </data>
+  <data name="&gt;&gt;labelUsedNew.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelUsedNew.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelUsedNew.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="comboBoxUsedNew.Items" xml:space="preserve">
+    <value>Used</value>
+  </data>
+  <data name="comboBoxUsedNew.Items1" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="comboBoxUsedNew.Location" type="System.Drawing.Point, System.Drawing">
+    <value>280, 170</value>
+  </data>
+  <data name="comboBoxUsedNew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 24</value>
+  </data>
+  <data name="comboBoxUsedNew.TabIndex" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUsedNew.Name" xml:space="preserve">
+    <value>comboBoxUsedNew</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUsedNew.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUsedNew.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUsedNew.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="labelManufactureDate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelManufactureDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 11.25pt, style=Bold</value>
+  </data>
+  <data name="labelManufactureDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>505, 117</value>
+  </data>
+  <data name="labelManufactureDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="labelManufactureDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 24</value>
+  </data>
+  <data name="labelManufactureDate.TabIndex" type="System.Int32, mscorlib">
+    <value>85</value>
+  </data>
+  <data name="labelManufactureDate.Text" xml:space="preserve">
+    <value>Manufacture Date</value>
+  </data>
+  <data name="&gt;&gt;labelManufactureDate.Name" xml:space="preserve">
+    <value>labelManufactureDate</value>
+  </data>
+  <data name="&gt;&gt;labelManufactureDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelManufactureDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelManufactureDate.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="dateTimePickerManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>464, 144</value>
+  </data>
+  <data name="dateTimePickerManufactureDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 22</value>
+  </data>
+  <data name="dateTimePickerManufactureDate.TabIndex" type="System.Int32, mscorlib">
+    <value>84</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerManufactureDate.Name" xml:space="preserve">
+    <value>dateTimePickerManufactureDate</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerManufactureDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerManufactureDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerManufactureDate.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="button1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 9.75pt, style=Bold</value>
+  </data>
+  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>246, 217</value>
+  </data>
+  <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 53</value>
+  </data>
+  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+    <value>86</value>
+  </data>
+  <data name="button1.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="&gt;&gt;button1.Name" xml:space="preserve">
+    <value>button1</value>
+  </data>
+  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ClearButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 9.75pt, style=Bold</value>
+  </data>
+  <data name="ClearButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ClearButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>370, 217</value>
+  </data>
+  <data name="ClearButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="ClearButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 53</value>
+  </data>
+  <data name="ClearButton.TabIndex" type="System.Int32, mscorlib">
+    <value>87</value>
+  </data>
+  <data name="ClearButton.Text" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="&gt;&gt;ClearButton.Name" xml:space="preserve">
+    <value>ClearButton</value>
+  </data>
+  <data name="&gt;&gt;ClearButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ClearButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ClearButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1363,9 +1372,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>755, 283</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

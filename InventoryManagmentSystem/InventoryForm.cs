@@ -23,6 +23,11 @@ namespace InventoryManagmentSystem
         SqlCommand cm = new SqlCommand();
         //Creatinng Reader
         SqlDataReader dr;
+
+        //Used for query
+        string CurrTable = "";
+        string FinalColumn = "";
+        string Sizes = "";
         #endregion SQL_Variables
 
         public InventoryForm()
@@ -31,59 +36,67 @@ namespace InventoryManagmentSystem
             LoadInventory();
         }
 
+        private string QueryItems()
+        {
+            CurrTable = "tb" + comboBoxItem.Text;
+            if(comboBoxItem.SelectedIndex == 0)
+            {
+                FinalColumn = ", Color";
+                Sizes = "";
+            }
+            else if (comboBoxItem.SelectedIndex == 3)
+            {
+                FinalColumn = ", Material";
+                Sizes = " Size,";
+            }
+            else
+            {
+                FinalColumn = "";
+                Sizes = " Size,";
+            }
+            return ("SELECT ItemType, Brand, SerialNumber,"+ Sizes + " ManufactureDate, UsedNew " + FinalColumn + ",Location" + " FROM " + CurrTable +
+                     " WHERE Location='Fire-Tec'");
+        }
+
+        /// <summary>
+        /// loads different tables
+        /// </summary>
         public void LoadInventory()
         {
             if (comboBoxItem.SelectedIndex != -1)
             {
+                dataGridInv.Columns["ManufactureDate"].DefaultCellStyle.Format = "d";
                 int i = 0;
                 dataGridInv.Rows.Clear();
-                //Check which item was selected 1 = helmets 2 = jackets 3 = pants 4 = boots 0 = nothing
+                cm = new SqlCommand(QueryItems(), con);
+                con.Open();
+                dr = cm.ExecuteReader();
+
+                //Check which item was selected
                 if (comboBoxItem.SelectedIndex == 0)
                 {
-                    cm = new SqlCommand("SELECT * FROM tbHelmets", con);
-                    con.Open();
-                    dr = cm.ExecuteReader();
-
                     while (dr.Read())
                     {
                         i++;
-                        dataGridInv.Rows.Add(i, dr[9].ToString(), dr[1].ToString(), dr[5].ToString(), dr[2].ToString(), dr[3].ToString(), dr[6].ToString(), dr[4].ToString());
+                        dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), "NA", dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString());
                     }
                 }
-                else if (comboBoxItem.SelectedIndex == 1)
+                else if(comboBoxItem.SelectedIndex == 3)
                 {
-                    cm = new SqlCommand("SELECT * FROM tbJackets", con);
-                    con.Open();
-                    dr = cm.ExecuteReader();
                     while (dr.Read())
                     {
                         i++;
-                        dataGridInv.Rows.Add(i, dr[1].ToString(), dr[2].ToString(), dr[4].ToString(), dr[3].ToString(), dr[8].ToString(), dr[5].ToString(), "NA");
+                        dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], dr[6].ToString(), dr[7].ToString());
                     }
                 }
-                else if (comboBoxItem.SelectedIndex == 2)
+                else if (comboBoxItem.SelectedIndex == 1 || comboBoxItem.SelectedIndex == 2)
                 {
-                    cm = new SqlCommand("SELECT * FROM tbPants", con);
-                    con.Open();
-                    dr = cm.ExecuteReader();
                     while (dr.Read())
                     {
                         i++;
-                        dataGridInv.Rows.Add(i, dr[1].ToString(), dr[2].ToString(), dr[4].ToString(), dr[3].ToString(), dr[8].ToString(), dr[5].ToString(), "NA");
+                        dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], "NA", dr[6].ToString());
                     }
                 }
-                else if (comboBoxItem.SelectedIndex == 3)
-                {
-                    cm = new SqlCommand("SELECT * FROM tbBoots", con);
-                    con.Open();
-                    dr = cm.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        i++;
-                        dataGridInv.Rows.Add(i, dr[7].ToString(), dr[1].ToString(), dr[3].ToString(), dr[2].ToString(), dr[9].ToString(), dr[4].ToString(), dr[6].ToString());
-                    }
-                }
-
                 dr.Close();
                 con.Close();
             }
@@ -92,6 +105,14 @@ namespace InventoryManagmentSystem
         private void comboBoxItem_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadInventory();
+        }
+
+
+        private void UsersButton_Click_1(object sender, EventArgs e)
+        {
+                NewItemModuleForm ModForm = new NewItemModuleForm(true);
+                ModForm.ShowDialog();
+                LoadInventory();
         }
     }
 }

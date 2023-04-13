@@ -36,20 +36,21 @@
             this.ItemLable = new System.Windows.Forms.Label();
             this.comboBoxItem = new System.Windows.Forms.ComboBox();
             this.dataGridInv = new System.Windows.Forms.DataGridView();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.DepartmentsTxt = new System.Windows.Forms.Label();
+            this.panelBottom = new System.Windows.Forms.Panel();
+            this.labelInv = new System.Windows.Forms.Label();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Model = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ManufactureDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UsedNew = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColorMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
-            this.flowLayoutPanel2.SuspendLayout();
+            this.panelBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,10 +67,11 @@
             // 
             // ItemLable
             // 
+            this.ItemLable.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.ItemLable.AutoSize = true;
             this.ItemLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ItemLable.ForeColor = System.Drawing.SystemColors.Control;
-            this.ItemLable.Location = new System.Drawing.Point(3, 10);
+            this.ItemLable.Location = new System.Drawing.Point(3, 11);
             this.ItemLable.Margin = new System.Windows.Forms.Padding(3, 10, 0, 0);
             this.ItemLable.Name = "ItemLable";
             this.ItemLable.Size = new System.Drawing.Size(55, 25);
@@ -78,6 +80,9 @@
             // 
             // comboBoxItem
             // 
+            this.comboBoxItem.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxItem.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxItem.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxItem.FormattingEnabled = true;
             this.comboBoxItem.Items.AddRange(new object[] {
             "Helmets",
@@ -93,6 +98,7 @@
             // 
             // dataGridInv
             // 
+            this.dataGridInv.AllowUserToAddRows = false;
             this.dataGridInv.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridInv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -107,12 +113,13 @@
             this.dataGridInv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Num,
             this.Type,
+            this.Brand,
             this.Serial,
             this.Size,
-            this.Brand,
-            this.Model,
             this.ManufactureDate,
-            this.ColorMaterial});
+            this.UsedNew,
+            this.ColorMaterial,
+            this.Location});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -123,9 +130,10 @@
             this.dataGridInv.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridInv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridInv.EnableHeadersVisualStyles = false;
-            this.dataGridInv.GridColor = System.Drawing.SystemColors.Control;
+            this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridInv.Location = new System.Drawing.Point(0, 39);
             this.dataGridInv.Name = "dataGridInv";
+            this.dataGridInv.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.MidnightBlue;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -137,49 +145,51 @@
             this.dataGridInv.RowHeadersVisible = false;
             this.dataGridInv.RowHeadersWidth = 51;
             this.dataGridInv.RowTemplate.Height = 24;
+            this.dataGridInv.RowTemplate.ReadOnly = true;
+            this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridInv.Size = new System.Drawing.Size(1034, 450);
             this.dataGridInv.TabIndex = 1;
             // 
-            // flowLayoutPanel2
+            // panelBottom
             // 
-            this.flowLayoutPanel2.BackColor = System.Drawing.Color.MidnightBlue;
-            this.flowLayoutPanel2.Controls.Add(this.DepartmentsTxt);
-            this.flowLayoutPanel2.Controls.Add(this.UsersButton);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 429);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(1034, 60);
-            this.flowLayoutPanel2.TabIndex = 4;
+            this.panelBottom.BackColor = System.Drawing.Color.MidnightBlue;
+            this.panelBottom.Controls.Add(this.UsersButton);
+            this.panelBottom.Controls.Add(this.labelInv);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 436);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(1034, 53);
+            this.panelBottom.TabIndex = 6;
             // 
-            // DepartmentsTxt
+            // labelInv
             // 
-            this.DepartmentsTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DepartmentsTxt.AutoSize = true;
-            this.DepartmentsTxt.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DepartmentsTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.DepartmentsTxt.Location = new System.Drawing.Point(3, 15);
-            this.DepartmentsTxt.Margin = new System.Windows.Forms.Padding(3, 15, 3, 0);
-            this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(213, 35);
-            this.DepartmentsTxt.TabIndex = 14;
-            this.DepartmentsTxt.Text = "Manage Inventory";
-            this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelInv.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelInv.AutoSize = true;
+            this.labelInv.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelInv.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelInv.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelInv.Location = new System.Drawing.Point(12, 15);
+            this.labelInv.Margin = new System.Windows.Forms.Padding(3, 15, 3, 0);
+            this.labelInv.Name = "labelInv";
+            this.labelInv.Size = new System.Drawing.Size(213, 29);
+            this.labelInv.TabIndex = 15;
+            this.labelInv.Text = "Manage Inventory";
+            this.labelInv.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // UsersButton
             // 
+            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
             this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
             this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
-            this.UsersButton.Location = new System.Drawing.Point(969, 15);
+            this.UsersButton.Location = new System.Drawing.Point(950, 15);
             this.UsersButton.Margin = new System.Windows.Forms.Padding(750, 15, 3, 3);
             this.UsersButton.Name = "UsersButton";
-            this.UsersButton.Size = new System.Drawing.Size(31, 32);
+            this.UsersButton.Size = new System.Drawing.Size(51, 26);
             this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.UsersButton.TabIndex = 16;
+            this.UsersButton.TabIndex = 17;
             this.UsersButton.TabStop = false;
+            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click_1);
             // 
             // Num
             // 
@@ -188,6 +198,7 @@
             this.Num.HeaderText = "#";
             this.Num.MinimumWidth = 6;
             this.Num.Name = "Num";
+            this.Num.ReadOnly = true;
             // 
             // Type
             // 
@@ -196,6 +207,15 @@
             this.Type.HeaderText = "Item";
             this.Type.MinimumWidth = 6;
             this.Type.Name = "Type";
+            this.Type.ReadOnly = true;
+            // 
+            // Brand
+            // 
+            this.Brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Brand.HeaderText = "Brand";
+            this.Brand.MinimumWidth = 6;
+            this.Brand.Name = "Brand";
+            this.Brand.ReadOnly = true;
             // 
             // Serial
             // 
@@ -203,6 +223,7 @@
             this.Serial.HeaderText = "Serial #";
             this.Serial.MinimumWidth = 6;
             this.Serial.Name = "Serial";
+            this.Serial.ReadOnly = true;
             // 
             // Size
             // 
@@ -211,28 +232,25 @@
             this.Size.HeaderText = "Size";
             this.Size.MinimumWidth = 6;
             this.Size.Name = "Size";
-            // 
-            // Brand
-            // 
-            this.Brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Brand.HeaderText = "Brand";
-            this.Brand.MinimumWidth = 6;
-            this.Brand.Name = "Brand";
-            // 
-            // Model
-            // 
-            this.Model.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Model.HeaderText = "Model";
-            this.Model.MinimumWidth = 6;
-            this.Model.Name = "Model";
+            this.Size.ReadOnly = true;
             // 
             // ManufactureDate
             // 
             this.ManufactureDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ManufactureDate.FillWeight = 120F;
-            this.ManufactureDate.HeaderText = "ManufactureDate";
+            this.ManufactureDate.HeaderText = "MFD";
             this.ManufactureDate.MinimumWidth = 6;
             this.ManufactureDate.Name = "ManufactureDate";
+            this.ManufactureDate.ReadOnly = true;
+            // 
+            // UsedNew
+            // 
+            this.UsedNew.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.UsedNew.FillWeight = 50F;
+            this.UsedNew.HeaderText = "Used";
+            this.UsedNew.MinimumWidth = 6;
+            this.UsedNew.Name = "UsedNew";
+            this.UsedNew.ReadOnly = true;
             // 
             // ColorMaterial
             // 
@@ -241,13 +259,22 @@
             this.ColorMaterial.HeaderText = "Color / Material";
             this.ColorMaterial.MinimumWidth = 6;
             this.ColorMaterial.Name = "ColorMaterial";
+            this.ColorMaterial.ReadOnly = true;
+            // 
+            // Location
+            // 
+            this.Location.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Location.HeaderText = "Location";
+            this.Location.MinimumWidth = 6;
+            this.Location.Name = "Location";
+            this.Location.ReadOnly = true;
             // 
             // InventoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 489);
-            this.Controls.Add(this.flowLayoutPanel2);
+            this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.dataGridInv);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -256,8 +283,8 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
+            this.panelBottom.ResumeLayout(false);
+            this.panelBottom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             this.ResumeLayout(false);
 
@@ -266,19 +293,20 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.DataGridView dataGridInv;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Label DepartmentsTxt;
-        private CustomButton UsersButton;
         private System.Windows.Forms.Label ItemLable;
         private System.Windows.Forms.ComboBox comboBoxItem;
+        private System.Windows.Forms.DataGridView dataGridInv;
+        private System.Windows.Forms.Panel panelBottom;
+        private CustomButton UsersButton;
+        private System.Windows.Forms.Label labelInv;
         private System.Windows.Forms.DataGridViewTextBoxColumn Num;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Brand;
         private System.Windows.Forms.DataGridViewTextBoxColumn Serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn Size;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Brand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Model;
         private System.Windows.Forms.DataGridViewTextBoxColumn ManufactureDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UsedNew;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorMaterial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Location;
     }
 }

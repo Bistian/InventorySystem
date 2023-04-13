@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BottomPanel = new System.Windows.Forms.Panel();
+            this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.UserTxt = new System.Windows.Forms.Label();
             this.dataGridUser = new System.Windows.Forms.DataGridView();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,12 +45,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.searchBar = new System.Windows.Forms.TextBox();
             this.customButton1 = new InventoryManagmentSystem.CustomButton();
-            this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.BottomPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUser)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customButton1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             this.SuspendLayout();
             // 
             // BottomPanel
@@ -62,6 +62,19 @@
             this.BottomPanel.Size = new System.Drawing.Size(1034, 53);
             this.BottomPanel.TabIndex = 0;
             // 
+            // UsersButton
+            // 
+            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
+            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
+            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
+            this.UsersButton.Location = new System.Drawing.Point(991, 9);
+            this.UsersButton.Name = "UsersButton";
+            this.UsersButton.Size = new System.Drawing.Size(31, 32);
+            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.UsersButton.TabIndex = 15;
+            this.UsersButton.TabStop = false;
+            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click);
+            // 
             // UserTxt
             // 
             this.UserTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -73,7 +86,7 @@
             this.UserTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.UserTxt.Location = new System.Drawing.Point(12, 14);
             this.UserTxt.Name = "UserTxt";
-            this.UserTxt.Size = new System.Drawing.Size(130, 24);
+            this.UserTxt.Size = new System.Drawing.Size(164, 29);
             this.UserTxt.TabIndex = 14;
             this.UserTxt.Text = "Manage Users";
             this.UserTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -83,14 +96,14 @@
             this.dataGridUser.AllowUserToAddRows = false;
             this.dataGridUser.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridUser.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridUser.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridUser.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridUser.ColumnHeadersHeight = 30;
             this.dataGridUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -104,6 +117,9 @@
             this.dataGridUser.EnableHeadersVisualStyles = false;
             this.dataGridUser.Location = new System.Drawing.Point(0, 0);
             this.dataGridUser.Name = "dataGridUser";
+            this.dataGridUser.ReadOnly = true;
+            this.dataGridUser.RowHeadersWidth = 51;
+            this.dataGridUser.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridUser.Size = new System.Drawing.Size(1034, 542);
             this.dataGridUser.TabIndex = 1;
             this.dataGridUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridUser_CellContentClick);
@@ -111,30 +127,38 @@
             // Column4
             // 
             this.Column4.HeaderText = "#";
+            this.Column4.MinimumWidth = 6;
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             this.Column4.Width = 25;
             // 
             // Column1
             // 
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column1.HeaderText = "User Name";
+            this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column1.Width = 97;
+            this.Column1.Width = 123;
             // 
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column2.HeaderText = "Password";
+            this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.Width = 88;
+            this.Column2.Width = 110;
             // 
             // Column3
             // 
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column3.HeaderText = "Full Name";
+            this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Edit
@@ -142,30 +166,32 @@
             this.Edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Edit.HeaderText = "";
             this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.MinimumWidth = 6;
             this.Edit.Name = "Edit";
+            this.Edit.ReadOnly = true;
             this.Edit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Edit.Width = 5;
+            this.Edit.Width = 6;
             // 
             // Delete
             // 
             this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Delete.HeaderText = "";
+            this.Delete.MinimumWidth = 6;
             this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
             this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Delete.Width = 5;
+            this.Delete.Width = 6;
             // 
             // DepartmentsTxt
             // 
-            this.DepartmentsTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DepartmentsTxt.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.DepartmentsTxt.AutoSize = true;
             this.DepartmentsTxt.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DepartmentsTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.DepartmentsTxt.Location = new System.Drawing.Point(12, 14);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(130, 24);
+            this.DepartmentsTxt.Size = new System.Drawing.Size(164, 29);
             this.DepartmentsTxt.TabIndex = 14;
             this.DepartmentsTxt.Text = "Manage Users";
             this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -185,25 +211,29 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label1.Location = new System.Drawing.Point(686, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 17);
+            this.label1.Size = new System.Drawing.Size(68, 20);
             this.label1.TabIndex = 19;
             this.label1.Text = "Search";
             // 
             // searchBar
             // 
+            this.searchBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.searchBar.Location = new System.Drawing.Point(764, 18);
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(208, 23);
+            this.searchBar.Size = new System.Drawing.Size(208, 26);
             this.searchBar.TabIndex = 18;
             this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged_1);
             // 
             // customButton1
             // 
+            this.customButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.customButton1.Image = ((System.Drawing.Image)(resources.GetObject("customButton1.Image")));
             this.customButton1.ImageHover = ((System.Drawing.Image)(resources.GetObject("customButton1.ImageHover")));
             this.customButton1.ImageNormal = ((System.Drawing.Image)(resources.GetObject("customButton1.ImageNormal")));
@@ -215,22 +245,9 @@
             this.customButton1.TabStop = false;
             this.customButton1.Click += new System.EventHandler(this.customButton1_Click);
             // 
-            // UsersButton
-            // 
-            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
-            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
-            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
-            this.UsersButton.Location = new System.Drawing.Point(991, 9);
-            this.UsersButton.Name = "UsersButton";
-            this.UsersButton.Size = new System.Drawing.Size(31, 32);
-            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.UsersButton.TabIndex = 15;
-            this.UsersButton.TabStop = false;
-            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click);
-            // 
             // UserForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 542);
             this.Controls.Add(this.panel1);
@@ -243,11 +260,11 @@
             this.Text = "UserForm";
             this.BottomPanel.ResumeLayout(false);
             this.BottomPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUser)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customButton1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -45,8 +45,8 @@
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.BottomPanel = new System.Windows.Forms.Panel();
-            this.searchBar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.searchBar = new System.Windows.Forms.TextBox();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDept)).BeginInit();
             this.BottomPanel.SuspendLayout();
@@ -55,16 +55,14 @@
             // 
             // DepartmentsTxt
             // 
-            this.DepartmentsTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DepartmentsTxt.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.DepartmentsTxt.AutoSize = true;
             this.DepartmentsTxt.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DepartmentsTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.DepartmentsTxt.Location = new System.Drawing.Point(12, 14);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(196, 24);
+            this.DepartmentsTxt.Size = new System.Drawing.Size(249, 29);
             this.DepartmentsTxt.TabIndex = 14;
             this.DepartmentsTxt.Text = "Manage Departments";
             this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -101,6 +99,8 @@
             this.dataGridDept.EnableHeadersVisualStyles = false;
             this.dataGridDept.Location = new System.Drawing.Point(0, 0);
             this.dataGridDept.Name = "dataGridDept";
+            this.dataGridDept.RowHeadersWidth = 51;
+            this.dataGridDept.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridDept.Size = new System.Drawing.Size(1034, 489);
             this.dataGridDept.TabIndex = 3;
             this.dataGridDept.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDept_CellContentClick);
@@ -108,6 +108,7 @@
             // Column0
             // 
             this.Column0.HeaderText = "#";
+            this.Column0.MinimumWidth = 6;
             this.Column0.Name = "Column0";
             this.Column0.Width = 25;
             // 
@@ -115,83 +116,94 @@
             // 
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column1.HeaderText = "Customer ID";
+            this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column1.Width = 105;
+            this.Column1.Width = 134;
             // 
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column2.HeaderText = "Department Name";
+            this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.Width = 141;
+            this.Column2.Width = 183;
             // 
             // Column3
             // 
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column3.HeaderText = "Contact Name";
+            this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
             this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column3.Width = 116;
+            this.Column3.Width = 149;
             // 
             // Column4
             // 
             this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column4.HeaderText = "Phone";
+            this.Column4.MinimumWidth = 6;
             this.Column4.Name = "Column4";
-            this.Column4.Width = 69;
+            this.Column4.Width = 87;
             // 
             // Column5
             // 
             this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column5.HeaderText = "Email";
+            this.Column5.MinimumWidth = 6;
             this.Column5.Name = "Column5";
             // 
             // Column6
             // 
             this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column6.HeaderText = "Address";
+            this.Column6.MinimumWidth = 6;
             this.Column6.Name = "Column6";
-            this.Column6.Width = 80;
+            this.Column6.Width = 99;
             // 
             // Column7
             // 
             this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column7.HeaderText = "City";
+            this.Column7.MinimumWidth = 6;
             this.Column7.Name = "Column7";
-            this.Column7.Width = 55;
+            this.Column7.Width = 68;
             // 
             // Column8
             // 
             this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column8.HeaderText = "State";
+            this.Column8.MinimumWidth = 6;
             this.Column8.Name = "Column8";
-            this.Column8.Width = 62;
+            this.Column8.Width = 79;
             // 
             // Column9
             // 
             this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column9.HeaderText = "Zip";
+            this.Column9.MinimumWidth = 6;
             this.Column9.Name = "Column9";
-            this.Column9.Width = 50;
+            this.Column9.Width = 62;
             // 
             // Edit
             // 
             this.Edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Edit.HeaderText = "";
             this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.MinimumWidth = 6;
             this.Edit.Name = "Edit";
             this.Edit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Edit.Width = 5;
+            this.Edit.Width = 6;
             // 
             // Delete
             // 
             this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Delete.HeaderText = "";
+            this.Delete.MinimumWidth = 6;
             this.Delete.Name = "Delete";
             this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Delete.Width = 5;
+            this.Delete.Width = 6;
             // 
             // BottomPanel
             // 
@@ -206,27 +218,30 @@
             this.BottomPanel.Size = new System.Drawing.Size(1034, 53);
             this.BottomPanel.TabIndex = 2;
             // 
-            // searchBar
-            // 
-            this.searchBar.Location = new System.Drawing.Point(766, 18);
-            this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(208, 20);
-            this.searchBar.TabIndex = 16;
-            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
-            // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label1.Location = new System.Drawing.Point(688, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 17);
+            this.label1.Size = new System.Drawing.Size(68, 20);
             this.label1.TabIndex = 17;
             this.label1.Text = "Search";
             // 
+            // searchBar
+            // 
+            this.searchBar.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.searchBar.Location = new System.Drawing.Point(766, 18);
+            this.searchBar.Name = "searchBar";
+            this.searchBar.Size = new System.Drawing.Size(208, 22);
+            this.searchBar.TabIndex = 16;
+            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
+            // 
             // UsersButton
             // 
+            this.UsersButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
             this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
             this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));

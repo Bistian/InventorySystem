@@ -38,26 +38,26 @@ namespace InventoryManagmentSystem
 
         private string QueryRented()
         {
-            return ("SELECT Type, Location, DueDate, SerialNumber FROM tbPants " +
+            return ("SELECT ItemType, Location, DueDate, SerialNumber FROM tbPants " +
                 "WHERE DueDate IS NOT NULL AND DueDate >= CONVERT(DATE, GETDATE()) " +
-                "UNION SELECT Type, Location, DueDate, SerialNumber FROM tbBoots " +
+                "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbBoots " +
                 "WHERE DueDate IS NOT NULL AND DueDate >= CONVERT(DATE, GETDATE()) " +
-                "UNION SELECT Type, Location, DueDate, SerialNumber FROM tbHelmets " +
+                "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbHelmets " +
                 "WHERE DueDate IS NOT NULL AND DueDate >= CONVERT(DATE, GETDATE()) " +
-                "UNION SELECT Type, Location, DueDate, SerialNumber FROM tbJackets " +
+                "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbJackets " +
                 "WHERE DueDate IS NOT NULL AND DueDate >= CONVERT(DATE, GETDATE()) " +
                 "ORDER BY DueDate");
         }
 
         private string QueryPastDue()
         {
-            return ("SELECT Type, Location, DueDate, SerialNumber FROM tbPants " +
+            return ("SELECT ItemType, Location, DueDate, SerialNumber FROM tbPants " +
                 "WHERE DueDate IS NOT NULL AND DueDate < CONVERT(DATE, GETDATE()) " +
-                "UNION SELECT Type, Location, DueDate, SerialNumber FROM tbBoots " +
+                "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbBoots " +
                 "WHERE DueDate IS NOT NULL AND DueDate < CONVERT(DATE, GETDATE()) " +
-                "UNION SELECT Type, Location, DueDate, SerialNumber FROM tbHelmets " +
+                "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbHelmets " +
                 "WHERE DueDate IS NOT NULL AND DueDate < CONVERT(DATE, GETDATE()) " +
-                "UNION SELECT Type, Location, DueDate, SerialNumber FROM tbJackets " +
+                "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbJackets " +
                 "WHERE DueDate IS NOT NULL AND DueDate < CONVERT(DATE, GETDATE()) " +
                 "ORDER BY DueDate");
         }
@@ -140,8 +140,8 @@ namespace InventoryManagmentSystem
                 row = dataGridRented.Rows[e.RowIndex];
             }
 
-            string rentee = row.Cells[2].Value.ToString();
 
+            string rentee = row.Cells[2].Value.ToString();
             // Check if there is at least one item with that name on the clints table.
             string query = (
                 "SELECT COUNT(*) FROM tbClients " +
@@ -160,6 +160,12 @@ namespace InventoryManagmentSystem
             // Show the details of the row in a new form or dialog
             DialogBoxClient dialogBoxClient = new DialogBoxClient(rentee);
             dialogBoxClient.ShowDialog();
+        }
+
+        private void ButtonNewRental_Click(object sender, EventArgs e)
+        {
+                NewRentalModuleForm ModForm = new NewRentalModuleForm();
+                ModForm.ShowDialog();
         }
     }
 
