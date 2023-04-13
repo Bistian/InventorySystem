@@ -32,7 +32,7 @@
             this.numericUpDownRow = new System.Windows.Forms.NumericUpDown();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelRow = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRow)).BeginInit();
             this.SuspendLayout();
@@ -93,16 +93,16 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // label1
+            // labelRow
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(224, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 15);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Row";
+            this.labelRow.AutoSize = true;
+            this.labelRow.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRow.ForeColor = System.Drawing.Color.White;
+            this.labelRow.Location = new System.Drawing.Point(224, 18);
+            this.labelRow.Name = "labelRow";
+            this.labelRow.Size = new System.Drawing.Size(35, 15);
+            this.labelRow.TabIndex = 4;
+            this.labelRow.Text = "Row";
             // 
             // label2
             // 
@@ -125,7 +125,7 @@
             this.ClientSize = new System.Drawing.Size(328, 85);
             this.ControlBox = false;
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelRow);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.numericUpDownRow);
@@ -147,7 +147,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDownRow;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelRow;
         private System.Windows.Forms.Label label2;
     }
 }

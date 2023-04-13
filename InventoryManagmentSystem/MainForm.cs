@@ -47,7 +47,7 @@ namespace InventoryManagmentSystem
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            openChildForm(new RentalForm());
+            openChildForm(new HomeForm());
         }
 
         private void DepatmensButton_Click(object sender, EventArgs e)
@@ -57,7 +57,7 @@ namespace InventoryManagmentSystem
 
         private void HomeButton_Click(object sender, EventArgs e)
         {
-            openChildForm(new RentalForm());
+            openChildForm(new HomeForm());
         }
 
         private void InventoryButton_Click(object sender, EventArgs e)

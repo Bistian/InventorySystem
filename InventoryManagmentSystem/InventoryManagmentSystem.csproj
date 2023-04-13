@@ -106,8 +106,14 @@
     <Compile Include="HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HomeForm.Designer.cs">
+    <Compile Include="HomeForm.designer.cs">
       <DependentUpon>HomeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NewRentalModuleForm.cs">
       <SubType>Form</SubType>
@@ -144,12 +150,6 @@
     </Compile>
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NewItemModuleForm.cs">
       <SubType>Form</SubType>
@@ -198,6 +198,9 @@
     <EmbeddedResource Include="HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NewRentalModuleForm.resx">
       <DependentUpon>NewRentalModuleForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -221,9 +224,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewItemModuleForm.resx">
       <DependentUpon>NewItemModuleForm.cs</DependentUpon>
