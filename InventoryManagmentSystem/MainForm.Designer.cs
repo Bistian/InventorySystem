@@ -43,6 +43,8 @@
             this.MyLogo = new System.Windows.Forms.PictureBox();
             this.BottomPanel = new System.Windows.Forms.Panel();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.btnExcelImport = new System.Windows.Forms.Button();
+            this.LabelExcel = new System.Windows.Forms.Label();
             this.TopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RentalButton)).BeginInit();
@@ -55,6 +57,8 @@
             // TopPanel
             // 
             this.TopPanel.BackColor = System.Drawing.Color.Maroon;
+            this.TopPanel.Controls.Add(this.LabelExcel);
+            this.TopPanel.Controls.Add(this.btnExcelImport);
             this.TopPanel.Controls.Add(this.RentalLable);
             this.TopPanel.Controls.Add(this.UsersButton);
             this.TopPanel.Controls.Add(this.RentalButton);
@@ -84,7 +88,7 @@
             this.RentalLable.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.RentalLable.Location = new System.Drawing.Point(216, 62);
             this.RentalLable.Name = "RentalLable";
-            this.RentalLable.Size = new System.Drawing.Size(96, 29);
+            this.RentalLable.Size = new System.Drawing.Size(76, 24);
             this.RentalLable.TabIndex = 13;
             this.RentalLable.Text = "Rentals";
             this.RentalLable.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -126,7 +130,7 @@
             this.UsersTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.UsersTxt.Location = new System.Drawing.Point(538, 63);
             this.UsersTxt.Name = "UsersTxt";
-            this.UsersTxt.Size = new System.Drawing.Size(73, 29);
+            this.UsersTxt.Size = new System.Drawing.Size(58, 24);
             this.UsersTxt.TabIndex = 15;
             this.UsersTxt.Text = "Users";
             this.UsersTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -142,7 +146,7 @@
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.DepartmentsTxt.Location = new System.Drawing.Point(431, 61);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(66, 29);
+            this.DepartmentsTxt.Size = new System.Drawing.Size(52, 24);
             this.DepartmentsTxt.TabIndex = 13;
             this.DepartmentsTxt.Text = "Dept";
             this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -158,7 +162,7 @@
             this.HomeTex.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.HomeTex.Location = new System.Drawing.Point(117, 62);
             this.HomeTex.Name = "HomeTex";
-            this.HomeTex.Size = new System.Drawing.Size(78, 29);
+            this.HomeTex.Size = new System.Drawing.Size(61, 24);
             this.HomeTex.TabIndex = 11;
             this.HomeTex.Text = "Home";
             this.HomeTex.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -187,7 +191,7 @@
             this.InventoryTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.InventoryTxt.Location = new System.Drawing.Point(336, 62);
             this.InventoryTxt.Name = "InventoryTxt";
-            this.InventoryTxt.Size = new System.Drawing.Size(47, 29);
+            this.InventoryTxt.Size = new System.Drawing.Size(37, 24);
             this.InventoryTxt.TabIndex = 9;
             this.InventoryTxt.Text = "Inv";
             this.InventoryTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -247,9 +251,35 @@
             this.MainPanel.Size = new System.Drawing.Size(1034, 542);
             this.MainPanel.TabIndex = 0;
             // 
+            // btnExcelImport
+            // 
+            this.btnExcelImport.Location = new System.Drawing.Point(651, 24);
+            this.btnExcelImport.Name = "btnExcelImport";
+            this.btnExcelImport.Size = new System.Drawing.Size(65, 38);
+            this.btnExcelImport.TabIndex = 16;
+            this.btnExcelImport.Text = "Import";
+            this.btnExcelImport.UseVisualStyleBackColor = true;
+            this.btnExcelImport.Click += new System.EventHandler(this.btnExcelImport_Click);
+            // 
+            // LabelExcel
+            // 
+            this.LabelExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LabelExcel.AutoSize = true;
+            this.LabelExcel.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelExcel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.LabelExcel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.LabelExcel.Location = new System.Drawing.Point(647, 61);
+            this.LabelExcel.Name = "LabelExcel";
+            this.LabelExcel.Size = new System.Drawing.Size(69, 24);
+            this.LabelExcel.TabIndex = 17;
+            this.LabelExcel.Text = "Import";
+            this.LabelExcel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 651);
             this.Controls.Add(this.MainPanel);
@@ -289,5 +319,7 @@
         private System.Windows.Forms.Label UsersTxt;
         private System.Windows.Forms.Label RentalLable;
         private CustomButton RentalButton;
+        private System.Windows.Forms.Label LabelExcel;
+        private System.Windows.Forms.Button btnExcelImport;
     }
 }

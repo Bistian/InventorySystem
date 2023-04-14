@@ -74,5 +74,10 @@ namespace InventoryManagmentSystem
         {
 
         }
+
+        private void btnExcelImport_Click(object sender, EventArgs e)
+        {
+            openChildForm(new ExcelImportForm());
+        }
     }
 }

@@ -133,6 +133,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ExcelUserPromptForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExcelUserPromptForm";
             this.Load += new System.EventHandler(this.ExcelUserPromptForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRow)).EndInit();

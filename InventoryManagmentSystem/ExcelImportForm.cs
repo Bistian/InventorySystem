@@ -6,10 +6,12 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
+using System.Linq;
 
 namespace InventoryManagmentSystem
 {
-    /*TODO: Delete columns if changing selected table.*/
+    /*TODO: (Manual) Delete columns if changing selected table.*/
     public partial class ExcelImportForm : Form
     {
         #region SQL_Variables
@@ -29,8 +31,12 @@ namespace InventoryManagmentSystem
         Excel.Worksheet worksheet = null;
         #endregion Excel_Variables
 
+        string tableColumnSerial = "";
+
+
         List<TextBox> listTextBox = new List<TextBox>();
-        List<string> listColumns = new List<string>();
+        List<string> listTableColumns = new List<string>();
+        List<string> listExcelColumns = new List<string>();
         string excelFileName = "";
         int headerRow = -1;
         int selectedWorksheet = 1;
@@ -45,6 +51,7 @@ namespace InventoryManagmentSystem
         {
             workbook.Close();
             excelApp.Quit();
+            CloseBackgroundExcel();
             con.Close();
         }
         private void ExcelImport_Load(object sender, EventArgs e)
@@ -139,9 +146,29 @@ namespace InventoryManagmentSystem
                 if(isManual == false)
                 {
                     headerRow = 2;
-                    FindColumnNames();
+                    FindExcelColumnNames();
+
+                    // Find the type to know which table to use.
                     Excel.Range cell = worksheet.Cells[3, 1];
                     string table = "tb" + cell.Value.ToString();
+
+                    // Find the names of all columns on the database table.
+                    string query = "SELECT COLUMN_NAME " +
+                        "FROM INFORMATION_SCHEMA.COLUMNS " +
+                        "WHERE TABLE_NAME = '" + table + "'" +
+                        "ORDER BY ORDINAL_POSITION";
+
+                    cm = new SqlCommand(query, con);
+                    con.Open();
+                    dr = cm.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        listTableColumns.Add(dr.GetString(0));
+                    }
+                    con.Close();
+
+                    tableColumnSerial = listTableColumns[3];
+
                     UpdateDatabaseStandard(table);
                 }
 
@@ -162,27 +189,48 @@ namespace InventoryManagmentSystem
 
             int rowNum = worksheet.UsedRange.Rows.Count;
             int colNum = worksheet.UsedRange.Columns.Count;
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = rowNum+1;
+            progressBar1.Value = 0;
+            progressBar1.Visible = true;
 
             // Loop through the rows in the worksheet and add them to the rows collection.
             for (int i = headerRow + 1; i <= worksheet.UsedRange.Rows.Count + 1; i++)
             {
                 object[] values = new object[colNum];
                 bool isDuplicate = false;
+                bool isNull = false;
                 for (int j = 1; j <= worksheet.UsedRange.Columns.Count; j++)
                 {
-                    values[j - 1] = worksheet.Cells[i, j].Value;
-                    if (j == 2)
+                    var v = worksheet.Cells[i, j].Value;
+
+                    // Making sure not to add empty rows.
+                    if((j == 1 || j == 2 || j == 3) && v == null)
                     {
-                        isDuplicate = CheckDuplicateSerialNumber(worksheet.Cells[i, j].Value, tableName);
+                        isNull = true;
+                        break;
                     }
+
+                    // Make sure this item is not duplicated.
+                    if (j == 3)
+                    {
+                        isDuplicate = CheckDuplicateSerialNumber(v.ToString(), tableName);
+                        if(isDuplicate) { break; }
+                    }
+
+                    values[j - 1] = v;
                 }
                 Console.WriteLine($"Cell({i}/{rowNum})");
+                progressBar1.Value = i;
 
-                if (!isDuplicate)
+                // Only add row if it does not have a duplicated serial number and initial columns are not null.
+                if (isDuplicate == false && !isNull == false)
                 {
                     rows.Add(values);
                 }
             }
+
+            progressBar1.Visible = false;
 
             // Convert the rows collection to a DataTable.
             DataTable dataTable = new DataTable();
@@ -200,11 +248,11 @@ namespace InventoryManagmentSystem
 
             string columns = "";
             string colValues = "";
-            for (int i = 0; i < listColumns.Count; ++i)
+            for (int i = 0; i < listExcelColumns.Count; ++i)
             {
-                columns += listColumns[i].ToString();
-                colValues += "@" + listColumns[i].ToString();
-                if (i < listColumns.Count - 1)
+                columns += listExcelColumns[i].ToString();
+                colValues += "@" + listExcelColumns[i].ToString();
+                if (i < listExcelColumns.Count - 1)
                 {
                     columns += ", ";
                     colValues += ", ";
@@ -265,14 +313,18 @@ namespace InventoryManagmentSystem
             ClearExcelVar();
         }
 
-        // Return false if serial number does not exist in the database.
+        /// <summary>
+        /// Try to find a match for the given serial number.
+        /// </summary>
+        /// <param name="serial">Serial number to be looked for.</param>
+        /// <param name="table">Table to look at.</param>
+        /// <returns>false if serial number does not exist in the given table.</returns>
         private bool CheckDuplicateSerialNumber(string serial, string table)
         {
             bool result = false;
-            string columnName = "SerialNumber";
             string query = "SELECT CASE\r\n" +
                 "WHEN EXISTS (SELECT 1 FROM " + table + " " +
-                "WHERE " + columnName + " = '" + serial + "')\r\n " +
+                "WHERE " + tableColumnSerial + " = '" + serial + "')\r\n " +
                 "THEN CAST(1 AS BIT)\r\n " +
                 "ELSE CAST(0 AS BIT)\r\n" +
                 "END";
@@ -291,19 +343,12 @@ namespace InventoryManagmentSystem
 
         #region Manula Import
 
-        /* Make a list with the name of all availabe column names.
-         * headerRow: Row in which the column names can be found.
-         */
-        private void FindColumnNames()
+        /// <summary>
+        /// Make a list with the name of all availabe Excel column names.
+        /// </summary>
+        private void FindExcelColumnNames()
         {
-            if (selectedWorksheet < 0 || headerRow < 1) { return; }
-
-            // Open the selected workbook
-            Excel.Workbook workbook = excelApp.Workbooks.Open(excelFileName);
-
-            // Get the first worksheet
-            Excel.Worksheet worksheet = workbook.Sheets[selectedWorksheet];
-            worksheet.Select();
+            if(worksheet == null || workbook == null) { return; }
 
             // Loop through the cells in the headerRow
             int col = 1;
@@ -314,7 +359,7 @@ namespace InventoryManagmentSystem
                     var v = (worksheet.Cells[headerRow, col] as Excel.Range).Value;
                     if(v == null) { break; }
 
-                    listColumns.Add(v.ToString());
+                    listExcelColumns.Add(v.ToString());
                     ++col;
                 }
                 catch(Exception ex)
@@ -332,14 +377,7 @@ namespace InventoryManagmentSystem
          */
         private int FindColumn(string columnName)
         {
-            if (selectedWorksheet < 0 || headerRow < 1) { return -2; }
-
-            // Open the selected workbook
-            Excel.Workbook workbook = excelApp.Workbooks.Open(excelFileName);
-
-            // Get the first worksheet
-            Excel.Worksheet worksheet = workbook.Sheets[1];
-            worksheet.Select();
+            if (worksheet == null || workbook == null) { return -2; }
 
             // Find the column by name
             Excel.Range columnRange = worksheet.Rows[headerRow].Find(columnName, Type.Missing,
@@ -391,7 +429,7 @@ namespace InventoryManagmentSystem
         // Select which table is going to be used.
         private void comboBoxTbSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FindColumnNames();
+            FindExcelColumnNames();
 
             switch(comboBoxTbSelect.SelectedItem.ToString())
             {
@@ -477,9 +515,9 @@ namespace InventoryManagmentSystem
                 comboBox.Name = "cb" + rows;
                 comboBox.Location = excelColumnPos;
                 comboBox.Size = new Size(boxWidth, boxHeight);
-                for (int i = 0; i < listColumns.Count; ++i)
+                for (int i = 0; i < listExcelColumns.Count; ++i)
                 {
-                    comboBox.Items.Add(listColumns[i]);
+                    comboBox.Items.Add(listExcelColumns[i]);
                 }
                 this.Controls.Add(comboBox);
                 ++rows;
@@ -527,46 +565,46 @@ namespace InventoryManagmentSystem
             return value; // Return as string by default
         }
 
-        // Clear variables related to Excel.
+        /// <summary>
+        /// Clear variables related to Excel.
+        /// </summary>
         private void ClearExcelVar()
         {
-            /*if(worksheet != null)
-            {
-                Marshal.ReleaseComObject(worksheet);
-                worksheet = null;
-            }
-            workbook.Close();
-            if (workbook != null)
-            {
-                Marshal.ReleaseComObject(workbook);
-                workbook = null;
-            }
-            excelApp.Quit();
-            if (excelApp != null)
-            {
-                Marshal.ReleaseComObject(excelApp);
-                excelApp = null;
-            }
-
-            GC.Collect();*/
-
-            /* This will kill ALL Excel programs, including the ones unrelated to this app.
-                workbook.Close();
-                excelApp.Quit();
-                System.Diagnostics.Process[] processes = System.Diagnostics.Process.GetProcessesByName("EXCEL");
-                foreach (System.Diagnostics.Process process in processes)
-                {
-                    process.Kill();
-                }
-            */
-
             workbook.Close();
             excelApp.Quit();
+            CloseBackgroundExcel();
+            worksheet = null;
+            workbook = null;
+            excelApp = null;
             con.Close();
-            listColumns.Clear();
+            listExcelColumns.Clear();
+            listTableColumns.Clear();
             headerRow = -1;
             selectedWorksheet = -1;
             comboBoxTbSelect.Enabled = false;
+        }
+
+        /// <summary>
+        /// Close Excel applications running on the background.
+        /// </summary>
+        private void CloseBackgroundExcel()
+        {
+            // Release the Excel object
+            Marshal.ReleaseComObject(excelApp);
+
+            // Force garbage collection
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            // Close the Excel process
+            Process[] processes = Process.GetProcessesByName("EXCEL");
+            foreach (Process process in processes)
+            {
+                if (string.IsNullOrEmpty(process.MainWindowTitle))
+                {
+                    process.Kill();
+                }
+            }
         }
 
         #endregion Helper

@@ -694,7 +694,7 @@
   <data name="RentalButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAPcAAADMCAYAAACvMTU9AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wgAADsIBFShKgAAAFwdJREFUeF7tnQtcVNW+x90zAz4ys2uGltXRMrt16pTH6lhoz9vD1FLBZ17LCh+I
+        wQAADsEBuJFr7QAAFwdJREFUeF7tnQtcVNW+x90zAz4ys2uGltXRMrt16pTH6lhoz9vD1FLBZ17LCh+I
         IIqC6ZkykFBJRgl5FQahgQSInFGiDpqmUqCmCFkgllnHynM/dSV7eOCs/ygnGtfM3mvPngeb3/fz+X5m
         bXTvWXtm/Wat/e4EAAAAAAAAAAAAAAAAAACgb8xms2nDhg0B8fGpN5tM/v9gfuvEb8zmtUMyMzOvsFgs
         nc8vAgDgS1Cok5M3X/fMrOpRksFwlv2pRamSZPiX0ej3Q1JSwUBaDvsbAMC7tEifHPu6/8T/rRxjMPj/
@@ -929,7 +929,7 @@
   <data name="RentalButton.ImageNormal" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAPcAAADMCAYAAACvMTU9AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wgAADsIBFShKgAAAFwdJREFUeF7tnQtcVNW+x90zAz4ys2uGltXRMrt16pTH6lhoz9vD1FLBZ17LCh+I
+        wQAADsEBuJFr7QAAFwdJREFUeF7tnQtcVNW+x90zAz4ys2uGltXRMrt16pTH6lhoz9vD1FLBZ17LCh+I
         IIqC6ZkykFBJRgl5FQahgQSInFGiDpqmUqCmCFkgllnHynM/dSV7eOCs/ygnGtfM3mvPngeb3/fz+X5m
         bXTvWXtm/Wat/e4EAAAAAAAAAAAAAAAAAACgb8xms2nDhg0B8fGpN5tM/v9gfuvEb8zmtUMyMzOvsFgs
         nc8vAgDgS1Cok5M3X/fMrOpRksFwlv2pRamSZPiX0ej3Q1JSwUBaDvsbAMC7tEifHPu6/8T/rRxjMPj/
