@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewRentalModuleForm));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.TxtCustomerInfo = new System.Windows.Forms.Label();
             this.labelAcademy = new System.Windows.Forms.Label();
             this.comboBoxAcademy = new System.Windows.Forms.ComboBox();
@@ -50,6 +49,7 @@
             this.labelRep = new System.Windows.Forms.Label();
             this.ClearButton = new System.Windows.Forms.Button();
             this.ButtonContinue = new System.Windows.Forms.Button();
+            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
@@ -64,20 +64,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(534, 67);
             this.panel1.TabIndex = 0;
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
-            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
-            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(485, 13);
-            this.CloseButton.Margin = new System.Windows.Forms.Padding(4);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(36, 42);
-            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CloseButton.TabIndex = 69;
-            this.CloseButton.TabStop = false;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // TxtCustomerInfo
             // 
@@ -117,21 +103,21 @@
             "Ocala",
             "Coral Springs",
             "Pasco Hernando ",
-            "PALM BEACH",
-            "MIAMI DADE",
-            "EASTERN",
-            "MONROE",
-            "BRAXTON",
-            "BARRY",
-            "CITRUS",
-            "SUNCOAST",
-            "DAYTONA",
-            "RIDGE",
-            "GATEWAY",
-            "APARICIO LEVY",
-            "RESOLVE MARITIME",
-            "SOUTH FL STATE (AVON PARK)",
-            "NORTHWEST"});
+            "Palm Beach",
+            "Miami Dade",
+            "Eastern",
+            "Monroe",
+            "Braxton",
+            "Barry",
+            "Citrus",
+            "SunCoast",
+            "Daytona",
+            "Ridge",
+            "Gateway",
+            "Aparicio Levy",
+            "Resolve Maritime",
+            "S FL State (Avon Park)",
+            "Northwest"});
             this.comboBoxAcademy.Location = new System.Drawing.Point(28, 129);
             this.comboBoxAcademy.Name = "comboBoxAcademy";
             this.comboBoxAcademy.Size = new System.Drawing.Size(123, 24);
@@ -303,6 +289,20 @@
             this.ButtonContinue.UseVisualStyleBackColor = false;
             this.ButtonContinue.Click += new System.EventHandler(this.ButtonContinue_Click);
             // 
+            // CloseButton
+            // 
+            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
+            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
+            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
+            this.CloseButton.Location = new System.Drawing.Point(485, 13);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(4);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(36, 42);
+            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CloseButton.TabIndex = 69;
+            this.CloseButton.TabStop = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
             // NewRentalModuleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -343,7 +343,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label TxtCustomerInfo;
         private System.Windows.Forms.Label labelAcademy;
         private System.Windows.Forms.ComboBox comboBoxAcademy;
         private System.Windows.Forms.Label labelDayNight;
@@ -363,5 +362,6 @@
         private CustomButton CloseButton;
         public System.Windows.Forms.Button ClearButton;
         public System.Windows.Forms.Button ButtonContinue;
+        public System.Windows.Forms.Label TxtCustomerInfo;
     }
 }

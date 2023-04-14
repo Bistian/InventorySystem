@@ -99,6 +99,7 @@
             this.dataGridDept.EnableHeadersVisualStyles = false;
             this.dataGridDept.Location = new System.Drawing.Point(0, 0);
             this.dataGridDept.Name = "dataGridDept";
+            this.dataGridDept.RowHeadersVisible = false;
             this.dataGridDept.RowHeadersWidth = 51;
             this.dataGridDept.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridDept.Size = new System.Drawing.Size(1034, 489);

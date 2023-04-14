@@ -85,11 +85,23 @@
     <Compile Include="DialogBoxClient.Designer.cs">
       <DependentUpon>DialogBoxClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExistingCustomerModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExistingCustomerModuleForm.Designer.cs">
+      <DependentUpon>ExistingCustomerModuleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HomeForm.Designer.cs">
       <DependentUpon>HomeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewOrExistingCustomerModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewOrExistingCustomerModuleForm.Designer.cs">
+      <DependentUpon>NewOrExistingCustomerModuleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NewRentalModuleForm.cs">
       <SubType>Form</SubType>
@@ -153,6 +165,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetSelectionModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetSelectionModuleForm.Designer.cs">
+      <DependentUpon>SetSelectionModuleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,8 +195,14 @@
     <EmbeddedResource Include="DialogBoxClient.resx">
       <DependentUpon>DialogBoxClient.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ExistingCustomerModuleForm.resx">
+      <DependentUpon>ExistingCustomerModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewOrExistingCustomerModuleForm.resx">
+      <DependentUpon>NewOrExistingCustomerModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewRentalModuleForm.resx">
       <DependentUpon>NewRentalModuleForm.cs</DependentUpon>
@@ -219,6 +243,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SetSelectionModuleForm.resx">
+      <DependentUpon>SetSelectionModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>
     </EmbeddedResource>
