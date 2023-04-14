@@ -28,6 +28,7 @@ namespace InventoryManagmentSystem
 
         //Makes date red if it is less than this number.
         int daysForWarning = 14;
+        int setSelection = 0;
 
         public RentalForm()
         {
@@ -164,7 +165,7 @@ namespace InventoryManagmentSystem
 
         private void ButtonNewRental_Click(object sender, EventArgs e)
         {
-                NewRentalModuleForm ModForm = new NewRentalModuleForm();
+                NewOrExistingCustomerModuleForm ModForm = new NewOrExistingCustomerModuleForm();
                 ModForm.ShowDialog();
         }
     }

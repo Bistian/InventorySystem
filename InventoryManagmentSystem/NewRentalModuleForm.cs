@@ -24,9 +24,12 @@ namespace InventoryManagmentSystem
         bool isNewItem;
         #endregion SQL_Variables
 
+        public bool ExistingUser = false;
+
         public NewRentalModuleForm()
         {
             InitializeComponent();
+
         }
 
         private bool CheckIfExists(string tableName, string SerialNumber)
@@ -107,6 +110,40 @@ namespace InventoryManagmentSystem
             }
         }
 
+        public void DisableLicense()
+        {
+            txtBoxDriversLicense.Enabled = false;
+            txtBoxDriversLicense.BackColor = SystemColors.Control;
+        }
+
+        public void UpdateClient()
+        {
+            try
+            {
+                if (MessageBox.Show("Are you sure you want to update this Client?", "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    cm = new SqlCommand("UPDATE tbClients SET Name = @Name,Phone = @Phone,Email = @Email,Academy = @Academy,DayNight = @DayNight,DriversLicenseNumber = @DriversLicenseNumber,Address = @Address,FireTecRepresentative = @FireTecRepresentative WHERE DriversLicenseNumber LIKE " + txtBoxDriversLicense.Text, con);
+                    cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
+                    cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
+                    cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
+                    cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
+                    cm.Parameters.AddWithValue("@DayNight", comboDayNight.Text);
+                    cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
+                    cm.Parameters.AddWithValue("@Address", txtBoxAddress.Text);
+                    cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Client has been successfully updated");
+                    this.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
 
         private void ButtonContinue_Click(object sender, EventArgs e)
         {
@@ -119,12 +156,23 @@ namespace InventoryManagmentSystem
          !string.IsNullOrEmpty(comboBoxAcademy.Text) &&
          !string.IsNullOrEmpty(comboBoxAcademy.Text))
             {
-                SaveClient();
+                if(ExistingUser == false)
+                {
+                 SaveClient();
+                }
+                else
+                {
+                    UpdateClient();
+                    ExistingUser = false;
+                }
             }
             else
             {
                 MessageBox.Show("Please fill the required fields");
             }
+            SetSelectionModuleForm ModForm = new SetSelectionModuleForm();
+            this.Dispose();
+            ModForm.ShowDialog();
         }
     }
 }
