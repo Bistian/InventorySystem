@@ -55,7 +55,7 @@ namespace InventoryManagmentSystem
                 Sizes = " Size,";
             }
             return ("SELECT ItemType, Brand, SerialNumber,"+ Sizes + " ManufactureDate, UsedNew " + FinalColumn + ",Location" + " FROM " + CurrTable +
-                     " WHERE Location='Fire-Tec'");
+                     " WHERE Location='Fire-Tec' OR Location='FIRETEC' OR Location='FIRE TEC'");
         }
 
         /// <summary>
