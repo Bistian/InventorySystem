@@ -102,9 +102,9 @@
             // 
             this.progressBar1.BackColor = System.Drawing.Color.ForestGreen;
             this.progressBar1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.progressBar1.Location = new System.Drawing.Point(13, 73);
+            this.progressBar1.Location = new System.Drawing.Point(12, 73);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(119, 10);
+            this.progressBar1.Size = new System.Drawing.Size(121, 10);
             this.progressBar1.TabIndex = 5;
             this.progressBar1.Visible = false;
             // 

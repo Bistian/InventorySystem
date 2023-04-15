@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.TopPanel = new System.Windows.Forms.Panel();
+            this.LabelExcel = new System.Windows.Forms.Label();
+            this.btnExcelImport = new System.Windows.Forms.Button();
             this.RentalLable = new System.Windows.Forms.Label();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.RentalButton = new InventoryManagmentSystem.CustomButton();
@@ -43,8 +45,6 @@
             this.MyLogo = new System.Windows.Forms.PictureBox();
             this.BottomPanel = new System.Windows.Forms.Panel();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.btnExcelImport = new System.Windows.Forms.Button();
-            this.LabelExcel = new System.Windows.Forms.Label();
             this.TopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RentalButton)).BeginInit();
@@ -76,6 +76,32 @@
             this.TopPanel.Name = "TopPanel";
             this.TopPanel.Size = new System.Drawing.Size(1034, 90);
             this.TopPanel.TabIndex = 0;
+            // 
+            // LabelExcel
+            // 
+            this.LabelExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LabelExcel.AutoSize = true;
+            this.LabelExcel.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelExcel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.LabelExcel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.LabelExcel.Location = new System.Drawing.Point(647, 61);
+            this.LabelExcel.Name = "LabelExcel";
+            this.LabelExcel.Size = new System.Drawing.Size(69, 24);
+            this.LabelExcel.TabIndex = 17;
+            this.LabelExcel.Text = "Import";
+            this.LabelExcel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // btnExcelImport
+            // 
+            this.btnExcelImport.Location = new System.Drawing.Point(651, 24);
+            this.btnExcelImport.Name = "btnExcelImport";
+            this.btnExcelImport.Size = new System.Drawing.Size(65, 38);
+            this.btnExcelImport.TabIndex = 16;
+            this.btnExcelImport.Text = "Import";
+            this.btnExcelImport.UseVisualStyleBackColor = true;
+            this.btnExcelImport.Click += new System.EventHandler(this.btnExcelImport_Click);
             // 
             // RentalLable
             // 
@@ -250,32 +276,6 @@
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(1034, 542);
             this.MainPanel.TabIndex = 0;
-            // 
-            // btnExcelImport
-            // 
-            this.btnExcelImport.Location = new System.Drawing.Point(651, 24);
-            this.btnExcelImport.Name = "btnExcelImport";
-            this.btnExcelImport.Size = new System.Drawing.Size(65, 38);
-            this.btnExcelImport.TabIndex = 16;
-            this.btnExcelImport.Text = "Import";
-            this.btnExcelImport.UseVisualStyleBackColor = true;
-            this.btnExcelImport.Click += new System.EventHandler(this.btnExcelImport_Click);
-            // 
-            // LabelExcel
-            // 
-            this.LabelExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.LabelExcel.AutoSize = true;
-            this.LabelExcel.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelExcel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.LabelExcel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.LabelExcel.Location = new System.Drawing.Point(647, 61);
-            this.LabelExcel.Name = "LabelExcel";
-            this.LabelExcel.Size = new System.Drawing.Size(69, 24);
-            this.LabelExcel.TabIndex = 17;
-            this.LabelExcel.Text = "Import";
-            this.LabelExcel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // MainForm
             // 

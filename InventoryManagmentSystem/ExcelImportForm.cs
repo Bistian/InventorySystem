@@ -224,7 +224,7 @@ namespace InventoryManagmentSystem
                 progressBar1.Value = i;
 
                 // Only add row if it does not have a duplicated serial number and initial columns are not null.
-                if (isDuplicate == false && !isNull == false)
+                if (isDuplicate == false && isNull == false)
                 {
                     rows.Add(values);
                 }
@@ -250,7 +250,7 @@ namespace InventoryManagmentSystem
             string colValues = "";
             for (int i = 0; i < listExcelColumns.Count; ++i)
             {
-                columns += listExcelColumns[i].ToString();
+                columns += listTableColumns[i+1].ToString();
                 colValues += "@" + listExcelColumns[i].ToString();
                 if (i < listExcelColumns.Count - 1)
                 {
@@ -260,11 +260,13 @@ namespace InventoryManagmentSystem
             }
 
             con.Open();
-            try
+            // Insert rows from Excel into the database table.
+            string query = "INSERT INTO " + tableName +
+                " (" + columns + ") VALUES (" + colValues + ")";
+
+            foreach (DataRow row in dataTable.Rows)
             {
-                string query = "INSERT INTO " + tableName +
-                    " (" + columns + ") VALUES (" + colValues + ")";
-                foreach (DataRow row in dataTable.Rows)
+                try
                 {
                     cm = new SqlCommand(query, con);
                     for (int i = 0; i < dataTable.Columns.Count; ++i)
@@ -272,6 +274,7 @@ namespace InventoryManagmentSystem
                         object value = row[i];
                         SqlDbType dbType = SqlDbType.VarChar;
 
+                        // Find out the data type of this cell.
                         if (value != null && value != DBNull.Value)
                         {
                             Type valueType = value.GetType();
@@ -305,10 +308,11 @@ namespace InventoryManagmentSystem
 
                     cm.ExecuteNonQuery();
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                    
             }
             ClearExcelVar();
         }

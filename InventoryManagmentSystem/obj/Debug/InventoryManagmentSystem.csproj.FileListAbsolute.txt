@@ -106,3 +106,6 @@ C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\bin\Debug\Inventory
 C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\bin\Debug\InventoryManagmentSystem.exe
 C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\bin\Debug\InventoryManagmentSystem.pdb
 C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.HomeForm.resources
+C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.NewOrExistingCustomerModuleForm.resources
+C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.SetSelectionModuleForm.resources
+C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ExistingCustomerModuleForm.resources

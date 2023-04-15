@@ -120,10 +120,9 @@
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Green;
+            this.BackColor = System.Drawing.Color.DarkGreen;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(328, 85);
-            this.ControlBox = false;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.labelRow);
             this.Controls.Add(this.btnCancel);
@@ -131,6 +130,7 @@
             this.Controls.Add(this.numericUpDownRow);
             this.Controls.Add(this.comboBoxColumns);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ExcelUserPromptForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
