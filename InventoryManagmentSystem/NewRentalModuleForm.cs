@@ -25,6 +25,8 @@ namespace InventoryManagmentSystem
         #endregion SQL_Variables
 
         public bool ExistingUser = false;
+        public string currentUser = "";
+        string license = "";
 
         public NewRentalModuleForm()
         {
@@ -51,7 +53,6 @@ namespace InventoryManagmentSystem
             txtBoxCustomerName.Clear();
             txtBoxPhone.Clear();
             txtBoxEmail.Clear();
-            txtBoxDriversLicense.Clear();
             txtBoxAddress.Clear();
             txtBoxRep.Clear();
             comboBoxAcademy.SelectedIndex = -1;
@@ -136,6 +137,10 @@ namespace InventoryManagmentSystem
                     con.Close();
                     MessageBox.Show("Client has been successfully updated");
                     this.Dispose();
+                    ExistingUser = false;
+                    SetSelectionModuleForm ModForm = new SetSelectionModuleForm(currentUser, license);
+                    this.Dispose();
+                    ModForm.ShowDialog();
                 }
             }
             catch (Exception ex)
@@ -156,23 +161,24 @@ namespace InventoryManagmentSystem
          !string.IsNullOrEmpty(comboBoxAcademy.Text) &&
          !string.IsNullOrEmpty(comboBoxAcademy.Text))
             {
+                currentUser = txtBoxCustomerName.Text;
+                license = txtBoxDriversLicense.Text;
                 if(ExistingUser == false)
                 {
                  SaveClient();
+                    SetSelectionModuleForm ModForm = new SetSelectionModuleForm(currentUser, license);
+                    this.Dispose();
+                    ModForm.ShowDialog();
                 }
                 else
                 {
                     UpdateClient();
-                    ExistingUser = false;
                 }
             }
             else
             {
                 MessageBox.Show("Please fill the required fields");
             }
-            SetSelectionModuleForm ModForm = new SetSelectionModuleForm();
-            this.Dispose();
-            ModForm.ShowDialog();
         }
     }
 }
