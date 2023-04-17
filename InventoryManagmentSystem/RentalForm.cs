@@ -150,6 +150,8 @@ namespace InventoryManagmentSystem
                 "SELECT COUNT(*) FROM tbClients " +
                 "WHERE Name ='" + rentee + "'");
 
+            //string q = "SELECT Name FROM tbClients WHERE DriversLicenseNumber = rentee";
+
             cm = new SqlCommand(query, con);
             con.Open();
             

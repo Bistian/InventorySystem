@@ -104,6 +104,8 @@ namespace InventoryManagmentSystem
 
         private void comboBoxItem_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Reset search bar.
+            searchBar.Text = "";
             LoadInventory();
         }
 
@@ -113,6 +115,59 @@ namespace InventoryManagmentSystem
                 NewItemModuleForm ModForm = new NewItemModuleForm(true);
                 ModForm.ShowDialog();
                 LoadInventory();
+        }
+
+        private void searchBar_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = searchBar.Text;
+            if (string.IsNullOrEmpty(searchTerm)) 
+            { 
+                LoadInventory();
+                return;
+            }
+
+            //SQL
+            int i = 0;
+            dataGridInv.Rows.Clear();
+
+            string query = "SELECT * FROM tb" + comboBoxItem.Text;
+
+            // TODO: Fix after standard database.
+            
+            if(comboBoxItem.Text == "Helmets")
+            {
+                query += " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
+                    " UsedNew LIKE '%" + searchTerm + "%') AND" +
+                    " LOCATION = 'FIRETEC'";
+            }
+            else
+            {
+                query += " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
+                    " UsedNew LIKE '%" + searchTerm + "%' OR" +
+                    " SIZE LIKE '%" + searchTerm + "%') AND" +
+                    " LOCATION = 'FIRETEC'";
+            }
+
+            cm = new SqlCommand(query, con);
+            con.Open();
+            dr = cm.ExecuteReader();
+
+            while (dr.Read())
+            {
+                i++;
+                dataGridInv.Rows.Add(i, 
+                    dr[1].ToString(),
+                    dr[2].ToString(),
+                    dr[3].ToString(),
+                    dr[4].ToString(),
+                    dr[5].ToString(),
+                    dr[6].ToString(),
+                    dr[7].ToString(),
+                    dr[8].ToString());
+            }
+
+            dr.Close();
+            con.Close();
         }
     }
 }
