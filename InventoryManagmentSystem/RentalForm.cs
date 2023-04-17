@@ -63,11 +63,12 @@ namespace InventoryManagmentSystem
                 "ORDER BY DueDate");
         }
 
-        /* Render the tables.
-         * grid: which table you are going to render.
-         * query: SQL code for the table.
-         * columnName: name of the column as it is in Edit Columns.
-        */
+        /// <summary>
+        /// Render the tables.
+        /// </summary>
+        /// <param name="grid">Which table you are going to render.</param>
+        /// <param name="query">SQL code for the table.</param>
+        /// <param name="columnName">Name of the column as it is in Edit Columns.</param>
         private void LoadTables(DataGridView grid, string query, string columnName)
         {
             // Change the styling for the date column.
@@ -118,10 +119,11 @@ namespace InventoryManagmentSystem
             ClientPopUp(e, true);
         }
 
-        /* Makes the pop up window with the client's information.
-         * e: is the event from the click.
-         * isPastDue: a flag checking if the function is working with the rented table or the past due.
-         */
+        /// <summary>
+        /// Makes the pop up window with the client's information.
+        /// </summary>
+        /// <param name="e">Event from the click.</param>
+        /// <param name="isPastDue">Flag checking if the function is working with the rented table or the past due.</param>
         private void ClientPopUp(DataGridViewCellEventArgs e, bool isPastDue)
         {
             // Check if the clicked cell is in a row
@@ -147,6 +149,8 @@ namespace InventoryManagmentSystem
             string query = (
                 "SELECT COUNT(*) FROM tbClients " +
                 "WHERE Name ='" + rentee + "'");
+
+            //string q = "SELECT Name FROM tbClients WHERE DriversLicenseNumber = rentee";
 
             cm = new SqlCommand(query, con);
             con.Open();

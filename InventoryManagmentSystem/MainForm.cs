@@ -55,24 +55,24 @@ namespace InventoryManagmentSystem
             openChildForm(new DepartmentForm());
         }
 
-        private void HomeButton_Click(object sender, EventArgs e)
-        {
-            openChildForm(new HomeForm());
-        }
-
         private void InventoryButton_Click(object sender, EventArgs e)
         {
             openChildForm(new InventoryForm());
         }
 
-        public void RentalButton_Click(object sender, EventArgs e)
+        private void btnSettings_Click(object sender, EventArgs e)
         {
-            openChildForm(new RentalForm());
+            openChildForm(new ExcelImportForm());
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void HomeButton_Click(object sender, EventArgs e)
         {
+            openChildForm(new HomeForm());
+        }
 
+        private void RentalButton_Click(object sender, EventArgs e)
+        {
+            openChildForm(new RentalForm());
         }
     }
 }

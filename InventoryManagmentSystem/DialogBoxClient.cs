@@ -35,20 +35,20 @@ namespace InventoryManagmentSystem
         private string QueryItems()
         {
             //return ("SELECT Type, DueDate, SerialNumber FROM tbBoots WHERE Location='Client1'");
-            return ("SELECT Type, DueDate, SerialNumber FROM tbPants " +
+            return ("SELECT ItemType, DueDate, SerialNumber FROM tbPants " +
                 "WHERE Location='" + client + "' " +
-                "UNION SELECT Type, DueDate, SerialNumber FROM tbBoots " +
+                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbBoots " +
                 "WHERE Location='" + client + "' " +
-                "UNION SELECT Type, DueDate, SerialNumber FROM tbHelmets " +
+                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbHelmets " +
                 "WHERE Location='" + client + "' " +
-                "UNION SELECT Type, DueDate, SerialNumber FROM tbJackets " +
+                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbJackets " +
                 "WHERE Location='" + client + "' " +
                 "ORDER BY DueDate");
         }
 
         private string QueryClient()
         {
-            return ("SELECT phone, email FROM tbClients WHERE Name='" + client + "'");
+            return ("SELECT Phone, Email, Academy, DayNight FROM tbClients WHERE Name='" + client + "'");
         }
 
         private void DialogBoxClient_Load(object sender, EventArgs e)
@@ -69,6 +69,8 @@ namespace InventoryManagmentSystem
                 textClient.Text = client;
                 textPhone.Text = dr[0].ToString();
                 textEmail.Text = dr[1].ToString();
+                textAcademy.Text = dr[2].ToString();
+                textDayNight.Text = dr[3].ToString();
             }
 
             dr.Close();
