@@ -145,6 +145,7 @@
             this.textBoxJacket.Name = "textBoxJacket";
             this.textBoxJacket.Size = new System.Drawing.Size(197, 26);
             this.textBoxJacket.TabIndex = 28;
+            this.textBoxJacket.TextChanged += new System.EventHandler(this.textBoxJacket_TextChanged);
             // 
             // textBoxPants
             // 
@@ -152,6 +153,7 @@
             this.textBoxPants.Name = "textBoxPants";
             this.textBoxPants.Size = new System.Drawing.Size(197, 26);
             this.textBoxPants.TabIndex = 29;
+            this.textBoxPants.TextChanged += new System.EventHandler(this.textBoxPants_TextChanged);
             // 
             // textBoxBoots
             // 
@@ -159,6 +161,7 @@
             this.textBoxBoots.Name = "textBoxBoots";
             this.textBoxBoots.Size = new System.Drawing.Size(197, 26);
             this.textBoxBoots.TabIndex = 30;
+            this.textBoxBoots.TextChanged += new System.EventHandler(this.textBoxBoots_TextChanged);
             // 
             // lableHelmet
             // 
@@ -286,7 +289,7 @@
             this.dataGridInv.RowTemplate.Height = 24;
             this.dataGridInv.RowTemplate.ReadOnly = true;
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridInv.Size = new System.Drawing.Size(1003, 376);
+            this.dataGridInv.Size = new System.Drawing.Size(1003, 347);
             this.dataGridInv.TabIndex = 39;
             this.dataGridInv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellContentClick);
             // 
@@ -362,6 +365,7 @@
             // 
             // dataGridViewClient
             // 
+            this.dataGridViewClient.AllowUserToAddRows = false;
             this.dataGridViewClient.AllowUserToDeleteRows = false;
             this.dataGridViewClient.AllowUserToResizeRows = false;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
@@ -394,7 +398,6 @@
             this.dataGridViewClient.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewClient.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridViewClient.EnableHeadersVisualStyles = false;
-            this.dataGridViewClient.GridColor = System.Drawing.SystemColors.Window;
             this.dataGridViewClient.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dataGridViewClient.Location = new System.Drawing.Point(279, 483);
             this.dataGridViewClient.Margin = new System.Windows.Forms.Padding(4, 5, 4, 15);
@@ -457,8 +460,8 @@
             // 
             this.panelTitle.BackColor = System.Drawing.Color.Maroon;
             this.panelTitle.Controls.Add(this.labelClientName);
-            this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitle.Location = new System.Drawing.Point(279, 456);
+            this.panelTitle.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelTitle.Location = new System.Drawing.Point(279, 451);
             this.panelTitle.Name = "panelTitle";
             this.panelTitle.Size = new System.Drawing.Size(1003, 32);
             this.panelTitle.TabIndex = 41;
