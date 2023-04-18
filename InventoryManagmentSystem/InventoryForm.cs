@@ -40,14 +40,14 @@ namespace InventoryManagmentSystem
         {
             CurrTable = "tb" + comboBoxItem.Text;
 
+            string firetec = "Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'";
             string specificWhere = "";
             if(comboBoxItem.SelectedIndex == 0) // Helmets
             {
                 FinalColumn = ", Color";
                 Sizes = "";
                 specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
-                    " UsedNew LIKE '%" + searchTerm + "%') AND" +
-                    " LOCATION = 'FIRETEC'";
+                    " UsedNew LIKE '%" + searchTerm + "%') AND " + firetec;
             }
             else if (comboBoxItem.SelectedIndex == 3) // Boots
             {
@@ -55,8 +55,7 @@ namespace InventoryManagmentSystem
                 Sizes = " Size,";
                 specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
                     " UsedNew LIKE '%" + searchTerm + "%' OR" +
-                    " SIZE LIKE '%" + searchTerm + "%') AND" +
-                    " LOCATION = 'FIRETEC'";
+                    " SIZE LIKE '%" + searchTerm + "%') AND " + firetec;
             }
             else // Pants && Jackets
             {
@@ -64,8 +63,7 @@ namespace InventoryManagmentSystem
                 Sizes = " Size,";
                 specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
                     " UsedNew LIKE '%" + searchTerm + "%' OR" +
-                    " SIZE LIKE '%" + searchTerm + "%') AND" +
-                    " LOCATION = 'FIRETEC'";
+                    " SIZE LIKE '%" + searchTerm + "%') AND " + firetec;
             }
 
             string query = "SELECT ItemType, " +
@@ -76,9 +74,7 @@ namespace InventoryManagmentSystem
 
             if (!isSearch)
             {
-                return (query + " WHERE Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'");
-                /*return ("SELECT ItemType, Brand, SerialNumber,"+ Sizes + " ManufactureDate, UsedNew " + FinalColumn + ",Location" + " FROM " + CurrTable +
-                         " WHERE Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'");*/
+                return (query + " WHERE " + firetec);
             }
 
             return (query + specificWhere);
