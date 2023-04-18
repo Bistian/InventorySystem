@@ -36,26 +36,52 @@ namespace InventoryManagmentSystem
             LoadInventory();
         }
 
-        private string QueryItems()
+        private string QueryItems(bool isSearch=false, string searchTerm="")
         {
             CurrTable = "tb" + comboBoxItem.Text;
-            if(comboBoxItem.SelectedIndex == 0)
+
+            string specificWhere = "";
+            if(comboBoxItem.SelectedIndex == 0) // Helmets
             {
                 FinalColumn = ", Color";
                 Sizes = "";
+                specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
+                    " UsedNew LIKE '%" + searchTerm + "%') AND" +
+                    " LOCATION = 'FIRETEC'";
             }
-            else if (comboBoxItem.SelectedIndex == 3)
+            else if (comboBoxItem.SelectedIndex == 3) // Boots
             {
                 FinalColumn = ", Material";
                 Sizes = " Size,";
+                specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
+                    " UsedNew LIKE '%" + searchTerm + "%' OR" +
+                    " SIZE LIKE '%" + searchTerm + "%') AND" +
+                    " LOCATION = 'FIRETEC'";
             }
-            else
+            else // Pants && Jackets
             {
                 FinalColumn = "";
                 Sizes = " Size,";
+                specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
+                    " UsedNew LIKE '%" + searchTerm + "%' OR" +
+                    " SIZE LIKE '%" + searchTerm + "%') AND" +
+                    " LOCATION = 'FIRETEC'";
             }
-            return ("SELECT ItemType, Brand, SerialNumber,"+ Sizes + " ManufactureDate, UsedNew " + FinalColumn + ",Location" + " FROM " + CurrTable +
-                     " WHERE Location='Fire-Tec' OR Location='FIRETEC' OR Location='FIRE TEC'");
+
+            string query = "SELECT ItemType, " +
+                "Brand, SerialNumber, " + 
+                Sizes + " ManufactureDate, " +
+                "UsedNew " + FinalColumn + 
+                ", Location" + " FROM " + CurrTable;
+
+            if (!isSearch)
+            {
+                return (query + " WHERE Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'");
+                /*return ("SELECT ItemType, Brand, SerialNumber,"+ Sizes + " ManufactureDate, UsedNew " + FinalColumn + ",Location" + " FROM " + CurrTable +
+                         " WHERE Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'");*/
+            }
+
+            return (query + specificWhere);
         }
 
         /// <summary>
@@ -130,23 +156,9 @@ namespace InventoryManagmentSystem
             int i = 0;
             dataGridInv.Rows.Clear();
 
-            string query = "SELECT * FROM tb" + comboBoxItem.Text;
-
-            // TODO: Fix after standard database.
+            string query = "";
             
-            if(comboBoxItem.Text == "Helmets")
-            {
-                query += " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
-                    " UsedNew LIKE '%" + searchTerm + "%') AND" +
-                    " LOCATION = 'FIRETEC'";
-            }
-            else
-            {
-                query += " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
-                    " UsedNew LIKE '%" + searchTerm + "%' OR" +
-                    " SIZE LIKE '%" + searchTerm + "%') AND" +
-                    " LOCATION = 'FIRETEC'";
-            }
+            query = QueryItems(true, searchTerm);
 
             cm = new SqlCommand(query, con);
             con.Open();
@@ -155,15 +167,43 @@ namespace InventoryManagmentSystem
             while (dr.Read())
             {
                 i++;
-                dataGridInv.Rows.Add(i, 
+                if (comboBoxItem.Text == "Helmets")
+                {
+                    dataGridInv.Rows.Add(i,
+                    dr[0].ToString(),
                     dr[1].ToString(),
                     dr[2].ToString(),
+                    "NA",
                     dr[3].ToString(),
                     dr[4].ToString(),
                     dr[5].ToString(),
-                    dr[6].ToString(),
-                    dr[7].ToString(),
-                    dr[8].ToString());
+                    dr[6].ToString());
+                }
+                else if(comboBoxItem.Text == "Boots")
+                {
+                    string s = dr[0].ToString();
+                    dataGridInv.Rows.Add(i,
+                        dr[0].ToString(),
+                        dr[1].ToString(),
+                        dr[2].ToString(),
+                        dr[3].ToString(),
+                        dr[4].ToString(),
+                        dr[5].ToString(),
+                        dr[6].ToString(),
+                        dr[7].ToString());
+                }
+                else // Pants && Jackets
+                {
+                    dataGridInv.Rows.Add(i,
+                        dr[0].ToString(),
+                        dr[1].ToString(),
+                        dr[2].ToString(),
+                        dr[3].ToString(),
+                        dr[4].ToString(),
+                        dr[5].ToString(),
+                        "NA",
+                        dr[6].ToString());
+                }
             }
 
             dr.Close();
