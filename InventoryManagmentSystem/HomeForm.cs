@@ -49,32 +49,40 @@ namespace InventoryManagmentSystem
 
         private string QueryWithin10Days()
         {
-            return ("SELECT ItemType, Location, DueDate, SerialNumber FROM tbPants " +
-                   "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE))" +
+            return ("SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbPants " +
+                   "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
+                   "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE)) " +
 
                    "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbBoots " +
+                   "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location " +
                    "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE)) " +
 
                    "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbHelmets " +
+                   "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location " +
                    "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE))  " +
 
                    "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbJackets " +
+                   "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location " +
                    "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE))  " +
                    "ORDER BY DueDate");
         }
 
         private string QueryOver30Days()
         {
-            return ("SELECT ItemType, Location, DueDate, SerialNumber FROM tbPants " +
+            return ("SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbPants " +
+                   "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
                    "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 30 " +
 
-                   "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbBoots " +
+                   "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbBoots " +
+                   "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location " +
                    "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 30 " +
 
-                   "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbHelmets " +
+                   "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbHelmets " +
+                   "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location " +
                    "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 30  " +
 
-                   "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbJackets " +
+                   "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbJackets " +
+                   "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location " +
                    "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 30  " +
                    "ORDER BY DueDate");
         }
@@ -104,7 +112,6 @@ namespace InventoryManagmentSystem
             con.Close();
         }
 
-
         private int CountTotalRented()
         {
             return CountRented("tbPants") + CountRented("tbJackets");
@@ -116,6 +123,7 @@ namespace InventoryManagmentSystem
             ButtonCurrentlyRentedJackets.Text = "Coats " + System.Environment.NewLine + CountRented("tbJackets");
             ButtonCurrentlyRented.Text = "Items Rented" + System.Environment.NewLine + CountTotalRented();
         }
+       
         private Form activeForm = null;
 
         private void OpenRented()
