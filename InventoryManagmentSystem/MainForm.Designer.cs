@@ -89,9 +89,9 @@
             this.LabelExcel.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelExcel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LabelExcel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.LabelExcel.Location = new System.Drawing.Point(20, 70);
+            this.LabelExcel.Location = new System.Drawing.Point(16, 70);
             this.LabelExcel.Name = "LabelExcel";
-            this.LabelExcel.Size = new System.Drawing.Size(69, 24);
+            this.LabelExcel.Size = new System.Drawing.Size(89, 29);
             this.LabelExcel.TabIndex = 17;
             this.LabelExcel.Text = "Import";
             this.LabelExcel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -116,9 +116,9 @@
             this.UsersTxt.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UsersTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.UsersTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.UsersTxt.Location = new System.Drawing.Point(18, 70);
+            this.UsersTxt.Location = new System.Drawing.Point(19, 70);
             this.UsersTxt.Name = "UsersTxt";
-            this.UsersTxt.Size = new System.Drawing.Size(58, 24);
+            this.UsersTxt.Size = new System.Drawing.Size(73, 29);
             this.UsersTxt.TabIndex = 15;
             this.UsersTxt.Text = "Users";
             this.UsersTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -131,7 +131,7 @@
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.DepartmentsTxt.Location = new System.Drawing.Point(24, 70);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(52, 24);
+            this.DepartmentsTxt.Size = new System.Drawing.Size(66, 29);
             this.DepartmentsTxt.TabIndex = 13;
             this.DepartmentsTxt.Text = "Dept";
             this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -158,7 +158,7 @@
             this.InventoryTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.InventoryTxt.Location = new System.Drawing.Point(31, 70);
             this.InventoryTxt.Name = "InventoryTxt";
-            this.InventoryTxt.Size = new System.Drawing.Size(37, 24);
+            this.InventoryTxt.Size = new System.Drawing.Size(47, 29);
             this.InventoryTxt.TabIndex = 9;
             this.InventoryTxt.Text = "Inv";
             this.InventoryTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -241,9 +241,9 @@
             this.label1.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label1.Location = new System.Drawing.Point(18, 70);
+            this.label1.Location = new System.Drawing.Point(20, 70);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 24);
+            this.label1.Size = new System.Drawing.Size(78, 29);
             this.label1.TabIndex = 14;
             this.label1.Text = "Home";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -292,9 +292,9 @@
             this.RentalLable.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RentalLable.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.RentalLable.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.RentalLable.Location = new System.Drawing.Point(18, 70);
+            this.RentalLable.Location = new System.Drawing.Point(12, 70);
             this.RentalLable.Name = "RentalLable";
-            this.RentalLable.Size = new System.Drawing.Size(76, 24);
+            this.RentalLable.Size = new System.Drawing.Size(96, 29);
             this.RentalLable.TabIndex = 13;
             this.RentalLable.Text = "Rentals";
             this.RentalLable.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -341,7 +341,7 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 651);
             this.Controls.Add(this.MainPanel);

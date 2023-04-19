@@ -30,14 +30,17 @@ namespace InventoryManagmentSystem
         string Sizes = "";
         #endregion SQL_Variables
 
+        public string DayNight;
         public string client;
         public string license;
         string firetec = "Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'";
 
-        public SetSelectionModuleForm(string client, string license)
+        public SetSelectionModuleForm(string client, string license, string DayNight)
         {
             this.client = client;
             this.license = license;
+            this.DayNight = DayNight;
+
             InitializeComponent();
             LoadClient();
             lableHelmet.Visible = false;
@@ -237,141 +240,165 @@ namespace InventoryManagmentSystem
         {
             if (MessageBox.Show("Are you sure you want to rent this item to " + client, "Rent", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Helmet")
+                if (DateTime.Today != DatepickerDue.Value.Date)
                 {
-                    textBoxHelmet.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                    cm = new SqlCommand("UPDATE tbHelmets SET location = @location WHERE SerialNumber LIKE " + textBoxHelmet.Text, con);
-                    cm.Parameters.AddWithValue("@location", license);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Rental has been successfully completed");
-                }
+                    if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Helmet")
+                    {
+                        textBoxHelmet.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                        cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE " + textBoxHelmet.Text, con);
+                        cm.Parameters.AddWithValue("@location", license);
+                        cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Rental has been successfully completed");
+                    }
 
 
-                else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Jacket")
-                {
-                    textBoxJacket.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                    cm = new SqlCommand("UPDATE tbJackets SET location = @location WHERE SerialNumber LIKE " + textBoxJacket.Text, con);
-                    cm.Parameters.AddWithValue("@location", license);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Rental has been successfully completed");
+                    if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Jacket")
+                    {
+                        textBoxJacket.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                        cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE " + textBoxJacket.Text, con);
+                        cm.Parameters.AddWithValue("@location", license);
+                        cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Rental has been successfully completed");
 
 
-                }
+                    }
 
-                else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Pants")
-                {
-                    textBoxPants.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                    cm = new SqlCommand("UPDATE tbPants SET location = @location WHERE SerialNumber LIKE " + textBoxPants.Text, con);
-                    cm.Parameters.AddWithValue("@location", license);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Rental has been successfully completed");
+                    if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Pants")
+                    {
+                        textBoxPants.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                        cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE " + textBoxPants.Text, con);
+                        cm.Parameters.AddWithValue("@location", license);
+                        cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Rental has been successfully completed");
 
-                }
+                    }
 
-                else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Boots")
-                {
-                    textBoxBoots.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                    cm = new SqlCommand("UPDATE tbBoots SET location = @location WHERE SerialNumber LIKE " + textBoxBoots.Text, con);
-                    cm.Parameters.AddWithValue("@location", license);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Rental has been successfully completed");
-
+                    if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Boots")
+                    {
+                        textBoxBoots.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                        cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE " + textBoxBoots.Text, con);
+                        cm.Parameters.AddWithValue("@location", license);
+                        cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Rental has been successfully completed");
+                    }
                     LoadClient();
+                    LoadInventory();
                 }
-                LoadInventory();
+                else
+                {
+                    MessageBox.Show("Please select a due date");
+                }
             }
         }
 
-            private void textBoxHelmet_TextChanged(object sender, EventArgs e)
+        private void textBoxHelmet_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = textBoxHelmet.Text;
+            if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
+
+            // SQL
+            int i = 0;
+            dataGridInv.Rows.Clear();
+            cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber,ManufactureDate, UsedNew, Color FROM tbHelmets WHERE (" + firetec + ") AND SerialNumber LIKE '%" + searchTerm + "%'", con);
+            con.Open();
+            dr = cm.ExecuteReader();
+
+            while (dr.Read())
             {
-                string searchTerm = textBoxHelmet.Text;
-                if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
-
-                // SQL
-                int i = 0;
-                dataGridInv.Rows.Clear();
-                cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber,ManufactureDate, UsedNew, Color FROM tbHelmets WHERE (" + firetec + ") AND SerialNumber LIKE '%" + searchTerm + "%'", con);
-                con.Open();
-                dr = cm.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    i++;
-                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), "NA", dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
-                }
-                dr.Close();
-                con.Close();
+                i++;
+                dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), "NA", dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
             }
+            dr.Close();
+            con.Close();
+        }
 
-            private void textBoxJacket_TextChanged(object sender, EventArgs e)
+        private void textBoxJacket_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = textBoxJacket.Text;
+            if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
+
+            // SQL
+            int i = 0;
+            dataGridInv.Rows.Clear();
+            cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber, Size, ManufactureDate, UsedNew FROM tbJackets WHERE (" + firetec + ") AND SerialNumber LIKE '%" + searchTerm + "%'", con);
+            con.Open();
+            dr = cm.ExecuteReader();
+
+            while (dr.Read())
             {
-                string searchTerm = textBoxJacket.Text;
-                if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
-
-                // SQL
-                int i = 0;
-                dataGridInv.Rows.Clear();
-                cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber, Size, ManufactureDate, UsedNew FROM tbJackets WHERE (" + firetec + ") AND SerialNumber LIKE '%" + searchTerm + "%'", con);
-                con.Open();
-                dr = cm.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    i++;
-                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], "NA");
-                }
-                dr.Close();
-                con.Close();
+                i++;
+                dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], "NA");
             }
+            dr.Close();
+            con.Close();
+        }
 
-            private void textBoxPants_TextChanged(object sender, EventArgs e)
+        private void textBoxPants_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = textBoxPants.Text;
+            if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
+
+            // SQL
+            int i = 0;
+            dataGridInv.Rows.Clear();
+            cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber, Size, ManufactureDate, UsedNew FROM tbPants WHERE (" + firetec + ") AND SerialNumber LIKE '%" + searchTerm + "%'", con);
+            con.Open();
+            dr = cm.ExecuteReader();
+
+            while (dr.Read())
             {
-                string searchTerm = textBoxPants.Text;
-                if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
-
-                // SQL
-                int i = 0;
-                dataGridInv.Rows.Clear();
-                cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber, Size, ManufactureDate, UsedNew FROM tbPants WHERE (" + firetec + ") AND SerialNumber LIKE '%" + searchTerm + "%'", con);
-                con.Open();
-                dr = cm.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    i++;
-                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], "NA");
-                }
-                dr.Close();
-                con.Close();
+                i++;
+                dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], "NA");
             }
+            dr.Close();
+            con.Close();
+        }
 
-            private void textBoxBoots_TextChanged(object sender, EventArgs e)
+        private void textBoxBoots_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = textBoxBoots.Text;
+            if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
+
+            // SQL
+            int i = 0;
+            dataGridInv.Rows.Clear();
+            cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber,Size, ManufactureDate, UsedNew, Material FROM tbBoots WHERE (" + firetec + ") AND SerialNumber LIKE '%" + searchTerm + "%'", con);
+            con.Open();
+            dr = cm.ExecuteReader();
+
+            while (dr.Read())
             {
-                string searchTerm = textBoxBoots.Text;
-                if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
+                i++;
+                dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], dr[6].ToString());
+            }
+            dr.Close();
+            con.Close();
+        }
 
-                // SQL
-                int i = 0;
-                dataGridInv.Rows.Clear();
-                cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber,Size, ManufactureDate, UsedNew, Material FROM tbBoots WHERE (" + firetec + ") AND SerialNumber LIKE '%" + searchTerm + "%'", con);
-                con.Open();
-                dr = cm.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    i++;
-                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], dr[6].ToString());
-                }
-                dr.Close();
-                con.Close();
+        private void btnContinue_Click(object sender, EventArgs e)
+        {
+            if (comboBoxSet.SelectedIndex != -1)
+            {
+                WorkOrderModuleForm ModForm = new WorkOrderModuleForm(labelClientName.Text, DayNight, comboBoxSet.Text);
+                this.Dispose();
+                ModForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Select a rental option");
             }
         }
     }
+}

@@ -59,8 +59,9 @@
             this.panel1.Controls.Add(this.MyLogo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(320, 73);
+            this.panel1.Size = new System.Drawing.Size(427, 90);
             this.panel1.TabIndex = 0;
             // 
             // CloseButton
@@ -68,9 +69,10 @@
             this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
             this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
             this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(288, -1);
+            this.CloseButton.Location = new System.Drawing.Point(384, -1);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(27, 34);
+            this.CloseButton.Size = new System.Drawing.Size(36, 42);
             this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.CloseButton.TabIndex = 13;
             this.CloseButton.TabStop = false;
@@ -78,20 +80,22 @@
             // 
             // Title
             // 
-            this.Title.Font = new System.Drawing.Font("Blade Runner Movie Font", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Title.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Title.Location = new System.Drawing.Point(97, 9);
+            this.Title.Location = new System.Drawing.Point(143, 9);
+            this.Title.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(151, 43);
+            this.Title.Size = new System.Drawing.Size(201, 53);
             this.Title.TabIndex = 7;
             this.Title.Text = " Inventory Managment";
             // 
             // MyLogo
             // 
             this.MyLogo.Image = ((System.Drawing.Image)(resources.GetObject("MyLogo.Image")));
-            this.MyLogo.Location = new System.Drawing.Point(3, 3);
+            this.MyLogo.Location = new System.Drawing.Point(4, 4);
+            this.MyLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MyLogo.Name = "MyLogo";
-            this.MyLogo.Size = new System.Drawing.Size(64, 67);
+            this.MyLogo.Size = new System.Drawing.Size(85, 82);
             this.MyLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.MyLogo.TabIndex = 6;
             this.MyLogo.TabStop = false;
@@ -99,18 +103,20 @@
             // 
             // UserNameTxt
             // 
-            this.UserNameTxt.Location = new System.Drawing.Point(23, 276);
+            this.UserNameTxt.Location = new System.Drawing.Point(31, 340);
+            this.UserNameTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.UserNameTxt.Name = "UserNameTxt";
-            this.UserNameTxt.Size = new System.Drawing.Size(276, 20);
+            this.UserNameTxt.Size = new System.Drawing.Size(367, 22);
             this.UserNameTxt.TabIndex = 0;
             // 
             // UserNameLable
             // 
             this.UserNameLable.AutoSize = true;
             this.UserNameLable.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UserNameLable.Location = new System.Drawing.Point(19, 253);
+            this.UserNameLable.Location = new System.Drawing.Point(25, 311);
+            this.UserNameLable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UserNameLable.Name = "UserNameLable";
-            this.UserNameLable.Size = new System.Drawing.Size(91, 20);
+            this.UserNameLable.Size = new System.Drawing.Size(113, 24);
             this.UserNameLable.TabIndex = 1;
             this.UserNameLable.Text = "User Name:";
             // 
@@ -118,17 +124,19 @@
             // 
             this.PasswordLable.AutoSize = true;
             this.PasswordLable.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PasswordLable.Location = new System.Drawing.Point(19, 322);
+            this.PasswordLable.Location = new System.Drawing.Point(25, 396);
+            this.PasswordLable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PasswordLable.Name = "PasswordLable";
-            this.PasswordLable.Size = new System.Drawing.Size(78, 20);
+            this.PasswordLable.Size = new System.Drawing.Size(99, 24);
             this.PasswordLable.TabIndex = 3;
             this.PasswordLable.Text = "Password:";
             // 
             // PasswordTxt
             // 
-            this.PasswordTxt.Location = new System.Drawing.Point(23, 345);
+            this.PasswordTxt.Location = new System.Drawing.Point(31, 425);
+            this.PasswordTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PasswordTxt.Name = "PasswordTxt";
-            this.PasswordTxt.Size = new System.Drawing.Size(276, 20);
+            this.PasswordTxt.Size = new System.Drawing.Size(367, 22);
             this.PasswordTxt.TabIndex = 2;
             this.PasswordTxt.UseSystemPasswordChar = true;
             this.PasswordTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input_KeyDown);
@@ -138,9 +146,10 @@
             this.LoginButton.BackColor = System.Drawing.Color.Maroon;
             this.LoginButton.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.LoginButton.Location = new System.Drawing.Point(23, 408);
+            this.LoginButton.Location = new System.Drawing.Point(31, 502);
+            this.LoginButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(276, 43);
+            this.LoginButton.Size = new System.Drawing.Size(368, 53);
             this.LoginButton.TabIndex = 4;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = false;
@@ -149,9 +158,10 @@
             // FireTecLogo
             // 
             this.FireTecLogo.Image = ((System.Drawing.Image)(resources.GetObject("FireTecLogo.Image")));
-            this.FireTecLogo.Location = new System.Drawing.Point(93, 79);
+            this.FireTecLogo.Location = new System.Drawing.Point(124, 97);
+            this.FireTecLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.FireTecLogo.Name = "FireTecLogo";
-            this.FireTecLogo.Size = new System.Drawing.Size(139, 123);
+            this.FireTecLogo.Size = new System.Drawing.Size(185, 151);
             this.FireTecLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.FireTecLogo.TabIndex = 5;
             this.FireTecLogo.TabStop = false;
@@ -167,9 +177,10 @@
             this.PleaseLoginLable.AutoSize = true;
             this.PleaseLoginLable.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PleaseLoginLable.ForeColor = System.Drawing.Color.Maroon;
-            this.PleaseLoginLable.Location = new System.Drawing.Point(107, 212);
+            this.PleaseLoginLable.Location = new System.Drawing.Point(143, 261);
+            this.PleaseLoginLable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PleaseLoginLable.Name = "PleaseLoginLable";
-            this.PleaseLoginLable.Size = new System.Drawing.Size(104, 22);
+            this.PleaseLoginLable.Size = new System.Drawing.Size(130, 26);
             this.PleaseLoginLable.TabIndex = 6;
             this.PleaseLoginLable.Text = "Please Login";
             // 
@@ -182,9 +193,10 @@
             // ShowPassword
             // 
             this.ShowPassword.AutoSize = true;
-            this.ShowPassword.Location = new System.Drawing.Point(197, 371);
+            this.ShowPassword.Location = new System.Drawing.Point(263, 457);
+            this.ShowPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ShowPassword.Name = "ShowPassword";
-            this.ShowPassword.Size = new System.Drawing.Size(102, 17);
+            this.ShowPassword.Size = new System.Drawing.Size(125, 20);
             this.ShowPassword.TabIndex = 7;
             this.ShowPassword.Text = "Show Password";
             this.ShowPassword.UseVisualStyleBackColor = true;
@@ -195,18 +207,19 @@
             this.ClearLable.AutoSize = true;
             this.ClearLable.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClearLable.ForeColor = System.Drawing.Color.Red;
-            this.ClearLable.Location = new System.Drawing.Point(19, 510);
+            this.ClearLable.Location = new System.Drawing.Point(25, 628);
+            this.ClearLable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ClearLable.Name = "ClearLable";
-            this.ClearLable.Size = new System.Drawing.Size(45, 20);
+            this.ClearLable.Size = new System.Drawing.Size(57, 24);
             this.ClearLable.TabIndex = 8;
             this.ClearLable.Text = "Clear";
             this.ClearLable.Click += new System.EventHandler(this.ClearLable_Click);
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(320, 560);
+            this.ClientSize = new System.Drawing.Size(427, 689);
             this.Controls.Add(this.ClearLable);
             this.Controls.Add(this.ShowPassword);
             this.Controls.Add(this.PleaseLoginLable);
@@ -218,6 +231,7 @@
             this.Controls.Add(this.UserNameTxt);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";

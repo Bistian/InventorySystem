@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetSelectionModuleForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -37,8 +38,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetSelectionModuleForm));
             this.InventoryPanel = new System.Windows.Forms.Panel();
+            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.NewItemTxt = new System.Windows.Forms.Label();
             this.comboBoxSet = new System.Windows.Forms.ComboBox();
             this.labelRentalOptions = new System.Windows.Forms.Label();
@@ -52,6 +53,9 @@
             this.labelBoots = new System.Windows.Forms.Label();
             this.BtnNewItem = new System.Windows.Forms.Button();
             this.panelInput = new System.Windows.Forms.Panel();
+            this.btnContinue = new System.Windows.Forms.Button();
+            this.labelDueDate = new System.Windows.Forms.Label();
+            this.DatepickerDue = new System.Windows.Forms.DateTimePicker();
             this.dataGridInv = new System.Windows.Forms.DataGridView();
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,13 +72,12 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelTitle = new System.Windows.Forms.Panel();
             this.labelClientName = new System.Windows.Forms.Label();
-            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.InventoryPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.panelInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).BeginInit();
             this.panelTitle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
             // 
             // InventoryPanel
@@ -89,6 +92,20 @@
             this.InventoryPanel.Size = new System.Drawing.Size(1282, 80);
             this.InventoryPanel.TabIndex = 24;
             // 
+            // CloseButton
+            // 
+            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
+            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
+            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
+            this.CloseButton.Location = new System.Drawing.Point(1210, 14);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(40, 52);
+            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CloseButton.TabIndex = 68;
+            this.CloseButton.TabStop = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
             // NewItemTxt
             // 
             this.NewItemTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -101,7 +118,7 @@
             this.NewItemTxt.Location = new System.Drawing.Point(18, 20);
             this.NewItemTxt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.NewItemTxt.Name = "NewItemTxt";
-            this.NewItemTxt.Size = new System.Drawing.Size(310, 33);
+            this.NewItemTxt.Size = new System.Drawing.Size(261, 29);
             this.NewItemTxt.TabIndex = 16;
             this.NewItemTxt.Text = "Select a rental option";
             this.NewItemTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -115,6 +132,7 @@
             "Set Boots Only",
             "Pants & Jacket"});
             this.comboBoxSet.Location = new System.Drawing.Point(24, 96);
+            this.comboBoxSet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxSet.Name = "comboBoxSet";
             this.comboBoxSet.Size = new System.Drawing.Size(241, 28);
             this.comboBoxSet.TabIndex = 25;
@@ -127,39 +145,43 @@
             this.labelRentalOptions.ForeColor = System.Drawing.Color.White;
             this.labelRentalOptions.Location = new System.Drawing.Point(18, 48);
             this.labelRentalOptions.Name = "labelRentalOptions";
-            this.labelRentalOptions.Size = new System.Drawing.Size(228, 37);
+            this.labelRentalOptions.Size = new System.Drawing.Size(194, 31);
             this.labelRentalOptions.TabIndex = 26;
             this.labelRentalOptions.Text = "Rental Options";
             // 
             // textBoxHelmet
             // 
-            this.textBoxHelmet.Location = new System.Drawing.Point(25, 209);
+            this.textBoxHelmet.Location = new System.Drawing.Point(15, 262);
+            this.textBoxHelmet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxHelmet.Name = "textBoxHelmet";
-            this.textBoxHelmet.Size = new System.Drawing.Size(197, 26);
+            this.textBoxHelmet.Size = new System.Drawing.Size(198, 26);
             this.textBoxHelmet.TabIndex = 27;
             this.textBoxHelmet.TextChanged += new System.EventHandler(this.textBoxHelmet_TextChanged);
             // 
             // textBoxJacket
             // 
-            this.textBoxJacket.Location = new System.Drawing.Point(24, 278);
+            this.textBoxJacket.Location = new System.Drawing.Point(14, 331);
+            this.textBoxJacket.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxJacket.Name = "textBoxJacket";
-            this.textBoxJacket.Size = new System.Drawing.Size(197, 26);
+            this.textBoxJacket.Size = new System.Drawing.Size(198, 26);
             this.textBoxJacket.TabIndex = 28;
             this.textBoxJacket.TextChanged += new System.EventHandler(this.textBoxJacket_TextChanged);
             // 
             // textBoxPants
             // 
-            this.textBoxPants.Location = new System.Drawing.Point(25, 350);
+            this.textBoxPants.Location = new System.Drawing.Point(15, 404);
+            this.textBoxPants.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxPants.Name = "textBoxPants";
-            this.textBoxPants.Size = new System.Drawing.Size(197, 26);
+            this.textBoxPants.Size = new System.Drawing.Size(198, 26);
             this.textBoxPants.TabIndex = 29;
             this.textBoxPants.TextChanged += new System.EventHandler(this.textBoxPants_TextChanged);
             // 
             // textBoxBoots
             // 
-            this.textBoxBoots.Location = new System.Drawing.Point(24, 420);
+            this.textBoxBoots.Location = new System.Drawing.Point(14, 474);
+            this.textBoxBoots.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxBoots.Name = "textBoxBoots";
-            this.textBoxBoots.Size = new System.Drawing.Size(197, 26);
+            this.textBoxBoots.Size = new System.Drawing.Size(198, 26);
             this.textBoxBoots.TabIndex = 30;
             this.textBoxBoots.TextChanged += new System.EventHandler(this.textBoxBoots_TextChanged);
             // 
@@ -168,9 +190,9 @@
             this.lableHelmet.AutoSize = true;
             this.lableHelmet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lableHelmet.ForeColor = System.Drawing.Color.White;
-            this.lableHelmet.Location = new System.Drawing.Point(20, 181);
+            this.lableHelmet.Location = new System.Drawing.Point(10, 235);
             this.lableHelmet.Name = "lableHelmet";
-            this.lableHelmet.Size = new System.Drawing.Size(141, 25);
+            this.lableHelmet.Size = new System.Drawing.Size(121, 20);
             this.lableHelmet.TabIndex = 31;
             this.lableHelmet.Text = "Search Helmet";
             // 
@@ -179,9 +201,9 @@
             this.labelJacket.AutoSize = true;
             this.labelJacket.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelJacket.ForeColor = System.Drawing.Color.White;
-            this.labelJacket.Location = new System.Drawing.Point(19, 250);
+            this.labelJacket.Location = new System.Drawing.Point(9, 304);
             this.labelJacket.Name = "labelJacket";
-            this.labelJacket.Size = new System.Drawing.Size(138, 25);
+            this.labelJacket.Size = new System.Drawing.Size(116, 20);
             this.labelJacket.TabIndex = 32;
             this.labelJacket.Text = "Search Jacket";
             // 
@@ -190,9 +212,9 @@
             this.labelPants.AutoSize = true;
             this.labelPants.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPants.ForeColor = System.Drawing.Color.White;
-            this.labelPants.Location = new System.Drawing.Point(20, 322);
+            this.labelPants.Location = new System.Drawing.Point(10, 376);
             this.labelPants.Name = "labelPants";
-            this.labelPants.Size = new System.Drawing.Size(130, 25);
+            this.labelPants.Size = new System.Drawing.Size(110, 20);
             this.labelPants.TabIndex = 33;
             this.labelPants.Text = "Search Pants";
             // 
@@ -201,16 +223,17 @@
             this.labelBoots.AutoSize = true;
             this.labelBoots.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelBoots.ForeColor = System.Drawing.Color.White;
-            this.labelBoots.Location = new System.Drawing.Point(19, 392);
+            this.labelBoots.Location = new System.Drawing.Point(9, 446);
             this.labelBoots.Name = "labelBoots";
-            this.labelBoots.Size = new System.Drawing.Size(130, 25);
+            this.labelBoots.Size = new System.Drawing.Size(111, 20);
             this.labelBoots.TabIndex = 34;
             this.labelBoots.Text = "Search Boots";
             // 
             // BtnNewItem
             // 
             this.BtnNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnNewItem.Location = new System.Drawing.Point(61, 521);
+            this.BtnNewItem.Location = new System.Drawing.Point(15, 519);
+            this.BtnNewItem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnNewItem.Name = "BtnNewItem";
             this.BtnNewItem.Size = new System.Drawing.Size(120, 35);
             this.BtnNewItem.TabIndex = 35;
@@ -221,6 +244,9 @@
             // panelInput
             // 
             this.panelInput.BackColor = System.Drawing.Color.Transparent;
+            this.panelInput.Controls.Add(this.btnContinue);
+            this.panelInput.Controls.Add(this.labelDueDate);
+            this.panelInput.Controls.Add(this.DatepickerDue);
             this.panelInput.Controls.Add(this.textBoxBoots);
             this.panelInput.Controls.Add(this.comboBoxSet);
             this.panelInput.Controls.Add(this.BtnNewItem);
@@ -234,9 +260,42 @@
             this.panelInput.Controls.Add(this.lableHelmet);
             this.panelInput.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelInput.Location = new System.Drawing.Point(0, 80);
+            this.panelInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelInput.Name = "panelInput";
             this.panelInput.Size = new System.Drawing.Size(279, 568);
             this.panelInput.TabIndex = 37;
+            // 
+            // btnContinue
+            // 
+            this.btnContinue.BackColor = System.Drawing.Color.Lime;
+            this.btnContinue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnContinue.Location = new System.Drawing.Point(151, 519);
+            this.btnContinue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnContinue.Name = "btnContinue";
+            this.btnContinue.Size = new System.Drawing.Size(120, 35);
+            this.btnContinue.TabIndex = 38;
+            this.btnContinue.Text = "Continue";
+            this.btnContinue.UseVisualStyleBackColor = false;
+            this.btnContinue.Click += new System.EventHandler(this.btnContinue_Click);
+            // 
+            // labelDueDate
+            // 
+            this.labelDueDate.AutoSize = true;
+            this.labelDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDueDate.ForeColor = System.Drawing.Color.White;
+            this.labelDueDate.Location = new System.Drawing.Point(90, 141);
+            this.labelDueDate.Name = "labelDueDate";
+            this.labelDueDate.Size = new System.Drawing.Size(94, 25);
+            this.labelDueDate.TabIndex = 37;
+            this.labelDueDate.Text = "Due Date";
+            // 
+            // DatepickerDue
+            // 
+            this.DatepickerDue.Location = new System.Drawing.Point(3, 176);
+            this.DatepickerDue.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.DatepickerDue.Name = "DatepickerDue";
+            this.DatepickerDue.Size = new System.Drawing.Size(268, 26);
+            this.DatepickerDue.TabIndex = 36;
             // 
             // dataGridInv
             // 
@@ -289,7 +348,7 @@
             this.dataGridInv.RowTemplate.Height = 24;
             this.dataGridInv.RowTemplate.ReadOnly = true;
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridInv.Size = new System.Drawing.Size(1003, 347);
+            this.dataGridInv.Size = new System.Drawing.Size(1003, 348);
             this.dataGridInv.TabIndex = 39;
             this.dataGridInv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellContentClick);
             // 
@@ -462,6 +521,7 @@
             this.panelTitle.Controls.Add(this.labelClientName);
             this.panelTitle.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelTitle.Location = new System.Drawing.Point(279, 451);
+            this.panelTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelTitle.Name = "panelTitle";
             this.panelTitle.Size = new System.Drawing.Size(1003, 32);
             this.panelTitle.TabIndex = 41;
@@ -475,23 +535,9 @@
             this.labelClientName.ForeColor = System.Drawing.Color.White;
             this.labelClientName.Location = new System.Drawing.Point(6, 0);
             this.labelClientName.Name = "labelClientName";
-            this.labelClientName.Size = new System.Drawing.Size(62, 25);
+            this.labelClientName.Size = new System.Drawing.Size(52, 20);
             this.labelClientName.TabIndex = 0;
             this.labelClientName.Text = "Client";
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
-            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
-            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(1210, 14);
-            this.CloseButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(40, 52);
-            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CloseButton.TabIndex = 68;
-            this.CloseButton.TabStop = false;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // SetSelectionModuleForm
             // 
@@ -511,13 +557,13 @@
             this.Text = "SetSelectionModuleForm";
             this.InventoryPanel.ResumeLayout(false);
             this.InventoryPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             this.panelInput.ResumeLayout(false);
             this.panelInput.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).EndInit();
             this.panelTitle.ResumeLayout(false);
             this.panelTitle.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -555,5 +601,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.Panel panelTitle;
         private System.Windows.Forms.Label labelClientName;
+        private System.Windows.Forms.Label labelDueDate;
+        private System.Windows.Forms.DateTimePicker DatepickerDue;
+        private System.Windows.Forms.Button btnContinue;
     }
 }
