@@ -35,7 +35,7 @@ namespace InventoryManagmentSystem
         public string license;
         string firetec = "Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'";
 
-        public SetSelectionModuleForm(string client, string license,string DayNight)
+        public SetSelectionModuleForm(string client, string license, string DayNight)
         {
             this.client = client;
             this.license = license;
@@ -255,7 +255,7 @@ namespace InventoryManagmentSystem
                     }
 
 
-                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Jacket")
+                    if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Jacket")
                     {
                         textBoxJacket.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
                         cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE " + textBoxJacket.Text, con);
@@ -269,7 +269,7 @@ namespace InventoryManagmentSystem
 
                     }
 
-                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Pants")
+                    if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Pants")
                     {
                         textBoxPants.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
                         cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE " + textBoxPants.Text, con);
@@ -282,7 +282,7 @@ namespace InventoryManagmentSystem
 
                     }
 
-                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Boots")
+                    if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Boots")
                     {
                         textBoxBoots.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
                         cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE " + textBoxBoots.Text, con);
