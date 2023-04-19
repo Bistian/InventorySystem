@@ -124,6 +124,7 @@ namespace InventoryManagmentSystem
                 Sizes = " Size,";
                 CurrTable = "tbBoots";
             }
+            string firetec = "(Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC')";
             return ("SELECT ItemType, Brand, SerialNumber," + Sizes + " ManufactureDate, UsedNew " + FinalColumn + " FROM " + CurrTable +
                      " WHERE " + firetec);
         }

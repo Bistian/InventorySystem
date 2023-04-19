@@ -150,7 +150,7 @@ namespace InventoryManagmentSystem
 
                     // Find the type to know which table to use.
                     Excel.Range cell = worksheet.Cells[3, 1];
-                    string table = "tb" + cell.Value.ToString();
+                    string table = "tb" + cell.Value.ToString().Trim();
 
                     // Find the names of all columns on the database table.
                     string query = "SELECT COLUMN_NAME " +
@@ -203,9 +203,13 @@ namespace InventoryManagmentSystem
                 for (int j = 1; j <= worksheet.UsedRange.Columns.Count; j++)
                 {
                     var v = worksheet.Cells[i, j].Value;
+                    if(v != null && v.GetType() == typeof(string))
+                    {
+                        v = ((string)v).Trim();
+                    }
 
                     // Making sure not to add empty rows.
-                    if((j == 1 || j == 2 || j == 3) && v == null)
+                    if ((j == 1 || j == 2 || j == 3) && v == null)
                     {
                         isNull = true;
                         break;
@@ -246,9 +250,58 @@ namespace InventoryManagmentSystem
                 dataTable.Rows.Add(row);
             }
 
+            // Match columns from Excel and Database.
             string columns = "";
             string colValues = "";
-            for (int i = 0; i < listExcelColumns.Count; ++i)
+            // I will hard code somethings to keep the standard Excel format.
+            // Excel: 0.ItemType 1.Brand 2.Serial 3.Size 4.MDF 5.UsedNew 6.DueDate 7.Location
+            // Database: 1.ItemType 2.Brand 3.SerialNumber 4.Location 5.UsedNew 6.ManufactureDate 7.DueDate 8.Size || Color 9.Other
+            if(tableName == "tbJackets" || tableName == "tbPants")
+            {
+                for(int i = 1; i <= 8; ++i)
+                {
+                    // Select database column to add to.
+                    columns += listTableColumns[i];
+                    // Select value from Excel column to add to database.
+                    if(i == 4)
+                    {
+                        colValues += "@" + listExcelColumns[7];
+                    }
+                    else if(i == 5)
+                    {
+                        colValues += "@" + listExcelColumns[5];
+                    }
+                    else if(i == 6)
+                    {
+                        colValues += "@" + listExcelColumns[4];
+                    }
+                    else if( i == 8)
+                    {
+                        colValues += "@" + listExcelColumns[3];
+                    }
+                    else
+                    {
+                        colValues += "@" + listExcelColumns[i-1];
+                    }
+
+                    // Add comma and space unless it is the lest item.
+                    if (i < 8)
+                    {
+                        columns += ", ";
+                        colValues += ", ";
+                    }
+                }
+            }
+            else if(tableName == "tbHelmets")
+            {
+
+            }
+            else if( tableName == "tbBoots")
+            {
+
+            }
+            
+            /*for (int i = 0; i < listExcelColumns.Count; ++i)
             {
                 columns += listTableColumns[i+1].ToString();
                 colValues += "@" + listExcelColumns[i].ToString();
@@ -257,7 +310,7 @@ namespace InventoryManagmentSystem
                     columns += ", ";
                     colValues += ", ";
                 }
-            }
+            }*/
 
             con.Open();
             // Insert rows from Excel into the database table.
@@ -279,11 +332,17 @@ namespace InventoryManagmentSystem
                         {
                             Type valueType = value.GetType();
                             if (valueType == typeof(int))
+                            {
                                 dbType = SqlDbType.Int;
+                            }
                             else if (valueType == typeof(double))
+                            {
                                 dbType = SqlDbType.Float;
+                            }
                             else if (valueType == typeof(DateTime))
+                            {
                                 dbType = SqlDbType.DateTime;
+                            }
 
                             // Add more data types as needed
 
