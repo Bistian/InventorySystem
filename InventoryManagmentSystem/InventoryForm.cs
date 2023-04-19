@@ -141,69 +141,72 @@ namespace InventoryManagmentSystem
 
         private void searchBar_TextChanged(object sender, EventArgs e)
         {
-            string searchTerm = searchBar.Text;
-            if (string.IsNullOrEmpty(searchTerm)) 
-            { 
-                LoadInventory();
-                return;
-            }
-
-            //SQL
-            int i = 0;
-            dataGridInv.Rows.Clear();
-
-            string query = "";
-            
-            query = QueryItems(true, searchTerm);
-
-            cm = new SqlCommand(query, con);
-            con.Open();
-            dr = cm.ExecuteReader();
-
-            while (dr.Read())
+            if (comboBoxItem.SelectedIndex != -1)
             {
-                i++;
-                if (comboBoxItem.Text == "Helmets")
+                string searchTerm = searchBar.Text;
+                if (string.IsNullOrEmpty(searchTerm))
                 {
-                    dataGridInv.Rows.Add(i,
-                    dr[0].ToString(),
-                    dr[1].ToString(),
-                    dr[2].ToString(),
-                    "NA",
-                    dr[3].ToString(),
-                    dr[4].ToString(),
-                    dr[5].ToString(),
-                    dr[6].ToString());
+                    LoadInventory();
+                    return;
                 }
-                else if(comboBoxItem.Text == "Boots")
-                {
-                    string s = dr[0].ToString();
-                    dataGridInv.Rows.Add(i,
-                        dr[0].ToString(),
-                        dr[1].ToString(),
-                        dr[2].ToString(),
-                        dr[3].ToString(),
-                        dr[4].ToString(),
-                        dr[5].ToString(),
-                        dr[6].ToString(),
-                        dr[7].ToString());
-                }
-                else // Pants && Jackets
-                {
-                    dataGridInv.Rows.Add(i,
-                        dr[0].ToString(),
-                        dr[1].ToString(),
-                        dr[2].ToString(),
-                        dr[3].ToString(),
-                        dr[4].ToString(),
-                        dr[5].ToString(),
-                        "NA",
-                        dr[6].ToString());
-                }
-            }
 
-            dr.Close();
-            con.Close();
+                //SQL
+                int i = 0;
+                dataGridInv.Rows.Clear();
+
+                string query = "";
+
+                query = QueryItems(true, searchTerm);
+
+                cm = new SqlCommand(query, con);
+                con.Open();
+                dr = cm.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    i++;
+                    if (comboBoxItem.Text == "Helmets")
+                    {
+                        dataGridInv.Rows.Add(i,
+                        dr[0].ToString(),
+                        dr[1].ToString(),
+                        dr[2].ToString(),
+                        "NA",
+                        dr[3].ToString(),
+                        dr[4].ToString(),
+                        dr[5].ToString(),
+                        dr[6].ToString());
+                    }
+                    else if (comboBoxItem.Text == "Boots")
+                    {
+                        string s = dr[0].ToString();
+                        dataGridInv.Rows.Add(i,
+                            dr[0].ToString(),
+                            dr[1].ToString(),
+                            dr[2].ToString(),
+                            dr[3].ToString(),
+                            dr[4].ToString(),
+                            dr[5].ToString(),
+                            dr[6].ToString(),
+                            dr[7].ToString());
+                    }
+                    else // Pants && Jackets
+                    {
+                        dataGridInv.Rows.Add(i,
+                            dr[0].ToString(),
+                            dr[1].ToString(),
+                            dr[2].ToString(),
+                            dr[3].ToString(),
+                            dr[4].ToString(),
+                            dr[5].ToString(),
+                            "NA",
+                            dr[6].ToString());
+                    }
+                }
+
+                dr.Close();
+                con.Close();
+            }
         }
     }
 }

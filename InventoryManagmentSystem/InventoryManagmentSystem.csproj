@@ -201,6 +201,12 @@
     <Compile Include="UserModuleForm.Designer.cs">
       <DependentUpon>UserModuleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WorkOrderModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkOrderModuleForm.Designer.cs">
+      <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CustomButton.resx">
       <DependentUpon>CustomButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -275,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserModuleForm.resx">
       <DependentUpon>UserModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkOrderModuleForm.resx">
+      <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

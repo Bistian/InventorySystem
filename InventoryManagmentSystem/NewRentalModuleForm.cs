@@ -27,6 +27,7 @@ namespace InventoryManagmentSystem
         public bool ExistingUser = false;
         public string currentUser = "";
         string license = "";
+        string DayNight = "";
 
         public NewRentalModuleForm()
         {
@@ -138,7 +139,7 @@ namespace InventoryManagmentSystem
                     MessageBox.Show("Client has been successfully updated");
                     this.Dispose();
                     ExistingUser = false;
-                    SetSelectionModuleForm ModForm = new SetSelectionModuleForm(currentUser, license);
+                    SetSelectionModuleForm ModForm = new SetSelectionModuleForm(currentUser, license, DayNight);
                     this.Dispose();
                     ModForm.ShowDialog();
                 }
@@ -163,10 +164,11 @@ namespace InventoryManagmentSystem
             {
                 currentUser = txtBoxCustomerName.Text;
                 license = txtBoxDriversLicense.Text;
+                DayNight = comboDayNight.Text;
                 if(ExistingUser == false)
                 {
                  SaveClient();
-                    SetSelectionModuleForm ModForm = new SetSelectionModuleForm(currentUser, license);
+                    SetSelectionModuleForm ModForm = new SetSelectionModuleForm(currentUser, license, DayNight);
                     this.Dispose();
                     ModForm.ShowDialog();
                 }

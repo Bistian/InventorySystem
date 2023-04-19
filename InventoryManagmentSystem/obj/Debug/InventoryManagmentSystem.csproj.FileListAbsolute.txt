@@ -112,3 +112,4 @@ C:\Users\sebas\OneDrive\Desktop\InventorySystem\InventoryManagmentSystem\bin\Deb
 C:\Users\sebas\OneDrive\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\InventoryManagmentSystem.pdb
 C:\Users\sebas\OneDrive\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ExcelImportForm.resources
 C:\Users\sebas\OneDrive\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ExcelUserPromptForm.resources
+C:\Users\sebas\OneDrive\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.WorkOrderModuleForm.resources
