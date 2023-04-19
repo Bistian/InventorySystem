@@ -32,8 +32,9 @@ namespace InventoryManagmentSystem
 
         public string client;
         public string license;
+        string firetec = "Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'";
 
-        public SetSelectionModuleForm(string client,string license)
+        public SetSelectionModuleForm(string client, string license)
         {
             this.client = client;
             this.license = license;
@@ -121,7 +122,7 @@ namespace InventoryManagmentSystem
                 CurrTable = "tbBoots";
             }
             return ("SELECT ItemType, Brand, SerialNumber," + Sizes + " ManufactureDate, UsedNew " + FinalColumn + " FROM " + CurrTable +
-                     " WHERE Location='Fire-Tec'");
+                     " WHERE " + firetec);
         }
 
         private void LoadInventory()
@@ -141,7 +142,7 @@ namespace InventoryManagmentSystem
                     dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), "NA", dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
                 }
             }
-            else if(textBoxJacket.Focused || textBoxPants.Focused)
+            else if (textBoxJacket.Focused || textBoxPants.Focused)
             {
                 while (dr.Read())
                 {
@@ -149,7 +150,7 @@ namespace InventoryManagmentSystem
                     dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), "NA");
                 }
             }
-            else if(textBoxBoots.Focused)
+            else if (textBoxBoots.Focused)
             {
                 while (dr.Read())
                 {
@@ -164,14 +165,14 @@ namespace InventoryManagmentSystem
         private void comboBoxSet_SelectedIndexChanged(object sender, EventArgs e)
         {
             //full set
-            if(comboBoxSet.SelectedIndex == 0)
+            if (comboBoxSet.SelectedIndex == 0)
             {
                 lableHelmet.Visible = true;
                 textBoxHelmet.Visible = true;
 
                 labelJacket.Visible = true;
                 textBoxJacket.Visible = true;
-                
+
                 labelPants.Visible = true;
                 textBoxPants.Visible = true;
 
@@ -179,7 +180,7 @@ namespace InventoryManagmentSystem
                 textBoxBoots.Visible = true;
             }
             //set only helmet
-            else if(comboBoxSet.SelectedIndex == 1) 
+            else if (comboBoxSet.SelectedIndex == 1)
             {
                 lableHelmet.Visible = true;
                 textBoxHelmet.Visible = true;
@@ -194,7 +195,7 @@ namespace InventoryManagmentSystem
                 textBoxBoots.Visible = false;
             }
             //set only boots
-            else if(comboBoxSet.SelectedIndex == 2) 
+            else if (comboBoxSet.SelectedIndex == 2)
             {
 
                 lableHelmet.Visible = false;
@@ -209,7 +210,7 @@ namespace InventoryManagmentSystem
                 labelBoots.Visible = true;
                 textBoxBoots.Visible = true;
             }
-            else if(comboBoxSet.SelectedIndex == 3)
+            else if (comboBoxSet.SelectedIndex == 3)
             {
                 lableHelmet.Visible = false;
                 textBoxHelmet.Visible = false;
@@ -225,27 +226,6 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void textBoxHelmet_TextChanged(object sender, EventArgs e)
-        {
-            string searchTerm = textBoxHelmet.Text;
-            if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
-
-            // SQL
-            int i = 0;
-            dataGridInv.Rows.Clear();
-            cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber,ManufactureDate, UsedNew, Color FROM tbHelmets WHERE Location ='Fire-Tec' AND SerialNumber LIKE '%" + searchTerm + "%'", con);
-            con.Open();
-            dr = cm.ExecuteReader();
-
-            while (dr.Read())
-            {
-                i++;
-                dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), "NA", dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
-            }
-            dr.Close();
-            con.Close();
-        }
-
         private void BtnNewItem_Click(object sender, EventArgs e)
         {
             NewItemModuleForm ModForm = new NewItemModuleForm(true);
@@ -254,24 +234,12 @@ namespace InventoryManagmentSystem
 
         private void dataGridInv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-                if (MessageBox.Show("Are you sure you want to rent this item to " + client, "Rent", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to rent this item to " + client, "Rent", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Helmet")
                 {
-                    if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Helmet")
-                    {
-                        textBoxHelmet.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                        cm = new SqlCommand("UPDATE tbHelmets SET location = @location WHERE SerialNumber LIKE " + textBoxHelmet.Text, con);
-                        cm.Parameters.AddWithValue("@location", license);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
-                        MessageBox.Show("Rental has been successfully completed");
-                    }
-
-
-                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Jacket")
-                    {
-                        textBoxJacket.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                    cm = new SqlCommand("UPDATE tbJacket SET location = @location WHERE SerialNumber LIKE " + textBoxJacket.Text, con);
+                    textBoxHelmet.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                    cm = new SqlCommand("UPDATE tbHelmets SET location = @location WHERE SerialNumber LIKE " + textBoxHelmet.Text, con);
                     cm.Parameters.AddWithValue("@location", license);
                     con.Open();
                     cm.ExecuteNonQuery();
@@ -279,95 +247,130 @@ namespace InventoryManagmentSystem
                     MessageBox.Show("Rental has been successfully completed");
                 }
 
-                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Pants")
-                    {
-                        textBoxPants.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+
+                else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Jacket")
+                {
+                    textBoxJacket.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                    cm = new SqlCommand("UPDATE tbJackets SET location = @location WHERE SerialNumber LIKE " + textBoxJacket.Text, con);
+                    cm.Parameters.AddWithValue("@location", license);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Rental has been successfully completed");
+
+
+                }
+
+                else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Pants")
+                {
+                    textBoxPants.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
                     cm = new SqlCommand("UPDATE tbPants SET location = @location WHERE SerialNumber LIKE " + textBoxPants.Text, con);
                     cm.Parameters.AddWithValue("@location", license);
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
                     MessageBox.Show("Rental has been successfully completed");
+
                 }
 
-                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Boots")
-                    {
-                        textBoxBoots.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Boots")
+                {
+                    textBoxBoots.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
                     cm = new SqlCommand("UPDATE tbBoots SET location = @location WHERE SerialNumber LIKE " + textBoxBoots.Text, con);
                     cm.Parameters.AddWithValue("@location", license);
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
                     MessageBox.Show("Rental has been successfully completed");
-                }
+
                     LoadClient();
                 }
-
-            
-            
+                LoadInventory();
+            }
         }
 
-        private void textBoxJacket_TextChanged(object sender, EventArgs e)
-        {
-            string searchTerm = textBoxJacket.Text;
-            if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
-
-            // SQL
-            int i = 0;
-            dataGridInv.Rows.Clear();
-            cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber, Size, ManufactureDate, UsedNew FROM tbJackets WHERE Location ='Fire-Tec' AND SerialNumber LIKE '%" + searchTerm + "%'", con);
-            con.Open();
-            dr = cm.ExecuteReader();
-
-            while (dr.Read())
+            private void textBoxHelmet_TextChanged(object sender, EventArgs e)
             {
-                i++;
-                dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], "NA");
+                string searchTerm = textBoxHelmet.Text;
+                if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
+
+                // SQL
+                int i = 0;
+                dataGridInv.Rows.Clear();
+                cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber,ManufactureDate, UsedNew, Color FROM tbHelmets WHERE (" + firetec + ") AND SerialNumber LIKE '%" + searchTerm + "%'", con);
+                con.Open();
+                dr = cm.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    i++;
+                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), "NA", dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
+                }
+                dr.Close();
+                con.Close();
             }
-            dr.Close();
-            con.Close();
-        }
 
-        private void textBoxPants_TextChanged(object sender, EventArgs e)
-        {
-            string searchTerm = textBoxPants.Text;
-            if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
-
-            // SQL
-            int i = 0;
-            dataGridInv.Rows.Clear();
-            cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber, Size, ManufactureDate, UsedNew FROM tbPants WHERE Location ='Fire-Tec' AND SerialNumber LIKE '%" + searchTerm + "%'", con);
-            con.Open();
-            dr = cm.ExecuteReader();
-
-            while (dr.Read())
+            private void textBoxJacket_TextChanged(object sender, EventArgs e)
             {
-                i++;
-                dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], "NA");
+                string searchTerm = textBoxJacket.Text;
+                if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
+
+                // SQL
+                int i = 0;
+                dataGridInv.Rows.Clear();
+                cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber, Size, ManufactureDate, UsedNew FROM tbJackets WHERE (" + firetec + ") AND SerialNumber LIKE '%" + searchTerm + "%'", con);
+                con.Open();
+                dr = cm.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    i++;
+                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], "NA");
+                }
+                dr.Close();
+                con.Close();
             }
-            dr.Close();
-            con.Close();
-        }
 
-        private void textBoxBoots_TextChanged(object sender, EventArgs e)
-        {
-            string searchTerm = textBoxBoots.Text;
-            if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
-
-            // SQL
-            int i = 0;
-            dataGridInv.Rows.Clear();
-            cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber,Size, ManufactureDate, UsedNew, Material FROM tbBoots WHERE Location ='Fire-Tec' AND SerialNumber LIKE '%" + searchTerm + "%'", con);
-            con.Open();
-            dr = cm.ExecuteReader();
-
-            while (dr.Read())
+            private void textBoxPants_TextChanged(object sender, EventArgs e)
             {
-                i++;
-                dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], dr[6].ToString());
+                string searchTerm = textBoxPants.Text;
+                if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
+
+                // SQL
+                int i = 0;
+                dataGridInv.Rows.Clear();
+                cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber, Size, ManufactureDate, UsedNew FROM tbPants WHERE (" + firetec + ") AND SerialNumber LIKE '%" + searchTerm + "%'", con);
+                con.Open();
+                dr = cm.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    i++;
+                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], "NA");
+                }
+                dr.Close();
+                con.Close();
             }
-            dr.Close();
-            con.Close();
+
+            private void textBoxBoots_TextChanged(object sender, EventArgs e)
+            {
+                string searchTerm = textBoxBoots.Text;
+                if (string.IsNullOrEmpty(searchTerm)) { LoadInventory(); }
+
+                // SQL
+                int i = 0;
+                dataGridInv.Rows.Clear();
+                cm = new SqlCommand("SELECT ItemType, Brand, SerialNumber,Size, ManufactureDate, UsedNew, Material FROM tbBoots WHERE (" + firetec + ") AND SerialNumber LIKE '%" + searchTerm + "%'", con);
+                con.Open();
+                dr = cm.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    i++;
+                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], dr[6].ToString());
+                }
+                dr.Close();
+                con.Close();
+            }
         }
     }
-}
