@@ -36,13 +36,19 @@ namespace InventoryManagmentSystem
             {
                 bool Exists = false;
 
-                cm = new SqlCommand($"SELECT SerialNumber FROM {tableName} WHERE SerialNumber = @SerialNumber", con);
+                cm = new SqlCommand($"SELECT Count (*) FROM {tableName} WHERE SerialNumber = @SerialNumber", con);
                 cm.Parameters.AddWithValue("@SerialNumber", SerialNumber);
                 con.Open();
                 object result = cm.ExecuteScalar();
 
                 if(result != null)
                 {
+                    int r = (int)result;
+                    Exists = r > 0 ? true : false;
+                }
+                else
+                {
+                    // Null is an error!! don't add plz
                     Exists = true;
                 }
                 

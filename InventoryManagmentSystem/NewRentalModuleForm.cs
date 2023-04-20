@@ -37,16 +37,33 @@ namespace InventoryManagmentSystem
 
         private bool CheckIfExists(string tableName, string SerialNumber)
         {
-            bool Exists = false;
-            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE DriversLicenseNumber = " + SerialNumber, con);
-            con.Open();
-            int count = (int)cm.ExecuteScalar();
-            con.Close();
-            if (count != 0)
+            try
             {
-                Exists = true;
+                bool Exists = false;
+                cm = new SqlCommand($"Select Count (*) FROM {tableName} WHERE DriversLicenseNumber = @SerialNumber", con);
+                cm.Parameters.AddWithValue("@SerialNumber", SerialNumber);
+                con.Open();
+                object result = cm.ExecuteScalar();
+                if (result != null)
+                {
+                    int r = (int)result;
+                    Exists = r > 0 ? true : false;
+                }
+                else
+                {
+                    // Null is an error!! don't add plz
+                    Exists = true;
+                }
+                con.Close();
+                return Exists;
             }
-            return Exists;
+            catch(Exception ex) 
+            {
+                Console.WriteLine($"ERROR NewRentalModuleForm.cs --> CheckIfExists(): {ex.Message}");
+                con.Close();
+                // If there was an error, pretend you found something just so you don't add it.
+                return true;
+            }
         }
 
         public void Clear()
