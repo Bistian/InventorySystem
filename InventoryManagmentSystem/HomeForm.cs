@@ -37,10 +37,11 @@ namespace InventoryManagmentSystem
 
         #endregion SQL_Variables
 
+        string firetec = "Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'";
 
         private int CountRented(string tableName)
         {
-            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE Location NOT IN ('Fire-Tec') AND Location IS NOT NULL", con);
+            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') AND Location IS NOT NULL", con);
             con.Open();
             int count = (int)cm.ExecuteScalar();
             con.Close();
