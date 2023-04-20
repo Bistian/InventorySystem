@@ -32,16 +32,31 @@ namespace InventoryManagmentSystem
 
         private bool CheckIfExists(string tableName, string SerialNumber)
         {
-            bool Exists = false;
-            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE SerialNumber = " + SerialNumber, con);
-            con.Open();
-            int count = (int)cm.ExecuteScalar();
-            con.Close();
-            if (count != 0)
+            try
             {
-                Exists = true;
+                bool Exists = false;
+
+                cm = new SqlCommand($"SELECT SerialNumber FROM {tableName} WHERE SerialNumber = @SerialNumber", con);
+                cm.Parameters.AddWithValue("@SerialNumber", SerialNumber);
+                con.Open();
+                object result = cm.ExecuteScalar();
+
+                if(result != null)
+                {
+                    Exists = true;
+                }
+                
+                con.Close();
+
+                return Exists;
             }
-            return Exists;
+            catch(Exception ex)
+            {
+                Console.WriteLine($"ERROR NewPantsModuleForm.cs --> CheckIfExists(): {ex.Message}");
+                con.Close();
+                // If there was an error, pretend you found something just so you don't add it.
+                return true;
+            }
         }
 
         public void Clear()
@@ -61,7 +76,10 @@ namespace InventoryManagmentSystem
                     bool exists = CheckIfExists("tbPants", txtBoxSerialNumber.Text);
                     if (!exists)
                     {
-                        cm = new SqlCommand("INSERT INTO tbPants(SerialNumber,Brand,UsedNew,Size,ManufactureDate)VALUES(@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)", con);
+                        cm = new SqlCommand(
+                            "INSERT INTO tbPants(SerialNumber,Brand,UsedNew,Size,ManufactureDate)" +
+                            "VALUES(@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)", con);
+
                         cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                         cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
                         cm.Parameters.AddWithValue("@UsedNew", comboBoxUsedNew.Text);

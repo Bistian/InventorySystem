@@ -242,47 +242,76 @@ namespace InventoryManagmentSystem
             {
                 if (DateTime.Today != DatepickerDue.Value.Date)
                 {
+                    // Helmet
                     if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Helmet")
                     {
-                        textBoxHelmet.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                        cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE " + textBoxHelmet.Text, con);
-                        cm.Parameters.AddWithValue("@location", license);
-                        cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
-                        MessageBox.Show("Rental has been successfully completed");
+                        try
+                        {
+                            textBoxHelmet.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                            cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                            cm.Parameters.AddWithValue("@location", license);
+                            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+                            cm.Parameters.AddWithValue("@serial", textBoxPants.Text);
+                            con.Open();
+                            cm.ExecuteNonQuery();
+                            con.Close();
+                            MessageBox.Show("Rental has been successfully completed");
+                        }
+                        catch(Exception ex)
+                        {
+                            Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                            con.Close();
+                            return;
+                        }
                     }
 
-
-                    if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Jacket")
+                    // Jacket
+                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Jacket")
                     {
-                        textBoxJacket.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                        cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE " + textBoxJacket.Text, con);
-                        cm.Parameters.AddWithValue("@location", license);
-                        cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
-                        MessageBox.Show("Rental has been successfully completed");
-
-
+                        try
+                        {
+                            textBoxJacket.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                            cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                            cm.Parameters.AddWithValue("@location", license);
+                            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+                            cm.Parameters.AddWithValue("@serial", textBoxPants.Text);
+                            con.Open();
+                            cm.ExecuteNonQuery();
+                            con.Close();
+                            MessageBox.Show("Rental has been successfully completed");
+                        }
+                        catch(Exception ex)
+                        {
+                            Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                            con.Close();
+                            return;
+                        }
                     }
 
-                    if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Pants")
+                    // Pants
+                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Pants")
                     {
-                        textBoxPants.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                        cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE " + textBoxPants.Text, con);
-                        cm.Parameters.AddWithValue("@location", license);
-                        cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
-                        MessageBox.Show("Rental has been successfully completed");
-
+                        try
+                        {
+                            textBoxPants.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                            cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                            cm.Parameters.AddWithValue("@location", license);
+                            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+                            cm.Parameters.AddWithValue("@serial", textBoxPants.Text);
+                            con.Open();
+                            cm.ExecuteNonQuery();
+                            con.Close();
+                            MessageBox.Show("Rental has been successfully completed");
+                        }
+                        catch(Exception ex)
+                        {
+                            Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                            con.Close();
+                            return;
+                        }
                     }
 
-                    if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Boots")
+                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Boots")
                     {
                         textBoxBoots.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
                         cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE " + textBoxBoots.Text, con);

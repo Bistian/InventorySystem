@@ -68,7 +68,7 @@
             this.PanelTitles.Controls.Add(this.DueIn10);
             this.PanelTitles.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelTitles.Location = new System.Drawing.Point(0, 0);
-            this.PanelTitles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PanelTitles.Margin = new System.Windows.Forms.Padding(2);
             this.PanelTitles.Name = "PanelTitles";
             this.PanelTitles.Size = new System.Drawing.Size(762, 20);
             this.PanelTitles.TabIndex = 2;
@@ -128,7 +128,7 @@
             this.dataGridViewDueIn10.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewDueIn10.Dock = System.Windows.Forms.DockStyle.Left;
             this.dataGridViewDueIn10.Location = new System.Drawing.Point(0, 20);
-            this.dataGridViewDueIn10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewDueIn10.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewDueIn10.Name = "dataGridViewDueIn10";
             this.dataGridViewDueIn10.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -204,7 +204,7 @@
             this.dataGridViewPast30.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewPast30.Dock = System.Windows.Forms.DockStyle.Right;
             this.dataGridViewPast30.Location = new System.Drawing.Point(536, 20);
-            this.dataGridViewPast30.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewPast30.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewPast30.Name = "dataGridViewPast30";
             this.dataGridViewPast30.ReadOnly = true;
             this.dataGridViewPast30.RowHeadersVisible = false;
@@ -332,7 +332,7 @@
             this.Controls.Add(this.dataGridViewPast30);
             this.Controls.Add(this.dataGridViewDueIn10);
             this.Controls.Add(this.PanelTitles);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "HomeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HomeForm";

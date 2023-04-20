@@ -33,34 +33,52 @@ namespace InventoryManagmentSystem
         public RentalForm()
         {
             InitializeComponent();
-            LoadTables(dataGridRented, QueryRented(), "DueDate");
-            LoadTables(dataGridPastDue, QueryPastDue(), "DDate");
+            LoadTables(dataGridRented, Query(true), "DueDate");
+            LoadTables(dataGridPastDue, Query(false), "DDate");
         }
 
-        private string QueryRented()
+        /// <summary>
+        /// Query for rented and post due grids.
+        /// </summary>
+        /// <param name="isRented">true for rented, false for past due</param>
+        /// <returns></returns>
+        private string Query(bool isRented)
         {
-            return ("SELECT ItemType, Location, DueDate, SerialNumber FROM tbPants " +
-                "WHERE DueDate IS NOT NULL AND DueDate >= CONVERT(DATE, GETDATE()) " +
-                "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbBoots " +
-                "WHERE DueDate IS NOT NULL AND DueDate >= CONVERT(DATE, GETDATE()) " +
-                "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbHelmets " +
-                "WHERE DueDate IS NOT NULL AND DueDate >= CONVERT(DATE, GETDATE()) " +
-                "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbJackets " +
-                "WHERE DueDate IS NOT NULL AND DueDate >= CONVERT(DATE, GETDATE()) " +
-                "ORDER BY DueDate");
-        }
+            string sign = isRented ? ">=" : "<";
+            string[] tables = { "tbPants", "tbBoots", "tbHelmets", "tbJackets" };
+            string query = 
+                "SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM " + tables[0] +
+                " INNER JOIN tbClients ON tbClients.DriversLicenseNumber = " + tables[0] + ".Location " +
+                "WHERE DueDate IS NOT NULL AND DueDate " + sign + " CONVERT(DATE, GETDATE()) ";
 
-        private string QueryPastDue()
-        {
-            return ("SELECT ItemType, Location, DueDate, SerialNumber FROM tbPants " +
-                "WHERE DueDate IS NOT NULL AND DueDate < CONVERT(DATE, GETDATE()) " +
-                "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbBoots " +
-                "WHERE DueDate IS NOT NULL AND DueDate < CONVERT(DATE, GETDATE()) " +
-                "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbHelmets " +
-                "WHERE DueDate IS NOT NULL AND DueDate < CONVERT(DATE, GETDATE()) " +
-                "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbJackets " +
-                "WHERE DueDate IS NOT NULL AND DueDate < CONVERT(DATE, GETDATE()) " +
-                "ORDER BY DueDate");
+            for (int i = 1; i < tables.Length; ++i)
+            {
+                query += 
+                    "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM " + tables[i] +
+                    " INNER JOIN tbClients ON tbClients.DriversLicenseNumber = " + tables[i] + ".Location " +
+                    "WHERE DueDate IS NOT NULL AND DueDate " + sign + " CONVERT(DATE, GETDATE()) ";
+            }
+            query += "ORDER BY DueDate";
+
+            /*"SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbPants " +
+            "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
+            "WHERE DueDate IS NOT NULL AND DueDate " + sign + " CONVERT(DATE, GETDATE()) " +
+
+            "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbBoots " +
+            "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
+            "WHERE DueDate IS NOT NULL AND DueDate " + sign + " CONVERT(DATE, GETDATE()) " +
+
+            "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbHelmets " +
+            "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
+            "WHERE DueDate IS NOT NULL AND DueDate " + sign + " CONVERT(DATE, GETDATE()) " +
+
+            "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbJackets " +
+            "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
+            "WHERE DueDate IS NOT NULL AND DueDate " + sign + " CONVERT(DATE, GETDATE()) " +
+
+            "ORDER BY DueDate";*/
+
+            return query;
         }
 
         /// <summary>
