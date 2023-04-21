@@ -32,14 +32,25 @@ namespace InventoryManagmentSystem
         private bool CheckIfExists(string tableName, string SerialNumber)
         {
             bool Exists = false;
-            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE SerialNumber = " + SerialNumber, con);
+
+            cm = new SqlCommand($"SELECT Count (*) FROM {tableName} WHERE SerialNumber = @SerialNumber", con);
+            cm.Parameters.AddWithValue("@SerialNumber", SerialNumber);
             con.Open();
-            int count = (int)cm.ExecuteScalar();
-            con.Close();
-            if (count != 0)
+            object result = cm.ExecuteScalar();
+
+            if (result != null)
             {
+                int r = (int)result;
+                Exists = r > 0 ? true : false;
+            }
+            else
+            {
+                // Null is an error!! don't add plz
                 Exists = true;
             }
+
+            con.Close();
+
             return Exists;
         }
 
@@ -60,7 +71,10 @@ namespace InventoryManagmentSystem
                     bool exists = CheckIfExists("tbJackets", txtBoxSerialNumber.Text);
                     if (!exists)
                     {
-                        cm = new SqlCommand("INSERT INTO tbJackets(SerialNumber,Brand,UsedNew,Size,ManufactureDate)VALUES(@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)", con);
+                        cm = new SqlCommand(
+                             "INSERT INTO tbJackets(SerialNumber,Brand,UsedNew,Size,ManufactureDate)" +
+                             "VALUES(@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)", con);
+
                         cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                         cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
                         cm.Parameters.AddWithValue("@UsedNew", comboBoxUsedNew.Text);

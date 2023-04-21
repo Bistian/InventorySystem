@@ -191,9 +191,9 @@
             this.labelUsedNew.Location = new System.Drawing.Point(144, 143);
             this.labelUsedNew.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelUsedNew.Name = "labelUsedNew";
-            this.labelUsedNew.Size = new System.Drawing.Size(47, 24);
+            this.labelUsedNew.Size = new System.Drawing.Size(124, 24);
             this.labelUsedNew.TabIndex = 95;
-            this.labelUsedNew.Text = "Size";
+            this.labelUsedNew.Text = "Used or New";
             // 
             // comboBoxUsedNew
             // 
