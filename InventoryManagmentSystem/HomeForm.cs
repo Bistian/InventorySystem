@@ -54,15 +54,15 @@ namespace InventoryManagmentSystem
                    "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
                    "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE)) " +
 
-                   "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbBoots " +
+                   "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbBoots " +
                    "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location " +
                    "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE)) " +
 
-                   "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbHelmets " +
+                   "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbHelmets " +
                    "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location " +
                    "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE))  " +
 
-                   "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbJackets " +
+                   "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbJackets " +
                    "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location " +
                    "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE))  " +
                    "ORDER BY DueDate");
@@ -161,5 +161,64 @@ namespace InventoryManagmentSystem
         {
             OpenRented();
         }
+
+        private void dataGridViewDueIn10_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ClientPopUp(e, true);
+        }
+
+        private void dataGridViewPast30_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ClientPopUp(e, false);
+        }
+
+        /// <summary>
+        /// Pop up with client information when client's name is clicked on table.
+        /// </summary>
+        /// <param name="e">Event that was triggered.</param>
+        /// <param name="isDue10">Boolean representing which table was clicked.</param>
+        private void ClientPopUp(DataGridViewCellEventArgs e, bool isDue10)
+        {
+            // Check if the clicked cell is in a row
+            if (e.RowIndex < 0) { return; }
+
+            // Column 2 is the only one this function should operate on.
+            if (e.ColumnIndex != 2) { return; }
+
+            // Get the data from rentee at that row.
+            DataGridViewRow row;
+            if (isDue10)
+            {
+                row = dataGridViewDueIn10.Rows[e.RowIndex];
+            }
+            else
+            {
+                row = dataGridViewPast30.Rows[e.RowIndex];
+            }
+
+
+            string rentee = row.Cells[2].Value.ToString();
+
+            // Check if there is at least one item with that name on the clints table.
+            string query = (
+                "SELECT COUNT(*) FROM tbClients " +
+                "WHERE Name ='" + rentee + "'");
+
+            cm = new SqlCommand(query, con);
+            con.Open();
+
+            // If there are no matches with that name, return.
+            if ((int)cm.ExecuteScalar() <= 0)
+            {
+                con.Close();
+                return;
+            }
+            con.Close();
+
+            // Show the details of the row in a new form or dialog
+            DialogBoxClient dialogBoxClient = new DialogBoxClient(rentee);
+            dialogBoxClient.ShowDialog();
+        }
+
     }
 }

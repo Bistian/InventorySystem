@@ -143,6 +143,7 @@
             this.dataGridViewDueIn10.RowTemplate.Height = 24;
             this.dataGridViewDueIn10.Size = new System.Drawing.Size(226, 377);
             this.dataGridViewDueIn10.TabIndex = 9;
+            this.dataGridViewDueIn10.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDueIn10_CellClick);
             // 
             // num
             // 
@@ -212,6 +213,7 @@
             this.dataGridViewPast30.RowTemplate.Height = 24;
             this.dataGridViewPast30.Size = new System.Drawing.Size(226, 377);
             this.dataGridViewPast30.TabIndex = 10;
+            this.dataGridViewPast30.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPast30_CellClick);
             // 
             // nums
             // 
