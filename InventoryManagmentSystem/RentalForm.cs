@@ -190,6 +190,13 @@ namespace InventoryManagmentSystem
                 NewOrExistingCustomerModuleForm ModForm = new NewOrExistingCustomerModuleForm();
                 ModForm.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ExistingCustomerModuleForm ModForm = new ExistingCustomerModuleForm();
+            ModForm.isReturn = true;
+            ModForm.ShowDialog();
+        }
     }
 
 }
