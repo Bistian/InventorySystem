@@ -24,6 +24,7 @@ namespace InventoryManagmentSystem
         SqlDataReader dr;
         #endregion SQL_Variables
 
+        public bool isReturn = false;
         public ExistingCustomerModuleForm()
         {
             InitializeComponent();
@@ -32,23 +33,35 @@ namespace InventoryManagmentSystem
 
         private void dataGridDept_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            String colName = dataGridUsers.Columns[e.ColumnIndex].Name;
- 
-            NewRentalModuleForm UserInfoModule = new NewRentalModuleForm();
-            UserInfoModule.txtBoxCustomerName.Text = dataGridUsers.Rows[e.RowIndex].Cells["Name"].Value.ToString();
-            UserInfoModule.txtBoxPhone.Text = dataGridUsers.Rows[e.RowIndex].Cells["Phone"].Value.ToString();
-            UserInfoModule.txtBoxEmail.Text = dataGridUsers.Rows[e.RowIndex].Cells["Email"].Value.ToString();
-            UserInfoModule.txtBoxAddress.Text = dataGridUsers.Rows[e.RowIndex].Cells["Address"].Value.ToString();
-            UserInfoModule.txtBoxDriversLicense.Text = dataGridUsers.Rows[e.RowIndex].Cells["DriversLicense"].Value.ToString();
-            UserInfoModule.txtBoxRep.Text = dataGridUsers.Rows[e.RowIndex].Cells["Rep"].Value.ToString();
-            UserInfoModule.TxtCustomerInfo.Text = "Confirm customer info";
+            if (MessageBox.Show("Are you sure you want to select this client", "Continue", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                String colName = dataGridUsers.Columns[e.ColumnIndex].Name;
+                if (!isReturn)
+                {
+                    NewRentalModuleForm UserInfoModule = new NewRentalModuleForm();
+                    UserInfoModule.txtBoxCustomerName.Text = dataGridUsers.Rows[e.RowIndex].Cells["Name"].Value.ToString();
+                    UserInfoModule.txtBoxPhone.Text = dataGridUsers.Rows[e.RowIndex].Cells["Phone"].Value.ToString();
+                    UserInfoModule.txtBoxEmail.Text = dataGridUsers.Rows[e.RowIndex].Cells["Email"].Value.ToString();
+                    UserInfoModule.txtBoxAddress.Text = dataGridUsers.Rows[e.RowIndex].Cells["Address"].Value.ToString();
+                    UserInfoModule.txtBoxDriversLicense.Text = dataGridUsers.Rows[e.RowIndex].Cells["DriversLicense"].Value.ToString();
+                    UserInfoModule.txtBoxRep.Text = dataGridUsers.Rows[e.RowIndex].Cells["Rep"].Value.ToString();
+                    UserInfoModule.TxtCustomerInfo.Text = "Confirm customer info";
 
-            this.Dispose();
-            UserInfoModule.ExistingUser = true;
-            UserInfoModule.DisableLicense();
-            UserInfoModule.ShowDialog();
+                    this.Dispose();
+                    UserInfoModule.ExistingUser = true;
+                    UserInfoModule.DisableLicense();
+                    UserInfoModule.ShowDialog();
+                }
+                else if (isReturn)
+                {
+                    ReturnModule RentalReturn = new ReturnModule(dataGridUsers.Rows[e.RowIndex].Cells["Name"].Value.ToString(),
+                                              dataGridUsers.Rows[e.RowIndex].Cells["DriversLicense"].Value.ToString());
 
-
+                    this.Dispose();
+                    RentalReturn.ShowDialog();
+                    isReturn = false;
+                }
+            }
         }
 
         private void customButton1_Click(object sender, EventArgs e)

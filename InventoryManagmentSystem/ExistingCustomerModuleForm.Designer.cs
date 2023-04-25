@@ -151,7 +151,6 @@
             this.DriversLicense,
             this.Address,
             this.Rep});
-            this.dataGridUsers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridUsers.EnableHeadersVisualStyles = false;
             this.dataGridUsers.Location = new System.Drawing.Point(0, 64);
             this.dataGridUsers.Name = "dataGridUsers";
