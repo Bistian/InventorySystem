@@ -208,5 +208,32 @@ namespace InventoryManagmentSystem
                 con.Close();
             }
         }
+
+        private void dataGridInv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            String colName = dataGridInv.Columns[e.ColumnIndex].Name;
+            if (colName == "Edit")
+            {
+                UserModuleForm userModule = new UserModuleForm();
+                userModule.UserNameTxt.Text = dataGridInv.Rows[e.RowIndex].Cells[1].Value.ToString();
+                userModule.NameTxtBox.Text = dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+                userModule.SaveButton.Enabled = true;
+                userModule.UserNameTxt.Enabled = false;
+                userModule.ShowDialog();
+            }
+            else if (colName == "Delete")
+            {
+                if (MessageBox.Show("Are you sure you want to delete this item?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    con.Open();
+                    cm = new SqlCommand("DELETE FROM tbUser WHERE username LIKE '" + dataGridInv.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
+                    cm.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Item has been successfully deleted");
+                }
+            }
+            LoadInventory();
+        }
     }
 }

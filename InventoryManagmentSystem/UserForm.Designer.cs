@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BottomPanel = new System.Windows.Forms.Panel();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.UserTxt = new System.Windows.Forms.Label();
@@ -86,7 +86,7 @@
             this.UserTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.UserTxt.Location = new System.Drawing.Point(12, 14);
             this.UserTxt.Name = "UserTxt";
-            this.UserTxt.Size = new System.Drawing.Size(164, 29);
+            this.UserTxt.Size = new System.Drawing.Size(130, 24);
             this.UserTxt.TabIndex = 14;
             this.UserTxt.Text = "Manage Users";
             this.UserTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -96,14 +96,14 @@
             this.dataGridUser.AllowUserToAddRows = false;
             this.dataGridUser.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridUser.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridUser.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridUser.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridUser.ColumnHeadersHeight = 30;
             this.dataGridUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -140,7 +140,7 @@
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column1.Width = 123;
+            this.Column1.Width = 97;
             // 
             // Column2
             // 
@@ -150,7 +150,7 @@
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.Width = 110;
+            this.Column2.Width = 88;
             // 
             // Column3
             // 
@@ -191,7 +191,7 @@
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.DepartmentsTxt.Location = new System.Drawing.Point(12, 14);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(164, 29);
+            this.DepartmentsTxt.Size = new System.Drawing.Size(130, 24);
             this.DepartmentsTxt.TabIndex = 14;
             this.DepartmentsTxt.Text = "Manage Users";
             this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -218,7 +218,7 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label1.Location = new System.Drawing.Point(686, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 20);
+            this.label1.Size = new System.Drawing.Size(59, 17);
             this.label1.TabIndex = 19;
             this.label1.Text = "Search";
             // 
@@ -227,7 +227,7 @@
             this.searchBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.searchBar.Location = new System.Drawing.Point(764, 18);
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(208, 26);
+            this.searchBar.Size = new System.Drawing.Size(208, 23);
             this.searchBar.TabIndex = 18;
             this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged_1);
             // 
@@ -247,7 +247,7 @@
             // 
             // UserForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 542);
             this.Controls.Add(this.panel1);

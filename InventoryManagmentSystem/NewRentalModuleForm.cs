@@ -139,9 +139,20 @@ namespace InventoryManagmentSystem
         {
             try
             {
-                if (MessageBox.Show("Are you sure you want to update this Client?", "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(
+                    "Are you sure you want to update this Client?", 
+                    "Update Client", 
+                    MessageBoxButtons.YesNo, 
+                    MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cm = new SqlCommand("UPDATE tbClients SET Name = @Name,Phone = @Phone,Email = @Email,Academy = @Academy,DayNight = @DayNight,DriversLicenseNumber = @DriversLicenseNumber,Address = @Address,FireTecRepresentative = @FireTecRepresentative WHERE DriversLicenseNumber LIKE " + txtBoxDriversLicense.Text, con);
+                    cm = new SqlCommand(
+                        "UPDATE tbClients " +
+                        "SET Name = @Name,Phone = @Phone,Email = " +
+                        "@Email,Academy = @Academy,DayNight = " +
+                        "@DayNight,DriversLicenseNumber = @DriversLicenseNumber," +
+                        "Address = @Address,FireTecRepresentative = @FireTecRepresentative " +
+                        "WHERE DriversLicenseNumber LIKE " + txtBoxDriversLicense.Text, con);
+
                     cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
                     cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
                     cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
