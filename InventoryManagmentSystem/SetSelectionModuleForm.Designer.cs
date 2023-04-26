@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetSelectionModuleForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -37,8 +38,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetSelectionModuleForm));
             this.InventoryPanel = new System.Windows.Forms.Panel();
+            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.NewItemTxt = new System.Windows.Forms.Label();
             this.comboBoxSet = new System.Windows.Forms.ComboBox();
             this.labelRentalOptions = new System.Windows.Forms.Label();
@@ -65,19 +66,18 @@
             this.UsedNew = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColorMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewClient = new System.Windows.Forms.DataGridView();
-            this.panelTitle = new System.Windows.Forms.Panel();
-            this.labelClientName = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SerialNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CloseButton = new InventoryManagmentSystem.CustomButton();
+            this.panelTitle = new System.Windows.Forms.Panel();
+            this.labelClientName = new System.Windows.Forms.Label();
             this.InventoryPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.panelInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).BeginInit();
             this.panelTitle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
             // 
             // InventoryPanel
@@ -90,6 +90,20 @@
             this.InventoryPanel.Name = "InventoryPanel";
             this.InventoryPanel.Size = new System.Drawing.Size(1140, 64);
             this.InventoryPanel.TabIndex = 24;
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
+            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
+            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
+            this.CloseButton.Location = new System.Drawing.Point(1076, 11);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(4);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(36, 42);
+            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CloseButton.TabIndex = 68;
+            this.CloseButton.TabStop = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // NewItemTxt
             // 
@@ -113,8 +127,8 @@
             this.comboBoxSet.FormattingEnabled = true;
             this.comboBoxSet.Items.AddRange(new object[] {
             "Full Set",
-            "Set Helmet Only",
-            "Set Boots Only",
+            "Set + Helmet",
+            "Set + Boots",
             "Pants & Jacket"});
             this.comboBoxSet.Location = new System.Drawing.Point(21, 77);
             this.comboBoxSet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -470,30 +484,6 @@
             this.dataGridViewClient.TabIndex = 40;
             this.dataGridViewClient.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellContentClick);
             // 
-            // panelTitle
-            // 
-            this.panelTitle.BackColor = System.Drawing.Color.Maroon;
-            this.panelTitle.Controls.Add(this.labelClientName);
-            this.panelTitle.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelTitle.Location = new System.Drawing.Point(248, 360);
-            this.panelTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panelTitle.Name = "panelTitle";
-            this.panelTitle.Size = new System.Drawing.Size(892, 26);
-            this.panelTitle.TabIndex = 41;
-            // 
-            // labelClientName
-            // 
-            this.labelClientName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelClientName.AutoSize = true;
-            this.labelClientName.BackColor = System.Drawing.Color.Transparent;
-            this.labelClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelClientName.ForeColor = System.Drawing.Color.White;
-            this.labelClientName.Location = new System.Drawing.Point(5, 0);
-            this.labelClientName.Name = "labelClientName";
-            this.labelClientName.Size = new System.Drawing.Size(52, 20);
-            this.labelClientName.TabIndex = 0;
-            this.labelClientName.Text = "Client";
-            // 
             // dataGridViewTextBoxColumn1
             // 
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
@@ -528,19 +518,29 @@
             this.SerialNum.Name = "SerialNum";
             this.SerialNum.ReadOnly = true;
             // 
-            // CloseButton
+            // panelTitle
             // 
-            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
-            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
-            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(1076, 11);
-            this.CloseButton.Margin = new System.Windows.Forms.Padding(4);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(36, 42);
-            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CloseButton.TabIndex = 68;
-            this.CloseButton.TabStop = false;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.panelTitle.BackColor = System.Drawing.Color.Maroon;
+            this.panelTitle.Controls.Add(this.labelClientName);
+            this.panelTitle.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelTitle.Location = new System.Drawing.Point(248, 360);
+            this.panelTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelTitle.Name = "panelTitle";
+            this.panelTitle.Size = new System.Drawing.Size(892, 26);
+            this.panelTitle.TabIndex = 41;
+            // 
+            // labelClientName
+            // 
+            this.labelClientName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelClientName.AutoSize = true;
+            this.labelClientName.BackColor = System.Drawing.Color.Transparent;
+            this.labelClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelClientName.ForeColor = System.Drawing.Color.White;
+            this.labelClientName.Location = new System.Drawing.Point(5, 0);
+            this.labelClientName.Name = "labelClientName";
+            this.labelClientName.Size = new System.Drawing.Size(52, 20);
+            this.labelClientName.TabIndex = 0;
+            this.labelClientName.Text = "Client";
             // 
             // SetSelectionModuleForm
             // 
@@ -559,13 +559,13 @@
             this.Text = "SetSelectionModuleForm";
             this.InventoryPanel.ResumeLayout(false);
             this.InventoryPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             this.panelInput.ResumeLayout(false);
             this.panelInput.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).EndInit();
             this.panelTitle.ResumeLayout(false);
             this.panelTitle.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -55,6 +55,7 @@
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -72,6 +73,12 @@
     </Compile>
     <Compile Include="CustomButton.Designer.cs">
       <DependentUpon>CustomButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseCreationModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatabaseCreationModule.Designer.cs">
+      <DependentUpon>DatabaseCreationModule.cs</DependentUpon>
     </Compile>
     <Compile Include="DepartmentForm.cs">
       <SubType>Form</SubType>
@@ -215,6 +222,9 @@
     </Compile>
     <EmbeddedResource Include="CustomButton.resx">
       <DependentUpon>CustomButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseCreationModule.resx">
+      <DependentUpon>DatabaseCreationModule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DepartmentForm.resx">
       <DependentUpon>DepartmentForm.cs</DependentUpon>
