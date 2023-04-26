@@ -61,24 +61,6 @@ namespace InventoryManagmentSystem
             }
             query += "ORDER BY DueDate";
 
-            /*"SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbPants " +
-            "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
-            "WHERE DueDate IS NOT NULL AND DueDate " + sign + " CONVERT(DATE, GETDATE()) " +
-
-            "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbBoots " +
-            "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
-            "WHERE DueDate IS NOT NULL AND DueDate " + sign + " CONVERT(DATE, GETDATE()) " +
-
-            "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbHelmets " +
-            "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
-            "WHERE DueDate IS NOT NULL AND DueDate " + sign + " CONVERT(DATE, GETDATE()) " +
-
-            "UNION SELECT ItemType, Location, DueDate, SerialNumber FROM tbJackets " +
-            "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
-            "WHERE DueDate IS NOT NULL AND DueDate " + sign + " CONVERT(DATE, GETDATE()) " +
-
-            "ORDER BY DueDate";*/
-
             return query;
         }
 
@@ -168,8 +150,6 @@ namespace InventoryManagmentSystem
             string query = (
                 "SELECT COUNT(*) FROM tbClients " +
                 "WHERE Name ='" + rentee + "'");
-
-            //string q = "SELECT Name FROM tbClients WHERE DriversLicenseNumber = rentee";
 
             cm = new SqlCommand(query, con);
             con.Open();
