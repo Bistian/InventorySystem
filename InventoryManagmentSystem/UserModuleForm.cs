@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using Microsoft.Win32.SafeHandles;
+using System.Configuration;
 
 namespace InventoryManagmentSystem
 {
     public partial class UserModuleForm : Form
     {
         #region SQL_Variables
-        //Database Path
-        static string dbPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database\\dbMS.mdf;");
+        // Get the current connection string
+        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         //Creating command
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename=" + dbPath + " Integrated Security=True;Connect Timeout=30");
+        SqlConnection con = new SqlConnection(connectionString);
         //Creating command
         SqlCommand cm = new SqlCommand();
         //Flag to switch between adding new user or updating.

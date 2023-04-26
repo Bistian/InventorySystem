@@ -147,3 +147,4 @@ C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\obj\Debug\Inventory
 C:\Users\sebas\OneDrive\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.WorkOrderModuleForm.resources
 C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.WorkOrderModuleForm.resources
 C:\Users\sebas\OneDrive\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ReturnModule.resources
+C:\Users\sebas\OneDrive\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.DatabaseCreationModule.resources
