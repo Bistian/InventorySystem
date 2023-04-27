@@ -148,3 +148,8 @@ C:\Users\sebas\OneDrive\Desktop\InventorySystem\InventoryManagmentSystem\obj\Deb
 C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.WorkOrderModuleForm.resources
 C:\Users\sebas\OneDrive\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ReturnModule.resources
 C:\Users\sebas\OneDrive\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.DatabaseCreationModule.resources
+C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.DatabaseCreationModule.resources
+C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ExcelImportForm.resources
+C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ExcelUserPromptForm.resources
+C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ReturnModule.resources
+C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.WorkOrderModuleForm.resources

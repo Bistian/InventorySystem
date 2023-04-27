@@ -8,6 +8,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Linq;
+using System.Configuration;
 
 namespace InventoryManagmentSystem
 {
@@ -15,10 +16,10 @@ namespace InventoryManagmentSystem
     public partial class ExcelImportForm : Form
     {
         #region SQL_Variables
-        //Database Path
-        static string dbPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database\\dbMS.mdf;");
+        // Get the current connection string
+        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         //Creating command
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename=" + dbPath + " Integrated Security=True;Connect Timeout=30");
+        SqlConnection con = new SqlConnection(connectionString);
         //Creating command
         SqlCommand cm = new SqlCommand();
         //Creatinng Reader
