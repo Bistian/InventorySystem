@@ -1,4 +1,6 @@
-﻿namespace InventoryManagmentSystem
+﻿using static System.Windows.Forms.AxHost;
+
+namespace InventoryManagmentSystem
 {
     partial class ExistingCustomerModuleForm
     {
@@ -38,7 +40,7 @@
             this.searchBar = new System.Windows.Forms.TextBox();
             this.dataGridUsers = new System.Windows.Forms.DataGridView();
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Name1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Academy = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,8 +61,9 @@
             this.InventoryPanel.Controls.Add(this.ExistingCustomerTxt);
             this.InventoryPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.InventoryPanel.Location = new System.Drawing.Point(0, 0);
+            this.InventoryPanel.Margin = new System.Windows.Forms.Padding(2);
             this.InventoryPanel.Name = "InventoryPanel";
-            this.InventoryPanel.Size = new System.Drawing.Size(1000, 64);
+            this.InventoryPanel.Size = new System.Drawing.Size(750, 52);
             this.InventoryPanel.TabIndex = 24;
             // 
             // customButton1
@@ -68,10 +71,9 @@
             this.customButton1.Image = ((System.Drawing.Image)(resources.GetObject("customButton1.Image")));
             this.customButton1.ImageHover = ((System.Drawing.Image)(resources.GetObject("customButton1.ImageHover")));
             this.customButton1.ImageNormal = ((System.Drawing.Image)(resources.GetObject("customButton1.ImageNormal")));
-            this.customButton1.Location = new System.Drawing.Point(951, 8);
-            this.customButton1.Margin = new System.Windows.Forms.Padding(4);
+            this.customButton1.Location = new System.Drawing.Point(713, 6);
             this.customButton1.Name = "customButton1";
-            this.customButton1.Size = new System.Drawing.Size(36, 42);
+            this.customButton1.Size = new System.Drawing.Size(27, 34);
             this.customButton1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.customButton1.TabIndex = 69;
             this.customButton1.TabStop = false;
@@ -86,10 +88,9 @@
             this.ExistingCustomerTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ExistingCustomerTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ExistingCustomerTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.ExistingCustomerTxt.Location = new System.Drawing.Point(16, 16);
-            this.ExistingCustomerTxt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.ExistingCustomerTxt.Location = new System.Drawing.Point(12, 13);
             this.ExistingCustomerTxt.Name = "ExistingCustomerTxt";
-            this.ExistingCustomerTxt.Size = new System.Drawing.Size(222, 29);
+            this.ExistingCustomerTxt.Size = new System.Drawing.Size(177, 24);
             this.ExistingCustomerTxt.TabIndex = 16;
             this.ExistingCustomerTxt.Text = "Select a customer";
             this.ExistingCustomerTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -100,9 +101,10 @@
             this.TopPanel.Controls.Add(this.label1);
             this.TopPanel.Controls.Add(this.searchBar);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TopPanel.Location = new System.Drawing.Point(0, 595);
+            this.TopPanel.Location = new System.Drawing.Point(0, 483);
+            this.TopPanel.Margin = new System.Windows.Forms.Padding(2);
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(1000, 61);
+            this.TopPanel.Size = new System.Drawing.Size(750, 50);
             this.TopPanel.TabIndex = 25;
             // 
             // label1
@@ -111,24 +113,28 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(702, 27);
+            this.label1.Location = new System.Drawing.Point(526, 22);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 20);
+            this.label1.Size = new System.Drawing.Size(59, 17);
             this.label1.TabIndex = 19;
             this.label1.Text = "Search";
             // 
             // searchBar
             // 
             this.searchBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchBar.Location = new System.Drawing.Point(780, 27);
+            this.searchBar.Location = new System.Drawing.Point(585, 22);
+            this.searchBar.Margin = new System.Windows.Forms.Padding(2);
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(208, 22);
+            this.searchBar.Size = new System.Drawing.Size(157, 20);
             this.searchBar.TabIndex = 18;
             this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
             // 
             // dataGridUsers
             // 
             this.dataGridUsers.AllowUserToAddRows = false;
+            this.dataGridUsers.AllowUserToDeleteRows = false;
+            this.dataGridUsers.AllowUserToResizeRows = false;
             this.dataGridUsers.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridUsers.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -143,7 +149,7 @@
             this.dataGridUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Num,
-            this.Name,
+            this.Name1,
             this.Phone,
             this.Email,
             this.Academy,
@@ -151,15 +157,17 @@
             this.DriversLicense,
             this.Address,
             this.Rep});
+            this.dataGridUsers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridUsers.EnableHeadersVisualStyles = false;
-            this.dataGridUsers.Location = new System.Drawing.Point(0, 64);
+            this.dataGridUsers.Location = new System.Drawing.Point(0, 52);
+            this.dataGridUsers.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridUsers.Name = "dataGridUsers";
             this.dataGridUsers.RowHeadersVisible = false;
             this.dataGridUsers.RowHeadersWidth = 51;
             this.dataGridUsers.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridUsers.Size = new System.Drawing.Size(1000, 531);
+            this.dataGridUsers.Size = new System.Drawing.Size(750, 431);
             this.dataGridUsers.TabIndex = 26;
-            this.dataGridUsers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDept_CellContentClick);
+            this.dataGridUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridUsers_CellClick);
             // 
             // Num
             // 
@@ -169,12 +177,12 @@
             this.Num.MinimumWidth = 6;
             this.Num.Name = "Num";
             // 
-            // Name
+            // Name1
             // 
-            this.Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Name.HeaderText = "Name";
-            this.Name.MinimumWidth = 6;
-            this.Name.Name = "Name";
+            this.Name1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Name1.HeaderText = "Name";
+            this.Name1.MinimumWidth = 6;
+            this.Name1.Name = "Name1";
             // 
             // Phone
             // 
@@ -227,14 +235,16 @@
             // 
             // ExistingCustomerModuleForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1000, 656);
+            this.ClientSize = new System.Drawing.Size(750, 533);
             this.Controls.Add(this.dataGridUsers);
             this.Controls.Add(this.TopPanel);
             this.Controls.Add(this.InventoryPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "ExistingCustomerModuleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExistingCustomerModuleForm";
             this.InventoryPanel.ResumeLayout(false);
@@ -257,7 +267,7 @@
         private System.Windows.Forms.TextBox searchBar;
         private System.Windows.Forms.DataGridView dataGridUsers;
         private System.Windows.Forms.DataGridViewTextBoxColumn Num;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Name1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.DataGridViewTextBoxColumn Academy;

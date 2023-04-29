@@ -152,7 +152,7 @@ namespace InventoryManagmentSystem
                         "@Email,Academy = @Academy,DayNight = " +
                         "@DayNight,DriversLicenseNumber = @DriversLicenseNumber," +
                         "Address = @Address,FireTecRepresentative = @FireTecRepresentative " +
-                        "WHERE DriversLicenseNumber LIKE " + txtBoxDriversLicense.Text, con);
+                        "WHERE DriversLicenseNumber LIKE @DriversLicenseNumber", con);
 
                     cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
                     cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);

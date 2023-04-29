@@ -41,9 +41,9 @@
             this.lablePrice = new System.Windows.Forms.Label();
             this.labelamount = new System.Windows.Forms.Label();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MyLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
@@ -187,7 +187,12 @@
             this.btnPrint.TabIndex = 11;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Visible = false;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // printDialog1
+            // 
+            this.printDialog1.UseEXDialog = true;
             // 
             // CloseButton
             // 
@@ -201,10 +206,6 @@
             this.CloseButton.TabIndex = 13;
             this.CloseButton.TabStop = false;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
-            // 
-            // printDialog1
-            // 
-            this.printDialog1.UseEXDialog = true;
             // 
             // WorkOrderModuleForm
             // 

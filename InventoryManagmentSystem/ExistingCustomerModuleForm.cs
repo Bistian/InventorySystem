@@ -33,35 +33,42 @@ namespace InventoryManagmentSystem
             LoadUsers();
         }
 
-        private void dataGridDept_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridUsers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to select this client", "Continue", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                String colName = dataGridUsers.Columns[e.ColumnIndex].Name;
-                if (!isReturn)
+                try
                 {
-                    NewRentalModuleForm UserInfoModule = new NewRentalModuleForm();
-                    UserInfoModule.txtBoxCustomerName.Text = dataGridUsers.Rows[e.RowIndex].Cells["Name"].Value.ToString();
-                    UserInfoModule.txtBoxPhone.Text = dataGridUsers.Rows[e.RowIndex].Cells["Phone"].Value.ToString();
-                    UserInfoModule.txtBoxEmail.Text = dataGridUsers.Rows[e.RowIndex].Cells["Email"].Value.ToString();
-                    UserInfoModule.txtBoxAddress.Text = dataGridUsers.Rows[e.RowIndex].Cells["Address"].Value.ToString();
-                    UserInfoModule.txtBoxDriversLicense.Text = dataGridUsers.Rows[e.RowIndex].Cells["DriversLicense"].Value.ToString();
-                    UserInfoModule.txtBoxRep.Text = dataGridUsers.Rows[e.RowIndex].Cells["Rep"].Value.ToString();
-                    UserInfoModule.TxtCustomerInfo.Text = "Confirm customer info";
+                    if (!isReturn)
+                    {
+                        NewRentalModuleForm UserInfoModule = new NewRentalModuleForm();
+                        // Name is always index 1, so it is best to leave at that instead of a name tjat could change.
+                        UserInfoModule.txtBoxCustomerName.Text = dataGridUsers.Rows[e.RowIndex].Cells[1].Value.ToString();
+                        UserInfoModule.txtBoxPhone.Text = dataGridUsers.Rows[e.RowIndex].Cells["Phone"].Value.ToString();
+                        UserInfoModule.txtBoxEmail.Text = dataGridUsers.Rows[e.RowIndex].Cells["Email"].Value.ToString();
+                        UserInfoModule.txtBoxAddress.Text = dataGridUsers.Rows[e.RowIndex].Cells["Address"].Value.ToString();
+                        UserInfoModule.txtBoxDriversLicense.Text = dataGridUsers.Rows[e.RowIndex].Cells["DriversLicense"].Value.ToString();
+                        UserInfoModule.txtBoxRep.Text = dataGridUsers.Rows[e.RowIndex].Cells["Rep"].Value.ToString();
+                        UserInfoModule.TxtCustomerInfo.Text = "Confirm customer info";
 
-                    this.Dispose();
-                    UserInfoModule.ExistingUser = true;
-                    UserInfoModule.DisableLicense();
-                    UserInfoModule.ShowDialog();
+                        this.Dispose();
+                        UserInfoModule.ExistingUser = true;
+                        UserInfoModule.DisableLicense();
+                        UserInfoModule.ShowDialog();
+                    }
+                    else if (isReturn)
+                    {
+                        ReturnModule RentalReturn = new ReturnModule(dataGridUsers.Rows[e.RowIndex].Cells[1].Value.ToString(),
+                                                  dataGridUsers.Rows[e.RowIndex].Cells["DriversLicense"].Value.ToString());
+
+                        this.Dispose();
+                        RentalReturn.ShowDialog();
+                        isReturn = false;
+                    }
                 }
-                else if (isReturn)
+                catch (Exception ex)
                 {
-                    ReturnModule RentalReturn = new ReturnModule(dataGridUsers.Rows[e.RowIndex].Cells["Name"].Value.ToString(),
-                                              dataGridUsers.Rows[e.RowIndex].Cells["DriversLicense"].Value.ToString());
-
-                    this.Dispose();
-                    RentalReturn.ShowDialog();
-                    isReturn = false;
+                    Console.WriteLine("ERROR Existing Customer Module:" + ex.Message);
                 }
             }
         }
@@ -112,5 +119,6 @@ namespace InventoryManagmentSystem
             dr.Close();
             con.Close();
         }
+
     }
 }

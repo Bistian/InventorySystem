@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,11 +9,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
 
 namespace InventoryManagmentSystem
 {
     public partial class WorkOrderModuleForm : Form
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="currClient">Client Name</param>
+        /// <param name="DayNight">Period</param>
+        /// <param name="RentalOption">Rental Selection</param>
         public WorkOrderModuleForm(string currClient, string DayNight, string RentalOption)
         {
             InitializeComponent();
@@ -24,7 +33,7 @@ namespace InventoryManagmentSystem
             {
                 if(DayNight == "Day")
                 {
-                labelamount.Text = "$708";
+                    labelamount.Text = "$708";
                 }
                 else if (DayNight == "Night")
                 {
@@ -111,26 +120,38 @@ namespace InventoryManagmentSystem
             // Print the document
             printDocument.Print();*/
 
-        /*    // Create a new PrintDocument object
-            PrintDocument pd = new PrintDocument();
+            /*    // Create a new PrintDocument object
+                PrintDocument pd = new PrintDocument();
 
-            // Set the PrintPage event handler
-            pd.PrintPage += new PrintPageEventHandler(this.PrintPage);
+                // Set the PrintPage event handler
+                pd.PrintPage += new PrintPageEventHandler(this.PrintPage);
 
-            // Show the print dialog and start the print job
-            if (printDialog1.ShowDialog() == DialogResult.OK)
-            {
-                pd.PrinterSettings = printDialog1.PrinterSettings;
-                pd.Print();
-            }*/
+                // Show the print dialog and start the print job
+                if (printDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    pd.PrinterSettings = printDialog1.PrinterSettings;
+                    pd.Print();
+                }*/
 
-            PrintDialog printDialog1 = new PrintDialog();
-            printDialog1.Document = printDocument1;
+            /* PrintDialog printDialog1 = new PrintDialog();
+             printDialog1.Document = printDocument1;
 
-            if (printDialog1.ShowDialog() == DialogResult.OK)
-            {
-                printDocument1.Print();
-            }
+             if (printDialog1.ShowDialog() == DialogResult.OK)
+             {
+                 printDocument1.Print();
+             }*/
+
+            // Create a new PDF document
+            PdfDocument pdfDocument = new PdfDocument();
+
+            // Add a new page to the PDF
+            PdfPage pdfPage = pdfDocument.AddPage();
+
+            // Get the graphics object of the PDF page
+            XGraphics graphics = XGraphics.FromPdfPage(pdfPage);
+
+            // Save the PDF to a file
+            pdfDocument.Save("Form.pdf");
         }
 
         private void PrintPage(object sender, PrintPageEventArgs e)
@@ -139,9 +160,9 @@ namespace InventoryManagmentSystem
             {
                 if(this.BackgroundImage != null)
                 {
-                    // Draw the contents of the form onto the PrintPageEventArgs
+                   /* // Draw the contents of the form onto the PrintPageEventArgs
                     this.DrawToBitmap(new Bitmap(this.Width, this.Height), new Rectangle(Point.Empty, this.Size));
-                    e.Graphics.DrawImageUnscaled(this.BackgroundImage, this.Location);  
+                    e.Graphics.DrawImageUnscaled(this.BackgroundImage, this.Location);  */
                 }
             } 
             catch (Exception ex)

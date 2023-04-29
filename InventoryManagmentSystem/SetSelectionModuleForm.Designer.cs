@@ -87,8 +87,9 @@
             this.InventoryPanel.Controls.Add(this.NewItemTxt);
             this.InventoryPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.InventoryPanel.Location = new System.Drawing.Point(0, 0);
+            this.InventoryPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.InventoryPanel.Name = "InventoryPanel";
-            this.InventoryPanel.Size = new System.Drawing.Size(1140, 64);
+            this.InventoryPanel.Size = new System.Drawing.Size(855, 52);
             this.InventoryPanel.TabIndex = 24;
             // 
             // CloseButton
@@ -96,10 +97,9 @@
             this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
             this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
             this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(1076, 11);
-            this.CloseButton.Margin = new System.Windows.Forms.Padding(4);
+            this.CloseButton.Location = new System.Drawing.Point(807, 9);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(36, 42);
+            this.CloseButton.Size = new System.Drawing.Size(27, 34);
             this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.CloseButton.TabIndex = 68;
             this.CloseButton.TabStop = false;
@@ -114,26 +114,26 @@
             this.NewItemTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NewItemTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.NewItemTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.NewItemTxt.Location = new System.Drawing.Point(16, 16);
-            this.NewItemTxt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.NewItemTxt.Location = new System.Drawing.Point(12, 13);
             this.NewItemTxt.Name = "NewItemTxt";
-            this.NewItemTxt.Size = new System.Drawing.Size(261, 29);
+            this.NewItemTxt.Size = new System.Drawing.Size(207, 24);
             this.NewItemTxt.TabIndex = 16;
             this.NewItemTxt.Text = "Select a rental option";
             this.NewItemTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // comboBoxSet
             // 
+            this.comboBoxSet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSet.FormattingEnabled = true;
             this.comboBoxSet.Items.AddRange(new object[] {
             "Full Set",
             "Set + Helmet",
             "Set + Boots",
             "Pants & Jacket"});
-            this.comboBoxSet.Location = new System.Drawing.Point(21, 77);
-            this.comboBoxSet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxSet.Location = new System.Drawing.Point(16, 63);
+            this.comboBoxSet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxSet.Name = "comboBoxSet";
-            this.comboBoxSet.Size = new System.Drawing.Size(215, 24);
+            this.comboBoxSet.Size = new System.Drawing.Size(162, 21);
             this.comboBoxSet.TabIndex = 25;
             this.comboBoxSet.SelectedIndexChanged += new System.EventHandler(this.comboBoxSet_SelectedIndexChanged);
             // 
@@ -142,48 +142,49 @@
             this.labelRentalOptions.AutoSize = true;
             this.labelRentalOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelRentalOptions.ForeColor = System.Drawing.Color.White;
-            this.labelRentalOptions.Location = new System.Drawing.Point(16, 38);
+            this.labelRentalOptions.Location = new System.Drawing.Point(12, 31);
+            this.labelRentalOptions.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelRentalOptions.Name = "labelRentalOptions";
-            this.labelRentalOptions.Size = new System.Drawing.Size(194, 31);
+            this.labelRentalOptions.Size = new System.Drawing.Size(156, 26);
             this.labelRentalOptions.TabIndex = 26;
             this.labelRentalOptions.Text = "Rental Options";
             // 
             // textBoxHelmet
             // 
-            this.textBoxHelmet.Location = new System.Drawing.Point(13, 210);
-            this.textBoxHelmet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxHelmet.Location = new System.Drawing.Point(10, 171);
+            this.textBoxHelmet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxHelmet.Name = "textBoxHelmet";
-            this.textBoxHelmet.Size = new System.Drawing.Size(176, 22);
+            this.textBoxHelmet.Size = new System.Drawing.Size(133, 20);
             this.textBoxHelmet.TabIndex = 27;
             this.textBoxHelmet.Click += new System.EventHandler(this.textBoxHelmet_TextChanged);
             this.textBoxHelmet.TextChanged += new System.EventHandler(this.textBoxHelmet_TextChanged);
             // 
             // textBoxJacket
             // 
-            this.textBoxJacket.Location = new System.Drawing.Point(12, 265);
-            this.textBoxJacket.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxJacket.Location = new System.Drawing.Point(9, 215);
+            this.textBoxJacket.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxJacket.Name = "textBoxJacket";
-            this.textBoxJacket.Size = new System.Drawing.Size(176, 22);
+            this.textBoxJacket.Size = new System.Drawing.Size(133, 20);
             this.textBoxJacket.TabIndex = 28;
             this.textBoxJacket.Click += new System.EventHandler(this.textBoxJacket_TextChanged);
             this.textBoxJacket.TextChanged += new System.EventHandler(this.textBoxJacket_TextChanged);
             // 
             // textBoxPants
             // 
-            this.textBoxPants.Location = new System.Drawing.Point(13, 323);
-            this.textBoxPants.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxPants.Location = new System.Drawing.Point(10, 262);
+            this.textBoxPants.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPants.Name = "textBoxPants";
-            this.textBoxPants.Size = new System.Drawing.Size(176, 22);
+            this.textBoxPants.Size = new System.Drawing.Size(133, 20);
             this.textBoxPants.TabIndex = 29;
             this.textBoxPants.Click += new System.EventHandler(this.textBoxPants_TextChanged);
             this.textBoxPants.TextChanged += new System.EventHandler(this.textBoxPants_TextChanged);
             // 
             // textBoxBoots
             // 
-            this.textBoxBoots.Location = new System.Drawing.Point(12, 379);
-            this.textBoxBoots.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxBoots.Location = new System.Drawing.Point(9, 308);
+            this.textBoxBoots.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxBoots.Name = "textBoxBoots";
-            this.textBoxBoots.Size = new System.Drawing.Size(176, 22);
+            this.textBoxBoots.Size = new System.Drawing.Size(133, 20);
             this.textBoxBoots.TabIndex = 30;
             this.textBoxBoots.Click += new System.EventHandler(this.textBoxBoots_TextChanged);
             this.textBoxBoots.TextChanged += new System.EventHandler(this.textBoxBoots_TextChanged);
@@ -193,9 +194,10 @@
             this.lableHelmet.AutoSize = true;
             this.lableHelmet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lableHelmet.ForeColor = System.Drawing.Color.White;
-            this.lableHelmet.Location = new System.Drawing.Point(9, 188);
+            this.lableHelmet.Location = new System.Drawing.Point(7, 153);
+            this.lableHelmet.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lableHelmet.Name = "lableHelmet";
-            this.lableHelmet.Size = new System.Drawing.Size(121, 20);
+            this.lableHelmet.Size = new System.Drawing.Size(101, 17);
             this.lableHelmet.TabIndex = 31;
             this.lableHelmet.Text = "Search Helmet";
             // 
@@ -204,9 +206,10 @@
             this.labelJacket.AutoSize = true;
             this.labelJacket.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelJacket.ForeColor = System.Drawing.Color.White;
-            this.labelJacket.Location = new System.Drawing.Point(8, 243);
+            this.labelJacket.Location = new System.Drawing.Point(6, 197);
+            this.labelJacket.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelJacket.Name = "labelJacket";
-            this.labelJacket.Size = new System.Drawing.Size(116, 20);
+            this.labelJacket.Size = new System.Drawing.Size(98, 17);
             this.labelJacket.TabIndex = 32;
             this.labelJacket.Text = "Search Jacket";
             // 
@@ -215,9 +218,10 @@
             this.labelPants.AutoSize = true;
             this.labelPants.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPants.ForeColor = System.Drawing.Color.White;
-            this.labelPants.Location = new System.Drawing.Point(9, 301);
+            this.labelPants.Location = new System.Drawing.Point(7, 245);
+            this.labelPants.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPants.Name = "labelPants";
-            this.labelPants.Size = new System.Drawing.Size(110, 20);
+            this.labelPants.Size = new System.Drawing.Size(93, 17);
             this.labelPants.TabIndex = 33;
             this.labelPants.Text = "Search Pants";
             // 
@@ -226,19 +230,20 @@
             this.labelBoots.AutoSize = true;
             this.labelBoots.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelBoots.ForeColor = System.Drawing.Color.White;
-            this.labelBoots.Location = new System.Drawing.Point(8, 357);
+            this.labelBoots.Location = new System.Drawing.Point(6, 290);
+            this.labelBoots.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelBoots.Name = "labelBoots";
-            this.labelBoots.Size = new System.Drawing.Size(111, 20);
+            this.labelBoots.Size = new System.Drawing.Size(93, 17);
             this.labelBoots.TabIndex = 34;
             this.labelBoots.Text = "Search Boots";
             // 
             // BtnNewItem
             // 
             this.BtnNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnNewItem.Location = new System.Drawing.Point(13, 415);
-            this.BtnNewItem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BtnNewItem.Location = new System.Drawing.Point(10, 337);
+            this.BtnNewItem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BtnNewItem.Name = "BtnNewItem";
-            this.BtnNewItem.Size = new System.Drawing.Size(107, 28);
+            this.BtnNewItem.Size = new System.Drawing.Size(80, 23);
             this.BtnNewItem.TabIndex = 35;
             this.BtnNewItem.Text = "New Item";
             this.BtnNewItem.UseVisualStyleBackColor = true;
@@ -262,20 +267,20 @@
             this.panelInput.Controls.Add(this.textBoxPants);
             this.panelInput.Controls.Add(this.lableHelmet);
             this.panelInput.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelInput.Location = new System.Drawing.Point(0, 64);
-            this.panelInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelInput.Location = new System.Drawing.Point(0, 52);
+            this.panelInput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelInput.Name = "panelInput";
-            this.panelInput.Size = new System.Drawing.Size(248, 454);
+            this.panelInput.Size = new System.Drawing.Size(186, 369);
             this.panelInput.TabIndex = 37;
             // 
             // btnContinue
             // 
             this.btnContinue.BackColor = System.Drawing.Color.Lime;
             this.btnContinue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnContinue.Location = new System.Drawing.Point(134, 415);
-            this.btnContinue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnContinue.Location = new System.Drawing.Point(100, 337);
+            this.btnContinue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnContinue.Name = "btnContinue";
-            this.btnContinue.Size = new System.Drawing.Size(107, 28);
+            this.btnContinue.Size = new System.Drawing.Size(80, 23);
             this.btnContinue.TabIndex = 38;
             this.btnContinue.Text = "Continue";
             this.btnContinue.UseVisualStyleBackColor = false;
@@ -286,17 +291,19 @@
             this.labelDueDate.AutoSize = true;
             this.labelDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDueDate.ForeColor = System.Drawing.Color.White;
-            this.labelDueDate.Location = new System.Drawing.Point(80, 113);
+            this.labelDueDate.Location = new System.Drawing.Point(60, 92);
+            this.labelDueDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelDueDate.Name = "labelDueDate";
-            this.labelDueDate.Size = new System.Drawing.Size(94, 25);
+            this.labelDueDate.Size = new System.Drawing.Size(78, 20);
             this.labelDueDate.TabIndex = 37;
             this.labelDueDate.Text = "Due Date";
             // 
             // DatepickerDue
             // 
-            this.DatepickerDue.Location = new System.Drawing.Point(3, 141);
+            this.DatepickerDue.Location = new System.Drawing.Point(2, 115);
+            this.DatepickerDue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.DatepickerDue.Name = "DatepickerDue";
-            this.DatepickerDue.Size = new System.Drawing.Size(239, 22);
+            this.DatepickerDue.Size = new System.Drawing.Size(180, 20);
             this.DatepickerDue.TabIndex = 36;
             // 
             // dataGridInv
@@ -333,7 +340,8 @@
             this.dataGridInv.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridInv.EnableHeadersVisualStyles = false;
             this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridInv.Location = new System.Drawing.Point(248, 64);
+            this.dataGridInv.Location = new System.Drawing.Point(186, 52);
+            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridInv.Name = "dataGridInv";
             this.dataGridInv.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -349,7 +357,7 @@
             this.dataGridInv.RowTemplate.Height = 24;
             this.dataGridInv.RowTemplate.ReadOnly = true;
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridInv.Size = new System.Drawing.Size(892, 278);
+            this.dataGridInv.Size = new System.Drawing.Size(669, 226);
             this.dataGridInv.TabIndex = 39;
             this.dataGridInv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellContentClick);
             // 
@@ -459,8 +467,8 @@
             this.dataGridViewClient.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridViewClient.EnableHeadersVisualStyles = false;
             this.dataGridViewClient.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dataGridViewClient.Location = new System.Drawing.Point(248, 386);
-            this.dataGridViewClient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
+            this.dataGridViewClient.Location = new System.Drawing.Point(186, 314);
+            this.dataGridViewClient.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.dataGridViewClient.Name = "dataGridViewClient";
             this.dataGridViewClient.ReadOnly = true;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -480,7 +488,7 @@
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.Window;
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            this.dataGridViewClient.Size = new System.Drawing.Size(892, 132);
+            this.dataGridViewClient.Size = new System.Drawing.Size(669, 107);
             this.dataGridViewClient.TabIndex = 40;
             this.dataGridViewClient.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellContentClick);
             // 
@@ -523,10 +531,10 @@
             this.panelTitle.BackColor = System.Drawing.Color.Maroon;
             this.panelTitle.Controls.Add(this.labelClientName);
             this.panelTitle.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelTitle.Location = new System.Drawing.Point(248, 360);
-            this.panelTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelTitle.Location = new System.Drawing.Point(186, 293);
+            this.panelTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelTitle.Name = "panelTitle";
-            this.panelTitle.Size = new System.Drawing.Size(892, 26);
+            this.panelTitle.Size = new System.Drawing.Size(669, 21);
             this.panelTitle.TabIndex = 41;
             // 
             // labelClientName
@@ -536,24 +544,26 @@
             this.labelClientName.BackColor = System.Drawing.Color.Transparent;
             this.labelClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelClientName.ForeColor = System.Drawing.Color.White;
-            this.labelClientName.Location = new System.Drawing.Point(5, 0);
+            this.labelClientName.Location = new System.Drawing.Point(4, 0);
+            this.labelClientName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelClientName.Name = "labelClientName";
-            this.labelClientName.Size = new System.Drawing.Size(52, 20);
+            this.labelClientName.Size = new System.Drawing.Size(43, 17);
             this.labelClientName.TabIndex = 0;
             this.labelClientName.Text = "Client";
             // 
             // SetSelectionModuleForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1140, 518);
+            this.ClientSize = new System.Drawing.Size(855, 421);
             this.Controls.Add(this.panelTitle);
             this.Controls.Add(this.dataGridViewClient);
             this.Controls.Add(this.dataGridInv);
             this.Controls.Add(this.panelInput);
             this.Controls.Add(this.InventoryPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SetSelectionModuleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SetSelectionModuleForm";

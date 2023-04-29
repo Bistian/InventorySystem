@@ -83,24 +83,35 @@ namespace InventoryManagmentSystem
             // Change the styling for the date column.
             dataGridView1.Columns["DueDate"].DefaultCellStyle.Format = "d";
 
-            dataGridView1.Rows.Clear();
-            cm = new SqlCommand(QueryItems(), con);
-            con.Open();
-            dr = cm.ExecuteReader();
-
-            int i = 0;
-            while (dr.Read())
+            try
             {
-                ++i;
-                dataGridView1.Rows.Add(i,
-                    dr[0].ToString(),
-                    dr[1],
-                    dr[2].ToString()
-                );
-            }
+                dataGridView1.Rows.Clear();
+                cm = new SqlCommand(QueryItems(), con);
+                con.Open();
+                dr = cm.ExecuteReader();
 
-            dr.Close();
-            con.Close();
+                int i = 0;
+                while (dr.Read())
+                {
+                    ++i;
+                    Console.WriteLine(dataGridView1.Rows[i]);
+                    dataGridView1.Rows.Add(i,
+                        dr[0].ToString(),
+                        dr[1],
+                        dr[2].ToString()
+                    );
+                }
+
+                dr.Close();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                dr.Close();
+                con.Close();
+                Console.WriteLine("ERROR DialogBoxCliets -> SetTable(): " + ex.ToString());
+            }
+            
         }
 
         private void CloseUserModuel_Click(object sender, EventArgs e)
