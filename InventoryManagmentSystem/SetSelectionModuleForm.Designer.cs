@@ -87,7 +87,7 @@
             this.InventoryPanel.Controls.Add(this.NewItemTxt);
             this.InventoryPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.InventoryPanel.Location = new System.Drawing.Point(0, 0);
-            this.InventoryPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.InventoryPanel.Margin = new System.Windows.Forms.Padding(2);
             this.InventoryPanel.Name = "InventoryPanel";
             this.InventoryPanel.Size = new System.Drawing.Size(855, 52);
             this.InventoryPanel.TabIndex = 24;
@@ -131,7 +131,7 @@
             "Set + Boots",
             "Pants & Jacket"});
             this.comboBoxSet.Location = new System.Drawing.Point(16, 63);
-            this.comboBoxSet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxSet.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxSet.Name = "comboBoxSet";
             this.comboBoxSet.Size = new System.Drawing.Size(162, 21);
             this.comboBoxSet.TabIndex = 25;
@@ -152,7 +152,7 @@
             // textBoxHelmet
             // 
             this.textBoxHelmet.Location = new System.Drawing.Point(10, 171);
-            this.textBoxHelmet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxHelmet.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxHelmet.Name = "textBoxHelmet";
             this.textBoxHelmet.Size = new System.Drawing.Size(133, 20);
             this.textBoxHelmet.TabIndex = 27;
@@ -162,7 +162,7 @@
             // textBoxJacket
             // 
             this.textBoxJacket.Location = new System.Drawing.Point(9, 215);
-            this.textBoxJacket.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxJacket.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxJacket.Name = "textBoxJacket";
             this.textBoxJacket.Size = new System.Drawing.Size(133, 20);
             this.textBoxJacket.TabIndex = 28;
@@ -172,7 +172,7 @@
             // textBoxPants
             // 
             this.textBoxPants.Location = new System.Drawing.Point(10, 262);
-            this.textBoxPants.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxPants.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxPants.Name = "textBoxPants";
             this.textBoxPants.Size = new System.Drawing.Size(133, 20);
             this.textBoxPants.TabIndex = 29;
@@ -182,7 +182,7 @@
             // textBoxBoots
             // 
             this.textBoxBoots.Location = new System.Drawing.Point(9, 308);
-            this.textBoxBoots.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxBoots.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxBoots.Name = "textBoxBoots";
             this.textBoxBoots.Size = new System.Drawing.Size(133, 20);
             this.textBoxBoots.TabIndex = 30;
@@ -241,7 +241,7 @@
             // 
             this.BtnNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnNewItem.Location = new System.Drawing.Point(10, 337);
-            this.BtnNewItem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnNewItem.Margin = new System.Windows.Forms.Padding(2);
             this.BtnNewItem.Name = "BtnNewItem";
             this.BtnNewItem.Size = new System.Drawing.Size(80, 23);
             this.BtnNewItem.TabIndex = 35;
@@ -268,7 +268,7 @@
             this.panelInput.Controls.Add(this.lableHelmet);
             this.panelInput.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelInput.Location = new System.Drawing.Point(0, 52);
-            this.panelInput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelInput.Margin = new System.Windows.Forms.Padding(2);
             this.panelInput.Name = "panelInput";
             this.panelInput.Size = new System.Drawing.Size(186, 369);
             this.panelInput.TabIndex = 37;
@@ -278,7 +278,7 @@
             this.btnContinue.BackColor = System.Drawing.Color.Lime;
             this.btnContinue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnContinue.Location = new System.Drawing.Point(100, 337);
-            this.btnContinue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnContinue.Margin = new System.Windows.Forms.Padding(2);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(80, 23);
             this.btnContinue.TabIndex = 38;
@@ -301,7 +301,7 @@
             // DatepickerDue
             // 
             this.DatepickerDue.Location = new System.Drawing.Point(2, 115);
-            this.DatepickerDue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DatepickerDue.Margin = new System.Windows.Forms.Padding(2);
             this.DatepickerDue.Name = "DatepickerDue";
             this.DatepickerDue.Size = new System.Drawing.Size(180, 20);
             this.DatepickerDue.TabIndex = 36;
@@ -341,7 +341,7 @@
             this.dataGridInv.EnableHeadersVisualStyles = false;
             this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridInv.Location = new System.Drawing.Point(186, 52);
-            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridInv.Name = "dataGridInv";
             this.dataGridInv.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -359,7 +359,7 @@
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridInv.Size = new System.Drawing.Size(669, 226);
             this.dataGridInv.TabIndex = 39;
-            this.dataGridInv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellContentClick);
+            this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellClick);
             // 
             // Num
             // 
@@ -490,7 +490,7 @@
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             this.dataGridViewClient.Size = new System.Drawing.Size(669, 107);
             this.dataGridViewClient.TabIndex = 40;
-            this.dataGridViewClient.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellContentClick);
+            this.dataGridViewClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -532,7 +532,7 @@
             this.panelTitle.Controls.Add(this.labelClientName);
             this.panelTitle.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelTitle.Location = new System.Drawing.Point(186, 293);
-            this.panelTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelTitle.Margin = new System.Windows.Forms.Padding(2);
             this.panelTitle.Name = "panelTitle";
             this.panelTitle.Size = new System.Drawing.Size(669, 21);
             this.panelTitle.TabIndex = 41;
@@ -563,7 +563,7 @@
             this.Controls.Add(this.panelInput);
             this.Controls.Add(this.InventoryPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SetSelectionModuleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SetSelectionModuleForm";

@@ -102,8 +102,8 @@
             this.dataGridViewClient.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridViewClient.EnableHeadersVisualStyles = false;
             this.dataGridViewClient.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dataGridViewClient.Location = new System.Drawing.Point(0, 392);
-            this.dataGridViewClient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
+            this.dataGridViewClient.Location = new System.Drawing.Point(0, 319);
+            this.dataGridViewClient.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.dataGridViewClient.Name = "dataGridViewClient";
             this.dataGridViewClient.ReadOnly = true;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -123,9 +123,9 @@
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.Window;
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            this.dataGridViewClient.Size = new System.Drawing.Size(1003, 132);
+            this.dataGridViewClient.Size = new System.Drawing.Size(752, 107);
             this.dataGridViewClient.TabIndex = 43;
-            this.dataGridViewClient.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellContentClick);
+            this.dataGridViewClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -195,7 +195,8 @@
             this.dataGridInv.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridInv.EnableHeadersVisualStyles = false;
             this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridInv.Location = new System.Drawing.Point(0, 64);
+            this.dataGridInv.Location = new System.Drawing.Point(0, 52);
+            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridInv.Name = "dataGridInv";
             this.dataGridInv.ReadOnly = true;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -211,7 +212,7 @@
             this.dataGridInv.RowTemplate.Height = 24;
             this.dataGridInv.RowTemplate.ReadOnly = true;
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridInv.Size = new System.Drawing.Size(1003, 278);
+            this.dataGridInv.Size = new System.Drawing.Size(752, 226);
             this.dataGridInv.TabIndex = 42;
             // 
             // Num
@@ -292,8 +293,9 @@
             this.InventoryPanel.Controls.Add(this.returntxt);
             this.InventoryPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.InventoryPanel.Location = new System.Drawing.Point(0, 0);
+            this.InventoryPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.InventoryPanel.Name = "InventoryPanel";
-            this.InventoryPanel.Size = new System.Drawing.Size(1003, 64);
+            this.InventoryPanel.Size = new System.Drawing.Size(752, 52);
             this.InventoryPanel.TabIndex = 41;
             // 
             // customButton1
@@ -301,10 +303,9 @@
             this.customButton1.Image = ((System.Drawing.Image)(resources.GetObject("customButton1.Image")));
             this.customButton1.ImageHover = ((System.Drawing.Image)(resources.GetObject("customButton1.ImageHover")));
             this.customButton1.ImageNormal = ((System.Drawing.Image)(resources.GetObject("customButton1.ImageNormal")));
-            this.customButton1.Location = new System.Drawing.Point(954, 13);
-            this.customButton1.Margin = new System.Windows.Forms.Padding(4);
+            this.customButton1.Location = new System.Drawing.Point(716, 11);
             this.customButton1.Name = "customButton1";
-            this.customButton1.Size = new System.Drawing.Size(36, 42);
+            this.customButton1.Size = new System.Drawing.Size(27, 34);
             this.customButton1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.customButton1.TabIndex = 70;
             this.customButton1.TabStop = false;
@@ -315,10 +316,9 @@
             this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
             this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
             this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(1076, 11);
-            this.CloseButton.Margin = new System.Windows.Forms.Padding(4);
+            this.CloseButton.Location = new System.Drawing.Point(807, 9);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(36, 42);
+            this.CloseButton.Size = new System.Drawing.Size(27, 34);
             this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.CloseButton.TabIndex = 68;
             this.CloseButton.TabStop = false;
@@ -332,10 +332,9 @@
             this.returntxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.returntxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.returntxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.returntxt.Location = new System.Drawing.Point(16, 16);
-            this.returntxt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.returntxt.Location = new System.Drawing.Point(12, 13);
             this.returntxt.Name = "returntxt";
-            this.returntxt.Size = new System.Drawing.Size(378, 29);
+            this.returntxt.Size = new System.Drawing.Size(302, 24);
             this.returntxt.TabIndex = 16;
             this.returntxt.Text = "Select the items being returned";
             this.returntxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -345,10 +344,10 @@
             this.panelTitle.BackColor = System.Drawing.Color.Maroon;
             this.panelTitle.Controls.Add(this.labelClientName);
             this.panelTitle.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelTitle.Location = new System.Drawing.Point(0, 366);
-            this.panelTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelTitle.Location = new System.Drawing.Point(0, 298);
+            this.panelTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelTitle.Name = "panelTitle";
-            this.panelTitle.Size = new System.Drawing.Size(1003, 26);
+            this.panelTitle.Size = new System.Drawing.Size(752, 21);
             this.panelTitle.TabIndex = 44;
             // 
             // labelClientName
@@ -358,23 +357,25 @@
             this.labelClientName.BackColor = System.Drawing.Color.Transparent;
             this.labelClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelClientName.ForeColor = System.Drawing.Color.White;
-            this.labelClientName.Location = new System.Drawing.Point(5, 0);
+            this.labelClientName.Location = new System.Drawing.Point(4, 0);
+            this.labelClientName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelClientName.Name = "labelClientName";
-            this.labelClientName.Size = new System.Drawing.Size(52, 20);
+            this.labelClientName.Size = new System.Drawing.Size(43, 17);
             this.labelClientName.TabIndex = 0;
             this.labelClientName.Text = "Client";
             // 
             // ReturnModule
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1003, 524);
+            this.ClientSize = new System.Drawing.Size(752, 426);
             this.Controls.Add(this.panelTitle);
             this.Controls.Add(this.dataGridViewClient);
             this.Controls.Add(this.dataGridInv);
             this.Controls.Add(this.InventoryPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ReturnModule";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ReturnModule";

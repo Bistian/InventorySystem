@@ -167,7 +167,7 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void dataGridViewClient_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridViewClient_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to return this item", "Return", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {

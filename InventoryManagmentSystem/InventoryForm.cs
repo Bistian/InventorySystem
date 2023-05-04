@@ -210,7 +210,7 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void dataGridInv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridInv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             String colName = dataGridInv.Columns[e.ColumnIndex].Name;
             if (colName == "Edit")

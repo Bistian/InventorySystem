@@ -122,7 +122,7 @@
             this.dataGridUser.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridUser.Size = new System.Drawing.Size(1034, 542);
             this.dataGridUser.TabIndex = 1;
-            this.dataGridUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridUser_CellContentClick);
+            this.dataGridUser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridUser_CellClick);
             // 
             // Column4
             // 

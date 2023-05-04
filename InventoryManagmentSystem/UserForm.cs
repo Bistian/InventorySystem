@@ -57,34 +57,6 @@ namespace InventoryManagmentSystem
             LoadUser();
         }
 
-        private void dataGridUser_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            String colName = dataGridUser.Columns[e.ColumnIndex].Name;
-            if (colName == "Edit")
-            {
-                UserModuleForm userModule = new UserModuleForm();
-                userModule.UserNameTxt.Text = dataGridUser.Rows[e.RowIndex].Cells[1].Value.ToString();
-                userModule.NameTxtBox.Text = dataGridUser.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-                userModule.SaveButton.Enabled = true;
-                userModule.UserNameTxt.Enabled = false;
-                userModule.ShowDialog();
-            }
-            else if (colName == "Delete")
-            {
-                if (MessageBox.Show("Are you sure you want to delete this user?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    con.Open();
-                    cm = new SqlCommand("DELETE FROM tbUser WHERE username LIKE '" + dataGridUser.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("User has been successfully deleted");
-                }
-            }
-            LoadUser();
-
-        }
-
         // Add New User
         // Redirect to adding user form.
         private void customButton1_Click(object sender, EventArgs e)
@@ -115,6 +87,33 @@ namespace InventoryManagmentSystem
             }
             dr.Close();
             con.Close();
+        }
+
+        private void dataGridUser_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            String colName = dataGridUser.Columns[e.ColumnIndex].Name;
+            if (colName == "Edit")
+            {
+                UserModuleForm userModule = new UserModuleForm();
+                userModule.UserNameTxt.Text = dataGridUser.Rows[e.RowIndex].Cells[1].Value.ToString();
+                userModule.NameTxtBox.Text = dataGridUser.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+                userModule.SaveButton.Enabled = true;
+                userModule.UserNameTxt.Enabled = false;
+                userModule.ShowDialog();
+            }
+            else if (colName == "Delete")
+            {
+                if (MessageBox.Show("Are you sure you want to delete this user?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    con.Open();
+                    cm = new SqlCommand("DELETE FROM tbUser WHERE username LIKE '" + dataGridUser.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
+                    cm.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("User has been successfully deleted");
+                }
+            }
+            LoadUser();
         }
     }
 }

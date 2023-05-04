@@ -62,7 +62,7 @@
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.DepartmentsTxt.Location = new System.Drawing.Point(12, 14);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(249, 29);
+            this.DepartmentsTxt.Size = new System.Drawing.Size(196, 24);
             this.DepartmentsTxt.TabIndex = 14;
             this.DepartmentsTxt.Text = "Manage Departments";
             this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -103,7 +103,7 @@
             this.dataGridDept.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridDept.Size = new System.Drawing.Size(1034, 489);
             this.dataGridDept.TabIndex = 3;
-            this.dataGridDept.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDept_CellContentClick);
+            this.dataGridDept.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDept_CellClick);
             // 
             // Column0
             // 
@@ -119,7 +119,7 @@
             this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column1.Width = 134;
+            this.Column1.Width = 105;
             // 
             // Column2
             // 
@@ -128,7 +128,7 @@
             this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.Width = 183;
+            this.Column2.Width = 141;
             // 
             // Column3
             // 
@@ -137,7 +137,7 @@
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
             this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column3.Width = 149;
+            this.Column3.Width = 116;
             // 
             // Column4
             // 
@@ -145,7 +145,7 @@
             this.Column4.HeaderText = "Phone";
             this.Column4.MinimumWidth = 6;
             this.Column4.Name = "Column4";
-            this.Column4.Width = 87;
+            this.Column4.Width = 69;
             // 
             // Column5
             // 
@@ -160,7 +160,7 @@
             this.Column6.HeaderText = "Address";
             this.Column6.MinimumWidth = 6;
             this.Column6.Name = "Column6";
-            this.Column6.Width = 99;
+            this.Column6.Width = 80;
             // 
             // Column7
             // 
@@ -168,7 +168,7 @@
             this.Column7.HeaderText = "City";
             this.Column7.MinimumWidth = 6;
             this.Column7.Name = "Column7";
-            this.Column7.Width = 68;
+            this.Column7.Width = 55;
             // 
             // Column8
             // 
@@ -176,7 +176,7 @@
             this.Column8.HeaderText = "State";
             this.Column8.MinimumWidth = 6;
             this.Column8.Name = "Column8";
-            this.Column8.Width = 79;
+            this.Column8.Width = 62;
             // 
             // Column9
             // 
@@ -184,7 +184,7 @@
             this.Column9.HeaderText = "Zip";
             this.Column9.MinimumWidth = 6;
             this.Column9.Name = "Column9";
-            this.Column9.Width = 62;
+            this.Column9.Width = 50;
             // 
             // Edit
             // 
@@ -226,7 +226,7 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label1.Location = new System.Drawing.Point(688, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 20);
+            this.label1.Size = new System.Drawing.Size(59, 17);
             this.label1.TabIndex = 17;
             this.label1.Text = "Search";
             // 
@@ -235,7 +235,7 @@
             this.searchBar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.searchBar.Location = new System.Drawing.Point(766, 18);
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(208, 22);
+            this.searchBar.Size = new System.Drawing.Size(208, 20);
             this.searchBar.TabIndex = 16;
             this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
             // 
