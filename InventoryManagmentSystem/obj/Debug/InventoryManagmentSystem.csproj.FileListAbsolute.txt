@@ -153,3 +153,10 @@ C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\Invent
 C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ExcelUserPromptForm.resources
 C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ReturnModule.resources
 C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.WorkOrderModuleForm.resources
+C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\PdfSharp.Charting.dll
+C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\PdfSharp.dll
+C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\PdfSharp.xml
+C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\PdfSharp.Charting.xml
+C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\de\PdfSharp.Charting.resources.dll
+C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.CopyComplete
