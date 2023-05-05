@@ -188,10 +188,11 @@ namespace InventoryManagmentSystem
 
             List<object[]> rows = new List<object[]>();
 
-            int rowNum = worksheet.UsedRange.Rows.Count;
             int colNum = worksheet.UsedRange.Columns.Count;
+
+            // Set progress bar to start.
             progressBar1.Minimum = 0;
-            progressBar1.Maximum = rowNum+1;
+            progressBar1.Maximum = worksheet.UsedRange.Rows.Count;
             progressBar1.Value = 0;
             progressBar1.Visible = true;
 
@@ -204,16 +205,18 @@ namespace InventoryManagmentSystem
                 for (int j = 1; j <= worksheet.UsedRange.Columns.Count; j++)
                 {
                     var v = worksheet.Cells[i, j].Value;
-                    if(v != null && v.GetType() == typeof(string))
-                    {
-                        v = ((string)v).Trim();
-                    }
 
-                    // Making sure not to add empty rows.
+                    // Making sure not to add empty row cells to important places.
                     if ((j == 1 || j == 2 || j == 3) && v == null)
                     {
                         isNull = true;
                         break;
+                    }
+
+                    // Take away empty spaces from beginning and end.
+                    if(v != null && v.GetType() == typeof(string))
+                    {
+                        v = ((string)v).Trim();
                     }
 
                     // Make sure this item is not duplicated.
@@ -225,8 +228,10 @@ namespace InventoryManagmentSystem
 
                     values[j - 1] = v;
                 }
-                Console.WriteLine($"Cell({i}/{rowNum})");
-                progressBar1.Value = i;
+                
+                // TODO: Can I add the count to the center of the progress bar?
+                ++progressBar1.Value;
+                Console.WriteLine($"Cell({progressBar1.Value}/{progressBar1.Maximum})");
 
                 // Only add row if it does not have a duplicated serial number and initial columns are not null.
                 if (isDuplicate == false && isNull == false)
@@ -237,7 +242,7 @@ namespace InventoryManagmentSystem
 
             progressBar1.Visible = false;
 
-            // Convert the rows collection to a DataTable.
+            // Create the colums for the Data Table.
             DataTable dataTable = new DataTable();
             for (int i = 0; i < colNum; i++)
             {
@@ -246,6 +251,7 @@ namespace InventoryManagmentSystem
                 dataTable.Columns.Add(v);
             }
 
+            // Add rows to the Data Table
             foreach (var row in rows)
             {
                 dataTable.Rows.Add(row);
