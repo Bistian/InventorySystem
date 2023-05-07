@@ -151,7 +151,25 @@ namespace InventoryManagmentSystem
 
                     // Find the type to know which table to use.
                     Excel.Range cell = worksheet.Cells[3, 1];
-                    string table = "tb" + cell.Value.ToString().Trim();
+                    string trimed = cell.Value.ToString().Trim();
+                    string table = "";
+                    if (trimed == "Jacket")
+                    {
+                        table = "tbJackets";
+                    }
+                    else if (trimed == "Pants")
+                    {
+                        table = "tbPants";
+                    }
+                    else if(trimed == "Helmet")
+                    {
+                        table = "tbHelmets";
+                    }
+                    else if(trimed == "Boots")
+                    {
+                        table = "tbBoots";
+                    }
+                    else { return; }
 
                     // Find the names of all columns on the database table.
                     string query = "SELECT COLUMN_NAME " +

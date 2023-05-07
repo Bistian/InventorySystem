@@ -1,16 +1,13 @@
-﻿using Microsoft.Office.Interop.Excel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
+using System.IO;
 
 namespace InventoryManagmentSystem
 {
@@ -33,11 +30,11 @@ namespace InventoryManagmentSystem
             {
                 if(DayNight == "Day")
                 {
-                    labelamount.Text = "$708";
+                    labelAmount.Text = "$708";
                 }
                 else if (DayNight == "Night")
                 {
-                    labelamount.Text = "$801";
+                    labelAmount.Text = "$801";
                 }
 
                 Item1.Text = "Helmet";
@@ -49,11 +46,11 @@ namespace InventoryManagmentSystem
             {
                 if (DayNight == "Day")
                 {
-                    labelamount.Text = "$595";
+                    labelAmount.Text = "$595";
                 }
                 else if (DayNight == "Night")
                 {
-                    labelamount.Text = "$687";
+                    labelAmount.Text = "$687";
                 }
 
                 Item1.Text = "Helmet";
@@ -65,11 +62,11 @@ namespace InventoryManagmentSystem
             {
                 if (DayNight == "Day")
                 {
-                    labelamount.Text = "$636";
+                    labelAmount.Text = "$636";
                 }
                 else if (DayNight == "Night")
                 {
-                    labelamount.Text = "$729";
+                    labelAmount.Text = "$729";
                 }
 
                 Item1.Text = "Jacket";
@@ -81,11 +78,11 @@ namespace InventoryManagmentSystem
             {
                 if (DayNight == "Day")
                 {
-                    labelamount.Text = "$518";
+                    labelAmount.Text = "$518";
                 }
                 else if (DayNight == "Night")
                 {
-                    labelamount.Text = "$610";
+                    labelAmount.Text = "$610";
                 }
 
                 Item1.Text = "Jacket";
@@ -141,33 +138,85 @@ namespace InventoryManagmentSystem
                  printDocument1.Print();
              }*/
 
-            // Create a new PDF document
-            PdfDocument pdfDocument = new PdfDocument();
-
-            // Add a new page to the PDF
-            PdfPage pdfPage = pdfDocument.AddPage();
-
-            // Get the graphics object of the PDF page
-            XGraphics graphics = XGraphics.FromPdfPage(pdfPage);
-
-            // Save the PDF to a file
-            pdfDocument.Save("Form.pdf");
-        }
-
-        private void PrintPage(object sender, PrintPageEventArgs e)
-        {
-            try
+            // Show the save file dialog box
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if(this.BackgroundImage != null)
+                // Create a new PDF document
+                PdfDocument document = new PdfDocument();
+
+                // Add a new page to the PDF
+                PdfPage page = document.AddPage();
+                
+                // Get the graphics object of the PDF page
+                XGraphics graphics = XGraphics.FromPdfPage(page);
+
+                // Vertical position of each line.
+                int yPosition = 50;
+                string font = "Arial";
+
+                // =========== Add Title ===========
+
+                // Format title
+                XFont fontTitle = new XFont(font, 18, XFontStyle.Bold);
+                XStringFormat formatLabel = new XStringFormat();
+                formatLabel.Alignment = XStringAlignment.Near;
+
+                graphics.DrawString(
+                    labelFormTitle.Text, 
+                    fontTitle, 
+                    XBrushes.Black,
+                    new XRect(50, yPosition, 100, fontTitle.Height), formatLabel);
+
+                yPosition += (int)fontTitle.Height + 10;
+
+
+                // =========== Add Fields ===========
+                XFont clientLabel = new XFont(font, 16, XFontStyle.Bold);
+                XFont fontLabel = new XFont(font, 12, XFontStyle.Bold);
+
+                
+                graphics.DrawString(
+                        LableClientName.Text,
+                        fontLabel,
+                        XBrushes.Black,
+                        new XRect(50, yPosition, 100, clientLabel.Height), formatLabel);
+                yPosition += (int)fontLabel.Height + 10;
+
+                string rented = "";
+                if (Item1.Text != "Item1")
                 {
-                   /* // Draw the contents of the form onto the PrintPageEventArgs
-                    this.DrawToBitmap(new Bitmap(this.Width, this.Height), new Rectangle(Point.Empty, this.Size));
-                    e.Graphics.DrawImageUnscaled(this.BackgroundImage, this.Location);  */
+                    rented += Item1.Text + "  ";
                 }
-            } 
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                if (Item2.Text != "Item2")
+                {
+                    rented += Item2.Text + "  ";
+                }
+                if (Item3.Text != "Item3")
+                {
+                    rented += Item3.Text + "  ";
+                }
+                if (Item4.Text != "Item4")
+                {
+                    rented += Item4.Text + "  ";
+                }
+
+                graphics.DrawString(
+                        rented,
+                        fontLabel,
+                        XBrushes.Black,
+                        new XRect(50, yPosition, 100, fontLabel.Height), formatLabel);
+                yPosition += (int)fontLabel.Height + 10;
+
+                graphics.DrawString(
+                    "Price = " + labelAmount.Text, 
+                    fontLabel, 
+                    XBrushes.Black, 
+                    new XRect(50, yPosition, 100, fontLabel.Height), formatLabel);
+
+                document.Save(saveFileDialog.FileName);
+                document.Close();
             }
         }
     }

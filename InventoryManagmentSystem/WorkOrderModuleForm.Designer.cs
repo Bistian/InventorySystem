@@ -30,7 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WorkOrderModuleForm));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.NewJacketTxt = new System.Windows.Forms.Label();
+            this.labelFormTitle = new System.Windows.Forms.Label();
+            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.MyLogo = new System.Windows.Forms.PictureBox();
             this.LableClientName = new System.Windows.Forms.Label();
             this.lableRentalOption = new System.Windows.Forms.Label();
@@ -39,20 +40,19 @@
             this.Item3 = new System.Windows.Forms.Label();
             this.Item4 = new System.Windows.Forms.Label();
             this.lablePrice = new System.Windows.Forms.Label();
-            this.labelamount = new System.Windows.Forms.Label();
+            this.labelAmount = new System.Windows.Forms.Label();
             this.btnPrint = new System.Windows.Forms.Button();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MyLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MyLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Maroon;
-            this.panel1.Controls.Add(this.NewJacketTxt);
+            this.panel1.Controls.Add(this.labelFormTitle);
             this.panel1.Controls.Add(this.CloseButton);
             this.panel1.Controls.Add(this.MyLogo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -61,21 +61,34 @@
             this.panel1.Size = new System.Drawing.Size(600, 73);
             this.panel1.TabIndex = 1;
             // 
-            // NewJacketTxt
+            // labelFormTitle
             // 
-            this.NewJacketTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.labelFormTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.NewJacketTxt.AutoSize = true;
-            this.NewJacketTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NewJacketTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.NewJacketTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.NewJacketTxt.Location = new System.Drawing.Point(222, 22);
-            this.NewJacketTxt.Name = "NewJacketTxt";
-            this.NewJacketTxt.Size = new System.Drawing.Size(148, 29);
-            this.NewJacketTxt.TabIndex = 17;
-            this.NewJacketTxt.Text = "Work Order";
-            this.NewJacketTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelFormTitle.AutoSize = true;
+            this.labelFormTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFormTitle.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelFormTitle.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelFormTitle.Location = new System.Drawing.Point(222, 22);
+            this.labelFormTitle.Name = "labelFormTitle";
+            this.labelFormTitle.Size = new System.Drawing.Size(148, 29);
+            this.labelFormTitle.TabIndex = 17;
+            this.labelFormTitle.Text = "Work Order";
+            this.labelFormTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
+            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
+            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
+            this.CloseButton.Location = new System.Drawing.Point(563, 9);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(27, 34);
+            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CloseButton.TabIndex = 13;
+            this.CloseButton.TabStop = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // MyLogo
             // 
@@ -164,16 +177,16 @@
             this.lablePrice.TabIndex = 9;
             this.lablePrice.Text = "Price =";
             // 
-            // labelamount
+            // labelAmount
             // 
-            this.labelamount.AutoSize = true;
-            this.labelamount.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelamount.Location = new System.Drawing.Point(399, 186);
-            this.labelamount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelamount.Name = "labelamount";
-            this.labelamount.Size = new System.Drawing.Size(92, 29);
-            this.labelamount.TabIndex = 10;
-            this.labelamount.Text = "amount";
+            this.labelAmount.AutoSize = true;
+            this.labelAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAmount.Location = new System.Drawing.Point(399, 186);
+            this.labelAmount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelAmount.Name = "labelAmount";
+            this.labelAmount.Size = new System.Drawing.Size(92, 29);
+            this.labelAmount.TabIndex = 10;
+            this.labelAmount.Text = "amount";
             // 
             // btnPrint
             // 
@@ -185,27 +198,13 @@
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 11;
-            this.btnPrint.Text = "Print";
+            this.btnPrint.Text = "Save";
             this.btnPrint.UseVisualStyleBackColor = false;
-            this.btnPrint.Visible = false;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // printDialog1
             // 
             this.printDialog1.UseEXDialog = true;
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
-            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
-            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(563, 9);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(27, 34);
-            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CloseButton.TabIndex = 13;
-            this.CloseButton.TabStop = false;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // WorkOrderModuleForm
             // 
@@ -214,7 +213,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(600, 360);
             this.Controls.Add(this.btnPrint);
-            this.Controls.Add(this.labelamount);
+            this.Controls.Add(this.labelAmount);
             this.Controls.Add(this.lablePrice);
             this.Controls.Add(this.Item4);
             this.Controls.Add(this.Item3);
@@ -230,8 +229,8 @@
             this.Text = "WorkOrderModuleForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MyLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MyLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,14 +241,14 @@
         private System.Windows.Forms.Panel panel1;
         private CustomButton CloseButton;
         private System.Windows.Forms.PictureBox MyLogo;
-        private System.Windows.Forms.Label NewJacketTxt;
+        private System.Windows.Forms.Label labelFormTitle;
         private System.Windows.Forms.Label LableClientName;
         private System.Windows.Forms.Label Item1;
         private System.Windows.Forms.Label Item2;
         private System.Windows.Forms.Label Item3;
         private System.Windows.Forms.Label Item4;
         private System.Windows.Forms.Label lablePrice;
-        private System.Windows.Forms.Label labelamount;
+        private System.Windows.Forms.Label labelAmount;
         public System.Windows.Forms.Label lableRentalOption;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.PrintDialog printDialog1;
