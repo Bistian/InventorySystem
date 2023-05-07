@@ -61,9 +61,9 @@
             this.panel1.Controls.Add(this.TxtCustomerInfo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(400, 54);
+            this.panel1.Size = new System.Drawing.Size(533, 66);
             this.panel1.TabIndex = 0;
             // 
             // CloseButton
@@ -71,9 +71,10 @@
             this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
             this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
             this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(364, 11);
+            this.CloseButton.Location = new System.Drawing.Point(485, 14);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(27, 34);
+            this.CloseButton.Size = new System.Drawing.Size(36, 42);
             this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.CloseButton.TabIndex = 69;
             this.CloseButton.TabStop = false;
@@ -88,9 +89,10 @@
             this.TxtCustomerInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtCustomerInfo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.TxtCustomerInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.TxtCustomerInfo.Location = new System.Drawing.Point(10, 13);
+            this.TxtCustomerInfo.Location = new System.Drawing.Point(13, 16);
+            this.TxtCustomerInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TxtCustomerInfo.Name = "TxtCustomerInfo";
-            this.TxtCustomerInfo.Size = new System.Drawing.Size(139, 24);
+            this.TxtCustomerInfo.Size = new System.Drawing.Size(175, 29);
             this.TxtCustomerInfo.TabIndex = 17;
             this.TxtCustomerInfo.Text = "Customer Info";
             this.TxtCustomerInfo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -99,9 +101,10 @@
             // 
             this.labelAcademy.AutoSize = true;
             this.labelAcademy.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAcademy.Location = new System.Drawing.Point(18, 83);
+            this.labelAcademy.Location = new System.Drawing.Point(24, 102);
+            this.labelAcademy.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelAcademy.Name = "labelAcademy";
-            this.labelAcademy.Size = new System.Drawing.Size(74, 20);
+            this.labelAcademy.Size = new System.Drawing.Size(90, 24);
             this.labelAcademy.TabIndex = 87;
             this.labelAcademy.Text = "Academy";
             // 
@@ -130,19 +133,20 @@
             "Resolve Maritime",
             "S FL State (Avon Park)",
             "Northwest"});
-            this.comboBoxAcademy.Location = new System.Drawing.Point(21, 105);
-            this.comboBoxAcademy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxAcademy.Location = new System.Drawing.Point(28, 129);
+            this.comboBoxAcademy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxAcademy.Name = "comboBoxAcademy";
-            this.comboBoxAcademy.Size = new System.Drawing.Size(93, 21);
+            this.comboBoxAcademy.Size = new System.Drawing.Size(123, 24);
             this.comboBoxAcademy.TabIndex = 86;
             // 
             // labelDayNight
             // 
             this.labelDayNight.AutoSize = true;
             this.labelDayNight.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDayNight.Location = new System.Drawing.Point(116, 83);
+            this.labelDayNight.Location = new System.Drawing.Point(155, 102);
+            this.labelDayNight.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDayNight.Name = "labelDayNight";
-            this.labelDayNight.Size = new System.Drawing.Size(88, 20);
+            this.labelDayNight.Size = new System.Drawing.Size(109, 24);
             this.labelDayNight.TabIndex = 89;
             this.labelDayNight.Text = "Day / Night";
             // 
@@ -154,111 +158,123 @@
             this.comboDayNight.Items.AddRange(new object[] {
             "Day",
             "Night"});
-            this.comboDayNight.Location = new System.Drawing.Point(119, 105);
-            this.comboDayNight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboDayNight.Location = new System.Drawing.Point(159, 129);
+            this.comboDayNight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboDayNight.Name = "comboDayNight";
-            this.comboDayNight.Size = new System.Drawing.Size(70, 21);
+            this.comboDayNight.Size = new System.Drawing.Size(92, 24);
             this.comboDayNight.TabIndex = 88;
             // 
             // txtBoxCustomerName
             // 
-            this.txtBoxCustomerName.Location = new System.Drawing.Point(208, 105);
+            this.txtBoxCustomerName.Location = new System.Drawing.Point(277, 129);
+            this.txtBoxCustomerName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxCustomerName.Name = "txtBoxCustomerName";
-            this.txtBoxCustomerName.Size = new System.Drawing.Size(167, 20);
+            this.txtBoxCustomerName.Size = new System.Drawing.Size(221, 22);
             this.txtBoxCustomerName.TabIndex = 91;
             // 
             // LableCustomerName
             // 
             this.LableCustomerName.AutoSize = true;
             this.LableCustomerName.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LableCustomerName.Location = new System.Drawing.Point(204, 82);
+            this.LableCustomerName.Location = new System.Drawing.Point(272, 101);
+            this.LableCustomerName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LableCustomerName.Name = "LableCustomerName";
-            this.LableCustomerName.Size = new System.Drawing.Size(120, 20);
+            this.LableCustomerName.Size = new System.Drawing.Size(151, 24);
             this.LableCustomerName.TabIndex = 90;
             this.LableCustomerName.Text = "Customer Name";
             // 
             // txtBoxPhone
             // 
-            this.txtBoxPhone.Location = new System.Drawing.Point(22, 150);
+            this.txtBoxPhone.Location = new System.Drawing.Point(29, 185);
+            this.txtBoxPhone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxPhone.Name = "txtBoxPhone";
-            this.txtBoxPhone.Size = new System.Drawing.Size(168, 20);
+            this.txtBoxPhone.Size = new System.Drawing.Size(223, 22);
             this.txtBoxPhone.TabIndex = 93;
             // 
             // labelPhone
             // 
             this.labelPhone.AutoSize = true;
             this.labelPhone.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPhone.Location = new System.Drawing.Point(18, 127);
+            this.labelPhone.Location = new System.Drawing.Point(24, 156);
+            this.labelPhone.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPhone.Name = "labelPhone";
-            this.labelPhone.Size = new System.Drawing.Size(53, 20);
+            this.labelPhone.Size = new System.Drawing.Size(65, 24);
             this.labelPhone.TabIndex = 92;
             this.labelPhone.Text = "Phone";
             // 
             // txtBoxEmail
             // 
-            this.txtBoxEmail.Location = new System.Drawing.Point(206, 150);
+            this.txtBoxEmail.Location = new System.Drawing.Point(275, 185);
+            this.txtBoxEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxEmail.Name = "txtBoxEmail";
-            this.txtBoxEmail.Size = new System.Drawing.Size(169, 20);
+            this.txtBoxEmail.Size = new System.Drawing.Size(224, 22);
             this.txtBoxEmail.TabIndex = 95;
             // 
             // labelEmail
             // 
             this.labelEmail.AutoSize = true;
             this.labelEmail.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEmail.Location = new System.Drawing.Point(202, 127);
+            this.labelEmail.Location = new System.Drawing.Point(269, 156);
+            this.labelEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelEmail.Name = "labelEmail";
-            this.labelEmail.Size = new System.Drawing.Size(47, 20);
+            this.labelEmail.Size = new System.Drawing.Size(59, 24);
             this.labelEmail.TabIndex = 94;
             this.labelEmail.Text = "Email";
             // 
             // txtBoxDriversLicense
             // 
-            this.txtBoxDriversLicense.Location = new System.Drawing.Point(21, 194);
+            this.txtBoxDriversLicense.Location = new System.Drawing.Point(28, 239);
+            this.txtBoxDriversLicense.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxDriversLicense.Name = "txtBoxDriversLicense";
-            this.txtBoxDriversLicense.Size = new System.Drawing.Size(168, 20);
+            this.txtBoxDriversLicense.Size = new System.Drawing.Size(223, 22);
             this.txtBoxDriversLicense.TabIndex = 97;
             // 
             // labelDriversLicense
             // 
             this.labelDriversLicense.AutoSize = true;
             this.labelDriversLicense.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDriversLicense.Location = new System.Drawing.Point(17, 171);
+            this.labelDriversLicense.Location = new System.Drawing.Point(23, 210);
+            this.labelDriversLicense.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDriversLicense.Name = "labelDriversLicense";
-            this.labelDriversLicense.Size = new System.Drawing.Size(131, 20);
+            this.labelDriversLicense.Size = new System.Drawing.Size(165, 24);
             this.labelDriversLicense.TabIndex = 96;
             this.labelDriversLicense.Text = "Drivers License #";
             // 
             // txtBoxAddress
             // 
-            this.txtBoxAddress.Location = new System.Drawing.Point(206, 194);
+            this.txtBoxAddress.Location = new System.Drawing.Point(275, 239);
+            this.txtBoxAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxAddress.Name = "txtBoxAddress";
-            this.txtBoxAddress.Size = new System.Drawing.Size(168, 20);
+            this.txtBoxAddress.Size = new System.Drawing.Size(223, 22);
             this.txtBoxAddress.TabIndex = 99;
             // 
             // labelAddress
             // 
             this.labelAddress.AutoSize = true;
             this.labelAddress.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAddress.Location = new System.Drawing.Point(202, 171);
+            this.labelAddress.Location = new System.Drawing.Point(269, 210);
+            this.labelAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelAddress.Name = "labelAddress";
-            this.labelAddress.Size = new System.Drawing.Size(64, 20);
+            this.labelAddress.Size = new System.Drawing.Size(79, 24);
             this.labelAddress.TabIndex = 98;
             this.labelAddress.Text = "Address";
             // 
             // txtBoxRep
             // 
-            this.txtBoxRep.Location = new System.Drawing.Point(111, 261);
+            this.txtBoxRep.Location = new System.Drawing.Point(148, 321);
+            this.txtBoxRep.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxRep.Name = "txtBoxRep";
-            this.txtBoxRep.Size = new System.Drawing.Size(168, 20);
+            this.txtBoxRep.Size = new System.Drawing.Size(223, 22);
             this.txtBoxRep.TabIndex = 101;
             // 
             // labelRep
             // 
             this.labelRep.AutoSize = true;
             this.labelRep.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRep.Location = new System.Drawing.Point(107, 238);
+            this.labelRep.Location = new System.Drawing.Point(143, 293);
+            this.labelRep.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelRep.Name = "labelRep";
-            this.labelRep.Size = new System.Drawing.Size(180, 20);
+            this.labelRep.Size = new System.Drawing.Size(227, 24);
             this.labelRep.TabIndex = 100;
             this.labelRep.Text = "Fire-Tec Representative";
             // 
@@ -267,9 +283,10 @@
             this.ClearButton.BackColor = System.Drawing.Color.Maroon;
             this.ClearButton.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClearButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClearButton.Location = new System.Drawing.Point(208, 298);
+            this.ClearButton.Location = new System.Drawing.Point(277, 367);
+            this.ClearButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ClearButton.Name = "ClearButton";
-            this.ClearButton.Size = new System.Drawing.Size(87, 43);
+            this.ClearButton.Size = new System.Drawing.Size(116, 53);
             this.ClearButton.TabIndex = 103;
             this.ClearButton.Text = "Clear";
             this.ClearButton.UseVisualStyleBackColor = false;
@@ -280,9 +297,10 @@
             this.ButtonContinue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.ButtonContinue.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonContinue.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ButtonContinue.Location = new System.Drawing.Point(92, 298);
+            this.ButtonContinue.Location = new System.Drawing.Point(123, 367);
+            this.ButtonContinue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ButtonContinue.Name = "ButtonContinue";
-            this.ButtonContinue.Size = new System.Drawing.Size(87, 43);
+            this.ButtonContinue.Size = new System.Drawing.Size(116, 53);
             this.ButtonContinue.TabIndex = 102;
             this.ButtonContinue.Text = "Continue";
             this.ButtonContinue.UseVisualStyleBackColor = false;
@@ -290,10 +308,10 @@
             // 
             // NewRentalModuleForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(400, 352);
+            this.ClientSize = new System.Drawing.Size(533, 433);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.ButtonContinue);
             this.Controls.Add(this.txtBoxRep);
@@ -314,7 +332,7 @@
             this.Controls.Add(this.comboBoxAcademy);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "NewRentalModuleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewRentalModule";
@@ -330,9 +348,7 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelAcademy;
-        private System.Windows.Forms.ComboBox comboBoxAcademy;
         private System.Windows.Forms.Label labelDayNight;
-        private System.Windows.Forms.ComboBox comboDayNight;
         public System.Windows.Forms.TextBox txtBoxCustomerName;
         private System.Windows.Forms.Label LableCustomerName;
         public System.Windows.Forms.TextBox txtBoxPhone;
@@ -349,5 +365,7 @@
         public System.Windows.Forms.Button ClearButton;
         public System.Windows.Forms.Button ButtonContinue;
         public System.Windows.Forms.Label TxtCustomerInfo;
+        public System.Windows.Forms.ComboBox comboBoxAcademy;
+        public System.Windows.Forms.ComboBox comboDayNight;
     }
 }
