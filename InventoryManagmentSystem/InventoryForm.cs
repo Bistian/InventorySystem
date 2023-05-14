@@ -48,7 +48,8 @@ namespace InventoryManagmentSystem
                 FinalColumn = ", Color";
                 Sizes = "";
                 specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
-                    " UsedNew LIKE '%" + searchTerm + "%') AND " + firetec;
+                    " UsedNew LIKE '%" + searchTerm + "%' OR" +
+                    " SerialNumber LIKE '%" + searchTerm + "%') AND " + firetec;
             }
             else if (comboBoxItem.SelectedIndex == 3) // Boots
             {
@@ -56,7 +57,8 @@ namespace InventoryManagmentSystem
                 Sizes = " Size,";
                 specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
                     " UsedNew LIKE '%" + searchTerm + "%' OR" +
-                    " SIZE LIKE '%" + searchTerm + "%') AND " + firetec;
+                    " SIZE LIKE '%" + searchTerm + "%' OR" +
+                    " SerialNumber LIKE '%" + searchTerm + "%') AND " + firetec;
             }
             else // Pants && Jackets
             {
@@ -64,7 +66,8 @@ namespace InventoryManagmentSystem
                 Sizes = " Size,";
                 specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
                     " UsedNew LIKE '%" + searchTerm + "%' OR" +
-                    " SIZE LIKE '%" + searchTerm + "%') AND " + firetec;
+                    " SIZE LIKE '%" + searchTerm + "%' OR" +
+                    " SerialNumber LIKE '%" + searchTerm + "%') AND " + firetec;
             }
 
             string query = "SELECT ItemType, " +
@@ -159,54 +162,63 @@ namespace InventoryManagmentSystem
 
                 query = QueryItems(true, searchTerm);
 
-                cm = new SqlCommand(query, con);
-                con.Open();
-                dr = cm.ExecuteReader();
-
-                while (dr.Read())
+                try
                 {
-                    i++;
-                    if (comboBoxItem.Text == "Helmets")
-                    {
-                        dataGridInv.Rows.Add(i,
-                        dr[0].ToString(),
-                        dr[1].ToString(),
-                        dr[2].ToString(),
-                        "NA",
-                        dr[3].ToString(),
-                        dr[4].ToString(),
-                        dr[5].ToString(),
-                        dr[6].ToString());
-                    }
-                    else if (comboBoxItem.Text == "Boots")
-                    {
-                        string s = dr[0].ToString();
-                        dataGridInv.Rows.Add(i,
-                            dr[0].ToString(),
-                            dr[1].ToString(),
-                            dr[2].ToString(),
-                            dr[3].ToString(),
-                            dr[4].ToString(),
-                            dr[5].ToString(),
-                            dr[6].ToString(),
-                            dr[7].ToString());
-                    }
-                    else // Pants && Jackets
-                    {
-                        dataGridInv.Rows.Add(i,
-                            dr[0].ToString(),
-                            dr[1].ToString(),
-                            dr[2].ToString(),
-                            dr[3].ToString(),
-                            dr[4].ToString(),
-                            dr[5].ToString(),
-                            "NA",
-                            dr[6].ToString());
-                    }
-                }
+                    cm = new SqlCommand(query, con);
+                    con.Open();
+                    dr = cm.ExecuteReader();
 
-                dr.Close();
-                con.Close();
+                    while (dr.Read())
+                    {
+                        i++;
+                        if (comboBoxItem.Text == "Helmets")
+                        {
+                            dataGridInv.Rows.Add(i,
+                            dr[0].ToString(),
+                            dr[1].ToString(),
+                            dr[2].ToString(),
+                            "NA",
+                            dr[3].ToString(),
+                            dr[4].ToString(),
+                            dr[5].ToString(),
+                            dr[6].ToString());
+                        }
+                        else if (comboBoxItem.Text == "Boots")
+                        {
+                            string s = dr[0].ToString();
+                            dataGridInv.Rows.Add(i,
+                                dr[0].ToString(),
+                                dr[1].ToString(),
+                                dr[2].ToString(),
+                                dr[3].ToString(),
+                                dr[4].ToString(),
+                                dr[5].ToString(),
+                                dr[6].ToString(),
+                                dr[7].ToString());
+                        }
+                        else // Pants && Jackets
+                        {
+                            dataGridInv.Rows.Add(i,
+                                dr[0].ToString(),
+                                dr[1].ToString(),
+                                dr[2].ToString(),
+                                dr[3].ToString(),
+                                dr[4].ToString(),
+                                dr[5].ToString(),
+                                "NA",
+                                dr[6].ToString());
+                        }
+                    }
+
+                    dr.Close();
+                    con.Close();
+                }
+                catch (Exception ex)
+                {
+                    dr.Close();
+                    con.Close();
+                    Console.WriteLine(ex.Message);
+                }  
             }
         }
 
