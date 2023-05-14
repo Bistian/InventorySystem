@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Linq;
 using System.Configuration;
+using Microsoft.Office.Interop.Excel;
 
 namespace InventoryManagmentSystem
 {
@@ -35,7 +36,7 @@ namespace InventoryManagmentSystem
         string tableColumnSerial = "";
 
 
-        List<TextBox> listTextBox = new List<TextBox>();
+        List<System.Windows.Forms.TextBox> listTextBox = new List<System.Windows.Forms.TextBox>();
         List<string> listTableColumns = new List<string>();
         List<string> listExcelColumns = new List<string>();
         string excelFileName = "";
@@ -200,6 +201,49 @@ namespace InventoryManagmentSystem
             }
         }
 
+        private void ImportPantsOrJackets(List<object[]> rows, bool isPants)
+        {
+            for(int i = 0; i < rows.Count; ++i)
+            {
+                object[] row = (object[])rows[i];
+                string table = isPants ? "tbPants" : "tbJackets";
+
+                if (row[7] == null)
+                {
+                    row[7] = "FIRETEC";
+                }
+
+                string query = $"INSERT INTO '{table}' " +
+                    $"(ItemType, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Size) " +
+                    $"VALUES ('{row[0]}','{row[1]}','{row[2]}','{row[7]}','{row[5]}','{row[4]}',@date,'{row[3]}')";
+
+                try
+                {
+                    con.Open();
+                    cm = new SqlCommand(query, con);
+
+                    SqlParameter parameter = new SqlParameter("@date", SqlDbType.Date);
+                    if (row[6] == null)
+                    {
+                        parameter.Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        parameter.Value = row[6];
+                    }
+                    cm.Parameters.Add(parameter);
+
+                    cm.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+        }
+
         // Using standar Excel files, update the database.
         private void UpdateDatabaseStandard(string tableName)
         {
@@ -210,12 +254,12 @@ namespace InventoryManagmentSystem
 
             // Set progress bar to start.
             progressBar1.Minimum = 0;
-            progressBar1.Maximum = worksheet.UsedRange.Rows.Count;
+            progressBar1.Maximum = worksheet.UsedRange.Rows.Count - headerRow;
             progressBar1.Value = 0;
             progressBar1.Visible = true;
 
             // Loop through the rows in the worksheet and add them to the rows collection.
-            for (int i = headerRow + 1; i <= worksheet.UsedRange.Rows.Count + 1; i++)
+            for (int i = headerRow + 1; i <= worksheet.UsedRange.Rows.Count; i++)
             {
                 object[] values = new object[colNum];
                 bool isDuplicate = false;
@@ -260,13 +304,19 @@ namespace InventoryManagmentSystem
 
             progressBar1.Visible = false;
 
+            if(tableName == "tbPants")
+                ImportPantsOrJackets(rows, true);
+            else if(tableName == "tbJackets")
+                ImportPantsOrJackets(rows, false);
+
+            /*
             // Create the colums for the Data Table.
             DataTable dataTable = new DataTable();
             for (int i = 0; i < colNum; i++)
             {
                 var v = worksheet.Cells[headerRow, i + 1].Value;
                 if (v == null) { continue; }
-                dataTable.Columns.Add(v);
+                dataTable.Columns.Add(listExcelColumns[i]);
             }
 
             // Add rows to the Data Table
@@ -274,7 +324,8 @@ namespace InventoryManagmentSystem
             {
                 dataTable.Rows.Add(row);
             }
-
+            */
+            /*
             // Match columns from Excel and Database.
             string columns = "";
             string colValues = "";
@@ -283,30 +334,30 @@ namespace InventoryManagmentSystem
             // Database: 1.ItemType 2.Brand 3.SerialNumber 4.Location 5.UsedNew 6.ManufactureDate 7.DueDate 8.Size || Color 9.Other
             if(tableName == "tbJackets" || tableName == "tbPants")
             {
-                for(int i = 1; i <= 8; ++i)
+                for (int i = 1; i <= 8; ++i)
                 {
                     // Select database column to add to.
                     columns += listTableColumns[i];
                     // Select value from Excel column to add to database.
-                    if(i == 4)
+                    if (i == 4)
                     {
                         colValues += "@" + listExcelColumns[7];
                     }
-                    else if(i == 5)
+                    else if (i == 5)
                     {
                         colValues += "@" + listExcelColumns[5];
                     }
-                    else if(i == 6)
+                    else if (i == 6)
                     {
                         colValues += "@" + listExcelColumns[4];
                     }
-                    else if( i == 8)
+                    else if (i == 8)
                     {
                         colValues += "@" + listExcelColumns[3];
                     }
                     else
                     {
-                        colValues += "@" + listExcelColumns[i-1];
+                        colValues += "@" + listExcelColumns[i - 1];
                     }
 
                     // Add comma and space unless it is the lest item.
@@ -325,24 +376,42 @@ namespace InventoryManagmentSystem
             {
 
             }
-            
-            /*for (int i = 0; i < listExcelColumns.Count; ++i)
-            {
-                columns += listTableColumns[i+1].ToString();
-                colValues += "@" + listExcelColumns[i].ToString();
-                if (i < listExcelColumns.Count - 1)
-                {
-                    columns += ", ";
-                    colValues += ", ";
-                }
-            }*/
+            */
+            /* for (int i = 0; i < listExcelColumns.Count; ++i)
+             {
+                 columns += listTableColumns[i + 1].ToString();
+                 colValues += "@" + listExcelColumns[i].ToString();
+                 if (i < listExcelColumns.Count - 1)
+                 {
+                     columns += ", ";
+                     colValues += ", ";
+                 }
+             }*/
 
-            con.Open();
+            /*con.Open();
             // Insert rows from Excel into the database table.
-            string query = "INSERT INTO " + tableName +
-                " (" + columns + ") VALUES (" + colValues + ")";
+            string query = "INSERT INTO " + tableName + " (" + columns + ") " +
+                            "VALUES (" + colValues + ")";*/
 
-            foreach (DataRow row in dataTable.Rows)
+            /* string query2 = "insert into tbPants" + 
+                 "(ItemType, Brand, SerialNumber, Size, ManufactureDate, UsedNew, DueDate, Location) " +
+                 "VALUES (@v1, @v2, @v3, @v4, @v5, @v6, @v7, @v8)";*/
+
+            /*      string query2 = "insert into tbPants" +
+                      "(ItemType, Brand, SerialNumber, Size, ManufactureDate, UsedNew, DueDate, Location) " +
+                      "VALUES (@v1, @v2, @v3, @v4, @v5, @v6, @v7, @v8)";
+
+                  cm.Parameters.AddWithValue("@v1", rows[0][0]);
+                  cm.Parameters.AddWithValue("@v2", rows[0][1]);
+                  cm.Parameters.AddWithValue("@v3", rows[0][2]);
+                  cm.Parameters.AddWithValue("@v4", rows[0][3]);
+                  cm.Parameters.AddWithValue("@v5", rows[0][4]);
+                  cm.Parameters.AddWithValue("@v6", rows[0][5]);
+                  cm.Parameters.AddWithValue("@v7", rows[0][6]);
+                  cm.Parameters.AddWithValue("@v8", rows[0][7]);*/
+
+            //TODO: I probably don't need to use the name of the columns.
+            /*foreach (DataRow row in dataTable.Rows)
             {
                 try
                 {
@@ -369,7 +438,7 @@ namespace InventoryManagmentSystem
                                 dbType = SqlDbType.DateTime;
                             }
 
-                            // Add more data types as needed
+                            // Add more data types as needed...
 
                             SqlParameter parameter = new SqlParameter("@" + dataTable.Columns[i].ColumnName, dbType);
                             parameter.Value = value;
@@ -383,21 +452,15 @@ namespace InventoryManagmentSystem
                             cm.Parameters.Add(parameter);
                         }
                     }
-
-                    /*for(int i = 0; i < listColumns.Count; ++i)
-                    {
-                        string col = listColumns[i].ToString();
-                        cm.Parameters.AddWithValue("@" + col, row[col]);
-                    }*/
-
                     cm.ExecuteNonQuery();
                 }
                 catch(Exception ex)
                 {
+                    // TODO: Send an error notification to user.
                     Console.WriteLine(ex.ToString());
                 }
                     
-            }
+            }*/
             ClearExcelVar();
         }
 
@@ -429,8 +492,6 @@ namespace InventoryManagmentSystem
             return result;
         }
 
-        #region Manula Import
-
         /// <summary>
         /// Make a list with the name of all availabe Excel column names.
         /// </summary>
@@ -446,8 +507,7 @@ namespace InventoryManagmentSystem
                 {
                     var v = (worksheet.Cells[headerRow, col] as Excel.Range).Value;
                     if(v == null) { break; }
-
-                    listExcelColumns.Add(v.ToString());
+                    listExcelColumns.Add(v);
                     ++col;
                 }
                 catch(Exception ex)
@@ -457,6 +517,8 @@ namespace InventoryManagmentSystem
                 }
             }
         }
+
+        #region Manula Import
 
         /* Discover if column name exists and if it does, what is its index.
          * columnName: Name of the column you want to find.
@@ -522,7 +584,7 @@ namespace InventoryManagmentSystem
             switch(comboBoxTbSelect.SelectedItem.ToString())
             {
                 case "Pants":
-                    //ImportPants();
+                    //ImportPantsManual();
                     UpdateDatabaseStandard("tbPants");
                     break;
 
@@ -535,7 +597,7 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void ImportPants()
+        private void ImportPantsManual()
         {
             // Get the name of each column in the table.
             string query = ("SELECT COLUMN_NAME " +
@@ -549,7 +611,7 @@ namespace InventoryManagmentSystem
         // Make columns from Excel and Database to be filled by the user.
         private void MakeColumnsManualMethod(string query)
         {
-            List<TextBox> list = new List<TextBox>();
+            List<System.Windows.Forms.TextBox> list = new List<System.Windows.Forms.TextBox>();
 
             cm = new SqlCommand(query, con);
             con.Open();
@@ -559,18 +621,18 @@ namespace InventoryManagmentSystem
             int boxWidth = 100;
             int boxHeight = 20;
             int boxSpacing = 10;
-            Point databaseColumnPos = new Point(150, 20);
-            Point excelColumnPos = new Point(150 + boxWidth + boxSpacing, 20);
+            System.Drawing.Point databaseColumnPos = new System.Drawing.Point(150, 20);
+            System.Drawing.Point excelColumnPos = new System.Drawing.Point(150 + boxWidth + boxSpacing, 20);
 
             // Add Label on top of database columns.
-            Label databse = new Label();
+            System.Windows.Forms.Label databse = new System.Windows.Forms.Label();
             databse.Text = "Database";
             databse.Location = databaseColumnPos;
             databse.ForeColor = Color.White;
             this.Controls.Add(databse);
 
             // Add Label on top of Excel columns.
-            Label excel = new Label();
+            System.Windows.Forms.Label excel = new System.Windows.Forms.Label();
             excel.Text = "Excel Table";
             excel.Location = excelColumnPos;
             excel.ForeColor = Color.White;
@@ -580,17 +642,17 @@ namespace InventoryManagmentSystem
             while (dr.Read())
             {
                 // Calculate the location of the next Text Box.
-                databaseColumnPos = new Point(
+                databaseColumnPos = new System.Drawing.Point(
                     databaseColumnPos.X,
                     databaseColumnPos.Y + boxHeight);
 
                 // Calculate the location of the next combo box Fill.
-                excelColumnPos = new Point(
+                excelColumnPos = new System.Drawing.Point(
                     databaseColumnPos.X + boxWidth + boxSpacing,
                     databaseColumnPos.Y);
 
                 // Make text box with info from the database.
-                TextBox textBox = new TextBox();
+                System.Windows.Forms.TextBox textBox = new System.Windows.Forms.TextBox();
                 textBox.ReadOnly = true;
                 textBox.Name = "tb" + rows;
                 textBox.Text = dr[0].ToString();
