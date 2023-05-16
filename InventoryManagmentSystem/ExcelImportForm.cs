@@ -210,10 +210,21 @@ namespace InventoryManagmentSystem
 
                 if (row[7] == null)
                 {
-                    row[7] = "FIRETEC";
+                    row[7] = "Fire-Tec";
+                }
+                else
+                {
+                    string str = row[7].ToString();
+                    if (str == "firetec" || 
+                        str == "FIRETEC" || 
+                        str == "fire-tec" || 
+                        str == "Firetec")
+                    {
+                        row[7] = "Fire-Tec";
+                    }
                 }
 
-                string query = $"INSERT INTO '{table}' " +
+                string query = $"INSERT INTO {table} " +
                     $"(ItemType, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Size) " +
                     $"VALUES ('{row[0]}','{row[1]}','{row[2]}','{row[7]}','{row[5]}','{row[4]}',@date,'{row[3]}')";
 
@@ -239,7 +250,10 @@ namespace InventoryManagmentSystem
                 catch (Exception ex)
                 {
                     con.Close();
-                    Console.WriteLine(ex.ToString());
+                    #if DEBUG
+                        Console.WriteLine($"Error Row {i}");
+                        Console.WriteLine(ex.ToString());
+                    #endif
                 }
             }
         }
@@ -293,8 +307,9 @@ namespace InventoryManagmentSystem
                 
                 // TODO: Can I add the count to the center of the progress bar?
                 ++progressBar1.Value;
+                #if DEBUG
                 Console.WriteLine($"Cell({progressBar1.Value}/{progressBar1.Maximum})");
-
+                #endif
                 // Only add row if it does not have a duplicated serial number and initial columns are not null.
                 if (isDuplicate == false && isNull == false)
                 {
@@ -410,7 +425,6 @@ namespace InventoryManagmentSystem
                   cm.Parameters.AddWithValue("@v7", rows[0][6]);
                   cm.Parameters.AddWithValue("@v8", rows[0][7]);*/
 
-            //TODO: I probably don't need to use the name of the columns.
             /*foreach (DataRow row in dataTable.Rows)
             {
                 try
