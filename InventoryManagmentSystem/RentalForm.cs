@@ -34,8 +34,7 @@ namespace InventoryManagmentSystem
         public RentalForm()
         {
             InitializeComponent();
-            LoadTables(dataGridRented, Query(true), "DueDate");
-            LoadTables(dataGridPastDue, Query(false), "DDate");
+            RefreshForm();
         }
 
         /// <summary>
@@ -168,8 +167,9 @@ namespace InventoryManagmentSystem
 
         private void ButtonNewRental_Click(object sender, EventArgs e)
         {
-                NewOrExistingCustomerModuleForm ModForm = new NewOrExistingCustomerModuleForm();
-                ModForm.ShowDialog();
+            NewOrExistingCustomerModuleForm ModForm = new NewOrExistingCustomerModuleForm();
+            ModForm.ShowDialog();
+            RefreshForm();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -177,6 +177,13 @@ namespace InventoryManagmentSystem
             ExistingCustomerModuleForm ModForm = new ExistingCustomerModuleForm();
             ModForm.isReturn = true;
             ModForm.ShowDialog();
+            RefreshForm();
+        }
+
+        private void RefreshForm()
+        {
+            LoadTables(dataGridRented, Query(true), "DueDate");
+            LoadTables(dataGridPastDue, Query(false), "DDate");
         }
     }
 
