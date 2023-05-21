@@ -36,6 +36,13 @@
             this.ItemLable = new System.Windows.Forms.Label();
             this.comboBoxItem = new System.Windows.Forms.ComboBox();
             this.dataGridInv = new System.Windows.Forms.DataGridView();
+            this.panelBottom = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.searchBar = new System.Windows.Forms.TextBox();
+            this.labelInv = new System.Windows.Forms.Label();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,13 +52,8 @@
             this.UsedNew = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColorMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelBottom = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.searchBar = new System.Windows.Forms.TextBox();
-            this.UsersButton = new InventoryManagmentSystem.CustomButton();
-            this.labelInv = new System.Windows.Forms.Label();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.panelBottom.SuspendLayout();
@@ -65,7 +67,7 @@
             this.flowLayoutPanel1.Controls.Add(this.comboBoxItem);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(776, 32);
             this.flowLayoutPanel1.TabIndex = 0;
@@ -125,7 +127,9 @@
             this.ManufactureDate,
             this.UsedNew,
             this.ColorMaterial,
-            this.Location});
+            this.Location,
+            this.Edit,
+            this.Delete});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -138,7 +142,7 @@
             this.dataGridInv.EnableHeadersVisualStyles = false;
             this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridInv.Location = new System.Drawing.Point(0, 32);
-            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridInv.Name = "dataGridInv";
             this.dataGridInv.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -157,6 +161,89 @@
             this.dataGridInv.Size = new System.Drawing.Size(776, 365);
             this.dataGridInv.TabIndex = 1;
             this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellClick);
+            // 
+            // panelBottom
+            // 
+            this.panelBottom.BackColor = System.Drawing.Color.MidnightBlue;
+            this.panelBottom.Controls.Add(this.label1);
+            this.panelBottom.Controls.Add(this.searchBar);
+            this.panelBottom.Controls.Add(this.UsersButton);
+            this.panelBottom.Controls.Add(this.labelInv);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 354);
+            this.panelBottom.Margin = new System.Windows.Forms.Padding(2);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(776, 43);
+            this.panelBottom.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.Location = new System.Drawing.Point(419, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 17);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Search";
+            // 
+            // searchBar
+            // 
+            this.searchBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchBar.Location = new System.Drawing.Point(497, 13);
+            this.searchBar.Name = "searchBar";
+            this.searchBar.Size = new System.Drawing.Size(208, 20);
+            this.searchBar.TabIndex = 18;
+            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
+            // 
+            // labelInv
+            // 
+            this.labelInv.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelInv.AutoSize = true;
+            this.labelInv.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelInv.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelInv.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelInv.Location = new System.Drawing.Point(9, 12);
+            this.labelInv.Margin = new System.Windows.Forms.Padding(2, 12, 2, 0);
+            this.labelInv.Name = "labelInv";
+            this.labelInv.Size = new System.Drawing.Size(168, 24);
+            this.labelInv.TabIndex = 15;
+            this.labelInv.Text = "Manage Inventory";
+            this.labelInv.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.MinimumWidth = 6;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dataGridViewImageColumn2
+            // 
+            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewImageColumn2.HeaderText = "";
+            this.dataGridViewImageColumn2.MinimumWidth = 6;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            this.dataGridViewImageColumn2.ReadOnly = true;
+            // 
+            // UsersButton
+            // 
+            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
+            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
+            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
+            this.UsersButton.Location = new System.Drawing.Point(712, 12);
+            this.UsersButton.Margin = new System.Windows.Forms.Padding(562, 12, 2, 2);
+            this.UsersButton.Name = "UsersButton";
+            this.UsersButton.Size = new System.Drawing.Size(38, 21);
+            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.UsersButton.TabIndex = 17;
+            this.UsersButton.TabStop = false;
+            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click_1);
             // 
             // Num
             // 
@@ -236,88 +323,22 @@
             this.Location.Name = "Location";
             this.Location.ReadOnly = true;
             // 
-            // panelBottom
+            // Edit
             // 
-            this.panelBottom.BackColor = System.Drawing.Color.MidnightBlue;
-            this.panelBottom.Controls.Add(this.label1);
-            this.panelBottom.Controls.Add(this.searchBar);
-            this.panelBottom.Controls.Add(this.UsersButton);
-            this.panelBottom.Controls.Add(this.labelInv);
-            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 354);
-            this.panelBottom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(776, 43);
-            this.panelBottom.TabIndex = 6;
+            this.Edit.HeaderText = "";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.MinimumWidth = 6;
+            this.Edit.Name = "Edit";
+            this.Edit.ReadOnly = true;
+            this.Edit.Width = 25;
             // 
-            // label1
+            // Delete
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(419, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 17);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Search";
-            // 
-            // searchBar
-            // 
-            this.searchBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchBar.Location = new System.Drawing.Point(497, 13);
-            this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(208, 20);
-            this.searchBar.TabIndex = 18;
-            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
-            // 
-            // UsersButton
-            // 
-            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
-            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
-            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
-            this.UsersButton.Location = new System.Drawing.Point(712, 12);
-            this.UsersButton.Margin = new System.Windows.Forms.Padding(562, 12, 2, 2);
-            this.UsersButton.Name = "UsersButton";
-            this.UsersButton.Size = new System.Drawing.Size(38, 21);
-            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.UsersButton.TabIndex = 17;
-            this.UsersButton.TabStop = false;
-            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click_1);
-            // 
-            // labelInv
-            // 
-            this.labelInv.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelInv.AutoSize = true;
-            this.labelInv.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInv.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelInv.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.labelInv.Location = new System.Drawing.Point(9, 12);
-            this.labelInv.Margin = new System.Windows.Forms.Padding(2, 12, 2, 0);
-            this.labelInv.Name = "labelInv";
-            this.labelInv.Size = new System.Drawing.Size(168, 24);
-            this.labelInv.TabIndex = 15;
-            this.labelInv.Text = "Manage Inventory";
-            this.labelInv.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewImageColumn1.HeaderText = "";
-            this.dataGridViewImageColumn1.MinimumWidth = 6;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewImageColumn2
-            // 
-            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewImageColumn2.HeaderText = "";
-            this.dataGridViewImageColumn2.MinimumWidth = 6;
-            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            this.dataGridViewImageColumn2.ReadOnly = true;
+            this.Delete.HeaderText = "";
+            this.Delete.MinimumWidth = 6;
+            this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
+            this.Delete.Width = 25;
             // 
             // InventoryForm
             // 
@@ -328,7 +349,7 @@
             this.Controls.Add(this.dataGridInv);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "InventoryForm";
             this.Text = "InventoryForm";
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -363,5 +384,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn UsedNew;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorMaterial;
         private System.Windows.Forms.DataGridViewTextBoxColumn Location;
+        private System.Windows.Forms.DataGridViewImageColumn Edit;
+        private System.Windows.Forms.DataGridViewImageColumn Delete;
     }
 }
