@@ -34,7 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PanelTitles = new System.Windows.Forms.Panel();
-            this.over30 = new System.Windows.Forms.Label();
+            this.PastDue = new System.Windows.Forms.Label();
             this.DueIn10 = new System.Windows.Forms.Label();
             this.dataGridViewDueIn10 = new System.Windows.Forms.DataGridView();
             this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,7 +64,7 @@
             // PanelTitles
             // 
             this.PanelTitles.BackColor = System.Drawing.Color.Maroon;
-            this.PanelTitles.Controls.Add(this.over30);
+            this.PanelTitles.Controls.Add(this.PastDue);
             this.PanelTitles.Controls.Add(this.DueIn10);
             this.PanelTitles.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelTitles.Location = new System.Drawing.Point(0, 0);
@@ -73,19 +73,19 @@
             this.PanelTitles.Size = new System.Drawing.Size(1016, 25);
             this.PanelTitles.TabIndex = 2;
             // 
-            // over30
+            // PastDue
             // 
-            this.over30.AutoSize = true;
-            this.over30.Dock = System.Windows.Forms.DockStyle.Right;
-            this.over30.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.over30.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.over30.Location = new System.Drawing.Point(743, 0);
-            this.over30.Margin = new System.Windows.Forms.Padding(500, 10, 0, 0);
-            this.over30.Name = "over30";
-            this.over30.Padding = new System.Windows.Forms.Padding(0, 0, 51, 0);
-            this.over30.Size = new System.Drawing.Size(273, 29);
-            this.over30.TabIndex = 2;
-            this.over30.Text = "30 Days Over Due";
+            this.PastDue.AutoSize = true;
+            this.PastDue.Dock = System.Windows.Forms.DockStyle.Right;
+            this.PastDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PastDue.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.PastDue.Location = new System.Drawing.Point(808, 0);
+            this.PastDue.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.PastDue.Name = "PastDue";
+            this.PastDue.Padding = new System.Windows.Forms.Padding(0, 0, 90, 0);
+            this.PastDue.Size = new System.Drawing.Size(208, 29);
+            this.PastDue.TabIndex = 2;
+            this.PastDue.Text = "Past Due";
             // 
             // DueIn10
             // 
@@ -96,8 +96,8 @@
             this.DueIn10.Location = new System.Drawing.Point(0, 0);
             this.DueIn10.Margin = new System.Windows.Forms.Padding(29, 10, 0, 0);
             this.DueIn10.Name = "DueIn10";
-            this.DueIn10.Padding = new System.Windows.Forms.Padding(51, 0, 0, 0);
-            this.DueIn10.Size = new System.Drawing.Size(303, 29);
+            this.DueIn10.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
+            this.DueIn10.Size = new System.Drawing.Size(287, 29);
             this.DueIn10.TabIndex = 1;
             this.DueIn10.Text = "Due Withinn 10 Days";
             // 
@@ -352,7 +352,7 @@
 
         #endregion
         private System.Windows.Forms.Panel PanelTitles;
-        private System.Windows.Forms.Label over30;
+        private System.Windows.Forms.Label PastDue;
         private System.Windows.Forms.Label DueIn10;
         private System.Windows.Forms.DataGridView dataGridViewDueIn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn num;

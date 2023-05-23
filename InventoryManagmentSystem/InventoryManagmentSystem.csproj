@@ -122,6 +122,9 @@
     <Compile Include="ExistingCustomerModuleForm.Designer.cs">
       <DependentUpon>ExistingCustomerModuleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GradientFlowLayoutPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
