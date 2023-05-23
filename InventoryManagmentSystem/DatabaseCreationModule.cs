@@ -21,9 +21,20 @@ namespace InventoryManagmentSystem
 {
     public partial class DatabaseCreationModule : Form
     {
-        public DatabaseCreationModule()
+        bool isInit;
+
+        public DatabaseCreationModule(bool isInit = true)
         {
             InitializeComponent();
+            this.isInit = isInit;
+            if (!isInit)
+            {
+                BackColor = panelTop.BackColor;
+                panelTop.Visible = false;
+                panelTop.Enabled = false;
+                ButtonClose.Visible = false;
+                ButtonClose.Enabled = false;
+            }
         }
 
         private string createDatabase()
@@ -36,6 +47,11 @@ namespace InventoryManagmentSystem
             {
                 // user selected a file path, save it
                 filePath = saveDialog.FileName;
+            }
+            else
+            {
+                this.Dispose();
+                return null;
             }
 
             string databaseName = Path.GetFileNameWithoutExtension(filePath);
@@ -64,11 +80,13 @@ namespace InventoryManagmentSystem
             }
             return filePath;
         }
+
         private void btnNewDatabase_Click(object sender, EventArgs e)
         {
            string filePath = createDatabase();
+           // If user canceled the action, just return.
+           if(filePath == null) { return; }
            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename="+filePath+";Integrated Security=True;Connect Timeout=30";
-
 
             //Create the tables
 
@@ -225,8 +243,6 @@ namespace InventoryManagmentSystem
                 command.ExecuteNonQuery();
             }
 
-
-
             // Get the current connection string
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             ConnectionStringSettings connectionStringSettings = config.ConnectionStrings.ConnectionStrings["MyConnectionString"];
@@ -242,8 +258,49 @@ namespace InventoryManagmentSystem
             // Refresh the ConfigurationManager to reflect the changes
             ConfigurationManager.RefreshSection("connectionStrings");
 
-            MainForm ModForm = new MainForm();
-            ModForm.ShowDialog();
+            if(isInit)
+            {
+                MainForm ModForm = new MainForm();
+                ModForm.ShowDialog();
+            }
+            this.Dispose();
+        }
+
+        private void btnFindDatabase_Click(object sender, EventArgs e)
+        {
+            // Select existing database.
+            string filePath = "";
+            var saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "SQL Server database files| *.mdf";
+            if (saveDialog.ShowDialog() == DialogResult.OK)
+            {
+                // user selected a file path, save it.
+                filePath = saveDialog.FileName;
+            }
+            else
+            {
+                this.Dispose();
+                return;
+            }
+
+            string databaseName = Path.GetFileNameWithoutExtension(filePath);
+
+            // Get the current connection string.
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            ConnectionStringSettings connectionStringSettings = config.ConnectionStrings.ConnectionStrings["MyConnectionString"];
+
+            // Update the configuration file
+            connectionStringSettings.ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=" + filePath + ";Integrated Security=True;Connect Timeout=30";
+            config.Save(ConfigurationSaveMode.Modified);
+
+            // Refresh the ConfigurationManager to reflect the changes
+            ConfigurationManager.RefreshSection("connectionStrings");
+
+            if (isInit)
+            {
+                MainForm ModForm = new MainForm();
+                ModForm.ShowDialog();
+            }
             this.Dispose();
         }
 
@@ -254,5 +311,6 @@ namespace InventoryManagmentSystem
                 this.Dispose();
             }
         }
+
     }
 }
