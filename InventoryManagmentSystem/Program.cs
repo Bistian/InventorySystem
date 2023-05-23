@@ -27,15 +27,18 @@ namespace InventoryManagmentSystem
                 // checking if database exists
                 try
                 {
-                 connection.Open();
-                 connection.Close();
-                 Application.Run(new MainForm());
-
+                    connection.Open();
+                    connection.Close();
+                    Application.Run(new MainForm());
                 }
-                catch
+                catch (Exception ex)
                 {
-                    Application.Run(new DatabaseCreationModule());
-
+                    try
+                    {
+                        Console.WriteLine(ex.Message);
+                        Application.Run(new DatabaseCreationModule());
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); }
                 }    
                 
             }

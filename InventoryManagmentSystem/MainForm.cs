@@ -70,7 +70,7 @@ namespace InventoryManagmentSystem
         private void btnSettings_Click(object sender, EventArgs e)
         {
             ColorTabSwitch("Import");
-            openChildForm(new ExcelImportForm());
+            openChildForm(new SettingsForm());
         }
 
         private void HomeButton_Click(object sender, EventArgs e)
@@ -85,7 +85,7 @@ namespace InventoryManagmentSystem
             openChildForm(new RentalForm());
         }
 
-        private void ColorTabSwitch(string tab)
+        public void ColorTabSwitch(string tab)
         {
             // Set all colors to normal.
             panelHome.BackColor = offColor;

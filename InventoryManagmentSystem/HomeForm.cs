@@ -151,16 +151,22 @@ namespace InventoryManagmentSystem
 
         private void ButtonCurrentlyRented_Click_1(object sender, EventArgs e)
         {
+            var parentForm = this.ParentForm as MainForm;
+            parentForm.ColorTabSwitch("Rentals");
             OpenRented();
         }
 
         private void ButtonCurrentlyRentedPants_Click(object sender, EventArgs e)
         {
+            var parentForm = this.ParentForm as MainForm;
+            parentForm.ColorTabSwitch("Rentals");
             OpenRented();
         }
 
         private void ButtonCurrentlyRentedJackets_Click(object sender, EventArgs e)
         {
+            var parentForm = this.ParentForm as MainForm;
+            parentForm.ColorTabSwitch("Rentals");
             OpenRented();
         }
 

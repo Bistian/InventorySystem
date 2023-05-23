@@ -224,29 +224,37 @@ namespace InventoryManagmentSystem
 
         private void dataGridInv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            String colName = dataGridInv.Columns[e.ColumnIndex].Name;
-            if (colName == "Edit")
+            try
             {
-                UserModuleForm userModule = new UserModuleForm();
-                userModule.UserNameTxt.Text = dataGridInv.Rows[e.RowIndex].Cells[1].Value.ToString();
-                userModule.NameTxtBox.Text = dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-                userModule.SaveButton.Enabled = true;
-                userModule.UserNameTxt.Enabled = false;
-                userModule.ShowDialog();
-            }
-            else if (colName == "Delete")
-            {
-                if (MessageBox.Show("Are you sure you want to delete this item?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                String colName = dataGridInv.Columns[e.ColumnIndex].Name;
+                if (colName == "Edit")
                 {
-                    con.Open();
-                    cm = new SqlCommand("DELETE FROM tbUser WHERE username LIKE '" + dataGridInv.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Item has been successfully deleted");
+                    UserModuleForm userModule = new UserModuleForm();
+                    userModule.UserNameTxt.Text = dataGridInv.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    userModule.NameTxtBox.Text = dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+                    userModule.SaveButton.Enabled = true;
+                    userModule.UserNameTxt.Enabled = false;
+                    userModule.ShowDialog();
                 }
+                else if (colName == "Delete")
+                {
+                    if (MessageBox.Show("Are you sure you want to delete this item?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        string table = "tb" + comboBoxItem.Text;
+                        con.Open();
+                        cm = new SqlCommand("DELETE FROM " + table + " WHERE SerialNumber LIKE '" + dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString() + "'", con);
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Item has been successfully deleted");
+                    }
+                }
+                LoadInventory();
             }
-            LoadInventory();
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
