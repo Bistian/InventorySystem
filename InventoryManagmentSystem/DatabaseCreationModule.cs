@@ -260,10 +260,14 @@ namespace InventoryManagmentSystem
 
             if(isInit)
             {
+                this.Dispose();
                 MainForm ModForm = new MainForm();
                 ModForm.ShowDialog();
             }
-            this.Dispose();
+            else
+            {
+                this.Dispose();
+            }
         }
 
         private void btnFindDatabase_Click(object sender, EventArgs e)
@@ -298,10 +302,14 @@ namespace InventoryManagmentSystem
 
             if (isInit)
             {
+                this.Dispose();
                 MainForm ModForm = new MainForm();
                 ModForm.ShowDialog();
             }
-            this.Dispose();
+            else
+            {
+                this.Dispose();
+            }
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)

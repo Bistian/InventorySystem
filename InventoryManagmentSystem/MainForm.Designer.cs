@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.LabelExcel = new System.Windows.Forms.Label();
+            this.LabelSettings = new System.Windows.Forms.Label();
             this.UsersTxt = new System.Windows.Forms.Label();
             this.DepartmentsTxt = new System.Windows.Forms.Label();
             this.MyLogo = new System.Windows.Forms.PictureBox();
@@ -80,18 +80,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).BeginInit();
             this.SuspendLayout();
             // 
-            // LabelExcel
+            // LabelSettings
             // 
-            this.LabelExcel.AutoSize = true;
-            this.LabelExcel.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelExcel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.LabelExcel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.LabelExcel.Location = new System.Drawing.Point(16, 70);
-            this.LabelExcel.Name = "LabelExcel";
-            this.LabelExcel.Size = new System.Drawing.Size(89, 29);
-            this.LabelExcel.TabIndex = 17;
-            this.LabelExcel.Text = "Import";
-            this.LabelExcel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.LabelSettings.AutoSize = true;
+            this.LabelSettings.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelSettings.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.LabelSettings.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.LabelSettings.Location = new System.Drawing.Point(16, 70);
+            this.LabelSettings.Name = "LabelSettings";
+            this.LabelSettings.Size = new System.Drawing.Size(82, 24);
+            this.LabelSettings.TabIndex = 17;
+            this.LabelSettings.Text = "Settings";
+            this.LabelSettings.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // UsersTxt
             // 
@@ -101,7 +101,7 @@
             this.UsersTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.UsersTxt.Location = new System.Drawing.Point(19, 70);
             this.UsersTxt.Name = "UsersTxt";
-            this.UsersTxt.Size = new System.Drawing.Size(73, 29);
+            this.UsersTxt.Size = new System.Drawing.Size(58, 24);
             this.UsersTxt.TabIndex = 15;
             this.UsersTxt.Text = "Users";
             this.UsersTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -114,7 +114,7 @@
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.DepartmentsTxt.Location = new System.Drawing.Point(24, 70);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(66, 29);
+            this.DepartmentsTxt.Size = new System.Drawing.Size(52, 24);
             this.DepartmentsTxt.TabIndex = 13;
             this.DepartmentsTxt.Text = "Dept";
             this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -186,7 +186,7 @@
             this.label2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label2.Location = new System.Drawing.Point(20, 70);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 29);
+            this.label2.Size = new System.Drawing.Size(61, 24);
             this.label2.TabIndex = 14;
             this.label2.Text = "Home";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -238,7 +238,7 @@
             this.label3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label3.Location = new System.Drawing.Point(12, 70);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 29);
+            this.label3.Size = new System.Drawing.Size(74, 24);
             this.label3.TabIndex = 13;
             this.label3.Text = "Active ";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -261,7 +261,7 @@
             this.label4.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label4.Location = new System.Drawing.Point(31, 70);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 29);
+            this.label4.Size = new System.Drawing.Size(37, 24);
             this.label4.TabIndex = 9;
             this.label4.Text = "Inv";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -314,7 +314,7 @@
             this.label1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label1.Location = new System.Drawing.Point(20, 70);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 29);
+            this.label1.Size = new System.Drawing.Size(61, 24);
             this.label1.TabIndex = 14;
             this.label1.Text = "Home";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -365,7 +365,7 @@
             this.RentalLable.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.RentalLable.Location = new System.Drawing.Point(12, 70);
             this.RentalLable.Name = "RentalLable";
-            this.RentalLable.Size = new System.Drawing.Size(96, 29);
+            this.RentalLable.Size = new System.Drawing.Size(76, 24);
             this.RentalLable.TabIndex = 13;
             this.RentalLable.Text = "Rentals";
             this.RentalLable.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -421,7 +421,7 @@
             // panelImport
             // 
             this.panelImport.BackColor = System.Drawing.Color.Maroon;
-            this.panelImport.Controls.Add(this.LabelExcel);
+            this.panelImport.Controls.Add(this.LabelSettings);
             this.panelImport.Controls.Add(this.btnSettings);
             this.panelImport.Location = new System.Drawing.Point(568, 3);
             this.panelImport.Name = "panelImport";
@@ -445,7 +445,7 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 651);
             this.Controls.Add(this.MainPanel);
@@ -496,7 +496,7 @@
         private CustomButton DepatmensButton;
         private CustomButton UsersButton;
         private System.Windows.Forms.Label UsersTxt;
-        private System.Windows.Forms.Label LabelExcel;
+        private System.Windows.Forms.Label LabelSettings;
         private CustomButton btnSettings;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutNavBar;
         private System.Windows.Forms.Panel panelRentals;

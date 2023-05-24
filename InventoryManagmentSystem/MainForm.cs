@@ -60,39 +60,39 @@ namespace InventoryManagmentSystem
         private void DepatmensButton_Click(object sender, EventArgs e)
         {
             OpenNavBar("Dept");
-            ColorTabSwitch("Dept", true);
+            ColorTabSwitch("Dept");
             openChildForm(new DepartmentForm());
         }
 
         private void InventoryButton_Click(object sender, EventArgs e)
         {
             OpenNavBar("Inv");
-            ColorTabSwitch("Inv", true);
+            ColorTabSwitch("Inv");
             openChildForm(new InventoryForm());
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            OpenNavBar("Import");
-            ColorTabSwitch("Import", true);
-            openChildForm(new ExcelImportForm());
+            OpenNavBar("Settings");
+            ColorTabSwitch("Settings");
+            openChildForm(new SettingsForm());
         }
 
         private void HomeButton_Click(object sender, EventArgs e)
         {
             OpenNavBar("Home");
-            ColorTabSwitch("Home", true);
+            ColorTabSwitch("Home");
             openChildForm(new HomeForm());
         }
 
         private void RentalButton_Click(object sender, EventArgs e)
         {
             OpenNavBar("Rentals");
-            ColorTabSwitch("Rentals", true);
+            ColorTabSwitch("Rentals");
             openChildForm(new HomeForm());
         }
 
-        private void ColorTabSwitch(string tab, bool isPrimary)
+        public void ColorTabSwitch(string tab, bool isPrimary = true)
         {
             //check to see which nav bar is being clicked on
             if (isPrimary)
@@ -109,7 +109,7 @@ namespace InventoryManagmentSystem
                 else if (tab == "Rentals") { panelRentals.BackColor = onColor; }
                 else if (tab == "Dept") { panelDept.BackColor = onColor; }
                 else if (tab == "Users") { panelUsers.BackColor = onColor; }
-                else if (tab == "Import") { panelImport.BackColor = onColor; }
+                else if (tab == "Settings") { panelImport.BackColor = onColor; }
             }
 
             //Secondary Nav Bar
