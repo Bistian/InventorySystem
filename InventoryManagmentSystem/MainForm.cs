@@ -100,7 +100,6 @@ namespace InventoryManagmentSystem
                  // Set all colors to normal.
                 panelHome.BackColor = offColor;
                 panelRentals.BackColor = offColor;
-                panelInv.BackColor = offColor;
                 panelDept.BackColor = offColor;
                 panelUsers.BackColor = offColor;
                 panelImport.BackColor = offColor;
@@ -108,7 +107,6 @@ namespace InventoryManagmentSystem
                 // Pick one tab and set it to the clicked color.
                 if (tab == "Home") { panelHome.BackColor = onColor; }
                 else if (tab == "Rentals") { panelRentals.BackColor = onColor; }
-                else if (tab == "Inv") { panelInv.BackColor = onColor; }
                 else if (tab == "Dept") { panelDept.BackColor = onColor; }
                 else if (tab == "Users") { panelUsers.BackColor = onColor; }
                 else if (tab == "Import") { panelImport.BackColor = onColor; }
