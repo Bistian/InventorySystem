@@ -260,8 +260,7 @@ namespace InventoryManagmentSystem
 
             if(isInit)
             {
-                this.Dispose();
-                MainForm ModForm = new MainForm();
+                MainForm ModForm = new MainForm(this);
                 ModForm.ShowDialog();
             }
             else

@@ -12,20 +12,34 @@ namespace InventoryManagmentSystem
 {
     public partial class MainForm : Form
     {
+        //colors
         Color offColor = Color.Transparent;
         Color onColor = Color.White;
 
+        //to show subform in mainform
+        private Form activeForm = null;
+
+        //Track previous form
+       private Form previousForm = null;
+
         //Initialize
-        public MainForm()
+        public MainForm(Form databaseCreation = null)
         {
+
             InitializeComponent();
             offColor = Color.Transparent;
             onColor = Color.DarkGray;
+            if (databaseCreation != null)
+            {
+                //Gage likes minors
+                databaseCreation.Dispose();
+            }
         }
-        //keeping track of current tab
-        string currTab = "";
-        //to show subform in mainform
-        private Form activeForm = null;
+
+        public void SetPrevForm(Form curr)
+        {
+            previousForm = curr;
+        }
 
         public void openChildForm(Form childForm)
         {

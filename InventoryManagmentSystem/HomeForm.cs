@@ -5,11 +5,14 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 
 namespace InventoryManagmentSystem
@@ -22,6 +25,7 @@ namespace InventoryManagmentSystem
             PrintRented();
             LoadTables(dataGridViewDueIn10, QueryWithin10Days(), "Due");
             LoadTables(dataGridViewPast30, QueryOver30Days(), "DueDate2");
+
         }
 
         #region SQL_Variables
@@ -39,6 +43,7 @@ namespace InventoryManagmentSystem
 
         #endregion SQL_Variables
 
+        private Form activeForm = null;
         string firetec = "Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'";
 
         private int CountRented(string tableName)
@@ -126,13 +131,23 @@ namespace InventoryManagmentSystem
             ButtonCurrentlyRentedJackets.Text = "Coats " + System.Environment.NewLine + CountRented("tbJackets");
             ButtonCurrentlyRented.Text = "Items Rented" + System.Environment.NewLine + CountTotalRented();
         }
-       
-        private Form activeForm = null;
 
-        private void OpenRented()
+        private void OpenDockedForm(string formType)
         {
+            Form childForm = null;
+            //access the main panel in the parent form that will be docked into
             Panel MainPanel = this.ParentForm.Controls.Find("MainPanel", true).FirstOrDefault() as Panel;
-            RentalForm childForm = new RentalForm();
+
+            //deciding the type of form that will be docked
+            if (formType == "RentalForm")
+            {
+                childForm = new RentalForm();
+            }
+            else if (formType == "NewRentalModuleForm")
+            {
+                childForm = new NewRentalModuleForm();
+            }
+
 
             if (activeForm != null)
             {
@@ -153,21 +168,21 @@ namespace InventoryManagmentSystem
         {
             var parentForm = this.ParentForm as MainForm;
             parentForm.ColorTabSwitch("Rentals");
-            OpenRented();
+            OpenDockedForm("RentalForm");
         }
 
         private void ButtonCurrentlyRentedPants_Click(object sender, EventArgs e)
         {
             var parentForm = this.ParentForm as MainForm;
             parentForm.ColorTabSwitch("Rentals");
-            OpenRented();
+            OpenDockedForm("RentalForm");
         }
 
         private void ButtonCurrentlyRentedJackets_Click(object sender, EventArgs e)
         {
             var parentForm = this.ParentForm as MainForm;
             parentForm.ColorTabSwitch("Rentals");
-            OpenRented();
+            OpenDockedForm("RentalForm");
         }
 
         private void dataGridViewDueIn10_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -228,5 +243,9 @@ namespace InventoryManagmentSystem
             dialogBoxClient.ShowDialog();
         }
 
+        private void buttonNewCustomer_Click(object sender, EventArgs e)
+        {
+            OpenDockedForm("NewRentalModuleForm");
+        }
     }
 }

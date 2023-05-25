@@ -72,7 +72,7 @@ namespace InventoryManagmentSystem
             txtBoxCustomerName.Clear();
             txtBoxPhone.Clear();
             txtBoxEmail.Clear();
-            txtBoxAddress.Clear();
+            txtBoxStreet.Clear();
             txtBoxRep.Clear();
             comboBoxAcademy.SelectedIndex = -1;
             comboDayNight.SelectedIndex = -1;
@@ -107,7 +107,7 @@ namespace InventoryManagmentSystem
                         cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
                         cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
                         cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
-                        cm.Parameters.AddWithValue("@Address", txtBoxAddress.Text);
+                        cm.Parameters.AddWithValue("@Address", txtBoxStreet.Text);
                         cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
                         cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
                         cm.Parameters.AddWithValue("@DayNight", comboDayNight.Text);
@@ -160,7 +160,7 @@ namespace InventoryManagmentSystem
                     cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
                     cm.Parameters.AddWithValue("@DayNight", comboDayNight.Text);
                     cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
-                    cm.Parameters.AddWithValue("@Address", txtBoxAddress.Text);
+                    cm.Parameters.AddWithValue("@Address", txtBoxStreet.Text);
                     cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
                     con.Open();
                     cm.ExecuteNonQuery();
@@ -182,7 +182,7 @@ namespace InventoryManagmentSystem
 
         private void ButtonContinue_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtBoxAddress.Text) &&
+            if (!string.IsNullOrEmpty(txtBoxStreet.Text) &&
          !string.IsNullOrEmpty(txtBoxCustomerName.Text) &&
          !string.IsNullOrEmpty(txtBoxDriversLicense.Text) &&
          !string.IsNullOrEmpty(txtBoxEmail.Text) &&
