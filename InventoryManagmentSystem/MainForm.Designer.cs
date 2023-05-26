@@ -47,7 +47,7 @@
             this.ButtonRentalInv = new InventoryManagmentSystem.CustomButton();
             this.flowLayoutNavBar = new System.Windows.Forms.FlowLayoutPanel();
             this.panelHome = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelDashboard = new System.Windows.Forms.Label();
             this.HomeButton = new InventoryManagmentSystem.CustomButton();
             this.panelRentals = new System.Windows.Forms.Panel();
             this.RentalButton = new InventoryManagmentSystem.CustomButton();
@@ -86,9 +86,9 @@
             this.LabelSettings.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelSettings.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LabelSettings.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.LabelSettings.Location = new System.Drawing.Point(16, 70);
+            this.LabelSettings.Location = new System.Drawing.Point(10, 70);
             this.LabelSettings.Name = "LabelSettings";
-            this.LabelSettings.Size = new System.Drawing.Size(82, 24);
+            this.LabelSettings.Size = new System.Drawing.Size(102, 29);
             this.LabelSettings.TabIndex = 17;
             this.LabelSettings.Text = "Settings";
             this.LabelSettings.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -101,7 +101,7 @@
             this.UsersTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.UsersTxt.Location = new System.Drawing.Point(19, 70);
             this.UsersTxt.Name = "UsersTxt";
-            this.UsersTxt.Size = new System.Drawing.Size(58, 24);
+            this.UsersTxt.Size = new System.Drawing.Size(73, 29);
             this.UsersTxt.TabIndex = 15;
             this.UsersTxt.Text = "Users";
             this.UsersTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -114,7 +114,7 @@
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.DepartmentsTxt.Location = new System.Drawing.Point(24, 70);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(52, 24);
+            this.DepartmentsTxt.Size = new System.Drawing.Size(66, 29);
             this.DepartmentsTxt.TabIndex = 13;
             this.DepartmentsTxt.Text = "Dept";
             this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -186,7 +186,7 @@
             this.label2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label2.Location = new System.Drawing.Point(20, 70);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 24);
+            this.label2.Size = new System.Drawing.Size(78, 29);
             this.label2.TabIndex = 14;
             this.label2.Text = "Home";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -238,7 +238,7 @@
             this.label3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label3.Location = new System.Drawing.Point(12, 70);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 24);
+            this.label3.Size = new System.Drawing.Size(91, 29);
             this.label3.TabIndex = 13;
             this.label3.Text = "Active ";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -261,7 +261,7 @@
             this.label4.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label4.Location = new System.Drawing.Point(31, 70);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 24);
+            this.label4.Size = new System.Drawing.Size(47, 29);
             this.label4.TabIndex = 9;
             this.label4.Text = "Inv";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -299,35 +299,35 @@
             // panelHome
             // 
             this.panelHome.BackColor = System.Drawing.Color.Maroon;
-            this.panelHome.Controls.Add(this.label1);
+            this.panelHome.Controls.Add(this.labelDashboard);
             this.panelHome.Controls.Add(this.HomeButton);
             this.panelHome.Location = new System.Drawing.Point(144, 3);
             this.panelHome.Name = "panelHome";
             this.panelHome.Size = new System.Drawing.Size(100, 94);
             this.panelHome.TabIndex = 12;
             // 
-            // label1
+            // labelDashboard
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label1.Location = new System.Drawing.Point(20, 70);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 24);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Home";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelDashboard.AutoSize = true;
+            this.labelDashboard.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDashboard.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelDashboard.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelDashboard.Location = new System.Drawing.Point(23, 70);
+            this.labelDashboard.Name = "labelDashboard";
+            this.labelDashboard.Size = new System.Drawing.Size(65, 29);
+            this.labelDashboard.TabIndex = 14;
+            this.labelDashboard.Text = "Dash";
+            this.labelDashboard.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // HomeButton
             // 
             this.HomeButton.Image = ((System.Drawing.Image)(resources.GetObject("HomeButton.Image")));
             this.HomeButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("HomeButton.ImageHover")));
             this.HomeButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("HomeButton.ImageNormal")));
-            this.HomeButton.Location = new System.Drawing.Point(22, 0);
+            this.HomeButton.Location = new System.Drawing.Point(22, 9);
             this.HomeButton.Margin = new System.Windows.Forms.Padding(3, 3, 50, 3);
             this.HomeButton.Name = "HomeButton";
-            this.HomeButton.Size = new System.Drawing.Size(57, 67);
+            this.HomeButton.Size = new System.Drawing.Size(53, 58);
             this.HomeButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.HomeButton.TabIndex = 10;
             this.HomeButton.TabStop = false;
@@ -365,7 +365,7 @@
             this.RentalLable.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.RentalLable.Location = new System.Drawing.Point(12, 70);
             this.RentalLable.Name = "RentalLable";
-            this.RentalLable.Size = new System.Drawing.Size(76, 24);
+            this.RentalLable.Size = new System.Drawing.Size(96, 29);
             this.RentalLable.TabIndex = 13;
             this.RentalLable.Text = "Rentals";
             this.RentalLable.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -445,7 +445,7 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 651);
             this.Controls.Add(this.MainPanel);
@@ -502,7 +502,7 @@
         private System.Windows.Forms.Panel panelRentals;
         private System.Windows.Forms.Label RentalLable;
         private System.Windows.Forms.Panel panelHome;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelDashboard;
         private CustomButton HomeButton;
         private CustomButton RentalButton;
         private System.Windows.Forms.Panel panelDept;

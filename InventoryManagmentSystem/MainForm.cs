@@ -68,7 +68,7 @@ namespace InventoryManagmentSystem
         {
             OpenNavBar("Home");
             ColorTabSwitch("Home", true);
-            openChildForm(new HomeForm());
+            openChildForm(new Dashboard());
         }
 
         private void DepatmensButton_Click(object sender, EventArgs e)
@@ -96,13 +96,14 @@ namespace InventoryManagmentSystem
         {
             OpenNavBar("Home");
             ColorTabSwitch("Home");
-            openChildForm(new HomeForm());
+            openChildForm(new Dashboard());
         }
 
         private void RentalButton_Click(object sender, EventArgs e)
         {
             OpenNavBar("Rentals");
             ColorTabSwitch("Rentals");
+            ColorTabSwitch("RentalHome", false);
             openChildForm(new HomeForm());
         }
 

@@ -186,6 +186,13 @@ namespace InventoryManagmentSystem
                     "[DayNight]              VARCHAR(50) NOT NULL," +
                     "[DriversLicenseNumber]  VARCHAR(50) NOT NULL," +
                     "[Address]               VARCHAR(50) NOT NULL," +
+                    "[Chest]                 VARCHAR(50) NOT NULL," +
+                    "[Sleeve]                VARCHAR(50) NOT NULL," +
+                    "[Waist]                 VARCHAR(50) NOT NULL," +
+                    "[Inseam]                VARCHAR(50) NOT NULL," +
+                    "[Hips]                  VARCHAR(50) NOT NULL," +
+                    "[Height]                VARCHAR(50) NOT NULL," +
+                    "[Weight]                VARCHAR(50) NOT NULL," +
                     "[FireTecRepresentative] VARCHAR(50) NULL);";
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
