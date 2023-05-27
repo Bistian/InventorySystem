@@ -21,6 +21,7 @@ namespace InventoryManagmentSystem
             InitializeComponent();
             offColor = Color.Transparent;
             onColor = Color.DarkGray;
+            
         }
         //keeping track of current tab
         string currTab = "";
