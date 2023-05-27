@@ -46,10 +46,9 @@ namespace InventoryManagmentSystem
                         UserInfoModule.txtBoxCustomerName.Text = dataGridUsers.Rows[e.RowIndex].Cells[1].Value.ToString();
                         UserInfoModule.txtBoxPhone.Text = dataGridUsers.Rows[e.RowIndex].Cells["Phone"].Value.ToString();
                         UserInfoModule.txtBoxEmail.Text = dataGridUsers.Rows[e.RowIndex].Cells["Email"].Value.ToString();
-                        UserInfoModule.txtBoxAddress.Text = dataGridUsers.Rows[e.RowIndex].Cells["Address"].Value.ToString();
+                        UserInfoModule.txtBoxStreet.Text = dataGridUsers.Rows[e.RowIndex].Cells["Address"].Value.ToString();
                         UserInfoModule.txtBoxDriversLicense.Text = dataGridUsers.Rows[e.RowIndex].Cells["DriversLicense"].Value.ToString();
                         UserInfoModule.txtBoxRep.Text = dataGridUsers.Rows[e.RowIndex].Cells["Rep"].Value.ToString();
-                        UserInfoModule.TxtCustomerInfo.Text = "Confirm customer info";
                         UserInfoModule.comboBoxAcademy.Text = dataGridUsers.Rows[e.RowIndex].Cells["Academy"].Value.ToString();
                         UserInfoModule.comboDayNight.Text = dataGridUsers.Rows[e.RowIndex].Cells["DayNight"].Value.ToString();
 

@@ -13,15 +13,15 @@ namespace InventoryManagmentSystem
     {
         public Color StartColor { get; set; }
         public Color EndColor { get; set; }
-
+        bool doOnce = true;
         protected override void OnPaint(PaintEventArgs e)
         {
-            using (var brush = new LinearGradientBrush(ClientRectangle, StartColor, EndColor, LinearGradientMode.Vertical))
-            {
-                e.Graphics.FillRectangle(brush, ClientRectangle);
-            }
+                using (var brush = new LinearGradientBrush(ClientRectangle, StartColor, EndColor, LinearGradientMode.Vertical))
+                {
+                    e.Graphics.FillRectangle(brush, ClientRectangle);
+                }
 
-            base.OnPaint(e);
+                base.OnPaint(e);
         }
     }
 }

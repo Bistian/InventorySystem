@@ -12,21 +12,34 @@ namespace InventoryManagmentSystem
 {
     public partial class MainForm : Form
     {
+        //colors
         Color offColor = Color.Transparent;
         Color onColor = Color.White;
 
+        //to show subform in mainform
+        private Form activeForm = null;
+
+        //Track previous form
+       private Form previousForm = null;
+
         //Initialize
-        public MainForm()
+        public MainForm(Form databaseCreation = null)
         {
+
             InitializeComponent();
             offColor = Color.Transparent;
             onColor = Color.DarkGray;
-            
+            if (databaseCreation != null)
+            {
+                //Gage likes minors
+                databaseCreation.Dispose();
+            }
         }
-        //keeping track of current tab
-        string currTab = "";
-        //to show subform in mainform
-        private Form activeForm = null;
+
+        public void SetPrevForm(Form curr)
+        {
+            previousForm = curr;
+        }
 
         public void openChildForm(Form childForm)
         {
@@ -55,7 +68,7 @@ namespace InventoryManagmentSystem
         {
             OpenNavBar("Home");
             ColorTabSwitch("Home", true);
-            openChildForm(new HomeForm());
+            openChildForm(new Dashboard());
         }
 
         private void DepatmensButton_Click(object sender, EventArgs e)
@@ -83,13 +96,14 @@ namespace InventoryManagmentSystem
         {
             OpenNavBar("Home");
             ColorTabSwitch("Home");
-            openChildForm(new HomeForm());
+            openChildForm(new Dashboard());
         }
 
         private void RentalButton_Click(object sender, EventArgs e)
         {
             OpenNavBar("Rentals");
             ColorTabSwitch("Rentals");
+            ColorTabSwitch("RentalHome", false);
             openChildForm(new HomeForm());
         }
 

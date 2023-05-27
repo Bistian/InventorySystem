@@ -72,8 +72,8 @@ namespace InventoryManagmentSystem
             txtBoxCustomerName.Clear();
             txtBoxPhone.Clear();
             txtBoxEmail.Clear();
-            txtBoxAddress.Clear();
-            txtBoxRep.Clear();
+            txtBoxStreet.Clear();
+            txtBoxRep.SelectedIndex = -1;
             comboBoxAcademy.SelectedIndex = -1;
             comboDayNight.SelectedIndex = -1;
 
@@ -98,19 +98,27 @@ namespace InventoryManagmentSystem
             {
                 if (MessageBox.Show("Are you sure you want to save this Info?", "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    string address = txtBoxStreet.Text + " " + textBoxCity.Text + " " + textBoxState.Text + " " + textBoxZip.Text;
                     bool exists = CheckIfExists("tbClients", txtBoxDriversLicense.Text);
                     if (!exists)
                     {
-                        cm = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,DayNight,DriversLicenseNumber,Address,FireTecRepresentative)" +
-                        "VALUES(@Name,@Phone,@Email,@Academy,@DayNight,@DriversLicenseNumber,@Address,@FireTecRepresentative)", con);
+                        cm = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,DayNight,DriversLicenseNumber,Address,Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,FireTecRepresentative)" +
+                        "VALUES(@Name,@Phone,@Email,@Academy,@DayNight,@DriversLicenseNumber,@Address,@Chest,@Sleeve,@Waist,@Inseam,@Hips,@Height,@Weight,@FireTecRepresentative)", con);
                         cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
                         cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
                         cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
                         cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
-                        cm.Parameters.AddWithValue("@Address", txtBoxAddress.Text);
+                        cm.Parameters.AddWithValue("@Address", address);
                         cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
                         cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
                         cm.Parameters.AddWithValue("@DayNight", comboDayNight.Text);
+                        cm.Parameters.AddWithValue("@Chest", textBoxChest.Text);
+                        cm.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
+                        cm.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
+                        cm.Parameters.AddWithValue("@Inseam", textBoxInseam.Text);
+                        cm.Parameters.AddWithValue("@Hips", textBoxHips.Text);
+                        cm.Parameters.AddWithValue("@Height", textBoxHeight.Text);
+                        cm.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
                         con.Open();
                         cm.ExecuteNonQuery();
                         con.Close();
@@ -160,7 +168,7 @@ namespace InventoryManagmentSystem
                     cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
                     cm.Parameters.AddWithValue("@DayNight", comboDayNight.Text);
                     cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
-                    cm.Parameters.AddWithValue("@Address", txtBoxAddress.Text);
+                    cm.Parameters.AddWithValue("@Address", txtBoxStreet.Text);
                     cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
                     con.Open();
                     cm.ExecuteNonQuery();
@@ -182,14 +190,24 @@ namespace InventoryManagmentSystem
 
         private void ButtonContinue_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtBoxAddress.Text) &&
-         !string.IsNullOrEmpty(txtBoxCustomerName.Text) &&
-         !string.IsNullOrEmpty(txtBoxDriversLicense.Text) &&
-         !string.IsNullOrEmpty(txtBoxEmail.Text) &&
-         !string.IsNullOrEmpty(txtBoxPhone.Text) &&
-         !string.IsNullOrEmpty(txtBoxRep.Text) &&
-         !string.IsNullOrEmpty(comboBoxAcademy.Text) &&
-         !string.IsNullOrEmpty(comboBoxAcademy.Text))
+            if (!string.IsNullOrEmpty(txtBoxStreet.Text) &&
+                !string.IsNullOrEmpty(textBoxState.Text) &&
+                !string.IsNullOrEmpty(textBoxZip.Text) &&
+                !string.IsNullOrEmpty(txtBoxCustomerName.Text) &&
+                !string.IsNullOrEmpty(txtBoxDriversLicense.Text) &&
+                !string.IsNullOrEmpty(txtBoxEmail.Text) &&
+                !string.IsNullOrEmpty(txtBoxPhone.Text) &&
+                !string.IsNullOrEmpty(txtBoxRep.Text) &&
+                !string.IsNullOrEmpty(comboBoxAcademy.Text) &&
+                !string.IsNullOrEmpty(textBoxCity.Text) &&
+                !string.IsNullOrEmpty(textBoxChest.Text) &&
+                !string.IsNullOrEmpty(textBoxSleeve.Text) &&
+                !string.IsNullOrEmpty(textBoxWaist.Text) &&
+                !string.IsNullOrEmpty(textBoxInseam.Text) &&
+                !string.IsNullOrEmpty(textBoxHips.Text) &&
+                !string.IsNullOrEmpty(textBoxHeight.Text) &&
+                !string.IsNullOrEmpty(textBoxWeight.Text) &&
+                !string.IsNullOrEmpty(comboBoxAcademy.Text))
             {
                 currentUser = txtBoxCustomerName.Text;
                 license = txtBoxDriversLicense.Text;
