@@ -382,7 +382,7 @@ namespace InventoryManagmentSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"ERROR DETACH DATABASE: {ex.Message}");
+                Console.WriteLine($"ERROR DETACH DATABASE: {ex.Message}");
             }
         }
 
@@ -409,7 +409,7 @@ namespace InventoryManagmentSystem
             }
             catch (Exception ex) 
             {
-                MessageBox.Show($"ERROR DROP DATABASE: {ex.Message}");
+                Console.WriteLine($"ERROR DROP DATABASE: {ex.Message}");
             }
             
         }
