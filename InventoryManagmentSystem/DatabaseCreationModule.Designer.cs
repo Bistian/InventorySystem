@@ -35,6 +35,7 @@
             this.returntxt = new System.Windows.Forms.Label();
             this.btnNewDatabase = new System.Windows.Forms.Button();
             this.btnFindDatabase = new System.Windows.Forms.Button();
+            this.labelName = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ButtonClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
@@ -118,12 +119,23 @@
             this.btnFindDatabase.UseVisualStyleBackColor = true;
             this.btnFindDatabase.Click += new System.EventHandler(this.btnFindDatabase_Click);
             // 
+            // labelName
+            // 
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(16, 77);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(35, 13);
+            this.labelName.TabIndex = 45;
+            this.labelName.Text = "label1";
+            this.labelName.Visible = false;
+            // 
             // DatabaseCreationModule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(423, 202);
+            this.Controls.Add(this.labelName);
             this.Controls.Add(this.btnFindDatabase);
             this.Controls.Add(this.btnNewDatabase);
             this.Controls.Add(this.panelTop);
@@ -137,6 +149,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ButtonClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -148,5 +161,6 @@
         private System.Windows.Forms.Button btnNewDatabase;
         private CustomButton ButtonClose;
         private System.Windows.Forms.Button btnFindDatabase;
+        private System.Windows.Forms.Label labelName;
     }
 }

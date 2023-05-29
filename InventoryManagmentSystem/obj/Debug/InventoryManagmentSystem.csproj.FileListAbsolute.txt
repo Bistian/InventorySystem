@@ -204,5 +204,6 @@ C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\I
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.CopyComplete
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.exe
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.pdb
-C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.SettingsForm.resources
+C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.SettingsForm.resources
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Dashboard.resources
+C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.SettingsForm.resources

@@ -21,12 +21,17 @@ namespace InventoryManagmentSystem
 {
     public partial class DatabaseCreationModule : Form
     {
-        bool isInit;
+        private bool isInit;
+        private string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True";
+        SqlConnection connection;
 
         public DatabaseCreationModule(bool isInit = true)
         {
             InitializeComponent();
             this.isInit = isInit;
+            labelName.Visible = false;
+
+            // Configure form for docking if this class is not called on app init.
             if (!isInit)
             {
                 BackColor = panelTop.BackColor;
@@ -34,37 +39,94 @@ namespace InventoryManagmentSystem
                 panelTop.Enabled = false;
                 ButtonClose.Visible = false;
                 ButtonClose.Enabled = false;
+                labelName.Text = "Database: " +  ConfigurationManager.AppSettings["databaseName"];
+                labelName.Visible = true;
             }
         }
 
-        private string createDatabase()
+        private void btnNewDatabase_Click(object sender, EventArgs e)
         {
-            string filePath = ""; // file path selected by the user
+            string filePath = GetNewDatabasePath();
+            // If user canceled the action, just return.
+            if (filePath == null) { return; }
 
-            var saveDialog = new SaveFileDialog();
-            saveDialog.Filter = "SQL Server database files| *.mdf";
-            if (saveDialog.ShowDialog() == DialogResult.OK)
-            {
-                // user selected a file path, save it
-                filePath = saveDialog.FileName;
-            }
-            else
+            CreateDatabase(filePath);
+
+            UpdateConfigFile(filePath);
+
+            CreateMainFormOnInit();
+
+            this.Close();
+        }
+
+        private void btnFindDatabase_Click(object sender, EventArgs e)
+        {
+            var dialogBox = new OpenFileDialog();
+            dialogBox.Filter = "SQL Server database files| *.mdf";
+            dialogBox.ShowDialog();
+            string filePath = dialogBox.FileName;
+            // If user canceled the action, just return.
+            if (filePath == "") { return; }
+
+            UpdateConfigFile(filePath);
+
+            CreateMainFormOnInit();
+
+            this.Close();
+        }
+
+        private void ButtonClose_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Exit Module?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 this.Dispose();
-                return null;
             }
+        }
 
+        /// <summary>
+        /// Get file path for new database.
+        /// </summary>
+        /// <returns>string file path</returns>
+        private string GetNewDatabasePath()
+        {
+            // Open dialog box to create a new database.
+            var saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "SQL Server database files| *.mdf";
+
+            if(saveDialog.ShowDialog() == DialogResult.OK) 
+            {
+                string filePath = saveDialog.FileName;
+                string databaseName = Path.GetFileNameWithoutExtension(filePath);
+                // Check if the file already exists.
+                if (File.Exists(filePath))
+                {
+                    // Prompt the user for confirmation to overwrite.
+                    string message = "The file already exists. Do you want to overwrite it?";
+                    DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        DeleteFileAndDatabase(databaseName);
+                    }
+                    else
+                    {
+                        // User canceled overwrite, exit the method.
+                        return null;
+                    }
+                }
+                return filePath;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Create a new database and its tables.
+        /// </summary>
+        /// <param name="connectionString"></param>
+        private void CreateDatabase(string filePath)
+        {
             string databaseName = Path.GetFileNameWithoutExtension(filePath);
 
-            // Check if the database file already exists
-            if (File.Exists(filePath))
-            {
-                MessageBox.Show("The database file already exists.");
-                return "failed";
-            }
-
             // Create the new database file
-            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -77,21 +139,13 @@ namespace InventoryManagmentSystem
 
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+                connection.Close();
             }
-            return filePath;
-        }
 
-        private void btnNewDatabase_Click(object sender, EventArgs e)
-        {
-           string filePath = createDatabase();
-           // If user canceled the action, just return.
-           if(filePath == null) { return; }
-           string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename="+filePath+";Integrated Security=True;Connect Timeout=30";
-
-            //Create the tables
+            string connectDatabase = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=" + filePath + ";Integrated Security=True;Connect Timeout=30";
 
             //Helmets
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
             {
                 connection.Open();
 
@@ -108,10 +162,11 @@ namespace InventoryManagmentSystem
                     "   [Color]           VARCHAR (50) NOT NULL);";
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+                connection.Close();
             }
 
             //Jackets
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
             {
                 connection.Open();
 
@@ -128,10 +183,11 @@ namespace InventoryManagmentSystem
                 "    [Size]            VARCHAR (50) NOT NULL);";
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+                connection.Close();
             }
 
             //Pants
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
             {
                 connection.Open();
 
@@ -148,10 +204,11 @@ namespace InventoryManagmentSystem
                 "    [Size]            VARCHAR (50) NOT NULL);";
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+                connection.Close();
             }
 
             //Boots
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
             {
                 connection.Open();
 
@@ -169,11 +226,12 @@ namespace InventoryManagmentSystem
                 "    [Material]        VARCHAR (50) NOT NULL);";
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+                connection.Close();
             }
 
             //Clients
-             using (SqlConnection connection = new SqlConnection(connectionString))
-             {
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
+            {
                 connection.Open();
 
                 string sql =
@@ -196,10 +254,11 @@ namespace InventoryManagmentSystem
                     "[FireTecRepresentative] VARCHAR(50) NULL);";
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
-             }
+                connection.Close();
+            }
 
             //Departments
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
             {
                 connection.Open();
 
@@ -216,10 +275,11 @@ namespace InventoryManagmentSystem
                     "[Zip]         VARCHAR(50) NOT NULL);";
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+                connection.Close();
             }
 
             //General
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
             {
                 connection.Open();
 
@@ -233,10 +293,11 @@ namespace InventoryManagmentSystem
 
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+                connection.Close();
             }
 
             //Users
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
             {
                 connection.Open();
 
@@ -248,83 +309,109 @@ namespace InventoryManagmentSystem
 
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
-            }
-
-            // Get the current connection string
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            ConnectionStringSettings connectionStringSettings = config.ConnectionStrings.ConnectionStrings["MyConnectionString"];
-            string GlobalConnectionString = connectionStringSettings.ConnectionString;
-
-            // Modify the connection string
-            GlobalConnectionString = connectionString;
-
-            // Update the configuration file
-            connectionStringSettings.ConnectionString = GlobalConnectionString;
-            config.Save(ConfigurationSaveMode.Modified);
-
-            // Refresh the ConfigurationManager to reflect the changes
-            ConfigurationManager.RefreshSection("connectionStrings");
-
-            if(isInit)
-            {
-                MainForm ModForm = new MainForm(this);
-                ModForm.ShowDialog();
-            }
-            else
-            {
-                this.Dispose();
+                connection.Close();
             }
         }
 
-        private void btnFindDatabase_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Update variables inside of App.config.
+        /// </summary>
+        /// <param name="filePath"></param>
+        private void UpdateConfigFile(string filePath)
         {
-            // Select existing database.
-            string filePath = "";
-            var saveDialog = new SaveFileDialog();
-            saveDialog.Filter = "SQL Server database files| *.mdf";
-            if (saveDialog.ShowDialog() == DialogResult.OK)
-            {
-                // user selected a file path, save it.
-                filePath = saveDialog.FileName;
-            }
-            else
-            {
-                this.Dispose();
-                return;
-            }
-
-            string databaseName = Path.GetFileNameWithoutExtension(filePath);
-
             // Get the current connection string.
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             ConnectionStringSettings connectionStringSettings = config.ConnectionStrings.ConnectionStrings["MyConnectionString"];
 
             // Update the configuration file
+            string databaseName = Path.GetFileNameWithoutExtension(filePath);
+            config.AppSettings.Settings["databaseName"].Value = databaseName;
             connectionStringSettings.ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=" + filePath + ";Integrated Security=True;Connect Timeout=30";
             config.Save(ConfigurationSaveMode.Modified);
 
             // Refresh the ConfigurationManager to reflect the changes
+            ConfigurationManager.RefreshSection("appSettings");
             ConfigurationManager.RefreshSection("connectionStrings");
+            SqlConnection.ClearAllPools();
+        }
 
+        /// <summary>
+        /// If app is initializing, create main form.
+        /// </summary>
+        private void CreateMainFormOnInit()
+        {
             if (isInit)
             {
-                this.Dispose();
+                this.Hide();
                 MainForm ModForm = new MainForm();
                 ModForm.ShowDialog();
             }
-            else
-            {
-                this.Dispose();
-            }
         }
 
-        private void ButtonClose_Click(object sender, EventArgs e)
+        private void DeleteFileAndDatabase(string filePath)
         {
-            if (MessageBox.Show("Exit Module?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            DetachDatabase(filePath);
+            DropDatabase(filePath);
+            File.Delete(filePath);
+        }
+
+        /// <summary>
+        /// Detaching a database releases its data and log files from the SQL Server instance.
+        /// Detaching the database allows you to maintain a backup of the database files before deleting them permanently.
+        /// It also ensures that the database is not actively used or accessed by any active connections or processes.
+        /// </summary>
+        /// <param name="databaseName"></param>
+        private void DetachDatabase(string databaseName)
+        {
+            try
             {
-                this.Dispose();
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Detach the database
+                    string detachCommand = $"USE master; EXEC sp_detach_db '{databaseName}'";
+                    using (SqlCommand command = new SqlCommand(detachCommand, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
+
+                MessageBox.Show("Database detached successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR DETACH DATABASE: {ex.Message}");
             }
         }
 
+        /// <summary>
+        /// Deletes the database.
+        /// </summary>
+        /// <param name="databaseName"></param>
+        private void DropDatabase(string databaseName)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Drop the database
+                    string dropCommand = $"USE master; DROP DATABASE {databaseName}";
+                    using (SqlCommand command = new SqlCommand(dropCommand, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine($"ERROR DROP DATABASE: {ex.Message}");
+            }
+            
+        }
     }
 }
