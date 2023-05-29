@@ -50,7 +50,6 @@ namespace InventoryManagmentSystem
                         UserInfoModule.txtBoxDriversLicense.Text = dataGridUsers.Rows[e.RowIndex].Cells["DriversLicense"].Value.ToString();
                         UserInfoModule.txtBoxRep.Text = dataGridUsers.Rows[e.RowIndex].Cells["Rep"].Value.ToString();
                         UserInfoModule.comboBoxAcademy.Text = dataGridUsers.Rows[e.RowIndex].Cells["Academy"].Value.ToString();
-                        UserInfoModule.comboDayNight.Text = dataGridUsers.Rows[e.RowIndex].Cells["DayNight"].Value.ToString();
 
                         this.Dispose();
                         UserInfoModule.ExistingUser = true;

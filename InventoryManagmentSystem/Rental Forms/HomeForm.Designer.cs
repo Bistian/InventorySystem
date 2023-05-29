@@ -114,7 +114,7 @@
             this.buttonActiveRental.Name = "buttonActiveRental";
             this.buttonActiveRental.Size = new System.Drawing.Size(275, 88);
             this.buttonActiveRental.TabIndex = 19;
-            this.buttonActiveRental.Text = "Active Rentals";
+            this.buttonActiveRental.Text = "Existing Customer";
             this.buttonActiveRental.UseVisualStyleBackColor = false;
             this.buttonActiveRental.Click += new System.EventHandler(this.buttonActiveRental_Click);
             // 

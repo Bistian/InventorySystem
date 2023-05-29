@@ -241,7 +241,7 @@ namespace InventoryManagmentSystem
                     "[Phone]                 VARCHAR(50) NOT NULL," +
                     "[Email]                 VARCHAR(50) NOT NULL," +
                     "[Academy]               VARCHAR(50) NOT NULL," +
-                    "[DayNight]              VARCHAR(50) NOT NULL," +
+                    "[DayNight]              VARCHAR(50) NULL," +
                     "[DriversLicenseNumber]  VARCHAR(50) NOT NULL," +
                     "[Address]               VARCHAR(50) NOT NULL," +
                     "[Chest]                 VARCHAR(50) NOT NULL," +
