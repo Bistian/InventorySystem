@@ -61,6 +61,7 @@ namespace InventoryManagmentSystem
             comboBoxBrand.SelectedIndex = -1;
             comboBoxUsedNew.SelectedIndex = -1;
             comboBoxColor.SelectedIndex = -1;
+            dateTimePickerManufactureDate.Value = DateTime.Today;
         }
 
         //helper functions
