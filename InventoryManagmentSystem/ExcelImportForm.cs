@@ -58,11 +58,12 @@ namespace InventoryManagmentSystem
         }
         private void ExcelImport_Load(object sender, EventArgs e)
         {
-            comboBoxTbSelect.Items.Add("Pants");
-            comboBoxTbSelect.Items.Add("Jackets");
 
+            // ========== Manual Import Area ==========
             // Keep it disabled until a proper Excel file has been selected.
             comboBoxTbSelect.Enabled = false;
+            comboBoxTbSelect.Items.Add("Pants");
+            comboBoxTbSelect.Items.Add("Jackets");
         }
 
         /// <summary>
@@ -72,7 +73,7 @@ namespace InventoryManagmentSystem
         /// <param name="e"></param>
         private void btnExcel_Click(object sender, EventArgs e)
         {
-            ImportExcel(true);
+
         }
 
         /// <summary>
@@ -82,14 +83,14 @@ namespace InventoryManagmentSystem
         /// <param name="e"></param>
         private void btnStandard_Click(object sender, EventArgs e)
         {
-            ImportExcel(false);
+            ImportExcel();
         }
 
         /// <summary>
         /// Logic for importing.
         /// </summary>
         /// <param name="isManual">Tells is the user is going to import manually</param>
-        private void ImportExcel(bool isManual)
+        private void ImportExcel()
         {
             // Release memory if needed and clean variables.
             if (excelApp != null)
@@ -104,38 +105,8 @@ namespace InventoryManagmentSystem
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 excelFileName = openFileDialog.FileName;
-
-                // Create a new Excel Application object
-                excelApp = new Excel.Application();
-                excelApp.Visible = false;
-
-                // Open the selected workbook
-                workbook = excelApp.Workbooks.Open(excelFileName);
-
-                // Get all worksheet names available in the selected Excel file.
-                List<string> worksheetNames = new List<string>();
-                foreach (Excel.Worksheet worksheet in workbook.Worksheets)
-                {
-                    worksheetNames.Add(worksheet.Name);
-                }
-
-                // Get user prompt initialized.
-                var promptForm = new ExcelUserPromptForm(worksheetNames, isManual);
-
-                // Subscribe to the event inside of promptForm.
-                // This will listen for user inputs.
-                promptForm.userPrompt += (s, arguments) =>
-                {
-                    // Make sure user selected something before setting worksheet.
-                    if(arguments.selectedWorksheet != "")
-                    {
-                        worksheet = workbook.Worksheets[arguments.selectedWorksheet];
-                    }
-                    headerRow = arguments.selectedRow;
-                };
-
-                // This will update the selectedWorksheet and headerRow when the user is done.
-                promptForm.ShowDialog();
+                OpenExcelFile(excelFileName);
+                SubscribeToPromptForm();
 
                 // If user cancels the dialog for import, this IF handles it without errors.
                 if(worksheet == null) 
@@ -144,63 +115,130 @@ namespace InventoryManagmentSystem
                     return; 
                 }
 
-                // If it is not manual I know what row the header is.
-                if(isManual == false)
+                // For using the import with a standar Excel document, header needs to be 2.
+                headerRow = 2;
+                FindExcelColumnNames();
+                string tableName = FindTableName();
+
+                // Could not find a table matching the item type.
+                if(tableName == "")
                 {
-                    headerRow = 2;
-                    FindExcelColumnNames();
-
-                    // Find the type to know which table to use.
-                    Excel.Range cell = worksheet.Cells[3, 1];
-                    string trimed = cell.Value.ToString().Trim();
-                    string table = "";
-                    if (trimed == "Jacket")
-                    {
-                        table = "tbJackets";
-                    }
-                    else if (trimed == "Pants")
-                    {
-                        table = "tbPants";
-                    }
-                    else if(trimed == "Helmet")
-                    {
-                        table = "tbHelmets";
-                    }
-                    else if(trimed == "Boots")
-                    {
-                        table = "tbBoots";
-                    }
-                    else { return; }
-
-                    // Find the names of all columns on the database table.
-                    string query = "SELECT COLUMN_NAME " +
-                        "FROM INFORMATION_SCHEMA.COLUMNS " +
-                        "WHERE TABLE_NAME = '" + table + "'" +
-                        "ORDER BY ORDINAL_POSITION";
-
-                    cm = new SqlCommand(query, con);
-                    con.Open();
-                    dr = cm.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        listTableColumns.Add(dr.GetString(0));
-                    }
-                    con.Close();
-
-                    tableColumnSerial = listTableColumns[3];
-
-                    UpdateDatabaseStandard(table);
+                    ClearExcelVar();
+                    return;
                 }
-
-
-                // Cannot select a worksheet before selecting an Excel file.
-                /*if (selectedWorksheet >= 0 && headerRow > 0)
-                {
-                    comboBoxTbSelect.Enabled = true;
-                }*/
+                FindNamesOfColumnsOnTable(tableName);
+                UpdateDatabaseStandard(tableName);
             }
         }
 
+        /// <summary>
+        /// Starts a new Excel app. This is needed to open an Excel file.
+        /// </summary>
+        /// <param name="excelFileName"></param>
+        private void OpenExcelFile(string excelFileName)
+        {
+            // Create a new Excel Application object
+            excelApp = new Excel.Application();
+            excelApp.Visible = false;
+
+            // Open the selected workbook
+            workbook = excelApp.Workbooks.Open(excelFileName);
+        }
+
+        /// <summary>
+        /// Wait for user to respond to ExcelUserPromptForm.
+        /// This form will select which worksheet needs to be used.
+        /// Also selects what row will be the start (2 for standard).
+        /// </summary>
+        private void SubscribeToPromptForm()
+        {
+            // Get all worksheet names available in the selected Excel file.
+            List<string> worksheetNames = new List<string>();
+            foreach (Excel.Worksheet worksheet in workbook.Worksheets)
+            {
+                worksheetNames.Add(worksheet.Name);
+            }
+
+            // Get user prompt initialized.
+            var promptForm = new ExcelUserPromptForm(worksheetNames, false);
+
+            // Subscribe to the event inside of promptForm.
+            // This will listen for user inputs.
+            promptForm.userPrompt += (s, arguments) =>
+            {
+                // Make sure user selected something before setting worksheet.
+                if (arguments.selectedWorksheet != "")
+                {
+                    worksheet = workbook.Worksheets[arguments.selectedWorksheet];
+                }
+                headerRow = arguments.selectedRow;
+            };
+
+            // This will update the selectedWorksheet and headerRow when the user is done.
+            promptForm.ShowDialog();
+        }
+
+        /// <summary>
+        /// Find the table being used based on the item type.
+        /// </summary>
+        /// <param name="itemType"></param>
+        /// <returns>Table Name or empty string if no table was found</returns>
+        private string FindTableName()
+        {
+            // Find the type to know which table to use.
+            Excel.Range cell = worksheet.Cells[3, 1];
+            string trimed = cell.Value.ToString().Trim();
+            string table = "";
+            if (trimed == "Jacket")
+            {
+                table = "tbJackets";
+            }
+            else if (trimed == "Pants")
+            {
+                table = "tbPants";
+            }
+            else if (trimed == "Helmet")
+            {
+                table = "tbHelmets";
+            }
+            else if (trimed == "Boots")
+            {
+                table = "tbBoots";
+            }
+            
+            return table;
+        }
+
+        /// <summary>
+        /// Used fill the listTableColumns and set the tableColumnSerial.
+        /// </summary>
+        /// <param name="tableName"></param>
+        private void FindNamesOfColumnsOnTable(string tableName)
+        {
+            // Find the names of all columns on the database table.
+            string query = "SELECT COLUMN_NAME " +
+                "FROM INFORMATION_SCHEMA.COLUMNS " +
+                "WHERE TABLE_NAME = '" + tableName + "'" +
+                "ORDER BY ORDINAL_POSITION";
+
+            cm = new SqlCommand(query, con);
+            con.Open();
+            dr = cm.ExecuteReader();
+            while (dr.Read())
+            {
+                listTableColumns.Add(dr.GetString(0));
+            }
+            con.Close();
+
+            tableColumnSerial = listTableColumns[3];
+        }
+
+        /// <summary>
+        /// Import items that are either pants or jackets.
+        /// The columns are hard coded.
+        /// </summary>
+        /// <param name="rows"></param>
+        /// <param name="isPants"></param>
         private void ImportPantsOrJackets(List<object[]> rows, bool isPants)
         {
             for(int i = 0; i < rows.Count; ++i)
@@ -258,7 +296,10 @@ namespace InventoryManagmentSystem
             }
         }
 
-        // Using standar Excel files, update the database.
+        /// <summary>
+        /// Using standar Excel files, update the database.
+        /// </summary>
+        /// <param name="tableName"></param>
         private void UpdateDatabaseStandard(string tableName)
         {
 
@@ -305,7 +346,6 @@ namespace InventoryManagmentSystem
                     values[j - 1] = v;
                 }
                 
-                // TODO: Can I add the count to the center of the progress bar?
                 ++progressBar1.Value;
                 #if DEBUG
                 Console.WriteLine($"Cell({progressBar1.Value}/{progressBar1.Maximum})");
@@ -323,6 +363,8 @@ namespace InventoryManagmentSystem
                 ImportPantsOrJackets(rows, true);
             else if(tableName == "tbJackets")
                 ImportPantsOrJackets(rows, false);
+
+            ClearExcelVar();
 
             /*
             // Create the colums for the Data Table.
@@ -475,7 +517,7 @@ namespace InventoryManagmentSystem
                 }
                     
             }*/
-            ClearExcelVar();
+
         }
 
         /// <summary>
@@ -697,7 +739,12 @@ namespace InventoryManagmentSystem
 
         #region Helper
 
-        // Convert a value from Excel into the appropriate data type to fit the database column.
+        /// <summary>
+        /// Convert a value from Excel into the appropriate data type to fit the database column.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <returns></returns>
         private object ConvertExcelValueToType(string value, Type targetType)
         {
             if (targetType == typeof(int))
@@ -773,93 +820,7 @@ namespace InventoryManagmentSystem
 
         #endregion Helper
 
-
-        /*
-        private void UpdateExcelFile(string fileName)
-        {
-            // Create a new Excel Application object
-            Excel.Application excelApp = new Excel.Application();
-            excelApp.Visible = false;
-
-            // Open the selected workbook
-            Excel.Workbook workbook = excelApp.Workbooks.Open(fileName);
-
-            // Get the first worksheet
-            Excel.Worksheet worksheet = workbook.Sheets[1];
-
-            // Get the range of cells containing data
-            Excel.Range range = worksheet.UsedRange;
-
-            // Get a DataTable containing the changes
-            DataTable changesTable = ((DataTable)dataGridView1.DataSource).GetChanges();
-
-            // Update the Excel file with the changes
-            if (changesTable != null)
-            {
-                foreach (DataRow dataRow in changesTable.Rows)
-                {
-                    Excel.Range cell = range.Find(dataRow[0]);
-                    if (cell != null)
-                    {
-                        cell.Offset[0, 1].Value = dataRow[1];
-                    }
-                    else
-                    {
-                        int lastRow = range.Rows.Count;
-                        range.Cells[lastRow + 1, 1].Value = dataRow[0];
-                        range.Cells[lastRow + 1, 2].Value = dataRow[1];
-                    }
-                }
-            }
-        }
-        */
     }
-
-    /*
-        private void LoadExcelFile(string fileName)
-        {
-            // Create a new Excel Application object
-            //Excel.Application excelApp = new Excel.Application();
-            //excelApp.Visible = false;
-
-            // Open the selected workbook
-            //Excel.Workbook workbook = excelApp.Workbooks.Open(fileName);
-
-            // Get the first worksheet
-            //Excel.Worksheet worksheet = workbook.Sheets[1];
-
-            // Get the range of cells containing data
-            Excel.Range range = worksheet.UsedRange;
-
-            // Create a new DataTable to store the data
-            DataTable dataTable = new DataTable();
-
-            // Add columns to the DataTable
-            for (int i = 1; i <= range.Columns.Count; i++)
-            {
-                dataTable.Columns.Add(range.Cells[1, i].Value.ToString());
-            }
-
-            // Add rows to the DataTable
-            for (int i = 2; i <= range.Rows.Count; i++)
-            {
-                DataRow dataRow = dataTable.NewRow();
-                for (int j = 1; j <= range.Columns.Count; j++)
-                {
-                    dataRow[j - 1] = range.Cells[i, j].Value;
-                }
-                dataTable.Rows.Add(dataRow);
-            }
-
-            // Set the DataGridView's DataSource property to the DataTable
-            //dataGridView1.DataSource = dataTable;
-
-            // Clean up resources
-            workbook.Close(false);
-            excelApp.Quit();
-            System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
-        }
-        */
 }
 
 /* To use Microsoft Office Excel dll:
