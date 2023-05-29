@@ -24,7 +24,7 @@ namespace InventoryManagmentSystem
             InitializeComponent();
             PrintRented();
             LoadTables(dataGridViewDueIn10, QueryWithin10Days(), "Due");
-            LoadTables(dataGridViewPast30, QueryOver30Days(), "DueDate2");
+            LoadTables(dataGridViewPast30, QueryLateItems(), "DueDate2");
 
         }
 
@@ -75,23 +75,23 @@ namespace InventoryManagmentSystem
                    "ORDER BY DueDate");
         }
 
-        private string QueryOver30Days()
+        private string QueryLateItems()
         {
             return ("SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbPants " +
                    "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
-                   "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 30 " +
+                   "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 0 " +
 
                    "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbBoots " +
                    "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location " +
-                   "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 30 " +
+                   "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 0 " +
 
                    "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbHelmets " +
                    "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location " +
-                   "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 30  " +
+                   "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 0  " +
 
                    "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbJackets " +
                    "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location " +
-                   "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 30  " +
+                   "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 0  " +
                    "ORDER BY DueDate");
         }
 
