@@ -14,7 +14,6 @@ namespace InventoryManagmentSystem
 {
     public partial class NewRentalModuleForm : Form
     {
-
         #region SQL_Variables
         // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
@@ -22,17 +21,27 @@ namespace InventoryManagmentSystem
         SqlConnection con = new SqlConnection(connectionString);
         //Creating command
         SqlCommand cm = new SqlCommand();
-        bool isNewItem;
+        //Creatinng Reader
+        SqlDataReader dr;
+
+        //Used for counting rentals
+        int total = 0;
+
         #endregion SQL_Variables
 
         public bool ExistingUser = false;
         public string currentUser = "";
         string license = "";
         string DayNight = "";
+        bool academy = true;
 
         public NewRentalModuleForm()
         {
             InitializeComponent();
+            panelAddress.Visible = false;
+            panelContactInfo.Visible = false;
+            panelMeasurments.Visible = false;
+            panelRentalInfo.Visible = false;
 
         }
 
@@ -58,7 +67,7 @@ namespace InventoryManagmentSystem
                 con.Close();
                 return Exists;
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine($"ERROR NewRentalModuleForm.cs --> CheckIfExists(): {ex.Message}");
                 con.Close();
@@ -75,7 +84,6 @@ namespace InventoryManagmentSystem
             txtBoxStreet.Clear();
             txtBoxRep.SelectedIndex = -1;
             comboBoxAcademy.SelectedIndex = -1;
-            comboDayNight.SelectedIndex = -1;
 
         }
 
@@ -92,6 +100,82 @@ namespace InventoryManagmentSystem
             Clear();
         }
 
+        public void LoadProfile(bool isDepartment, String ClientDrivers)
+        {
+            if (!isDepartment)
+            {
+                try
+                {
+
+                    cm = new SqlCommand("SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address," +
+                        "Chest,Sleeve,Waist,Inseam,Hips,Height,Weight " +
+                        "FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber", con);
+                    cm.Parameters.AddWithValue("@DriversLicenseNumber", ClientDrivers);
+                    con.Open();
+                    dr = cm.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        labelProfileName.Text = dr[0].ToString();
+                        labelClientPhone.Text = dr[1].ToString();
+                        labelClientEmail.Text = dr[2].ToString();
+                        labelClientAcademy.Text = dr[3].ToString();
+                        labelClientDrivers.Text = dr[4].ToString();
+                        labelClientAddress.Text = dr[5].ToString();
+                        labelClientChest.Text = dr[6].ToString();
+                        labelClientSleeve.Text = dr[7].ToString();
+                        labelClientWaist.Text = dr[8].ToString();
+                        labelClientInseam.Text = dr[9].ToString();
+                        labelClientHips.Text = dr[10].ToString();
+                        labelClientHeight.Text = dr[11].ToString();
+                        labelClientWeight.Text = dr[12].ToString();
+                    }
+                    dr.Close();
+                    con.Close();
+                    flowLayoutPanelProfile.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            else if (isDepartment)
+            {
+                try
+                {
+
+                    cm = new SqlCommand("SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address," +
+                           "Chest,Sleeve,Waist,Inseam,Hips,Height,Weight " +
+                           "FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber", con);
+                    cm.Parameters.AddWithValue("@DriversLicenseNumber", ClientDrivers);
+                    con.Open();
+                    dr = cm.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        labelProfileName.Text = dr[4].ToString();
+                        labelClientPhone.Text = dr[1].ToString();
+                        labelClientEmail.Text = dr[2].ToString();
+
+                        //point of contact
+                        labelProfileDrivers.Text = "Point of contact";
+                        labelClientDrivers.Text = dr[0].ToString();
+                        labelClientAddress.Text = dr[5].ToString();
+                    }
+                    dr.Close();
+                    con.Close();
+                    flowLayoutPanelProfile.Visible = true;
+                    panelProfileRentalInfo.Visible = false;
+                    panelProfileMeasurments.Visible = false;
+                    panelProfileAddress.Visible = false;
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+            }
+        }
+
         private void SaveClient()
         {
             try
@@ -102,8 +186,8 @@ namespace InventoryManagmentSystem
                     bool exists = CheckIfExists("tbClients", txtBoxDriversLicense.Text);
                     if (!exists)
                     {
-                        cm = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,DayNight,DriversLicenseNumber,Address,Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,FireTecRepresentative)" +
-                        "VALUES(@Name,@Phone,@Email,@Academy,@DayNight,@DriversLicenseNumber,@Address,@Chest,@Sleeve,@Waist,@Inseam,@Hips,@Height,@Weight,@FireTecRepresentative)", con);
+                        cm = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,DriversLicenseNumber,Address,Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,FireTecRepresentative)" +
+                        "VALUES(@Name,@Phone,@Email,@Academy,@DriversLicenseNumber,@Address,@Chest,@Sleeve,@Waist,@Inseam,@Hips,@Height,@Weight,@FireTecRepresentative)", con);
                         cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
                         cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
                         cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
@@ -111,7 +195,6 @@ namespace InventoryManagmentSystem
                         cm.Parameters.AddWithValue("@Address", address);
                         cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
                         cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
-                        cm.Parameters.AddWithValue("@DayNight", comboDayNight.Text);
                         cm.Parameters.AddWithValue("@Chest", textBoxChest.Text);
                         cm.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
                         cm.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
@@ -124,7 +207,13 @@ namespace InventoryManagmentSystem
                         con.Close();
                         MessageBox.Show("Info has been successfully saved");
                         Clear();
-                        this.Dispose();
+
+                        //hiding input panels
+                        panelAddress.Visible = false;
+                        panelContactInfo.Visible = false;
+                        panelMeasurments.Visible = false;
+                        panelRentalInfo.Visible = false;
+                        panelFinalize.Visible = false;
                     }
                     else
                     {
@@ -149,9 +238,9 @@ namespace InventoryManagmentSystem
             try
             {
                 if (MessageBox.Show(
-                    "Are you sure you want to update this Client?", 
-                    "Update Client", 
-                    MessageBoxButtons.YesNo, 
+                    "Are you sure you want to update this Client?",
+                    "Update Client",
+                    MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     cm = new SqlCommand(
@@ -166,7 +255,6 @@ namespace InventoryManagmentSystem
                     cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
                     cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
                     cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
-                    cm.Parameters.AddWithValue("@DayNight", comboDayNight.Text);
                     cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
                     cm.Parameters.AddWithValue("@Address", txtBoxStreet.Text);
                     cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
@@ -211,13 +299,18 @@ namespace InventoryManagmentSystem
             {
                 currentUser = txtBoxCustomerName.Text;
                 license = txtBoxDriversLicense.Text;
-                DayNight = comboDayNight.Text;
-                if(ExistingUser == false)
+                if (ExistingUser == false)
                 {
-                 SaveClient();
-                    SetSelectionModuleForm ModForm = new SetSelectionModuleForm(currentUser, license, DayNight);
-                    this.Dispose();
-                    ModForm.ShowDialog();
+                    SaveClient();
+                    panelRentalType.Visible = false;
+                    if (comboBoxRentalType.SelectedIndex == 0)
+                    {
+                         LoadProfile(false, license);
+                    }
+                    else if(comboBoxRentalType.SelectedIndex == 1)
+                    {
+                        LoadProfile(true, license);
+                    }
                 }
                 else
                 {
@@ -227,6 +320,108 @@ namespace InventoryManagmentSystem
             else
             {
                 MessageBox.Show("Please fill the required fields");
+            }
+        }
+
+        private void comboBoxGender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxGender.SelectedIndex == 0)
+            {
+                textBoxHips.Text = "N/A";
+                panelHips.Visible = false;
+            }
+            else
+            {
+                textBoxHips.Text = "";
+                panelHips.Visible = true;
+            }
+        }
+
+        private void comboBoxRentalType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //nothing seleced
+            if (comboBoxRentalType.SelectedIndex == -1)
+            {
+                panelAddress.Visible = false;
+                panelContactInfo.Visible = false;
+                panelMeasurments.Visible = false;
+                panelRentalInfo.Visible = false;
+            }
+            //Individual
+            else if (comboBoxRentalType.SelectedIndex == 0)
+            {
+                //Change fields
+                LableCustomerName.Text = "Customer Name";
+                labelDriversLicense.Text = "Drivers Licence #";
+
+                //show panels
+                panelAddress.Visible = true;
+                panelContactInfo.Visible = true;
+                panelMeasurments.Visible = true;
+                panelRentalInfo.Visible = true;
+                panelAcademy.Visible = true;
+
+                //default values
+                textBoxChest.Text = "";
+                textBoxSleeve.Text = "";
+                textBoxInseam.Text = "";
+                textBoxHips.Text = "";
+                textBoxWaist.Text = "";
+                textBoxWeight.Text = "";
+                textBoxHeight.Text = "";
+                comboBoxAcademy.SelectedIndex = -1;
+
+            }
+            //department
+            else if (comboBoxRentalType.SelectedIndex == 1)
+            {
+                //change fields
+                panelMeasurments.Visible = false;
+                panelAcademy.Visible = false;
+                LableCustomerName.Text = "Point Of Contact";
+                labelDriversLicense.Text = "Department Name";
+
+                //default values
+                textBoxChest.Text = "N/A";
+                textBoxSleeve.Text = "N/A";
+                textBoxInseam.Text = "N/A";
+                textBoxHips.Text = "N/A";
+                textBoxWaist.Text = "N/A";
+                textBoxWeight.Text = "N/A";
+                textBoxHeight.Text = "N/A";
+                comboBoxAcademy.Text = "N/A";
+
+
+                //show pannels
+                panelAddress.Visible = true;
+                panelContactInfo.Visible = true;
+                panelRentalInfo.Visible = true;
+
+            }
+            //academy
+            else if (comboBoxRentalType.SelectedIndex == 2)
+            {
+                //hide pannels
+                panelMeasurments.Visible = false;
+                panelAcademy.Visible = false;
+                LableCustomerName.Text = "Point Of Contact";
+                labelDriversLicense.Text = "Academy Name";
+
+
+                //default values
+                textBoxChest.Text = "N/A";
+                textBoxSleeve.Text = "N/A";
+                textBoxInseam.Text = "N/A";
+                textBoxHips.Text = "N/A";
+                textBoxWaist.Text = "N/A";
+                textBoxWeight.Text = "N/A";
+                textBoxHeight.Text = "N/A";
+                comboBoxAcademy.Text = "N/A";
+
+                //show pannels
+                panelAddress.Visible = true;
+                panelRentalInfo.Visible = true;
+                panelContactInfo.Visible = true;
             }
         }
     }
