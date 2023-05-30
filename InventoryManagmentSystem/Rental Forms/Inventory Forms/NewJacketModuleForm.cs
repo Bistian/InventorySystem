@@ -60,7 +60,7 @@ namespace InventoryManagmentSystem
             txtBoxSerialNumber.Clear();
             comboBoxBrand.SelectedIndex = -1;
             comboBoxUsedNew.SelectedIndex = -1; ;
-            comboBoxSize.SelectedIndex = -1;
+            comboBoxSize.Clear();
             dateTimePickerManufactureDate.Value = DateTime.Today;
         }
 
@@ -90,7 +90,7 @@ namespace InventoryManagmentSystem
                         this.Dispose();
                     }
                     else
-                        MessageBox.Show("Serial Number already in use");
+                        MessageBox.Show("Serial Number already in the system");
                 }
             }
             catch (Exception ex)

@@ -51,6 +51,7 @@
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.TopPanel = new System.Windows.Forms.Panel();
+            this.labelNewItem = new System.Windows.Forms.Label();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.TopPanel.SuspendLayout();
@@ -140,7 +141,8 @@
             this.dataGridInv.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridInv.RowHeadersVisible = false;
             this.dataGridInv.RowHeadersWidth = 51;
-            this.dataGridInv.RowTemplate.Height = 24;
+            this.dataGridInv.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridInv.RowTemplate.Height = 40;
             this.dataGridInv.RowTemplate.ReadOnly = true;
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridInv.Size = new System.Drawing.Size(1035, 459);
@@ -202,8 +204,8 @@
             // UsedNew
             // 
             this.UsedNew.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.UsedNew.FillWeight = 50F;
-            this.UsedNew.HeaderText = "Used";
+            this.UsedNew.FillWeight = 80F;
+            this.UsedNew.HeaderText = "Condition";
             this.UsedNew.MinimumWidth = 6;
             this.UsedNew.Name = "UsedNew";
             this.UsedNew.ReadOnly = true;
@@ -212,7 +214,7 @@
             // 
             this.ColorMaterial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ColorMaterial.FillWeight = 55F;
-            this.ColorMaterial.HeaderText = "Color / Material";
+            this.ColorMaterial.HeaderText = "Material";
             this.ColorMaterial.MinimumWidth = 6;
             this.ColorMaterial.Name = "ColorMaterial";
             this.ColorMaterial.ReadOnly = true;
@@ -224,6 +226,7 @@
             this.Location.MinimumWidth = 6;
             this.Location.Name = "Location";
             this.Location.ReadOnly = true;
+            this.Location.Visible = false;
             // 
             // Edit
             // 
@@ -287,6 +290,7 @@
             // TopPanel
             // 
             this.TopPanel.BackColor = System.Drawing.Color.Maroon;
+            this.TopPanel.Controls.Add(this.labelNewItem);
             this.TopPanel.Controls.Add(this.UsersButton);
             this.TopPanel.Controls.Add(this.labelSearch);
             this.TopPanel.Controls.Add(this.ItemLable);
@@ -297,6 +301,19 @@
             this.TopPanel.Name = "TopPanel";
             this.TopPanel.Size = new System.Drawing.Size(1035, 30);
             this.TopPanel.TabIndex = 20;
+            // 
+            // labelNewItem
+            // 
+            this.labelNewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelNewItem.AutoSize = true;
+            this.labelNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNewItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelNewItem.Location = new System.Drawing.Point(881, 2);
+            this.labelNewItem.Margin = new System.Windows.Forms.Padding(0);
+            this.labelNewItem.Name = "labelNewItem";
+            this.labelNewItem.Size = new System.Drawing.Size(108, 25);
+            this.labelNewItem.TabIndex = 20;
+            this.labelNewItem.Text = "New Item:";
             // 
             // UsersButton
             // 
@@ -341,6 +358,7 @@
         private System.Windows.Forms.TextBox searchBar;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
+        private System.Windows.Forms.Panel TopPanel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Num;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Brand;
@@ -352,6 +370,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Location;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Delete;
-        private System.Windows.Forms.Panel TopPanel;
+        private System.Windows.Forms.Label labelNewItem;
     }
 }

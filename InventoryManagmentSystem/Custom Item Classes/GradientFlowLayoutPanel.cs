@@ -16,12 +16,21 @@ namespace InventoryManagmentSystem
         bool doOnce = true;
         protected override void OnPaint(PaintEventArgs e)
         {
+            try
+            {
+                if (this.Height < 1 || this.Width < 1) { return; } ;
+
                 using (var brush = new LinearGradientBrush(ClientRectangle, StartColor, EndColor, LinearGradientMode.Vertical))
                 {
                     e.Graphics.FillRectangle(brush, ClientRectangle);
                 }
 
                 base.OnPaint(e);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }

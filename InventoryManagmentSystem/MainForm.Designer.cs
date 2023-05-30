@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.LabelSettings = new System.Windows.Forms.Label();
             this.UsersTxt = new System.Windows.Forms.Label();
-            this.DepartmentsTxt = new System.Windows.Forms.Label();
             this.MyLogo = new System.Windows.Forms.PictureBox();
             this.BottomPanel = new System.Windows.Forms.Panel();
             this.MainPanel = new System.Windows.Forms.Panel();
@@ -41,7 +40,7 @@
             this.ButtonRentalHome = new InventoryManagmentSystem.CustomButton();
             this.panelActiveRentals = new System.Windows.Forms.Panel();
             this.ButtonActiveRentals = new InventoryManagmentSystem.CustomButton();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelClients = new System.Windows.Forms.Label();
             this.panelRentalInv = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.ButtonRentalInv = new InventoryManagmentSystem.CustomButton();
@@ -52,8 +51,6 @@
             this.panelRentals = new System.Windows.Forms.Panel();
             this.RentalButton = new InventoryManagmentSystem.CustomButton();
             this.RentalLable = new System.Windows.Forms.Label();
-            this.panelDept = new System.Windows.Forms.Panel();
-            this.DepatmensButton = new InventoryManagmentSystem.CustomButton();
             this.panelUsers = new System.Windows.Forms.Panel();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.panelImport = new System.Windows.Forms.Panel();
@@ -72,8 +69,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.HomeButton)).BeginInit();
             this.panelRentals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RentalButton)).BeginInit();
-            this.panelDept.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DepatmensButton)).BeginInit();
             this.panelUsers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             this.panelImport.SuspendLayout();
@@ -105,19 +100,6 @@
             this.UsersTxt.TabIndex = 15;
             this.UsersTxt.Text = "Users";
             this.UsersTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // DepartmentsTxt
-            // 
-            this.DepartmentsTxt.AutoSize = true;
-            this.DepartmentsTxt.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DepartmentsTxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.DepartmentsTxt.Location = new System.Drawing.Point(24, 70);
-            this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(66, 29);
-            this.DepartmentsTxt.TabIndex = 13;
-            this.DepartmentsTxt.Text = "Dept";
-            this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // MyLogo
             // 
@@ -209,7 +191,7 @@
             // 
             this.panelActiveRentals.BackColor = System.Drawing.Color.Transparent;
             this.panelActiveRentals.Controls.Add(this.ButtonActiveRentals);
-            this.panelActiveRentals.Controls.Add(this.label3);
+            this.panelActiveRentals.Controls.Add(this.labelClients);
             this.panelActiveRentals.Location = new System.Drawing.Point(3, 175);
             this.panelActiveRentals.Name = "panelActiveRentals";
             this.panelActiveRentals.Size = new System.Drawing.Size(100, 94);
@@ -229,19 +211,19 @@
             this.ButtonActiveRentals.TabStop = false;
             this.ButtonActiveRentals.Click += new System.EventHandler(this.ButtonActiveRentals_Click);
             // 
-            // label3
+            // labelClients
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label3.Location = new System.Drawing.Point(12, 70);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 29);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Active ";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelClients.AutoSize = true;
+            this.labelClients.BackColor = System.Drawing.Color.Transparent;
+            this.labelClients.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelClients.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelClients.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelClients.Location = new System.Drawing.Point(12, 70);
+            this.labelClients.Name = "labelClients";
+            this.labelClients.Size = new System.Drawing.Size(90, 29);
+            this.labelClients.TabIndex = 13;
+            this.labelClients.Text = "Clients";
+            this.labelClients.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // panelRentalInv
             // 
@@ -286,7 +268,6 @@
             this.flowLayoutNavBar.Controls.Add(this.MyLogo);
             this.flowLayoutNavBar.Controls.Add(this.panelHome);
             this.flowLayoutNavBar.Controls.Add(this.panelRentals);
-            this.flowLayoutNavBar.Controls.Add(this.panelDept);
             this.flowLayoutNavBar.Controls.Add(this.panelUsers);
             this.flowLayoutNavBar.Controls.Add(this.panelImport);
             this.flowLayoutNavBar.Dock = System.Windows.Forms.DockStyle.Top;
@@ -370,36 +351,12 @@
             this.RentalLable.Text = "Rentals";
             this.RentalLable.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // panelDept
-            // 
-            this.panelDept.BackColor = System.Drawing.Color.Maroon;
-            this.panelDept.Controls.Add(this.DepartmentsTxt);
-            this.panelDept.Controls.Add(this.DepatmensButton);
-            this.panelDept.Location = new System.Drawing.Point(356, 3);
-            this.panelDept.Name = "panelDept";
-            this.panelDept.Size = new System.Drawing.Size(100, 94);
-            this.panelDept.TabIndex = 17;
-            // 
-            // DepatmensButton
-            // 
-            this.DepatmensButton.Image = ((System.Drawing.Image)(resources.GetObject("DepatmensButton.Image")));
-            this.DepatmensButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("DepatmensButton.ImageHover")));
-            this.DepatmensButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("DepatmensButton.ImageNormal")));
-            this.DepatmensButton.Location = new System.Drawing.Point(26, 0);
-            this.DepatmensButton.Margin = new System.Windows.Forms.Padding(3, 3, 50, 3);
-            this.DepatmensButton.Name = "DepatmensButton";
-            this.DepatmensButton.Size = new System.Drawing.Size(50, 67);
-            this.DepatmensButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.DepatmensButton.TabIndex = 12;
-            this.DepatmensButton.TabStop = false;
-            this.DepatmensButton.Click += new System.EventHandler(this.DepatmensButton_Click);
-            // 
             // panelUsers
             // 
             this.panelUsers.BackColor = System.Drawing.Color.Maroon;
             this.panelUsers.Controls.Add(this.UsersTxt);
             this.panelUsers.Controls.Add(this.UsersButton);
-            this.panelUsers.Location = new System.Drawing.Point(462, 3);
+            this.panelUsers.Location = new System.Drawing.Point(356, 3);
             this.panelUsers.Name = "panelUsers";
             this.panelUsers.Size = new System.Drawing.Size(100, 94);
             this.panelUsers.TabIndex = 18;
@@ -423,7 +380,7 @@
             this.panelImport.BackColor = System.Drawing.Color.Maroon;
             this.panelImport.Controls.Add(this.LabelSettings);
             this.panelImport.Controls.Add(this.btnSettings);
-            this.panelImport.Location = new System.Drawing.Point(568, 3);
+            this.panelImport.Location = new System.Drawing.Point(462, 3);
             this.panelImport.Name = "panelImport";
             this.panelImport.Size = new System.Drawing.Size(100, 94);
             this.panelImport.TabIndex = 19;
@@ -475,9 +432,6 @@
             this.panelRentals.ResumeLayout(false);
             this.panelRentals.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RentalButton)).EndInit();
-            this.panelDept.ResumeLayout(false);
-            this.panelDept.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DepatmensButton)).EndInit();
             this.panelUsers.ResumeLayout(false);
             this.panelUsers.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
@@ -492,8 +446,6 @@
         private System.Windows.Forms.Panel BottomPanel;
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.PictureBox MyLogo;
-        private System.Windows.Forms.Label DepartmentsTxt;
-        private CustomButton DepatmensButton;
         private CustomButton UsersButton;
         private System.Windows.Forms.Label UsersTxt;
         private System.Windows.Forms.Label LabelSettings;
@@ -505,7 +457,6 @@
         private System.Windows.Forms.Label labelDashboard;
         private CustomButton HomeButton;
         private CustomButton RentalButton;
-        private System.Windows.Forms.Panel panelDept;
         private System.Windows.Forms.Panel panelUsers;
         private System.Windows.Forms.Panel panelImport;
         private System.Windows.Forms.Panel PanelRentalHome;
@@ -513,7 +464,7 @@
         private CustomButton ButtonRentalHome;
         private System.Windows.Forms.Panel panelActiveRentals;
         private CustomButton ButtonActiveRentals;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelClients;
         private System.Windows.Forms.Panel panelRentalInv;
         private System.Windows.Forms.Label label4;
         private CustomButton ButtonRentalInv;

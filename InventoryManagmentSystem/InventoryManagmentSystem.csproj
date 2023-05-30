@@ -127,10 +127,10 @@
     <Compile Include="ExcelUserPromptForm.Designer.cs">
       <DependentUpon>ExcelUserPromptForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExistingCustomerModuleForm.cs">
+    <Compile Include="Rental Forms\ExistingCustomerModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExistingCustomerModuleForm.Designer.cs">
+    <Compile Include="Rental Forms\ExistingCustomerModuleForm.Designer.cs">
       <DependentUpon>ExistingCustomerModuleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Custom Item Classes\GradientFlowLayoutPanel.cs">
@@ -269,7 +269,7 @@
     <EmbeddedResource Include="DialogBoxClient.resx">
       <DependentUpon>DialogBoxClient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExistingCustomerModuleForm.resx">
+    <EmbeddedResource Include="Rental Forms\ExistingCustomerModuleForm.resx">
       <DependentUpon>ExistingCustomerModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Rental Forms\HomeForm.resx">
