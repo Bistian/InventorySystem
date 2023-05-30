@@ -35,6 +35,11 @@
             this.ItemLable = new System.Windows.Forms.Label();
             this.comboBoxItem = new System.Windows.Forms.ComboBox();
             this.dataGridInv = new System.Windows.Forms.DataGridView();
+            this.labelSearch = new System.Windows.Forms.Label();
+            this.searchBar = new System.Windows.Forms.TextBox();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.TopPanel = new System.Windows.Forms.Panel();
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,11 +51,7 @@
             this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.labelSearch = new System.Windows.Forms.Label();
-            this.searchBar = new System.Windows.Forms.TextBox();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.TopPanel = new System.Windows.Forms.Panel();
+            this.labelNewItem = new System.Windows.Forms.Label();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.TopPanel.SuspendLayout();
@@ -147,6 +148,63 @@
             this.dataGridInv.TabIndex = 1;
             this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellClick);
             // 
+            // labelSearch
+            // 
+            this.labelSearch.AutoSize = true;
+            this.labelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelSearch.Location = new System.Drawing.Point(167, 5);
+            this.labelSearch.Margin = new System.Windows.Forms.Padding(0);
+            this.labelSearch.Name = "labelSearch";
+            this.labelSearch.Size = new System.Drawing.Size(88, 25);
+            this.labelSearch.TabIndex = 19;
+            this.labelSearch.Text = "Search:";
+            // 
+            // searchBar
+            // 
+            this.searchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBar.Location = new System.Drawing.Point(243, 5);
+            this.searchBar.Margin = new System.Windows.Forms.Padding(4);
+            this.searchBar.Name = "searchBar";
+            this.searchBar.Size = new System.Drawing.Size(208, 24);
+            this.searchBar.TabIndex = 18;
+            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.MinimumWidth = 6;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewImageColumn1.Width = 125;
+            // 
+            // dataGridViewImageColumn2
+            // 
+            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewImageColumn2.HeaderText = "";
+            this.dataGridViewImageColumn2.MinimumWidth = 6;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            this.dataGridViewImageColumn2.ReadOnly = true;
+            this.dataGridViewImageColumn2.Width = 125;
+            // 
+            // TopPanel
+            // 
+            this.TopPanel.BackColor = System.Drawing.Color.Maroon;
+            this.TopPanel.Controls.Add(this.labelNewItem);
+            this.TopPanel.Controls.Add(this.UsersButton);
+            this.TopPanel.Controls.Add(this.labelSearch);
+            this.TopPanel.Controls.Add(this.ItemLable);
+            this.TopPanel.Controls.Add(this.searchBar);
+            this.TopPanel.Controls.Add(this.comboBoxItem);
+            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TopPanel.Location = new System.Drawing.Point(0, 0);
+            this.TopPanel.Name = "TopPanel";
+            this.TopPanel.Size = new System.Drawing.Size(1035, 30);
+            this.TopPanel.TabIndex = 20;
+            // 
             // Num
             // 
             this.Num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -202,8 +260,8 @@
             // UsedNew
             // 
             this.UsedNew.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.UsedNew.FillWeight = 50F;
-            this.UsedNew.HeaderText = "Used";
+            this.UsedNew.FillWeight = 80F;
+            this.UsedNew.HeaderText = "Condition";
             this.UsedNew.MinimumWidth = 6;
             this.UsedNew.Name = "UsedNew";
             this.UsedNew.ReadOnly = true;
@@ -212,7 +270,7 @@
             // 
             this.ColorMaterial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ColorMaterial.FillWeight = 55F;
-            this.ColorMaterial.HeaderText = "Color / Material";
+            this.ColorMaterial.HeaderText = "Material";
             this.ColorMaterial.MinimumWidth = 6;
             this.ColorMaterial.Name = "ColorMaterial";
             this.ColorMaterial.ReadOnly = true;
@@ -224,6 +282,7 @@
             this.Location.MinimumWidth = 6;
             this.Location.Name = "Location";
             this.Location.ReadOnly = true;
+            this.Location.Visible = false;
             // 
             // Edit
             // 
@@ -242,61 +301,18 @@
             this.Delete.ReadOnly = true;
             this.Delete.Width = 25;
             // 
-            // labelSearch
+            // labelNewItem
             // 
-            this.labelSearch.AutoSize = true;
-            this.labelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSearch.Location = new System.Drawing.Point(167, 5);
-            this.labelSearch.Margin = new System.Windows.Forms.Padding(0);
-            this.labelSearch.Name = "labelSearch";
-            this.labelSearch.Size = new System.Drawing.Size(88, 25);
-            this.labelSearch.TabIndex = 19;
-            this.labelSearch.Text = "Search:";
-            // 
-            // searchBar
-            // 
-            this.searchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBar.Location = new System.Drawing.Point(243, 5);
-            this.searchBar.Margin = new System.Windows.Forms.Padding(4);
-            this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(208, 24);
-            this.searchBar.TabIndex = 18;
-            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewImageColumn1.HeaderText = "";
-            this.dataGridViewImageColumn1.MinimumWidth = 6;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewImageColumn1.Width = 125;
-            // 
-            // dataGridViewImageColumn2
-            // 
-            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewImageColumn2.HeaderText = "";
-            this.dataGridViewImageColumn2.MinimumWidth = 6;
-            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            this.dataGridViewImageColumn2.ReadOnly = true;
-            this.dataGridViewImageColumn2.Width = 125;
-            // 
-            // TopPanel
-            // 
-            this.TopPanel.BackColor = System.Drawing.Color.Maroon;
-            this.TopPanel.Controls.Add(this.UsersButton);
-            this.TopPanel.Controls.Add(this.labelSearch);
-            this.TopPanel.Controls.Add(this.ItemLable);
-            this.TopPanel.Controls.Add(this.searchBar);
-            this.TopPanel.Controls.Add(this.comboBoxItem);
-            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopPanel.Location = new System.Drawing.Point(0, 0);
-            this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(1035, 30);
-            this.TopPanel.TabIndex = 20;
+            this.labelNewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelNewItem.AutoSize = true;
+            this.labelNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNewItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelNewItem.Location = new System.Drawing.Point(881, 2);
+            this.labelNewItem.Margin = new System.Windows.Forms.Padding(0);
+            this.labelNewItem.Name = "labelNewItem";
+            this.labelNewItem.Size = new System.Drawing.Size(108, 25);
+            this.labelNewItem.TabIndex = 20;
+            this.labelNewItem.Text = "New Item:";
             // 
             // UsersButton
             // 
@@ -341,6 +357,7 @@
         private System.Windows.Forms.TextBox searchBar;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
+        private System.Windows.Forms.Panel TopPanel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Num;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Brand;
@@ -352,6 +369,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Location;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Delete;
-        private System.Windows.Forms.Panel TopPanel;
+        private System.Windows.Forms.Label labelNewItem;
     }
 }

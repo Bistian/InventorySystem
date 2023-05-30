@@ -24,6 +24,11 @@ namespace InventoryManagmentSystem
         //Creatinng Reader
         SqlDataReader dr;
 
+        //Used for query
+        string CurrTable = "";
+        string FinalColumn = "";
+        string Sizes = "";
+
         //Used for counting rentals
         int total = 0;
 
@@ -74,6 +79,121 @@ namespace InventoryManagmentSystem
                 // If there was an error, pretend you found something just so you don't add it.
                 return true;
             }
+        }
+
+        private string QueryClient()
+        {
+            //return ("SELECT Type, DueDate, SerialNumber FROM tbBoots WHERE Location='Client1'");
+            return ("SELECT ItemType, DueDate, SerialNumber FROM tbPants " +
+                "WHERE Location='" + license + "' " +
+                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbBoots " +
+                "WHERE Location='" + license + "' " +
+                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbHelmets " +
+                "WHERE Location='" + license + "' " +
+                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbJackets " +
+                "WHERE Location='" + license + "' " +
+                "ORDER BY DueDate");
+        }
+
+        private void LoadClient()
+        {
+            // Change the styling for the date column.
+            dataGridViewClient.Columns["DueDate"].DefaultCellStyle.Format = "d";
+
+            dataGridViewClient.Rows.Clear();
+            cm = new SqlCommand(QueryClient(), con);
+            con.Open();
+            dr = cm.ExecuteReader();
+
+            int i = 0;
+            while (dr.Read())
+            {
+                ++i;
+                dataGridViewClient.Rows.Add(i,
+                    dr[0].ToString(),
+                    dr[1],
+                    dr[2].ToString()
+                );
+            }
+
+            dr.Close();
+            con.Close();
+        }
+
+        private string QueryItems()
+        {
+            string searchTerm = textBoxSearchBar.Text;
+
+            string firetec = "(Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC')";
+            if (comboBoxItemType.SelectedIndex == 0)
+            {
+                FinalColumn = ", Color";
+                Sizes = "";
+                CurrTable = "tbHelmets";
+            }
+            else if (comboBoxItemType.SelectedIndex == 1)
+            {
+                FinalColumn = "";
+                Sizes = " Size,";
+                CurrTable = "tbJackets";
+            }
+            else if (comboBoxItemType.SelectedIndex == 2)
+            {
+                FinalColumn = "";
+                Sizes = " Size,";
+                CurrTable = "tbPants";
+            }
+            else if (comboBoxItemType.SelectedIndex == 3)
+            {
+                FinalColumn = ", Material";
+                Sizes = " Size,";
+                CurrTable = "tbBoots";
+            }
+            else
+            {
+                return ("SELECT ItemType,Brand,SerialNumber,Size,ManufactureDate,UsedNew FROM tbJackets WHERE " + firetec + "AND SerialNumber LIKE '%" + searchTerm + "%'");
+            }
+
+            return ("SELECT ItemType, Brand, SerialNumber," + Sizes + " ManufactureDate, UsedNew "
+                + FinalColumn + " FROM " + CurrTable +
+                     " WHERE " + firetec + " AND SerialNumber LIKE '%" + searchTerm + "%'");
+        }
+
+        private void LoadInventory()
+        {
+            dataGridInv.Columns["ManufactureDate"].DefaultCellStyle.Format = "d";
+            int i = 0;
+            dataGridInv.Rows.Clear();
+            cm = new SqlCommand(QueryItems(), con);
+            con.Open();
+            dr = cm.ExecuteReader();
+
+            if (comboBoxItemType.SelectedIndex == 0)
+            {
+                while (dr.Read())
+                {
+                    i++;
+                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), "NA", dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
+                }
+            }
+            else if (comboBoxItemType.SelectedIndex == 1 || comboBoxItemType.SelectedIndex == 2)
+            {
+                while (dr.Read())
+                {
+                    i++;
+                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), "N/A");
+                }
+            }
+            else if (comboBoxItemType.SelectedIndex == 3)
+            {
+                while (dr.Read())
+                {
+                    i++;
+                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5]);
+                }
+            }
+            dr.Close();
+            con.Close();
         }
 
         public void Clear()
@@ -132,7 +252,6 @@ namespace InventoryManagmentSystem
                     }
                     dr.Close();
                     con.Close();
-                    flowLayoutPanelProfile.Visible = true;
                 }
                 catch (Exception ex)
                 {
@@ -157,7 +276,7 @@ namespace InventoryManagmentSystem
                         labelClientEmail.Text = dr[2].ToString();
 
                         //point of contact
-                        labelProfileDrivers.Text = "Point of contact";
+                        labelProfileDrivers.Text = "Point of contact:";
                         labelClientDrivers.Text = dr[0].ToString();
                         labelClientAddress.Text = dr[5].ToString();
                     }
@@ -172,8 +291,11 @@ namespace InventoryManagmentSystem
                 {
                     Console.WriteLine(ex.Message);
                 }
-
             }
+            flowLayoutPanelProfile.Visible = true;
+            flowLayoutPanelProfile.AutoScroll = false;
+            splitContainermain.SplitterDistance = 285;
+            splitContainerInventories.Visible = true;
         }
 
         private bool SaveClient()
@@ -313,11 +435,10 @@ namespace InventoryManagmentSystem
                             LoadProfile(false, license);
                         }
                         //department
-                        else if (comboBoxRentalType.SelectedIndex == 1)
+                        else if (comboBoxRentalType.SelectedIndex == 1 || comboBoxRentalType.SelectedIndex == 2)
                         {
                             LoadProfile(true, license);
                         }
-                       // splitContainermain.SplitterDistance = 600;
                     }
                 }
                 else
@@ -433,6 +554,16 @@ namespace InventoryManagmentSystem
                 panelRentalInfo.Visible = true;
                 panelContactInfo.Visible = true;
             }
+        }
+
+        private void comboBoxItemType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadInventory();
+        }
+
+        private void textBoxSearchBar_TextChanged(object sender, EventArgs e)
+        {
+            QueryItems();
         }
     }
 }

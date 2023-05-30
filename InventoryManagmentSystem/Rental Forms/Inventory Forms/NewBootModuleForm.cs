@@ -91,7 +91,7 @@ namespace InventoryManagmentSystem
                         this.Dispose();
                     }
                     else
-                        MessageBox.Show("Serial Number already in use");
+                        MessageBox.Show("Serial Number already in the system");
                 }
             }
             catch (Exception ex)

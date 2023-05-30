@@ -28,6 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainermain = new System.Windows.Forms.SplitContainer();
             this.gradientFlowLayoutCustomerInfo = new InventoryManagmentSystem.GradientFlowLayoutPanel();
             this.panelRentalType = new System.Windows.Forms.Panel();
@@ -99,7 +108,6 @@
             this.ClearButton = new System.Windows.Forms.Button();
             this.ButtonContinue = new System.Windows.Forms.Button();
             this.flowLayoutPanelProfile = new System.Windows.Forms.FlowLayoutPanel();
-            this.labelProfileName = new System.Windows.Forms.Label();
             this.panelProfileContactInfo = new System.Windows.Forms.Panel();
             this.labelClientDrivers = new System.Windows.Forms.Label();
             this.labelClientEmail = new System.Windows.Forms.Label();
@@ -131,7 +139,30 @@
             this.panelProfileRentalInfo = new System.Windows.Forms.Panel();
             this.labelClientAcademy = new System.Windows.Forms.Label();
             this.lableRentalInfo = new System.Windows.Forms.Label();
-            this.gradientFlowLayoutPanel2 = new InventoryManagmentSystem.GradientFlowLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.textBoxSearchBar = new System.Windows.Forms.TextBox();
+            this.lableSearchBar = new System.Windows.Forms.Label();
+            this.splitContainerInventories = new System.Windows.Forms.SplitContainer();
+            this.panelCustomerInv = new System.Windows.Forms.Panel();
+            this.dataGridViewClient = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SerialNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.labelProfileName = new System.Windows.Forms.Label();
+            this.panelFireTecInv = new System.Windows.Forms.Panel();
+            this.comboBoxItemType = new System.Windows.Forms.ComboBox();
+            this.labelItemType = new System.Windows.Forms.Label();
+            this.dataGridInv = new System.Windows.Forms.DataGridView();
+            this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ManufactureDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UsedNew = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColorMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.labelFireTecInv = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainermain)).BeginInit();
             this.splitContainermain.Panel1.SuspendLayout();
             this.splitContainermain.Panel2.SuspendLayout();
@@ -166,10 +197,20 @@
             this.panelProfileAddress.SuspendLayout();
             this.panelProfileMeasurments.SuspendLayout();
             this.panelProfileRentalInfo.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerInventories)).BeginInit();
+            this.splitContainerInventories.Panel1.SuspendLayout();
+            this.splitContainerInventories.Panel2.SuspendLayout();
+            this.splitContainerInventories.SuspendLayout();
+            this.panelCustomerInv.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).BeginInit();
+            this.panelFireTecInv.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainermain
             // 
+            this.splitContainermain.BackColor = System.Drawing.Color.Maroon;
             this.splitContainermain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainermain.Location = new System.Drawing.Point(0, 0);
             this.splitContainermain.Name = "splitContainermain";
@@ -180,10 +221,11 @@
             // 
             // splitContainermain.Panel2
             // 
-            this.splitContainermain.Panel2.Controls.Add(this.gradientFlowLayoutPanel2);
+            this.splitContainermain.Panel2.Controls.Add(this.panel2);
+            this.splitContainermain.Panel2.Controls.Add(this.splitContainerInventories);
             this.splitContainermain.Size = new System.Drawing.Size(1225, 733);
-            this.splitContainermain.SplitterDistance = 611;
-            this.splitContainermain.TabIndex = 114;
+            this.splitContainermain.SplitterDistance = 612;
+            this.splitContainermain.TabIndex = 612;
             // 
             // gradientFlowLayoutCustomerInfo
             // 
@@ -202,7 +244,7 @@
             this.gradientFlowLayoutCustomerInfo.EndColor = System.Drawing.Color.Maroon;
             this.gradientFlowLayoutCustomerInfo.Location = new System.Drawing.Point(0, 0);
             this.gradientFlowLayoutCustomerInfo.Name = "gradientFlowLayoutCustomerInfo";
-            this.gradientFlowLayoutCustomerInfo.Size = new System.Drawing.Size(611, 733);
+            this.gradientFlowLayoutCustomerInfo.Size = new System.Drawing.Size(612, 733);
             this.gradientFlowLayoutCustomerInfo.StartColor = System.Drawing.Color.Empty;
             this.gradientFlowLayoutCustomerInfo.TabIndex = 112;
             // 
@@ -213,7 +255,7 @@
             this.panelRentalType.Controls.Add(this.labelRentalType);
             this.panelRentalType.Location = new System.Drawing.Point(3, 3);
             this.panelRentalType.Name = "panelRentalType";
-            this.panelRentalType.Size = new System.Drawing.Size(565, 61);
+            this.panelRentalType.Size = new System.Drawing.Size(578, 61);
             this.panelRentalType.TabIndex = 120;
             // 
             // comboBoxRentalType
@@ -254,7 +296,7 @@
             this.panelContactInfo.Controls.Add(this.panelPhone);
             this.panelContactInfo.Location = new System.Drawing.Point(3, 70);
             this.panelContactInfo.Name = "panelContactInfo";
-            this.panelContactInfo.Size = new System.Drawing.Size(320, 307);
+            this.panelContactInfo.Size = new System.Drawing.Size(303, 302);
             this.panelContactInfo.TabIndex = 116;
             // 
             // panelLicence
@@ -406,7 +448,7 @@
             this.panelAddress.Controls.Add(this.panelCity);
             this.panelAddress.Controls.Add(this.panelStreet);
             this.panelAddress.Controls.Add(this.labelAddress);
-            this.panelAddress.Location = new System.Drawing.Point(3, 383);
+            this.panelAddress.Location = new System.Drawing.Point(3, 378);
             this.panelAddress.Name = "panelAddress";
             this.panelAddress.Size = new System.Drawing.Size(320, 194);
             this.panelAddress.TabIndex = 117;
@@ -564,7 +606,7 @@
             this.panelMeasurments.Controls.Add(this.labelMeasurments);
             this.panelMeasurments.Controls.Add(this.panelChest);
             this.panelMeasurments.Controls.Add(this.panelSleeve);
-            this.panelMeasurments.Location = new System.Drawing.Point(3, 583);
+            this.panelMeasurments.Location = new System.Drawing.Point(3, 578);
             this.panelMeasurments.Name = "panelMeasurments";
             this.panelMeasurments.Size = new System.Drawing.Size(320, 276);
             this.panelMeasurments.TabIndex = 117;
@@ -849,9 +891,9 @@
             this.panelRentalInfo.Controls.Add(this.panelAcademy);
             this.panelRentalInfo.Controls.Add(this.labelRentalInfo);
             this.panelRentalInfo.Controls.Add(this.panelFinalize);
-            this.panelRentalInfo.Location = new System.Drawing.Point(3, 865);
+            this.panelRentalInfo.Location = new System.Drawing.Point(3, 860);
             this.panelRentalInfo.Name = "panelRentalInfo";
-            this.panelRentalInfo.Size = new System.Drawing.Size(320, 291);
+            this.panelRentalInfo.Size = new System.Drawing.Size(320, 234);
             this.panelRentalInfo.TabIndex = 115;
             // 
             // panelAcademy
@@ -932,7 +974,7 @@
             this.panelFinalize.Location = new System.Drawing.Point(0, 101);
             this.panelFinalize.Margin = new System.Windows.Forms.Padding(150, 3, 3, 3);
             this.panelFinalize.Name = "panelFinalize";
-            this.panelFinalize.Size = new System.Drawing.Size(320, 188);
+            this.panelFinalize.Size = new System.Drawing.Size(320, 129);
             this.panelFinalize.TabIndex = 117;
             // 
             // panelrep
@@ -1005,30 +1047,15 @@
             // 
             // flowLayoutPanelProfile
             // 
-            this.flowLayoutPanelProfile.Controls.Add(this.labelProfileName);
             this.flowLayoutPanelProfile.Controls.Add(this.panelProfileContactInfo);
             this.flowLayoutPanelProfile.Controls.Add(this.panelProfileAddress);
             this.flowLayoutPanelProfile.Controls.Add(this.panelProfileMeasurments);
             this.flowLayoutPanelProfile.Controls.Add(this.panelProfileRentalInfo);
-            this.flowLayoutPanelProfile.Location = new System.Drawing.Point(3, 1162);
+            this.flowLayoutPanelProfile.Location = new System.Drawing.Point(3, 1100);
             this.flowLayoutPanelProfile.Name = "flowLayoutPanelProfile";
-            this.flowLayoutPanelProfile.Size = new System.Drawing.Size(571, 667);
+            this.flowLayoutPanelProfile.Size = new System.Drawing.Size(438, 522);
             this.flowLayoutPanelProfile.TabIndex = 115;
             this.flowLayoutPanelProfile.Visible = false;
-            // 
-            // labelProfileName
-            // 
-            this.labelProfileName.AutoSize = true;
-            this.labelProfileName.BackColor = System.Drawing.Color.Transparent;
-            this.labelProfileName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelProfileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelProfileName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelProfileName.Location = new System.Drawing.Point(0, 0);
-            this.labelProfileName.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.labelProfileName.Name = "labelProfileName";
-            this.labelProfileName.Size = new System.Drawing.Size(461, 69);
-            this.labelProfileName.TabIndex = 118;
-            this.labelProfileName.Text = "Jairo Rodriguez";
             // 
             // panelProfileContactInfo
             // 
@@ -1042,7 +1069,7 @@
             this.panelProfileContactInfo.Controls.Add(this.labelProfileDrivers);
             this.panelProfileContactInfo.Controls.Add(this.labelProfileEmail);
             this.panelProfileContactInfo.Controls.Add(this.labelProfilePhone);
-            this.panelProfileContactInfo.Location = new System.Drawing.Point(0, 72);
+            this.panelProfileContactInfo.Location = new System.Drawing.Point(0, 3);
             this.panelProfileContactInfo.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.panelProfileContactInfo.Name = "panelProfileContactInfo";
             this.panelProfileContactInfo.Size = new System.Drawing.Size(433, 145);
@@ -1146,7 +1173,7 @@
             this.panelProfileAddress.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelProfileAddress.Controls.Add(this.labelClientAddress);
             this.panelProfileAddress.Controls.Add(this.lableProfileAddress);
-            this.panelProfileAddress.Location = new System.Drawing.Point(0, 223);
+            this.panelProfileAddress.Location = new System.Drawing.Point(0, 154);
             this.panelProfileAddress.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.panelProfileAddress.Name = "panelProfileAddress";
             this.panelProfileAddress.Size = new System.Drawing.Size(433, 77);
@@ -1198,7 +1225,7 @@
             this.panelProfileMeasurments.Controls.Add(this.labelClientChest);
             this.panelProfileMeasurments.Controls.Add(this.labelProfileChest);
             this.panelProfileMeasurments.Controls.Add(this.labelProfileMeasurments);
-            this.panelProfileMeasurments.Location = new System.Drawing.Point(0, 306);
+            this.panelProfileMeasurments.Location = new System.Drawing.Point(0, 237);
             this.panelProfileMeasurments.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.panelProfileMeasurments.Name = "panelProfileMeasurments";
             this.panelProfileMeasurments.Size = new System.Drawing.Size(433, 182);
@@ -1418,7 +1445,7 @@
             this.panelProfileRentalInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelProfileRentalInfo.Controls.Add(this.labelClientAcademy);
             this.panelProfileRentalInfo.Controls.Add(this.lableRentalInfo);
-            this.panelProfileRentalInfo.Location = new System.Drawing.Point(0, 494);
+            this.panelProfileRentalInfo.Location = new System.Drawing.Point(0, 425);
             this.panelProfileRentalInfo.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.panelProfileRentalInfo.Name = "panelProfileRentalInfo";
             this.panelProfileRentalInfo.Size = new System.Drawing.Size(433, 90);
@@ -1450,16 +1477,359 @@
             this.lableRentalInfo.TabIndex = 112;
             this.lableRentalInfo.Text = "Academy";
             // 
-            // gradientFlowLayoutPanel2
+            // panel2
             // 
-            this.gradientFlowLayoutPanel2.BackColor = System.Drawing.Color.Maroon;
-            this.gradientFlowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gradientFlowLayoutPanel2.EndColor = System.Drawing.Color.MidnightBlue;
-            this.gradientFlowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.gradientFlowLayoutPanel2.Name = "gradientFlowLayoutPanel2";
-            this.gradientFlowLayoutPanel2.Size = new System.Drawing.Size(610, 733);
-            this.gradientFlowLayoutPanel2.StartColor = System.Drawing.Color.Empty;
-            this.gradientFlowLayoutPanel2.TabIndex = 113;
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.textBoxSearchBar);
+            this.panel2.Controls.Add(this.lableSearchBar);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 588);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(609, 145);
+            this.panel2.TabIndex = 118;
+            // 
+            // textBoxSearchBar
+            // 
+            this.textBoxSearchBar.Location = new System.Drawing.Point(268, 2);
+            this.textBoxSearchBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxSearchBar.Name = "textBoxSearchBar";
+            this.textBoxSearchBar.Size = new System.Drawing.Size(176, 22);
+            this.textBoxSearchBar.TabIndex = 32;
+            this.textBoxSearchBar.TextChanged += new System.EventHandler(this.textBoxSearchBar_TextChanged);
+            // 
+            // lableSearchBar
+            // 
+            this.lableSearchBar.AutoSize = true;
+            this.lableSearchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lableSearchBar.ForeColor = System.Drawing.Color.White;
+            this.lableSearchBar.Location = new System.Drawing.Point(190, -1);
+            this.lableSearchBar.Name = "lableSearchBar";
+            this.lableSearchBar.Size = new System.Drawing.Size(88, 25);
+            this.lableSearchBar.TabIndex = 33;
+            this.lableSearchBar.Text = "Search:";
+            // 
+            // splitContainerInventories
+            // 
+            this.splitContainerInventories.BackColor = System.Drawing.Color.Maroon;
+            this.splitContainerInventories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerInventories.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerInventories.Name = "splitContainerInventories";
+            // 
+            // splitContainerInventories.Panel1
+            // 
+            this.splitContainerInventories.Panel1.Controls.Add(this.panelCustomerInv);
+            // 
+            // splitContainerInventories.Panel2
+            // 
+            this.splitContainerInventories.Panel2.Controls.Add(this.panelFireTecInv);
+            this.splitContainerInventories.Size = new System.Drawing.Size(609, 733);
+            this.splitContainerInventories.SplitterDistance = 161;
+            this.splitContainerInventories.SplitterWidth = 25;
+            this.splitContainerInventories.TabIndex = 0;
+            this.splitContainerInventories.Visible = false;
+            // 
+            // panelCustomerInv
+            // 
+            this.panelCustomerInv.BackColor = System.Drawing.Color.Transparent;
+            this.panelCustomerInv.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelCustomerInv.Controls.Add(this.dataGridViewClient);
+            this.panelCustomerInv.Controls.Add(this.labelProfileName);
+            this.panelCustomerInv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCustomerInv.Location = new System.Drawing.Point(0, 0);
+            this.panelCustomerInv.Name = "panelCustomerInv";
+            this.panelCustomerInv.Size = new System.Drawing.Size(161, 733);
+            this.panelCustomerInv.TabIndex = 119;
+            // 
+            // dataGridViewClient
+            // 
+            this.dataGridViewClient.AllowUserToAddRows = false;
+            this.dataGridViewClient.AllowUserToDeleteRows = false;
+            this.dataGridViewClient.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            this.dataGridViewClient.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewClient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewClient.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewClient.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewClient.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewClient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.Item,
+            this.DueDate,
+            this.SerialNum});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewClient.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewClient.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewClient.EnableHeadersVisualStyles = false;
+            this.dataGridViewClient.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dataGridViewClient.Location = new System.Drawing.Point(0, 38);
+            this.dataGridViewClient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
+            this.dataGridViewClient.Name = "dataGridViewClient";
+            this.dataGridViewClient.ReadOnly = true;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(0, 0, 0, 4);
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewClient.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewClient.RowHeadersVisible = false;
+            this.dataGridViewClient.RowHeadersWidth = 15;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Transparent;
+            this.dataGridViewClient.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewClient.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewClient.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            this.dataGridViewClient.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            this.dataGridViewClient.Size = new System.Drawing.Size(161, 695);
+            this.dataGridViewClient.TabIndex = 112;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewTextBoxColumn1.FillWeight = 30F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "#";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // Item
+            // 
+            this.Item.HeaderText = "Item";
+            this.Item.MinimumWidth = 6;
+            this.Item.Name = "Item";
+            this.Item.ReadOnly = true;
+            // 
+            // DueDate
+            // 
+            this.DueDate.HeaderText = "DueDate";
+            this.DueDate.MinimumWidth = 6;
+            this.DueDate.Name = "DueDate";
+            this.DueDate.ReadOnly = true;
+            // 
+            // SerialNum
+            // 
+            this.SerialNum.HeaderText = "Serial";
+            this.SerialNum.MinimumWidth = 6;
+            this.SerialNum.Name = "SerialNum";
+            this.SerialNum.ReadOnly = true;
+            // 
+            // labelProfileName
+            // 
+            this.labelProfileName.AutoSize = true;
+            this.labelProfileName.BackColor = System.Drawing.Color.Transparent;
+            this.labelProfileName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelProfileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelProfileName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelProfileName.Location = new System.Drawing.Point(0, 0);
+            this.labelProfileName.Margin = new System.Windows.Forms.Padding(60, 50, 3, 0);
+            this.labelProfileName.Name = "labelProfileName";
+            this.labelProfileName.Size = new System.Drawing.Size(261, 38);
+            this.labelProfileName.TabIndex = 111;
+            this.labelProfileName.Text = "Jairo Rodriguez";
+            // 
+            // panelFireTecInv
+            // 
+            this.panelFireTecInv.BackColor = System.Drawing.Color.Transparent;
+            this.panelFireTecInv.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelFireTecInv.Controls.Add(this.comboBoxItemType);
+            this.panelFireTecInv.Controls.Add(this.labelItemType);
+            this.panelFireTecInv.Controls.Add(this.dataGridInv);
+            this.panelFireTecInv.Controls.Add(this.labelFireTecInv);
+            this.panelFireTecInv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelFireTecInv.Location = new System.Drawing.Point(0, 0);
+            this.panelFireTecInv.Name = "panelFireTecInv";
+            this.panelFireTecInv.Size = new System.Drawing.Size(423, 733);
+            this.panelFireTecInv.TabIndex = 119;
+            // 
+            // comboBoxItemType
+            // 
+            this.comboBoxItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxItemType.FormattingEnabled = true;
+            this.comboBoxItemType.Items.AddRange(new object[] {
+            "Helmet",
+            "Jacket",
+            "Pants",
+            "Boots"});
+            this.comboBoxItemType.Location = new System.Drawing.Point(275, 3);
+            this.comboBoxItemType.Name = "comboBoxItemType";
+            this.comboBoxItemType.Size = new System.Drawing.Size(132, 33);
+            this.comboBoxItemType.TabIndex = 120;
+            this.comboBoxItemType.SelectedIndexChanged += new System.EventHandler(this.comboBoxItemType_SelectedIndexChanged);
+            // 
+            // labelItemType
+            // 
+            this.labelItemType.AutoSize = true;
+            this.labelItemType.BackColor = System.Drawing.Color.Transparent;
+            this.labelItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelItemType.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelItemType.Location = new System.Drawing.Point(177, 5);
+            this.labelItemType.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
+            this.labelItemType.Name = "labelItemType";
+            this.labelItemType.Size = new System.Drawing.Size(115, 25);
+            this.labelItemType.TabIndex = 121;
+            this.labelItemType.Text = "Item Type:";
+            // 
+            // dataGridInv
+            // 
+            this.dataGridInv.AllowUserToAddRows = false;
+            this.dataGridInv.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridInv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridInv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dataGridInv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridInv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Num,
+            this.Type,
+            this.Brand,
+            this.Serial,
+            this.Size,
+            this.ManufactureDate,
+            this.UsedNew,
+            this.ColorMaterial});
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridInv.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridInv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridInv.EnableHeadersVisualStyles = false;
+            this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.dataGridInv.Location = new System.Drawing.Point(0, 38);
+            this.dataGridInv.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridInv.Name = "dataGridInv";
+            this.dataGridInv.ReadOnly = true;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridInv.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dataGridInv.RowHeadersVisible = false;
+            this.dataGridInv.RowHeadersWidth = 51;
+            this.dataGridInv.RowTemplate.Height = 24;
+            this.dataGridInv.RowTemplate.ReadOnly = true;
+            this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridInv.Size = new System.Drawing.Size(423, 695);
+            this.dataGridInv.TabIndex = 112;
+            // 
+            // Num
+            // 
+            this.Num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Num.FillWeight = 30F;
+            this.Num.HeaderText = "#";
+            this.Num.MinimumWidth = 6;
+            this.Num.Name = "Num";
+            this.Num.ReadOnly = true;
+            // 
+            // Type
+            // 
+            this.Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Type.FillWeight = 50F;
+            this.Type.HeaderText = "Item";
+            this.Type.MinimumWidth = 6;
+            this.Type.Name = "Type";
+            this.Type.ReadOnly = true;
+            // 
+            // Brand
+            // 
+            this.Brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Brand.HeaderText = "Brand";
+            this.Brand.MinimumWidth = 6;
+            this.Brand.Name = "Brand";
+            this.Brand.ReadOnly = true;
+            // 
+            // Serial
+            // 
+            this.Serial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Serial.HeaderText = "Serial";
+            this.Serial.MinimumWidth = 6;
+            this.Serial.Name = "Serial";
+            this.Serial.ReadOnly = true;
+            // 
+            // Size
+            // 
+            this.Size.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Size.FillWeight = 80F;
+            this.Size.HeaderText = "Size";
+            this.Size.MinimumWidth = 6;
+            this.Size.Name = "Size";
+            this.Size.ReadOnly = true;
+            // 
+            // ManufactureDate
+            // 
+            this.ManufactureDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ManufactureDate.FillWeight = 120F;
+            this.ManufactureDate.HeaderText = "MFD";
+            this.ManufactureDate.MinimumWidth = 6;
+            this.ManufactureDate.Name = "ManufactureDate";
+            this.ManufactureDate.ReadOnly = true;
+            // 
+            // UsedNew
+            // 
+            this.UsedNew.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.UsedNew.FillWeight = 75F;
+            this.UsedNew.HeaderText = "Condition";
+            this.UsedNew.MinimumWidth = 6;
+            this.UsedNew.Name = "UsedNew";
+            this.UsedNew.ReadOnly = true;
+            // 
+            // ColorMaterial
+            // 
+            this.ColorMaterial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColorMaterial.FillWeight = 60F;
+            this.ColorMaterial.HeaderText = "Material";
+            this.ColorMaterial.MinimumWidth = 6;
+            this.ColorMaterial.Name = "ColorMaterial";
+            this.ColorMaterial.ReadOnly = true;
+            // 
+            // labelFireTecInv
+            // 
+            this.labelFireTecInv.AutoSize = true;
+            this.labelFireTecInv.BackColor = System.Drawing.Color.Transparent;
+            this.labelFireTecInv.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelFireTecInv.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFireTecInv.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelFireTecInv.Location = new System.Drawing.Point(0, 0);
+            this.labelFireTecInv.Margin = new System.Windows.Forms.Padding(400, 50, 3, 0);
+            this.labelFireTecInv.Name = "labelFireTecInv";
+            this.labelFireTecInv.Size = new System.Drawing.Size(176, 38);
+            this.labelFireTecInv.TabIndex = 111;
+            this.labelFireTecInv.Text = "FIRE-TEC";
             // 
             // NewRentalModuleForm
             // 
@@ -1527,7 +1897,6 @@
             this.panelrep.ResumeLayout(false);
             this.panelrep.PerformLayout();
             this.flowLayoutPanelProfile.ResumeLayout(false);
-            this.flowLayoutPanelProfile.PerformLayout();
             this.panelProfileContactInfo.ResumeLayout(false);
             this.panelProfileContactInfo.PerformLayout();
             this.panelProfileAddress.ResumeLayout(false);
@@ -1536,6 +1905,18 @@
             this.panelProfileMeasurments.PerformLayout();
             this.panelProfileRentalInfo.ResumeLayout(false);
             this.panelProfileRentalInfo.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.splitContainerInventories.Panel1.ResumeLayout(false);
+            this.splitContainerInventories.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerInventories)).EndInit();
+            this.splitContainerInventories.ResumeLayout(false);
+            this.panelCustomerInv.ResumeLayout(false);
+            this.panelCustomerInv.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).EndInit();
+            this.panelFireTecInv.ResumeLayout(false);
+            this.panelFireTecInv.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1553,7 +1934,6 @@
         public System.Windows.Forms.ComboBox comboBoxAcademy;
         private System.Windows.Forms.Label labelContactInfoIndividual;
         private GradientFlowLayoutPanel gradientFlowLayoutCustomerInfo;
-        private GradientFlowLayoutPanel gradientFlowLayoutPanel2;
         private System.Windows.Forms.SplitContainer splitContainermain;
         private System.Windows.Forms.Panel panelName;
         private System.Windows.Forms.Panel panelPhone;
@@ -1601,7 +1981,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelProfile;
         private System.Windows.Forms.Panel panelProfileContactInfo;
         private System.Windows.Forms.Label labelProfileContactInfo;
-        private System.Windows.Forms.Label labelProfileName;
         private System.Windows.Forms.Label labelProfilePhone;
         private System.Windows.Forms.Label labelProfileEmail;
         private System.Windows.Forms.Label labelProfileDrivers;
@@ -1645,5 +2024,29 @@
         public System.Windows.Forms.Label LableCustomerName;
         public System.Windows.Forms.Label labelDriversLicense;
         public System.Windows.Forms.Label labelRentalInfo;
+        private System.Windows.Forms.SplitContainer splitContainerInventories;
+        public System.Windows.Forms.Panel panelCustomerInv;
+        private System.Windows.Forms.DataGridView dataGridViewClient;
+        private System.Windows.Forms.Label labelProfileName;
+        public System.Windows.Forms.Panel panelFireTecInv;
+        private System.Windows.Forms.Label labelFireTecInv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Item;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SerialNum;
+        private System.Windows.Forms.DataGridView dataGridInv;
+        private System.Windows.Forms.Panel panel2;
+        public System.Windows.Forms.ComboBox comboBoxItemType;
+        private System.Windows.Forms.Label labelItemType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Brand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Serial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ManufactureDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UsedNew;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColorMaterial;
+        private System.Windows.Forms.TextBox textBoxSearchBar;
+        private System.Windows.Forms.Label lableSearchBar;
     }
 }
