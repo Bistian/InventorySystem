@@ -207,3 +207,4 @@ C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\I
 C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.SettingsForm.resources
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Dashboard.resources
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.SettingsForm.resources
+C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Dashboard.resources

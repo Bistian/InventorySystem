@@ -80,6 +80,11 @@
     <Compile Include="Custom Item Classes\CustomButton.Designer.cs">
       <DependentUpon>CustomButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="dadadaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dadadaDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,6 +337,17 @@
     <EmbeddedResource Include="WorkOrderModuleForm.resx">
       <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="dadadaDataSet.xsc">
+      <DependentUpon>dadadaDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="dadadaDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dadadaDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="dadadaDataSet.xss">
+      <DependentUpon>dadadaDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
