@@ -91,8 +91,6 @@
             this.panelAcademy = new System.Windows.Forms.Panel();
             this.comboBoxAcademy = new System.Windows.Forms.ComboBox();
             this.labelAcademy = new System.Windows.Forms.Label();
-            this.labelRentalTerm = new System.Windows.Forms.Label();
-            this.dateTimePickerRentalTerm = new System.Windows.Forms.DateTimePicker();
             this.labelRentalInfo = new System.Windows.Forms.Label();
             this.panelFinalize = new System.Windows.Forms.Panel();
             this.panelrep = new System.Windows.Forms.Panel();
@@ -289,7 +287,7 @@
             this.txtBoxDriversLicense.Margin = new System.Windows.Forms.Padding(20, 4, 4, 4);
             this.txtBoxDriversLicense.Name = "txtBoxDriversLicense";
             this.txtBoxDriversLicense.Size = new System.Drawing.Size(273, 30);
-            this.txtBoxDriversLicense.TabIndex = 4;
+            this.txtBoxDriversLicense.TabIndex = 2;
             // 
             // labelContactInfoIndividual
             // 
@@ -366,7 +364,7 @@
             this.txtBoxEmail.Margin = new System.Windows.Forms.Padding(20, 4, 4, 4);
             this.txtBoxEmail.Name = "txtBoxEmail";
             this.txtBoxEmail.Size = new System.Drawing.Size(268, 30);
-            this.txtBoxEmail.TabIndex = 3;
+            this.txtBoxEmail.TabIndex = 4;
             // 
             // panelPhone
             // 
@@ -398,7 +396,7 @@
             this.txtBoxPhone.Margin = new System.Windows.Forms.Padding(20, 4, 4, 4);
             this.txtBoxPhone.Name = "txtBoxPhone";
             this.txtBoxPhone.Size = new System.Drawing.Size(268, 30);
-            this.txtBoxPhone.TabIndex = 2;
+            this.txtBoxPhone.TabIndex = 3;
             // 
             // panelAddress
             // 
@@ -568,7 +566,7 @@
             this.panelMeasurments.Controls.Add(this.panelSleeve);
             this.panelMeasurments.Location = new System.Drawing.Point(3, 583);
             this.panelMeasurments.Name = "panelMeasurments";
-            this.panelMeasurments.Size = new System.Drawing.Size(320, 323);
+            this.panelMeasurments.Size = new System.Drawing.Size(320, 276);
             this.panelMeasurments.TabIndex = 117;
             // 
             // panel1
@@ -849,13 +847,11 @@
             // 
             this.panelRentalInfo.BackColor = System.Drawing.Color.Transparent;
             this.panelRentalInfo.Controls.Add(this.panelAcademy);
-            this.panelRentalInfo.Controls.Add(this.labelRentalTerm);
-            this.panelRentalInfo.Controls.Add(this.dateTimePickerRentalTerm);
             this.panelRentalInfo.Controls.Add(this.labelRentalInfo);
             this.panelRentalInfo.Controls.Add(this.panelFinalize);
-            this.panelRentalInfo.Location = new System.Drawing.Point(3, 912);
+            this.panelRentalInfo.Location = new System.Drawing.Point(3, 865);
             this.panelRentalInfo.Name = "panelRentalInfo";
-            this.panelRentalInfo.Size = new System.Drawing.Size(320, 347);
+            this.panelRentalInfo.Size = new System.Drawing.Size(320, 291);
             this.panelRentalInfo.TabIndex = 115;
             // 
             // panelAcademy
@@ -863,7 +859,7 @@
             this.panelAcademy.BackColor = System.Drawing.Color.Transparent;
             this.panelAcademy.Controls.Add(this.comboBoxAcademy);
             this.panelAcademy.Controls.Add(this.labelAcademy);
-            this.panelAcademy.Location = new System.Drawing.Point(45, 95);
+            this.panelAcademy.Location = new System.Drawing.Point(45, 37);
             this.panelAcademy.Name = "panelAcademy";
             this.panelAcademy.Size = new System.Drawing.Size(263, 58);
             this.panelAcademy.TabIndex = 120;
@@ -913,25 +909,6 @@
             this.labelAcademy.TabIndex = 87;
             this.labelAcademy.Text = "Academy";
             // 
-            // labelRentalTerm
-            // 
-            this.labelRentalTerm.AutoSize = true;
-            this.labelRentalTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRentalTerm.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelRentalTerm.Location = new System.Drawing.Point(47, 39);
-            this.labelRentalTerm.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelRentalTerm.Name = "labelRentalTerm";
-            this.labelRentalTerm.Size = new System.Drawing.Size(118, 25);
-            this.labelRentalTerm.TabIndex = 119;
-            this.labelRentalTerm.Text = "Rental Term";
-            // 
-            // dateTimePickerRentalTerm
-            // 
-            this.dateTimePickerRentalTerm.Location = new System.Drawing.Point(52, 67);
-            this.dateTimePickerRentalTerm.Name = "dateTimePickerRentalTerm";
-            this.dateTimePickerRentalTerm.Size = new System.Drawing.Size(247, 22);
-            this.dateTimePickerRentalTerm.TabIndex = 118;
-            // 
             // labelRentalInfo
             // 
             this.labelRentalInfo.AutoSize = true;
@@ -952,10 +929,10 @@
             this.panelFinalize.Controls.Add(this.panelrep);
             this.panelFinalize.Controls.Add(this.ClearButton);
             this.panelFinalize.Controls.Add(this.ButtonContinue);
-            this.panelFinalize.Location = new System.Drawing.Point(0, 159);
+            this.panelFinalize.Location = new System.Drawing.Point(0, 101);
             this.panelFinalize.Margin = new System.Windows.Forms.Padding(150, 3, 3, 3);
             this.panelFinalize.Name = "panelFinalize";
-            this.panelFinalize.Size = new System.Drawing.Size(320, 130);
+            this.panelFinalize.Size = new System.Drawing.Size(320, 188);
             this.panelFinalize.TabIndex = 117;
             // 
             // panelrep
@@ -1033,7 +1010,7 @@
             this.flowLayoutPanelProfile.Controls.Add(this.panelProfileAddress);
             this.flowLayoutPanelProfile.Controls.Add(this.panelProfileMeasurments);
             this.flowLayoutPanelProfile.Controls.Add(this.panelProfileRentalInfo);
-            this.flowLayoutPanelProfile.Location = new System.Drawing.Point(3, 1265);
+            this.flowLayoutPanelProfile.Location = new System.Drawing.Point(3, 1162);
             this.flowLayoutPanelProfile.Name = "flowLayoutPanelProfile";
             this.flowLayoutPanelProfile.Size = new System.Drawing.Size(571, 667);
             this.flowLayoutPanelProfile.TabIndex = 115;
@@ -1170,7 +1147,7 @@
             this.panelProfileAddress.Location = new System.Drawing.Point(0, 223);
             this.panelProfileAddress.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.panelProfileAddress.Name = "panelProfileAddress";
-            this.panelProfileAddress.Size = new System.Drawing.Size(486, 93);
+            this.panelProfileAddress.Size = new System.Drawing.Size(486, 77);
             this.panelProfileAddress.TabIndex = 119;
             // 
             // labelClientAddress
@@ -1179,7 +1156,7 @@
             this.labelClientAddress.BackColor = System.Drawing.Color.Transparent;
             this.labelClientAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelClientAddress.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelClientAddress.Location = new System.Drawing.Point(1, 67);
+            this.labelClientAddress.Location = new System.Drawing.Point(1, 48);
             this.labelClientAddress.Margin = new System.Windows.Forms.Padding(100, 0, 4, 0);
             this.labelClientAddress.Name = "labelClientAddress";
             this.labelClientAddress.Size = new System.Drawing.Size(413, 29);
@@ -1218,7 +1195,7 @@
             this.panelProfileMeasurments.Controls.Add(this.labelClientChest);
             this.panelProfileMeasurments.Controls.Add(this.labelProfileChest);
             this.panelProfileMeasurments.Controls.Add(this.labelProfileMeasurments);
-            this.panelProfileMeasurments.Location = new System.Drawing.Point(0, 322);
+            this.panelProfileMeasurments.Location = new System.Drawing.Point(0, 306);
             this.panelProfileMeasurments.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.panelProfileMeasurments.Name = "panelProfileMeasurments";
             this.panelProfileMeasurments.Size = new System.Drawing.Size(486, 182);
@@ -1437,10 +1414,10 @@
             this.panelProfileRentalInfo.BackColor = System.Drawing.Color.Transparent;
             this.panelProfileRentalInfo.Controls.Add(this.labelClientAcademy);
             this.panelProfileRentalInfo.Controls.Add(this.lableRentalInfo);
-            this.panelProfileRentalInfo.Location = new System.Drawing.Point(0, 510);
+            this.panelProfileRentalInfo.Location = new System.Drawing.Point(0, 494);
             this.panelProfileRentalInfo.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.panelProfileRentalInfo.Name = "panelProfileRentalInfo";
-            this.panelProfileRentalInfo.Size = new System.Drawing.Size(486, 129);
+            this.panelProfileRentalInfo.Size = new System.Drawing.Size(486, 90);
             this.panelProfileRentalInfo.TabIndex = 120;
             // 
             // labelClientAcademy
@@ -1664,7 +1641,5 @@
         public System.Windows.Forms.ComboBox comboBoxRentalType;
         private System.Windows.Forms.Label labelRentalType;
         private System.Windows.Forms.Panel panelAcademy;
-        private System.Windows.Forms.Label labelRentalTerm;
-        private System.Windows.Forms.DateTimePicker dateTimePickerRentalTerm;
     }
 }

@@ -165,7 +165,6 @@ namespace InventoryManagmentSystem
                     flowLayoutPanelProfile.Visible = true;
                     panelProfileRentalInfo.Visible = false;
                     panelProfileMeasurments.Visible = false;
-                    panelProfileAddress.Visible = false;
 
                 }
                 catch (Exception ex)
@@ -176,25 +175,24 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void SaveClient()
+        private bool SaveClient()
         {
             try
             {
-                if (MessageBox.Show("Are you sure you want to save this Info?", "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
                     string address = txtBoxStreet.Text + " " + textBoxCity.Text + " " + textBoxState.Text + " " + textBoxZip.Text;
                     bool exists = CheckIfExists("tbClients", txtBoxDriversLicense.Text);
                     if (!exists)
                     {
-                        cm = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,DriversLicenseNumber,Address,Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,FireTecRepresentative)" +
-                        "VALUES(@Name,@Phone,@Email,@Academy,@DriversLicenseNumber,@Address,@Chest,@Sleeve,@Waist,@Inseam,@Hips,@Height,@Weight,@FireTecRepresentative)", con);
+                        cm = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,DayNight,DriversLicenseNumber,Address,Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,FireTecRepresentative)" +
+                        "VALUES(@Name,@Phone,@Email,@Academy,@DayNight,@DriversLicenseNumber,@Address,@Chest,@Sleeve,@Waist,@Inseam,@Hips,@Height,@Weight,@FireTecRepresentative)", con);
                         cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
                         cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
                         cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
                         cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
+                        cm.Parameters.AddWithValue("@DayNight", comboBoxRentalType.Text);
                         cm.Parameters.AddWithValue("@Address", address);
                         cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
-                        cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
+                        cm.Parameters.AddWithValue("@Academy", txtBoxDriversLicense.Text);
                         cm.Parameters.AddWithValue("@Chest", textBoxChest.Text);
                         cm.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
                         cm.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
@@ -214,17 +212,21 @@ namespace InventoryManagmentSystem
                         panelMeasurments.Visible = false;
                         panelRentalInfo.Visible = false;
                         panelFinalize.Visible = false;
+
+                    return true;
                     }
                     else
                     {
                         MessageBox.Show("License Number already in use");
-                    }
+                    return false;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return false;
             }
+            return false;
         }
 
         public void DisableLicense()
@@ -275,7 +277,6 @@ namespace InventoryManagmentSystem
             }
         }
 
-
         private void ButtonContinue_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtBoxStreet.Text) &&
@@ -301,15 +302,20 @@ namespace InventoryManagmentSystem
                 license = txtBoxDriversLicense.Text;
                 if (ExistingUser == false)
                 {
-                    SaveClient();
+                   
                     panelRentalType.Visible = false;
-                    if (comboBoxRentalType.SelectedIndex == 0)
+                    if (SaveClient())
                     {
-                         LoadProfile(false, license);
-                    }
-                    else if(comboBoxRentalType.SelectedIndex == 1)
-                    {
-                        LoadProfile(true, license);
+                        //individual
+                        if (comboBoxRentalType.SelectedIndex == 0)
+                        {
+                            LoadProfile(false, license);
+                        }
+                        //department
+                        else if (comboBoxRentalType.SelectedIndex == 1)
+                        {
+                            LoadProfile(true, license);
+                        }
                     }
                 }
                 else
@@ -378,6 +384,7 @@ namespace InventoryManagmentSystem
                 //change fields
                 panelMeasurments.Visible = false;
                 panelAcademy.Visible = false;
+                labelRentalInfo.Visible = false;
                 LableCustomerName.Text = "Point Of Contact";
                 labelDriversLicense.Text = "Department Name";
 
@@ -404,6 +411,7 @@ namespace InventoryManagmentSystem
                 //hide pannels
                 panelMeasurments.Visible = false;
                 panelAcademy.Visible = false;
+                labelRentalInfo.Visible = false;
                 LableCustomerName.Text = "Point Of Contact";
                 labelDriversLicense.Text = "Academy Name";
 
