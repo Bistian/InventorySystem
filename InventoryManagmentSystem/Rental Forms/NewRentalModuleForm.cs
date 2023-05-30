@@ -102,6 +102,7 @@ namespace InventoryManagmentSystem
 
         public void LoadProfile(bool isDepartment, String ClientDrivers)
         {
+            panelRentalType.Visible = false;
             if (!isDepartment)
             {
                 try
@@ -316,6 +317,7 @@ namespace InventoryManagmentSystem
                         {
                             LoadProfile(true, license);
                         }
+                       // splitContainermain.SplitterDistance = 600;
                     }
                 }
                 else

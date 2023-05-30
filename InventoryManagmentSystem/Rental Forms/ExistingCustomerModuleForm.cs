@@ -32,6 +32,7 @@ namespace InventoryManagmentSystem
         {
             InitializeComponent();
             LoadUsers();
+            comboBox1.SelectedIndex = 0;
         }
 
         private void dataGridUsers_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -40,32 +41,29 @@ namespace InventoryManagmentSystem
             {
                 try
                 {
-                    if (!isReturn)
-                    {
-                        NewRentalModuleForm UserInfoModule = new NewRentalModuleForm();
-                        // Name is always index 1, so it is best to leave at that instead of a name tjat could change.
-                        UserInfoModule.txtBoxCustomerName.Text = dataGridUsers.Rows[e.RowIndex].Cells[1].Value.ToString();
-                        UserInfoModule.txtBoxPhone.Text = dataGridUsers.Rows[e.RowIndex].Cells["Phone"].Value.ToString();
-                        UserInfoModule.txtBoxEmail.Text = dataGridUsers.Rows[e.RowIndex].Cells["Email"].Value.ToString();
-                        UserInfoModule.txtBoxStreet.Text = dataGridUsers.Rows[e.RowIndex].Cells["Address"].Value.ToString();
-                        UserInfoModule.txtBoxDriversLicense.Text = dataGridUsers.Rows[e.RowIndex].Cells["DriversLicense"].Value.ToString();
-                        UserInfoModule.txtBoxRep.Text = dataGridUsers.Rows[e.RowIndex].Cells["Rep"].Value.ToString();
-                        UserInfoModule.comboBoxAcademy.Text = dataGridUsers.Rows[e.RowIndex].Cells["Academy"].Value.ToString();
 
-                        this.Dispose();
-                        UserInfoModule.ExistingUser = true;
-                        UserInfoModule.DisableLicense();
-                        UserInfoModule.ShowDialog();
-                    }
-                    else if (isReturn)
-                    {
-                        ReturnModule RentalReturn = new ReturnModule(dataGridUsers.Rows[e.RowIndex].Cells[1].Value.ToString(),
-                                                  dataGridUsers.Rows[e.RowIndex].Cells["DriversLicense"].Value.ToString());
+                    var parentForm = this.ParentForm as MainForm;
+                    NewRentalModuleForm Profile = new NewRentalModuleForm();
+                    string licence = dataGridUsers.Rows[e.RowIndex].Cells["ID"].Value.ToString();
 
-                        this.Dispose();
-                        RentalReturn.ShowDialog();
-                        isReturn = false;
+                    //is an individual
+                    if (comboBox1.SelectedIndex == 0)
+                    {
+                        Profile.LoadProfile(false, licence);
                     }
+                    //is a department
+                    else if(comboBox1.SelectedIndex == 1)
+                    {
+                        Profile.LoadProfile(true, licence);
+                    }
+                    //is an academy
+                    else if(comboBox1.SelectedIndex == 2)
+                    {
+                        Profile.LoadProfile(true, licence);
+                    }
+                    parentForm.openChildForm(Profile);
+
+                    this.Dispose();
                 }
                 catch (Exception ex)
                 {
@@ -86,7 +84,7 @@ namespace InventoryManagmentSystem
         {
             int i = 0;
             dataGridUsers.Rows.Clear();
-            cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address, FireTecRepresentative FROM tbClients WHERE DayNight = @ClientType", con);
+            cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE DayNight = @ClientType", con);
             cm.Parameters.AddWithValue("@ClientType", clientType);
             con.Open();
             dr = cm.ExecuteReader();
@@ -94,7 +92,7 @@ namespace InventoryManagmentSystem
             while (dr.Read())
             {
                 i++;
-                dataGridUsers.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
+                dataGridUsers.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString());
             }
             dr.Close();
             con.Close();
@@ -108,7 +106,7 @@ namespace InventoryManagmentSystem
             //SQL
             int i = 0;
             dataGridUsers.Rows.Clear();
-            cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address, FireTecRepresentative FROM tbClients WHERE (Name LIKE '%" + searchTerm + "%' OR Academy LIKE '%" + searchTerm + "%') AND DayNight = @ClientType", con);
+            cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE (Name LIKE '%" + searchTerm + "%' OR Academy LIKE '%" + searchTerm + "%') AND DayNight = @ClientType", con);
             cm.Parameters.AddWithValue("@ClientType", clientType);
             con.Open();
             dr = cm.ExecuteReader();

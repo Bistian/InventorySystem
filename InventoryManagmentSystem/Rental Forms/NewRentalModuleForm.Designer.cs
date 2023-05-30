@@ -265,7 +265,7 @@
             this.panelLicence.Location = new System.Drawing.Point(13, 101);
             this.panelLicence.Name = "panelLicence";
             this.panelLicence.Size = new System.Drawing.Size(287, 61);
-            this.panelLicence.TabIndex = 4;
+            this.panelLicence.TabIndex = 2;
             // 
             // labelDriversLicense
             // 
@@ -342,7 +342,7 @@
             this.panelEmail.Location = new System.Drawing.Point(13, 238);
             this.panelEmail.Name = "panelEmail";
             this.panelEmail.Size = new System.Drawing.Size(287, 61);
-            this.panelEmail.TabIndex = 3;
+            this.panelEmail.TabIndex = 4;
             // 
             // labelEmail
             // 
@@ -374,7 +374,7 @@
             this.panelPhone.Location = new System.Drawing.Point(13, 167);
             this.panelPhone.Name = "panelPhone";
             this.panelPhone.Size = new System.Drawing.Size(287, 66);
-            this.panelPhone.TabIndex = 2;
+            this.panelPhone.TabIndex = 3;
             // 
             // labelPhone
             // 
@@ -614,7 +614,7 @@
             this.panel8.Location = new System.Drawing.Point(21, 209);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(148, 58);
-            this.panel8.TabIndex = 15;
+            this.panel8.TabIndex = 14;
             // 
             // labelWeight
             // 
@@ -646,7 +646,7 @@
             this.panelHeight.Location = new System.Drawing.Point(169, 208);
             this.panelHeight.Name = "panelHeight";
             this.panelHeight.Size = new System.Drawing.Size(151, 61);
-            this.panelHeight.TabIndex = 14;
+            this.panelHeight.TabIndex = 15;
             // 
             // labelHeight
             // 
@@ -1034,6 +1034,7 @@
             // 
             this.panelProfileContactInfo.BackColor = System.Drawing.Color.Transparent;
             this.panelProfileContactInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelProfileContactInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelProfileContactInfo.Controls.Add(this.labelClientDrivers);
             this.panelProfileContactInfo.Controls.Add(this.labelClientEmail);
             this.panelProfileContactInfo.Controls.Add(this.labelClientPhone);
@@ -1044,7 +1045,7 @@
             this.panelProfileContactInfo.Location = new System.Drawing.Point(0, 72);
             this.panelProfileContactInfo.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.panelProfileContactInfo.Name = "panelProfileContactInfo";
-            this.panelProfileContactInfo.Size = new System.Drawing.Size(486, 145);
+            this.panelProfileContactInfo.Size = new System.Drawing.Size(433, 145);
             this.panelProfileContactInfo.TabIndex = 117;
             // 
             // labelClientDrivers
@@ -1092,7 +1093,7 @@
             this.labelProfileContactInfo.BackColor = System.Drawing.Color.Transparent;
             this.labelProfileContactInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProfileContactInfo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelProfileContactInfo.Location = new System.Drawing.Point(-3, 0);
+            this.labelProfileContactInfo.Location = new System.Drawing.Point(104, 0);
             this.labelProfileContactInfo.Margin = new System.Windows.Forms.Padding(60, 50, 3, 0);
             this.labelProfileContactInfo.Name = "labelProfileContactInfo";
             this.labelProfileContactInfo.Size = new System.Drawing.Size(248, 46);
@@ -1142,12 +1143,13 @@
             // 
             this.panelProfileAddress.BackColor = System.Drawing.Color.Transparent;
             this.panelProfileAddress.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelProfileAddress.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelProfileAddress.Controls.Add(this.labelClientAddress);
             this.panelProfileAddress.Controls.Add(this.lableProfileAddress);
             this.panelProfileAddress.Location = new System.Drawing.Point(0, 223);
             this.panelProfileAddress.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.panelProfileAddress.Name = "panelProfileAddress";
-            this.panelProfileAddress.Size = new System.Drawing.Size(486, 77);
+            this.panelProfileAddress.Size = new System.Drawing.Size(433, 77);
             this.panelProfileAddress.TabIndex = 119;
             // 
             // labelClientAddress
@@ -1169,7 +1171,7 @@
             this.lableProfileAddress.BackColor = System.Drawing.Color.Transparent;
             this.lableProfileAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lableProfileAddress.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lableProfileAddress.Location = new System.Drawing.Point(-1, 3);
+            this.lableProfileAddress.Location = new System.Drawing.Point(145, 2);
             this.lableProfileAddress.Margin = new System.Windows.Forms.Padding(60, 50, 3, 0);
             this.lableProfileAddress.Name = "lableProfileAddress";
             this.lableProfileAddress.Size = new System.Drawing.Size(173, 46);
@@ -1179,6 +1181,7 @@
             // panelProfileMeasurments
             // 
             this.panelProfileMeasurments.BackColor = System.Drawing.Color.Transparent;
+            this.panelProfileMeasurments.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelProfileMeasurments.Controls.Add(this.lablePounds);
             this.panelProfileMeasurments.Controls.Add(this.labelClientWeight);
             this.panelProfileMeasurments.Controls.Add(this.labelProfileWeight);
@@ -1198,7 +1201,7 @@
             this.panelProfileMeasurments.Location = new System.Drawing.Point(0, 306);
             this.panelProfileMeasurments.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.panelProfileMeasurments.Name = "panelProfileMeasurments";
-            this.panelProfileMeasurments.Size = new System.Drawing.Size(486, 182);
+            this.panelProfileMeasurments.Size = new System.Drawing.Size(433, 182);
             this.panelProfileMeasurments.TabIndex = 118;
             // 
             // lablePounds
@@ -1207,7 +1210,7 @@
             this.lablePounds.BackColor = System.Drawing.Color.Transparent;
             this.lablePounds.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lablePounds.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lablePounds.Location = new System.Drawing.Point(203, 144);
+            this.lablePounds.Location = new System.Drawing.Point(246, 144);
             this.lablePounds.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.lablePounds.Name = "lablePounds";
             this.lablePounds.Size = new System.Drawing.Size(51, 32);
@@ -1220,7 +1223,7 @@
             this.labelClientWeight.BackColor = System.Drawing.Color.Transparent;
             this.labelClientWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelClientWeight.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelClientWeight.Location = new System.Drawing.Point(153, 144);
+            this.labelClientWeight.Location = new System.Drawing.Point(207, 144);
             this.labelClientWeight.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelClientWeight.Name = "labelClientWeight";
             this.labelClientWeight.Size = new System.Drawing.Size(42, 32);
@@ -1233,7 +1236,7 @@
             this.labelProfileWeight.BackColor = System.Drawing.Color.Transparent;
             this.labelProfileWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProfileWeight.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelProfileWeight.Location = new System.Drawing.Point(55, 144);
+            this.labelProfileWeight.Location = new System.Drawing.Point(127, 144);
             this.labelProfileWeight.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelProfileWeight.Name = "labelProfileWeight";
             this.labelProfileWeight.Size = new System.Drawing.Size(111, 32);
@@ -1246,7 +1249,7 @@
             this.labelClientHeight.BackColor = System.Drawing.Color.Transparent;
             this.labelClientHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelClientHeight.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelClientHeight.Location = new System.Drawing.Point(263, 111);
+            this.labelClientHeight.Location = new System.Drawing.Point(317, 111);
             this.labelClientHeight.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelClientHeight.Name = "labelClientHeight";
             this.labelClientHeight.Size = new System.Drawing.Size(42, 32);
@@ -1259,7 +1262,7 @@
             this.labelProfileHeight.BackColor = System.Drawing.Color.Transparent;
             this.labelProfileHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProfileHeight.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelProfileHeight.Location = new System.Drawing.Point(168, 111);
+            this.labelProfileHeight.Location = new System.Drawing.Point(240, 111);
             this.labelProfileHeight.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelProfileHeight.Name = "labelProfileHeight";
             this.labelProfileHeight.Size = new System.Drawing.Size(105, 32);
@@ -1272,7 +1275,7 @@
             this.labelClientHips.BackColor = System.Drawing.Color.Transparent;
             this.labelClientHips.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelClientHips.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelClientHips.Location = new System.Drawing.Point(80, 112);
+            this.labelClientHips.Location = new System.Drawing.Point(135, 111);
             this.labelClientHips.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelClientHips.Name = "labelClientHips";
             this.labelClientHips.Size = new System.Drawing.Size(42, 32);
@@ -1285,7 +1288,7 @@
             this.labelProfileHips.BackColor = System.Drawing.Color.Transparent;
             this.labelProfileHips.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProfileHips.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelProfileHips.Location = new System.Drawing.Point(9, 112);
+            this.labelProfileHips.Location = new System.Drawing.Point(81, 112);
             this.labelProfileHips.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelProfileHips.Name = "labelProfileHips";
             this.labelProfileHips.Size = new System.Drawing.Size(79, 32);
@@ -1298,7 +1301,7 @@
             this.labelClientInseam.BackColor = System.Drawing.Color.Transparent;
             this.labelClientInseam.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelClientInseam.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelClientInseam.Location = new System.Drawing.Point(263, 79);
+            this.labelClientInseam.Location = new System.Drawing.Point(317, 79);
             this.labelClientInseam.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelClientInseam.Name = "labelClientInseam";
             this.labelClientInseam.Size = new System.Drawing.Size(42, 32);
@@ -1311,7 +1314,7 @@
             this.labelProfileInseam.BackColor = System.Drawing.Color.Transparent;
             this.labelProfileInseam.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProfileInseam.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelProfileInseam.Location = new System.Drawing.Point(159, 79);
+            this.labelProfileInseam.Location = new System.Drawing.Point(231, 79);
             this.labelProfileInseam.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelProfileInseam.Name = "labelProfileInseam";
             this.labelProfileInseam.Size = new System.Drawing.Size(114, 32);
@@ -1324,7 +1327,7 @@
             this.labelClientWaist.BackColor = System.Drawing.Color.Transparent;
             this.labelClientWaist.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelClientWaist.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelClientWaist.Location = new System.Drawing.Point(80, 79);
+            this.labelClientWaist.Location = new System.Drawing.Point(135, 79);
             this.labelClientWaist.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelClientWaist.Name = "labelClientWaist";
             this.labelClientWaist.Size = new System.Drawing.Size(42, 32);
@@ -1337,7 +1340,7 @@
             this.labelProfileWaist.BackColor = System.Drawing.Color.Transparent;
             this.labelProfileWaist.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProfileWaist.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelProfileWaist.Location = new System.Drawing.Point(-5, 79);
+            this.labelProfileWaist.Location = new System.Drawing.Point(67, 79);
             this.labelProfileWaist.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelProfileWaist.Name = "labelProfileWaist";
             this.labelProfileWaist.Size = new System.Drawing.Size(93, 32);
@@ -1350,7 +1353,7 @@
             this.labelClientSleeve.BackColor = System.Drawing.Color.Transparent;
             this.labelClientSleeve.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelClientSleeve.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelClientSleeve.Location = new System.Drawing.Point(263, 47);
+            this.labelClientSleeve.Location = new System.Drawing.Point(317, 47);
             this.labelClientSleeve.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelClientSleeve.Name = "labelClientSleeve";
             this.labelClientSleeve.Size = new System.Drawing.Size(42, 32);
@@ -1363,7 +1366,7 @@
             this.labelProfileSleeve.BackColor = System.Drawing.Color.Transparent;
             this.labelProfileSleeve.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProfileSleeve.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelProfileSleeve.Location = new System.Drawing.Point(159, 47);
+            this.labelProfileSleeve.Location = new System.Drawing.Point(231, 47);
             this.labelProfileSleeve.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelProfileSleeve.Name = "labelProfileSleeve";
             this.labelProfileSleeve.Size = new System.Drawing.Size(110, 32);
@@ -1376,7 +1379,7 @@
             this.labelClientChest.BackColor = System.Drawing.Color.Transparent;
             this.labelClientChest.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelClientChest.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelClientChest.Location = new System.Drawing.Point(81, 47);
+            this.labelClientChest.Location = new System.Drawing.Point(135, 47);
             this.labelClientChest.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelClientChest.Name = "labelClientChest";
             this.labelClientChest.Size = new System.Drawing.Size(42, 32);
@@ -1389,7 +1392,7 @@
             this.labelProfileChest.BackColor = System.Drawing.Color.Transparent;
             this.labelProfileChest.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProfileChest.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelProfileChest.Location = new System.Drawing.Point(-5, 47);
+            this.labelProfileChest.Location = new System.Drawing.Point(67, 47);
             this.labelProfileChest.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelProfileChest.Name = "labelProfileChest";
             this.labelProfileChest.Size = new System.Drawing.Size(96, 32);
@@ -1402,7 +1405,7 @@
             this.labelProfileMeasurments.BackColor = System.Drawing.Color.Transparent;
             this.labelProfileMeasurments.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProfileMeasurments.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelProfileMeasurments.Location = new System.Drawing.Point(-10, 0);
+            this.labelProfileMeasurments.Location = new System.Drawing.Point(104, 1);
             this.labelProfileMeasurments.Margin = new System.Windows.Forms.Padding(60, 50, 3, 0);
             this.labelProfileMeasurments.Name = "labelProfileMeasurments";
             this.labelProfileMeasurments.Size = new System.Drawing.Size(271, 46);
@@ -1412,12 +1415,13 @@
             // panelProfileRentalInfo
             // 
             this.panelProfileRentalInfo.BackColor = System.Drawing.Color.Transparent;
+            this.panelProfileRentalInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelProfileRentalInfo.Controls.Add(this.labelClientAcademy);
             this.panelProfileRentalInfo.Controls.Add(this.lableRentalInfo);
             this.panelProfileRentalInfo.Location = new System.Drawing.Point(0, 494);
             this.panelProfileRentalInfo.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.panelProfileRentalInfo.Name = "panelProfileRentalInfo";
-            this.panelProfileRentalInfo.Size = new System.Drawing.Size(486, 90);
+            this.panelProfileRentalInfo.Size = new System.Drawing.Size(433, 90);
             this.panelProfileRentalInfo.TabIndex = 120;
             // 
             // labelClientAcademy
@@ -1439,7 +1443,7 @@
             this.lableRentalInfo.BackColor = System.Drawing.Color.Transparent;
             this.lableRentalInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lableRentalInfo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lableRentalInfo.Location = new System.Drawing.Point(1, 0);
+            this.lableRentalInfo.Location = new System.Drawing.Point(126, 0);
             this.lableRentalInfo.Margin = new System.Windows.Forms.Padding(60, 50, 3, 0);
             this.lableRentalInfo.Name = "lableRentalInfo";
             this.lableRentalInfo.Size = new System.Drawing.Size(194, 46);
@@ -1539,13 +1543,11 @@
         #endregion
         private System.Windows.Forms.Label labelAcademy;
         public System.Windows.Forms.TextBox txtBoxCustomerName;
-        private System.Windows.Forms.Label LableCustomerName;
         public System.Windows.Forms.TextBox txtBoxPhone;
         private System.Windows.Forms.Label labelPhone;
         public System.Windows.Forms.TextBox txtBoxEmail;
         private System.Windows.Forms.Label labelEmail;
         public System.Windows.Forms.TextBox txtBoxDriversLicense;
-        private System.Windows.Forms.Label labelDriversLicense;
         public System.Windows.Forms.Button ClearButton;
         public System.Windows.Forms.Button ButtonContinue;
         public System.Windows.Forms.ComboBox comboBoxAcademy;
@@ -1557,8 +1559,6 @@
         private System.Windows.Forms.Panel panelPhone;
         private System.Windows.Forms.Panel panelEmail;
         private System.Windows.Forms.Panel panelLicence;
-        private System.Windows.Forms.Panel panelContactInfo;
-        private System.Windows.Forms.Panel panelAddress;
         private System.Windows.Forms.Panel panelZip;
         public System.Windows.Forms.TextBox textBoxZip;
         private System.Windows.Forms.Label labelZip;
@@ -1572,7 +1572,6 @@
         private System.Windows.Forms.Label labelStreet;
         public System.Windows.Forms.TextBox txtBoxStreet;
         private System.Windows.Forms.Label labelAddress;
-        private System.Windows.Forms.Panel panelMeasurments;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label labelWeight;
         public System.Windows.Forms.TextBox textBoxWeight;
@@ -1599,8 +1598,6 @@
         private System.Windows.Forms.Panel panelrep;
         private System.Windows.Forms.Label labelRep;
         public System.Windows.Forms.ComboBox txtBoxRep;
-        private System.Windows.Forms.Panel panelRentalInfo;
-        private System.Windows.Forms.Label labelRentalInfo;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelProfile;
         private System.Windows.Forms.Panel panelProfileContactInfo;
         private System.Windows.Forms.Label labelProfileContactInfo;
@@ -1640,6 +1637,13 @@
         private System.Windows.Forms.Panel panelRentalType;
         public System.Windows.Forms.ComboBox comboBoxRentalType;
         private System.Windows.Forms.Label labelRentalType;
-        private System.Windows.Forms.Panel panelAcademy;
+        public System.Windows.Forms.Panel panelContactInfo;
+        public System.Windows.Forms.Panel panelAddress;
+        public System.Windows.Forms.Panel panelMeasurments;
+        public System.Windows.Forms.Panel panelRentalInfo;
+        public System.Windows.Forms.Panel panelAcademy;
+        public System.Windows.Forms.Label LableCustomerName;
+        public System.Windows.Forms.Label labelDriversLicense;
+        public System.Windows.Forms.Label labelRentalInfo;
     }
 }
