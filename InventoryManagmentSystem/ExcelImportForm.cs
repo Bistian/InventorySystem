@@ -296,6 +296,117 @@ namespace InventoryManagmentSystem
             }
         }
 
+        private void ImportBoots(List<object[]> rows)
+        {
+            for (int i = 0; i < rows.Count; ++i)
+            {
+                object[] row = (object[])rows[i];
+                string table = "tbBoots";
+
+                if (row[8] == null)
+                {
+                    row[8] = "Fire-Tec";
+                }
+                else
+                {
+                    string str = row[8].ToString();
+                    if (str == "firetec" ||
+                        str == "FIRETEC" ||
+                        str == "fire-tec" ||
+                        str == "Firetec")
+                    {
+                        row[8] = "Fire-Tec";
+                    }
+                }
+
+                string query = $"INSERT INTO {table} " +
+                    "(ItemType, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Size, [Material]) " +
+                    "VALUES (@ItemType, @Brand, @SerialNumber, @Location, @UsedNew, @ManufactureDate, @DueDate, @Size, @Material)";
+
+                try
+                {
+                    con.Open();
+                    cm = new SqlCommand(query, con);
+
+                    cm.Parameters.AddWithValue("@ItemType", row[0]);
+                    cm.Parameters.AddWithValue("@Brand", row[1]);
+                    cm.Parameters.AddWithValue("@SerialNumber", row[2]);
+                    cm.Parameters.AddWithValue("@Location", row[8]);
+                    cm.Parameters.AddWithValue("@UsedNew", row[5]);
+                    cm.Parameters.AddWithValue("@ManufactureDate", row[4]);
+                    cm.Parameters.AddWithValue("@DueDate", row[7] ?? DBNull.Value);
+                    cm.Parameters.AddWithValue("@Size", row[6]);
+                    cm.Parameters.AddWithValue("@Material", row[3]);
+
+                    cm.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    #if DEBUG
+                    Console.WriteLine($"Error Row {i}");
+                    Console.WriteLine(ex.ToString());
+                    #endif
+                }
+            }
+        }
+
+        private void ImportHelmets(List<object[]> rows)
+        {
+            for (int i = 0; i < rows.Count; ++i)
+            {
+                object[] row = (object[])rows[i];
+                string table = "tbHelmets";
+
+                if (row[7] == null)
+                {
+                    row[7] = "Fire-Tec";
+                }
+                else
+                {
+                    string str = row[7].ToString();
+                    if (str == "firetec" ||
+                        str == "FIRETEC" ||
+                        str == "fire-tec" ||
+                        str == "Firetec")
+                    {
+                        row[7] = "Fire-Tec";
+                    }
+                }
+
+                string query = $"INSERT INTO {table} " +
+                    "(ItemType, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Color) " +
+                    "VALUES (@ItemType, @Brand, @SerialNumber, @Location, @UsedNew, @ManufactureDate, @DueDate, @Color)";
+
+                try
+                {
+                    con.Open();
+                    cm = new SqlCommand(query, con);
+
+                    cm.Parameters.AddWithValue("@ItemType", row[0]);
+                    cm.Parameters.AddWithValue("@Brand", row[1]);
+                    cm.Parameters.AddWithValue("@SerialNumber", row[2]);
+                    cm.Parameters.AddWithValue("@Location", row[7]);
+                    cm.Parameters.AddWithValue("@UsedNew", row[5]);
+                    cm.Parameters.AddWithValue("@ManufactureDate", row[4]);
+                    cm.Parameters.AddWithValue("@DueDate", row[6] ?? DBNull.Value);
+                    cm.Parameters.AddWithValue("@Color", row[3]);
+
+                    cm.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    #if DEBUG
+                    Console.WriteLine($"Error Row {i}");
+                    Console.WriteLine(ex.ToString());
+                    #endif
+                }
+            }
+        }
+
         /// <summary>
         /// Using standar Excel files, update the database.
         /// </summary>
@@ -359,10 +470,14 @@ namespace InventoryManagmentSystem
 
             progressBar1.Visible = false;
 
-            if(tableName == "tbPants")
+            if (tableName == "tbPants")
                 ImportPantsOrJackets(rows, true);
-            else if(tableName == "tbJackets")
+            else if (tableName == "tbJackets")
                 ImportPantsOrJackets(rows, false);
+            else if (tableName == "tbBoots")
+                ImportBoots(rows);
+            else if (tableName == "tbHelmets")
+                ImportHelmets(rows);
 
             ClearExcelVar();
 
