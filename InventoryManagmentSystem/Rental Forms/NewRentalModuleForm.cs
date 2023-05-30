@@ -173,7 +173,7 @@ namespace InventoryManagmentSystem
                 while (dr.Read())
                 {
                     i++;
-                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), "NA", dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
+                    dataGridInv.Rows.Add(dr[1].ToString(), dr[2].ToString(), "NA", dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
                 }
             }
             else if (comboBoxItemType.SelectedIndex == 1 || comboBoxItemType.SelectedIndex == 2)
@@ -181,7 +181,7 @@ namespace InventoryManagmentSystem
                 while (dr.Read())
                 {
                     i++;
-                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), "N/A");
+                    dataGridInv.Rows.Add(dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), "N/A");
                 }
             }
             else if (comboBoxItemType.SelectedIndex == 3)
@@ -189,7 +189,7 @@ namespace InventoryManagmentSystem
                 while (dr.Read())
                 {
                     i++;
-                    dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5]);
+                    dataGridInv.Rows.Add(dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5]);
                 }
             }
             dr.Close();

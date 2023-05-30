@@ -144,6 +144,8 @@ namespace InventoryManagmentSystem
             this.dataGridUsers.Name = "dataGridUsers";
             this.dataGridUsers.RowHeadersVisible = false;
             this.dataGridUsers.RowHeadersWidth = 51;
+            this.dataGridUsers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridUsers.RowTemplate.Height = 40;
             this.dataGridUsers.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridUsers.Size = new System.Drawing.Size(1000, 626);
             this.dataGridUsers.TabIndex = 26;

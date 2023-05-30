@@ -230,7 +230,7 @@
             this.dataGridViewDueIn10.RowHeadersVisible = false;
             this.dataGridViewDueIn10.RowHeadersWidth = 51;
             this.dataGridViewDueIn10.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.dataGridViewDueIn10.RowTemplate.Height = 24;
+            this.dataGridViewDueIn10.RowTemplate.Height = 40;
             this.dataGridViewDueIn10.Size = new System.Drawing.Size(301, 599);
             this.dataGridViewDueIn10.TabIndex = 9;
             this.dataGridViewDueIn10.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDueIn10_CellClick);
@@ -300,7 +300,8 @@
             this.dataGridViewPast30.ReadOnly = true;
             this.dataGridViewPast30.RowHeadersVisible = false;
             this.dataGridViewPast30.RowHeadersWidth = 51;
-            this.dataGridViewPast30.RowTemplate.Height = 24;
+            this.dataGridViewPast30.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewPast30.RowTemplate.Height = 40;
             this.dataGridViewPast30.Size = new System.Drawing.Size(301, 599);
             this.dataGridViewPast30.TabIndex = 10;
             this.dataGridViewPast30.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPast30_CellClick);

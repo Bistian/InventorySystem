@@ -154,15 +154,13 @@
             this.comboBoxItemType = new System.Windows.Forms.ComboBox();
             this.labelItemType = new System.Windows.Forms.Label();
             this.dataGridInv = new System.Windows.Forms.DataGridView();
-            this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.labelFireTecInv = new System.Windows.Forms.Label();
             this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ManufactureDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UsedNew = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColorMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.labelFireTecInv = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainermain)).BeginInit();
             this.splitContainermain.Panel1.SuspendLayout();
             this.splitContainermain.Panel2.SuspendLayout();
@@ -1598,8 +1596,10 @@
             dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Transparent;
             this.dataGridViewClient.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewClient.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            this.dataGridViewClient.RowTemplate.Height = 40;
             this.dataGridViewClient.Size = new System.Drawing.Size(161, 695);
             this.dataGridViewClient.TabIndex = 112;
             // 
@@ -1708,8 +1708,6 @@
             this.dataGridInv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridInv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridInv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Num,
-            this.Type,
             this.Brand,
             this.Serial,
             this.Size,
@@ -1741,29 +1739,26 @@
             this.dataGridInv.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridInv.RowHeadersVisible = false;
             this.dataGridInv.RowHeadersWidth = 51;
-            this.dataGridInv.RowTemplate.Height = 24;
+            this.dataGridInv.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridInv.RowTemplate.Height = 40;
             this.dataGridInv.RowTemplate.ReadOnly = true;
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridInv.Size = new System.Drawing.Size(423, 695);
             this.dataGridInv.TabIndex = 112;
             // 
-            // Num
+            // labelFireTecInv
             // 
-            this.Num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Num.FillWeight = 30F;
-            this.Num.HeaderText = "#";
-            this.Num.MinimumWidth = 6;
-            this.Num.Name = "Num";
-            this.Num.ReadOnly = true;
-            // 
-            // Type
-            // 
-            this.Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Type.FillWeight = 50F;
-            this.Type.HeaderText = "Item";
-            this.Type.MinimumWidth = 6;
-            this.Type.Name = "Type";
-            this.Type.ReadOnly = true;
+            this.labelFireTecInv.AutoSize = true;
+            this.labelFireTecInv.BackColor = System.Drawing.Color.Transparent;
+            this.labelFireTecInv.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelFireTecInv.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFireTecInv.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelFireTecInv.Location = new System.Drawing.Point(0, 0);
+            this.labelFireTecInv.Margin = new System.Windows.Forms.Padding(400, 50, 3, 0);
+            this.labelFireTecInv.Name = "labelFireTecInv";
+            this.labelFireTecInv.Size = new System.Drawing.Size(176, 38);
+            this.labelFireTecInv.TabIndex = 111;
+            this.labelFireTecInv.Text = "FIRE-TEC";
             // 
             // Brand
             // 
@@ -1776,6 +1771,7 @@
             // Serial
             // 
             this.Serial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Serial.FillWeight = 115F;
             this.Serial.HeaderText = "Serial";
             this.Serial.MinimumWidth = 6;
             this.Serial.Name = "Serial";
@@ -1816,20 +1812,6 @@
             this.ColorMaterial.MinimumWidth = 6;
             this.ColorMaterial.Name = "ColorMaterial";
             this.ColorMaterial.ReadOnly = true;
-            // 
-            // labelFireTecInv
-            // 
-            this.labelFireTecInv.AutoSize = true;
-            this.labelFireTecInv.BackColor = System.Drawing.Color.Transparent;
-            this.labelFireTecInv.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelFireTecInv.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFireTecInv.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelFireTecInv.Location = new System.Drawing.Point(0, 0);
-            this.labelFireTecInv.Margin = new System.Windows.Forms.Padding(400, 50, 3, 0);
-            this.labelFireTecInv.Name = "labelFireTecInv";
-            this.labelFireTecInv.Size = new System.Drawing.Size(176, 38);
-            this.labelFireTecInv.TabIndex = 111;
-            this.labelFireTecInv.Text = "FIRE-TEC";
             // 
             // NewRentalModuleForm
             // 
@@ -2038,15 +2020,13 @@
         private System.Windows.Forms.Panel panel2;
         public System.Windows.Forms.ComboBox comboBoxItemType;
         private System.Windows.Forms.Label labelItemType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Num;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
+        private System.Windows.Forms.TextBox textBoxSearchBar;
+        private System.Windows.Forms.Label lableSearchBar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Brand;
         private System.Windows.Forms.DataGridViewTextBoxColumn Serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn ManufactureDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn UsedNew;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorMaterial;
-        private System.Windows.Forms.TextBox textBoxSearchBar;
-        private System.Windows.Forms.Label lableSearchBar;
     }
 }
