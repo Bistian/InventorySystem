@@ -94,7 +94,7 @@
             this.btnStandard.Name = "btnStandard";
             this.btnStandard.Size = new System.Drawing.Size(121, 23);
             this.btnStandard.TabIndex = 4;
-            this.btnStandard.Text = "Standard Import";
+            this.btnStandard.Text = "Import";
             this.btnStandard.UseVisualStyleBackColor = true;
             this.btnStandard.Click += new System.EventHandler(this.btnStandard_Click);
             // 

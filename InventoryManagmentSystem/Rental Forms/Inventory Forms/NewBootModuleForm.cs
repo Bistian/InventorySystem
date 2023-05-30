@@ -62,6 +62,7 @@ namespace InventoryManagmentSystem
             comboBoxUsedNew.SelectedIndex = -1;
             comboBoxMaterial.SelectedIndex = -1;
             comboBoxSize.SelectedIndex = -1;
+            dateTimePickerManufactureDate.Value = DateTime.Today;
         }
 
         private void CreateItem()
