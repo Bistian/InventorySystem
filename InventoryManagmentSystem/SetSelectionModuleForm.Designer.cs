@@ -307,6 +307,7 @@
             this.dataGridInv.Size = new System.Drawing.Size(892, 278);
             this.dataGridInv.TabIndex = 39;
             this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellClick);
+            this.dataGridInv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellContentClick);
             // 
             // Num
             // 

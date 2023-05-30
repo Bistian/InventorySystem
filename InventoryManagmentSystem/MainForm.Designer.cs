@@ -360,6 +360,7 @@
             this.panelUsers.Name = "panelUsers";
             this.panelUsers.Size = new System.Drawing.Size(100, 94);
             this.panelUsers.TabIndex = 18;
+            this.panelUsers.Visible = false;
             // 
             // UsersButton
             // 

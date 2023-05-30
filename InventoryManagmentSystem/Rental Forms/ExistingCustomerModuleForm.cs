@@ -91,8 +91,7 @@ namespace InventoryManagmentSystem
 
             while (dr.Read())
             {
-                i++;
-                dataGridUsers.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString());
+                dataGridUsers.Rows.Add(dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString());
             }
             dr.Close();
             con.Close();
@@ -113,8 +112,7 @@ namespace InventoryManagmentSystem
 
             while (dr.Read())
             {
-                i++;
-                dataGridUsers.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
+                dataGridUsers.Rows.Add(dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
             }
 
             dr.Close();
@@ -126,20 +124,20 @@ namespace InventoryManagmentSystem
             if(comboBox1.SelectedIndex == 0) 
             {
                 clientType = "Individual";
-                dataGridUsers.Columns[1].HeaderText = "Name";
-                dataGridUsers.Columns[4].HeaderText = "Academy";
+                dataGridUsers.Columns[0].HeaderText = "Name";
+                dataGridUsers.Columns[3].HeaderText = "Academy";
             }
             else if(comboBox1.SelectedIndex == 1)
             {
                 clientType = "Department";
-                dataGridUsers.Columns[1].HeaderText = "Point Of Contact";
-                dataGridUsers.Columns[4].HeaderText = "Department";
+                dataGridUsers.Columns[0].HeaderText = "Point Of Contact";
+                dataGridUsers.Columns[3].HeaderText = "Department";
             }
             else if (comboBox1.SelectedIndex == 2)
             {
                 clientType = "Academy";
-                dataGridUsers.Columns[1].HeaderText = "Point Of Contact";
-                dataGridUsers.Columns[4].HeaderText = "Academy";
+                dataGridUsers.Columns[0].HeaderText = "Point Of Contact";
+                dataGridUsers.Columns[3].HeaderText = "Academy";
             }
             LoadUsers();
         }

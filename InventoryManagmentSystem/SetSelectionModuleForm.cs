@@ -543,5 +543,10 @@ namespace InventoryManagmentSystem
                 LoadInventory();
             }
         }
+
+        private void dataGridInv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

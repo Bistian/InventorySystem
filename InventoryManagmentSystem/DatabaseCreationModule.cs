@@ -251,6 +251,7 @@ namespace InventoryManagmentSystem
                     "[Hips]                  VARCHAR(50) NOT NULL," +
                     "[Height]                VARCHAR(50) NOT NULL," +
                     "[Weight]                VARCHAR(50) NOT NULL," +
+                    "[Notes]                 VARCHAR(MAX) NULL," +
                     "[FireTecRepresentative] VARCHAR(50) NULL);";
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
