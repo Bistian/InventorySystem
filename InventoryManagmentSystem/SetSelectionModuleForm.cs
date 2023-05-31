@@ -548,5 +548,10 @@ namespace InventoryManagmentSystem
         {
 
         }
+
+        private void dataGridViewClient_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

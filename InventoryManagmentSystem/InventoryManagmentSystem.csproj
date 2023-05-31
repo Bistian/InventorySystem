@@ -80,6 +80,9 @@
     <Compile Include="Custom Item Classes\CustomButton.Designer.cs">
       <DependentUpon>CustomButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="Custom Item Classes\CustomDateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
