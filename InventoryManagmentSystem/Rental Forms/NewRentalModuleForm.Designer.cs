@@ -471,7 +471,7 @@
             this.panelAddress.Controls.Add(this.panelCity);
             this.panelAddress.Controls.Add(this.panelStreet);
             this.panelAddress.Controls.Add(this.labelAddress);
-            this.panelAddress.Location = new System.Drawing.Point(3, 374);
+            this.panelAddress.Location = new System.Drawing.Point(312, 68);
             this.panelAddress.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAddress.Name = "panelAddress";
             this.panelAddress.Size = new System.Drawing.Size(320, 194);
@@ -492,7 +492,7 @@
             // 
             this.textBoxZip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxZip.Location = new System.Drawing.Point(12, 25);
-            this.textBoxZip.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxZip.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxZip.Name = "textBoxZip";
             this.textBoxZip.Size = new System.Drawing.Size(95, 30);
             this.textBoxZip.TabIndex = 8;
@@ -558,7 +558,7 @@
             // 
             this.textBoxCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxCity.Location = new System.Drawing.Point(15, 27);
-            this.textBoxCity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxCity.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxCity.Name = "textBoxCity";
             this.textBoxCity.Size = new System.Drawing.Size(95, 30);
             this.textBoxCity.TabIndex = 6;
@@ -634,7 +634,7 @@
             this.panelMeasurments.Controls.Add(this.labelMeasurments);
             this.panelMeasurments.Controls.Add(this.panelChest);
             this.panelMeasurments.Controls.Add(this.panelSleeve);
-            this.panelMeasurments.Location = new System.Drawing.Point(3, 572);
+            this.panelMeasurments.Location = new System.Drawing.Point(3, 374);
             this.panelMeasurments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelMeasurments.Name = "panelMeasurments";
             this.panelMeasurments.Size = new System.Drawing.Size(320, 276);
@@ -929,7 +929,7 @@
             this.panelRentalInfo.Controls.Add(this.panelAcademy);
             this.panelRentalInfo.Controls.Add(this.labelRentalInfo);
             this.panelRentalInfo.Controls.Add(this.panelFinalize);
-            this.panelRentalInfo.Location = new System.Drawing.Point(3, 852);
+            this.panelRentalInfo.Location = new System.Drawing.Point(3, 654);
             this.panelRentalInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelRentalInfo.Name = "panelRentalInfo";
             this.panelRentalInfo.Size = new System.Drawing.Size(320, 234);
@@ -1065,7 +1065,7 @@
             this.ClearButton.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClearButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClearButton.Location = new System.Drawing.Point(21, 69);
-            this.ClearButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClearButton.Margin = new System.Windows.Forms.Padding(4);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(116, 53);
             this.ClearButton.TabIndex = 19;
@@ -1079,7 +1079,7 @@
             this.ButtonContinue.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonContinue.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ButtonContinue.Location = new System.Drawing.Point(179, 69);
-            this.ButtonContinue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ButtonContinue.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonContinue.Name = "ButtonContinue";
             this.ButtonContinue.Size = new System.Drawing.Size(116, 53);
             this.ButtonContinue.TabIndex = 20;
@@ -1096,7 +1096,7 @@
             this.flowLayoutPanelProfile.Controls.Add(this.panelNotes);
             this.flowLayoutPanelProfile.Controls.Add(this.buttonEditNotes);
             this.flowLayoutPanelProfile.Controls.Add(this.buttonSaveNotes);
-            this.flowLayoutPanelProfile.Location = new System.Drawing.Point(3, 1090);
+            this.flowLayoutPanelProfile.Location = new System.Drawing.Point(3, 892);
             this.flowLayoutPanelProfile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanelProfile.Name = "flowLayoutPanelProfile";
             this.flowLayoutPanelProfile.Size = new System.Drawing.Size(320, 661);
