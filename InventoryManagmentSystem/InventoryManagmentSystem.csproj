@@ -219,6 +219,12 @@
     <Compile Include="ReturnModule.Designer.cs">
       <DependentUpon>ReturnModule.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReturnOrReplacecs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnOrReplacecs.Designer.cs">
+      <DependentUpon>ReturnOrReplacecs.cs</DependentUpon>
+    </Compile>
     <Compile Include="SetSelectionModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReturnModule.resx">
       <DependentUpon>ReturnModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnOrReplacecs.resx">
+      <DependentUpon>ReturnOrReplacecs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SetSelectionModuleForm.resx">
       <DependentUpon>SetSelectionModuleForm.cs</DependentUpon>

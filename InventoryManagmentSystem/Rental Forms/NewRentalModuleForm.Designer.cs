@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewRentalModuleForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -37,6 +38,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainermain = new System.Windows.Forms.SplitContainer();
+            this.panelReplace = new System.Windows.Forms.Panel();
+            this.SwapButton = new System.Windows.Forms.Button();
+            this.labelTypeOfItem = new System.Windows.Forms.Label();
+            this.labelReplace = new System.Windows.Forms.Label();
+            this.labelOld = new System.Windows.Forms.Label();
+            this.labelReplacmentItem = new System.Windows.Forms.Label();
+            this.labelOldItem = new System.Windows.Forms.Label();
             this.panelRentals = new System.Windows.Forms.Panel();
             this.labelDueDate = new System.Windows.Forms.Label();
             this.splitContainerInventories = new System.Windows.Forms.SplitContainer();
@@ -170,6 +178,7 @@
             this.splitContainermain.Panel1.SuspendLayout();
             this.splitContainermain.Panel2.SuspendLayout();
             this.splitContainermain.SuspendLayout();
+            this.panelReplace.SuspendLayout();
             this.panelRentals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerInventories)).BeginInit();
             this.splitContainerInventories.Panel1.SuspendLayout();
@@ -225,11 +234,99 @@
             // 
             // splitContainermain.Panel2
             // 
+            this.splitContainermain.Panel2.Controls.Add(this.panelReplace);
             this.splitContainermain.Panel2.Controls.Add(this.panelRentals);
             this.splitContainermain.Panel2.Controls.Add(this.splitContainerInventories);
             this.splitContainermain.Size = new System.Drawing.Size(1800, 733);
             this.splitContainermain.SplitterDistance = 640;
             this.splitContainermain.TabIndex = 630;
+            // 
+            // panelReplace
+            // 
+            this.panelReplace.BackColor = System.Drawing.Color.Transparent;
+            this.panelReplace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelReplace.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelReplace.Controls.Add(this.SwapButton);
+            this.panelReplace.Controls.Add(this.labelTypeOfItem);
+            this.panelReplace.Controls.Add(this.labelReplace);
+            this.panelReplace.Controls.Add(this.labelOld);
+            this.panelReplace.Controls.Add(this.labelReplacmentItem);
+            this.panelReplace.Controls.Add(this.labelOldItem);
+            this.panelReplace.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelReplace.Location = new System.Drawing.Point(0, 547);
+            this.panelReplace.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.panelReplace.Name = "panelReplace";
+            this.panelReplace.Size = new System.Drawing.Size(1156, 105);
+            this.panelReplace.TabIndex = 119;
+            this.panelReplace.Visible = false;
+            // 
+            // SwapButton
+            // 
+            this.SwapButton.Enabled = false;
+            this.SwapButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SwapButton.Image = ((System.Drawing.Image)(resources.GetObject("SwapButton.Image")));
+            this.SwapButton.Location = new System.Drawing.Point(294, 15);
+            this.SwapButton.Name = "SwapButton";
+            this.SwapButton.Size = new System.Drawing.Size(109, 50);
+            this.SwapButton.TabIndex = 46;
+            this.SwapButton.Text = "Swap Items";
+            this.SwapButton.UseVisualStyleBackColor = true;
+            this.SwapButton.Click += new System.EventHandler(this.SwapButton_Click_1);
+            // 
+            // labelTypeOfItem
+            // 
+            this.labelTypeOfItem.AutoSize = true;
+            this.labelTypeOfItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTypeOfItem.ForeColor = System.Drawing.Color.White;
+            this.labelTypeOfItem.Location = new System.Drawing.Point(158, 1);
+            this.labelTypeOfItem.Name = "labelTypeOfItem";
+            this.labelTypeOfItem.Size = new System.Drawing.Size(99, 25);
+            this.labelTypeOfItem.TabIndex = 45;
+            this.labelTypeOfItem.Text = "item type";
+            // 
+            // labelReplace
+            // 
+            this.labelReplace.AutoSize = true;
+            this.labelReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelReplace.ForeColor = System.Drawing.Color.White;
+            this.labelReplace.Location = new System.Drawing.Point(440, 1);
+            this.labelReplace.Name = "labelReplace";
+            this.labelReplace.Size = new System.Drawing.Size(172, 25);
+            this.labelReplace.TabIndex = 44;
+            this.labelReplace.Text = "Replacment Item";
+            // 
+            // labelOld
+            // 
+            this.labelOld.AutoSize = true;
+            this.labelOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelOld.ForeColor = System.Drawing.Color.White;
+            this.labelOld.Location = new System.Drawing.Point(33, 1);
+            this.labelOld.Name = "labelOld";
+            this.labelOld.Size = new System.Drawing.Size(143, 25);
+            this.labelOld.TabIndex = 43;
+            this.labelOld.Text = "Previous Item";
+            // 
+            // labelReplacmentItem
+            // 
+            this.labelReplacmentItem.AutoSize = true;
+            this.labelReplacmentItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelReplacmentItem.ForeColor = System.Drawing.Color.White;
+            this.labelReplacmentItem.Location = new System.Drawing.Point(437, 20);
+            this.labelReplacmentItem.Name = "labelReplacmentItem";
+            this.labelReplacmentItem.Size = new System.Drawing.Size(275, 46);
+            this.labelReplacmentItem.TabIndex = 41;
+            this.labelReplacmentItem.Text = "SerialNumber";
+            // 
+            // labelOldItem
+            // 
+            this.labelOldItem.AutoSize = true;
+            this.labelOldItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelOldItem.ForeColor = System.Drawing.Color.White;
+            this.labelOldItem.Location = new System.Drawing.Point(30, 19);
+            this.labelOldItem.Name = "labelOldItem";
+            this.labelOldItem.Size = new System.Drawing.Size(268, 46);
+            this.labelOldItem.TabIndex = 40;
+            this.labelOldItem.Text = "Serialnumber";
             // 
             // panelRentals
             // 
@@ -239,10 +336,10 @@
             this.panelRentals.Controls.Add(this.DatepickerDue);
             this.panelRentals.Controls.Add(this.labelDueDate);
             this.panelRentals.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelRentals.Location = new System.Drawing.Point(0, 647);
+            this.panelRentals.Location = new System.Drawing.Point(0, 652);
             this.panelRentals.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.panelRentals.Name = "panelRentals";
-            this.panelRentals.Size = new System.Drawing.Size(1156, 86);
+            this.panelRentals.Size = new System.Drawing.Size(1156, 81);
             this.panelRentals.TabIndex = 118;
             this.panelRentals.Visible = false;
             // 
@@ -349,7 +446,7 @@
             this.dataGridViewClient.RowTemplate.Height = 40;
             this.dataGridViewClient.Size = new System.Drawing.Size(304, 695);
             this.dataGridViewClient.TabIndex = 112;
-            this.dataGridViewClient.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellContentClick);
+            this.dataGridViewClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellClick);
             // 
             // Item
             // 
@@ -504,7 +601,7 @@
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridInv.Size = new System.Drawing.Size(827, 695);
             this.dataGridInv.TabIndex = 112;
-            this.dataGridInv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellContentClick);
+            this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellClick_1);
             // 
             // Brand
             // 
@@ -1916,6 +2013,8 @@
             this.splitContainermain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainermain)).EndInit();
             this.splitContainermain.ResumeLayout(false);
+            this.panelReplace.ResumeLayout(false);
+            this.panelReplace.PerformLayout();
             this.panelRentals.ResumeLayout(false);
             this.panelRentals.PerformLayout();
             this.splitContainerInventories.Panel1.ResumeLayout(false);
@@ -2122,5 +2221,12 @@
         private System.Windows.Forms.TextBox textBoxNotes;
         private System.Windows.Forms.Label labelDueDate;
         private CustomDateTimePicker DatepickerDue;
+        private System.Windows.Forms.Panel panelReplace;
+        private System.Windows.Forms.Label labelReplacmentItem;
+        private System.Windows.Forms.Label labelOldItem;
+        private System.Windows.Forms.Label labelOld;
+        private System.Windows.Forms.Label labelReplace;
+        private System.Windows.Forms.Label labelTypeOfItem;
+        public System.Windows.Forms.Button SwapButton;
     }
 }

@@ -542,16 +542,6 @@ namespace InventoryManagmentSystem
                 LoadClient();
                 LoadInventory();
             }
-        }
-
-        private void dataGridInv_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridViewClient_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            }
         }
     }
-}

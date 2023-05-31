@@ -217,3 +217,4 @@ C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\PdfSha
 C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\de\PdfSharp.resources.dll
 C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\de\PdfSharp.Charting.resources.dll
 C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.CopyComplete
+C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ReturnOrReplacecs.resources
