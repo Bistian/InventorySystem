@@ -24,11 +24,6 @@ namespace InventoryManagmentSystem
         SqlCommand cm = new SqlCommand();
         //Creatinng Reader
         SqlDataReader dr;
-
-        //Used for query
-        string CurrTable = "";
-        string FinalColumn = "";
-        string Sizes = "";
         #endregion SQL_Variables
 
         public InventoryForm()
@@ -39,22 +34,23 @@ namespace InventoryManagmentSystem
 
         private string QueryItems(bool isSearch=false, string searchTerm="")
         {
-            CurrTable = "tb" + comboBoxItem.Text;
-
-            string firetec = "Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'";
-            string specificWhere = "";
+            string CurrTable = "tb" + comboBoxItem.Text;
+            string firetec = "Location='Fire-Tec'";
+            string sizes;
+            string finalColumn;
+            string specificWhere;
             if(comboBoxItem.SelectedIndex == 0) // Helmets
             {
-                FinalColumn = ", Color";
-                Sizes = "";
+                finalColumn = ", Color";
+                sizes = "";
                 specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
                     " UsedNew LIKE '%" + searchTerm + "%' OR" +
                     " SerialNumber LIKE '%" + searchTerm + "%') AND " + firetec;
             }
             else if (comboBoxItem.SelectedIndex == 3) // Boots
             {
-                FinalColumn = ", Material";
-                Sizes = " Size,";
+                finalColumn = ", Material";
+                sizes = " Size,";
                 specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
                     " UsedNew LIKE '%" + searchTerm + "%' OR" +
                     " SIZE LIKE '%" + searchTerm + "%' OR" +
@@ -62,8 +58,8 @@ namespace InventoryManagmentSystem
             }
             else // Pants && Jackets
             {
-                FinalColumn = "";
-                Sizes = " Size,";
+                finalColumn = "";
+                sizes = "Size, ";
                 specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
                     " UsedNew LIKE '%" + searchTerm + "%' OR" +
                     " SIZE LIKE '%" + searchTerm + "%' OR" +
@@ -72,8 +68,8 @@ namespace InventoryManagmentSystem
 
             string query = "SELECT ItemType, " +
                 "Brand, SerialNumber, " + 
-                Sizes + " ManufactureDate, " +
-                "UsedNew " + FinalColumn + 
+                sizes + "ManufactureDate, " +
+                "UsedNew " + finalColumn + 
                 ", Location" + " FROM " + CurrTable;
 
             if (!isSearch)
@@ -135,7 +131,6 @@ namespace InventoryManagmentSystem
             LoadInventory();
         }
 
-
         private void UsersButton_Click_1(object sender, EventArgs e)
         {
                 NewItemModuleForm ModForm = new NewItemModuleForm(true);
@@ -157,15 +152,12 @@ namespace InventoryManagmentSystem
                 //SQL
                 int i = 0;
                 dataGridInv.Rows.Clear();
-
-                string query = "";
-
-                query = QueryItems(true, searchTerm);
+                string query = QueryItems(true, searchTerm);
+                cm = new SqlCommand(query, con);
+                con.Open();
 
                 try
                 {
-                    cm = new SqlCommand(query, con);
-                    con.Open();
                     dr = cm.ExecuteReader();
 
                     while (dr.Read())
@@ -185,7 +177,6 @@ namespace InventoryManagmentSystem
                         }
                         else if (comboBoxItem.Text == "Boots")
                         {
-                            string s = dr[0].ToString();
                             dataGridInv.Rows.Add(i,
                                 dr[0].ToString(),
                                 dr[1].ToString(),
@@ -212,6 +203,7 @@ namespace InventoryManagmentSystem
 
                     dr.Close();
                     con.Close();
+                    dataGridInv.Refresh();
                 }
                 catch (Exception ex)
                 {
