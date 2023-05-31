@@ -221,13 +221,90 @@ namespace InventoryManagmentSystem
                 String colName = dataGridInv.Columns[e.ColumnIndex].Name;
                 if (colName == "Edit")
                 {
-                    UserModuleForm userModule = new UserModuleForm();
-                    userModule.UserNameTxt.Text = dataGridInv.Rows[e.RowIndex].Cells[1].Value.ToString();
-                    userModule.NameTxtBox.Text = dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString();
+                    if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Jacket")
+                    {
 
-                    userModule.SaveButton.Enabled = true;
-                    userModule.UserNameTxt.Enabled = false;
-                    userModule.ShowDialog();
+                        NewJacketModuleForm InvModule = new NewJacketModuleForm();
+                        InvModule.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                        InvModule.comboBoxSize.Text = dataGridInv.Rows[e.RowIndex].Cells["Size"].Value.ToString();
+                        InvModule.comboBoxBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
+                        InvModule.comboBoxUsedNew.Text = dataGridInv.Rows[e.RowIndex].Cells["UsedNew"].Value.ToString();
+                        InvModule.dateTimePickerManufactureDate.Text = dataGridInv.Rows[e.RowIndex].Cells["ManufactureDate"].Value.ToString();
+                        InvModule.SaveButton.Enabled = true;
+
+                        //delete old 
+                        string table = "tb" + comboBoxItem.Text;
+                        con.Open();
+                        cm = new SqlCommand("DELETE FROM " + table + " WHERE SerialNumber LIKE '" + dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString() + "'", con);
+                        cm.ExecuteNonQuery();
+                        con.Close();
+
+                        InvModule.ShowDialog();
+                    }
+
+                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Pants")
+                    {
+
+                        NewPantsModuleForm InvModule = new NewPantsModuleForm();
+                        InvModule.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                        InvModule.comboBoxSize.Text = dataGridInv.Rows[e.RowIndex].Cells["Size"].Value.ToString();
+                        InvModule.comboBoxBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
+                        InvModule.comboBoxUsedNew.Text = dataGridInv.Rows[e.RowIndex].Cells["UsedNew"].Value.ToString();
+                        InvModule.dateTimePickerManufactureDate.Text = dataGridInv.Rows[e.RowIndex].Cells["ManufactureDate"].Value.ToString();
+                        InvModule.SaveButton.Enabled = true;
+
+                        //delete old 
+                        string table = "tb" + comboBoxItem.Text;
+                        con.Open();
+                        cm = new SqlCommand("DELETE FROM " + table + " WHERE SerialNumber LIKE '" + dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString() + "'", con);
+                        cm.ExecuteNonQuery();
+                        con.Close();
+
+                        InvModule.ShowDialog();
+                    }
+
+                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Helmet")
+                    {
+
+                        NewHelmetModuleForm InvModule = new NewHelmetModuleForm();
+                        InvModule.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                        InvModule.comboBoxColor.Text = dataGridInv.Rows[e.RowIndex].Cells["ColorMaterial"].Value.ToString();
+                        InvModule.comboBoxBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
+                        InvModule.comboBoxUsedNew.Text = dataGridInv.Rows[e.RowIndex].Cells["UsedNew"].Value.ToString();
+                        InvModule.dateTimePickerManufactureDate.Text = dataGridInv.Rows[e.RowIndex].Cells["ManufactureDate"].Value.ToString();
+                        InvModule.SaveButton.Enabled = true;
+
+                        //delete old 
+                        string table = "tb" + comboBoxItem.Text;
+                        con.Open();
+                        cm = new SqlCommand("DELETE FROM " + table + " WHERE SerialNumber LIKE '" + dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString() + "'", con);
+                        cm.ExecuteNonQuery();
+                        con.Close();
+
+                        InvModule.ShowDialog();
+                    }
+
+                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Boots")
+                    {
+
+                        NewBootModuleForm InvModule = new NewBootModuleForm();
+                        InvModule.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                        InvModule.comboBoxMaterial.Text = dataGridInv.Rows[e.RowIndex].Cells["ColorMaterial"].Value.ToString();
+                        InvModule.comboBoxSize.Text = dataGridInv.Rows[e.RowIndex].Cells["Size"].Value.ToString();
+                        InvModule.comboBoxBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
+                        InvModule.comboBoxUsedNew.Text = dataGridInv.Rows[e.RowIndex].Cells["UsedNew"].Value.ToString();
+                        InvModule.dateTimePickerManufactureDate.Text = dataGridInv.Rows[e.RowIndex].Cells["ManufactureDate"].Value.ToString();
+                        InvModule.SaveButton.Enabled = true;
+
+                        //delete old 
+                        string table = "tb" + comboBoxItem.Text;
+                        con.Open();
+                        cm = new SqlCommand("DELETE FROM " + table + " WHERE SerialNumber LIKE '" + dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString() + "'", con);
+                        cm.ExecuteNonQuery();
+                        con.Close();
+
+                        InvModule.ShowDialog();
+                    }
                 }
                 else if (colName == "Delete")
                 {

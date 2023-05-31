@@ -66,9 +66,9 @@ namespace InventoryManagmentSystem
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            OpenNavBar("Home");
-            ColorTabSwitch("Home", true);
-            openChildForm(new Dashboard());
+            OpenNavBar("Rentals");
+            ColorTabSwitch("Rentals", true);
+            openChildForm(new HomeForm());
         }
 
         private void DepatmensButton_Click(object sender, EventArgs e)

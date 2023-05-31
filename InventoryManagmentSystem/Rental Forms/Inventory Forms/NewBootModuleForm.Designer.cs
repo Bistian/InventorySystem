@@ -44,7 +44,7 @@
             this.comboBoxUsedNew = new System.Windows.Forms.ComboBox();
             this.labelManufactureDate = new System.Windows.Forms.Label();
             this.dateTimePickerManufactureDate = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
@@ -182,14 +182,14 @@
             resources.ApplyResources(this.dateTimePickerManufactureDate, "dateTimePickerManufactureDate");
             this.dateTimePickerManufactureDate.Name = "dateTimePickerManufactureDate";
             // 
-            // button1
+            // SaveButton
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.SaveButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            resources.ApplyResources(this.SaveButton, "SaveButton");
+            this.SaveButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.UseVisualStyleBackColor = false;
+            this.SaveButton.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // ClearButton
             // 
@@ -206,7 +206,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.Controls.Add(this.ClearButton);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.labelManufactureDate);
             this.Controls.Add(this.dateTimePickerManufactureDate);
             this.Controls.Add(this.labelUsedNew);
@@ -235,19 +235,19 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label NewBootTxt;
         private System.Windows.Forms.Label labelMaterial;
-        private System.Windows.Forms.ComboBox comboBoxMaterial;
         private System.Windows.Forms.Label LableBrand;
-        private System.Windows.Forms.ComboBox comboBoxBrand;
         private System.Windows.Forms.Label labelSize;
-        private System.Windows.Forms.ComboBox comboBoxSize;
         public System.Windows.Forms.TextBox txtBoxSerialNumber;
         private System.Windows.Forms.Label LableSerialNumber;
         private CustomButton CloseButton;
         private System.Windows.Forms.Label labelUsedNew;
-        private System.Windows.Forms.ComboBox comboBoxUsedNew;
         private System.Windows.Forms.Label labelManufactureDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
-        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button SaveButton;
         public System.Windows.Forms.Button ClearButton;
+        public System.Windows.Forms.ComboBox comboBoxMaterial;
+        public System.Windows.Forms.ComboBox comboBoxBrand;
+        public System.Windows.Forms.ComboBox comboBoxSize;
+        public System.Windows.Forms.ComboBox comboBoxUsedNew;
+        public System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
     }
 }

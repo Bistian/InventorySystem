@@ -1170,13 +1170,13 @@
     <value>4, 0, 4, 0</value>
   </data>
   <data name="labelUsedNew.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 24</value>
+    <value>97, 24</value>
   </data>
   <data name="labelUsedNew.TabIndex" type="System.Int32, mscorlib">
     <value>83</value>
   </data>
   <data name="labelUsedNew.Text" xml:space="preserve">
-    <value>Used Or New</value>
+    <value>Condition</value>
   </data>
   <data name="&gt;&gt;labelUsedNew.Name" xml:space="preserve">
     <value>labelUsedNew</value>
@@ -1274,37 +1274,37 @@
   <data name="&gt;&gt;dateTimePickerManufactureDate.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="button1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="SaveButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Trebuchet MS, 9.75pt, style=Bold</value>
   </data>
-  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="SaveButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="SaveButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>398, 217</value>
   </data>
-  <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="SaveButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="SaveButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 53</value>
   </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+  <data name="SaveButton.TabIndex" type="System.Int32, mscorlib">
     <value>86</value>
   </data>
-  <data name="button1.Text" xml:space="preserve">
+  <data name="SaveButton.Text" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
+  <data name="&gt;&gt;SaveButton.Name" xml:space="preserve">
+    <value>SaveButton</value>
   </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+  <data name="&gt;&gt;SaveButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SaveButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SaveButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ClearButton.Font" type="System.Drawing.Font, System.Drawing">
