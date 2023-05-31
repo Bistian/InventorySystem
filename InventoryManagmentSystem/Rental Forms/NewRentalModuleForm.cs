@@ -577,7 +577,7 @@ namespace InventoryManagmentSystem
 
         private void textBoxSearchBar_TextChanged(object sender, EventArgs e)
         {
-            QueryItems();
+            LoadInventory();
         }
 
         private void buttonEditNotes_Click(object sender, EventArgs e)
