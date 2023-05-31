@@ -60,11 +60,12 @@
             // labelNotes
             // 
             this.labelNotes.AutoSize = true;
+            this.labelNotes.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelNotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNotes.Location = new System.Drawing.Point(170, 104);
             this.labelNotes.Margin = new System.Windows.Forms.Padding(170, 50, 3, 0);
             this.labelNotes.Name = "labelNotes";
-            this.labelNotes.Size = new System.Drawing.Size(751, 702);
+            this.labelNotes.Size = new System.Drawing.Size(771, 646);
             this.labelNotes.TabIndex = 1;
             this.labelNotes.Text = resources.GetString("labelNotes.Text");
             // 

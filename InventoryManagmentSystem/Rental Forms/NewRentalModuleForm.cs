@@ -38,7 +38,10 @@ namespace InventoryManagmentSystem
         public string currentUser = "";
         string license = "";
         string DayNight = "";
-        bool academy = true;
+        public int ReturnReplace = 0;
+        string ReplacmentSerial = "";
+        String dueDate = "";
+
 
         public NewRentalModuleForm()
         {
@@ -47,7 +50,7 @@ namespace InventoryManagmentSystem
             panelContactInfo.Visible = false;
             panelMeasurments.Visible = false;
             panelRentalInfo.Visible = false;
-
+            splitContainermain.SplitterDistance = 650;
         }
 
         private bool CheckIfExists(string tableName, string SerialNumber)
@@ -105,11 +108,9 @@ namespace InventoryManagmentSystem
             con.Open();
             dr = cm.ExecuteReader();
 
-            int i = 0;
             while (dr.Read())
             {
-                ++i;
-                dataGridViewClient.Rows.Add(i,
+                dataGridViewClient.Rows.Add(
                     dr[0].ToString(),
                     dr[1],
                     dr[2].ToString()
@@ -229,7 +230,7 @@ namespace InventoryManagmentSystem
                 {
 
                     cm = new SqlCommand("SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address," +
-                        "Chest,Sleeve,Waist,Inseam,Hips,Height,Weight " +
+                        "Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,Notes " +
                         "FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber", con);
                     cm.Parameters.AddWithValue("@DriversLicenseNumber", ClientDrivers);
                     con.Open();
@@ -249,9 +250,11 @@ namespace InventoryManagmentSystem
                         labelClientHips.Text = dr[10].ToString();
                         labelClientHeight.Text = dr[11].ToString();
                         labelClientWeight.Text = dr[12].ToString();
+                        textBoxNotes.Text = dr[13].ToString();
                     }
                     dr.Close();
                     con.Close();
+                    license = labelClientDrivers.Text;
                 }
                 catch (Exception ex)
                 {
@@ -264,7 +267,7 @@ namespace InventoryManagmentSystem
                 {
 
                     cm = new SqlCommand("SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address," +
-                           "Chest,Sleeve,Waist,Inseam,Hips,Height,Weight " +
+                           "Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,Notes " +
                            "FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber", con);
                     cm.Parameters.AddWithValue("@DriversLicenseNumber", ClientDrivers);
                     con.Open();
@@ -279,12 +282,14 @@ namespace InventoryManagmentSystem
                         labelProfileDrivers.Text = "Point of contact:";
                         labelClientDrivers.Text = dr[0].ToString();
                         labelClientAddress.Text = dr[5].ToString();
+                        textBoxNotes.Text = dr[13].ToString();
                     }
                     dr.Close();
                     con.Close();
                     flowLayoutPanelProfile.Visible = true;
                     panelProfileRentalInfo.Visible = false;
                     panelProfileMeasurments.Visible = false;
+                    license = labelProfileName.Text;
 
                 }
                 catch (Exception ex)
@@ -294,53 +299,62 @@ namespace InventoryManagmentSystem
             }
             flowLayoutPanelProfile.Visible = true;
             flowLayoutPanelProfile.AutoScroll = false;
-            splitContainermain.SplitterDistance = 285;
+            splitContainermain.SplitterDistance = 315;
             splitContainerInventories.Visible = true;
+            panelRentals.Visible = true;
+            LoadClient();
         }
 
         private bool SaveClient()
         {
             try
             {
-                    string address = txtBoxStreet.Text + " " + textBoxCity.Text + " " + textBoxState.Text + " " + textBoxZip.Text;
-                    bool exists = CheckIfExists("tbClients", txtBoxDriversLicense.Text);
-                    if (!exists)
+                string address = txtBoxStreet.Text + " " + textBoxCity.Text + " " + textBoxState.Text + " " + textBoxZip.Text;
+                bool exists = CheckIfExists("tbClients", txtBoxDriversLicense.Text);
+                if (!exists)
+                {
+                    cm = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,DayNight,DriversLicenseNumber,Address,Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,FireTecRepresentative)" +
+                    "VALUES(@Name,@Phone,@Email,@Academy,@DayNight,@DriversLicenseNumber,@Address,@Chest,@Sleeve,@Waist,@Inseam,@Hips,@Height,@Weight,@FireTecRepresentative)", con);
+                    cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
+                    cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
+                    cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
+                    cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
+                    cm.Parameters.AddWithValue("@DayNight", comboBoxRentalType.Text);
+                    cm.Parameters.AddWithValue("@Address", address);
+                    cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
+                    if (comboBoxRentalType.SelectedIndex == 0)
                     {
-                        cm = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,DayNight,DriversLicenseNumber,Address,Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,FireTecRepresentative)" +
-                        "VALUES(@Name,@Phone,@Email,@Academy,@DayNight,@DriversLicenseNumber,@Address,@Chest,@Sleeve,@Waist,@Inseam,@Hips,@Height,@Weight,@FireTecRepresentative)", con);
-                        cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
-                        cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
-                        cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
-                        cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
-                        cm.Parameters.AddWithValue("@DayNight", comboBoxRentalType.Text);
-                        cm.Parameters.AddWithValue("@Address", address);
-                        cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
-                        cm.Parameters.AddWithValue("@Academy", txtBoxDriversLicense.Text);
-                        cm.Parameters.AddWithValue("@Chest", textBoxChest.Text);
-                        cm.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
-                        cm.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
-                        cm.Parameters.AddWithValue("@Inseam", textBoxInseam.Text);
-                        cm.Parameters.AddWithValue("@Hips", textBoxHips.Text);
-                        cm.Parameters.AddWithValue("@Height", textBoxHeight.Text);
-                        cm.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
-                        MessageBox.Show("Info has been successfully saved");
-                        Clear();
-
-                        //hiding input panels
-                        panelAddress.Visible = false;
-                        panelContactInfo.Visible = false;
-                        panelMeasurments.Visible = false;
-                        panelRentalInfo.Visible = false;
-                        panelFinalize.Visible = false;
-
-                    return true;
+                        cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
                     }
                     else
                     {
-                        MessageBox.Show("License Number already in use");
+                        cm.Parameters.AddWithValue("@Academy", txtBoxDriversLicense.Text);
+                    }
+                    cm.Parameters.AddWithValue("@Chest", textBoxChest.Text);
+                    cm.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
+                    cm.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
+                    cm.Parameters.AddWithValue("@Inseam", textBoxInseam.Text);
+                    cm.Parameters.AddWithValue("@Hips", textBoxHips.Text);
+                    cm.Parameters.AddWithValue("@Height", textBoxHeight.Text);
+                    cm.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Info has been successfully saved");
+                    Clear();
+
+                    //hiding input panels
+                    panelAddress.Visible = false;
+                    panelContactInfo.Visible = false;
+                    panelMeasurments.Visible = false;
+                    panelRentalInfo.Visible = false;
+                    panelFinalize.Visible = false;
+
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("License Number already in use");
                     return false;
                 }
             }
@@ -425,7 +439,7 @@ namespace InventoryManagmentSystem
                 license = txtBoxDriversLicense.Text;
                 if (ExistingUser == false)
                 {
-                   
+
                     panelRentalType.Visible = false;
                     if (SaveClient())
                     {
@@ -564,6 +578,392 @@ namespace InventoryManagmentSystem
         private void textBoxSearchBar_TextChanged(object sender, EventArgs e)
         {
             QueryItems();
+        }
+
+        private void buttonEditNotes_Click(object sender, EventArgs e)
+        {
+            textBoxNotes.ReadOnly = false;
+            buttonSaveNotes.Enabled = true;
+            textBoxNotes.Focus();
+        }
+
+        private void buttonSaveNotes_Click(object sender, EventArgs e)
+        {
+            textBoxNotes.ReadOnly = true;
+            buttonSaveNotes.Enabled = false;
+
+
+            cm = new SqlCommand("UPDATE tbClients SET Notes = @Notes " +
+                   "WHERE DriversLicenseNumber = @DriversLicenseNumber", con);
+            cm.Parameters.AddWithValue("@Notes", textBoxNotes.Text);
+            cm.Parameters.AddWithValue("@DriversLicenseNumber", license);
+
+            con.Open();
+            cm.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("Note has been successfully saved");
+        }
+
+
+        private void SwapButton_Click_1(object sender, EventArgs e)
+        {
+            // Helmet
+            if (labelTypeOfItem.Text == "Helmet")
+            {
+                try
+                {
+                    comboBoxItemType.SelectedIndex = 0;
+                    //return item
+                    cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                    cm.Parameters.AddWithValue("@location", "FIRETEC");
+                    cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                    cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+
+                    //replace item
+                    cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                    cm.Parameters.AddWithValue("@location", license);
+                    cm.Parameters.AddWithValue("@DueDate", dueDate);
+                    cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+
+                    MessageBox.Show("Item Replaced");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                    con.Close();
+                    return;
+                }
+            }
+
+            // Jacket
+            else if (labelTypeOfItem.Text == "Jacket")
+            {
+                try
+                {
+                    comboBoxItemType.SelectedIndex = 1;
+
+                    //return item
+                    cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                    cm.Parameters.AddWithValue("@location", "FIRETEC");
+                    cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                    cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+
+                    //replace item
+                    cm = new SqlCommand("UPDATE tbJackets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                    cm.Parameters.AddWithValue("@location", license);
+                    cm.Parameters.AddWithValue("@DueDate", dueDate);
+                    cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+
+                    MessageBox.Show("Item Replaced");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                    con.Close();
+                    return;
+                }
+            }
+
+            // Pants
+            else if (labelTypeOfItem.Text == "Pants")
+            {
+                try
+                {
+                    comboBoxItemType.SelectedIndex = 2;
+
+                    //return item
+                    cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                    cm.Parameters.AddWithValue("@location", "FIRETEC");
+                    cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                    cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+
+                    //replace item
+                    cm = new SqlCommand("UPDATE tbPants SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                    cm.Parameters.AddWithValue("@location", license);
+                    cm.Parameters.AddWithValue("@DueDate", dueDate);
+                    cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Item Replaced");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                    con.Close();
+                    return;
+                }
+            }
+
+            else if (labelTypeOfItem.Text == "Boots")
+            {
+                comboBoxItemType.SelectedIndex = 3;
+
+                //return item
+                cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                cm.Parameters.AddWithValue("@location", "FIRETEC");
+                cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                con.Open();
+                cm.ExecuteNonQuery();
+                con.Close();
+
+                //replace item
+                cm = new SqlCommand("UPDATE tbBoots SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                cm.Parameters.AddWithValue("@location", license);
+                cm.Parameters.AddWithValue("@DueDate", dueDate);
+                cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                con.Open();
+                cm.ExecuteNonQuery();
+                con.Close();
+                MessageBox.Show("Item Replaced");
+            }
+            LoadClient();
+            LoadInventory();
+            panelReplace.Visible = false;
+            dataGridInv.Enabled = true;
+            dataGridViewClient.Enabled = true;
+            panelRentals.Visible = true;
+            ReturnReplace = 0;
+
+        }
+
+        private void dataGridViewClient_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ReturnOrReplacecs ModForm = new ReturnOrReplacecs(this);
+            ModForm.ShowDialog();
+
+            if (ReturnReplace == 1)
+            {
+                string SelectedSerial = "";
+                // Helmet
+                if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Helmet")
+                {
+                    try
+                    {
+                        comboBoxItemType.SelectedIndex = 0;
+                        SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
+                        cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", "FIRETEC");
+                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        cm.Parameters.AddWithValue("@serial", SelectedSerial);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Item Returned");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                        con.Close();
+                        return;
+                    }
+                }
+
+                // Jacket
+                else if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Jacket")
+                {
+                    try
+                    {
+                        comboBoxItemType.SelectedIndex = 1;
+                        SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
+                        cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", "FIRETEC");
+                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        cm.Parameters.AddWithValue("@serial", SelectedSerial);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Item Returned");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                        con.Close();
+                        return;
+                    }
+                }
+
+                // Pants
+                else if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Pants")
+                {
+                    try
+                    {
+                        comboBoxItemType.SelectedIndex = 2;
+                        SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
+                        cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", "FIRETEC");
+                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        cm.Parameters.AddWithValue("@serial", SelectedSerial);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Item Returned");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                        con.Close();
+                        return;
+                    }
+                }
+
+                else if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Boots")
+                {
+                    comboBoxItemType.SelectedIndex = 3;
+                    SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
+                    cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                    cm.Parameters.AddWithValue("@location", "FIRETEC");
+                    cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                    cm.Parameters.AddWithValue("@serial", SelectedSerial);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Item Returned");
+                }
+                LoadClient();
+                LoadInventory();
+            }
+
+            else if (ReturnReplace == 2)
+            {
+                panelRentals.Visible = false;
+                panelReplace.Visible = true;
+                dataGridViewClient.Enabled = false;
+
+                dueDate = dataGridViewClient.Rows[e.RowIndex].Cells["DueDate"].Value.ToString();
+                String SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
+                labelOldItem.Text = SelectedSerial;
+                labelTypeOfItem.Text = dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString();
+
+                SwapButton.Enabled = false;
+
+            }
+        }
+
+        private void dataGridInv_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (ReturnReplace == 1 || ReturnReplace == 0)
+            {
+
+
+                if (MessageBox.Show("Are you sure you want to rent this item to " + labelProfileName.Text, "Rent", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    string SelectedSerial = "";
+
+                    if (DateTime.Today != DatepickerDue.Value.Date)
+                    {
+                        // Helmet
+                        if (comboBoxItemType.SelectedIndex == 0)
+                        {
+                            try
+                            {
+                                SelectedSerial = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                                cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                                cm.Parameters.AddWithValue("@location", license);
+                                cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+                                cm.Parameters.AddWithValue("@serial", SelectedSerial);
+                                con.Open();
+                                cm.ExecuteNonQuery();
+                                con.Close();
+                                MessageBox.Show("Rental has been successfully completed");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                                con.Close();
+                                return;
+                            }
+                        }
+
+                        // Jacket
+                        else if (comboBoxItemType.SelectedIndex == 1)
+                        {
+                            try
+                            {
+                                SelectedSerial = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                                cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                                cm.Parameters.AddWithValue("@location", license);
+                                cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+                                cm.Parameters.AddWithValue("@serial", SelectedSerial);
+                                con.Open();
+                                cm.ExecuteNonQuery();
+                                con.Close();
+                                MessageBox.Show("Rental has been successfully completed");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                                con.Close();
+                                return;
+                            }
+                        }
+
+                        // Pants
+                        else if (comboBoxItemType.SelectedIndex == 2)
+                        {
+                            try
+                            {
+                                SelectedSerial = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                                cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                                cm.Parameters.AddWithValue("@location", license);
+                                cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+                                cm.Parameters.AddWithValue("@serial", SelectedSerial);
+                                con.Open();
+                                cm.ExecuteNonQuery();
+                                con.Close();
+                                MessageBox.Show("Rental has been successfully completed");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                                con.Close();
+                                return;
+                            }
+                        }
+
+                        else if (comboBoxItemType.SelectedIndex == 3)
+                        {
+                            SelectedSerial = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                            cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                            cm.Parameters.AddWithValue("@location", license);
+                            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+                            cm.Parameters.AddWithValue("@serial", SelectedSerial);
+                            con.Open();
+                            cm.ExecuteNonQuery();
+                            con.Close();
+                            MessageBox.Show("Rental has been successfully completed");
+                        }
+                        LoadClient();
+                        LoadInventory();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select a due date");
+                    }
+                }
+            }
+            else if (ReturnReplace == 2)
+            {
+                ReplacmentSerial = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                labelReplacmentItem.Text = ReplacmentSerial;
+                SwapButton.Enabled = true;
+            }
         }
     }
 }

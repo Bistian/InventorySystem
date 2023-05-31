@@ -542,6 +542,6 @@ namespace InventoryManagmentSystem
                 LoadClient();
                 LoadInventory();
             }
+            }
         }
     }
-}

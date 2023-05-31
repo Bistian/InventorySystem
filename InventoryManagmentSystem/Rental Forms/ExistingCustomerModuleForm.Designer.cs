@@ -37,7 +37,6 @@ namespace InventoryManagmentSystem
             this.label1 = new System.Windows.Forms.Label();
             this.searchBar = new System.Windows.Forms.TextBox();
             this.dataGridUsers = new System.Windows.Forms.DataGridView();
-            this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Name1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -129,7 +128,6 @@ namespace InventoryManagmentSystem
             this.dataGridUsers.ColumnHeadersHeight = 30;
             this.dataGridUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Num,
             this.Name1,
             this.Phone,
             this.Email,
@@ -150,14 +148,6 @@ namespace InventoryManagmentSystem
             this.dataGridUsers.Size = new System.Drawing.Size(1000, 626);
             this.dataGridUsers.TabIndex = 26;
             this.dataGridUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridUsers_CellClick);
-            // 
-            // Num
-            // 
-            this.Num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Num.FillWeight = 30F;
-            this.Num.HeaderText = "#";
-            this.Num.MinimumWidth = 6;
-            this.Num.Name = "Num";
             // 
             // Name1
             // 
@@ -232,7 +222,6 @@ namespace InventoryManagmentSystem
         private System.Windows.Forms.DataGridView dataGridUsers;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Num;
         private System.Windows.Forms.DataGridViewTextBoxColumn Name1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;

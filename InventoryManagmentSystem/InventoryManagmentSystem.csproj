@@ -80,10 +80,8 @@
     <Compile Include="Custom Item Classes\CustomButton.Designer.cs">
       <DependentUpon>CustomButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="dadadaDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dadadaDataSet.xsd</DependentUpon>
+    <Compile Include="Custom Item Classes\CustomDateTimePicker.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
@@ -221,6 +219,12 @@
     <Compile Include="ReturnModule.Designer.cs">
       <DependentUpon>ReturnModule.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReturnOrReplacecs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnOrReplacecs.Designer.cs">
+      <DependentUpon>ReturnOrReplacecs.cs</DependentUpon>
+    </Compile>
     <Compile Include="SetSelectionModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -322,6 +326,9 @@
     <EmbeddedResource Include="ReturnModule.resx">
       <DependentUpon>ReturnModule.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReturnOrReplacecs.resx">
+      <DependentUpon>ReturnOrReplacecs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SetSelectionModuleForm.resx">
       <DependentUpon>SetSelectionModuleForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -337,17 +344,6 @@
     <EmbeddedResource Include="WorkOrderModuleForm.resx">
       <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="dadadaDataSet.xsc">
-      <DependentUpon>dadadaDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="dadadaDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dadadaDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="dadadaDataSet.xss">
-      <DependentUpon>dadadaDataSet.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
