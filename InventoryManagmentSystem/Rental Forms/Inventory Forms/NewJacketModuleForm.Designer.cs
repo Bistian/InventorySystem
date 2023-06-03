@@ -40,7 +40,7 @@
             this.labelUsedNew = new System.Windows.Forms.Label();
             this.comboBoxUsedNew = new System.Windows.Forms.ComboBox();
             this.ClearButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.labelManufactureDate = new System.Windows.Forms.Label();
             this.dateTimePickerManufactureDate = new System.Windows.Forms.DateTimePicker();
             this.CloseButton = new InventoryManagmentSystem.CustomButton();
@@ -167,9 +167,9 @@
             this.labelUsedNew.Location = new System.Drawing.Point(145, 144);
             this.labelUsedNew.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelUsedNew.Name = "labelUsedNew";
-            this.labelUsedNew.Size = new System.Drawing.Size(126, 24);
+            this.labelUsedNew.Size = new System.Drawing.Size(97, 24);
             this.labelUsedNew.TabIndex = 83;
-            this.labelUsedNew.Text = "Used Or New";
+            this.labelUsedNew.Text = "Condition";
             // 
             // comboBoxUsedNew
             // 
@@ -190,7 +190,7 @@
             this.ClearButton.BackColor = System.Drawing.Color.Maroon;
             this.ClearButton.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClearButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClearButton.Location = new System.Drawing.Point(227, 217);
+            this.ClearButton.Location = new System.Drawing.Point(247, 217);
             this.ClearButton.Margin = new System.Windows.Forms.Padding(4);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(116, 53);
@@ -199,19 +199,19 @@
             this.ClearButton.UseVisualStyleBackColor = false;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click_1);
             // 
-            // button1
+            // SaveButton
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.button1.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(361, 217);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(116, 53);
-            this.button1.TabIndex = 86;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.SaveButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.SaveButton.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SaveButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.SaveButton.Location = new System.Drawing.Point(371, 217);
+            this.SaveButton.Margin = new System.Windows.Forms.Padding(4);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(116, 53);
+            this.SaveButton.TabIndex = 86;
+            this.SaveButton.Text = "Save";
+            this.SaveButton.UseVisualStyleBackColor = false;
+            this.SaveButton.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // labelManufactureDate
             // 
@@ -262,7 +262,7 @@
             this.ClientSize = new System.Drawing.Size(755, 283);
             this.Controls.Add(this.comboBoxSize);
             this.Controls.Add(this.ClearButton);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.labelManufactureDate);
             this.Controls.Add(this.dateTimePickerManufactureDate);
             this.Controls.Add(this.labelUsedNew);
@@ -293,17 +293,17 @@
         private CustomButton CloseButton;
         private System.Windows.Forms.Label NewJacketTxt;
         private System.Windows.Forms.Label LableBrand;
-        private System.Windows.Forms.ComboBox comboBoxBrand;
         private System.Windows.Forms.Label labelSize;
         public System.Windows.Forms.TextBox txtBoxSerialNumber;
         private System.Windows.Forms.Label LableSerialNumber;
         private System.Windows.Forms.Label labelUsedNew;
-        private System.Windows.Forms.ComboBox comboBoxUsedNew;
         public System.Windows.Forms.Button ClearButton;
-        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Label labelManufactureDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
         private CustomButton customButton1;
         public System.Windows.Forms.TextBox comboBoxSize;
+        public System.Windows.Forms.ComboBox comboBoxBrand;
+        public System.Windows.Forms.ComboBox comboBoxUsedNew;
+        public System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
     }
 }

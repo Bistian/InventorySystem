@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.flowLayoutPatchNotes = new System.Windows.Forms.FlowLayoutPanel();
             this.labelVersion = new System.Windows.Forms.Label();
-            this.labelNotes = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.flowLayoutPatchNotes.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -39,42 +39,46 @@
             // 
             this.flowLayoutPatchNotes.AutoScroll = true;
             this.flowLayoutPatchNotes.Controls.Add(this.labelVersion);
-            this.flowLayoutPatchNotes.Controls.Add(this.labelNotes);
+            this.flowLayoutPatchNotes.Controls.Add(this.textBox1);
             this.flowLayoutPatchNotes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPatchNotes.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPatchNotes.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPatchNotes.Name = "flowLayoutPatchNotes";
-            this.flowLayoutPatchNotes.Size = new System.Drawing.Size(951, 601);
+            this.flowLayoutPatchNotes.Size = new System.Drawing.Size(1196, 668);
             this.flowLayoutPatchNotes.TabIndex = 0;
             // 
             // labelVersion
             // 
             this.labelVersion.AutoSize = true;
+            this.labelVersion.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 28.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelVersion.Location = new System.Drawing.Point(3, 0);
             this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(536, 54);
+            this.labelVersion.Size = new System.Drawing.Size(1071, 54);
             this.labelVersion.TabIndex = 0;
             this.labelVersion.Text = "Version 1.5 patch notes";
             // 
-            // labelNotes
+            // textBox1
             // 
-            this.labelNotes.AutoSize = true;
-            this.labelNotes.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelNotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNotes.Location = new System.Drawing.Point(170, 104);
-            this.labelNotes.Margin = new System.Windows.Forms.Padding(170, 50, 3, 0);
-            this.labelNotes.Name = "labelNotes";
-            this.labelNotes.Size = new System.Drawing.Size(771, 646);
-            this.labelNotes.TabIndex = 1;
-            this.labelNotes.Text = resources.GetString("labelNotes.Text");
+            this.textBox1.BackColor = System.Drawing.Color.Maroon;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(50, 74);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(50, 20, 3, 3);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(1024, 556);
+            this.textBox1.TabIndex = 2;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(951, 601);
+            this.ClientSize = new System.Drawing.Size(1196, 668);
             this.Controls.Add(this.flowLayoutPatchNotes);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Dashboard";
@@ -89,6 +93,6 @@
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPatchNotes;
         private System.Windows.Forms.Label labelVersion;
-        private System.Windows.Forms.Label labelNotes;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

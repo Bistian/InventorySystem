@@ -299,7 +299,7 @@ namespace InventoryManagmentSystem
             }
             flowLayoutPanelProfile.Visible = true;
             flowLayoutPanelProfile.AutoScroll = false;
-            splitContainermain.SplitterDistance = 315;
+            splitContainermain.SplitterDistance = 500;
             splitContainerInventories.Visible = true;
             panelRentals.Visible = true;
             LoadClient();
