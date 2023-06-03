@@ -312,6 +312,21 @@ namespace InventoryManagmentSystem
                 command.ExecuteNonQuery();
                 connection.Close();
             }
+
+            // Providers
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
+            {
+                connection.Open();
+
+                string sql =
+                    "CREATE TABLE[dbo].[tbProviders] (" +
+                    "[itemType] VARCHAR(50) NOT NULL," +
+                    "[provider] VARCHAR(50) NOT NULL);";
+
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
         }
 
         /// <summary>

@@ -31,6 +31,7 @@
             this.btnImport = new System.Windows.Forms.Button();
             this.btnDatabase = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnProviders = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnImport
@@ -60,12 +61,23 @@
             this.panel1.Size = new System.Drawing.Size(667, 426);
             this.panel1.TabIndex = 2;
             // 
+            // btnProviders
+            // 
+            this.btnProviders.Location = new System.Drawing.Point(13, 72);
+            this.btnProviders.Name = "btnProviders";
+            this.btnProviders.Size = new System.Drawing.Size(75, 23);
+            this.btnProviders.TabIndex = 3;
+            this.btnProviders.Text = "Providers";
+            this.btnProviders.UseVisualStyleBackColor = true;
+            this.btnProviders.Click += new System.EventHandler(this.btnProviders_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnProviders);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnDatabase);
             this.Controls.Add(this.btnImport);
@@ -80,5 +92,6 @@
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.Button btnDatabase;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnProviders;
     }
 }

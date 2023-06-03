@@ -45,5 +45,10 @@ namespace InventoryManagmentSystem
         {
             openChildForm(new DatabaseCreationModule(false));
         }
+
+        private void btnProviders_Click(object sender, EventArgs e)
+        {
+            openChildForm(new ProviderForm());
+        }
     }
 }
