@@ -55,6 +55,10 @@ namespace InventoryManagmentSystem
         {
             if(e.ColumnIndex != 3) { return; }
 
+            string message = "Do you want to delete this provider?";
+            DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No) { return; }
+
             string query = "DELETE FROM tbProviders WHERE itemType=@itemType AND provider=@provider";
             string item = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             string provider = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
