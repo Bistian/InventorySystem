@@ -95,11 +95,6 @@
     <Compile Include="DatabaseCreationModule.Designer.cs">
       <DependentUpon>DatabaseCreationModule.cs</DependentUpon>
     </Compile>
-    <Compile Include="dbTest1DataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbTest1DataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DepartmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +124,12 @@
     </Compile>
     <Compile Include="ExcelUserPromptForm.Designer.cs">
       <DependentUpon>ExcelUserPromptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PricesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PricesForm.Designer.cs">
+      <DependentUpon>PricesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ProviderForm.cs">
       <SubType>Form</SubType>
@@ -284,6 +285,9 @@
     <EmbeddedResource Include="DialogBoxClient.resx">
       <DependentUpon>DialogBoxClient.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PricesForm.resx">
+      <DependentUpon>PricesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProviderForm.resx">
       <DependentUpon>ProviderForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -358,17 +362,6 @@
     <EmbeddedResource Include="WorkOrderModuleForm.resx">
       <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="dbTest1DataSet.xsc">
-      <DependentUpon>dbTest1DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="dbTest1DataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dbTest1DataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="dbTest1DataSet.xss">
-      <DependentUpon>dbTest1DataSet.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

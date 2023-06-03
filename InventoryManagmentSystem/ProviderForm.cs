@@ -31,7 +31,12 @@ namespace InventoryManagmentSystem
         {
             if(cbItemType.SelectedIndex < 0) { return; }
             if(tbProvider.Text.Length == 0 ) { return; }
-            if(ItemAddedExists()) { return; }
+            if(ItemAddedExists()) 
+            {
+                string message = "Entry already exists.";
+                DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                return; 
+            }
 
             string query = "INSERT INTO tbProviders (itemType, provider) VALUES (@itemType, @provider)";
 
@@ -49,6 +54,8 @@ namespace InventoryManagmentSystem
             }
             connection.Close();
             LoadTable();
+            cbItemType.SelectedIndex = -1;
+            tbProvider.Text = "";
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

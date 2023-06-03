@@ -327,6 +327,24 @@ namespace InventoryManagmentSystem
                 command.ExecuteNonQuery();
                 connection.Close();
             }
+
+            // Prices
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
+            {
+                connection.Open();
+
+                string sql =
+                    "CREATE TABLE[dbo].[tbPrices] (" +
+                    "[name] VARCHAR(50) NOT NULL," +
+                    "[boots] FLOAT NOT NULL," +
+                    "[helmets] FLOAT NOT NULL," +
+                    "[jackets] FLOAT NOT NULL," +
+                    "[pants] FLOAT NOT NULL);";
+
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
         }
 
         /// <summary>

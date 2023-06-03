@@ -44,9 +44,10 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(43, 118);
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btnAdd.Location = new System.Drawing.Point(15, 114);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.Size = new System.Drawing.Size(121, 23);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -54,43 +55,46 @@
             // 
             // tbProvider
             // 
-            this.tbProvider.Location = new System.Drawing.Point(43, 92);
+            this.tbProvider.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.tbProvider.Location = new System.Drawing.Point(15, 84);
             this.tbProvider.Name = "tbProvider";
-            this.tbProvider.Size = new System.Drawing.Size(121, 20);
+            this.tbProvider.Size = new System.Drawing.Size(121, 24);
             this.tbProvider.TabIndex = 2;
             // 
             // labelItemType
             // 
             this.labelItemType.AutoSize = true;
+            this.labelItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.labelItemType.ForeColor = System.Drawing.SystemColors.Window;
-            this.labelItemType.Location = new System.Drawing.Point(43, 33);
+            this.labelItemType.Location = new System.Drawing.Point(12, 9);
             this.labelItemType.Name = "labelItemType";
-            this.labelItemType.Size = new System.Drawing.Size(54, 13);
+            this.labelItemType.Size = new System.Drawing.Size(72, 18);
             this.labelItemType.TabIndex = 3;
             this.labelItemType.Text = "Item Type";
             // 
             // labelProvider
             // 
             this.labelProvider.AutoSize = true;
+            this.labelProvider.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.labelProvider.ForeColor = System.Drawing.SystemColors.Window;
-            this.labelProvider.Location = new System.Drawing.Point(43, 76);
+            this.labelProvider.Location = new System.Drawing.Point(12, 63);
             this.labelProvider.Name = "labelProvider";
-            this.labelProvider.Size = new System.Drawing.Size(46, 13);
+            this.labelProvider.Size = new System.Drawing.Size(47, 18);
             this.labelProvider.TabIndex = 4;
-            this.labelProvider.Text = "Provider";
+            this.labelProvider.Text = "Brand";
             // 
             // cbItemType
             // 
             this.cbItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.cbItemType.FormattingEnabled = true;
             this.cbItemType.Items.AddRange(new object[] {
             "Boots",
             "Helmets",
-            "Jackets",
-            "Pants"});
-            this.cbItemType.Location = new System.Drawing.Point(43, 50);
+            "Jackets/Pants"});
+            this.cbItemType.Location = new System.Drawing.Point(15, 34);
             this.cbItemType.Name = "cbItemType";
-            this.cbItemType.Size = new System.Drawing.Size(121, 21);
+            this.cbItemType.Size = new System.Drawing.Size(121, 26);
             this.cbItemType.TabIndex = 5;
             // 
             // dataGridView1
@@ -100,7 +104,7 @@
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MediumBlue;
@@ -114,11 +118,11 @@
             this.Remove});
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridView1.Location = new System.Drawing.Point(212, 50);
+            this.dataGridView1.Location = new System.Drawing.Point(153, 9);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(332, 195);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
