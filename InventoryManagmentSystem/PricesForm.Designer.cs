@@ -28,15 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PricesForm));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Boots = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Helmets = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Jackets = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pants = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remove = new System.Windows.Forms.DataGridViewImageColumn();
             this.labelName = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.labelBoots = new System.Windows.Forms.Label();
@@ -48,6 +42,14 @@
             this.labelPants = new System.Windows.Forms.Label();
             this.tbPants = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Boots = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Helmets = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Jackets = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pants = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remove = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Update = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,14 +58,14 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MediumBlue;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.MediumBlue;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Number,
@@ -72,7 +74,8 @@
             this.Helmets,
             this.Jackets,
             this.Pants,
-            this.Remove});
+            this.Remove,
+            this.Update});
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridView1.Location = new System.Drawing.Point(148, 9);
@@ -82,55 +85,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(463, 266);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // Number
-            // 
-            this.Number.HeaderText = "#";
-            this.Number.Name = "Number";
-            this.Number.ReadOnly = true;
-            this.Number.Width = 25;
-            // 
-            // NameColumn
-            // 
-            this.NameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NameColumn.HeaderText = "Name";
-            this.NameColumn.Name = "NameColumn";
-            this.NameColumn.ReadOnly = true;
-            // 
-            // Boots
-            // 
-            this.Boots.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Boots.HeaderText = "Boots";
-            this.Boots.Name = "Boots";
-            this.Boots.ReadOnly = true;
-            // 
-            // Helmets
-            // 
-            this.Helmets.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Helmets.HeaderText = "Helmets";
-            this.Helmets.Name = "Helmets";
-            this.Helmets.ReadOnly = true;
-            // 
-            // Jackets
-            // 
-            this.Jackets.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Jackets.HeaderText = "Jackets";
-            this.Jackets.Name = "Jackets";
-            this.Jackets.ReadOnly = true;
-            // 
-            // Pants
-            // 
-            this.Pants.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Pants.HeaderText = "Pants";
-            this.Pants.Name = "Pants";
-            this.Pants.ReadOnly = true;
-            // 
-            // Remove
-            // 
-            this.Remove.HeaderText = "";
-            this.Remove.Name = "Remove";
-            this.Remove.ReadOnly = true;
-            this.Remove.Width = 25;
             // 
             // labelName
             // 
@@ -242,9 +196,66 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(121, 23);
             this.btnAdd.TabIndex = 20;
-            this.btnAdd.Text = "Add";
+            this.btnAdd.Text = "Add / Update";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // Number
+            // 
+            this.Number.HeaderText = "#";
+            this.Number.Name = "Number";
+            this.Number.ReadOnly = true;
+            this.Number.Width = 25;
+            // 
+            // NameColumn
+            // 
+            this.NameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameColumn.HeaderText = "Name";
+            this.NameColumn.Name = "NameColumn";
+            this.NameColumn.ReadOnly = true;
+            // 
+            // Boots
+            // 
+            this.Boots.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Boots.HeaderText = "Boots";
+            this.Boots.Name = "Boots";
+            this.Boots.ReadOnly = true;
+            // 
+            // Helmets
+            // 
+            this.Helmets.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Helmets.HeaderText = "Helmets";
+            this.Helmets.Name = "Helmets";
+            this.Helmets.ReadOnly = true;
+            // 
+            // Jackets
+            // 
+            this.Jackets.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Jackets.HeaderText = "Jackets";
+            this.Jackets.Name = "Jackets";
+            this.Jackets.ReadOnly = true;
+            // 
+            // Pants
+            // 
+            this.Pants.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Pants.HeaderText = "Pants";
+            this.Pants.Name = "Pants";
+            this.Pants.ReadOnly = true;
+            // 
+            // Remove
+            // 
+            this.Remove.HeaderText = "";
+            this.Remove.Name = "Remove";
+            this.Remove.ReadOnly = true;
+            this.Remove.Width = 25;
+            // 
+            // Update
+            // 
+            this.Update.HeaderText = "";
+            this.Update.Image = ((System.Drawing.Image)(resources.GetObject("Update.Image")));
+            this.Update.Name = "Update";
+            this.Update.ReadOnly = true;
+            this.Update.Width = 25;
             // 
             // PricesForm
             // 
@@ -286,6 +297,7 @@
         private System.Windows.Forms.TextBox tbJacket;
         private System.Windows.Forms.Label labelPants;
         private System.Windows.Forms.TextBox tbPants;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Boots;
@@ -293,6 +305,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Jackets;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pants;
         private System.Windows.Forms.DataGridViewImageColumn Remove;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.DataGridViewImageColumn Update;
     }
 }

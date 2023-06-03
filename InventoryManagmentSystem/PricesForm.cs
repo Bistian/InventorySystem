@@ -114,20 +114,73 @@ namespace InventoryManagmentSystem
             return found;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void UpdateItem()
         {
-            if(tbName.Text.Length < 1) { return; }
-            if(NameAddedExists()) 
-            {
-                string message = "Name already exists, please choose a different one.";
-                DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                return; 
-            }
-            if(tbBoots.Text.Length < 1) { tbBoots.Text = "0"; }
-            if (tbHelmet.Text.Length < 1) { tbHelmet.Text = "0"; }
-            if (tbJacket.Text.Length < 1) { tbJacket.Text = "0"; }
-            if (tbPants.Text.Length < 1) { tbPants.Text = "0"; }
+            string message = "Name already exists, do you want to update the entry?.";
+            DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No) { return; }
 
+            string query = "UPDATE tbPrices " +
+                           "SET name=@name, boots=@boots, helmets=@helmets, jackets=@jackets, pants=@pants " +
+                           "WHERE name=@name";
+
+            try
+            {
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@name", tbName.Text);
+                command.Parameters.AddWithValue("@boots", tbBoots.Text);
+                command.Parameters.AddWithValue("@helmets", tbHelmet.Text);
+                command.Parameters.AddWithValue("@jackets", tbJacket.Text);
+                command.Parameters.AddWithValue("@pants", tbPants.Text);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            connection.Close();
+            LoadTable();
+        }
+
+        private void DeleteItem(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != 6) { return; }
+
+            string message = "Do you want to delete this price?";
+            DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No) { return; }
+
+            string query = "DELETE FROM tbPrices WHERE name=@name";
+            string name = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            try
+            {
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@name", name);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            connection.Close();
+            LoadTable();
+        }
+
+        private void FillFieldsForUpdate(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != 7) { return; }
+
+            tbName.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            tbBoots.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+            tbHelmet.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+            tbJacket.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+            tbPants.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+        }
+
+        private void AddItem(object sender, EventArgs e)
+        {
             string query = "INSERT INTO tbPrices (name, boots, helmets, jackets, pants) " +
                            "VALUES (@name, @boots, @helmets, @jackets, @pants)";
 
@@ -148,7 +201,21 @@ namespace InventoryManagmentSystem
             }
             connection.Close();
             LoadTable();
-            ResetFields();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (tbName.Text.Length < 1) { return; }
+            if (tbBoots.Text.Length < 1) { tbBoots.Text = "0"; }
+            if (tbHelmet.Text.Length < 1) { tbHelmet.Text = "0"; }
+            if (tbJacket.Text.Length < 1) { tbJacket.Text = "0"; }
+            if (tbPants.Text.Length < 1) { tbPants.Text = "0"; }
+            if (NameAddedExists())
+            {
+                UpdateItem();
+                return;
+            }
+            AddItem(sender, e);
         }
 
         private void tbBoots_KeyPress(object sender, KeyPressEventArgs e)
@@ -173,27 +240,8 @@ namespace InventoryManagmentSystem
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex != 6) { return; }
-
-            string message = "Do you want to delete this price?";
-            DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.No) { return; }
-
-            string query = "DELETE FROM tbPrices WHERE name=@name";
-            string name = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            try
-            {
-                command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@name", name);
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
-            LoadTable();
+            DeleteItem(sender, e);
+            FillFieldsForUpdate(sender, e);
         }
     }
 }
