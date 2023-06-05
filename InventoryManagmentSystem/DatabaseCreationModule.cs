@@ -320,7 +320,7 @@ namespace InventoryManagmentSystem
 
                 string sql =
                     "CREATE TABLE[dbo].[tbProviders] (" +
-                    "[itemType] VARCHAR(50) NOT NULL," +
+                    "[] VARCHAR(50) NOT NULL," +
                     "[provider] VARCHAR(50) NOT NULL);";
 
                 SqlCommand command = new SqlCommand(sql, connection);
@@ -379,6 +379,11 @@ namespace InventoryManagmentSystem
                 this.Hide();
                 MainForm ModForm = new MainForm();
                 ModForm.ShowDialog();
+            }
+            else
+            {
+                string message = "Program needs to be restarted to switch to the new database.";
+                DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
         }
 

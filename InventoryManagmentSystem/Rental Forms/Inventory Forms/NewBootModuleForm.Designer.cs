@@ -100,11 +100,6 @@
             this.comboBoxBrand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxBrand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxBrand.FormattingEnabled = true;
-            this.comboBoxBrand.Items.AddRange(new object[] {
-            resources.GetString("comboBoxBrand.Items"),
-            resources.GetString("comboBoxBrand.Items1"),
-            resources.GetString("comboBoxBrand.Items2"),
-            resources.GetString("comboBoxBrand.Items3")});
             resources.ApplyResources(this.comboBoxBrand, "comboBoxBrand");
             this.comboBoxBrand.Name = "comboBoxBrand";
             // 

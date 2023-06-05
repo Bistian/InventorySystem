@@ -28,6 +28,7 @@ namespace InventoryManagmentSystem
         {
             InitializeComponent();
             isNewItem = newItem;
+            LoadBrands();
         }
 
         private bool CheckIfExists(string tableName, string SerialNumber)
@@ -159,6 +160,26 @@ namespace InventoryManagmentSystem
         private void ClearButton_Click_1(object sender, EventArgs e)
         {
             Clear();
+        }
+
+        private void LoadBrands()
+        {
+            string query = "SELECT * FROM tbProviders WHERE itemType='jackets/pants'";
+            try
+            {
+                cm = new SqlCommand(query, con);
+                con.Open();
+                SqlDataReader dataReader = cm.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    comboBoxBrand.Items.Add(dataReader[1]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            con.Close();
         }
     }
 }

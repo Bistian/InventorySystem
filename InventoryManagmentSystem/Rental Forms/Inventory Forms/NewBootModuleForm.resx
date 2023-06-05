@@ -740,13 +740,10 @@
     <value>NoControl</value>
   </data>
   <data name="CloseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>715, 4</value>
-  </data>
-  <data name="CloseButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>536, 3</value>
   </data>
   <data name="CloseButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 42</value>
+    <value>27, 34</value>
   </data>
   <data name="CloseButton.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -783,13 +780,10 @@
     <value>NoControl</value>
   </data>
   <data name="NewBootTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="NewBootTxt.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>12, 13</value>
   </data>
   <data name="NewBootTxt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 29</value>
+    <value>110, 24</value>
   </data>
   <data name="NewBootTxt.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -818,8 +812,11 @@
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 64</value>
+    <value>566, 52</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -846,13 +843,10 @@
     <value>NoControl</value>
   </data>
   <data name="labelMaterial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 143</value>
-  </data>
-  <data name="labelMaterial.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>114, 116</value>
   </data>
   <data name="labelMaterial.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 24</value>
+    <value>66, 20</value>
   </data>
   <data name="labelMaterial.TabIndex" type="System.Int32, mscorlib">
     <value>77</value>
@@ -879,10 +873,13 @@
     <value>Leather</value>
   </data>
   <data name="comboBoxMaterial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 170</value>
+    <value>117, 138</value>
+  </data>
+  <data name="comboBoxMaterial.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="comboBoxMaterial.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 24</value>
+    <value>80, 21</value>
   </data>
   <data name="comboBoxMaterial.TabIndex" type="System.Int32, mscorlib">
     <value>76</value>
@@ -909,13 +906,10 @@
     <value>NoControl</value>
   </data>
   <data name="LableBrand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 143</value>
-  </data>
-  <data name="LableBrand.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>12, 116</value>
   </data>
   <data name="LableBrand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 24</value>
+    <value>50, 20</value>
   </data>
   <data name="LableBrand.TabIndex" type="System.Int32, mscorlib">
     <value>73</value>
@@ -935,23 +929,14 @@
   <data name="&gt;&gt;LableBrand.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="comboBoxBrand.Items" xml:space="preserve">
-    <value>Croydon</value>
-  </data>
-  <data name="comboBoxBrand.Items1" xml:space="preserve">
-    <value>Saber</value>
-  </data>
-  <data name="comboBoxBrand.Items2" xml:space="preserve">
-    <value>Black Diamond</value>
-  </data>
-  <data name="comboBoxBrand.Items3" xml:space="preserve">
-    <value>Stc</value>
-  </data>
   <data name="comboBoxBrand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 170</value>
+    <value>15, 138</value>
+  </data>
+  <data name="comboBoxBrand.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="comboBoxBrand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 24</value>
+    <value>92, 21</value>
   </data>
   <data name="comboBoxBrand.TabIndex" type="System.Int32, mscorlib">
     <value>72</value>
@@ -978,13 +963,10 @@
     <value>NoControl</value>
   </data>
   <data name="labelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 84</value>
-  </data>
-  <data name="labelSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>207, 68</value>
   </data>
   <data name="labelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 24</value>
+    <value>38, 20</value>
   </data>
   <data name="labelSize.TabIndex" type="System.Int32, mscorlib">
     <value>71</value>
@@ -1074,10 +1056,13 @@
     <value>16</value>
   </data>
   <data name="comboBoxSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 111</value>
+    <value>210, 90</value>
+  </data>
+  <data name="comboBoxSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="comboBoxSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 24</value>
+    <value>92, 21</value>
   </data>
   <data name="comboBoxSize.TabIndex" type="System.Int32, mscorlib">
     <value>70</value>
@@ -1095,13 +1080,10 @@
     <value>11</value>
   </data>
   <data name="txtBoxSerialNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 113</value>
-  </data>
-  <data name="txtBoxSerialNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>15, 92</value>
   </data>
   <data name="txtBoxSerialNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 22</value>
+    <value>182, 20</value>
   </data>
   <data name="txtBoxSerialNumber.TabIndex" type="System.Int32, mscorlib">
     <value>69</value>
@@ -1128,13 +1110,10 @@
     <value>NoControl</value>
   </data>
   <data name="LableSerialNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 85</value>
-  </data>
-  <data name="LableSerialNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>11, 69</value>
   </data>
   <data name="LableSerialNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 24</value>
+    <value>109, 20</value>
   </data>
   <data name="LableSerialNumber.TabIndex" type="System.Int32, mscorlib">
     <value>68</value>
@@ -1164,13 +1143,10 @@
     <value>NoControl</value>
   </data>
   <data name="labelUsedNew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 143</value>
-  </data>
-  <data name="labelUsedNew.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>207, 116</value>
   </data>
   <data name="labelUsedNew.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 24</value>
+    <value>75, 20</value>
   </data>
   <data name="labelUsedNew.TabIndex" type="System.Int32, mscorlib">
     <value>83</value>
@@ -1197,10 +1173,13 @@
     <value>New</value>
   </data>
   <data name="comboBoxUsedNew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 170</value>
+    <value>210, 138</value>
+  </data>
+  <data name="comboBoxUsedNew.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="comboBoxUsedNew.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 24</value>
+    <value>92, 21</value>
   </data>
   <data name="comboBoxUsedNew.TabIndex" type="System.Int32, mscorlib">
     <value>82</value>
@@ -1227,13 +1206,10 @@
     <value>NoControl</value>
   </data>
   <data name="labelManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>505, 117</value>
-  </data>
-  <data name="labelManufactureDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>379, 95</value>
   </data>
   <data name="labelManufactureDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 24</value>
+    <value>137, 20</value>
   </data>
   <data name="labelManufactureDate.TabIndex" type="System.Int32, mscorlib">
     <value>85</value>
@@ -1254,10 +1230,13 @@
     <value>2</value>
   </data>
   <data name="dateTimePickerManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>464, 144</value>
+    <value>348, 117</value>
+  </data>
+  <data name="dateTimePickerManufactureDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="dateTimePickerManufactureDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 22</value>
+    <value>184, 20</value>
   </data>
   <data name="dateTimePickerManufactureDate.TabIndex" type="System.Int32, mscorlib">
     <value>84</value>
@@ -1281,13 +1260,10 @@
     <value>NoControl</value>
   </data>
   <data name="SaveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 217</value>
-  </data>
-  <data name="SaveButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>298, 176</value>
   </data>
   <data name="SaveButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 53</value>
+    <value>87, 43</value>
   </data>
   <data name="SaveButton.TabIndex" type="System.Int32, mscorlib">
     <value>86</value>
@@ -1314,13 +1290,10 @@
     <value>NoControl</value>
   </data>
   <data name="ClearButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 217</value>
-  </data>
-  <data name="ClearButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>206, 176</value>
   </data>
   <data name="ClearButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 53</value>
+    <value>87, 43</value>
   </data>
   <data name="ClearButton.TabIndex" type="System.Int32, mscorlib">
     <value>87</value>
@@ -1344,10 +1317,13 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>755, 283</value>
+    <value>566, 230</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

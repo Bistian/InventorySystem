@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnAdd = new System.Windows.Forms.Button();
             this.tbProvider = new System.Windows.Forms.TextBox();
             this.labelItemType = new System.Windows.Forms.Label();
@@ -39,6 +39,7 @@
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Provider = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remove = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnFiretecBrands = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,14 +103,14 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MediumBlue;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.MediumBlue;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Number,
@@ -154,12 +155,26 @@
             this.Remove.ReadOnly = true;
             this.Remove.Width = 25;
             // 
+            // btnFiretecBrands
+            // 
+            this.btnFiretecBrands.Enabled = false;
+            this.btnFiretecBrands.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btnFiretecBrands.Location = new System.Drawing.Point(15, 143);
+            this.btnFiretecBrands.Name = "btnFiretecBrands";
+            this.btnFiretecBrands.Size = new System.Drawing.Size(121, 23);
+            this.btnFiretecBrands.TabIndex = 7;
+            this.btnFiretecBrands.Text = "Firetec Brands";
+            this.btnFiretecBrands.UseVisualStyleBackColor = true;
+            this.btnFiretecBrands.Visible = false;
+            this.btnFiretecBrands.Click += new System.EventHandler(this.btnFiretecBrands_Click);
+            // 
             // ProviderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnFiretecBrands);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cbItemType);
             this.Controls.Add(this.labelProvider);
@@ -187,5 +202,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Item;
         private System.Windows.Forms.DataGridViewTextBoxColumn Provider;
         private System.Windows.Forms.DataGridViewImageColumn Remove;
+        private System.Windows.Forms.Button btnFiretecBrands;
     }
 }

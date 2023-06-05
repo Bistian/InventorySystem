@@ -25,6 +25,10 @@ namespace InventoryManagmentSystem
         {
             InitializeComponent();
             LoadTable();
+#if DEBUG
+            btnFiretecBrands.Enabled = true;
+            btnFiretecBrands.Visible = true;
+#endif
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -133,6 +137,76 @@ namespace InventoryManagmentSystem
                 Console.WriteLine(ex.Message);
             }
             connection.Close();
+        }
+
+        private void AddFiretecBrands1()
+        {
+            List<string> bootList = new List<string>();
+            bootList.Add("Croydon");
+            bootList.Add("Saber");
+            bootList.Add("Black Diamond");
+            bootList.Add("Stc");
+
+            List<string> helmetList = new List<string>();
+            helmetList.Add("Cairns");
+            helmetList.Add("Bullard");
+
+            List<string> pantsList = new List<string>();
+            pantsList.Add("Lakeland");
+            pantsList.Add("Innotex");
+            pantsList.Add("Viking");
+            pantsList.Add("Morning Pride");
+            pantsList.Add("Globe");
+            pantsList.Add("FireDex");
+            pantsList.Add("Honeywell");
+            pantsList.Add("Skold");
+            pantsList.Add("Frypel");
+            pantsList.Add("Quaker");
+            pantsList.Add("Janesville");
+            pantsList.Add("Lion");
+            pantsList.Add("Sperian");
+            pantsList.Add("Veridian");
+
+            foreach (string item in bootList)
+            {
+                AddFiretecBrands2("boots", item);
+            }
+
+            foreach (string item in helmetList)
+            {
+                AddFiretecBrands2("helmets", item);
+            }
+
+            foreach (string item in pantsList)
+            {
+                AddFiretecBrands2("jackets/pants", item);
+            }
+
+            LoadTable();
+        }
+
+        private void AddFiretecBrands2(string itemType, string brand)
+        {
+            string query = "INSERT INTO tbProviders (itemType, provider) VALUES (@itemType, @provider)";
+
+            try
+            {
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@itemType", itemType);
+                command.Parameters.AddWithValue("@provider", brand);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            connection.Close();
+        }
+
+        private void btnFiretecBrands_Click(object sender, EventArgs e)
+        {
+            AddFiretecBrands1();
         }
     }
 }
