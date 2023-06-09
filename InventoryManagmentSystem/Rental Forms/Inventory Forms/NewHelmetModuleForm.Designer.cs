@@ -45,6 +45,7 @@
             this.dateTimePickerManufactureDate = new System.Windows.Forms.DateTimePicker();
             this.SaveButton = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
+            this.btnAddBrand = new System.Windows.Forms.Button();
             this.InventoryPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
@@ -56,7 +57,7 @@
             this.InventoryPanel.Controls.Add(this.NewHelmetTxt);
             this.InventoryPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.InventoryPanel.Location = new System.Drawing.Point(0, 0);
-            this.InventoryPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.InventoryPanel.Margin = new System.Windows.Forms.Padding(2);
             this.InventoryPanel.Name = "InventoryPanel";
             this.InventoryPanel.Size = new System.Drawing.Size(566, 52);
             this.InventoryPanel.TabIndex = 21;
@@ -140,7 +141,7 @@
             this.comboBoxBrand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxBrand.FormattingEnabled = true;
             this.comboBoxBrand.Location = new System.Drawing.Point(14, 138);
-            this.comboBoxBrand.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxBrand.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxBrand.Name = "comboBoxBrand";
             this.comboBoxBrand.Size = new System.Drawing.Size(92, 21);
             this.comboBoxBrand.TabIndex = 58;
@@ -164,7 +165,7 @@
             "Black",
             "Yellow"});
             this.comboBoxColor.Location = new System.Drawing.Point(117, 138);
-            this.comboBoxColor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxColor.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxColor.Name = "comboBoxColor";
             this.comboBoxColor.Size = new System.Drawing.Size(78, 21);
             this.comboBoxColor.TabIndex = 62;
@@ -188,7 +189,7 @@
             "Used",
             "New"});
             this.comboBoxUsedNew.Location = new System.Drawing.Point(207, 138);
-            this.comboBoxUsedNew.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxUsedNew.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxUsedNew.Name = "comboBoxUsedNew";
             this.comboBoxUsedNew.Size = new System.Drawing.Size(91, 21);
             this.comboBoxUsedNew.TabIndex = 68;
@@ -207,7 +208,7 @@
             // 
             this.dateTimePickerManufactureDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerManufactureDate.Location = new System.Drawing.Point(345, 118);
-            this.dateTimePickerManufactureDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePickerManufactureDate.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePickerManufactureDate.Name = "dateTimePickerManufactureDate";
             this.dateTimePickerManufactureDate.Size = new System.Drawing.Size(186, 20);
             this.dateTimePickerManufactureDate.TabIndex = 70;
@@ -239,12 +240,25 @@
             this.ClearButton.UseVisualStyleBackColor = false;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click_1);
             // 
+            // btnAddBrand
+            // 
+            this.btnAddBrand.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btnAddBrand.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnAddBrand.Location = new System.Drawing.Point(12, 164);
+            this.btnAddBrand.Name = "btnAddBrand";
+            this.btnAddBrand.Size = new System.Drawing.Size(91, 23);
+            this.btnAddBrand.TabIndex = 89;
+            this.btnAddBrand.Text = "Add Brand";
+            this.btnAddBrand.UseVisualStyleBackColor = true;
+            this.btnAddBrand.Click += new System.EventHandler(this.btnAddBrand_Click);
+            // 
             // NewHelmetModuleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(566, 230);
+            this.Controls.Add(this.btnAddBrand);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.labelManufactureDate);
@@ -259,7 +273,7 @@
             this.Controls.Add(this.LableSerialNumber);
             this.Controls.Add(this.InventoryPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NewHelmetModuleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InventoryModuleForm";
@@ -290,5 +304,6 @@
         public System.Windows.Forms.ComboBox comboBoxColor;
         public System.Windows.Forms.ComboBox comboBoxUsedNew;
         public System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
+        private System.Windows.Forms.Button btnAddBrand;
     }
 }

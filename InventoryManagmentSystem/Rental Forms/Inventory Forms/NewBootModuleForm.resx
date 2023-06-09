@@ -831,7 +831,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="labelMaterial.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -864,7 +864,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelMaterial.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="comboBoxMaterial.Items" xml:space="preserve">
     <value>Rubber</value>
@@ -894,7 +894,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboBoxMaterial.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="LableBrand.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -927,7 +927,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LableBrand.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="comboBoxBrand.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 138</value>
@@ -951,7 +951,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboBoxBrand.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="labelSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -984,7 +984,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelSize.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="comboBoxSize.Items" xml:space="preserve">
     <value>5</value>
@@ -1077,7 +1077,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboBoxSize.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="txtBoxSerialNumber.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 92</value>
@@ -1098,7 +1098,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtBoxSerialNumber.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="LableSerialNumber.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1131,7 +1131,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LableSerialNumber.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="labelUsedNew.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1164,7 +1164,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelUsedNew.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="comboBoxUsedNew.Items" xml:space="preserve">
     <value>Used</value>
@@ -1194,7 +1194,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboBoxUsedNew.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="labelManufactureDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1227,7 +1227,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelManufactureDate.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="dateTimePickerManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>348, 117</value>
@@ -1251,7 +1251,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dateTimePickerManufactureDate.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="SaveButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Trebuchet MS, 9.75pt, style=Bold</value>
@@ -1281,7 +1281,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;SaveButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ClearButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Trebuchet MS, 9.75pt, style=Bold</value>
@@ -1311,6 +1311,36 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ClearButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnAddBrand.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11.25pt</value>
+  </data>
+  <data name="btnAddBrand.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnAddBrand.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 164</value>
+  </data>
+  <data name="btnAddBrand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 23</value>
+  </data>
+  <data name="btnAddBrand.TabIndex" type="System.Int32, mscorlib">
+    <value>88</value>
+  </data>
+  <data name="btnAddBrand.Text" xml:space="preserve">
+    <value>Add Brand</value>
+  </data>
+  <data name="&gt;&gt;btnAddBrand.Name" xml:space="preserve">
+    <value>btnAddBrand</value>
+  </data>
+  <data name="&gt;&gt;btnAddBrand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnAddBrand.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnAddBrand.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

@@ -320,7 +320,7 @@ namespace InventoryManagmentSystem
 
                 string sql =
                     "CREATE TABLE[dbo].[tbProviders] (" +
-                    "[] VARCHAR(50) NOT NULL," +
+                    "[itemType] VARCHAR(50) NOT NULL," +
                     "[provider] VARCHAR(50) NOT NULL);";
 
                 SqlCommand command = new SqlCommand(sql, connection);

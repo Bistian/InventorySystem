@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewPantsModuleForm));
             this.InventoryPanel = new System.Windows.Forms.Panel();
+            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.NewPantsTxt = new System.Windows.Forms.Label();
             this.LableBrand = new System.Windows.Forms.Label();
             this.comboBoxBrand = new System.Windows.Forms.ComboBox();
@@ -43,7 +44,7 @@
             this.labelManufactureDate = new System.Windows.Forms.Label();
             this.dateTimePickerManufactureDate = new System.Windows.Forms.DateTimePicker();
             this.comboBoxSize = new System.Windows.Forms.TextBox();
-            this.CloseButton = new InventoryManagmentSystem.CustomButton();
+            this.btnAddBrand = new System.Windows.Forms.Button();
             this.InventoryPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
@@ -55,10 +56,23 @@
             this.InventoryPanel.Controls.Add(this.NewPantsTxt);
             this.InventoryPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.InventoryPanel.Location = new System.Drawing.Point(0, 0);
-            this.InventoryPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.InventoryPanel.Margin = new System.Windows.Forms.Padding(2);
             this.InventoryPanel.Name = "InventoryPanel";
             this.InventoryPanel.Size = new System.Drawing.Size(566, 52);
             this.InventoryPanel.TabIndex = 22;
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
+            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
+            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
+            this.CloseButton.Location = new System.Drawing.Point(536, 3);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(27, 34);
+            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CloseButton.TabIndex = 68;
+            this.CloseButton.TabStop = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // NewPantsTxt
             // 
@@ -92,7 +106,7 @@
             this.comboBoxBrand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxBrand.FormattingEnabled = true;
             this.comboBoxBrand.Location = new System.Drawing.Point(21, 138);
-            this.comboBoxBrand.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxBrand.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxBrand.Name = "comboBoxBrand";
             this.comboBoxBrand.Size = new System.Drawing.Size(86, 21);
             this.comboBoxBrand.TabIndex = 3;
@@ -143,7 +157,7 @@
             "Used",
             "New"});
             this.comboBoxUsedNew.Location = new System.Drawing.Point(111, 138);
-            this.comboBoxUsedNew.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxUsedNew.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxUsedNew.Name = "comboBoxUsedNew";
             this.comboBoxUsedNew.Size = new System.Drawing.Size(92, 21);
             this.comboBoxUsedNew.TabIndex = 4;
@@ -188,7 +202,7 @@
             // 
             this.dateTimePickerManufactureDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerManufactureDate.Location = new System.Drawing.Point(355, 118);
-            this.dateTimePickerManufactureDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePickerManufactureDate.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePickerManufactureDate.Name = "dateTimePickerManufactureDate";
             this.dateTimePickerManufactureDate.Size = new System.Drawing.Size(186, 20);
             this.dateTimePickerManufactureDate.TabIndex = 96;
@@ -201,18 +215,17 @@
             this.comboBoxSize.Size = new System.Drawing.Size(92, 20);
             this.comboBoxSize.TabIndex = 2;
             // 
-            // CloseButton
+            // btnAddBrand
             // 
-            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
-            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
-            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(536, 3);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(27, 34);
-            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CloseButton.TabIndex = 68;
-            this.CloseButton.TabStop = false;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.btnAddBrand.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btnAddBrand.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnAddBrand.Location = new System.Drawing.Point(22, 164);
+            this.btnAddBrand.Name = "btnAddBrand";
+            this.btnAddBrand.Size = new System.Drawing.Size(86, 23);
+            this.btnAddBrand.TabIndex = 90;
+            this.btnAddBrand.Text = "Add Brand";
+            this.btnAddBrand.UseVisualStyleBackColor = true;
+            this.btnAddBrand.Click += new System.EventHandler(this.btnAddBrand_Click);
             // 
             // NewPantsModuleForm
             // 
@@ -220,6 +233,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(566, 230);
+            this.Controls.Add(this.btnAddBrand);
             this.Controls.Add(this.comboBoxSize);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.SaveButton);
@@ -234,7 +248,7 @@
             this.Controls.Add(this.LableSerialNumber);
             this.Controls.Add(this.InventoryPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NewPantsModuleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewPantsModuleForm";
@@ -263,5 +277,6 @@
         public System.Windows.Forms.ComboBox comboBoxBrand;
         public System.Windows.Forms.ComboBox comboBoxUsedNew;
         public System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
+        private System.Windows.Forms.Button btnAddBrand;
     }
 }

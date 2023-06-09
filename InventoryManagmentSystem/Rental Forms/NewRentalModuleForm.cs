@@ -51,6 +51,7 @@ namespace InventoryManagmentSystem
             panelMeasurments.Visible = false;
             panelRentalInfo.Visible = false;
             splitContainermain.SplitterDistance = 650;
+            PopulateAcademyList();
         }
 
         private bool CheckIfExists(string tableName, string SerialNumber)
@@ -412,6 +413,26 @@ namespace InventoryManagmentSystem
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void PopulateAcademyList()
+        {
+            string query = "SELECT * FROM tbProviders WHERE itemType = 'Academies'";
+            cm = new SqlCommand(query, con);
+            con.Open();
+            try
+            {
+                dr = cm.ExecuteReader();
+                while (dr.Read())
+                {
+                    comboBoxAcademy.Items.Add(dr[1]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            con.Close();
         }
 
         private void ButtonContinue_Click(object sender, EventArgs e)
@@ -964,6 +985,38 @@ namespace InventoryManagmentSystem
                 labelReplacmentItem.Text = ReplacmentSerial;
                 SwapButton.Enabled = true;
             }
+        }
+
+        private void btnAddBrand_Click(object sender, EventArgs e)
+        {
+            List<string> items = new List<string>();
+            items.Add("Academies");
+            ProviderForm form = new ProviderForm(items);
+            form.cbItemType.SelectedIndex = 0;
+            form.close = true;
+            form.ShowDialog();
+            LoadBrands();
+            comboBoxAcademy.SelectedIndex = comboBoxAcademy.Items.Count - 1;
+        }
+
+        private void LoadBrands()
+        {
+            string query = "SELECT * FROM tbProviders WHERE itemType='academies'";
+            try
+            {
+                cm = new SqlCommand(query, con);
+                con.Open();
+                SqlDataReader dataReader = cm.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    comboBoxAcademy.Items.Add(dataReader[1]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            con.Close();
         }
     }
 }

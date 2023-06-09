@@ -46,6 +46,7 @@
             this.dateTimePickerManufactureDate = new System.Windows.Forms.DateTimePicker();
             this.SaveButton = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
+            this.btnAddBrand = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
@@ -195,11 +196,19 @@
             this.ClearButton.UseVisualStyleBackColor = false;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
+            // btnAddBrand
+            // 
+            resources.ApplyResources(this.btnAddBrand, "btnAddBrand");
+            this.btnAddBrand.Name = "btnAddBrand";
+            this.btnAddBrand.UseVisualStyleBackColor = true;
+            this.btnAddBrand.Click += new System.EventHandler(this.btnAddBrand_Click);
+            // 
             // NewBootModuleForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.Controls.Add(this.btnAddBrand);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.labelManufactureDate);
@@ -244,5 +253,6 @@
         public System.Windows.Forms.ComboBox comboBoxSize;
         public System.Windows.Forms.ComboBox comboBoxUsedNew;
         public System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
+        private System.Windows.Forms.Button btnAddBrand;
     }
 }

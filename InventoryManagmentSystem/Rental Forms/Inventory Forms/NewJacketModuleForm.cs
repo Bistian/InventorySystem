@@ -181,5 +181,17 @@ namespace InventoryManagmentSystem
             }
             con.Close();
         }
+
+        private void btnAddBrand_Click(object sender, EventArgs e)
+        {
+            List<string> items = new List<string>();
+            items.Add("Jackets/Pants");
+            ProviderForm form = new ProviderForm(items);
+            form.cbItemType.SelectedIndex = 0;
+            form.close = true;
+            form.ShowDialog();
+            LoadBrands();
+            comboBoxBrand.SelectedIndex = comboBoxBrand.Items.Count - 1;
+        }
     }
 }

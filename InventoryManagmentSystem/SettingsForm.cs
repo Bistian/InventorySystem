@@ -52,10 +52,14 @@ namespace InventoryManagmentSystem
             openChildForm(new DatabaseCreationModule(false));
         }
 
-        private void btnProviders_Click(object sender, EventArgs e)
+        private void btnBrands_Click(object sender, EventArgs e)
         {
-            ColorTabSwitch("Providers");
-            openChildForm(new ProviderForm());
+            ColorTabSwitch("Brands");
+            List<string> comboBoxSelection = new List<string>();
+            comboBoxSelection.Add("Boots");
+            comboBoxSelection.Add("Helmets");
+            comboBoxSelection.Add("Jackets/Pants");
+            openChildForm(new ProviderForm(comboBoxSelection));
         }
 
         private void btnPrices_Click(object sender, EventArgs e)
@@ -64,19 +68,37 @@ namespace InventoryManagmentSystem
             openChildForm(new PricesForm());
         }
 
+        private void btnAcademies_Click(object sender, EventArgs e)
+        {
+            ColorTabSwitch("Academies");
+            List<string> comboBoxSelection = new List<string>();
+            comboBoxSelection.Add("Academies");
+            ProviderForm form = new ProviderForm(comboBoxSelection);
+            form.dataGridView1.Columns["Brands"].HeaderText = "Academies";
+            form.cbItemType.Visible = false;
+            form.labelItemType.Visible = false;
+            form.cbItemType.SelectedIndex = 0;
+            form.labelBrand.Text = "Academy Name";
+            openChildForm(form);
+        }
+
         private void ColorTabSwitch(string tab)
         {
             // Set all colors to normal.
             btnDatabase.BackColor = offColor;
             btnImport.BackColor = offColor;
-            btnProviders.BackColor = offColor;
+            btnBrands.BackColor = offColor;
             btnPrices.BackColor = offColor;
+            btnAcademies.BackColor = offColor;
 
             // Pick one tab and set it to the clicked color.
             if (tab == "Database") { btnDatabase.BackColor = onColor; }
             else if (tab == "Import") { btnImport.BackColor = onColor; }
-            else if (tab == "Providers") { btnProviders.BackColor = onColor; }
+            else if (tab == "Brands") { btnBrands.BackColor = onColor; }
             else if (tab == "Prices") { btnPrices.BackColor = onColor; }
-        }       
+            else if (tab == "Academies") { btnAcademies.BackColor = onColor; }
+        }
+
+       
     }
 }
