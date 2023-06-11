@@ -135,4 +135,29 @@
   <metadata name="Id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="Delete.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Update.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Update.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAs9JREFUOE9j
+        oCcwU+Nm7YmT5VvpI8a1ToqdKRsoxgzEChwsTPVgFUQCLik2lvJVxpLn33so/4fh644Kr2S4mGelWfDt
+        NpNlWwhUxwZRjgdwczC4ZPqzb/FX5NqJbBgIN2oKHWp2Ezj4rVX+/9FsqTuhejwb+NiZvaFasQKLjjTO
+        g//2C/xP1+ZBMfCcndzTDAveAyDDkPHSSJHT7MwMPlD9KIDZWod5FcgwEE7S5d2ObCAIl6oJ7tuTJnEV
+        ZNDnZvk/MENd1Dg3gPRDjIECZmaGsCvz+e7DDIx3Yd9z0ErmFrKBb92V/6nwsO5dFSN6ToqPefMKIA0y
+        8FiO1B2gEW4Qk6DAyZB1Nsyw33sF/ihKME1mY2YIsRHi7AmQ5F4UIsmzRJWLdTpQqaIwB3MckDby1eZc
+        BHOlFB9LI9ggKBBrT+c4BDNwXTP3BaCYAUQKN1AWYWmCGWinxA6yDA4c9k/guQIzsCCU/SBQDDVMsAAZ
+        AZYGmIE+mlyzocJgYLyygfsMzMD6eI7DQDFeiBRuYK3APgPuQkX2mVBhMODMDWLfBzPwwUq+F/xcTJlQ
+        OX4udoYsIM0C4cKB1eIIkdMwA+UEUMOQwVSDeRbMQBBeWMF1QkKIqQQo5T21kPO4pBBTIUQl0GQWBsd8
+        G749MMPWxYmdBwrbQWQRwGttM/dZZEPfbOR/XxTGfvDWEr5HE/M4D/NwMDV5qHPNXhsndhFmGAjbKHIs
+        gpqBCoBJpfv5ev7XyIYi47Jwjn27UiSuIRvW5il4AKhVB2ICJuDSlmea9WQ13wtsBoKwjTbLPphhc0NF
+        TvGwMYdB9eIELJLCTM11cRwH3m/h/4RsWLY/+/4tSeKXv7bI/8u35t8LNCwcqocoIMvJypBjps4859I8
+        3rs5ARz7+3yFTnd6CR4xkgYnES2IMtKBnpY88x4mJoYCIDsIiMXBohQAViCWgDCJAQwMAH++eCKb2BFp
+        AAAAAElFTkSuQmCC
+</value>
+  </data>
 </root>

@@ -723,9 +723,9 @@
             this.comboBoxRentalType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxRentalType.FormattingEnabled = true;
             this.comboBoxRentalType.Items.AddRange(new object[] {
-            "Individual",
-            "Department",
-            "Academy"});
+            "Individuals",
+            "Departments",
+            "Academys"});
             this.comboBoxRentalType.Location = new System.Drawing.Point(4, 20);
             this.comboBoxRentalType.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxRentalType.Name = "comboBoxRentalType";
@@ -788,7 +788,7 @@
             // txtBoxDriversLicense
             // 
             this.txtBoxDriversLicense.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxDriversLicense.Location = new System.Drawing.Point(8, 24);
+            this.txtBoxDriversLicense.Location = new System.Drawing.Point(12, 23);
             this.txtBoxDriversLicense.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
             this.txtBoxDriversLicense.Name = "txtBoxDriversLicense";
             this.txtBoxDriversLicense.Size = new System.Drawing.Size(206, 26);
@@ -900,7 +900,7 @@
             // txtBoxPhone
             // 
             this.txtBoxPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxPhone.Location = new System.Drawing.Point(11, 26);
+            this.txtBoxPhone.Location = new System.Drawing.Point(12, 26);
             this.txtBoxPhone.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
             this.txtBoxPhone.Name = "txtBoxPhone";
             this.txtBoxPhone.Size = new System.Drawing.Size(202, 26);
@@ -1395,7 +1395,7 @@
             this.comboBoxAcademy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxAcademy.FormattingEnabled = true;
             this.comboBoxAcademy.Items.AddRange(new object[] {
-            ""});
+            "N/A"});
             this.comboBoxAcademy.Location = new System.Drawing.Point(2, 20);
             this.comboBoxAcademy.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxAcademy.Name = "comboBoxAcademy";

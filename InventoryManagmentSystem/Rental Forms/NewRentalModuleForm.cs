@@ -43,7 +43,7 @@ namespace InventoryManagmentSystem
         String dueDate = "";
 
 
-        public NewRentalModuleForm()
+        public NewRentalModuleForm(string rentalType = null, string clientName = null)
         {
             InitializeComponent();
             panelAddress.Visible = false;
@@ -52,6 +52,11 @@ namespace InventoryManagmentSystem
             panelRentalInfo.Visible = false;
             splitContainermain.SplitterDistance = 650;
             PopulateAcademyList();
+            if (clientName != null)
+            {
+                comboBoxRentalType.Text = rentalType;
+                AutoFillFields(rentalType, clientName);
+            }
         }
 
         private bool CheckIfExists(string tableName, string SerialNumber)
@@ -107,16 +112,20 @@ namespace InventoryManagmentSystem
             dataGridViewClient.Rows.Clear();
             cm = new SqlCommand(QueryClient(), con);
             con.Open();
-            dr = cm.ExecuteReader();
-
-            while (dr.Read())
+            try
             {
-                dataGridViewClient.Rows.Add(
-                    dr[0].ToString(),
-                    dr[1],
-                    dr[2].ToString()
-                );
+                dr = cm.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    dataGridViewClient.Rows.Add(
+                        dr[0].ToString(),
+                        dr[1],
+                        dr[2].ToString()
+                    );
+                }
             }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
 
             dr.Close();
             con.Close();
@@ -229,7 +238,6 @@ namespace InventoryManagmentSystem
             {
                 try
                 {
-
                     cm = new SqlCommand("SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address," +
                         "Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,Notes " +
                         "FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber", con);
@@ -296,9 +304,58 @@ namespace InventoryManagmentSystem
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    con.Close();
                 }
             }
             flowLayoutPanelProfile.Visible = true;
+            flowLayoutPanelProfile.AutoScroll = false;
+            splitContainermain.SplitterDistance = 500;
+            splitContainerInventories.Visible = true;
+            panelRentals.Visible = true;
+            LoadClient();
+        }
+
+        public void UpdateProfile(bool isDepartment, String ClientDrivers)
+        {
+            panelRentalType.Visible = false;
+            ExistingUser = true;
+            if (isDepartment)
+            {
+                try
+                {
+                    /*cm = new SqlCommand("SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address," +
+                           "Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,Notes " +
+                           "FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber", con);
+                    cm.Parameters.AddWithValue("@DriversLicenseNumber", ClientDrivers);
+                    con.Open();
+                    dr = cm.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        labelProfileName.Text = dr[4].ToString();
+                        labelClientPhone.Text = dr[1].ToString();
+                        labelClientEmail.Text = dr[2].ToString();
+
+                        //point of contact
+                        labelProfileDrivers.Text = "Point of contact:";
+                        labelClientDrivers.Text = dr[0].ToString();
+                        labelClientAddress.Text = dr[5].ToString();
+                        textBoxNotes.Text = dr[13].ToString();
+                    }
+                    dr.Close();
+                    con.Close();*/
+                    flowLayoutPanelProfile.Visible = true;
+                    panelProfileRentalInfo.Visible = false;
+                    panelProfileMeasurments.Visible = false;
+                    license = labelProfileName.Text;
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    con.Close();
+                }
+            }
+            flowLayoutPanelProfile.Visible = false;
             flowLayoutPanelProfile.AutoScroll = false;
             splitContainermain.SplitterDistance = 500;
             splitContainerInventories.Visible = true;
@@ -339,7 +396,14 @@ namespace InventoryManagmentSystem
                     cm.Parameters.AddWithValue("@Height", textBoxHeight.Text);
                     cm.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
                     con.Open();
-                    cm.ExecuteNonQuery();
+                    try
+                    {
+                        cm.ExecuteNonQuery();
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
                     con.Close();
                     MessageBox.Show("Info has been successfully saved");
                     Clear();
@@ -364,7 +428,6 @@ namespace InventoryManagmentSystem
                 MessageBox.Show(ex.Message);
                 return false;
             }
-            return false;
         }
 
         public void DisableLicense()
@@ -373,46 +436,91 @@ namespace InventoryManagmentSystem
             txtBoxDriversLicense.BackColor = SystemColors.Control;
         }
 
-        public void UpdateClient()
+        public void AutoFillFields(string type, string clientName)
         {
+            RentalTypeSelector(type);
+
+            string query = "SELECT * FROM tbClients WHERE Name = '" + clientName + "'";
+            cm = new SqlCommand(query, con);
+            con.Open();
             try
             {
-                if (MessageBox.Show(
-                    "Are you sure you want to update this Client?",
-                    "Update Client",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) == DialogResult.Yes)
+                SqlDataReader dataReader = cm.ExecuteReader();
+                while (dataReader.Read())
                 {
-                    cm = new SqlCommand(
-                        "UPDATE tbClients " +
-                        "SET Name = @Name,Phone = @Phone,Email = " +
-                        "@Email,Academy = @Academy,DayNight = " +
-                        "@DayNight,DriversLicenseNumber = @DriversLicenseNumber," +
-                        "Address = @Address,FireTecRepresentative = @FireTecRepresentative " +
-                        "WHERE DriversLicenseNumber LIKE @DriversLicenseNumber", con);
-
-                    cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
-                    cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
-                    cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
-                    cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
-                    cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
-                    cm.Parameters.AddWithValue("@Address", txtBoxStreet.Text);
-                    cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Client has been successfully updated");
-                    this.Dispose();
-                    ExistingUser = false;
-                    SetSelectionModuleForm ModForm = new SetSelectionModuleForm(currentUser, license, DayNight);
-                    this.Dispose();
-                    ModForm.ShowDialog();
+                    txtBoxCustomerName.Text = dataReader[1].ToString();
+                    txtBoxPhone.Text = dataReader[2].ToString();
+                    txtBoxEmail.Text = dataReader[3].ToString();
+                    comboBoxAcademy.Text = dataReader[4].ToString();
+                    txtBoxDriversLicense.Text = dataReader[6].ToString();
+                    txtBoxStreet.Text = dataReader[7].ToString();
+                    textBoxChest.Text = dataReader[8].ToString();
+                    textBoxSleeve.Text = dataReader[9].ToString();
+                    textBoxWaist.Text = dataReader[10].ToString();
+                    textBoxInseam.Text = dataReader[11].ToString();
+                    textBoxHips.Text = dataReader[12].ToString();
+                    textBoxHeight.Text = dataReader[13].ToString();
+                    textBoxWeight.Text = dataReader[14].ToString();
+                    textBoxNotes.Text = dataReader[15].ToString();
+                    txtBoxRep.Text = dataReader[16].ToString();
                 }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            con.Close();
+        }
+
+        public void UpdateClient()
+        {
+            string message = "Are you sure you want to update this Client?";
+            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (messageBox == DialogResult.No) { return; }
+
+            string query = "UPDATE tbClients " +
+                    "SET Name = @Name,Phone = @Phone,Email = " +
+                    "@Email,Academy = @Academy,DriversLicenseNumber = @DriversLicenseNumber," +
+                    "Address = @Address,FireTecRepresentative = @FireTecRepresentative, " +
+                    "Chest=@Chest, Sleeve=@Sleeve, Waist=@Waist, Inseam=@Inseam, Hips=@Hips, Weight=@Weight, Height=@Height " +
+                    "WHERE DriversLicenseNumber LIKE @DriversLicenseNumber";
+
+            string address = txtBoxStreet.Text + " " + textBoxCity.Text + " " + textBoxState.Text + " " + textBoxZip.Text;
+            cm = new SqlCommand(query, con);
+            try
+            {
+                if(con.State == ConnectionState.Open) { con.Close(); }
+                con.Open();
+                cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
+                cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
+                cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
+                if (comboBoxRentalType.SelectedIndex == 0)
+                {
+                    cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
+                }
+                else
+                {
+                    cm.Parameters.AddWithValue("@Academy", txtBoxDriversLicense.Text);
+                }
+                cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
+                cm.Parameters.AddWithValue("@Address", address);
+                cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
+                cm.Parameters.AddWithValue("@Chest", textBoxChest.Text);
+                cm.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
+                cm.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
+                cm.Parameters.AddWithValue("@Inseam", textBoxInseam.Text);
+                cm.Parameters.AddWithValue("@Hips", textBoxHips.Text);
+                cm.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
+                cm.Parameters.AddWithValue("@Height", textBoxHeight.Text);
+
+                cm.ExecuteNonQuery();
+                MessageBox.Show("Client has been successfully updated.");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            con.Close();
         }
 
         private void PopulateAcademyList()
@@ -435,9 +543,31 @@ namespace InventoryManagmentSystem
             con.Close();
         }
 
-        private void ButtonContinue_Click(object sender, EventArgs e)
+        private int ClientExists(string driversLicense)
         {
-            if (!string.IsNullOrEmpty(txtBoxStreet.Text) &&
+            string query = "SELECT COUNT(*) FROM tbClients WHERE DriversLicenseNumber = @license";
+            cm = new SqlCommand(query, con);
+            con.Open();
+            try
+            {
+                cm.Parameters.AddWithValue("@license", driversLicense);
+
+                int count = Convert.ToInt32(cm.ExecuteScalar());
+
+                if(count > 0) { return 1; }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return -1;
+            }
+            con.Close();
+            return 0;
+        }
+
+        private bool IsBoxEmpty()
+        {
+            return (!string.IsNullOrEmpty(txtBoxStreet.Text) &&
                 !string.IsNullOrEmpty(textBoxState.Text) &&
                 !string.IsNullOrEmpty(textBoxZip.Text) &&
                 !string.IsNullOrEmpty(txtBoxCustomerName.Text) &&
@@ -454,14 +584,18 @@ namespace InventoryManagmentSystem
                 !string.IsNullOrEmpty(textBoxHips.Text) &&
                 !string.IsNullOrEmpty(textBoxHeight.Text) &&
                 !string.IsNullOrEmpty(textBoxWeight.Text) &&
-                !string.IsNullOrEmpty(comboBoxAcademy.Text))
+                !string.IsNullOrEmpty(comboBoxAcademy.Text));
+        }
+
+        private void ButtonContinue_Click(object sender, EventArgs e)
+        {
+            if (IsBoxEmpty())
             {
                 currentUser = txtBoxCustomerName.Text;
                 license = txtBoxDriversLicense.Text;
-                if (ExistingUser == false)
+                panelRentalType.Visible = false;
+                if(ExistingUser == false)
                 {
-
-                    panelRentalType.Visible = false;
                     if (SaveClient())
                     {
                         //individual
@@ -478,7 +612,24 @@ namespace InventoryManagmentSystem
                 }
                 else
                 {
-                    UpdateClient();
+                    //individual
+                    if (comboBoxRentalType.SelectedIndex == 0)
+                    {
+                        UpdateClient();
+                        LoadProfile(false, license);
+                    }
+                    //department
+                    else if (comboBoxRentalType.SelectedIndex == 1 || comboBoxRentalType.SelectedIndex == 2)
+                    {
+                        UpdateClient();
+                        LoadProfile(true, license);
+                    }
+                    panelContactInfo.Visible = false;
+                    panelAddress.Visible = false;
+                    panelMeasurments.Visible = false;
+                    panelRentalInfo.Visible = false;
+                    splitContainermain.SplitterDistance = 360;
+                    ExistingUser = false;
                 }
             }
             else
@@ -501,10 +652,10 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void comboBoxRentalType_SelectedIndexChanged(object sender, EventArgs e)
+        private void RentalTypeSelector(string type)
         {
             //nothing seleced
-            if (comboBoxRentalType.SelectedIndex == -1)
+            if (type == "")
             {
                 panelAddress.Visible = false;
                 panelContactInfo.Visible = false;
@@ -512,7 +663,7 @@ namespace InventoryManagmentSystem
                 panelRentalInfo.Visible = false;
             }
             //Individual
-            else if (comboBoxRentalType.SelectedIndex == 0)
+            else if (type == "Individuals")
             {
                 //Change fields
                 LableCustomerName.Text = "Customer Name";
@@ -536,8 +687,8 @@ namespace InventoryManagmentSystem
                 comboBoxAcademy.SelectedIndex = -1;
 
             }
-            //department
-            else if (comboBoxRentalType.SelectedIndex == 1)
+            //Department
+            else if (type == "Departments")
             {
                 //change fields
                 panelMeasurments.Visible = false;
@@ -554,8 +705,7 @@ namespace InventoryManagmentSystem
                 textBoxWaist.Text = "N/A";
                 textBoxWeight.Text = "N/A";
                 textBoxHeight.Text = "N/A";
-                comboBoxAcademy.Text = "N/A";
-
+                comboBoxAcademy.SelectedIndex = 0;
 
                 //show pannels
                 panelAddress.Visible = true;
@@ -563,8 +713,8 @@ namespace InventoryManagmentSystem
                 panelRentalInfo.Visible = true;
 
             }
-            //academy
-            else if (comboBoxRentalType.SelectedIndex == 2)
+            //Academy
+            else if (type == "Academys")
             {
                 //hide pannels
                 panelMeasurments.Visible = false;
@@ -589,6 +739,11 @@ namespace InventoryManagmentSystem
                 panelRentalInfo.Visible = true;
                 panelContactInfo.Visible = true;
             }
+        }
+
+        private void comboBoxRentalType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RentalTypeSelector(comboBoxRentalType.Text);
         }
 
         private void comboBoxItemType_SelectedIndexChanged(object sender, EventArgs e)
@@ -620,11 +775,17 @@ namespace InventoryManagmentSystem
             cm.Parameters.AddWithValue("@DriversLicenseNumber", license);
 
             con.Open();
-            cm.ExecuteNonQuery();
+            try
+            {
+                cm.ExecuteNonQuery();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             con.Close();
             MessageBox.Show("Note has been successfully saved");
         }
-
 
         private void SwapButton_Click_1(object sender, EventArgs e)
         {
@@ -853,7 +1014,14 @@ namespace InventoryManagmentSystem
                     cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
                     cm.Parameters.AddWithValue("@serial", SelectedSerial);
                     con.Open();
-                    cm.ExecuteNonQuery();
+                    try
+                    {
+                        cm.ExecuteNonQuery();
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.Message );
+                    }
                     con.Close();
                     MessageBox.Show("Item Returned");
                 }

@@ -27,37 +27,93 @@ namespace InventoryManagmentSystem
         #endregion SQL_Variables
 
         public bool isReturn = false;
-        string clientType = "Individual";
+        string clientType = "Individuals";
         public ExistingCustomerModuleForm()
         {
             InitializeComponent();
             LoadUsers();
-            comboBox1.SelectedIndex = 0;
+            cbClientType.SelectedIndex = 0;
+        }
+
+        private bool DeleteItem(DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != 6) { return false; }
+
+            string message = "Do you want to delete this price?";
+            DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No) { return true; }
+
+            string query = "DELETE FROM tbClients WHERE name=@name";
+            string name = dataGridUsers.Rows[e.RowIndex].Cells[0].Value.ToString();
+            try
+            {
+                cm = new SqlCommand(query, con);
+                cm.Parameters.AddWithValue("@name", name);
+                con.Open();
+                cm.ExecuteNonQuery();
+                LoadUsers();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            con.Close();
+
+            return true;
+        }
+
+        private bool UpdateItem(DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != 7) { return false; }
+            NewRentalModuleForm form = new NewRentalModuleForm(cbClientType.Text, dataGridUsers.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+            try
+            {
+                var parentForm = this.ParentForm as MainForm;
+                string licence = dataGridUsers.Rows[e.RowIndex].Cells["ID"].Value.ToString();
+
+                bool isNotIndividual = true;
+                if (cbClientType.SelectedIndex == 0)
+                {
+                    isNotIndividual = false;
+                }
+                form.UpdateProfile(isNotIndividual, licence);
+                parentForm.openChildForm(form);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR Existing Customer Module:" + ex.Message);
+            }
+
+            LoadUsers();
+            return true;
         }
 
         private void dataGridUsers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if(DeleteItem(e)) { return; }
+            if(UpdateItem(e)) { return; }
+
             if (MessageBox.Show("Are you sure you want to select this client", "Continue", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
-
                     var parentForm = this.ParentForm as MainForm;
                     NewRentalModuleForm Profile = new NewRentalModuleForm();
                     string licence = dataGridUsers.Rows[e.RowIndex].Cells["ID"].Value.ToString();
 
-                    //is an individual
-                    if (comboBox1.SelectedIndex == 0)
+                    //is an individuals
+                    if (cbClientType.SelectedIndex == 0)
                     {
                         Profile.LoadProfile(false, licence);
                     }
-                    //is a department
-                    else if(comboBox1.SelectedIndex == 1)
+                    //is a departments
+                    else if(cbClientType.SelectedIndex == 1)
                     {
                         Profile.LoadProfile(true, licence);
                     }
-                    //is an academy
-                    else if(comboBox1.SelectedIndex == 2)
+                    //is an academys
+                    else if(cbClientType.SelectedIndex == 2)
                     {
                         Profile.LoadProfile(true, licence);
                     }
@@ -82,17 +138,19 @@ namespace InventoryManagmentSystem
 
         private void LoadUsers()
         {
-            int i = 0;
             dataGridUsers.Rows.Clear();
             cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE DayNight = @ClientType", con);
             cm.Parameters.AddWithValue("@ClientType", clientType);
             con.Open();
-            dr = cm.ExecuteReader();
-
-            while (dr.Read())
+            try
             {
-                dataGridUsers.Rows.Add(dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString());
+                dr = cm.ExecuteReader();
+                while (dr.Read())
+                {
+                    dataGridUsers.Rows.Add(dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
+                }
             }
+            catch(Exception ex) { Console.WriteLine(ex.Message); }
             dr.Close();
             con.Close();
         }
@@ -121,21 +179,21 @@ namespace InventoryManagmentSystem
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBox1.SelectedIndex == 0) 
+            if(cbClientType.SelectedIndex == 0) 
             {
-                clientType = "Individual";
+                clientType = "Individuals";
                 dataGridUsers.Columns[0].HeaderText = "Name";
                 dataGridUsers.Columns[3].HeaderText = "Academy";
             }
-            else if(comboBox1.SelectedIndex == 1)
+            else if(cbClientType.SelectedIndex == 1)
             {
-                clientType = "Department";
+                clientType = "Departments";
                 dataGridUsers.Columns[0].HeaderText = "Point Of Contact";
                 dataGridUsers.Columns[3].HeaderText = "Department";
             }
-            else if (comboBox1.SelectedIndex == 2)
+            else if (cbClientType.SelectedIndex == 2)
             {
-                clientType = "Academy";
+                clientType = "Academys";
                 dataGridUsers.Columns[0].HeaderText = "Point Of Contact";
                 dataGridUsers.Columns[3].HeaderText = "Academy";
             }
