@@ -220,3 +220,4 @@ C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\obj\Debug\Invent
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ReturnOrReplacecs.resources
 C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ReturnOrReplacecs.resources
 C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ProviderForm.resources
+C:\Code\Projects\InventorySystem_02\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.PricesForm.resources
