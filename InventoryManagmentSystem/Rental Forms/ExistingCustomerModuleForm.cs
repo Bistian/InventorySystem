@@ -65,7 +65,8 @@ namespace InventoryManagmentSystem
         private bool UpdateItem(DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex != 7) { return false; }
-            NewRentalModuleForm form = new NewRentalModuleForm(cbClientType.Text, dataGridUsers.Rows[e.RowIndex].Cells[0].Value.ToString());
+            string clientName = dataGridUsers.Rows[e.RowIndex].Cells[0].Value.ToString();
+            NewRentalModuleForm form = new NewRentalModuleForm(cbClientType.Text, clientName);
 
             try
             {

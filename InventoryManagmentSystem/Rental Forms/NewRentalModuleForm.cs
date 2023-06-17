@@ -56,6 +56,7 @@ namespace InventoryManagmentSystem
             {
                 comboBoxRentalType.Text = rentalType;
                 AutoFillFields(rentalType, clientName);
+                
             }
         }
 
@@ -317,37 +318,17 @@ namespace InventoryManagmentSystem
 
         public void UpdateProfile(bool isDepartment, String ClientDrivers)
         {
+            txtBoxDriversLicense.Enabled = false;
             panelRentalType.Visible = false;
             ExistingUser = true;
             if (isDepartment)
             {
                 try
                 {
-                    /*cm = new SqlCommand("SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address," +
-                           "Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,Notes " +
-                           "FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber", con);
-                    cm.Parameters.AddWithValue("@DriversLicenseNumber", ClientDrivers);
-                    con.Open();
-                    dr = cm.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        labelProfileName.Text = dr[4].ToString();
-                        labelClientPhone.Text = dr[1].ToString();
-                        labelClientEmail.Text = dr[2].ToString();
-
-                        //point of contact
-                        labelProfileDrivers.Text = "Point of contact:";
-                        labelClientDrivers.Text = dr[0].ToString();
-                        labelClientAddress.Text = dr[5].ToString();
-                        textBoxNotes.Text = dr[13].ToString();
-                    }
-                    dr.Close();
-                    con.Close();*/
                     flowLayoutPanelProfile.Visible = true;
                     panelProfileRentalInfo.Visible = false;
                     panelProfileMeasurments.Visible = false;
                     license = labelProfileName.Text;
-
                 }
                 catch (Exception ex)
                 {
