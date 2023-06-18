@@ -144,64 +144,36 @@ namespace InventoryManagmentSystem
 
             string connectDatabase = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=" + filePath + ";Integrated Security=True;Connect Timeout=30";
 
-            //Helmets
+            // Items
             using (SqlConnection connection = new SqlConnection(connectDatabase))
             {
                 connection.Open();
 
                 string sql =
-                    "CREATE TABLE [dbo].[tbHelmets] (" +
-                    "   [Id]              INT          IDENTITY (1, 1) NOT NULL," +
-                    "   [ItemType]        VARCHAR (50) DEFAULT ('Helmet') NOT NULL," +
-                    "   [Brand]           VARCHAR (50) NOT NULL," +
-                    "   [SerialNumber]    VARCHAR (50) NOT NULL," +
-                    "   [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL," +
-                    "   [UsedNew]         VARCHAR (50) NOT NULL," +
-                    "   [ManufactureDate] DATE         NOT NULL," +
-                    "   [DueDate]         DATE         NULL," +
-                    "   [Color]           VARCHAR (50) NOT NULL);";
+                    "CREATE TABLE[dbo].[tbItems] (" +
+                    "[Id] INT NOT NULL PRIMARY KEY," +
+                    "[ItemType] VARCHAR(50);";
+
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
                 connection.Close();
             }
 
-            //Jackets
+            // History
             using (SqlConnection connection = new SqlConnection(connectDatabase))
             {
                 connection.Open();
 
                 string sql =
-                    "CREATE TABLE [dbo].[tbJackets] (" +
-                "    [Id]              INT          IDENTITY (1, 1) NOT NULL," +
-                "    [ItemType]        VARCHAR (50) DEFAULT ('Jacket') NOT NULL," +
-                "    [Brand]           VARCHAR (50) NOT NULL," +
-                "    [SerialNumber]    VARCHAR (50) NOT NULL," +
-                "    [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL," +
-                "    [UsedNew]         VARCHAR (50) NOT NULL," +
-                "    [ManufactureDate] DATE         NOT NULL," +
-                "    [DueDate]         DATE         NULL," +
-                "    [Size]            VARCHAR (50) NOT NULL);";
-                SqlCommand command = new SqlCommand(sql, connection);
-                command.ExecuteNonQuery();
-                connection.Close();
-            }
+                    "CREATE TABLE[dbo].[tbHistories] (" +
+                    "[Id] INT NOT NULL PRIMARY KEY," +
+                    "[ItemId] INT NOT NULL," +
+                    "[ClientId] INT NOT NULL," +
+                    "[RentDate] DATE NOT NULL," +
+                    "[ReturnDate] DATE);" +
+                    "FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([id])," +
+                    "FOREIGN KEY (ClientId) REFERENCES [dbo].[tbClients] ([Id]));";
 
-            //Pants
-            using (SqlConnection connection = new SqlConnection(connectDatabase))
-            {
-                connection.Open();
-
-                string sql =
-                    "CREATE TABLE [dbo].[tbPants] (" +
-                "    [Id]              INT          IDENTITY (1, 1) NOT NULL," +
-                "    [ItemType]        VARCHAR (50) DEFAULT ('Pants') NOT NULL," +
-                "    [Brand]           VARCHAR (50) NOT NULL," +
-                "    [SerialNumber]    VARCHAR (50) NOT NULL," +
-                "    [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL," +
-                "    [UsedNew]         VARCHAR (50) NULL," +
-                "    [ManufactureDate] DATE         NOT NULL," +
-                "    [DueDate]         DATE         NULL," +
-                "    [Size]            VARCHAR (50) NOT NULL);";
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -215,7 +187,7 @@ namespace InventoryManagmentSystem
                 string sql =
                     "CREATE TABLE [dbo].[tbBoots] (" +
                 "    [Id]              INT          IDENTITY (1, 1) NOT NULL," +
-                "    [ItemType]        VARCHAR (50) DEFAULT ('Boots') NOT NULL," +
+                "    [ItemId]          INT          NOT NULL," +
                 "    [Brand]           VARCHAR (50) NOT NULL," +
                 "    [SerialNumber]    VARCHAR (50) NOT NULL," +
                 "    [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL," +
@@ -223,7 +195,74 @@ namespace InventoryManagmentSystem
                 "    [ManufactureDate] DATE         NOT NULL," +
                 "    [DueDate]         DATE         NULL," +
                 "    [Size]            VARCHAR (50) NOT NULL," +
-                "    [Material]        VARCHAR (50) NOT NULL);";
+                "    [Material]        VARCHAR (50) NOT NULL)," +
+                "    FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id]));";
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+
+            //Helmets
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
+            {
+                connection.Open();
+
+                string sql =
+                    "CREATE TABLE [dbo].[tbHelmets] (" +
+                    "   [Id]              INT          IDENTITY (1, 1) NOT NULL," +
+                    "   [ItemId]          INT          NOT NULL," +
+                    "   [Brand]           VARCHAR (50) NOT NULL," +
+                    "   [SerialNumber]    VARCHAR (50) NOT NULL," +
+                    "   [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL," +
+                    "   [UsedNew]         VARCHAR (50) NOT NULL," +
+                    "   [ManufactureDate] DATE         NOT NULL," +
+                    "   [DueDate]         DATE         NULL," +
+                    "   [Color]           VARCHAR (50) NOT NULL)," +
+                    "   FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id]));";
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+
+            //Jackets
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
+            {
+                connection.Open();
+
+                string sql =
+                    "CREATE TABLE [dbo].[tbJackets] (" +
+                "    [Id]              INT          IDENTITY (1, 1) NOT NULL," +
+                "    [ItemId]          INT          NOT NULL," +
+                "    [Brand]           VARCHAR (50) NOT NULL," +
+                "    [SerialNumber]    VARCHAR (50) NOT NULL," +
+                "    [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL," +
+                "    [UsedNew]         VARCHAR (50) NOT NULL," +
+                "    [ManufactureDate] DATE         NOT NULL," +
+                "    [DueDate]         DATE         NULL," +
+                "    [Size]            VARCHAR (50) NOT NULL)," +
+                "    FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id]));";
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+
+            //Pants
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
+            {
+                connection.Open();
+
+                string sql =
+                    "CREATE TABLE [dbo].[tbPants] (" +
+                "    [Id]              INT          IDENTITY (1, 1) NOT NULL," +
+                "    [ItemId]          INT          NOT NULL," +
+                "    [Brand]           VARCHAR (50) NOT NULL," +
+                "    [SerialNumber]    VARCHAR (50) NOT NULL," +
+                "    [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL," +
+                "    [UsedNew]         VARCHAR (50) NULL," +
+                "    [ManufactureDate] DATE         NOT NULL," +
+                "    [DueDate]         DATE         NULL," +
+                "    [Size]            VARCHAR (50) NOT NULL)," +
+                "    FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id]));"; ;
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -279,24 +318,6 @@ namespace InventoryManagmentSystem
                 connection.Close();
             }
 
-            //General
-            using (SqlConnection connection = new SqlConnection(connectDatabase))
-            {
-                connection.Open();
-
-                string sql =
-                    "CREATE TABLE[dbo].[tbGeneral] (" +
-                    "[Id]           INT NOT NULL," +
-                    "[ItemType] NCHAR(10) NULL," +
-                    "[SerialNum] NCHAR(10) NULL," +
-                    "[Brand] NCHAR(10) NULL," +
-                    "[CurrLocation] NCHAR(10) NULL);";
-
-                SqlCommand command = new SqlCommand(sql, connection);
-                command.ExecuteNonQuery();
-                connection.Close();
-            }
-
             //Users
             using (SqlConnection connection = new SqlConnection(connectDatabase))
             {
@@ -345,6 +366,7 @@ namespace InventoryManagmentSystem
                 command.ExecuteNonQuery();
                 connection.Close();
             }
+
         }
 
         /// <summary>
