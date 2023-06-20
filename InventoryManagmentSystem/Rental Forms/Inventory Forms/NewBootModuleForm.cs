@@ -19,9 +19,9 @@ namespace InventoryManagmentSystem
         // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         //Creating command
-        SqlConnection con = new SqlConnection(connectionString);
+        SqlConnection connection = new SqlConnection(connectionString);
         //Creating command
-        SqlCommand cm = new SqlCommand();
+        SqlCommand command = new SqlCommand();
         bool isNewItem;
         #endregion SQL_Variables
 
@@ -36,10 +36,10 @@ namespace InventoryManagmentSystem
         {
             bool Exists = false;
 
-            cm = new SqlCommand($"SELECT Count (*) FROM {tableName} WHERE SerialNumber = @SerialNumber", con);
-            cm.Parameters.AddWithValue("@SerialNumber", SerialNumber);
-            con.Open();
-            object result = cm.ExecuteScalar();
+            command = new SqlCommand($"SELECT Count (*) FROM {tableName} WHERE SerialNumber = @SerialNumber", connection);
+            command.Parameters.AddWithValue("@SerialNumber", SerialNumber);
+            connection.Open();
+            object result = command.ExecuteScalar();
 
             if (result != null)
             {
@@ -52,7 +52,7 @@ namespace InventoryManagmentSystem
                 Exists = true;
             }
 
-            con.Close();
+            connection.Close();
 
             return Exists;
         }
@@ -70,30 +70,47 @@ namespace InventoryManagmentSystem
         {
             try
             {
-                if (MessageBox.Show("Are you sure you want to save this Item?", "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                string message = "Are you sure you want to save this Item?";
+                DialogResult result = MessageBox.Show(message, "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if(result == DialogResult.No) { return; }
+
+                bool exists = CheckIfExists("tbBoots", txtBoxSerialNumber.Text);
+                if(exists)
                 {
-                    bool exists = CheckIfExists("tbBoots", txtBoxSerialNumber.Text);
-                    if (!exists)
-                    {
-                        cm = new SqlCommand(
-                           "INSERT INTO tbBoots(SerialNumber,Brand,UsedNew,Material,Size,ManufactureDate)" +
-                           "VALUES(@SerialNumber,@Brand,@UsedNew,@Material,@Size,@ManufactureDate)", con);
-                        cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-                        cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                        cm.Parameters.AddWithValue("@UsedNew", comboBoxUsedNew.Text);
-                        cm.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
-                        cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                        cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value.Date);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
-                        MessageBox.Show("Item has been successfully saved");
-                        Clear();
-                        this.Dispose();
-                    }
-                    else
-                        MessageBox.Show("Serial Number already in the system");
+                    MessageBox.Show("Serial Number already in the system");
+                    return;
                 }
+
+                // Add to Items Table.
+                string query =
+                    "INSERT INTO tbItems(ItemType) " +
+                    "OUTPUT inserted.Id " +
+                    "VALUES(@ItemType)";
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemType", "Boots");
+                connection.Open();
+                // Execute the query and retrieve the generated UUID
+                Guid uuid = (Guid)command.ExecuteScalar();
+                connection.Close();
+
+                query = 
+                    "INSERT INTO tbBoots(ItemId,SerialNumber,Brand,UsedNew,Material,Size,ManufactureDate)" +
+                    "VALUES(@ItemId, @SerialNumber,@Brand,@UsedNew,@Material,@Size,@ManufactureDate)";
+
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemId", uuid);
+                command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
+                command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
+                command.Parameters.AddWithValue("@UsedNew", comboBoxUsedNew.Text);
+                command.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
+                command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
+                command.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value.Date);
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+                MessageBox.Show("Item has been successfully saved");
+                Clear();
+                this.Dispose();
             }
             catch (Exception ex)
             {
@@ -107,16 +124,16 @@ namespace InventoryManagmentSystem
             {
                 if (MessageBox.Show("Are you sure you want to update this Item?", "Update Item", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cm = new SqlCommand("UPDATE tbBoots SET SerialNumber = @SerialNum,Brand = @Brand, UsedNew = @UsedNew, Material = @Material, Size = @Size, ManufactureDate = @ManufactureDate WHERE BootID LIKE '" + txtBoxSerialNumber.Text + "' ", con);
-                    cm.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-                    cm.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                    cm.Parameters.AddWithValue("@UsedNew", comboBoxUsedNew.Text);
-                    cm.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
-                    cm.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                    cm.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
+                    command = new SqlCommand("UPDATE tbBoots SET SerialNumber = @SerialNum,Brand = @Brand, UsedNew = @UsedNew, Material = @Material, Size = @Size, ManufactureDate = @ManufactureDate WHERE BootID LIKE '" + txtBoxSerialNumber.Text + "' ", connection);
+                    command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
+                    command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
+                    command.Parameters.AddWithValue("@UsedNew", comboBoxUsedNew.Text);
+                    command.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
+                    command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
+                    command.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
                     MessageBox.Show("Item has been successfully updated");
                     this.Dispose();
 
@@ -139,25 +156,17 @@ namespace InventoryManagmentSystem
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtBoxSerialNumber.Text) && 
-                !string.IsNullOrEmpty(comboBoxUsedNew.Text) &&
-            !string.IsNullOrEmpty(comboBoxBrand.Text) &&
-            !string.IsNullOrEmpty(comboBoxMaterial.Text) &&
-            !string.IsNullOrEmpty(comboBoxSize.Text))
-            {
-                //if (isNewItem == true)
-                //{
-                CreateItem();
-                //}
-                //else
-                //{
-                //    UpdateItem();
-                //}
-            }
-            else
+            if (string.IsNullOrEmpty(txtBoxSerialNumber.Text) || 
+                string.IsNullOrEmpty(comboBoxUsedNew.Text) ||
+                string.IsNullOrEmpty(comboBoxBrand.Text) ||
+                string.IsNullOrEmpty(comboBoxMaterial.Text) ||
+                string.IsNullOrEmpty(comboBoxSize.Text))
             {
                 MessageBox.Show("Please fill the required fields");
-            }  
+                return;
+            }
+            CreateItem();
+
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
@@ -170,9 +179,9 @@ namespace InventoryManagmentSystem
             string query = "SELECT * FROM tbProviders WHERE itemType='boots'";
             try
             {
-                cm = new SqlCommand(query, con);
-                con.Open();
-                SqlDataReader dataReader = cm.ExecuteReader();
+                command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
                     comboBoxBrand.Items.Add(dataReader[1]);
@@ -182,7 +191,7 @@ namespace InventoryManagmentSystem
             {
                 Console.WriteLine(ex.Message);
             }
-            con.Close();
+            connection.Close();
         }
 
         private void btnAddBrand_Click(object sender, EventArgs e)

@@ -36,6 +36,7 @@
             this.btnNewDatabase = new System.Windows.Forms.Button();
             this.btnFindDatabase = new System.Windows.Forms.Button();
             this.labelName = new System.Windows.Forms.Label();
+            this.btnDeleteDatabase = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ButtonClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
@@ -49,9 +50,9 @@
             this.panelTop.Controls.Add(this.returntxt);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(564, 64);
+            this.panelTop.Size = new System.Drawing.Size(423, 52);
             this.panelTop.TabIndex = 42;
             // 
             // ButtonClose
@@ -59,10 +60,9 @@
             this.ButtonClose.Image = ((System.Drawing.Image)(resources.GetObject("ButtonClose.Image")));
             this.ButtonClose.ImageHover = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageHover")));
             this.ButtonClose.ImageNormal = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageNormal")));
-            this.ButtonClose.Location = new System.Drawing.Point(508, 17);
-            this.ButtonClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ButtonClose.Location = new System.Drawing.Point(381, 14);
             this.ButtonClose.Name = "ButtonClose";
-            this.ButtonClose.Size = new System.Drawing.Size(33, 28);
+            this.ButtonClose.Size = new System.Drawing.Size(25, 23);
             this.ButtonClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ButtonClose.TabIndex = 44;
             this.ButtonClose.TabStop = false;
@@ -73,10 +73,9 @@
             this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
             this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
             this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(1076, 11);
-            this.CloseButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CloseButton.Location = new System.Drawing.Point(807, 9);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(36, 42);
+            this.CloseButton.Size = new System.Drawing.Size(27, 34);
             this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.CloseButton.TabIndex = 68;
             this.CloseButton.TabStop = false;
@@ -90,10 +89,9 @@
             this.returntxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.returntxt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.returntxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.returntxt.Location = new System.Drawing.Point(16, 16);
-            this.returntxt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.returntxt.Location = new System.Drawing.Point(12, 13);
             this.returntxt.Name = "returntxt";
-            this.returntxt.Size = new System.Drawing.Size(443, 29);
+            this.returntxt.Size = new System.Drawing.Size(355, 24);
             this.returntxt.TabIndex = 16;
             this.returntxt.Text = "You do not have a database selected";
             this.returntxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -101,10 +99,10 @@
             // btnNewDatabase
             // 
             this.btnNewDatabase.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewDatabase.Location = new System.Drawing.Point(303, 117);
-            this.btnNewDatabase.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnNewDatabase.Location = new System.Drawing.Point(227, 95);
+            this.btnNewDatabase.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNewDatabase.Name = "btnNewDatabase";
-            this.btnNewDatabase.Size = new System.Drawing.Size(239, 66);
+            this.btnNewDatabase.Size = new System.Drawing.Size(179, 54);
             this.btnNewDatabase.TabIndex = 43;
             this.btnNewDatabase.Text = "New Database";
             this.btnNewDatabase.UseVisualStyleBackColor = true;
@@ -113,10 +111,10 @@
             // btnFindDatabase
             // 
             this.btnFindDatabase.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFindDatabase.Location = new System.Drawing.Point(21, 117);
-            this.btnFindDatabase.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnFindDatabase.Location = new System.Drawing.Point(16, 95);
+            this.btnFindDatabase.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFindDatabase.Name = "btnFindDatabase";
-            this.btnFindDatabase.Size = new System.Drawing.Size(239, 66);
+            this.btnFindDatabase.Size = new System.Drawing.Size(179, 54);
             this.btnFindDatabase.TabIndex = 44;
             this.btnFindDatabase.Text = "Find Database";
             this.btnFindDatabase.UseVisualStyleBackColor = true;
@@ -125,26 +123,38 @@
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(21, 95);
-            this.labelName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelName.Location = new System.Drawing.Point(16, 77);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(44, 16);
+            this.labelName.Size = new System.Drawing.Size(35, 13);
             this.labelName.TabIndex = 45;
             this.labelName.Text = "label1";
             this.labelName.Visible = false;
             // 
+            // btnDeleteDatabase
+            // 
+            this.btnDeleteDatabase.Enabled = false;
+            this.btnDeleteDatabase.Location = new System.Drawing.Point(331, 167);
+            this.btnDeleteDatabase.Name = "btnDeleteDatabase";
+            this.btnDeleteDatabase.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteDatabase.TabIndex = 46;
+            this.btnDeleteDatabase.Text = "Delete Database";
+            this.btnDeleteDatabase.UseVisualStyleBackColor = true;
+            this.btnDeleteDatabase.Visible = false;
+            this.btnDeleteDatabase.Click += new System.EventHandler(this.btnDeleteDatabase_Click);
+            // 
             // DatabaseCreationModule
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(564, 249);
+            this.ClientSize = new System.Drawing.Size(423, 202);
+            this.Controls.Add(this.btnDeleteDatabase);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.btnFindDatabase);
             this.Controls.Add(this.btnNewDatabase);
             this.Controls.Add(this.panelTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "DatabaseCreationModule";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DatabaseCreationModule";
@@ -166,5 +176,6 @@
         private CustomButton ButtonClose;
         private System.Windows.Forms.Button btnFindDatabase;
         private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.Button btnDeleteDatabase;
     }
 }
