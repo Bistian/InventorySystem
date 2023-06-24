@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryManagmentSystem.Rental_Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,29 +29,37 @@ namespace InventoryManagmentSystem
         private void Helmet_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            NewHelmetModuleForm ModForm = new NewHelmetModuleForm(true);
-            ModForm.ShowDialog();
+            //NewHelmetModuleForm ModForm = new NewHelmetModuleForm(true);
+            //ModForm.ShowDialog();
+            NewItemForm form = new NewItemForm("helmet");
+            form.ShowDialog();
         }
 
         private void Jacket_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            NewJacketModuleForm ModForm = new NewJacketModuleForm(true);
-            ModForm.ShowDialog();
+            //NewJacketModuleForm ModForm = new NewJacketModuleForm(true);
+            //ModForm.ShowDialog();
+            NewItemForm form = new NewItemForm("jacket");
+            form.ShowDialog();
         }
 
         private void Pants_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            NewPantsModuleForm ModForm = new NewPantsModuleForm(true);
-            ModForm.ShowDialog();
+            //NewPantsModuleForm ModForm = new NewPantsModuleForm(true);
+            //ModForm.ShowDialog();
+            NewItemForm form = new NewItemForm("pants");
+            form.ShowDialog();
         }
 
         private void Boots_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            NewBootModuleForm ModForm = new NewBootModuleForm(true);
-            ModForm.ShowDialog();
+            //NewBootModuleForm ModForm = new NewBootModuleForm(true);
+            //ModForm.ShowDialog();
+            NewItemForm form = new NewItemForm("boots");
+            form.ShowDialog();
         }
     }
 }
