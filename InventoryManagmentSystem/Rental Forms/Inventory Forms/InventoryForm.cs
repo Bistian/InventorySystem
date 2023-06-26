@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
+using InventoryManagmentSystem.Rental_Forms;
 
 namespace InventoryManagmentSystem
 {
@@ -19,9 +20,9 @@ namespace InventoryManagmentSystem
         // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         //Creating command
-        SqlConnection con = new SqlConnection(connectionString);
+        SqlConnection connection = new SqlConnection(connectionString);
         //Creating command
-        SqlCommand cm = new SqlCommand();
+        SqlCommand command = new SqlCommand();
         //Creatinng Reader
         SqlDataReader dr;
         #endregion SQL_Variables
@@ -41,7 +42,7 @@ namespace InventoryManagmentSystem
             string specificWhere;
             if(comboBoxItem.SelectedIndex == 0) // Helmets
             {
-                finalColumn = ", Color";
+                finalColumn = "Color,";
                 sizes = "";
                 specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
                     " UsedNew LIKE '%" + searchTerm + "%' OR" +
@@ -50,7 +51,7 @@ namespace InventoryManagmentSystem
             else if (comboBoxItem.SelectedIndex == 3) // Boots
             {
                 finalColumn = ", Material";
-                sizes = " Size,";
+                sizes = "Size,";
                 specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
                     " UsedNew LIKE '%" + searchTerm + "%' OR" +
                     " SIZE LIKE '%" + searchTerm + "%' OR" +
@@ -59,18 +60,17 @@ namespace InventoryManagmentSystem
             else // Pants && Jackets
             {
                 finalColumn = "";
-                sizes = "Size, ";
+                sizes = "Size,";
                 specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
                     " UsedNew LIKE '%" + searchTerm + "%' OR" +
                     " SIZE LIKE '%" + searchTerm + "%' OR" +
                     " SerialNumber LIKE '%" + searchTerm + "%') AND " + firetec;
             }
 
-            string query = "SELECT ItemType, " +
-                "Brand, SerialNumber, " + 
-                sizes + "ManufactureDate, " +
-                "UsedNew " + finalColumn + 
-                ", Location" + " FROM " + CurrTable;
+            string query = "SELECT Brand, SerialNumber," +
+                "UsedNew," + "ManufactureDate," +
+                sizes + finalColumn + 
+                "Location" + " FROM " + CurrTable;
 
             if (!isSearch)
             {
@@ -78,6 +78,49 @@ namespace InventoryManagmentSystem
             }
 
             return (query + specificWhere);
+        }
+
+        private string QueryItems2(string searchTerm = "")
+        {
+            if(comboBoxItem.Text == "Boots") { return QueryBoots(searchTerm); }
+            if(comboBoxItem.Text == "Helmets") { return QueryHelmets(searchTerm); }
+            if(comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants") { return QueryJacketsAndPants(searchTerm); }
+            return "";
+        }
+
+        private string QueryBoots(string searchTerm)
+        {
+            string select = "SELECT Brand, SerialNumber, UsedNew, ManufactureDate, Size, Material, Location FROM tbBoots ";
+            string where =
+                $"WHERE (Brand LIKE '%{searchTerm}%' OR " +
+                $"SerialNumber LIKE '%{searchTerm}%' OR " +
+                $"UsedNew LIKE '%{searchTerm}%' OR " +
+                $"Size LIKE '%{searchTerm}%')";
+            return (select + where);
+        }
+        
+        private string QueryHelmets(string searchTerm)
+        {
+            string select = "SELECT Brand, SerialNumber, UsedNew, ManufactureDate, Color, Location FROM tbHelmets ";
+            string where =
+                $"WHERE (Brand LIKE '%{searchTerm}%' OR " +
+                $"SerialNumber LIKE '%{searchTerm}%' OR " +
+                $"UsedNew LIKE '%{searchTerm}%' OR " +
+                $"Color LIKE '%{searchTerm}%')";
+            return (select + where);
+        }
+
+        private string QueryJacketsAndPants(string searchTerm)
+        {
+            string from = "tbPants ";
+            if(comboBoxItem.Text == "Jackets") { from = "tbJackets "; }
+            string select = "SELECT Brand, SerialNumber, UsedNew, ManufactureDate, Size, Location FROM ";
+            string where =
+                $"WHERE (Brand LIKE '%{searchTerm}%' OR " +
+                $"SerialNumber LIKE '%{searchTerm}%' OR " +
+                $"UsedNew LIKE '%{searchTerm}%' OR " +
+                $"Size LIKE '%{searchTerm}%')";
+            return (select + from + where);
         }
 
         /// <summary>
@@ -90,37 +133,37 @@ namespace InventoryManagmentSystem
                 dataGridInv.Columns["ManufactureDate"].DefaultCellStyle.Format = "d";
                 int i = 0;
                 dataGridInv.Rows.Clear();
-                cm = new SqlCommand(QueryItems(), con);
-                con.Open();
-                dr = cm.ExecuteReader();
+                command = new SqlCommand(QueryItems2(), connection);
+                connection.Open();
+                dr = command.ExecuteReader();
 
                 //Check which item was selected
-                if (comboBoxItem.SelectedIndex == 0)
+                if (comboBoxItem.Text == "Helmets")
                 {
                     while (dr.Read())
                     {
                         i++;
-                        dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), "NA", dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString());
+                        dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), "Size", "Material", dr[4].ToString(), dr[5].ToString());
                     }
                 }
-                else if(comboBoxItem.SelectedIndex == 3)
+                else if(comboBoxItem.Text == "Boots")
                 {
                     while (dr.Read())
                     {
                         i++;
-                        dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], dr[6].ToString(), dr[7].ToString());
+                        dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString(), "Color");
                     }
                 }
-                else if (comboBoxItem.SelectedIndex == 1 || comboBoxItem.SelectedIndex == 2)
+                else if (comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants")
                 {
                     while (dr.Read())
                     {
                         i++;
-                        dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], "NA", dr[6].ToString());
+                        dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4], dr[5].ToString(), "Material", "Color");
                     }
                 }
                 dr.Close();
-                con.Close();
+                connection.Close();
             }
         }
 
@@ -128,7 +171,30 @@ namespace InventoryManagmentSystem
         {
             // Reset search bar.
             searchBar.Text = "";
+            ChangeVisibleColumns();
             LoadInventory();
+        }
+
+        private void ChangeVisibleColumns()
+        {
+            if (comboBoxItem.Text == "Boots")
+            {
+                dataGridInv.Columns["Color"].Visible = false;
+                dataGridInv.Columns["Size"].Visible = true;
+                dataGridInv.Columns["Material"].Visible = true;
+            }
+            else if (comboBoxItem.Text == "Helmets")
+            {
+                dataGridInv.Columns["Color"].Visible = true;
+                dataGridInv.Columns["Size"].Visible = false;
+                dataGridInv.Columns["Material"].Visible = false;
+            }
+            else if (comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants")
+            {
+                dataGridInv.Columns["Color"].Visible = false;
+                dataGridInv.Columns["Size"].Visible = true;
+                dataGridInv.Columns["Material"].Visible = false;
+            }
         }
 
         private void UsersButton_Click_1(object sender, EventArgs e)
@@ -152,13 +218,13 @@ namespace InventoryManagmentSystem
                 //SQL
                 int i = 0;
                 dataGridInv.Rows.Clear();
-                string query = QueryItems(true, searchTerm);
-                cm = new SqlCommand(query, con);
-                con.Open();
+                string query = QueryItems2(searchTerm);
+                command = new SqlCommand(query, connection);
+                connection.Open();
 
                 try
                 {
-                    dr = cm.ExecuteReader();
+                    dr = command.ExecuteReader();
 
                     while (dr.Read())
                     {
@@ -202,13 +268,13 @@ namespace InventoryManagmentSystem
                     }
 
                     dr.Close();
-                    con.Close();
+                    connection.Close();
                     dataGridInv.Refresh();
                 }
                 catch (Exception ex)
                 {
                     dr.Close();
-                    con.Close();
+                    connection.Close();
                     Console.WriteLine(ex.Message);
                 }  
             }
@@ -216,107 +282,20 @@ namespace InventoryManagmentSystem
 
         private void dataGridInv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            string colName = dataGridInv.Columns[e.ColumnIndex].Name;
+            string itemType = comboBoxItem.Text;
             try
             {
-                String colName = dataGridInv.Columns[e.ColumnIndex].Name;
                 if (colName == "Edit")
                 {
-                    if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Jacket")
-                    {
-
-                        NewJacketModuleForm InvModule = new NewJacketModuleForm();
-                        InvModule.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                        InvModule.comboBoxSize.Text = dataGridInv.Rows[e.RowIndex].Cells["Size"].Value.ToString();
-                        InvModule.comboBoxBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
-                        InvModule.comboBoxUsedNew.Text = dataGridInv.Rows[e.RowIndex].Cells["UsedNew"].Value.ToString();
-                        InvModule.dateTimePickerManufactureDate.Text = dataGridInv.Rows[e.RowIndex].Cells["ManufactureDate"].Value.ToString();
-                        InvModule.SaveButton.Enabled = true;
-
-                        //delete old 
-                        string table = "tb" + comboBoxItem.Text;
-                        con.Open();
-                        cm = new SqlCommand("DELETE FROM " + table + " WHERE SerialNumber LIKE '" + dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString() + "'", con);
-                        cm.ExecuteNonQuery();
-                        con.Close();
-
-                        InvModule.ShowDialog();
-                    }
-
-                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Pants")
-                    {
-
-                        NewPantsModuleForm InvModule = new NewPantsModuleForm();
-                        InvModule.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                        InvModule.comboBoxSize.Text = dataGridInv.Rows[e.RowIndex].Cells["Size"].Value.ToString();
-                        InvModule.comboBoxBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
-                        InvModule.comboBoxUsedNew.Text = dataGridInv.Rows[e.RowIndex].Cells["UsedNew"].Value.ToString();
-                        InvModule.dateTimePickerManufactureDate.Text = dataGridInv.Rows[e.RowIndex].Cells["ManufactureDate"].Value.ToString();
-                        InvModule.SaveButton.Enabled = true;
-
-                        //delete old 
-                        string table = "tb" + comboBoxItem.Text;
-                        con.Open();
-                        cm = new SqlCommand("DELETE FROM " + table + " WHERE SerialNumber LIKE '" + dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString() + "'", con);
-                        cm.ExecuteNonQuery();
-                        con.Close();
-
-                        InvModule.ShowDialog();
-                    }
-
-                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Helmet")
-                    {
-
-                        NewHelmetModuleForm InvModule = new NewHelmetModuleForm();
-                        InvModule.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                        InvModule.comboBoxColor.Text = dataGridInv.Rows[e.RowIndex].Cells["ColorMaterial"].Value.ToString();
-                        InvModule.comboBoxBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
-                        InvModule.comboBoxUsedNew.Text = dataGridInv.Rows[e.RowIndex].Cells["UsedNew"].Value.ToString();
-                        InvModule.dateTimePickerManufactureDate.Text = dataGridInv.Rows[e.RowIndex].Cells["ManufactureDate"].Value.ToString();
-                        InvModule.SaveButton.Enabled = true;
-
-                        //delete old 
-                        string table = "tb" + comboBoxItem.Text;
-                        con.Open();
-                        cm = new SqlCommand("DELETE FROM " + table + " WHERE SerialNumber LIKE '" + dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString() + "'", con);
-                        cm.ExecuteNonQuery();
-                        con.Close();
-
-                        InvModule.ShowDialog();
-                    }
-
-                    else if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Boots")
-                    {
-
-                        NewBootModuleForm InvModule = new NewBootModuleForm();
-                        InvModule.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                        InvModule.comboBoxMaterial.Text = dataGridInv.Rows[e.RowIndex].Cells["ColorMaterial"].Value.ToString();
-                        InvModule.comboBoxSize.Text = dataGridInv.Rows[e.RowIndex].Cells["Size"].Value.ToString();
-                        InvModule.comboBoxBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
-                        InvModule.comboBoxUsedNew.Text = dataGridInv.Rows[e.RowIndex].Cells["UsedNew"].Value.ToString();
-                        InvModule.dateTimePickerManufactureDate.Text = dataGridInv.Rows[e.RowIndex].Cells["ManufactureDate"].Value.ToString();
-                        InvModule.SaveButton.Enabled = true;
-
-                        //delete old 
-                        string table = "tb" + comboBoxItem.Text;
-                        con.Open();
-                        cm = new SqlCommand("DELETE FROM " + table + " WHERE SerialNumber LIKE '" + dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString() + "'", con);
-                        cm.ExecuteNonQuery();
-                        con.Close();
-
-                        InvModule.ShowDialog();
-                    }
+                    if (itemType == "Jackets" || itemType == "Pants") { UpdateJacketOrPants(e); }
+                    else if (itemType == "Helmets") { UpdateHelmet(e); }
+                    else if (itemType == "Boots") { UpdateBoots(e); }
                 }
                 else if (colName == "Delete")
                 {
-                    if (MessageBox.Show("Are you sure you want to delete this item?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        string table = "tb" + comboBoxItem.Text;
-                        con.Open();
-                        cm = new SqlCommand("DELETE FROM " + table + " WHERE SerialNumber LIKE '" + dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString() + "'", con);
-                        cm.ExecuteNonQuery();
-                        con.Close();
-                        MessageBox.Show("Item has been successfully deleted");
-                    }
+                    string serialNumber = dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString();
+                    DeleteItem(serialNumber);
                 }
                 LoadInventory();
             }
@@ -324,6 +303,81 @@ namespace InventoryManagmentSystem
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        private void UpdateBoots(DataGridViewCellEventArgs e)
+        {
+            NewItemForm itemForm = new NewItemForm("Boots", true);
+            itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
+            itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
+            itemForm.comboBoxUsedNew.Text =                 GetCellValueAsString(e, "UsedNew");
+            itemForm.dateTimePickerManufactureDate.Text =   GetCellValueAsString(e, "ManufactureDate");
+            itemForm.comboBoxSize.Text =                    GetCellValueAsString(e, "Size");
+            itemForm.comboBoxMaterial.Text =                GetCellValueAsString(e, "Material");
+            itemForm.SaveButton.Enabled = true;
+            itemForm.ShowDialog();
+            itemForm.Close();
+        }
+
+        private void UpdateHelmet(DataGridViewCellEventArgs e)
+        {
+            NewItemForm itemForm = new NewItemForm("Helmet", true);
+            itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
+            itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
+            itemForm.comboBoxUsedNew.Text =                 GetCellValueAsString(e, "UsedNew");
+            itemForm.dateTimePickerManufactureDate.Text =   GetCellValueAsString(e, "ManufactureDate");
+            itemForm.comboBoxSize.Text =                    GetCellValueAsString(e, "Size");
+            itemForm.comboBoxColor.Text =                   GetCellValueAsString(e, "Color");
+            itemForm.SaveButton.Enabled = true;
+            itemForm.ShowDialog();
+            itemForm.Close();
+        }
+
+        private void UpdateJacketOrPants(DataGridViewCellEventArgs e)
+        {
+            string item = "Jacket";
+            if(comboBoxItem.Text == "Pants") { item = "Pants"; }
+            NewItemForm itemForm = new NewItemForm(item, true);
+            itemForm.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+            itemForm.comboBoxBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
+            itemForm.comboBoxUsedNew.Text = dataGridInv.Rows[e.RowIndex].Cells["UsedNew"].Value.ToString();
+            itemForm.dateTimePickerManufactureDate.Text = dataGridInv.Rows[e.RowIndex].Cells["ManufactureDate"].Value.ToString();
+            itemForm.comboBoxSize.Text = dataGridInv.Rows[e.RowIndex].Cells["Size"].Value.ToString();
+            itemForm.SaveButton.Enabled = true;
+            itemForm.ShowDialog();
+            itemForm.Close();
+        }
+        
+        private void DeleteItem(string serialNumber)
+        {
+            string message = "Are you sure you want to delete this item?";
+            string title = "Delete Record";
+            if (!HelperFunctions.YesNoMessageBox(message, title)) { return; }
+
+            string query = $"SELECT ItemId FROM tbItems WHERE SerialNumber = '{serialNumber}'";
+            // TODO: Do I really want to delete?
+            Guid uuid;
+            
+            string table = "tb" + comboBoxItem.Text;
+            try
+            {
+                connection.Open();
+                command = new SqlCommand($"DELETE FROM {table} WHERE SerialNumber LIKE '{serialNumber}'", connection);
+                command.ExecuteNonQuery();
+                connection.Close();
+                MessageBox.Show("Item has been successfully deleted");
+            }
+            catch(Exception ex)
+            {
+                connection.Close();
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Failed to delete the item.");
+            }
+        }
+
+        private string GetCellValueAsString(DataGridViewCellEventArgs e, string cellName)
+        {
+            return dataGridInv.Rows[e.RowIndex].Cells[cellName].Value.ToString();
         }
     }
 }

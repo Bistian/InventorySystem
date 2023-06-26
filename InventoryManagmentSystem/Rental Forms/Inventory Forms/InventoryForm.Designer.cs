@@ -43,13 +43,13 @@
             this.labelNewItem = new System.Windows.Forms.Label();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ManufactureDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UsedNew = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColorMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ManufactureDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Material = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
@@ -106,13 +106,13 @@
             this.dataGridInv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridInv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Num,
-            this.Type,
             this.Brand,
             this.Serial,
-            this.Size,
-            this.ManufactureDate,
             this.UsedNew,
-            this.ColorMaterial,
+            this.ManufactureDate,
+            this.Size,
+            this.Material,
+            this.Color,
             this.Location,
             this.Edit,
             this.Delete});
@@ -128,7 +128,7 @@
             this.dataGridInv.EnableHeadersVisualStyles = false;
             this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridInv.Location = new System.Drawing.Point(0, 24);
-            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridInv.Name = "dataGridInv";
             this.dataGridInv.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -199,7 +199,7 @@
             this.TopPanel.Controls.Add(this.comboBoxItem);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
-            this.TopPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TopPanel.Margin = new System.Windows.Forms.Padding(2);
             this.TopPanel.Name = "TopPanel";
             this.TopPanel.Size = new System.Drawing.Size(776, 24);
             this.TopPanel.TabIndex = 20;
@@ -241,15 +241,6 @@
             this.Num.Name = "Num";
             this.Num.ReadOnly = true;
             // 
-            // Type
-            // 
-            this.Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Type.FillWeight = 50F;
-            this.Type.HeaderText = "Item";
-            this.Type.MinimumWidth = 6;
-            this.Type.Name = "Type";
-            this.Type.ReadOnly = true;
-            // 
             // Brand
             // 
             this.Brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -266,14 +257,14 @@
             this.Serial.Name = "Serial";
             this.Serial.ReadOnly = true;
             // 
-            // Size
+            // UsedNew
             // 
-            this.Size.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Size.FillWeight = 40F;
-            this.Size.HeaderText = "Size";
-            this.Size.MinimumWidth = 6;
-            this.Size.Name = "Size";
-            this.Size.ReadOnly = true;
+            this.UsedNew.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.UsedNew.FillWeight = 80F;
+            this.UsedNew.HeaderText = "Condition";
+            this.UsedNew.MinimumWidth = 6;
+            this.UsedNew.Name = "UsedNew";
+            this.UsedNew.ReadOnly = true;
             // 
             // ManufactureDate
             // 
@@ -284,23 +275,33 @@
             this.ManufactureDate.Name = "ManufactureDate";
             this.ManufactureDate.ReadOnly = true;
             // 
-            // UsedNew
+            // Size
             // 
-            this.UsedNew.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.UsedNew.FillWeight = 80F;
-            this.UsedNew.HeaderText = "Condition";
-            this.UsedNew.MinimumWidth = 6;
-            this.UsedNew.Name = "UsedNew";
-            this.UsedNew.ReadOnly = true;
+            this.Size.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Size.FillWeight = 40F;
+            this.Size.HeaderText = "Size";
+            this.Size.MinimumWidth = 6;
+            this.Size.Name = "Size";
+            this.Size.ReadOnly = true;
+            this.Size.Visible = false;
             // 
-            // ColorMaterial
+            // Material
             // 
-            this.ColorMaterial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColorMaterial.FillWeight = 55F;
-            this.ColorMaterial.HeaderText = "Material";
-            this.ColorMaterial.MinimumWidth = 6;
-            this.ColorMaterial.Name = "ColorMaterial";
-            this.ColorMaterial.ReadOnly = true;
+            this.Material.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Material.FillWeight = 55F;
+            this.Material.HeaderText = "Material";
+            this.Material.MinimumWidth = 6;
+            this.Material.Name = "Material";
+            this.Material.ReadOnly = true;
+            this.Material.Visible = false;
+            // 
+            // Color
+            // 
+            this.Color.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Color.HeaderText = "Color";
+            this.Color.Name = "Color";
+            this.Color.ReadOnly = true;
+            this.Color.Visible = false;
             // 
             // Location
             // 
@@ -338,7 +339,7 @@
             this.Controls.Add(this.dataGridInv);
             this.Controls.Add(this.TopPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "InventoryForm";
             this.Text = "InventoryForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();
@@ -361,13 +362,13 @@
         private System.Windows.Forms.Panel TopPanel;
         private System.Windows.Forms.Label labelNewItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Num;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Brand;
         private System.Windows.Forms.DataGridViewTextBoxColumn Serial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ManufactureDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn UsedNew;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColorMaterial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ManufactureDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Material;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Color;
         private System.Windows.Forms.DataGridViewTextBoxColumn Location;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Delete;
