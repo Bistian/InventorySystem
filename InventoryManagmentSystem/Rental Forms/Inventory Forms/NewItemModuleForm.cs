@@ -29,8 +29,6 @@ namespace InventoryManagmentSystem
         private void Helmet_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            //NewHelmetModuleForm ModForm = new NewHelmetModuleForm(true);
-            //ModForm.ShowDialog();
             NewItemForm form = new NewItemForm("helmet");
             form.ShowDialog();
         }
@@ -38,8 +36,6 @@ namespace InventoryManagmentSystem
         private void Jacket_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            //NewJacketModuleForm ModForm = new NewJacketModuleForm(true);
-            //ModForm.ShowDialog();
             NewItemForm form = new NewItemForm("jacket");
             form.ShowDialog();
         }
@@ -47,8 +43,6 @@ namespace InventoryManagmentSystem
         private void Pants_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            //NewPantsModuleForm ModForm = new NewPantsModuleForm(true);
-            //ModForm.ShowDialog();
             NewItemForm form = new NewItemForm("pants");
             form.ShowDialog();
         }
@@ -56,8 +50,6 @@ namespace InventoryManagmentSystem
         private void Boots_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            //NewBootModuleForm ModForm = new NewBootModuleForm(true);
-            //ModForm.ShowDialog();
             NewItemForm form = new NewItemForm("boots");
             form.ShowDialog();
         }

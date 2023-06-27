@@ -95,7 +95,8 @@ namespace InventoryManagmentSystem
                 $"WHERE (Brand LIKE '%{searchTerm}%' OR " +
                 $"SerialNumber LIKE '%{searchTerm}%' OR " +
                 $"UsedNew LIKE '%{searchTerm}%' OR " +
-                $"Size LIKE '%{searchTerm}%')";
+                $"Size LIKE '%{searchTerm}%') AND " +
+                $"Location='Fire-Tec'";
             return (select + where);
         }
         
@@ -106,7 +107,8 @@ namespace InventoryManagmentSystem
                 $"WHERE (Brand LIKE '%{searchTerm}%' OR " +
                 $"SerialNumber LIKE '%{searchTerm}%' OR " +
                 $"UsedNew LIKE '%{searchTerm}%' OR " +
-                $"Color LIKE '%{searchTerm}%')";
+                $"Color LIKE '%{searchTerm}%') AND " +
+                $"Location='Fire-Tec'";
             return (select + where);
         }
 
@@ -119,7 +121,8 @@ namespace InventoryManagmentSystem
                 $"WHERE (Brand LIKE '%{searchTerm}%' OR " +
                 $"SerialNumber LIKE '%{searchTerm}%' OR " +
                 $"UsedNew LIKE '%{searchTerm}%' OR " +
-                $"Size LIKE '%{searchTerm}%')";
+                $"Size LIKE '%{searchTerm}%') AND " +
+                $"Location='Fire-Tec'";
             return (select + from + where);
         }
 

@@ -106,16 +106,16 @@
             resources.ApplyResources(this.labelUsedNew, "labelUsedNew");
             this.labelUsedNew.Name = "labelUsedNew";
             // 
-            // comboBoxCondition
+            // comboBoxUsedNew
             // 
             this.comboBoxUsedNew.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxUsedNew.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxUsedNew.FormattingEnabled = true;
             this.comboBoxUsedNew.Items.AddRange(new object[] {
-            resources.GetString("comboBoxCondition.Items"),
-            resources.GetString("comboBoxCondition.Items1")});
-            resources.ApplyResources(this.comboBoxUsedNew, "comboBoxCondition");
-            this.comboBoxUsedNew.Name = "comboBoxCondition";
+            resources.GetString("comboBoxUsedNew.Items"),
+            resources.GetString("comboBoxUsedNew.Items1")});
+            resources.ApplyResources(this.comboBoxUsedNew, "comboBoxUsedNew");
+            this.comboBoxUsedNew.Name = "comboBoxUsedNew";
             // 
             // labelMaterial
             // 
