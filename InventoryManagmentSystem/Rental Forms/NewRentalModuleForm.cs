@@ -41,6 +41,7 @@ namespace InventoryManagmentSystem
         public int ReturnReplace = 0;
         string ReplacmentSerial = "";
         String dueDate = "";
+        string ItemType = "";
 
 
         public NewRentalModuleForm(string rentalType = null, string clientName = null)
@@ -94,13 +95,13 @@ namespace InventoryManagmentSystem
         private string QueryClient()
         {
             //return ("SELECT Type, DueDate, SerialNumber FROM tbBoots WHERE Location='Client1'");
-            return ("SELECT ItemType, DueDate, SerialNumber FROM tbPants " +
+            return ("SELECT 'Pants' , DueDate, SerialNumber FROM tbPants " +
                 "WHERE Location='" + license + "' " +
-                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbBoots " +
+                "UNION SELECT 'Boots', DueDate, SerialNumber FROM tbBoots " +
                 "WHERE Location='" + license + "' " +
-                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbHelmets " +
+                "UNION SELECT 'Helmet', DueDate, SerialNumber FROM tbHelmets " +
                 "WHERE Location='" + license + "' " +
-                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbJackets " +
+                "UNION SELECT 'Jacket', DueDate, SerialNumber FROM tbJackets " +
                 "WHERE Location='" + license + "' " +
                 "ORDER BY DueDate");
         }
@@ -142,31 +143,35 @@ namespace InventoryManagmentSystem
                 FinalColumn = ", Color";
                 Sizes = "";
                 CurrTable = "tbHelmets";
+                ItemType = "Helmet";
             }
             else if (comboBoxItemType.SelectedIndex == 1)
             {
                 FinalColumn = "";
                 Sizes = " Size,";
                 CurrTable = "tbJackets";
+                ItemType = "Jacket";
             }
             else if (comboBoxItemType.SelectedIndex == 2)
             {
                 FinalColumn = "";
                 Sizes = " Size,";
                 CurrTable = "tbPants";
+                ItemType = "Pants";
             }
             else if (comboBoxItemType.SelectedIndex == 3)
             {
                 FinalColumn = ", Material";
                 Sizes = " Size,";
                 CurrTable = "tbBoots";
+                ItemType = "Boots";
             }
             else
             {
-                return ("SELECT ItemType,Brand,SerialNumber,Size,ManufactureDate,UsedNew FROM tbJackets WHERE " + firetec + "AND SerialNumber LIKE '%" + searchTerm + "%'");
+                return ("SELECT Brand,SerialNumber,Size,ManufactureDate,UsedNew FROM tbJackets WHERE " + firetec + "AND SerialNumber LIKE '%" + searchTerm + "%'");
             }
 
-            return ("SELECT ItemType, Brand, SerialNumber," + Sizes + " ManufactureDate, UsedNew "
+            return ("SELECT Brand, SerialNumber," + Sizes + " ManufactureDate, UsedNew "
                 + FinalColumn + " FROM " + CurrTable +
                      " WHERE " + firetec + " AND SerialNumber LIKE '%" + searchTerm + "%'");
         }
@@ -176,36 +181,44 @@ namespace InventoryManagmentSystem
             dataGridInv.Columns["ManufactureDate"].DefaultCellStyle.Format = "d";
             int i = 0;
             dataGridInv.Rows.Clear();
-            cm = new SqlCommand(QueryItems(), con);
-            con.Open();
-            dr = cm.ExecuteReader();
+            try
+            {
 
-            if (comboBoxItemType.SelectedIndex == 0)
-            {
-                while (dr.Read())
+                cm = new SqlCommand(QueryItems(), con);
+                con.Open();
+                dr = cm.ExecuteReader();
+
+                if (comboBoxItemType.SelectedIndex == 0)
                 {
-                    i++;
-                    dataGridInv.Rows.Add(dr[1].ToString(), dr[2].ToString(), "NA", dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
+                    while (dr.Read())
+                    {
+                        i++;
+                        dataGridInv.Rows.Add(dr[0].ToString(), dr[1].ToString(), "NA", dr[2].ToString(), dr[3].ToString(), dr[4].ToString());
+                    }
                 }
-            }
-            else if (comboBoxItemType.SelectedIndex == 1 || comboBoxItemType.SelectedIndex == 2)
-            {
-                while (dr.Read())
+                else if (comboBoxItemType.SelectedIndex == 1 || comboBoxItemType.SelectedIndex == 2)
                 {
-                    i++;
-                    dataGridInv.Rows.Add(dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), "N/A");
+                    while (dr.Read())
+                    {
+                        i++;
+                        dataGridInv.Rows.Add(dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), "N/A");
+                    }
                 }
-            }
-            else if (comboBoxItemType.SelectedIndex == 3)
-            {
-                while (dr.Read())
+                else if (comboBoxItemType.SelectedIndex == 3)
                 {
-                    i++;
-                    dataGridInv.Rows.Add(dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5]);
+                    while (dr.Read())
+                    {
+                        i++;
+                        dataGridInv.Rows.Add(dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4]);
+                    }
                 }
+                dr.Close();
+                con.Close();
             }
-            dr.Close();
-            con.Close();
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public void Clear()
