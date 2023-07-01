@@ -171,6 +171,12 @@
     <Compile Include="NewOrExistingCustomerModuleForm.Designer.cs">
       <DependentUpon>NewOrExistingCustomerModuleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Rental Forms\NewItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rental Forms\NewItemForm.Designer.cs">
+      <DependentUpon>NewItemForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Rental Forms\NewRentalModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,6 +324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewOrExistingCustomerModuleForm.resx">
       <DependentUpon>NewOrExistingCustomerModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rental Forms\NewItemForm.resx">
+      <DependentUpon>NewItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Rental Forms\NewRentalModuleForm.resx">
       <DependentUpon>NewRentalModuleForm.cs</DependentUpon>
