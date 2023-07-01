@@ -17,14 +17,10 @@ namespace InventoryManagmentSystem
     public partial class ExcelImportForm : Form
     {
         #region SQL_Variables
-        // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        //Creating command
-        SqlConnection con = new SqlConnection(connectionString);
-        //Creating command
-        SqlCommand cm = new SqlCommand();
-        //Creatinng Reader
-        SqlDataReader dr;
+        SqlConnection connection = new SqlConnection(connectionString);
+        SqlCommand command = new SqlCommand();
+        SqlDataReader dataReader;
         #endregion SQL_Variables
 
         #region Excel_Variables
@@ -33,8 +29,17 @@ namespace InventoryManagmentSystem
         Excel.Worksheet worksheet = null;
         #endregion Excel_Variables
 
-        string tableColumnSerial = "";
+        enum itemTypes
+        {
+            boots, helmet, jackets, pants, mask
+        }
 
+        enum tables
+        {
+
+        }
+
+        string tableColumnSerial = "";
 
         List<System.Windows.Forms.TextBox> listTextBox = new List<System.Windows.Forms.TextBox>();
         List<string> listTableColumns = new List<string>();
@@ -54,7 +59,7 @@ namespace InventoryManagmentSystem
             workbook.Close();
             excelApp.Quit();
             CloseBackgroundExcel();
-            con.Close();
+            connection.Close();
         }
         private void ExcelImport_Load(object sender, EventArgs e)
         {
@@ -221,14 +226,14 @@ namespace InventoryManagmentSystem
                 "WHERE TABLE_NAME = '" + tableName + "'" +
                 "ORDER BY ORDINAL_POSITION";
 
-            cm = new SqlCommand(query, con);
-            con.Open();
-            dr = cm.ExecuteReader();
-            while (dr.Read())
+            command = new SqlCommand(query, connection);
+            connection.Open();
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                listTableColumns.Add(dr.GetString(0));
+                listTableColumns.Add(dataReader.GetString(0));
             }
-            con.Close();
+            connection.Close();
 
             tableColumnSerial = listTableColumns[3];
         }
@@ -268,8 +273,8 @@ namespace InventoryManagmentSystem
 
                 try
                 {
-                    con.Open();
-                    cm = new SqlCommand(query, con);
+                    connection.Open();
+                    command = new SqlCommand(query, connection);
 
                     SqlParameter parameter = new SqlParameter("@date", SqlDbType.Date);
                     if (row[6] == null)
@@ -280,14 +285,14 @@ namespace InventoryManagmentSystem
                     {
                         parameter.Value = row[6];
                     }
-                    cm.Parameters.Add(parameter);
+                    command.Parameters.Add(parameter);
 
-                    cm.ExecuteNonQuery();
-                    con.Close();
+                    command.ExecuteNonQuery();
+                    connection.Close();
                 }
                 catch (Exception ex)
                 {
-                    con.Close();
+                    connection.Close();
                     #if DEBUG
                         Console.WriteLine($"Error Row {i}");
                         Console.WriteLine(ex.ToString());
@@ -325,25 +330,25 @@ namespace InventoryManagmentSystem
 
                 try
                 {
-                    con.Open();
-                    cm = new SqlCommand(query, con);
+                    connection.Open();
+                    command = new SqlCommand(query, connection);
 
-                    cm.Parameters.AddWithValue("@ItemType", row[0]);
-                    cm.Parameters.AddWithValue("@Brand", row[1]);
-                    cm.Parameters.AddWithValue("@SerialNumber", row[2]);
-                    cm.Parameters.AddWithValue("@Location", row[8]);
-                    cm.Parameters.AddWithValue("@UsedNew", row[5]);
-                    cm.Parameters.AddWithValue("@ManufactureDate", row[4]);
-                    cm.Parameters.AddWithValue("@DueDate", row[7] ?? DBNull.Value);
-                    cm.Parameters.AddWithValue("@Size", row[6]);
-                    cm.Parameters.AddWithValue("@Material", row[3]);
+                    command.Parameters.AddWithValue("@ItemType", row[0]);
+                    command.Parameters.AddWithValue("@Brand", row[1]);
+                    command.Parameters.AddWithValue("@SerialNumber", row[2]);
+                    command.Parameters.AddWithValue("@Location", row[8]);
+                    command.Parameters.AddWithValue("@UsedNew", row[5]);
+                    command.Parameters.AddWithValue("@ManufactureDate", row[4]);
+                    command.Parameters.AddWithValue("@DueDate", row[7] ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@Size", row[6]);
+                    command.Parameters.AddWithValue("@Material", row[3]);
 
-                    cm.ExecuteNonQuery();
-                    con.Close();
+                    command.ExecuteNonQuery();
+                    connection.Close();
                 }
                 catch (Exception ex)
                 {
-                    con.Close();
+                    connection.Close();
                     #if DEBUG
                     Console.WriteLine($"Error Row {i}");
                     Console.WriteLine(ex.ToString());
@@ -381,24 +386,24 @@ namespace InventoryManagmentSystem
 
                 try
                 {
-                    con.Open();
-                    cm = new SqlCommand(query, con);
+                    connection.Open();
+                    command = new SqlCommand(query, connection);
 
-                    cm.Parameters.AddWithValue("@ItemType", row[0]);
-                    cm.Parameters.AddWithValue("@Brand", row[1]);
-                    cm.Parameters.AddWithValue("@SerialNumber", row[2]);
-                    cm.Parameters.AddWithValue("@Location", row[7]);
-                    cm.Parameters.AddWithValue("@UsedNew", row[5]);
-                    cm.Parameters.AddWithValue("@ManufactureDate", row[4]);
-                    cm.Parameters.AddWithValue("@DueDate", row[6] ?? DBNull.Value);
-                    cm.Parameters.AddWithValue("@Color", row[3]);
+                    command.Parameters.AddWithValue("@ItemType", row[0]);
+                    command.Parameters.AddWithValue("@Brand", row[1]);
+                    command.Parameters.AddWithValue("@SerialNumber", row[2]);
+                    command.Parameters.AddWithValue("@Location", row[7]);
+                    command.Parameters.AddWithValue("@UsedNew", row[5]);
+                    command.Parameters.AddWithValue("@ManufactureDate", row[4]);
+                    command.Parameters.AddWithValue("@DueDate", row[6] ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@Color", row[3]);
 
-                    cm.ExecuteNonQuery();
-                    con.Close();
+                    command.ExecuteNonQuery();
+                    connection.Close();
                 }
                 catch (Exception ex)
                 {
-                    con.Close();
+                    connection.Close();
                     #if DEBUG
                     Console.WriteLine($"Error Row {i}");
                     Console.WriteLine(ex.ToString());
@@ -651,15 +656,15 @@ namespace InventoryManagmentSystem
                 "ELSE CAST(0 AS BIT)\r\n" +
                 "END";
 
-            cm = new SqlCommand(query, con);
-            con.Open();
-            dr = cm.ExecuteReader();
-            if (dr.HasRows)
+            command = new SqlCommand(query, connection);
+            connection.Open();
+            dataReader = command.ExecuteReader();
+            if (dataReader.HasRows)
             {
-                dr.Read();
-                result = dr.GetBoolean(0);
+                dataReader.Read();
+                result = dataReader.GetBoolean(0);
             }
-            con.Close();
+            connection.Close();
             return result;
         }
 
@@ -687,6 +692,32 @@ namespace InventoryManagmentSystem
                     break;
                 }
             }
+        }
+
+        private Guid AddItem(itemTypes type)
+        {
+            // TODO: FIX THIS SHIT
+            string query =
+                "INSERT INTO tbItems(ItemType) " +
+                "OUTPUT inserted.Id " +
+                "VALUES(@ItemType)";
+            Guid uuid = Guid.Empty;
+
+            try
+            {
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemType", "");
+                connection.Open();
+                uuid = (Guid)command.ExecuteScalar();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                connection.Close();
+                Console.WriteLine($"ERROR adding item: {ex.Message}");
+                MessageBox.Show("Could not add item.");
+            }
+            return uuid;
         }
 
         #region Manula Import
@@ -784,9 +815,9 @@ namespace InventoryManagmentSystem
         {
             List<System.Windows.Forms.TextBox> list = new List<System.Windows.Forms.TextBox>();
 
-            cm = new SqlCommand(query, con);
-            con.Open();
-            dr = cm.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            connection.Open();
+            dataReader = command.ExecuteReader();
 
             // Screen positions.
             int boxWidth = 100;
@@ -810,7 +841,7 @@ namespace InventoryManagmentSystem
             this.Controls.Add(excel);
 
             rows = 0;
-            while (dr.Read())
+            while (dataReader.Read())
             {
                 // Calculate the location of the next Text Box.
                 databaseColumnPos = new System.Drawing.Point(
@@ -826,7 +857,7 @@ namespace InventoryManagmentSystem
                 System.Windows.Forms.TextBox textBox = new System.Windows.Forms.TextBox();
                 textBox.ReadOnly = true;
                 textBox.Name = "tb" + rows;
-                textBox.Text = dr[0].ToString();
+                textBox.Text = dataReader[0].ToString();
                 textBox.Size = new Size(boxWidth, boxHeight);
                 textBox.Location = databaseColumnPos;
                 this.Controls.Add(textBox);
@@ -846,8 +877,8 @@ namespace InventoryManagmentSystem
             listTextBox.Clear();
             listTextBox = list;
 
-            dr.Close();
-            con.Close();
+            dataReader.Close();
+            connection.Close();
         }
 
         #endregion Manual Import
@@ -902,7 +933,7 @@ namespace InventoryManagmentSystem
             worksheet = null;
             workbook = null;
             excelApp = null;
-            con.Close();
+            connection.Close();
             listExcelColumns.Clear();
             listTableColumns.Clear();
             headerRow = -1;

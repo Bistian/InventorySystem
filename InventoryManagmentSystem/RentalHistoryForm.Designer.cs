@@ -99,7 +99,7 @@
             this.dataGridItems.Location = new System.Drawing.Point(15, 29);
             this.dataGridItems.Name = "dataGridItems";
             this.dataGridItems.RowHeadersVisible = false;
-            this.dataGridItems.Size = new System.Drawing.Size(461, 478);
+            this.dataGridItems.Size = new System.Drawing.Size(461, 403);
             this.dataGridItems.TabIndex = 2;
             // 
             // column_id
@@ -153,7 +153,7 @@
             this.dataGridHistory.Location = new System.Drawing.Point(482, 29);
             this.dataGridHistory.Name = "dataGridHistory";
             this.dataGridHistory.RowHeadersVisible = false;
-            this.dataGridHistory.Size = new System.Drawing.Size(439, 478);
+            this.dataGridHistory.Size = new System.Drawing.Size(439, 403);
             this.dataGridHistory.TabIndex = 3;
             // 
             // column_customer_id

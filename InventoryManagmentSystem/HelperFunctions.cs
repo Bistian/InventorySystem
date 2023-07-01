@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -35,6 +36,7 @@ namespace InventoryManagmentSystem
 
     /*public class SqlHelper
     {
-       
+        public static PerformQuery(SqlVariables variables, function())
+
     }*/
 }
