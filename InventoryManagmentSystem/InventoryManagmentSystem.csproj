@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6236F310-736F-44C3-9BED-07F4307F8977}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>InventoryManagmentSystem</RootNamespace>
+    <AssemblyName>InventoryManagmentSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft Office\root\Office16\ADDINS\PowerPivot Excel Add-inv16\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Custom Item Classes\CustomButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Custom Item Classes\CustomButton.Designer.cs">
+      <DependentUpon>CustomButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Item Classes\CustomDateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseCreationModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatabaseCreationModule.Designer.cs">
+      <DependentUpon>DatabaseCreationModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DepartmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DepartmentForm.Designer.cs">
+      <DependentUpon>DepartmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeptModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeptModuleForm.Designer.cs">
+      <DependentUpon>DeptModuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxClient.Designer.cs">
+      <DependentUpon>DialogBoxClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExcelImportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExcelImportForm.Designer.cs">
+      <DependentUpon>ExcelImportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExcelUserPromptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExcelUserPromptForm.Designer.cs">
+      <DependentUpon>ExcelUserPromptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperFunctions.cs" />
+    <Compile Include="PricesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PricesForm.Designer.cs">
+      <DependentUpon>PricesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProviderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProviderForm.Designer.cs">
+      <DependentUpon>ProviderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rental Forms\ExistingCustomerModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rental Forms\ExistingCustomerModuleForm.Designer.cs">
+      <DependentUpon>ExistingCustomerModuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Item Classes\GradientFlowLayoutPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Rental Forms\HomeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rental Forms\HomeForm.designer.cs">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewOrExistingCustomerModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewOrExistingCustomerModuleForm.Designer.cs">
+      <DependentUpon>NewOrExistingCustomerModuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rental Forms\NewItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rental Forms\NewItemForm.Designer.cs">
+      <DependentUpon>NewItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rental Forms\NewRentalModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rental Forms\NewRentalModuleForm.Designer.cs">
+      <DependentUpon>NewRentalModuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RentalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RentalForm.Designer.cs">
+      <DependentUpon>RentalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rental Forms\Inventory Forms\InventoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rental Forms\Inventory Forms\InventoryForm.Designer.cs">
+      <DependentUpon>InventoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rental Forms\Inventory Forms\NewBootModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rental Forms\Inventory Forms\NewBootModuleForm.Designer.cs">
+      <DependentUpon>NewBootModuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rental Forms\Inventory Forms\NewHelmetModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rental Forms\Inventory Forms\NewHelmetModuleForm.Designer.cs">
+      <DependentUpon>NewHelmetModuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rental Forms\Inventory Forms\NewItemModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rental Forms\Inventory Forms\NewItemModuleForm.Designer.cs">
+      <DependentUpon>NewItemModuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rental Forms\Inventory Forms\NewJacketModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rental Forms\Inventory Forms\NewJacketModuleForm.Designer.cs">
+      <DependentUpon>NewJacketModuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rental Forms\Inventory Forms\NewPantsModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rental Forms\Inventory Forms\NewPantsModuleForm.Designer.cs">
+      <DependentUpon>NewPantsModuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RentalHistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RentalHistoryForm.Designer.cs">
+      <DependentUpon>RentalHistoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnModule.Designer.cs">
+      <DependentUpon>ReturnModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnOrReplacecs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReturnOrReplacecs.Designer.cs">
+      <DependentUpon>ReturnOrReplacecs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SetSelectionModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetSelectionModuleForm.Designer.cs">
+      <DependentUpon>SetSelectionModuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserForm.Designer.cs">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserModuleForm.Designer.cs">
+      <DependentUpon>UserModuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkOrderModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkOrderModuleForm.Designer.cs">
+      <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Custom Item Classes\CustomButton.resx">
+      <DependentUpon>CustomButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseCreationModule.resx">
+      <DependentUpon>DatabaseCreationModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DepartmentForm.resx">
+      <DependentUpon>DepartmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeptModuleForm.resx">
+      <DependentUpon>DeptModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxClient.resx">
+      <DependentUpon>DialogBoxClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PricesForm.resx">
+      <DependentUpon>PricesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProviderForm.resx">
+      <DependentUpon>ProviderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rental Forms\ExistingCustomerModuleForm.resx">
+      <DependentUpon>ExistingCustomerModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rental Forms\HomeForm.resx">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewOrExistingCustomerModuleForm.resx">
+      <DependentUpon>NewOrExistingCustomerModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rental Forms\NewItemForm.resx">
+      <DependentUpon>NewItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rental Forms\NewRentalModuleForm.resx">
+      <DependentUpon>NewRentalModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RentalForm.resx">
+      <DependentUpon>RentalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExcelImportForm.resx">
+      <DependentUpon>ExcelImportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExcelUserPromptForm.resx">
+      <DependentUpon>ExcelUserPromptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rental Forms\Inventory Forms\InventoryForm.resx">
+      <DependentUpon>InventoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rental Forms\Inventory Forms\NewBootModuleForm.resx">
+      <DependentUpon>NewBootModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rental Forms\Inventory Forms\NewHelmetModuleForm.resx">
+      <DependentUpon>NewHelmetModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rental Forms\Inventory Forms\NewItemModuleForm.resx">
+      <DependentUpon>NewItemModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rental Forms\Inventory Forms\NewJacketModuleForm.resx">
+      <DependentUpon>NewJacketModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rental Forms\Inventory Forms\NewPantsModuleForm.resx">
+      <DependentUpon>NewPantsModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RentalHistoryForm.resx">
+      <DependentUpon>RentalHistoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnModule.resx">
+      <DependentUpon>ReturnModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReturnOrReplacecs.resx">
+      <DependentUpon>ReturnOrReplacecs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetSelectionModuleForm.resx">
+      <DependentUpon>SetSelectionModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserForm.resx">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserModuleForm.resx">
+      <DependentUpon>UserModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkOrderModuleForm.resx">
+      <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\synchronize_20px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
+    <Folder Include="obj\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
