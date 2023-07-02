@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Data.SqlClient;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace InventoryManagmentSystem
 {
@@ -14,27 +12,10 @@ namespace InventoryManagmentSystem
             return true;
         }
 
-        public static string RemoveLineBreaksFromString(string str)
+        public static void RemoveLineBreaksFromString(ref string str)
         {
-            return str.Replace("\r", "").Replace("\n", "").Replace("\t", "").Trim();
+            str = str.Replace("\r", "").Replace("\n", "").Replace("\t", "").Trim();
         }
 
     }
-
-    public class SqlVariables
-    {
-        public string query;
-        public SqlCommand command;
-        public SqlConnection connection;
-        public SqlVariables()
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-            connection = new SqlConnection(connectionString);
-        }
-    }
-
-    /*public class SqlHelper
-    {
-       
-    }*/
 }

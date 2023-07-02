@@ -126,6 +126,7 @@
       <DependentUpon>ExcelUserPromptForm.cs</DependentUpon>
     </Compile>
     <Compile Include="HelperFunctions.cs" />
+    <Compile Include="HelperSql.cs" />
     <Compile Include="PricesForm.cs">
       <SubType>Form</SubType>
     </Compile>

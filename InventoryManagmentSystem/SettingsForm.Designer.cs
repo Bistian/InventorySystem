@@ -34,6 +34,7 @@
             this.btnBrands = new System.Windows.Forms.Button();
             this.btnPrices = new System.Windows.Forms.Button();
             this.btnAcademies = new System.Windows.Forms.Button();
+            this.btnHistories = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnImport
@@ -93,12 +94,23 @@
             this.btnAcademies.UseVisualStyleBackColor = true;
             this.btnAcademies.Click += new System.EventHandler(this.btnAcademies_Click);
             // 
+            // btnHistories
+            // 
+            this.btnHistories.Location = new System.Drawing.Point(13, 159);
+            this.btnHistories.Name = "btnHistories";
+            this.btnHistories.Size = new System.Drawing.Size(75, 23);
+            this.btnHistories.TabIndex = 6;
+            this.btnHistories.Text = "Histories";
+            this.btnHistories.UseVisualStyleBackColor = true;
+            this.btnHistories.Click += new System.EventHandler(this.btnHistories_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnHistories);
             this.Controls.Add(this.btnAcademies);
             this.Controls.Add(this.btnPrices);
             this.Controls.Add(this.btnBrands);
@@ -119,5 +131,6 @@
         private System.Windows.Forms.Button btnBrands;
         private System.Windows.Forms.Button btnPrices;
         private System.Windows.Forms.Button btnAcademies;
+        private System.Windows.Forms.Button btnHistories;
     }
 }

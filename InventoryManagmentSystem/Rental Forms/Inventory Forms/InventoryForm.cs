@@ -131,9 +131,9 @@ namespace InventoryManagmentSystem
         /// </summary>
         public void LoadInventory()
         {
+            dataGridInv.Columns["ManufactureDate"].DefaultCellStyle.Format = "d";
             if (comboBoxItem.SelectedIndex != -1)
             {
-                dataGridInv.Columns["ManufactureDate"].DefaultCellStyle.Format = "d";
                 int i = 0;
                 dataGridInv.Rows.Clear();
                 command = new SqlCommand(QueryItems2(), connection);

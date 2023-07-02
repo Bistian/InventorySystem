@@ -41,12 +41,8 @@ namespace InventoryManagmentSystem.Rental_Forms
         /// <returns>Created item's uuid or empty if it failed.</returns>
         private Guid AddItem()
         {
-            string query =
-                "INSERT INTO tbItems(ItemType) " +
-                "OUTPUT inserted.Id " +
-                "VALUES(@ItemType)";
+            string query = HelperQuery.ItemInsertAndReturnUuid();
             Guid uuid = Guid.Empty;
-
             try
             {
                 command = new SqlCommand(query, connection);
@@ -70,7 +66,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         /// <param name="uuid"></param>
         private void DeleteItem(Guid uuid)
         {
-            string query = "DELETE FROM tbItems WHERE Id=@Id";
+            string query = HelperQuery.ItemDelete();
             try
             {
                 command = new SqlCommand(query, connection);
@@ -92,9 +88,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         /// <returns></returns>
         private bool AddBoots(Guid uuid)
         {
-            string query =
-                "INSERT INTO tbBoots(ItemId,SerialNumber,Brand,UsedNew,Material,Size,ManufactureDate)" +
-                "VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Material,@Size,@ManufactureDate)";
+            string query = HelperQuery.BootsInsert();
             try
             {
                 command = new SqlCommand(query, connection);
@@ -126,10 +120,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         /// <returns></returns>
         private bool AddHelmet(Guid uuid)
         {
-            string query =
-                "INSERT INTO tbHelmets(ItemId,SerialNumber,Brand,UsedNew,Color,ManufactureDate)" +
-                "VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Color,@ManufactureDate)";
-
+            string query = HelperQuery.HelmetInsert();
             try
             {
                 command = new SqlCommand(query, connection);
@@ -160,9 +151,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         /// <returns></returns>
         private bool AddJacket(Guid uuid)
         {
-            string query =
-                "INSERT INTO tbJackets(ItemId,SerialNumber,Brand,UsedNew,Size,ManufactureDate)" +
-                "VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)";
+            string query = HelperQuery.JacketInsert();
             try
             {
                 command = new SqlCommand(query, connection);
@@ -193,9 +182,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         /// <returns></returns>
         private bool AddPants(Guid uuid)
         {
-            string query =
-                "INSERT INTO tbPants(ItemId,SerialNumber,Brand,UsedNew,Size,ManufactureDate)" +
-                "VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)";
+            string query = HelperQuery.PantsInsert();
             try
             {
                 command = new SqlCommand(query, connection);

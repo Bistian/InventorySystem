@@ -33,24 +33,30 @@
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.labelItemType = new System.Windows.Forms.Label();
             this.dataGridItems = new System.Windows.Forms.DataGridView();
-            this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridHistory = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.column_item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_item_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_acquired = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_last_rent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridHistory = new System.Windows.Forms.DataGridView();
-            this.column_customer_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_client_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_customer_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_rented = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_returned = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridHistory)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbItemType
             // 
+            this.cbItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.cbItemType.FormattingEnabled = true;
             this.cbItemType.Items.AddRange(new object[] {
+            "All",
             "Boots",
             "Helmets",
             "Jackets",
@@ -61,6 +67,7 @@
             this.cbItemType.Name = "cbItemType";
             this.cbItemType.Size = new System.Drawing.Size(140, 23);
             this.cbItemType.TabIndex = 0;
+            this.cbItemType.SelectedIndexChanged += new System.EventHandler(this.cbItemType_SelectedIndexChanged);
             // 
             // labelItemType
             // 
@@ -90,41 +97,20 @@
             this.dataGridItems.ColumnHeadersHeight = 30;
             this.dataGridItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.column_id,
+            this.column_item_id,
+            this.column_item_type,
+            this.column_serial,
             this.column_brand,
             this.column_acquired,
             this.column_last_rent});
             this.dataGridItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridItems.EnableHeadersVisualStyles = false;
-            this.dataGridItems.Location = new System.Drawing.Point(15, 29);
+            this.dataGridItems.Location = new System.Drawing.Point(3, 3);
             this.dataGridItems.Name = "dataGridItems";
             this.dataGridItems.RowHeadersVisible = false;
-            this.dataGridItems.Size = new System.Drawing.Size(461, 478);
+            this.dataGridItems.Size = new System.Drawing.Size(905, 240);
             this.dataGridItems.TabIndex = 2;
-            // 
-            // column_id
-            // 
-            this.column_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_id.HeaderText = "ID";
-            this.column_id.Name = "column_id";
-            // 
-            // column_brand
-            // 
-            this.column_brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_brand.HeaderText = "Brand";
-            this.column_brand.Name = "column_brand";
-            // 
-            // column_acquired
-            // 
-            this.column_acquired.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_acquired.HeaderText = "Acquired";
-            this.column_acquired.Name = "column_acquired";
-            // 
-            // column_last_rent
-            // 
-            this.column_last_rent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_last_rent.HeaderText = "Last Rented";
-            this.column_last_rent.Name = "column_last_rent";
+            this.dataGridItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridItems_CellClick);
             // 
             // dataGridHistory
             // 
@@ -144,23 +130,67 @@
             this.dataGridHistory.ColumnHeadersHeight = 30;
             this.dataGridHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.column_customer_id,
+            this.column_client_id,
             this.column_customer_name,
             this.column_rented,
             this.column_returned});
             this.dataGridHistory.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridHistory.EnableHeadersVisualStyles = false;
-            this.dataGridHistory.Location = new System.Drawing.Point(482, 29);
+            this.dataGridHistory.Location = new System.Drawing.Point(3, 249);
             this.dataGridHistory.Name = "dataGridHistory";
             this.dataGridHistory.RowHeadersVisible = false;
-            this.dataGridHistory.Size = new System.Drawing.Size(439, 478);
+            this.dataGridHistory.Size = new System.Drawing.Size(905, 229);
             this.dataGridHistory.TabIndex = 3;
             // 
-            // column_customer_id
+            // flowLayoutPanel1
             // 
-            this.column_customer_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_customer_id.HeaderText = "Customer ID";
-            this.column_customer_id.Name = "column_customer_id";
+            this.flowLayoutPanel1.Controls.Add(this.dataGridItems);
+            this.flowLayoutPanel1.Controls.Add(this.dataGridHistory);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(13, 29);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(908, 478);
+            this.flowLayoutPanel1.TabIndex = 4;
+            // 
+            // column_item_id
+            // 
+            this.column_item_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_item_id.HeaderText = "Item ID";
+            this.column_item_id.Name = "column_item_id";
+            this.column_item_id.Visible = false;
+            // 
+            // column_item_type
+            // 
+            this.column_item_type.HeaderText = "Item Type";
+            this.column_item_type.Name = "column_item_type";
+            // 
+            // column_serial
+            // 
+            this.column_serial.HeaderText = "Serial";
+            this.column_serial.Name = "column_serial";
+            // 
+            // column_brand
+            // 
+            this.column_brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_brand.HeaderText = "Brand";
+            this.column_brand.Name = "column_brand";
+            // 
+            // column_acquired
+            // 
+            this.column_acquired.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_acquired.HeaderText = "Acquired";
+            this.column_acquired.Name = "column_acquired";
+            // 
+            // column_last_rent
+            // 
+            this.column_last_rent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_last_rent.HeaderText = "Last Rented";
+            this.column_last_rent.Name = "column_last_rent";
+            // 
+            // column_client_id
+            // 
+            this.column_client_id.HeaderText = "Client ID";
+            this.column_client_id.Name = "column_client_id";
+            this.column_client_id.Visible = false;
             // 
             // column_customer_name
             // 
@@ -186,8 +216,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(933, 519);
-            this.Controls.Add(this.dataGridHistory);
-            this.Controls.Add(this.dataGridItems);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.labelItemType);
             this.Controls.Add(this.cbItemType);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
@@ -196,6 +225,7 @@
             this.Text = "RentalHistoryForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridHistory)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,12 +236,15 @@
         private System.Windows.Forms.ComboBox cbItemType;
         private System.Windows.Forms.Label labelItemType;
         private System.Windows.Forms.DataGridView dataGridItems;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_id;
+        private System.Windows.Forms.DataGridView dataGridHistory;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_item_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_item_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_brand;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_acquired;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_last_rent;
-        private System.Windows.Forms.DataGridView dataGridHistory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_customer_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_client_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_customer_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_rented;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_returned;

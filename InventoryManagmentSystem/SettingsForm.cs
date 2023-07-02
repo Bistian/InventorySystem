@@ -40,6 +40,23 @@ namespace InventoryManagmentSystem
             childForm.Show();
         }
 
+        private void ColorTabSwitch(string tab)
+        {
+            // Set all colors to normal.
+            btnDatabase.BackColor = offColor;
+            btnImport.BackColor = offColor;
+            btnBrands.BackColor = offColor;
+            btnPrices.BackColor = offColor;
+            btnAcademies.BackColor = offColor;
+
+            // Pick one tab and set it to the clicked color.
+            if (tab == "Database") { btnDatabase.BackColor = onColor; }
+            else if (tab == "Import") { btnImport.BackColor = onColor; }
+            else if (tab == "Brands") { btnBrands.BackColor = onColor; }
+            else if (tab == "Prices") { btnPrices.BackColor = onColor; }
+            else if (tab == "Academies") { btnAcademies.BackColor = onColor; }
+        }
+
         private void btnImport_Click(object sender, EventArgs e)
         {
             ColorTabSwitch("Import");
@@ -82,23 +99,13 @@ namespace InventoryManagmentSystem
             openChildForm(form);
         }
 
-        private void ColorTabSwitch(string tab)
+        private void btnHistories_Click(object sender, EventArgs e)
         {
-            // Set all colors to normal.
-            btnDatabase.BackColor = offColor;
-            btnImport.BackColor = offColor;
-            btnBrands.BackColor = offColor;
-            btnPrices.BackColor = offColor;
-            btnAcademies.BackColor = offColor;
-
-            // Pick one tab and set it to the clicked color.
-            if (tab == "Database") { btnDatabase.BackColor = onColor; }
-            else if (tab == "Import") { btnImport.BackColor = onColor; }
-            else if (tab == "Brands") { btnBrands.BackColor = onColor; }
-            else if (tab == "Prices") { btnPrices.BackColor = onColor; }
-            else if (tab == "Academies") { btnAcademies.BackColor = onColor; }
+            ColorTabSwitch("Histories");
+            List<string> comboBoxSelection = new List<string>();
+            comboBoxSelection.Add("Histories");
+            RentalHistoryForm form = new RentalHistoryForm();
+            openChildForm(form);
         }
-
-       
     }
 }

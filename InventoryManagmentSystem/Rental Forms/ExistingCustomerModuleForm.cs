@@ -99,9 +99,11 @@ namespace InventoryManagmentSystem
             {
                 try
                 {
+                    DataGridViewRow row = dataGridUsers.Rows[e.RowIndex];
+                    string clientName = row.Cells["Name1"].Value.ToString();
                     var parentForm = this.ParentForm as MainForm;
-                    NewRentalModuleForm Profile = new NewRentalModuleForm();
-                    string licence = dataGridUsers.Rows[e.RowIndex].Cells["ID"].Value.ToString();
+                    NewRentalModuleForm Profile = new NewRentalModuleForm(null,clientName);
+                    string licence = row.Cells["ID"].Value.ToString();
 
                     //is an individuals
                     if (cbClientType.SelectedIndex == 0)
