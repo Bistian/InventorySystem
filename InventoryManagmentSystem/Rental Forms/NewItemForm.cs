@@ -36,52 +36,6 @@ namespace InventoryManagmentSystem.Rental_Forms
         #region Create
 
         /// <summary>
-        /// Add an item to Items table.
-        /// </summary>
-        /// <returns>Created item's uuid or empty if it failed.</returns>
-        private Guid AddItem()
-        {
-            string query = HelperQuery.ItemInsertAndReturnUuid();
-            Guid uuid = Guid.Empty;
-            try
-            {
-                command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemType", itemType);
-                connection.Open();
-                uuid = (Guid)command.ExecuteScalar();
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                connection.Close();
-                Console.WriteLine($"ERROR adding item: {ex.Message}");
-                MessageBox.Show("Could not add item.");
-            }
-            return uuid;
-        }
-
-        /// <summary>
-        /// Deletes an item from item table.
-        /// </summary>
-        /// <param name="uuid"></param>
-        private void DeleteItem(Guid uuid)
-        {
-            string query = HelperQuery.ItemDelete();
-            try
-            {
-                command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Id", uuid);
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
-        }
-
-        /// <summary>
         /// Adds boots to boots table.
         /// </summary>
         /// <param name="uuid"></param>
@@ -243,7 +197,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 return false;
             }
 
-            Guid uuid = AddItem();
+            Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(command,connection,itemType);
             if (uuid.Equals(Guid.Empty))
             {
                 Console.WriteLine("ERROR: UUID not found.");
@@ -254,7 +208,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (!wasAdded)
             {
                 // If item was not added to the specific table, delete from Items Table.
-                DeleteItem(uuid);
+                HelperDatabaseCall.DeleteItem(command, connection, uuid);
                 MessageBox.Show("Could not save the item.");
                 return false;
             }

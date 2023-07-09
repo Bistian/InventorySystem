@@ -33,54 +33,7 @@ namespace InventoryManagmentSystem
             LoadInventory();
         }
 
-        private string QueryItems(bool isSearch=false, string searchTerm="")
-        {
-            string CurrTable = "tb" + comboBoxItem.Text;
-            string firetec = "Location='Fire-Tec'";
-            string sizes;
-            string finalColumn;
-            string specificWhere;
-            if(comboBoxItem.SelectedIndex == 0) // Helmets
-            {
-                finalColumn = "Color,";
-                sizes = "";
-                specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
-                    " UsedNew LIKE '%" + searchTerm + "%' OR" +
-                    " SerialNumber LIKE '%" + searchTerm + "%') AND " + firetec;
-            }
-            else if (comboBoxItem.SelectedIndex == 3) // Boots
-            {
-                finalColumn = ", Material";
-                sizes = "Size,";
-                specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
-                    " UsedNew LIKE '%" + searchTerm + "%' OR" +
-                    " SIZE LIKE '%" + searchTerm + "%' OR" +
-                    " SerialNumber LIKE '%" + searchTerm + "%') AND " + firetec;
-            }
-            else // Pants && Jackets
-            {
-                finalColumn = "";
-                sizes = "Size,";
-                specificWhere = " WHERE (Brand LIKE '%" + searchTerm + "%' OR" +
-                    " UsedNew LIKE '%" + searchTerm + "%' OR" +
-                    " SIZE LIKE '%" + searchTerm + "%' OR" +
-                    " SerialNumber LIKE '%" + searchTerm + "%') AND " + firetec;
-            }
-
-            string query = "SELECT Brand, SerialNumber," +
-                "UsedNew," + "ManufactureDate," +
-                sizes + finalColumn + 
-                "Location" + " FROM " + CurrTable;
-
-            if (!isSearch)
-            {
-                return (query + " WHERE " + firetec);
-            }
-
-            return (query + specificWhere);
-        }
-
-        private string QueryItems2(string searchTerm = "")
+        private string QueryItems(string searchTerm = "")
         {
             if(comboBoxItem.Text == "Boots") { return QueryBoots(searchTerm); }
             if(comboBoxItem.Text == "Helmets") { return QueryHelmets(searchTerm); }
@@ -136,7 +89,7 @@ namespace InventoryManagmentSystem
             {
                 int i = 0;
                 dataGridInv.Rows.Clear();
-                command = new SqlCommand(QueryItems2(), connection);
+                command = new SqlCommand(QueryItems(), connection);
                 connection.Open();
                 dr = command.ExecuteReader();
 
@@ -221,7 +174,7 @@ namespace InventoryManagmentSystem
                 //SQL
                 int i = 0;
                 dataGridInv.Rows.Clear();
-                string query = QueryItems2(searchTerm);
+                string query = QueryItems(searchTerm);
                 command = new SqlCommand(query, connection);
                 connection.Open();
 
@@ -287,6 +240,7 @@ namespace InventoryManagmentSystem
         {
             string colName = dataGridInv.Columns[e.ColumnIndex].Name;
             string itemType = comboBoxItem.Text;
+            string serialNumber = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
             try
             {
                 if (colName == "Edit")
@@ -294,13 +248,21 @@ namespace InventoryManagmentSystem
                     if (itemType == "Jackets" || itemType == "Pants") { UpdateJacketOrPants(e); }
                     else if (itemType == "Helmets") { UpdateHelmet(e); }
                     else if (itemType == "Boots") { UpdateBoots(e); }
+                    LoadInventory();
                 }
                 else if (colName == "Delete")
                 {
-                    string serialNumber = dataGridInv.Rows[e.RowIndex].Cells[3].Value.ToString();
                     DeleteItem(serialNumber);
+                    LoadInventory();
                 }
-                LoadInventory();
+                else
+                {
+                    // Open History.
+                    RentalHistoryForm form = new RentalHistoryForm(itemType, serialNumber);
+                    var parentForm = this.ParentForm as MainForm;
+                    parentForm.openChildForm(form);
+                    this.Close();
+                }
             }
             catch (Exception ex)
             {

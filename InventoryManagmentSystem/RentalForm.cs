@@ -45,21 +45,24 @@ namespace InventoryManagmentSystem
         private string Query(bool isRented)
         {
             string sign = isRented ? ">=" : "<";
-            string[] tables = { "tbPants", "tbBoots", "tbHelmets", "tbJackets" };
-            string query = 
-                "SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM " + tables[0] +
-                " INNER JOIN tbClients ON tbClients.DriversLicenseNumber = " + tables[0] + ".Location " +
-                "WHERE DueDate IS NOT NULL AND DueDate " + sign + " CONVERT(DATE, GETDATE()) ";
+            string query = $@"
+                SELECT ItemType='Boots', tbClients.Name, DueDate, SerialNumber FROM tbBoots 
+                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location 
+                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
 
-            for (int i = 1; i < tables.Length; ++i)
-            {
-                query += 
-                    "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM " + tables[i] +
-                    " INNER JOIN tbClients ON tbClients.DriversLicenseNumber = " + tables[i] + ".Location " +
-                    "WHERE DueDate IS NOT NULL AND DueDate " + sign + " CONVERT(DATE, GETDATE()) ";
-            }
-            query += "ORDER BY DueDate";
+                UNION SELECT ItemType='Helmet', tbClients.Name, DueDate, SerialNumber FROM tbHelmets 
+                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location 
+                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
 
+                UNION SELECT ItemType='Jacket', tbClients.Name, DueDate, SerialNumber FROM tbJackets 
+                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location 
+                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
+
+                UNION SELECT ItemType='Pants', tbClients.Name, DueDate, SerialNumber FROM tbPants 
+                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location 
+                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
         }
 
@@ -77,21 +80,28 @@ namespace InventoryManagmentSystem
             grid.Rows.Clear();
             cm = new SqlCommand(query, con);
             con.Open();
-            dr = cm.ExecuteReader();
-
-            int i = 0;
-            while (dr.Read())
+            try
             {
-                ++i;
-                grid.Rows.Add(i,
-                    dr[0].ToString(),
-                    dr[1].ToString(),
-                    dr[2],
-                    dr[3].ToString()
-                );
-            }
+                dr = cm.ExecuteReader();
 
-            dr.Close();
+                int i = 0;
+                while (dr.Read())
+                {
+                    ++i;
+                    grid.Rows.Add(i,
+                        dr[0].ToString(),
+                        dr[1].ToString(),
+                        dr[2],
+                        dr[3].ToString()
+                    );
+                }
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             con.Close();
         }
 

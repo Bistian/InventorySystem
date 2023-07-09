@@ -20,13 +20,40 @@ namespace InventoryManagmentSystem
         SqlCommand command;
         #endregion SQL_Variables
 
-        public RentalHistoryForm()
+        public RentalHistoryForm(string itemType = null, string serial = null)
         {
             InitializeComponent();
-            cbItemType.SelectedItem = "All";
             dataGridItems.Columns["column_acquired"].DefaultCellStyle.Format = "d";
             dataGridItems.Columns["column_last_rent"].DefaultCellStyle.Format = "d";
+            dataGridHistory.Columns["column_rented"].DefaultCellStyle.Format = "d";
+            dataGridHistory.Columns["column_returned"].DefaultCellStyle.Format = "d";
             LoadHistories();
+            if (itemType != null && serial != null)
+            {
+                InitWithSelectedItem(itemType, serial);
+            } 
+            else
+            {
+                cbItemType.SelectedItem = "All";
+            }
+        }
+
+        private void InitWithSelectedItem(string itemType, string serial)
+        {
+            // Click the item type.
+            cbItemType.SelectedItem = itemType;
+            cbItemType_SelectedIndexChanged(cbItemType, EventArgs.Empty);
+
+            // Select a row by serial number.
+            for (int i = 0; i < dataGridItems.Rows.Count; ++i)
+            {
+                string serialNumber = dataGridItems.Rows[i].Cells["column_serial"].Value.ToString();
+                if (serialNumber != serial) { continue; }
+
+                dataGridItems.Rows[i].Selected = true;
+                LoadItemHistory(i);
+                break;
+            }
         }
 
         private void LoadHistories()
@@ -63,6 +90,7 @@ namespace InventoryManagmentSystem
             {
                 row = dataGridItems.Rows[i];
                 string itemType = row.Cells["column_item_type"].Value.ToString();
+                // Hide rows that are filtered out.
                 if(selectedType == "all") 
                 {
                     row.Visible = true;
@@ -80,8 +108,20 @@ namespace InventoryManagmentSystem
 
         private void dataGridItems_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            LoadItemHistory();
+        }
+
+        private void LoadItemHistory(int rowIndex = -1)
+        {
             dataGridHistory.Rows.Clear();
+
             DataGridViewRow row = dataGridItems.CurrentRow;
+            if(rowIndex > 0)
+            {
+                row = dataGridItems.Rows[rowIndex];
+            }
+            if(row == null) { return; }
+
             Guid itemId = (Guid)row.Cells["column_item_id"].Value;
 
             string query = HelperQuery.HistoryClientAndDates(itemId);
@@ -97,6 +137,14 @@ namespace InventoryManagmentSystem
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             connection.Close();
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            InventoryForm form = new InventoryForm();
+            var parentForm = this.ParentForm as MainForm;
+            parentForm.openChildForm(form);
+            this.Close();
         }
     }
 }
