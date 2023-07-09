@@ -94,13 +94,13 @@ namespace InventoryManagmentSystem
         private string QueryClient()
         {
             //return ("SELECT Type, DueDate, SerialNumber FROM tbBoots WHERE Location='Client1'");
-            return ("SELECT ItemType, DueDate, SerialNumber FROM tbPants " +
+            return ("SELECT 'Pants', DueDate,Brand,SerialNumber,Size,ManufactureDate FROM tbPants " +
                 "WHERE Location='" + license + "' " +
-                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbBoots " +
+                "UNION SELECT 'Boots',DueDate,Brand,SerialNumber,Size,ManufactureDate FROM tbBoots " +
                 "WHERE Location='" + license + "' " +
-                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbHelmets " +
+                "UNION SELECT 'Helmet',DueDate,Brand,SerialNumber,'NA',ManufactureDate FROM tbHelmets " +
                 "WHERE Location='" + license + "' " +
-                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbJackets " +
+                "UNION SELECT 'Jacket',DueDate,Brand,SerialNumber,Size,ManufactureDate FROM tbJackets " +
                 "WHERE Location='" + license + "' " +
                 "ORDER BY DueDate");
         }
@@ -108,7 +108,8 @@ namespace InventoryManagmentSystem
         private void LoadClient()
         {
             // Change the styling for the date column.
-            dataGridViewClient.Columns["DueDate"].DefaultCellStyle.Format = "d";
+            dataGridViewClient.Columns["DDate"].DefaultCellStyle.Format = "d";
+            dataGridViewClient.Columns["ClientMFD"].DefaultCellStyle.Format = "d";
 
             dataGridViewClient.Rows.Clear();
             cm = new SqlCommand(QueryClient(), con);
@@ -122,7 +123,10 @@ namespace InventoryManagmentSystem
                     dataGridViewClient.Rows.Add(
                         dr[0].ToString(),
                         dr[1],
-                        dr[2].ToString()
+                        dr[2].ToString(),
+                        dr[3].ToString(),
+                        dr[4].ToString(),
+                        dr[5]
                     );
                 }
             }
@@ -214,6 +218,17 @@ namespace InventoryManagmentSystem
             txtBoxPhone.Clear();
             txtBoxEmail.Clear();
             txtBoxStreet.Clear();
+            txtBoxDriversLicense.Clear();
+            textBoxChest.Clear();
+            textBoxCity.Clear();
+            textBoxHeight.Clear();
+            textBoxHips.Clear();
+            textBoxInseam.Clear();
+            textBoxSleeve.Clear();
+            textBoxState.Clear();
+            textBoxWaist.Clear();
+            textBoxWeight.Clear();
+            textBoxZip.Clear();
             txtBoxRep.SelectedIndex = -1;
             comboBoxAcademy.SelectedIndex = -1;
 
@@ -1016,7 +1031,7 @@ namespace InventoryManagmentSystem
                 panelReplace.Visible = true;
                 dataGridViewClient.Enabled = false;
 
-                dueDate = dataGridViewClient.Rows[e.RowIndex].Cells["DueDate"].Value.ToString();
+                dueDate = dataGridViewClient.Rows[e.RowIndex].Cells["DDate"].Value.ToString();
                 String SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
                 labelOldItem.Text = SelectedSerial;
                 labelTypeOfItem.Text = dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString();
