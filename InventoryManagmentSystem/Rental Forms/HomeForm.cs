@@ -4,17 +4,18 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 
-
-
 namespace InventoryManagmentSystem
 {
     public partial class HomeForm : Form
     {
+        public int dueDays = 14;
+
         public HomeForm()
         {
             InitializeComponent();
+            labelDueDate.Text = $"Due Within {dueDays} Days";
             PrintRented();
-            LoadTables(dataGridViewDueIn10, QueryWithin10Days(), "Due");
+            LoadTables(dataGridViewDueIn10, QueryRentedItems(), "Due");
             LoadTables(dataGridViewPast30, QueryLateItems(), "DueDate2");
 
         }
@@ -46,53 +47,35 @@ namespace InventoryManagmentSystem
             return count;
         }
 
-        private string QueryWithin10Days()
+        private string QueryRentedItems()
         {
-            string query = @"
+            string query = $@"
                 SELECT ItemType, Location, DueDate FROM tbItems 
                 JOIN tbBoots ON tbBoots.ItemId = tbItems.Id 
                 WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) 
                     BETWEEN CAST(GETDATE() AS DATE) AND 
-                    DATEADD(DAY, 10, CAST(GETDATE() AS DATE)) 
+                    DATEADD(DAY, {dueDays}, CAST(GETDATE() AS DATE)) 
 
                 UNION SELECT ItemType, Location, DueDate FROM tbItems 
                 JOIN tbHelmets ON tbHelmets.ItemId = tbItems.Id 
                 WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) 
                     BETWEEN CAST(GETDATE() AS DATE) AND 
-                    DATEADD(DAY, 10, CAST(GETDATE() AS DATE))
+                    DATEADD(DAY, {dueDays}, CAST(GETDATE() AS DATE))
 
                 UNION SELECT ItemType, Location, DueDate FROM tbItems 
                 JOIN tbJackets ON tbJackets.ItemId = tbItems.Id 
                 WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) 
                     BETWEEN CAST(GETDATE() AS DATE) AND 
-                    DATEADD(DAY, 10, CAST(GETDATE() AS DATE))
+                    DATEADD(DAY, {dueDays}, CAST(GETDATE() AS DATE))
 
                 UNION SELECT ItemType, Location, DueDate FROM tbItems 
                 JOIN tbPants ON tbPants.ItemId = tbItems.Id 
                 WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) 
                     BETWEEN CAST(GETDATE() AS DATE) AND 
-                    DATEADD(DAY, 10, CAST(GETDATE() AS DATE))
+                    DATEADD(DAY, {dueDays}, CAST(GETDATE() AS DATE))
             ";
             query = query.Replace("\r\n", " ");
             return query;
-            /*
-                ("SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbPants " +
-                "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
-                "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE)) " +
-
-                "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbBoots " +
-                "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location " +
-                "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE)) " +
-
-                "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbHelmets " +
-                "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location " +
-                "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE))  " +
-
-                "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbJackets " +
-                "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location " +
-                "WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) BETWEEN CAST(GETDATE() AS DATE) AND DATEADD(DAY, 10, CAST(GETDATE() AS DATE))  " +
-                "ORDER BY DueDate");
-             */
         }
 
         private string QueryLateItems()
@@ -116,24 +99,6 @@ namespace InventoryManagmentSystem
             ";
             query = query.Replace("\r\n", " ");
             return query;
-            /*
-                ("SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbPants " +
-                "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location " +
-                "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 0 " +
-
-                "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbBoots " +
-                "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location " +
-                "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 0 " +
-
-                "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbHelmets " +
-                "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location " +
-                "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 0  " +
-
-                "UNION SELECT ItemType, tbClients.Name, DueDate, SerialNumber FROM tbJackets " +
-                "INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location " +
-                "WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 0  " +
-                "ORDER BY DueDate");
-             */
         }
 
         private void LoadTables(DataGridView grid, string query, string columnName)
@@ -144,20 +109,27 @@ namespace InventoryManagmentSystem
             grid.Rows.Clear();
             cm = new SqlCommand(query, con);
             con.Open();
-            dr = cm.ExecuteReader();
-
-            int i = 0;
-            while (dr.Read())
+            try
             {
-                ++i;
-                grid.Rows.Add(i,
-                    dr[0].ToString(),
-                    dr[1].ToString(),
-                    dr[2]
-                    );
-            }
+                dr = cm.ExecuteReader();
 
-            dr.Close();
+                int i = 0;
+                while (dr.Read())
+                {
+                    ++i;
+                    grid.Rows.Add(i,
+                        dr[0].ToString(),
+                        dr[1].ToString(),
+                        dr[2]
+                        );
+                }
+
+                dr.Close();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             con.Close();
         }
 

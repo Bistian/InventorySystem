@@ -36,7 +36,7 @@
             this.splitContainerRentalOptions = new System.Windows.Forms.SplitContainer();
             this.buttonNewCustomer = new System.Windows.Forms.Button();
             this.buttonActiveRental = new System.Windows.Forms.Button();
-            this.DueIn10 = new System.Windows.Forms.Label();
+            this.labelDueDate = new System.Windows.Forms.Label();
             this.PastDue = new System.Windows.Forms.Label();
             this.PanelTitles = new System.Windows.Forms.Panel();
             this.Due = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -122,19 +122,19 @@
             this.buttonActiveRental.UseVisualStyleBackColor = false;
             this.buttonActiveRental.Click += new System.EventHandler(this.buttonActiveRental_Click);
             // 
-            // DueIn10
+            // labelDueDate
             // 
-            this.DueIn10.AutoSize = true;
-            this.DueIn10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DueIn10.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DueIn10.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.DueIn10.Location = new System.Drawing.Point(0, 0);
-            this.DueIn10.Margin = new System.Windows.Forms.Padding(22, 8, 0, 0);
-            this.DueIn10.Name = "DueIn10";
-            this.DueIn10.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
-            this.DueIn10.Size = new System.Drawing.Size(229, 24);
-            this.DueIn10.TabIndex = 1;
-            this.DueIn10.Text = "Due Withinn 10 Days";
+            this.labelDueDate.AutoSize = true;
+            this.labelDueDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDueDate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelDueDate.Location = new System.Drawing.Point(0, 0);
+            this.labelDueDate.Margin = new System.Windows.Forms.Padding(22, 8, 0, 0);
+            this.labelDueDate.Name = "labelDueDate";
+            this.labelDueDate.Padding = new System.Windows.Forms.Padding(26, 0, 0, 0);
+            this.labelDueDate.Size = new System.Drawing.Size(229, 24);
+            this.labelDueDate.TabIndex = 1;
+            this.labelDueDate.Text = "Due Withinn 10 Days";
             // 
             // PastDue
             // 
@@ -154,7 +154,7 @@
             // 
             this.PanelTitles.BackColor = System.Drawing.Color.Maroon;
             this.PanelTitles.Controls.Add(this.PastDue);
-            this.PanelTitles.Controls.Add(this.DueIn10);
+            this.PanelTitles.Controls.Add(this.labelDueDate);
             this.PanelTitles.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelTitles.Location = new System.Drawing.Point(0, 0);
             this.PanelTitles.Margin = new System.Windows.Forms.Padding(2);
@@ -431,7 +431,7 @@
 
         #endregion
         private System.Windows.Forms.SplitContainer splitContainerRentalOptions;
-        private System.Windows.Forms.Label DueIn10;
+        private System.Windows.Forms.Label labelDueDate;
         private System.Windows.Forms.Label PastDue;
         private System.Windows.Forms.Panel PanelTitles;
         private System.Windows.Forms.DataGridViewTextBoxColumn Due;
