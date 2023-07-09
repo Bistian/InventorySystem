@@ -20,11 +20,11 @@ namespace InventoryManagmentSystem
         // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         //Creating command
-        SqlConnection con = new SqlConnection(connectionString);
+        SqlConnection connection = new SqlConnection(connectionString);
         //Creating command
-        SqlCommand cm = new SqlCommand();
+        SqlCommand command = new SqlCommand();
         //Creatinng Reader
-        SqlDataReader dr;
+        SqlDataReader dataReader;
         #endregion SQL_Variables
 
         #region Excel_Variables
@@ -54,7 +54,7 @@ namespace InventoryManagmentSystem
             workbook.Close();
             excelApp.Quit();
             CloseBackgroundExcel();
-            con.Close();
+            connection.Close();
         }
         private void ExcelImport_Load(object sender, EventArgs e)
         {
@@ -221,14 +221,14 @@ namespace InventoryManagmentSystem
                 "WHERE TABLE_NAME = '" + tableName + "'" +
                 "ORDER BY ORDINAL_POSITION";
 
-            cm = new SqlCommand(query, con);
-            con.Open();
-            dr = cm.ExecuteReader();
-            while (dr.Read())
+            command = new SqlCommand(query, connection);
+            connection.Open();
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                listTableColumns.Add(dr.GetString(0));
+                listTableColumns.Add(dataReader.GetString(0));
             }
-            con.Close();
+            connection.Close();
 
             tableColumnSerial = listTableColumns[3];
         }
@@ -245,7 +245,7 @@ namespace InventoryManagmentSystem
             {
                 object[] row = (object[])rows[i];
                 string table = isPants ? "tbPants" : "tbJackets";
-
+               
                 if (row[7] == null)
                 {
                     row[7] = "Fire-Tec";
@@ -262,14 +262,15 @@ namespace InventoryManagmentSystem
                     }
                 }
 
+                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(command, connection, row[0].ToString());
                 string query = $"INSERT INTO {table} " +
-                    $"(ItemType, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Size) " +
-                    $"VALUES ('{row[0]}','{row[1]}','{row[2]}','{row[7]}','{row[5]}','{row[4]}',@date,'{row[3]}')";
+                    $"(ItemId, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Size) " +
+                    $"VALUES ('{uuid}','{row[1]}','{row[2]}','{row[7]}','{row[5]}','{row[4]}',@date,'{row[3]}')";
 
                 try
                 {
-                    con.Open();
-                    cm = new SqlCommand(query, con);
+                    connection.Open();
+                    command = new SqlCommand(query, connection);
 
                     SqlParameter parameter = new SqlParameter("@date", SqlDbType.Date);
                     if (row[6] == null)
@@ -280,18 +281,20 @@ namespace InventoryManagmentSystem
                     {
                         parameter.Value = row[6];
                     }
-                    cm.Parameters.Add(parameter);
+                    command.Parameters.Add(parameter);
 
-                    cm.ExecuteNonQuery();
-                    con.Close();
+                    command.ExecuteNonQuery();
+                    connection.Close();
                 }
                 catch (Exception ex)
                 {
-                    con.Close();
+                    connection.Close();
                     #if DEBUG
                         Console.WriteLine($"Error Row {i}");
                         Console.WriteLine(ex.ToString());
                     #endif
+                    // If I cannot connect the item, I need to delete it.
+                    HelperDatabaseCall.DeleteItem(command, connection, uuid);
                 }
             }
         }
@@ -318,36 +321,38 @@ namespace InventoryManagmentSystem
                         row[8] = "Fire-Tec";
                     }
                 }
-
+                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(command, connection, row[0].ToString());
                 string query = $"INSERT INTO {table} " +
-                    "(ItemType, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Size, [Material]) " +
-                    "VALUES (@ItemType, @Brand, @SerialNumber, @Location, @UsedNew, @ManufactureDate, @DueDate, @Size, @Material)";
+                    "(ItemId, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Size, [Material]) " +
+                    "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @UsedNew, @ManufactureDate, @DueDate, @Size, @Material)";
 
                 try
                 {
-                    con.Open();
-                    cm = new SqlCommand(query, con);
+                    connection.Open();
+                    command = new SqlCommand(query, connection);
 
-                    cm.Parameters.AddWithValue("@ItemType", row[0]);
-                    cm.Parameters.AddWithValue("@Brand", row[1]);
-                    cm.Parameters.AddWithValue("@SerialNumber", row[2]);
-                    cm.Parameters.AddWithValue("@Location", row[8]);
-                    cm.Parameters.AddWithValue("@UsedNew", row[5]);
-                    cm.Parameters.AddWithValue("@ManufactureDate", row[4]);
-                    cm.Parameters.AddWithValue("@DueDate", row[7] ?? DBNull.Value);
-                    cm.Parameters.AddWithValue("@Size", row[6]);
-                    cm.Parameters.AddWithValue("@Material", row[3]);
+                    command.Parameters.AddWithValue("@ItemId", uuid);
+                    command.Parameters.AddWithValue("@Brand", row[1]);
+                    command.Parameters.AddWithValue("@SerialNumber", row[2]);
+                    command.Parameters.AddWithValue("@Location", row[8]);
+                    command.Parameters.AddWithValue("@UsedNew", row[5]);
+                    command.Parameters.AddWithValue("@ManufactureDate", row[4]);
+                    command.Parameters.AddWithValue("@DueDate", row[7] ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@Size", row[6]);
+                    command.Parameters.AddWithValue("@Material", row[3]);
 
-                    cm.ExecuteNonQuery();
-                    con.Close();
+                    command.ExecuteNonQuery();
+                    connection.Close();
                 }
                 catch (Exception ex)
                 {
-                    con.Close();
+                    connection.Close();
                     #if DEBUG
                     Console.WriteLine($"Error Row {i}");
                     Console.WriteLine(ex.ToString());
                     #endif
+                    // If I cannot connect the item, I need to delete it.
+                    HelperDatabaseCall.DeleteItem(command, connection, uuid);
                 }
             }
         }
@@ -375,34 +380,37 @@ namespace InventoryManagmentSystem
                     }
                 }
 
+                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(command, connection, row[0].ToString());
                 string query = $"INSERT INTO {table} " +
-                    "(ItemType, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Color) " +
-                    "VALUES (@ItemType, @Brand, @SerialNumber, @Location, @UsedNew, @ManufactureDate, @DueDate, @Color)";
+                    "(ItemId, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Color) " +
+                    "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @UsedNew, @ManufactureDate, @DueDate, @Color)";
 
                 try
                 {
-                    con.Open();
-                    cm = new SqlCommand(query, con);
+                    connection.Open();
+                    command = new SqlCommand(query, connection);
 
-                    cm.Parameters.AddWithValue("@ItemType", row[0]);
-                    cm.Parameters.AddWithValue("@Brand", row[1]);
-                    cm.Parameters.AddWithValue("@SerialNumber", row[2]);
-                    cm.Parameters.AddWithValue("@Location", row[7]);
-                    cm.Parameters.AddWithValue("@UsedNew", row[5]);
-                    cm.Parameters.AddWithValue("@ManufactureDate", row[4]);
-                    cm.Parameters.AddWithValue("@DueDate", row[6] ?? DBNull.Value);
-                    cm.Parameters.AddWithValue("@Color", row[3]);
+                    command.Parameters.AddWithValue("@ItemId", uuid);
+                    command.Parameters.AddWithValue("@Brand", row[1]);
+                    command.Parameters.AddWithValue("@SerialNumber", row[2]);
+                    command.Parameters.AddWithValue("@Location", row[7]);
+                    command.Parameters.AddWithValue("@UsedNew", row[5]);
+                    command.Parameters.AddWithValue("@ManufactureDate", row[4]);
+                    command.Parameters.AddWithValue("@DueDate", row[6] ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@Color", row[3]);
 
-                    cm.ExecuteNonQuery();
-                    con.Close();
+                    command.ExecuteNonQuery();
+                    connection.Close();
                 }
                 catch (Exception ex)
                 {
-                    con.Close();
+                    connection.Close();
                     #if DEBUG
                     Console.WriteLine($"Error Row {i}");
                     Console.WriteLine(ex.ToString());
                     #endif
+                    // If I cannot connect the item, I need to delete it.
+                    HelperDatabaseCall.DeleteItem(command, connection, uuid);
                 }
             }
         }
@@ -480,159 +488,6 @@ namespace InventoryManagmentSystem
                 ImportHelmets(rows);
 
             ClearExcelVar();
-
-            /*
-            // Create the colums for the Data Table.
-            DataTable dataTable = new DataTable();
-            for (int i = 0; i < colNum; i++)
-            {
-                var v = worksheet.Cells[headerRow, i + 1].Value;
-                if (v == null) { continue; }
-                dataTable.Columns.Add(listExcelColumns[i]);
-            }
-
-            // Add rows to the Data Table
-            foreach (var row in rows)
-            {
-                dataTable.Rows.Add(row);
-            }
-            */
-            /*
-            // Match columns from Excel and Database.
-            string columns = "";
-            string colValues = "";
-            // I will hard code somethings to keep the standard Excel format.
-            // Excel: 0.ItemType 1.Brand 2.Serial 3.Size 4.MDF 5.UsedNew 6.DueDate 7.Location
-            // Database: 1.ItemType 2.Brand 3.SerialNumber 4.Location 5.UsedNew 6.ManufactureDate 7.DueDate 8.Size || Color 9.Other
-            if(tableName == "tbJackets" || tableName == "tbPants")
-            {
-                for (int i = 1; i <= 8; ++i)
-                {
-                    // Select database column to add to.
-                    columns += listTableColumns[i];
-                    // Select value from Excel column to add to database.
-                    if (i == 4)
-                    {
-                        colValues += "@" + listExcelColumns[7];
-                    }
-                    else if (i == 5)
-                    {
-                        colValues += "@" + listExcelColumns[5];
-                    }
-                    else if (i == 6)
-                    {
-                        colValues += "@" + listExcelColumns[4];
-                    }
-                    else if (i == 8)
-                    {
-                        colValues += "@" + listExcelColumns[3];
-                    }
-                    else
-                    {
-                        colValues += "@" + listExcelColumns[i - 1];
-                    }
-
-                    // Add comma and space unless it is the lest item.
-                    if (i < 8)
-                    {
-                        columns += ", ";
-                        colValues += ", ";
-                    }
-                }
-            }
-            else if(tableName == "tbHelmets")
-            {
-
-            }
-            else if( tableName == "tbBoots")
-            {
-
-            }
-            */
-            /* for (int i = 0; i < listExcelColumns.Count; ++i)
-             {
-                 columns += listTableColumns[i + 1].ToString();
-                 colValues += "@" + listExcelColumns[i].ToString();
-                 if (i < listExcelColumns.Count - 1)
-                 {
-                     columns += ", ";
-                     colValues += ", ";
-                 }
-             }*/
-
-            /*con.Open();
-            // Insert rows from Excel into the database table.
-            string query = "INSERT INTO " + tableName + " (" + columns + ") " +
-                            "VALUES (" + colValues + ")";*/
-
-            /* string query2 = "insert into tbPants" + 
-                 "(ItemType, Brand, SerialNumber, Size, ManufactureDate, UsedNew, DueDate, Location) " +
-                 "VALUES (@v1, @v2, @v3, @v4, @v5, @v6, @v7, @v8)";*/
-
-            /*      string query2 = "insert into tbPants" +
-                      "(ItemType, Brand, SerialNumber, Size, ManufactureDate, UsedNew, DueDate, Location) " +
-                      "VALUES (@v1, @v2, @v3, @v4, @v5, @v6, @v7, @v8)";
-
-                  cm.Parameters.AddWithValue("@v1", rows[0][0]);
-                  cm.Parameters.AddWithValue("@v2", rows[0][1]);
-                  cm.Parameters.AddWithValue("@v3", rows[0][2]);
-                  cm.Parameters.AddWithValue("@v4", rows[0][3]);
-                  cm.Parameters.AddWithValue("@v5", rows[0][4]);
-                  cm.Parameters.AddWithValue("@v6", rows[0][5]);
-                  cm.Parameters.AddWithValue("@v7", rows[0][6]);
-                  cm.Parameters.AddWithValue("@v8", rows[0][7]);*/
-
-            /*foreach (DataRow row in dataTable.Rows)
-            {
-                try
-                {
-                    cm = new SqlCommand(query, con);
-                    for (int i = 0; i < dataTable.Columns.Count; ++i)
-                    {
-                        object value = row[i];
-                        SqlDbType dbType = SqlDbType.VarChar;
-
-                        // Find out the data type of this cell.
-                        if (value != null && value != DBNull.Value)
-                        {
-                            Type valueType = value.GetType();
-                            if (valueType == typeof(int))
-                            {
-                                dbType = SqlDbType.Int;
-                            }
-                            else if (valueType == typeof(double))
-                            {
-                                dbType = SqlDbType.Float;
-                            }
-                            else if (valueType == typeof(DateTime))
-                            {
-                                dbType = SqlDbType.DateTime;
-                            }
-
-                            // Add more data types as needed...
-
-                            SqlParameter parameter = new SqlParameter("@" + dataTable.Columns[i].ColumnName, dbType);
-                            parameter.Value = value;
-                            cm.Parameters.Add(parameter);
-                        }
-                        else
-                        {
-                            // Handle null or DBNull values
-                            SqlParameter parameter = new SqlParameter("@" + dataTable.Columns[i].ColumnName, dbType);
-                            parameter.Value = DBNull.Value;
-                            cm.Parameters.Add(parameter);
-                        }
-                    }
-                    cm.ExecuteNonQuery();
-                }
-                catch(Exception ex)
-                {
-                    // TODO: Send an error notification to user.
-                    Console.WriteLine(ex.ToString());
-                }
-                    
-            }*/
-
         }
 
         /// <summary>
@@ -651,15 +506,15 @@ namespace InventoryManagmentSystem
                 "ELSE CAST(0 AS BIT)\r\n" +
                 "END";
 
-            cm = new SqlCommand(query, con);
-            con.Open();
-            dr = cm.ExecuteReader();
-            if (dr.HasRows)
+            command = new SqlCommand(query, connection);
+            connection.Open();
+            dataReader = command.ExecuteReader();
+            if (dataReader.HasRows)
             {
-                dr.Read();
-                result = dr.GetBoolean(0);
+                dataReader.Read();
+                result = dataReader.GetBoolean(0);
             }
-            con.Close();
+            connection.Close();
             return result;
         }
 
@@ -784,9 +639,9 @@ namespace InventoryManagmentSystem
         {
             List<System.Windows.Forms.TextBox> list = new List<System.Windows.Forms.TextBox>();
 
-            cm = new SqlCommand(query, con);
-            con.Open();
-            dr = cm.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            connection.Open();
+            dataReader = command.ExecuteReader();
 
             // Screen positions.
             int boxWidth = 100;
@@ -810,7 +665,7 @@ namespace InventoryManagmentSystem
             this.Controls.Add(excel);
 
             rows = 0;
-            while (dr.Read())
+            while (dataReader.Read())
             {
                 // Calculate the location of the next Text Box.
                 databaseColumnPos = new System.Drawing.Point(
@@ -826,7 +681,7 @@ namespace InventoryManagmentSystem
                 System.Windows.Forms.TextBox textBox = new System.Windows.Forms.TextBox();
                 textBox.ReadOnly = true;
                 textBox.Name = "tb" + rows;
-                textBox.Text = dr[0].ToString();
+                textBox.Text = dataReader[0].ToString();
                 textBox.Size = new Size(boxWidth, boxHeight);
                 textBox.Location = databaseColumnPos;
                 this.Controls.Add(textBox);
@@ -846,8 +701,8 @@ namespace InventoryManagmentSystem
             listTextBox.Clear();
             listTextBox = list;
 
-            dr.Close();
-            con.Close();
+            dataReader.Close();
+            connection.Close();
         }
 
         #endregion Manual Import
@@ -902,7 +757,7 @@ namespace InventoryManagmentSystem
             worksheet = null;
             workbook = null;
             excelApp = null;
-            con.Close();
+            connection.Close();
             listExcelColumns.Clear();
             listTableColumns.Clear();
             headerRow = -1;
