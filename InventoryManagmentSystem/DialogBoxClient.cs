@@ -33,20 +33,6 @@ namespace InventoryManagmentSystem
             this.client = client;
         }
 
-        private string QueryItems()
-        {
-            //return ("SELECT Type, DueDate, SerialNumber FROM tbBoots WHERE Location='Client1'");
-            return ("SELECT ItemType, DueDate, SerialNumber FROM tbPants " +
-                "WHERE Location='" + client + "' " +
-                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbBoots " +
-                "WHERE Location='" + client + "' " +
-                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbHelmets " +
-                "WHERE Location='" + client + "' " +
-                "UNION SELECT ItemType, DueDate, SerialNumber FROM tbJackets " +
-                "WHERE Location='" + client + "' " +
-                "ORDER BY DueDate");
-        }
-
         private string QueryClient()
         {
             return ("SELECT Phone, Email, Academy, DayNight FROM tbClients WHERE Name='" + client + "'");
@@ -55,12 +41,10 @@ namespace InventoryManagmentSystem
         private void DialogBoxClient_Load(object sender, EventArgs e)
         {
             SetLabels();
-            SetTable();
         }
 
         private void SetLabels()
         {
-            dataGridView1.Rows.Clear();
             cm = new SqlCommand(QueryClient(), con);
             con.Open();
             dr = cm.ExecuteReader();
@@ -76,42 +60,6 @@ namespace InventoryManagmentSystem
 
             dr.Close();
             con.Close();
-        }
-
-        private void SetTable()
-        {
-            // Change the styling for the date column.
-            dataGridView1.Columns["DueDate"].DefaultCellStyle.Format = "d";
-
-            try
-            {
-                dataGridView1.Rows.Clear();
-                cm = new SqlCommand(QueryItems(), con);
-                con.Open();
-                dr = cm.ExecuteReader();
-
-                int i = 0;
-                while (dr.Read())
-                {
-                    ++i;
-                    Console.WriteLine(dataGridView1.Rows[i]);
-                    dataGridView1.Rows.Add(i,
-                        dr[0].ToString(),
-                        dr[1],
-                        dr[2].ToString()
-                    );
-                }
-
-                dr.Close();
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                dr.Close();
-                con.Close();
-                Console.WriteLine("ERROR DialogBoxCliets -> SetTable(): " + ex.ToString());
-            }
-            
         }
 
         private void CloseUserModuel_Click(object sender, EventArgs e)
