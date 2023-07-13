@@ -1163,7 +1163,7 @@ namespace InventoryManagmentSystem
 
         private void LoadBrands()
         {
-            string query = "SELECT * FROM tbProviders WHERE itemType='academies'";
+            string query = "SELECT * FROM tbAcademies WHERE AcademyName='academies'";
             try
             {
                 cm = new SqlCommand(query, con);

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RentalHistoryForm));
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.labelItemType = new System.Windows.Forms.Label();
@@ -47,9 +47,9 @@
             this.column_returned = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.labelTitle = new System.Windows.Forms.Label();
             this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.labelTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -79,7 +79,7 @@
             this.cbItemType.Location = new System.Drawing.Point(280, 3);
             this.cbItemType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbItemType.Name = "cbItemType";
-            this.cbItemType.Size = new System.Drawing.Size(140, 23);
+            this.cbItemType.Size = new System.Drawing.Size(140, 32);
             this.cbItemType.TabIndex = 0;
             this.cbItemType.SelectedIndexChanged += new System.EventHandler(this.cbItemType_SelectedIndexChanged);
             // 
@@ -89,7 +89,7 @@
             this.labelItemType.ForeColor = System.Drawing.SystemColors.Window;
             this.labelItemType.Location = new System.Drawing.Point(206, 7);
             this.labelItemType.Name = "labelItemType";
-            this.labelItemType.Size = new System.Drawing.Size(67, 16);
+            this.labelItemType.Size = new System.Drawing.Size(93, 24);
             this.labelItemType.TabIndex = 1;
             this.labelItemType.Text = "Item Type";
             // 
@@ -100,14 +100,14 @@
             this.dataGridItems.AllowUserToResizeRows = false;
             this.dataGridItems.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridItems.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridItems.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridItems.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridItems.ColumnHeadersHeight = 30;
             this.dataGridItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -123,6 +123,7 @@
             this.dataGridItems.Location = new System.Drawing.Point(0, 0);
             this.dataGridItems.Name = "dataGridItems";
             this.dataGridItems.RowHeadersVisible = false;
+            this.dataGridItems.RowHeadersWidth = 62;
             this.dataGridItems.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.dataGridItems.RowTemplate.Height = 40;
             this.dataGridItems.Size = new System.Drawing.Size(933, 150);
@@ -133,35 +134,43 @@
             // 
             this.column_item_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.column_item_id.HeaderText = "Item ID";
+            this.column_item_id.MinimumWidth = 8;
             this.column_item_id.Name = "column_item_id";
             this.column_item_id.Visible = false;
             // 
             // column_item_type
             // 
             this.column_item_type.HeaderText = "Item Type";
+            this.column_item_type.MinimumWidth = 8;
             this.column_item_type.Name = "column_item_type";
+            this.column_item_type.Width = 150;
             // 
             // column_serial
             // 
             this.column_serial.HeaderText = "Serial";
+            this.column_serial.MinimumWidth = 8;
             this.column_serial.Name = "column_serial";
+            this.column_serial.Width = 150;
             // 
             // column_brand
             // 
             this.column_brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.column_brand.HeaderText = "Brand";
+            this.column_brand.MinimumWidth = 8;
             this.column_brand.Name = "column_brand";
             // 
             // column_acquired
             // 
             this.column_acquired.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.column_acquired.HeaderText = "Acquired";
+            this.column_acquired.MinimumWidth = 8;
             this.column_acquired.Name = "column_acquired";
             // 
             // column_last_rent
             // 
             this.column_last_rent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.column_last_rent.HeaderText = "Last Rented";
+            this.column_last_rent.MinimumWidth = 8;
             this.column_last_rent.Name = "column_last_rent";
             // 
             // dataGridHistory
@@ -171,14 +180,14 @@
             this.dataGridHistory.AllowUserToResizeRows = false;
             this.dataGridHistory.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridHistory.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridHistory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridHistory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridHistory.ColumnHeadersHeight = 30;
             this.dataGridHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -192,6 +201,7 @@
             this.dataGridHistory.Location = new System.Drawing.Point(0, 0);
             this.dataGridHistory.Name = "dataGridHistory";
             this.dataGridHistory.RowHeadersVisible = false;
+            this.dataGridHistory.RowHeadersWidth = 62;
             this.dataGridHistory.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.dataGridHistory.RowTemplate.Height = 40;
             this.dataGridHistory.Size = new System.Drawing.Size(933, 331);
@@ -201,25 +211,30 @@
             // column_client_id
             // 
             this.column_client_id.HeaderText = "Client ID";
+            this.column_client_id.MinimumWidth = 8;
             this.column_client_id.Name = "column_client_id";
             this.column_client_id.Visible = false;
+            this.column_client_id.Width = 150;
             // 
             // column_customer_name
             // 
             this.column_customer_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.column_customer_name.HeaderText = "Customer Name";
+            this.column_customer_name.MinimumWidth = 8;
             this.column_customer_name.Name = "column_customer_name";
             // 
             // column_rented
             // 
             this.column_rented.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.column_rented.HeaderText = "Rented";
+            this.column_rented.MinimumWidth = 8;
             this.column_rented.Name = "column_rented";
             // 
             // column_returned
             // 
             this.column_returned.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.column_returned.HeaderText = "Returned";
+            this.column_returned.MinimumWidth = 8;
             this.column_returned.Name = "column_returned";
             // 
             // splitContainer1
@@ -252,14 +267,26 @@
             this.panelTop.Size = new System.Drawing.Size(933, 30);
             this.panelTop.TabIndex = 6;
             // 
+            // labelTitle
+            // 
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitle.ForeColor = System.Drawing.SystemColors.Window;
+            this.labelTitle.Location = new System.Drawing.Point(-5, 3);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(216, 37);
+            this.labelTitle.TabIndex = 70;
+            this.labelTitle.Text = "Rental History";
+            // 
             // CloseButton
             // 
+            this.CloseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
             this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
             this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(894, 0);
+            this.CloseButton.Location = new System.Drawing.Point(157, 3);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(27, 34);
+            this.CloseButton.Size = new System.Drawing.Size(39, 45);
             this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.CloseButton.TabIndex = 69;
             this.CloseButton.TabStop = false;
@@ -283,20 +310,9 @@
             this.splitContainer2.SplitterDistance = 30;
             this.splitContainer2.TabIndex = 7;
             // 
-            // labelTitle
-            // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitle.ForeColor = System.Drawing.SystemColors.Window;
-            this.labelTitle.Location = new System.Drawing.Point(-5, 3);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(147, 25);
-            this.labelTitle.TabIndex = 70;
-            this.labelTitle.Text = "Rental History";
-            // 
             // RentalHistoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(933, 519);

@@ -396,6 +396,21 @@ namespace InventoryManagmentSystem
                     connection.Close();
                 }
 
+                // Acadamies
+                using (SqlConnection connection = new SqlConnection(connectDatabase))
+                {
+                    connection.Open();
+
+                    string sql =
+                        "CREATE TABLE[dbo].[tbAcademies] (" +
+                        "[AcademyName] VARCHAR(50) NOT NULL," +
+                        "[Brand] VARCHAR(50) NOT NULL);";
+
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+
                 // Prices
                 using (SqlConnection connection = new SqlConnection(connectDatabase))
                 {
