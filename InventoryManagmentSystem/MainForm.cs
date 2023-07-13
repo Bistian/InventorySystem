@@ -141,7 +141,7 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void OpenNavBar(string tab)
+        public void OpenNavBar(string tab)
         {
             //set all secondary nav bars visability to false before opening the needed one
             RentalsNavBar.Visible = false;

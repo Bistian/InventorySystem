@@ -133,6 +133,9 @@ namespace InventoryManagmentSystem
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
 
             dr.Close();
+            con.Close();
+        }
+
         private string QueryItems()
         {
             string searchTerm = textBoxSearchBar.Text;
@@ -168,9 +171,6 @@ namespace InventoryManagmentSystem
             }
 
             return ("SELECT ItemId, Brand, SerialNumber," + Sizes + " ManufactureDate, UsedNew "
-                + FinalColumn + " FROM " + CurrTable +
-                     " WHERE " + firetec + " AND SerialNumber LIKE '%" + searchTerm + "%'");
-        }
                 + FinalColumn + " FROM " + CurrTable +
                      " WHERE " + firetec + " AND SerialNumber LIKE '%" + searchTerm + "%'");
         }
