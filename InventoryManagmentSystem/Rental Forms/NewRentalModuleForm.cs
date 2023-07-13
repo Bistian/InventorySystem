@@ -1153,9 +1153,7 @@ namespace InventoryManagmentSystem
 
         private void btnAddBrand_Click(object sender, EventArgs e)
         {
-            List<string> items = new List<string>();
-            items.Add("Academies");
-            ProviderForm form = new ProviderForm(items);
+            BrandForm form = new BrandForm();
             form.cbItemType.SelectedIndex = 0;
             form.close = true;
             form.ShowDialog();

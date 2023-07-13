@@ -233,7 +233,6 @@ C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryMan
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.DeptModuleForm.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.DialogBoxClient.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.PricesForm.resources
-C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ProviderForm.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ExistingCustomerModuleForm.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.HomeForm.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.MainForm.resources
@@ -244,12 +243,8 @@ C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryMan
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ExcelImportForm.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ExcelUserPromptForm.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.InventoryForm.resources
-C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.NewBootModuleForm.resources
-C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.NewHelmetModuleForm.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Login.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.NewItemModuleForm.resources
-C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.NewJacketModuleForm.resources
-C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.NewPantsModuleForm.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Properties.Resources.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.RentalHistoryForm.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ReturnModule.resources
@@ -273,3 +268,4 @@ C:\Code\Projects\InventorySystem\InventoryManagmentSystem\bin\Debug\de\PdfSharp.
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.CopyComplete
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.exe
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.pdb
+C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.BrandForm.resources

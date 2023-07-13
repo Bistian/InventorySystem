@@ -187,7 +187,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="btnAddBrand.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>
@@ -217,7 +217,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnAddBrand.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="ClearButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Trebuchet MS, 9.75pt, style=Bold</value>
@@ -247,7 +247,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ClearButton.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="SaveButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Trebuchet MS, 9.75pt, style=Bold</value>
@@ -277,7 +277,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;SaveButton.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="labelManufactureDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -289,7 +289,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 70</value>
+    <value>328, 70</value>
   </data>
   <data name="labelManufactureDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 20</value>
@@ -310,19 +310,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelManufactureDate.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="dateTimePickerManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>206, 92</value>
+    <value>332, 92</value>
   </data>
   <data name="dateTimePickerManufactureDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="dateTimePickerManufactureDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 21</value>
+    <value>133, 21</value>
   </data>
   <data name="dateTimePickerManufactureDate.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;dateTimePickerManufactureDate.Name" xml:space="preserve">
     <value>dateTimePickerManufactureDate</value>
@@ -334,7 +334,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dateTimePickerManufactureDate.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="labelUsedNew.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -346,7 +346,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelUsedNew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 116</value>
+    <value>108, 116</value>
   </data>
   <data name="labelUsedNew.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 20</value>
@@ -367,7 +367,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelUsedNew.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="comboBoxUsedNew.Items" xml:space="preserve">
     <value>Used</value>
@@ -376,7 +376,7 @@
     <value>New</value>
   </data>
   <data name="comboBoxUsedNew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 138</value>
+    <value>111, 138</value>
   </data>
   <data name="comboBoxUsedNew.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -385,7 +385,7 @@
     <value>92, 23</value>
   </data>
   <data name="comboBoxUsedNew.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;comboBoxUsedNew.Name" xml:space="preserve">
     <value>comboBoxUsedNew</value>
@@ -397,7 +397,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboBoxUsedNew.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="labelMaterial.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -409,7 +409,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelMaterial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 116</value>
+    <value>300, 116</value>
   </data>
   <data name="labelMaterial.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 20</value>
@@ -430,7 +430,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelMaterial.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="comboBoxMaterial.Items" xml:space="preserve">
     <value>Rubber</value>
@@ -439,7 +439,7 @@
     <value>Leather</value>
   </data>
   <data name="comboBoxMaterial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 138</value>
+    <value>303, 138</value>
   </data>
   <data name="comboBoxMaterial.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -448,7 +448,7 @@
     <value>80, 23</value>
   </data>
   <data name="comboBoxMaterial.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;comboBoxMaterial.Name" xml:space="preserve">
     <value>comboBoxMaterial</value>
@@ -460,7 +460,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboBoxMaterial.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="lableBrand.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -493,7 +493,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lableBrand.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>19</value>
   </data>
   <data name="comboBoxBrand.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 138</value>
@@ -505,7 +505,7 @@
     <value>92, 23</value>
   </data>
   <data name="comboBoxBrand.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;comboBoxBrand.Name" xml:space="preserve">
     <value>comboBoxBrand</value>
@@ -517,7 +517,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboBoxBrand.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="labelSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -529,7 +529,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 116</value>
+    <value>204, 116</value>
   </data>
   <data name="labelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 20</value>
@@ -550,7 +550,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelSize.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="comboBoxSize.Items" xml:space="preserve">
     <value>5</value>
@@ -622,7 +622,7 @@
     <value>16</value>
   </data>
   <data name="comboBoxSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>195, 138</value>
+    <value>207, 138</value>
   </data>
   <data name="comboBoxSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -631,7 +631,7 @@
     <value>92, 23</value>
   </data>
   <data name="comboBoxSize.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;comboBoxSize.Name" xml:space="preserve">
     <value>comboBoxSize</value>
@@ -643,16 +643,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboBoxSize.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="txtBoxSerialNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 92</value>
+    <value>145, 92</value>
   </data>
   <data name="txtBoxSerialNumber.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 21</value>
   </data>
   <data name="txtBoxSerialNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;txtBoxSerialNumber.Name" xml:space="preserve">
     <value>txtBoxSerialNumber</value>
@@ -664,7 +664,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtBoxSerialNumber.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="lableSerialNumber.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -676,7 +676,7 @@
     <value>NoControl</value>
   </data>
   <data name="lableSerialNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 69</value>
+    <value>141, 69</value>
   </data>
   <data name="lableSerialNumber.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 20</value>
@@ -697,7 +697,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lableSerialNumber.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="labelColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -727,7 +727,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelColor.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="comboBoxColor.Items" xml:space="preserve">
     <value>Black</value>
@@ -745,7 +745,7 @@
     <value>78, 23</value>
   </data>
   <data name="comboBoxColor.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;comboBoxColor.Name" xml:space="preserve">
     <value>comboBoxColor</value>
@@ -757,7 +757,64 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboBoxColor.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cbItemType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 90</value>
+  </data>
+  <data name="cbItemType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="cbItemType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 23</value>
+  </data>
+  <data name="cbItemType.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;cbItemType.Name" xml:space="preserve">
+    <value>cbItemType</value>
+  </data>
+  <data name="&gt;&gt;cbItemType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbItemType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbItemType.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelItemType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelItemType.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 11.25pt, style=Bold</value>
+  </data>
+  <data name="labelItemType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelItemType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 68</value>
+  </data>
+  <data name="labelItemType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 20</value>
+  </data>
+  <data name="labelItemType.TabIndex" type="System.Int32, mscorlib">
+    <value>107</value>
+  </data>
+  <data name="labelItemType.Text" xml:space="preserve">
+    <value>Item Type</value>
+  </data>
+  <data name="&gt;&gt;labelItemType.Name" xml:space="preserve">
+    <value>labelItemType</value>
+  </data>
+  <data name="&gt;&gt;labelItemType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelItemType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelItemType.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -770,9 +827,6 @@
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.25pt</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>

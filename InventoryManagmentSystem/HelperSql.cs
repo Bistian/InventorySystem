@@ -185,6 +185,20 @@ namespace InventoryManagmentSystem
         /// VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)
         /// </summary>
         /// <returns></returns>
+        public static string MaskInsert()
+        {
+            string query = @"
+                INSERT INTO tbMasks(ItemId,SerialNumber,Brand,UsedNew,Size,ManufactureDate) 
+                VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return query;
+        }
+
+        /// <summary>
+        /// VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)
+        /// </summary>
+        /// <returns></returns>
         public static string PantsInsert()
         {
             string query = @"
@@ -208,20 +222,19 @@ namespace InventoryManagmentSystem
         {
             string query = HelperQuery.ItemInsertAndReturnUuid();
             Guid uuid = Guid.Empty;
+            connection.Open();
             try
             {
                 command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ItemType", itemType);
-                connection.Open();
                 uuid = (Guid)command.ExecuteScalar();
-                connection.Close();
             }
             catch (Exception ex)
             {
-                connection.Close();
                 Console.WriteLine($"ERROR adding item: {ex.Message}");
                 MessageBox.Show("Could not add item.");
             }
+            connection.Close();
             return uuid;
         }
 
@@ -232,11 +245,11 @@ namespace InventoryManagmentSystem
         public static void DeleteItem(SqlCommand command, SqlConnection connection, Guid uuid)
         {
             string query = HelperQuery.ItemDelete();
+            connection.Open();
             try
             {
                 command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Id", uuid);
-                connection.Open();
                 command.ExecuteNonQuery();
             }
             catch (Exception ex)

@@ -21,16 +21,20 @@ namespace InventoryManagmentSystem.Rental_Forms
         SqlCommand command;
         #endregion SQL_Variables
 
-        private string itemType = "";
         private bool isUpdate = false;
+        int lastItemTypeIndex = -1;
 
-        public NewItemForm(string itemType, bool isUpdate = false)
+        public NewItemForm(string itemType = "", bool isUpdate = false)
         {
             InitializeComponent();
-            this.itemType = itemType.ToLower();
+            this.cbItemType.Text = itemType.ToLower();
             this.isUpdate = isUpdate;
-            InitializeItemTypeSpecifics();
-            LoadBrands();
+            if(isUpdate)
+            {
+                LoadBrands();
+            }
+            ManageFieldsAvailability();
+            loadItemTypes();
         }
 
         #region Create
@@ -129,6 +133,32 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
         }
 
+        private bool AddMask(Guid uuid)
+        {
+            string query = HelperQuery.MaskInsert();
+            try
+            {
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemId", uuid);
+                command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
+                command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
+                command.Parameters.AddWithValue("@UsedNew", comboBoxUsedNew.Text);
+                command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
+                command.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                connection.Close();
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                return false;
+            }
+        }
+
         /// <summary>
         /// Add pants to pants table.
         /// </summary>
@@ -163,10 +193,11 @@ namespace InventoryManagmentSystem.Rental_Forms
         private bool SelectTableAndAddItem(Guid uuid)
         {
             bool wasAdded = false;
-            if (itemType == "boots") { wasAdded = AddBoots(uuid); }
-            else if (itemType == "helmet") { wasAdded = AddHelmet(uuid); }
-            else if (itemType == "jacket") { wasAdded = AddJacket(uuid); }
-            else if (itemType == "pants") { wasAdded = AddPants(uuid); }
+            if (cbItemType.Text == "boots") { wasAdded = AddBoots(uuid); }
+            else if (cbItemType.Text == "helmet") { wasAdded = AddHelmet(uuid); }
+            else if (cbItemType.Text == "mask") { wasAdded = AddMask(uuid); }
+            else if (cbItemType.Text == "jacket") { wasAdded = AddJacket(uuid); }
+            else if (cbItemType.Text == "pants") { wasAdded = AddPants(uuid); }
             return wasAdded;
         }
 
@@ -197,7 +228,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 return false;
             }
 
-            Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(command,connection,itemType);
+            Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(command,connection,cbItemType.Text);
             if (uuid.Equals(Guid.Empty))
             {
                 Console.WriteLine("ERROR: UUID not found.");
@@ -293,7 +324,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         private bool UpdateJacketOrHelmet()
         {
             string table = "tbJackets";
-            if (itemType == "pants") { table = "tbPants"; }
+            if (cbItemType.Text == "pants") { table = "tbPants"; }
 
             Guid uuid = GetUuidFromItem(table);
             if (uuid.Equals(Guid.Empty)) { return false; }
@@ -336,9 +367,9 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return false; }
 
             bool isUpdated = false;
-            if (itemType == "boots") { isUpdated = UpdateBoots(); }
-            else if (itemType == "helmet") { isUpdated = UpdateHelmet(); }
-            else if (itemType == "jacket" || itemType == "pants") { isUpdated = UpdateJacketOrHelmet(); }
+            if (cbItemType.Text == "boots") { isUpdated = UpdateBoots(); }
+            else if (cbItemType.Text == "helmet") { isUpdated = UpdateHelmet(); }
+            else if (cbItemType.Text == "jacket" || cbItemType.Text == "pants") { isUpdated = UpdateJacketOrHelmet(); }
 
             if (isUpdated)
             {
@@ -361,39 +392,72 @@ namespace InventoryManagmentSystem.Rental_Forms
         /// </summary>
         private void InitializeItemTypeSpecifics()
         {
-            labelTitle.Text = $"Add new {itemType}";
+            labelTitle.Text = $"Add new {cbItemType.Text}";
 
             if (isUpdate)
             {
-                labelTitle.Text = $"Update {itemType}";
+                labelTitle.Text = $"Update {cbItemType.Text}";
             }
 
-            if (itemType != "pants" &&
-                itemType != "jacket" &&
-                itemType != "helmet" &&
-                itemType != "boots")
+            if (cbItemType.Text == "pants" || cbItemType.Text == "jacket")
             {
-                MessageBox.Show($"Type \"{itemType}\" does not exist.");
-                this.Close();
-                return;
-            }
-
-            if (itemType == "pants" || itemType == "jacket")
-            {
+                comboBoxSize.Enabled = true;
                 comboBoxMaterial.Enabled = false;
                 comboBoxColor.Enabled = false;
             }
 
-            else if (itemType == "helmet")
+            else if (cbItemType.Text == "boots")
             {
+                comboBoxSize.Enabled = true;
+                comboBoxMaterial.Enabled = true;
+                comboBoxColor.Enabled = false;
+            }
+            
+            else if (cbItemType.Text == "helmet")
+            {
+                comboBoxColor.Enabled = true;
                 comboBoxSize.Enabled = false;
                 comboBoxMaterial.Enabled = false;
             }
 
-            else if (itemType == "boots")
+            else if(cbItemType.Text == "mask")
             {
+                comboBoxSize.Enabled = true;
+                comboBoxMaterial.Enabled = false;
                 comboBoxColor.Enabled = false;
             }
+        }
+
+        private void ManageFieldsAvailability()
+        {
+            if(isUpdate)
+            {
+                cbItemType.Enabled = false;
+            }
+
+            if(cbItemType.SelectedIndex == -1)
+            {
+                labelTitle.Text = "Please select an item type";
+                txtBoxSerialNumber.Enabled = false;
+                dateTimePickerManufactureDate.Enabled = false;
+                comboBoxBrand.Enabled = false;
+                btnAddBrand.Enabled = false;
+                comboBoxMaterial.Enabled = false;
+                comboBoxSize.Enabled = false;
+                comboBoxUsedNew.Enabled = false;
+                comboBoxColor.Enabled = false;
+                return;
+            }
+            if(lastItemTypeIndex == -1)
+            {
+                txtBoxSerialNumber.Enabled = true;
+                dateTimePickerManufactureDate.Enabled = true;
+                comboBoxBrand.Enabled = true;
+                btnAddBrand.Enabled = true;
+                comboBoxUsedNew.Enabled = true;
+            }
+            lastItemTypeIndex = cbItemType.SelectedIndex;
+            InitializeItemTypeSpecifics();
         }
 
         /// <summary>
@@ -415,7 +479,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         /// </summary>
         private void LoadBrands()
         {
-            string query = $"SELECT * FROM tbProviders WHERE itemType='{itemType}'";
+            string query = $"SELECT Brand FROM tbBrands WHERE ItemType='{cbItemType.Text}'";
             try
             {
                 command = new SqlCommand(query, connection);
@@ -423,7 +487,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 SqlDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    comboBoxBrand.Items.Add(dataReader[1]);
+                    comboBoxBrand.Items.Add(dataReader[0]);
                 }
             }
             catch (Exception ex)
@@ -433,13 +497,34 @@ namespace InventoryManagmentSystem.Rental_Forms
             connection.Close();
         }
 
+        private void loadItemTypes()
+        {
+            string query = "SELECT ItemType FROM tbItemTypes";
+            try
+            {
+                command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader dataReader = command.ExecuteReader();
+                while(dataReader.Read())
+                {
+                    cbItemType.Items.Add(dataReader[0]);
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+            }
+            connection.Close();
+        }
+
         private string GetTableName()
         {
             string table = "";
-            if (itemType == "boots") { table = "tbBoots"; }
-            else if (itemType == "helmet") { table = "tbHelmets"; }
-            else if (itemType == "jacket") { table = "tbJackets"; }
-            else if (itemType == "pants") { table = "tbPants"; }
+            if (cbItemType.Text == "boots") { table = "tbBoots"; }
+            else if (cbItemType.Text == "helmet") { table = "tbHelmets"; }
+            else if (cbItemType.Text == "jacket") { table = "tbJackets"; }
+            else if (cbItemType.Text == "mask") { table = "tbMasks"; }
+            else if (cbItemType.Text == "pants") { table = "tbPants"; }
 
             return table;
         }
@@ -450,13 +535,6 @@ namespace InventoryManagmentSystem.Rental_Forms
         /// <returns>false if item is unsafe to be added.</returns>
         private bool SaveSafetyChecks()
         {
-            string table = GetTableName();
-            if (table == "")
-            {
-                Console.WriteLine("ERROR: Table not found.");
-                return false;
-            }
-
             // Regardless of item type, all items must have these fields filled.
             if (string.IsNullOrEmpty(txtBoxSerialNumber.Text) ||
                 string.IsNullOrEmpty(comboBoxBrand.Text) ||
@@ -508,24 +586,28 @@ namespace InventoryManagmentSystem.Rental_Forms
             string SerialNumber = txtBoxSerialNumber.Text;
             bool Exists = false;
 
-            command = new SqlCommand($"SELECT Count (*) FROM {tableName} WHERE SerialNumber = @SerialNumber", connection);
-            command.Parameters.AddWithValue("@SerialNumber", SerialNumber);
-            connection.Open();
-            object result = command.ExecuteScalar();
-
-            if (result != null)
+            try
             {
-                int r = (int)result;
-                Exists = r > 0 ? true : false;
+                connection.Open();
+                command = new SqlCommand($"SELECT Count (*) FROM {tableName} WHERE SerialNumber = @SerialNumber", connection);
+                command.Parameters.AddWithValue("@SerialNumber", SerialNumber);
+                object result = command.ExecuteScalar();
+                if (result != null)
+                {
+                    int r = (int)result;
+                    Exists = r > 0 ? true : false;
+                }
+                else
+                {
+                    // Null is an error!! don't add plz
+                    Exists = true;
+                }
             }
-            else
-            {
-                // Null is an error!! don't add plz
-                Exists = true;
+            catch (Exception ex) 
+            { 
+                Console.WriteLine(ex.Message);
             }
-
             connection.Close();
-
             return Exists;
         }
         #endregion
@@ -554,9 +636,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void btnAddBrand_Click(object sender, EventArgs e)
         {
-            List<string> items = new List<string>();
-            items.Add(itemType);
-            ProviderForm form = new ProviderForm(items);
+            BrandForm form = new BrandForm();
             form.cbItemType.SelectedIndex = 0;
             form.close = true;
             form.ShowDialog();
@@ -570,6 +650,11 @@ namespace InventoryManagmentSystem.Rental_Forms
         }
         #endregion
 
+        private void cbItemType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadBrands();
+            ManageFieldsAvailability();            
+        }
     }
 }
 

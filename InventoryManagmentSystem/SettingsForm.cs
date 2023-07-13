@@ -72,11 +72,7 @@ namespace InventoryManagmentSystem
         private void btnBrands_Click(object sender, EventArgs e)
         {
             ColorTabSwitch("Brands");
-            List<string> comboBoxSelection = new List<string>();
-            comboBoxSelection.Add("Boots");
-            comboBoxSelection.Add("Helmets");
-            comboBoxSelection.Add("Jackets/Pants");
-            openChildForm(new ProviderForm(comboBoxSelection));
+            openChildForm(new BrandForm());
         }
 
         private void btnPrices_Click(object sender, EventArgs e)
@@ -88,9 +84,7 @@ namespace InventoryManagmentSystem
         private void btnAcademies_Click(object sender, EventArgs e)
         {
             ColorTabSwitch("Academies");
-            List<string> comboBoxSelection = new List<string>();
-            comboBoxSelection.Add("Academies");
-            ProviderForm form = new ProviderForm(comboBoxSelection);
+            BrandForm form = new BrandForm();
             form.dataGridView1.Columns["Brands"].HeaderText = "Academies";
             form.cbItemType.Visible = false;
             form.labelItemType.Visible = false;

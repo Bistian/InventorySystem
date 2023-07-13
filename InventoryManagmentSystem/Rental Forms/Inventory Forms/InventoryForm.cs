@@ -155,7 +155,7 @@ namespace InventoryManagmentSystem
 
         private void UsersButton_Click_1(object sender, EventArgs e)
         {
-                NewItemModuleForm ModForm = new NewItemModuleForm(true);
+                NewItemForm ModForm = new NewItemForm();
                 ModForm.ShowDialog();
                 LoadInventory();
         }
@@ -272,7 +272,7 @@ namespace InventoryManagmentSystem
 
         private void UpdateBoots(DataGridViewCellEventArgs e)
         {
-            NewItemForm itemForm = new NewItemForm("Boots", true);
+            NewItemForm itemForm = new NewItemForm(comboBoxItem.Text, true);
             itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
             itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
             itemForm.comboBoxUsedNew.Text =                 GetCellValueAsString(e, "UsedNew");
@@ -286,7 +286,7 @@ namespace InventoryManagmentSystem
 
         private void UpdateHelmet(DataGridViewCellEventArgs e)
         {
-            NewItemForm itemForm = new NewItemForm("Helmet", true);
+            NewItemForm itemForm = new NewItemForm(comboBoxItem.Text, true);
             itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
             itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
             itemForm.comboBoxUsedNew.Text =                 GetCellValueAsString(e, "UsedNew");
@@ -300,9 +300,7 @@ namespace InventoryManagmentSystem
 
         private void UpdateJacketOrPants(DataGridViewCellEventArgs e)
         {
-            string item = "Jacket";
-            if(comboBoxItem.Text == "Pants") { item = "Pants"; }
-            NewItemForm itemForm = new NewItemForm(item, true);
+            NewItemForm itemForm = new NewItemForm(comboBoxItem.Text, true);
             itemForm.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
             itemForm.comboBoxBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
             itemForm.comboBoxUsedNew.Text = dataGridInv.Rows[e.RowIndex].Cells["UsedNew"].Value.ToString();

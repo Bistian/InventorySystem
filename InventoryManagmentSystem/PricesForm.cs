@@ -96,11 +96,11 @@ namespace InventoryManagmentSystem
         private bool NameAddedExists()
         {
             bool found = false;
-            string query = "SELECT * FROM tbPrices WHERE name=@name";
+            string query = "SELECT * FROM tbPrices WHERE Name=@Name";
             try
             {
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@name", tbName.Text);
+                command.Parameters.AddWithValue("@Name", tbName.Text);
                 connection.Open();
                 object result = command.ExecuteScalar();
                 if (result != null) { found = true; }
@@ -121,17 +121,18 @@ namespace InventoryManagmentSystem
             if (result == DialogResult.No) { return; }
 
             string query = "UPDATE tbPrices " +
-                           "SET name=@name, boots=@boots, helmets=@helmets, jackets=@jackets, pants=@pants " +
-                           "WHERE name=@name";
+                           "SET Name=@Name, Boots=@Boots, Helmet=@Helmet, Jacket=@Jacket, Mask=@Mask, Pants=@Pants " +
+                           "WHERE Name=@Name";
 
             try
             {
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@name", tbName.Text);
-                command.Parameters.AddWithValue("@boots", tbBoots.Text);
-                command.Parameters.AddWithValue("@helmets", tbHelmet.Text);
-                command.Parameters.AddWithValue("@jackets", tbJacket.Text);
-                command.Parameters.AddWithValue("@pants", tbPants.Text);
+                command.Parameters.AddWithValue("@Name", tbName.Text);
+                command.Parameters.AddWithValue("@Boots", tbBoots.Text);
+                command.Parameters.AddWithValue("@Helmet", tbHelmet.Text);
+                command.Parameters.AddWithValue("@Jacket", tbJacket.Text);
+                command.Parameters.AddWithValue("@Mask", tbJacket.Text);
+                command.Parameters.AddWithValue("@Pants", tbPants.Text);
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -151,12 +152,12 @@ namespace InventoryManagmentSystem
             DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.No) { return; }
 
-            string query = "DELETE FROM tbPrices WHERE name=@name";
+            string query = "DELETE FROM tbPrices WHERE Name=@Name";
             string name = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             try
             {
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@name", name);
+                command.Parameters.AddWithValue("@Name", name);
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -181,17 +182,17 @@ namespace InventoryManagmentSystem
 
         private void AddItem(object sender, EventArgs e)
         {
-            string query = "INSERT INTO tbPrices (name, boots, helmets, jackets, pants) " +
-                           "VALUES (@name, @boots, @helmets, @jackets, @pants)";
+            string query = "INSERT INTO tbPrices (Name, Boots, Helmet, Jacket, Mask, Pants) " +
+                           "VALUES (@Name, @Boots, @Helmet, @Jacket, @Mask, @Pants)";
 
             try
             {
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@name", tbName.Text);
-                command.Parameters.AddWithValue("@boots", tbBoots.Text);
-                command.Parameters.AddWithValue("@helmets", tbHelmet.Text);
-                command.Parameters.AddWithValue("@jackets", tbJacket.Text);
-                command.Parameters.AddWithValue("@pants", tbPants.Text);
+                command.Parameters.AddWithValue("@Name", tbName.Text);
+                command.Parameters.AddWithValue("@Boots", tbBoots.Text);
+                command.Parameters.AddWithValue("@Helmets", tbHelmet.Text);
+                command.Parameters.AddWithValue("@Jackets", tbJacket.Text);
+                command.Parameters.AddWithValue("@Pants", tbPants.Text);
                 connection.Open();
                 command.ExecuteNonQuery();
             }

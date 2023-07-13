@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace InventoryManagmentSystem
 {
-    public partial class ProviderForm : Form
+    public partial class BrandForm : Form
     {
         #region SQL_Variables
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
@@ -23,19 +23,36 @@ namespace InventoryManagmentSystem
 
         public bool close = false;
 
-        public ProviderForm(List<string> comboBoxSelection)
+        public BrandForm()
         {
             InitializeComponent();
-            for (int i = 0; i < comboBoxSelection.Count; i++) 
-            {
-                cbItemType.Items.Add(comboBoxSelection[i]); 
-            }
+            LoadItemTypes();
             LoadTable();
             
 #if DEBUG
             btnFiretecBrands.Enabled = true;
             btnFiretecBrands.Visible = true;
 #endif
+        }
+
+        private void LoadItemTypes()
+        {
+            string query = "SELECT ItemType FROM tbItemTypes";
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(query, connection);
+                dataReader = command.ExecuteReader();
+                while(dataReader.Read())
+                {
+                    cbItemType.Items.Add(dataReader[0].ToString());
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            connection.Close();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -49,13 +66,13 @@ namespace InventoryManagmentSystem
                 return; 
             }
 
-            string query = "INSERT INTO tbProviders (itemType, provider) VALUES (@itemType, @provider)";
+            string query = "INSERT INTO tbBrands (ItemType, Brand) VALUES (@ItemType, @Brand)";
 
             try
             {
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@itemType", cbItemType.Text);
-                command.Parameters.AddWithValue("@provider", tbProvider.Text);
+                command.Parameters.AddWithValue("@ItemType", cbItemType.Text);
+                command.Parameters.AddWithValue("@Brand", tbProvider.Text);
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -77,13 +94,13 @@ namespace InventoryManagmentSystem
             DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.No) { return; }
 
-            string query = "DELETE FROM tbProviders WHERE itemType=@itemType AND provider=@provider";
+            string query = "DELETE FROM tbBrands WHERE ItemType=@ItemType AND Brand=@Brand";
             string provider = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             try
             {
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@itemType", cbItemType.Text);
-                command.Parameters.AddWithValue("@provider", provider);
+                command.Parameters.AddWithValue("@ItemType", cbItemType.Text);
+                command.Parameters.AddWithValue("@Brand", provider);
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -102,12 +119,12 @@ namespace InventoryManagmentSystem
         private bool ItemAddedExists()
         {
             bool found = false;
-            string query = "SELECT * FROM tbProviders WHERE itemType=@itemType AND provider=@provider";
+            string query = "SELECT * FROM tbBrands WHERE ItemType=@itemType AND Brand=@Brand";
             try
             {
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@itemType", cbItemType.Text);
-                command.Parameters.AddWithValue("@provider", tbProvider.Text);
+                command.Parameters.AddWithValue("@ItemType", cbItemType.Text);
+                command.Parameters.AddWithValue("@Brand", tbProvider.Text);
                 connection.Open();
                 object result = command.ExecuteScalar();
                 if (result != null) { found = true; }
@@ -127,7 +144,7 @@ namespace InventoryManagmentSystem
             if(cbItemType.SelectedIndex < 0) { return; }
 
             int i = 0;
-            string query = "SELECT * FROM tbProviders WHERE itemType = '" + cbItemType.Text + "'";
+            string query = "SELECT * FROM tbBrands WHERE ItemType = '" + cbItemType.Text + "'";
             try
             {
                 command = new SqlCommand(query, connection);
@@ -221,13 +238,13 @@ namespace InventoryManagmentSystem
 
         private void AddFiretecBrands2(string itemType, string brand)
         {
-            string query = "INSERT INTO tbProviders (itemType, provider) VALUES (@itemType, @provider)";
+            string query = "INSERT INTO tbBrands (ItemType, Brand) VALUES (@ItemType, @Brand)";
 
             try
             {
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@itemType", itemType);
-                command.Parameters.AddWithValue("@provider", brand);
+                command.Parameters.AddWithValue("@ItemType", itemType);
+                command.Parameters.AddWithValue("@Brand", brand);
                 connection.Open();
                 command.ExecuteNonQuery();
             }

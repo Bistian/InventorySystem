@@ -48,6 +48,8 @@
             this.lableSerialNumber = new System.Windows.Forms.Label();
             this.labelColor = new System.Windows.Forms.Label();
             this.comboBoxColor = new System.Windows.Forms.ComboBox();
+            this.cbItemType = new System.Windows.Forms.ComboBox();
+            this.labelItemType = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -209,11 +211,27 @@
             resources.ApplyResources(this.comboBoxColor, "comboBoxColor");
             this.comboBoxColor.Name = "comboBoxColor";
             // 
+            // cbItemType
+            // 
+            this.cbItemType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbItemType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbItemType.FormattingEnabled = true;
+            resources.ApplyResources(this.cbItemType, "cbItemType");
+            this.cbItemType.Name = "cbItemType";
+            this.cbItemType.SelectedIndexChanged += new System.EventHandler(this.cbItemType_SelectedIndexChanged);
+            // 
+            // labelItemType
+            // 
+            resources.ApplyResources(this.labelItemType, "labelItemType");
+            this.labelItemType.Name = "labelItemType";
+            // 
             // NewItemForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.Controls.Add(this.labelItemType);
+            this.Controls.Add(this.cbItemType);
             this.Controls.Add(this.labelColor);
             this.Controls.Add(this.comboBoxColor);
             this.Controls.Add(this.btnAddBrand);
@@ -263,5 +281,7 @@
         private System.Windows.Forms.Label lableSerialNumber;
         private System.Windows.Forms.Label labelColor;
         public System.Windows.Forms.ComboBox comboBoxColor;
+        public System.Windows.Forms.ComboBox cbItemType;
+        private System.Windows.Forms.Label labelItemType;
     }
 }

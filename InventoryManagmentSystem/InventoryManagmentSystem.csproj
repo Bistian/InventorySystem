@@ -133,11 +133,11 @@
     <Compile Include="PricesForm.Designer.cs">
       <DependentUpon>PricesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProviderForm.cs">
+    <Compile Include="BrandForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProviderForm.Designer.cs">
-      <DependentUpon>ProviderForm.cs</DependentUpon>
+    <Compile Include="BrandForm.Designer.cs">
+      <DependentUpon>BrandForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Rental Forms\ExistingCustomerModuleForm.cs">
       <SubType>Form</SubType>
@@ -195,18 +195,6 @@
     <Compile Include="Rental Forms\Inventory Forms\InventoryForm.Designer.cs">
       <DependentUpon>InventoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\NewBootModuleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\NewBootModuleForm.Designer.cs">
-      <DependentUpon>NewBootModuleForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\NewHelmetModuleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\NewHelmetModuleForm.Designer.cs">
-      <DependentUpon>NewHelmetModuleForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,18 +206,6 @@
     </Compile>
     <Compile Include="Rental Forms\Inventory Forms\NewItemModuleForm.Designer.cs">
       <DependentUpon>NewItemModuleForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\NewJacketModuleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\NewJacketModuleForm.Designer.cs">
-      <DependentUpon>NewJacketModuleForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\NewPantsModuleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\NewPantsModuleForm.Designer.cs">
-      <DependentUpon>NewPantsModuleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -302,8 +278,8 @@
     <EmbeddedResource Include="PricesForm.resx">
       <DependentUpon>PricesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProviderForm.resx">
-      <DependentUpon>ProviderForm.cs</DependentUpon>
+    <EmbeddedResource Include="BrandForm.resx">
+      <DependentUpon>BrandForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Rental Forms\ExistingCustomerModuleForm.resx">
       <DependentUpon>ExistingCustomerModuleForm.cs</DependentUpon>
@@ -335,23 +311,11 @@
     <EmbeddedResource Include="Rental Forms\Inventory Forms\InventoryForm.resx">
       <DependentUpon>InventoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Rental Forms\Inventory Forms\NewBootModuleForm.resx">
-      <DependentUpon>NewBootModuleForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Rental Forms\Inventory Forms\NewHelmetModuleForm.resx">
-      <DependentUpon>NewHelmetModuleForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Rental Forms\Inventory Forms\NewItemModuleForm.resx">
       <DependentUpon>NewItemModuleForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Rental Forms\Inventory Forms\NewJacketModuleForm.resx">
-      <DependentUpon>NewJacketModuleForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Rental Forms\Inventory Forms\NewPantsModuleForm.resx">
-      <DependentUpon>NewPantsModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

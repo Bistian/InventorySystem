@@ -203,6 +203,21 @@ namespace InventoryManagmentSystem
                     connection.Close();
                 }
 
+                // Item Types
+                using (SqlConnection connection = new SqlConnection(connectDatabase))
+                {
+                    connection.Open();
+
+                    string sql =
+                        "CREATE TABLE[dbo].[tbItemTypes] (" +
+                        "[Id] INT IDENTITY(1,1) PRIMARY KEY," +
+                        "[ItemType] VARCHAR (50) NOT NULL);";
+
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+
                 // History
                 using (SqlConnection connection = new SqlConnection(connectDatabase))
                 {
@@ -299,6 +314,7 @@ namespace InventoryManagmentSystem
                     "    [SerialNumber]    VARCHAR (50) NOT NULL," +
                     "    [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL," +
                     "    [UsedNew]         VARCHAR (50) NULL," +
+                    "    [ManufactureDate] DATE         NOT NULL," +
                     "    [DueDate]         DATE         NULL," +
                     "    [Size]            VARCHAR (50) NOT NULL," +
                     "    FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id]));"; ;
@@ -365,15 +381,15 @@ namespace InventoryManagmentSystem
                     connection.Close();
                 }
 
-                // Providers
+                // Brands
                 using (SqlConnection connection = new SqlConnection(connectDatabase))
                 {
                     connection.Open();
 
                     string sql =
-                        "CREATE TABLE[dbo].[tbProviders] (" +
-                        "[itemType] VARCHAR(50) NOT NULL," +
-                        "[provider] VARCHAR(50) NOT NULL);";
+                        "CREATE TABLE[dbo].[tbBrands] (" +
+                        "[ItemType] VARCHAR(50) NOT NULL," +
+                        "[Brand] VARCHAR(50) NOT NULL);";
 
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.ExecuteNonQuery();
@@ -387,11 +403,12 @@ namespace InventoryManagmentSystem
 
                     string sql =
                         "CREATE TABLE[dbo].[tbPrices] (" +
-                        "[name] VARCHAR(50) NOT NULL," +
-                        "[boots] FLOAT NOT NULL," +
-                        "[helmets] FLOAT NOT NULL," +
-                        "[jackets] FLOAT NOT NULL," +
-                        "[pants] FLOAT NOT NULL);";
+                        "[Name] VARCHAR(50) NOT NULL," +
+                        "[Boots] FLOAT NOT NULL," +
+                        "[Helmet] FLOAT NOT NULL," +
+                        "[Jacket] FLOAT NOT NULL," +
+                        "[Mask] FLOAT NOT NULL," +
+                        "[Pants] FLOAT NOT NULL);";
 
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.ExecuteNonQuery();
