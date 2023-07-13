@@ -76,41 +76,6 @@ namespace InventoryManagmentSystem
             connection.Close();
         }
 
-        private void cbItemType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DataGridViewRow row;
-            string selectedType = cbItemType.SelectedItem.ToString().ToLower();
-
-            // Need to make words singular to match item type.
-            if(selectedType == "helmets") { selectedType = "helmet"; }
-            else if(selectedType == "jackets") { selectedType = "jacket"; }
-
-            int length = dataGridItems.Rows.Count;
-            for (int i = 0; i < length; ++i)
-            {
-                row = dataGridItems.Rows[i];
-                string itemType = row.Cells["column_item_type"].Value.ToString();
-                // Hide rows that are filtered out.
-                if(selectedType == "all") 
-                {
-                    row.Visible = true;
-                }
-                else if (itemType != selectedType)
-                {
-                    row.Visible = false;
-                }
-                else
-                {
-                    row.Visible = true;
-                }
-            }
-        }
-
-        private void dataGridItems_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            LoadItemHistory();
-        }
-
         private void LoadItemHistory(int rowIndex = -1)
         {
             dataGridHistory.Rows.Clear();
@@ -144,6 +109,60 @@ namespace InventoryManagmentSystem
             InventoryForm form = new InventoryForm();
             var parentForm = this.ParentForm as MainForm;
             parentForm.openChildForm(form);
+            this.Close();
+        }
+
+        private void cbItemType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataGridViewRow row;
+            string selectedType = cbItemType.SelectedItem.ToString().ToLower();
+
+            // Need to make words singular to match item type.
+            if (selectedType == "helmets") { selectedType = "helmet"; }
+            else if (selectedType == "jackets") { selectedType = "jacket"; }
+
+            int length = dataGridItems.Rows.Count;
+            for (int i = 0; i < length; ++i)
+            {
+                row = dataGridItems.Rows[i];
+                string itemType = row.Cells["column_item_type"].Value.ToString();
+                // Hide rows that are filtered out.
+                if (selectedType == "all")
+                {
+                    row.Visible = true;
+                }
+                else if (itemType != selectedType)
+                {
+                    row.Visible = false;
+                }
+                else
+                {
+                    row.Visible = true;
+                }
+            }
+        }
+
+        private void dataGridItems_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            LoadItemHistory();
+        }
+
+        private void dataGridHistory_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var parentForm = this.ParentForm as MainForm;
+            if (parentForm != null) 
+            {
+                parentForm.ColorTabSwitch("ActiveRentals", false);
+                parentForm.openChildForm(new ExistingCustomerModuleForm());
+            }
+            else
+            {
+                // This is inside of Settings, not Main.
+                var parent = this.ParentForm as SettingsForm;
+                var grandparent = parent.ParentForm as MainForm;
+                grandparent.ColorTabSwitch("ActiveRentals", false);
+                grandparent.openChildForm(new ExistingCustomerModuleForm());
+            }
             this.Close();
         }
     }
