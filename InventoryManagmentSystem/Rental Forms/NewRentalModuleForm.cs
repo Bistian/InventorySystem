@@ -919,6 +919,40 @@ namespace InventoryManagmentSystem
                 con.Close();
                 MessageBox.Show("Item Replaced");
             }
+
+            // Maks
+            else if (labelTypeOfItem.Text == "Mask")
+            {
+                try
+                {
+                    comboBoxItemType.SelectedIndex = 2;
+
+                    //return item
+                    cm = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                    cm.Parameters.AddWithValue("@location", "FIRETEC");
+                    cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                    cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+
+                    //replace item
+                    cm = new SqlCommand("UPDATE tbPants SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                    cm.Parameters.AddWithValue("@location", license);
+                    cm.Parameters.AddWithValue("@DueDate", dueDate);
+                    cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                    con.Open();
+                    cm.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Item Replaced");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                    con.Close();
+                    return;
+                }
+            }
             LoadClient();
             LoadInventory();
             panelReplace.Visible = false;
@@ -1032,7 +1066,7 @@ namespace InventoryManagmentSystem
                 }
 
                 // Masks
-                else if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "SCBA Masks")
+                else if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Mask")
                 {
                     try
                     {
