@@ -1877,7 +1877,8 @@
             "Helmet",
             "Jacket",
             "Pants",
-            "Boots"});
+            "Boots",
+            "SCBA Masks"});
             this.comboBoxItemType.Location = new System.Drawing.Point(260, 3);
             this.comboBoxItemType.Name = "comboBoxItemType";
             this.comboBoxItemType.Size = new System.Drawing.Size(88, 33);

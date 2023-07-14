@@ -102,6 +102,8 @@ namespace InventoryManagmentSystem
                 "WHERE Location='" + license + "' " +
                 "UNION SELECT 'Jacket',DueDate,Brand,SerialNumber,Size,ManufactureDate FROM tbJackets " +
                 "WHERE Location='" + license + "' " +
+                 "UNION SELECT 'Mask',DueDate,Brand,SerialNumber,Size,ManufactureDate FROM tbMasks " +
+                "WHERE Location='" + license + "' " +
                 "ORDER BY DueDate");
         }
 
@@ -165,6 +167,12 @@ namespace InventoryManagmentSystem
                 Sizes = " Size,";
                 CurrTable = "tbBoots";
             }
+            else if (comboBoxItemType.SelectedIndex == 4)
+            {
+                FinalColumn = "";
+                Sizes = " Size,";
+                CurrTable = "tbMasks";
+            }
             else
             {
                 return ("SELECT ItemId,Brand,SerialNumber,Size,ManufactureDate,UsedNew FROM tbJackets WHERE " + firetec + "AND SerialNumber LIKE '%" + searchTerm + "%'");
@@ -192,7 +200,7 @@ namespace InventoryManagmentSystem
                     dataGridInv.Rows.Add(dr[1].ToString(), dr[2].ToString(), "NA", dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
                 }
             }
-            else if (comboBoxItemType.SelectedIndex == 1 || comboBoxItemType.SelectedIndex == 2)
+            else if (comboBoxItemType.SelectedIndex == 1 || comboBoxItemType.SelectedIndex == 2 || comboBoxItemType.SelectedIndex == 4)
             {
                 while (dr.Read())
                 {
@@ -1001,6 +1009,7 @@ namespace InventoryManagmentSystem
                     }
                 }
 
+                //Boots
                 else if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Boots")
                 {
                     comboBoxItemType.SelectedIndex = 3;
@@ -1020,6 +1029,30 @@ namespace InventoryManagmentSystem
                     }
                     con.Close();
                     MessageBox.Show("Item Returned");
+                }
+
+                // Masks
+                else if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "SCBA Masks")
+                {
+                    try
+                    {
+                        comboBoxItemType.SelectedIndex = 1;
+                        SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
+                        cm = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", "FIRETEC");
+                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        cm.Parameters.AddWithValue("@serial", SelectedSerial);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        MessageBox.Show("Item Returned");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                        con.Close();
+                        return;
+                    }
                 }
                 LoadClient();
                 LoadInventory();
@@ -1133,6 +1166,29 @@ namespace InventoryManagmentSystem
                             cm.ExecuteNonQuery();
                             con.Close();
                             MessageBox.Show("Rental has been successfully completed");
+                        }
+
+                        // Masks
+                        else if (comboBoxItemType.SelectedIndex == 4)
+                        {
+                            try
+                            {
+                                SelectedSerial = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                                cm = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                                cm.Parameters.AddWithValue("@location", license);
+                                cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+                                cm.Parameters.AddWithValue("@serial", SelectedSerial);
+                                con.Open();
+                                cm.ExecuteNonQuery();
+                                con.Close();
+                                MessageBox.Show("Rental has been successfully completed");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                                con.Close();
+                                return;
+                            }
                         }
                         LoadClient();
                         LoadInventory();

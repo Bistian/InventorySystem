@@ -37,7 +37,7 @@ namespace InventoryManagmentSystem
         {
             if(comboBoxItem.Text == "Boots") { return QueryBoots(searchTerm); }
             if(comboBoxItem.Text == "Helmets") { return QueryHelmets(searchTerm); }
-            if(comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants") { return QueryJacketsAndPants(searchTerm); }
+            if(comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants" || comboBoxItem.Text == "SCBA Masks") { return QueryJacketsAndPantsAndMask(searchTerm); }
             return "";
         }
 
@@ -65,10 +65,11 @@ namespace InventoryManagmentSystem
             return (select + where);
         }
 
-        private string QueryJacketsAndPants(string searchTerm)
+        private string QueryJacketsAndPantsAndMask(string searchTerm)
         {
             string from = "tbPants ";
             if(comboBoxItem.Text == "Jackets") { from = "tbJackets "; }
+            if (comboBoxItem.Text == "SCBA Masks") { from = "tbMasks "; }
             string select = "SELECT Brand, SerialNumber, UsedNew, ManufactureDate, Size, Location FROM ";
             string where =
                 $"WHERE (Brand LIKE '%{searchTerm}%' OR " +
@@ -110,7 +111,7 @@ namespace InventoryManagmentSystem
                         dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString(), "Color");
                     }
                 }
-                else if (comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants")
+                else if (comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants" || comboBoxItem.Text == "SCBA Masks")
                 {
                     while (dr.Read())
                     {
