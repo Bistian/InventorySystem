@@ -50,7 +50,6 @@ namespace InventoryManagmentSystem
             panelContactInfo.Visible = false;
             panelMeasurments.Visible = false;
             panelRentalInfo.Visible = false;
-            splitContainermain.SplitterDistance = 650;
             PopulateAcademyList();
             if (clientName != null)
             {
@@ -333,7 +332,6 @@ namespace InventoryManagmentSystem
             }
             flowLayoutPanelProfile.Visible = true;
             flowLayoutPanelProfile.AutoScroll = false;
-            splitContainermain.SplitterDistance = 500;
             splitContainerInventories.Visible = true;
             panelRentals.Visible = true;
             LoadClient();
@@ -361,7 +359,6 @@ namespace InventoryManagmentSystem
             }
             flowLayoutPanelProfile.Visible = false;
             flowLayoutPanelProfile.AutoScroll = false;
-            splitContainermain.SplitterDistance = 500;
             splitContainerInventories.Visible = true;
             panelRentals.Visible = true;
             LoadClient();
@@ -632,7 +629,6 @@ namespace InventoryManagmentSystem
                     panelAddress.Visible = false;
                     panelMeasurments.Visible = false;
                     panelRentalInfo.Visible = false;
-                    splitContainermain.SplitterDistance = 360;
                     ExistingUser = false;
                 }
             }
@@ -1270,5 +1266,6 @@ namespace InventoryManagmentSystem
             }
             con.Close();
         }
+
     }
 }
