@@ -37,8 +37,6 @@ namespace InventoryManagmentSystem.Rental_Forms
             loadItemTypes();
         }
 
-        #region Create
-
         /// <summary>
         /// Adds boots to boots table.
         /// </summary>
@@ -247,9 +245,6 @@ namespace InventoryManagmentSystem.Rental_Forms
             MessageBox.Show("Item has been successfully saved.");
             return true;
         }
-        #endregion
-
-        #region Update
 
         private bool UpdateBoots()
         {
@@ -382,9 +377,6 @@ namespace InventoryManagmentSystem.Rental_Forms
                 return false;
             }
         }
-        #endregion
-
-        #region Helper Functions
 
         /// <summary>
         /// Account for differences between item types.
@@ -610,9 +602,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             connection.Close();
             return Exists;
         }
-        #endregion
 
-        #region Buttons
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (isUpdate)
@@ -637,7 +627,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         private void btnAddBrand_Click(object sender, EventArgs e)
         {
             BrandForm form = new BrandForm();
-            form.cbItemType.SelectedIndex = 0;
+            form.cbItemType.Text= cbItemType.Text;
             form.close = true;
             form.ShowDialog();
             LoadBrands();
@@ -648,7 +638,6 @@ namespace InventoryManagmentSystem.Rental_Forms
         {
             Clear();
         }
-        #endregion
 
         private void cbItemType_SelectedIndexChanged(object sender, EventArgs e)
         {

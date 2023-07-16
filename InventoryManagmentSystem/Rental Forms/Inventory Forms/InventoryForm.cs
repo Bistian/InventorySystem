@@ -37,7 +37,7 @@ namespace InventoryManagmentSystem
         {
             if(comboBoxItem.Text == "Boots") { return QueryBoots(searchTerm); }
             if(comboBoxItem.Text == "Helmets") { return QueryHelmets(searchTerm); }
-            if(comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants" || comboBoxItem.Text == "Masks") { return QueryJacketsAndPantsAndMask(searchTerm); }
+            if(comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants" || comboBoxItem.Text == "Masks") { return QueryStandardItems(searchTerm); }
             return "";
         }
 
@@ -65,7 +65,12 @@ namespace InventoryManagmentSystem
             return (select + where);
         }
 
-        private string QueryJacketsAndPantsAndMask(string searchTerm)
+        /// <summary>
+        /// Standard items are Jackets, Masks, and Pants.
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        private string QueryStandardItems(string searchTerm)
         {
             string from = "tbPants ";
             if(comboBoxItem.Text == "Jackets") { from = "tbJackets "; }
@@ -163,78 +168,77 @@ namespace InventoryManagmentSystem
 
         private void searchBar_TextChanged(object sender, EventArgs e)
         {
-            if (comboBoxItem.SelectedIndex != -1)
+            if (comboBoxItem.SelectedIndex < 0)
             {
-                string searchTerm = searchBar.Text;
-                if (string.IsNullOrEmpty(searchTerm))
-                {
-                    LoadInventory();
-                    return;
-                }
+                return;
+            }
 
-                //SQL
-                int i = 0;
-                dataGridInv.Rows.Clear();
-                string query = QueryItems(searchTerm);
-                command = new SqlCommand(query, connection);
+            string searchTerm = searchBar.Text;
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                LoadInventory();
+                return;
+            }
+
+            //SQL
+            int i = 0;
+            dataGridInv.Rows.Clear();
+            string query = QueryItems(searchTerm);
+
+            try
+            {
                 connection.Open();
+                command = new SqlCommand(query, connection);
+                dr = command.ExecuteReader();
 
-                try
+                while (dr.Read())
                 {
-                    dr = command.ExecuteReader();
-
-                    while (dr.Read())
+                    i++;
+                    if (comboBoxItem.Text == "Helmets")
                     {
-                        i++;
-                        if (comboBoxItem.Text == "Helmets")
-                        {
-                            dataGridInv.Rows.Add(i,
+                        dataGridInv.Rows.Add(i,
+                        dr[0].ToString(),
+                        dr[1].ToString(),
+                        dr[2].ToString(),
+                        dr[3].ToString(),
+                        "Size",
+                        "Material",
+                        dr[4].ToString(),
+                        dr[5].ToString());
+                    }
+                    else if (comboBoxItem.Text == "Boots")
+                    {
+                        dataGridInv.Rows.Add(i,
                             dr[0].ToString(),
                             dr[1].ToString(),
                             dr[2].ToString(),
-                            "NA",
                             dr[3].ToString(),
                             dr[4].ToString(),
                             dr[5].ToString(),
                             dr[6].ToString());
-                        }
-                        else if (comboBoxItem.Text == "Boots")
-                        {
-                            dataGridInv.Rows.Add(i,
-                                dr[0].ToString(),
-                                dr[1].ToString(),
-                                dr[2].ToString(),
-                                dr[3].ToString(),
-                                dr[4].ToString(),
-                                dr[5].ToString(),
-                                dr[6].ToString(),
-                                dr[7].ToString());
-                        }
-                        else // Pants && Jackets && Masks
-                        {
-                            dataGridInv.Rows.Add(i,
-                                dr[0].ToString(),
-                                dr[1].ToString(),
-                                dr[2].ToString(),
-                                dr[3].ToString(),
-                                dr[4].ToString(),
-                                dr[5].ToString(),
-                                "NA",
-                                dr[6].ToString());
-                        }
                     }
-
-                    dr.Close();
-                    connection.Close();
-                    dataGridInv.Refresh();
+                    else // Pants && Jackets && Masks
+                    {
+                        dataGridInv.Rows.Add(i,
+                            dr[0].ToString(),
+                            dr[1].ToString(),
+                            dr[2].ToString(),
+                            dr[3].ToString(),
+                            dr[4].ToString(),
+                            dr[5].ToString());
+                    }
                 }
-                catch (Exception ex)
-                {
-                    dr.Close();
-                    connection.Close();
-                    Console.WriteLine(ex.Message);
-                }  
+
+                dr.Close();
+                connection.Close();
+                dataGridInv.Refresh();
             }
+            catch (Exception ex)
+            {
+                dr.Close();
+                connection.Close();
+                Console.WriteLine(ex.Message);
+            }  
         }
 
         private void dataGridInv_CellClick(object sender, DataGridViewCellEventArgs e)

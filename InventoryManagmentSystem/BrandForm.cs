@@ -58,11 +58,11 @@ namespace InventoryManagmentSystem
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if(cbItemType.SelectedIndex < 0) { return; }
-            if(tbProvider.Text.Length == 0 ) { return; }
+            if(tbBrands.Text.Length == 0 ) { return; }
             if(ItemAddedExists()) 
             {
                 string message = "Entry already exists.";
-                DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                HelperFunctions.YesNoMessageBox(message, "Confirmation");
                 return; 
             }
 
@@ -72,7 +72,7 @@ namespace InventoryManagmentSystem
             {
                 command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ItemType", cbItemType.Text);
-                command.Parameters.AddWithValue("@Brand", tbProvider.Text);
+                command.Parameters.AddWithValue("@Brand", tbBrands.Text);
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -82,7 +82,7 @@ namespace InventoryManagmentSystem
             }
             connection.Close();
             LoadTable();
-            tbProvider.Text = "";
+            tbBrands.Text = "";
             if(close) { this.Close(); }
         }
 
@@ -119,12 +119,12 @@ namespace InventoryManagmentSystem
         private bool ItemAddedExists()
         {
             bool found = false;
-            string query = "SELECT * FROM tbBrands WHERE ItemType=@itemType AND Brand=@Brand";
+            string query = "SELECT * FROM tbBrands WHERE ItemType=@ItemType AND Brand=@Brand";
             try
             {
                 command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ItemType", cbItemType.Text);
-                command.Parameters.AddWithValue("@Brand", tbProvider.Text);
+                command.Parameters.AddWithValue("@Brand", tbBrands.Text);
                 connection.Open();
                 object result = command.ExecuteScalar();
                 if (result != null) { found = true; }

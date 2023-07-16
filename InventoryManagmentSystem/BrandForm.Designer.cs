@@ -30,15 +30,15 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.tbProvider = new System.Windows.Forms.TextBox();
+            this.tbBrands = new System.Windows.Forms.TextBox();
             this.labelItemType = new System.Windows.Forms.Label();
             this.labelBrand = new System.Windows.Forms.Label();
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnFiretecBrands = new System.Windows.Forms.Button();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Brands = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remove = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnFiretecBrands = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,13 +53,13 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // tbProvider
+            // tbBrands
             // 
-            this.tbProvider.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.tbProvider.Location = new System.Drawing.Point(12, 34);
-            this.tbProvider.Name = "tbProvider";
-            this.tbProvider.Size = new System.Drawing.Size(121, 24);
-            this.tbProvider.TabIndex = 2;
+            this.tbBrands.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.tbBrands.Location = new System.Drawing.Point(12, 34);
+            this.tbBrands.Name = "tbBrands";
+            this.tbBrands.Size = new System.Drawing.Size(121, 24);
+            this.tbBrands.TabIndex = 2;
             // 
             // labelItemType
             // 
@@ -126,19 +126,6 @@
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
-            // btnFiretecBrands
-            // 
-            this.btnFiretecBrands.Enabled = false;
-            this.btnFiretecBrands.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btnFiretecBrands.Location = new System.Drawing.Point(12, 146);
-            this.btnFiretecBrands.Name = "btnFiretecBrands";
-            this.btnFiretecBrands.Size = new System.Drawing.Size(121, 23);
-            this.btnFiretecBrands.TabIndex = 7;
-            this.btnFiretecBrands.Text = "Firetec Brands";
-            this.btnFiretecBrands.UseVisualStyleBackColor = true;
-            this.btnFiretecBrands.Visible = false;
-            this.btnFiretecBrands.Click += new System.EventHandler(this.btnFiretecBrands_Click);
-            // 
             // Number
             // 
             this.Number.HeaderText = "#";
@@ -161,7 +148,20 @@
             this.Remove.Name = "Remove";
             this.Remove.ReadOnly = true;
             // 
-            // ProviderForm
+            // btnFiretecBrands
+            // 
+            this.btnFiretecBrands.Enabled = false;
+            this.btnFiretecBrands.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btnFiretecBrands.Location = new System.Drawing.Point(12, 146);
+            this.btnFiretecBrands.Name = "btnFiretecBrands";
+            this.btnFiretecBrands.Size = new System.Drawing.Size(121, 23);
+            this.btnFiretecBrands.TabIndex = 7;
+            this.btnFiretecBrands.Text = "Firetec Brands";
+            this.btnFiretecBrands.UseVisualStyleBackColor = true;
+            this.btnFiretecBrands.Visible = false;
+            this.btnFiretecBrands.Click += new System.EventHandler(this.btnFiretecBrands_Click);
+            // 
+            // BrandForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -172,10 +172,10 @@
             this.Controls.Add(this.cbItemType);
             this.Controls.Add(this.labelBrand);
             this.Controls.Add(this.labelItemType);
-            this.Controls.Add(this.tbProvider);
+            this.Controls.Add(this.tbBrands);
             this.Controls.Add(this.btnAdd);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "ProviderForm";
+            this.Name = "BrandForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Brands";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -186,7 +186,7 @@
 
         #endregion
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.TextBox tbProvider;
+        private System.Windows.Forms.TextBox tbBrands;
         private System.Windows.Forms.Button btnFiretecBrands;
         public System.Windows.Forms.DataGridView dataGridView1;
         public System.Windows.Forms.Label labelItemType;
