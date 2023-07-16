@@ -76,7 +76,7 @@
             "Jackets",
             "Masks",
             "Pants"});
-            this.cbItemType.Location = new System.Drawing.Point(280, 3);
+            this.cbItemType.Location = new System.Drawing.Point(293, 3);
             this.cbItemType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbItemType.Name = "cbItemType";
             this.cbItemType.Size = new System.Drawing.Size(140, 32);
@@ -87,7 +87,7 @@
             // 
             this.labelItemType.AutoSize = true;
             this.labelItemType.ForeColor = System.Drawing.SystemColors.Window;
-            this.labelItemType.Location = new System.Drawing.Point(206, 7);
+            this.labelItemType.Location = new System.Drawing.Point(219, 7);
             this.labelItemType.Name = "labelItemType";
             this.labelItemType.Size = new System.Drawing.Size(93, 24);
             this.labelItemType.TabIndex = 1;
@@ -126,7 +126,7 @@
             this.dataGridItems.RowHeadersWidth = 62;
             this.dataGridItems.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.dataGridItems.RowTemplate.Height = 40;
-            this.dataGridItems.Size = new System.Drawing.Size(933, 150);
+            this.dataGridItems.Size = new System.Drawing.Size(1241, 150);
             this.dataGridItems.TabIndex = 2;
             this.dataGridItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridItems_CellClick);
             // 
@@ -204,7 +204,7 @@
             this.dataGridHistory.RowHeadersWidth = 62;
             this.dataGridHistory.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.dataGridHistory.RowTemplate.Height = 40;
-            this.dataGridHistory.Size = new System.Drawing.Size(933, 331);
+            this.dataGridHistory.Size = new System.Drawing.Size(1241, 331);
             this.dataGridHistory.TabIndex = 3;
             this.dataGridHistory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridHistory_CellClick);
             // 
@@ -251,7 +251,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dataGridHistory);
-            this.splitContainer1.Size = new System.Drawing.Size(933, 485);
+            this.splitContainer1.Size = new System.Drawing.Size(1241, 485);
             this.splitContainer1.SplitterDistance = 150;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -264,7 +264,7 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(933, 30);
+            this.panelTop.Size = new System.Drawing.Size(1241, 30);
             this.panelTop.TabIndex = 6;
             // 
             // labelTitle
@@ -280,11 +280,10 @@
             // 
             // CloseButton
             // 
-            this.CloseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
             this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
             this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(157, 3);
+            this.CloseButton.Location = new System.Drawing.Point(164, 3);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(39, 45);
             this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -306,7 +305,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer1);
-            this.splitContainer2.Size = new System.Drawing.Size(933, 519);
+            this.splitContainer2.Size = new System.Drawing.Size(1241, 519);
             this.splitContainer2.SplitterDistance = 30;
             this.splitContainer2.TabIndex = 7;
             // 
@@ -315,7 +314,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(933, 519);
+            this.ClientSize = new System.Drawing.Size(1241, 519);
             this.Controls.Add(this.splitContainer2);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

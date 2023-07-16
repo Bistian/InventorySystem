@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewItemForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ButtonClose = new InventoryManagmentSystem.CustomButton();
             this.labelTitle = new System.Windows.Forms.Label();
             this.btnAddBrand = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
@@ -50,7 +51,6 @@
             this.comboBoxColor = new System.Windows.Forms.ComboBox();
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.labelItemType = new System.Windows.Forms.Label();
-            this.ButtonClose = new InventoryManagmentSystem.CustomButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ButtonClose)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +63,15 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.panel1.Name = "panel1";
+            // 
+            // ButtonClose
+            // 
+            resources.ApplyResources(this.ButtonClose, "ButtonClose");
+            this.ButtonClose.ImageHover = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageHover")));
+            this.ButtonClose.ImageNormal = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageNormal")));
+            this.ButtonClose.Name = "ButtonClose";
+            this.ButtonClose.TabStop = false;
+            this.ButtonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // labelTitle
             // 
@@ -115,6 +124,7 @@
             // 
             this.comboBoxUsedNew.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxUsedNew.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxUsedNew.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxUsedNew.FormattingEnabled = true;
             this.comboBoxUsedNew.Items.AddRange(new object[] {
             resources.GetString("comboBoxUsedNew.Items"),
@@ -131,6 +141,7 @@
             // 
             this.comboBoxMaterial.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxMaterial.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMaterial.FormattingEnabled = true;
             this.comboBoxMaterial.Items.AddRange(new object[] {
             resources.GetString("comboBoxMaterial.Items"),
@@ -147,6 +158,7 @@
             // 
             this.comboBoxBrand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxBrand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxBrand.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxBrand, "comboBoxBrand");
             this.comboBoxBrand.Name = "comboBoxBrand";
@@ -160,6 +172,7 @@
             // 
             this.comboBoxSize.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxSize.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSize.FormattingEnabled = true;
             this.comboBoxSize.Items.AddRange(new object[] {
             resources.GetString("comboBoxSize.Items"),
@@ -207,6 +220,7 @@
             // 
             this.comboBoxColor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxColor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxColor.FormattingEnabled = true;
             this.comboBoxColor.Items.AddRange(new object[] {
             resources.GetString("comboBoxColor.Items"),
@@ -218,6 +232,7 @@
             // 
             this.cbItemType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbItemType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbItemType.FormattingEnabled = true;
             resources.ApplyResources(this.cbItemType, "cbItemType");
             this.cbItemType.Name = "cbItemType";
@@ -227,15 +242,6 @@
             // 
             resources.ApplyResources(this.labelItemType, "labelItemType");
             this.labelItemType.Name = "labelItemType";
-            // 
-            // ButtonClose
-            // 
-            resources.ApplyResources(this.ButtonClose, "ButtonClose");
-            this.ButtonClose.ImageHover = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageHover")));
-            this.ButtonClose.ImageNormal = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageNormal")));
-            this.ButtonClose.Name = "ButtonClose";
-            this.ButtonClose.TabStop = false;
-            this.ButtonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // NewItemForm
             // 
