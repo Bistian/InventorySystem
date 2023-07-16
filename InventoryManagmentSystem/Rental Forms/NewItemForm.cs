@@ -655,6 +655,14 @@ namespace InventoryManagmentSystem.Rental_Forms
             LoadBrands();
             ManageFieldsAvailability();            
         }
+
+        private void ButtonClose_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Exit Module?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Dispose();
+            }
+        }
     }
 }
 

@@ -50,12 +50,15 @@
             this.comboBoxColor = new System.Windows.Forms.ComboBox();
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.labelItemType = new System.Windows.Forms.Label();
+            this.ButtonClose = new InventoryManagmentSystem.CustomButton();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ButtonClose)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Maroon;
+            this.panel1.Controls.Add(this.ButtonClose);
             this.panel1.Controls.Add(this.labelTitle);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.SystemColors.ActiveBorder;
@@ -225,6 +228,15 @@
             resources.ApplyResources(this.labelItemType, "labelItemType");
             this.labelItemType.Name = "labelItemType";
             // 
+            // ButtonClose
+            // 
+            resources.ApplyResources(this.ButtonClose, "ButtonClose");
+            this.ButtonClose.ImageHover = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageHover")));
+            this.ButtonClose.ImageNormal = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageNormal")));
+            this.ButtonClose.Name = "ButtonClose";
+            this.ButtonClose.TabStop = false;
+            this.ButtonClose.Click += new System.EventHandler(this.ButtonClose_Click);
+            // 
             // NewItemForm
             // 
             resources.ApplyResources(this, "$this");
@@ -254,6 +266,7 @@
             this.Name = "NewItemForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ButtonClose)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,5 +296,6 @@
         public System.Windows.Forms.ComboBox comboBoxColor;
         public System.Windows.Forms.ComboBox cbItemType;
         private System.Windows.Forms.Label labelItemType;
+        private CustomButton ButtonClose;
     }
 }
