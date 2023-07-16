@@ -87,15 +87,44 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// VALUES(@ItemId,@ClientId,@RentDate,@ReturnDate)
+        /// VALUES(@ItemId,@ClientId,@RentDate)
         /// </summary>
         /// <returns></returns>
         public static string HistoryInsert()
         {
             string query = @"
-                INSERT INTO tbHistories(ItemId,ClientId,RentDate,ReturnDate) 
-                VALUES(@ItemId,@ClientId,@RentDate,@ReturnDate)
+                INSERT INTO tbHistories(ItemId,ClientId,RentDate) 
+                VALUES(@ItemId,@ClientId,GETDATE())
             ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return query;
+        }
+
+        /// <summary>
+        /// VALUES(@ItemId,@ClientId,@ReturnDate)
+        /// </summary>
+        /// <returns></returns>
+        public static string HistoryUpdate()
+        {
+            string query = @"
+                UPDATE h1
+                SET h1.ReturnDate = GETDATE()
+                FROM tbHistories AS h1
+                JOIN (
+                    SELECT
+                        ItemId,
+                        ClientId,
+                        MAX(RentDate) AS LastRented
+                    FROM
+                        tbHistories
+                    WHERE
+                        ItemId = @ItemId AND ClientId = @ClientId
+                    GROUP BY
+                        ItemId, ClientId
+                ) AS h2 ON h1.ItemId = h2.ItemId AND h1.ClientId = h2.ClientId AND h1.RentDate = h2.LastRented
+                    WHERE h1.ReturnDate IS NULL;
+            ";
+
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
         }
@@ -134,9 +163,9 @@ namespace InventoryManagmentSystem
                 SELECT
                     it.Id,
                     it.ItemType,
-                    COALESCE(tb.SerialNumber, th.SerialNumber, tj.SerialNumber, tp.SerialNumber) AS SerialNumber,
-                    COALESCE(tb.Brand, th.Brand, tj.Brand, tp.Brand) AS Brand,
-                    COALESCE(tb.ManufactureDate, th.ManufactureDate, tj.ManufactureDate, tp.ManufactureDate) AS ManufactureDate,
+                    COALESCE(tb.SerialNumber, th.SerialNumber, tj.SerialNumber, tp.SerialNumber, tm.SerialNumber) AS SerialNumber,
+                    COALESCE(tb.Brand, th.Brand, tj.Brand, tp.Brand, tm.Brand) AS Brand,
+                    COALESCE(tb.ManufactureDate, th.ManufactureDate, tj.ManufactureDate, tp.ManufactureDate, tm.ManufactureDate) AS ManufactureDate,
                     ih.LastRented
                 FROM
                     (
@@ -161,7 +190,8 @@ namespace InventoryManagmentSystem
                     LEFT JOIN tbBoots tb ON it.ItemType = 'Boots' AND tb.ItemId = it.Id
                     LEFT JOIN tbHelmets th ON it.ItemType = 'Helmet' AND th.ItemId = it.Id
                     LEFT JOIN tbJackets tj ON it.ItemType = 'Jacket' AND tj.ItemId = it.Id
-                    LEFT JOIN tbPants tp ON it.ItemType = 'Pants' AND tp.ItemId = it.Id;
+                    LEFT JOIN tbPants tp ON it.ItemType = 'Pants' AND tp.ItemId = it.Id
+                    LEFT JOIN tbMasks tm ON it.ItemType = 'Mask' AND tm.ItemId = it.Id;
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
@@ -261,4 +291,3 @@ namespace InventoryManagmentSystem
 
     }
 }
-    

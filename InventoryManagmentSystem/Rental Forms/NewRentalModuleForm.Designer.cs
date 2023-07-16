@@ -151,6 +151,7 @@
             this.labelReplacmentItem = new System.Windows.Forms.Label();
             this.labelOldItem = new System.Windows.Forms.Label();
             this.panelRentals = new System.Windows.Forms.Panel();
+            this.DatepickerDue = new InventoryManagmentSystem.CustomDateTimePicker();
             this.labelDueDate = new System.Windows.Forms.Label();
             this.splitContainerInventories = new System.Windows.Forms.SplitContainer();
             this.panelCustomerInv = new System.Windows.Forms.Panel();
@@ -161,8 +162,11 @@
             this.SerialNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientMFD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelProfileName = new System.Windows.Forms.Label();
             this.panelFireTecInv = new System.Windows.Forms.Panel();
+            this.labelNewItem = new System.Windows.Forms.Label();
+            this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.textBoxSearchBar = new System.Windows.Forms.TextBox();
             this.lableSearchBar = new System.Windows.Forms.Label();
             this.comboBoxItemType = new System.Windows.Forms.ComboBox();
@@ -174,10 +178,10 @@
             this.ManufactureDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UsedNew = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColorMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemIdInv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelFireTecInv = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.DatepickerDue = new InventoryManagmentSystem.CustomDateTimePicker();
             this.gradientFlowLayoutCustomerInfo = new InventoryManagmentSystem.GradientFlowLayoutPanel();
             this.panelRentalType.SuspendLayout();
             this.panelContactInfo.SuspendLayout();
@@ -218,6 +222,7 @@
             this.panelCustomerInv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).BeginInit();
             this.panelFireTecInv.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -1612,6 +1617,16 @@
             this.panelRentals.TabIndex = 118;
             this.panelRentals.Visible = false;
             // 
+            // DatepickerDue
+            // 
+            this.DatepickerDue.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatepickerDue.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
+            this.DatepickerDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatepickerDue.Location = new System.Drawing.Point(2, 60);
+            this.DatepickerDue.Name = "DatepickerDue";
+            this.DatepickerDue.Size = new System.Drawing.Size(586, 58);
+            this.DatepickerDue.TabIndex = 40;
+            // 
             // labelDueDate
             // 
             this.labelDueDate.AutoSize = true;
@@ -1640,7 +1655,7 @@
             this.splitContainerInventories.Panel2.Controls.Add(this.panelFireTecInv);
             this.splitContainerInventories.Size = new System.Drawing.Size(1592, 1746);
             this.splitContainerInventories.SplitterDistance = 836;
-            this.splitContainerInventories.SplitterWidth = 31;
+            this.splitContainerInventories.SplitterWidth = 10;
             this.splitContainerInventories.TabIndex = 0;
             this.splitContainerInventories.Visible = false;
             // 
@@ -1682,7 +1697,8 @@
             this.ClientBrand,
             this.SerialNum,
             this.CSize,
-            this.ClientMFD});
+            this.ClientMFD,
+            this.ItemId});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
@@ -1720,6 +1736,7 @@
             this.dataGridViewClient.Size = new System.Drawing.Size(1592, 790);
             this.dataGridViewClient.TabIndex = 112;
             this.dataGridViewClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellClick);
+            this.dataGridViewClient.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewClient_ColumnHeaderMouseClick);
             // 
             // Item
             // 
@@ -1763,6 +1780,14 @@
             this.ClientMFD.Name = "ClientMFD";
             this.ClientMFD.ReadOnly = true;
             // 
+            // ItemId
+            // 
+            this.ItemId.HeaderText = "ItemId";
+            this.ItemId.MinimumWidth = 8;
+            this.ItemId.Name = "ItemId";
+            this.ItemId.ReadOnly = true;
+            this.ItemId.Visible = false;
+            // 
             // labelProfileName
             // 
             this.labelProfileName.AutoSize = true;
@@ -1781,6 +1806,8 @@
             // 
             this.panelFireTecInv.BackColor = System.Drawing.Color.Transparent;
             this.panelFireTecInv.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelFireTecInv.Controls.Add(this.labelNewItem);
+            this.panelFireTecInv.Controls.Add(this.UsersButton);
             this.panelFireTecInv.Controls.Add(this.textBoxSearchBar);
             this.panelFireTecInv.Controls.Add(this.lableSearchBar);
             this.panelFireTecInv.Controls.Add(this.comboBoxItemType);
@@ -1790,8 +1817,36 @@
             this.panelFireTecInv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFireTecInv.Location = new System.Drawing.Point(0, 0);
             this.panelFireTecInv.Name = "panelFireTecInv";
-            this.panelFireTecInv.Size = new System.Drawing.Size(1592, 879);
+            this.panelFireTecInv.Size = new System.Drawing.Size(1592, 900);
             this.panelFireTecInv.TabIndex = 119;
+            // 
+            // labelNewItem
+            // 
+            this.labelNewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelNewItem.AutoSize = true;
+            this.labelNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNewItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelNewItem.Location = new System.Drawing.Point(608, 5);
+            this.labelNewItem.Margin = new System.Windows.Forms.Padding(0);
+            this.labelNewItem.Name = "labelNewItem";
+            this.labelNewItem.Size = new System.Drawing.Size(130, 29);
+            this.labelNewItem.TabIndex = 121;
+            this.labelNewItem.Text = "New Item:";
+            // 
+            // UsersButton
+            // 
+            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
+            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
+            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
+            this.UsersButton.Location = new System.Drawing.Point(710, 4);
+            this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
+            this.UsersButton.Name = "UsersButton";
+            this.UsersButton.Size = new System.Drawing.Size(57, 32);
+            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.UsersButton.TabIndex = 120;
+            this.UsersButton.TabStop = false;
+            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click);
             // 
             // textBoxSearchBar
             // 
@@ -1823,7 +1878,7 @@
             "Jacket",
             "Pants",
             "Boots",
-            "SCBA Masks"});
+            "Masks"});
             this.comboBoxItemType.Location = new System.Drawing.Point(260, 3);
             this.comboBoxItemType.Name = "comboBoxItemType";
             this.comboBoxItemType.Size = new System.Drawing.Size(88, 33);
@@ -1863,7 +1918,8 @@
             this.Size,
             this.ManufactureDate,
             this.UsedNew,
-            this.ColorMaterial});
+            this.ColorMaterial,
+            this.ItemIdInv});
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1892,7 +1948,7 @@
             this.dataGridInv.RowTemplate.Height = 40;
             this.dataGridInv.RowTemplate.ReadOnly = true;
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridInv.Size = new System.Drawing.Size(1592, 833);
+            this.dataGridInv.Size = new System.Drawing.Size(1592, 854);
             this.dataGridInv.TabIndex = 112;
             this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellClick_1);
             // 
@@ -1949,6 +2005,15 @@
             this.ColorMaterial.Name = "ColorMaterial";
             this.ColorMaterial.ReadOnly = true;
             // 
+            // ItemIdInv
+            // 
+            this.ItemIdInv.HeaderText = "ItemIdInv";
+            this.ItemIdInv.MinimumWidth = 8;
+            this.ItemIdInv.Name = "ItemIdInv";
+            this.ItemIdInv.ReadOnly = true;
+            this.ItemIdInv.Visible = false;
+            this.ItemIdInv.Width = 150;
+            // 
             // labelFireTecInv
             // 
             this.labelFireTecInv.AutoSize = true;
@@ -1990,16 +2055,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1592, 1746);
             this.panel3.TabIndex = 120;
-            // 
-            // DatepickerDue
-            // 
-            this.DatepickerDue.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DatepickerDue.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
-            this.DatepickerDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DatepickerDue.Location = new System.Drawing.Point(2, 60);
-            this.DatepickerDue.Name = "DatepickerDue";
-            this.DatepickerDue.Size = new System.Drawing.Size(586, 58);
-            this.DatepickerDue.TabIndex = 40;
             // 
             // gradientFlowLayoutCustomerInfo
             // 
@@ -2098,6 +2153,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).EndInit();
             this.panelFireTecInv.ResumeLayout(false);
             this.panelFireTecInv.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -2219,12 +2275,6 @@
         private System.Windows.Forms.Label labelItemType;
         private System.Windows.Forms.TextBox textBoxSearchBar;
         private System.Windows.Forms.Label lableSearchBar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Brand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Serial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ManufactureDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UsedNew;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColorMaterial;
         private System.Windows.Forms.Panel panelNotes;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonEditNotes;
@@ -2240,13 +2290,23 @@
         private System.Windows.Forms.Label labelTypeOfItem;
         public System.Windows.Forms.Button SwapButton;
         private System.Windows.Forms.Button btnAddBrand;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Item;
         private System.Windows.Forms.DataGridViewTextBoxColumn DDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientBrand;
         private System.Windows.Forms.DataGridViewTextBoxColumn SerialNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn CSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientMFD;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemId;
+        private System.Windows.Forms.Label labelNewItem;
+        private CustomButton UsersButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Brand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Serial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ManufactureDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UsedNew;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColorMaterial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemIdInv;
     }
 }

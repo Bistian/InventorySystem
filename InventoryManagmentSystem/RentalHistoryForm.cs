@@ -120,6 +120,7 @@ namespace InventoryManagmentSystem
             // Need to make words singular to match item type.
             if (selectedType == "helmets") { selectedType = "helmet"; }
             else if (selectedType == "jackets") { selectedType = "jacket"; }
+            else if (selectedType == "masks") { selectedType = "mask"; }
 
             int length = dataGridItems.Rows.Count;
             for (int i = 0; i < length; ++i)
@@ -131,7 +132,7 @@ namespace InventoryManagmentSystem
                 {
                     row.Visible = true;
                 }
-                else if (itemType != selectedType)
+                else if (itemType.ToLower() != selectedType)
                 {
                     row.Visible = false;
                 }

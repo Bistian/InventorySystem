@@ -37,7 +37,7 @@ namespace InventoryManagmentSystem
         {
             if(comboBoxItem.Text == "Boots") { return QueryBoots(searchTerm); }
             if(comboBoxItem.Text == "Helmets") { return QueryHelmets(searchTerm); }
-            if(comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants" || comboBoxItem.Text == "SCBA Masks") { return QueryJacketsAndPantsAndMask(searchTerm); }
+            if(comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants" || comboBoxItem.Text == "Masks") { return QueryJacketsAndPantsAndMask(searchTerm); }
             return "";
         }
 
@@ -69,7 +69,7 @@ namespace InventoryManagmentSystem
         {
             string from = "tbPants ";
             if(comboBoxItem.Text == "Jackets") { from = "tbJackets "; }
-            if (comboBoxItem.Text == "SCBA Masks") { from = "tbMasks "; }
+            if (comboBoxItem.Text == "Masks") { from = "tbMasks "; }
             string select = "SELECT Brand, SerialNumber, UsedNew, ManufactureDate, Size, Location FROM ";
             string where =
                 $"WHERE (Brand LIKE '%{searchTerm}%' OR " +
@@ -111,7 +111,7 @@ namespace InventoryManagmentSystem
                         dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString(), "Color");
                     }
                 }
-                else if (comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants" || comboBoxItem.Text == "SCBA Masks")
+                else if (comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants" || comboBoxItem.Text == "Masks")
                 {
                     while (dr.Read())
                     {
@@ -146,7 +146,7 @@ namespace InventoryManagmentSystem
                 dataGridInv.Columns["Size"].Visible = false;
                 dataGridInv.Columns["Material"].Visible = false;
             }
-            else if (comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants")
+            else if (comboBoxItem.Text == "Jackets" || comboBoxItem.Text == "Pants" || comboBoxItem.Text == "Masks")
             {
                 dataGridInv.Columns["Color"].Visible = false;
                 dataGridInv.Columns["Size"].Visible = true;
@@ -210,7 +210,7 @@ namespace InventoryManagmentSystem
                                 dr[6].ToString(),
                                 dr[7].ToString());
                         }
-                        else // Pants && Jackets
+                        else // Pants && Jackets && Masks
                         {
                             dataGridInv.Rows.Add(i,
                                 dr[0].ToString(),
@@ -246,7 +246,7 @@ namespace InventoryManagmentSystem
             {
                 if (colName == "Edit")
                 {
-                    if (itemType == "Jackets" || itemType == "Pants") { UpdateJacketOrPants(e); }
+                    if (itemType == "Jackets" || itemType == "Pants" || itemType == "Masks") { UpdateJacketOrPantsOrMasks(e); }
                     else if (itemType == "Helmets") { UpdateHelmet(e); }
                     else if (itemType == "Boots") { UpdateBoots(e); }
                     LoadInventory();
@@ -299,7 +299,7 @@ namespace InventoryManagmentSystem
             itemForm.Close();
         }
 
-        private void UpdateJacketOrPants(DataGridViewCellEventArgs e)
+        private void UpdateJacketOrPantsOrMasks(DataGridViewCellEventArgs e)
         {
             NewItemForm itemForm = new NewItemForm(comboBoxItem.Text, true);
             itemForm.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
@@ -342,6 +342,11 @@ namespace InventoryManagmentSystem
         private string GetCellValueAsString(DataGridViewCellEventArgs e, string cellName)
         {
             return dataGridInv.Rows[e.RowIndex].Cells[cellName].Value.ToString();
+        }
+
+        private void labelNewItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

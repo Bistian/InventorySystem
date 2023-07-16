@@ -83,7 +83,7 @@
             "Jackets",
             "Pants",
             "Boots",
-            "SCBA Masks"});
+            "Masks"});
             this.comboBoxItem.Location = new System.Drawing.Point(62, 8);
             this.comboBoxItem.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.comboBoxItem.Name = "comboBoxItem";
@@ -318,6 +318,7 @@
             this.labelNewItem.Size = new System.Drawing.Size(130, 29);
             this.labelNewItem.TabIndex = 20;
             this.labelNewItem.Text = "New Item:";
+            this.labelNewItem.Click += new System.EventHandler(this.labelNewItem_Click);
             // 
             // UsersButton
             // 
