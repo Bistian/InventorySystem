@@ -262,7 +262,7 @@ namespace InventoryManagmentSystem
                     }
                 }
 
-                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(command, connection, row[0].ToString());
+                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, row[0].ToString());
                 string query = $"INSERT INTO {table} " +
                     $"(ItemId, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Size) " +
                     $"VALUES ('{uuid}','{row[1]}','{row[2]}','{row[7]}','{row[5]}','{row[4]}',@date,'{row[3]}')";
@@ -321,7 +321,7 @@ namespace InventoryManagmentSystem
                         row[8] = "Fire-Tec";
                     }
                 }
-                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(command, connection, row[0].ToString());
+                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, row[0].ToString());
                 string query = $"INSERT INTO {table} " +
                     "(ItemId, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Size, [Material]) " +
                     "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @UsedNew, @ManufactureDate, @DueDate, @Size, @Material)";
@@ -380,7 +380,7 @@ namespace InventoryManagmentSystem
                     }
                 }
 
-                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(command, connection, row[0].ToString());
+                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, row[0].ToString());
                 string query = $"INSERT INTO {table} " +
                     "(ItemId, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Color) " +
                     "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @UsedNew, @ManufactureDate, @DueDate, @Color)";

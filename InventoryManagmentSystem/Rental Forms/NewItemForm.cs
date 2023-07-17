@@ -226,7 +226,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 return false;
             }
 
-            Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(command,connection,cbItemType.Text);
+            Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection,cbItemType.Text);
             if (uuid.Equals(Guid.Empty))
             {
                 Console.WriteLine("ERROR: UUID not found.");
@@ -491,7 +491,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void loadItemTypes()
         {
-            string query = "SELECT ItemType FROM tbItemTypes";
+            string query = HelperQuery.ItemTypeLoad();
             try
             {
                 command = new SqlCommand(query, connection);

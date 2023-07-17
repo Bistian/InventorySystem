@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,9 @@ namespace InventoryManagmentSystem
 {
     public partial class SettingsForm : Form
     {
+        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(connectionString);
+
         // Colors
         Color offColor = Color.Transparent;
         Color onColor = Color.DarkGoldenrod;
@@ -22,6 +27,7 @@ namespace InventoryManagmentSystem
         public SettingsForm()
         {
             InitializeComponent();
+            devInitAddItem();
         }
 
         public void openChildForm(Form childForm)
@@ -100,6 +106,38 @@ namespace InventoryManagmentSystem
             comboBoxSelection.Add("Histories");
             RentalHistoryForm form = new RentalHistoryForm();
             openChildForm(form);
+        }
+
+        private void devInitAddItem()
+        {
+#if DEBUG
+            cbItemType.Enabled = true;
+            cbItemType.Visible = true;
+            tbUuid.Enabled = true;
+            tbUuid.Visible = true;
+            btnAddItem.Enabled = true;
+            btnAddItem.Visible = true;
+
+            string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+            SqlConnection connection = new SqlConnection(connectionString);
+            HelperDatabaseCall.ItemTypeLoadComboBox(connection, cbItemType);
+#endif
+        }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            if(cbItemType.SelectedIndex < 0) { return; }
+            if(!HelperFunctions.YesNoMessageBox("Do you want to add this Item?", "Add Item")) { return; }
+            Guid uuid = Guid.Empty;
+            if (cbItemType.SelectedIndex == 0)
+            {
+                uuid = Guid.NewGuid();
+            }
+            else
+            {
+                uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, cbItemType.Text);
+            }
+            tbUuid.Text = uuid.ToString();
         }
     }
 }

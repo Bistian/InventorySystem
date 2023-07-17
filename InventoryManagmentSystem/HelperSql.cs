@@ -72,6 +72,11 @@ namespace InventoryManagmentSystem
             return query;
         }
 
+        public static string ItemTypeLoad()
+        {
+            return "SELECT ItemType FROM tbItemTypes";
+        }
+
         /// <summary>
         /// VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Color,@ManufactureDate)
         /// </summary>
@@ -248,14 +253,14 @@ namespace InventoryManagmentSystem
         /// Add an item to Items table.
         /// </summary>
         /// <returns>Created item's uuid or empty if it failed.</returns>
-        public static Guid ItemInsertAndGetUuid(SqlCommand command, SqlConnection connection, string itemType)
+        public static Guid ItemInsertAndGetUuid(SqlConnection connection, string itemType)
         {
             string query = HelperQuery.ItemInsertAndReturnUuid();
             Guid uuid = Guid.Empty;
             connection.Open();
             try
             {
-                command = new SqlCommand(query, connection);
+                SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ItemType", itemType);
                 uuid = (Guid)command.ExecuteScalar();
             }
@@ -289,5 +294,24 @@ namespace InventoryManagmentSystem
             connection.Close();
         }
 
+        public static void ItemTypeLoadComboBox(SqlConnection connection, ComboBox comboBox)
+        {
+            string query = HelperQuery.ItemTypeLoad();
+            try
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    comboBox.Items.Add(dataReader[0]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+            }
+            connection.Close();
+        }
     }
 }

@@ -35,6 +35,9 @@
             this.btnPrices = new System.Windows.Forms.Button();
             this.btnAcademies = new System.Windows.Forms.Button();
             this.btnHistories = new System.Windows.Forms.Button();
+            this.btnAddItem = new System.Windows.Forms.Button();
+            this.cbItemType = new System.Windows.Forms.ComboBox();
+            this.tbUuid = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnImport
@@ -104,12 +107,49 @@
             this.btnHistories.UseVisualStyleBackColor = true;
             this.btnHistories.Click += new System.EventHandler(this.btnHistories_Click);
             // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Enabled = false;
+            this.btnAddItem.Location = new System.Drawing.Point(12, 341);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(75, 23);
+            this.btnAddItem.TabIndex = 7;
+            this.btnAddItem.Text = "Add Item";
+            this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Visible = false;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            // 
+            // cbItemType
+            // 
+            this.cbItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbItemType.Enabled = false;
+            this.cbItemType.FormattingEnabled = true;
+            this.cbItemType.Items.AddRange(new object[] {
+            "Detached UUID"});
+            this.cbItemType.Location = new System.Drawing.Point(12, 314);
+            this.cbItemType.Name = "cbItemType";
+            this.cbItemType.Size = new System.Drawing.Size(76, 21);
+            this.cbItemType.TabIndex = 8;
+            this.cbItemType.Visible = false;
+            // 
+            // tbUuid
+            // 
+            this.tbUuid.Enabled = false;
+            this.tbUuid.Location = new System.Drawing.Point(13, 288);
+            this.tbUuid.Name = "tbUuid";
+            this.tbUuid.Size = new System.Drawing.Size(75, 20);
+            this.tbUuid.TabIndex = 9;
+            this.tbUuid.Visible = false;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tbUuid);
+            this.Controls.Add(this.cbItemType);
+            this.Controls.Add(this.btnAddItem);
             this.Controls.Add(this.btnHistories);
             this.Controls.Add(this.btnAcademies);
             this.Controls.Add(this.btnPrices);
@@ -120,6 +160,7 @@
             this.Name = "SettingsForm";
             this.Text = "SettingsForm";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -132,5 +173,8 @@
         private System.Windows.Forms.Button btnPrices;
         private System.Windows.Forms.Button btnAcademies;
         private System.Windows.Forms.Button btnHistories;
+        private System.Windows.Forms.Button btnAddItem;
+        private System.Windows.Forms.ComboBox cbItemType;
+        private System.Windows.Forms.TextBox tbUuid;
     }
 }
