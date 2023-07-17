@@ -202,5 +202,10 @@ namespace InventoryManagmentSystem
             }
             LoadUsers();
         }
+
+        private void dataGridUsers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

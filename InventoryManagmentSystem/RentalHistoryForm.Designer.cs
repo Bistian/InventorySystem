@@ -48,8 +48,8 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panelTop = new System.Windows.Forms.Panel();
             this.labelTitle = new System.Windows.Forms.Label();
-            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.CloseButton = new InventoryManagmentSystem.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -57,11 +57,11 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panelTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
             // 
             // cbItemType
@@ -79,7 +79,7 @@
             this.cbItemType.Location = new System.Drawing.Point(293, 3);
             this.cbItemType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbItemType.Name = "cbItemType";
-            this.cbItemType.Size = new System.Drawing.Size(140, 32);
+            this.cbItemType.Size = new System.Drawing.Size(140, 26);
             this.cbItemType.TabIndex = 0;
             this.cbItemType.SelectedIndexChanged += new System.EventHandler(this.cbItemType_SelectedIndexChanged);
             // 
@@ -89,7 +89,7 @@
             this.labelItemType.ForeColor = System.Drawing.SystemColors.Window;
             this.labelItemType.Location = new System.Drawing.Point(219, 7);
             this.labelItemType.Name = "labelItemType";
-            this.labelItemType.Size = new System.Drawing.Size(93, 24);
+            this.labelItemType.Size = new System.Drawing.Size(79, 20);
             this.labelItemType.TabIndex = 1;
             this.labelItemType.Text = "Item Type";
             // 
@@ -126,7 +126,7 @@
             this.dataGridItems.RowHeadersWidth = 62;
             this.dataGridItems.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.dataGridItems.RowTemplate.Height = 40;
-            this.dataGridItems.Size = new System.Drawing.Size(1241, 150);
+            this.dataGridItems.Size = new System.Drawing.Size(1241, 148);
             this.dataGridItems.TabIndex = 2;
             this.dataGridItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridItems_CellClick);
             // 
@@ -204,7 +204,7 @@
             this.dataGridHistory.RowHeadersWidth = 62;
             this.dataGridHistory.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.dataGridHistory.RowTemplate.Height = 40;
-            this.dataGridHistory.Size = new System.Drawing.Size(1241, 331);
+            this.dataGridHistory.Size = new System.Drawing.Size(1241, 333);
             this.dataGridHistory.TabIndex = 3;
             this.dataGridHistory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridHistory_CellClick);
             // 
@@ -252,7 +252,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dataGridHistory);
             this.splitContainer1.Size = new System.Drawing.Size(1241, 485);
-            this.splitContainer1.SplitterDistance = 150;
+            this.splitContainer1.SplitterDistance = 148;
             this.splitContainer1.TabIndex = 5;
             // 
             // panelTop
@@ -274,22 +274,9 @@
             this.labelTitle.ForeColor = System.Drawing.SystemColors.Window;
             this.labelTitle.Location = new System.Drawing.Point(-5, 3);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(216, 37);
+            this.labelTitle.Size = new System.Drawing.Size(186, 31);
             this.labelTitle.TabIndex = 70;
             this.labelTitle.Text = "Rental History";
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
-            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
-            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(164, 3);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(39, 45);
-            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CloseButton.TabIndex = 69;
-            this.CloseButton.TabStop = false;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // splitContainer2
             // 
@@ -309,9 +296,22 @@
             this.splitContainer2.SplitterDistance = 30;
             this.splitContainer2.TabIndex = 7;
             // 
+            // CloseButton
+            // 
+            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
+            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
+            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
+            this.CloseButton.Location = new System.Drawing.Point(164, 3);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(39, 45);
+            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CloseButton.TabIndex = 69;
+            this.CloseButton.TabStop = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
             // RentalHistoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(1241, 519);
@@ -329,11 +329,11 @@
             this.splitContainer1.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             this.ResumeLayout(false);
 
         }
