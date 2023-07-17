@@ -27,6 +27,8 @@ namespace InventoryManagmentSystem
         SqlDataReader dr;
         #endregion SQL_Variables
 
+        string firetec = "(Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC')";
+
         public InventoryForm()
         {
             InitializeComponent();
@@ -48,8 +50,7 @@ namespace InventoryManagmentSystem
                 $"WHERE (Brand LIKE '%{searchTerm}%' OR " +
                 $"SerialNumber LIKE '%{searchTerm}%' OR " +
                 $"UsedNew LIKE '%{searchTerm}%' OR " +
-                $"Size LIKE '%{searchTerm}%') AND " +
-                $"Location='Fire-Tec'";
+                $"Size LIKE '%{searchTerm}%') AND " + firetec;
             return (select + where);
         }
         
@@ -60,8 +61,7 @@ namespace InventoryManagmentSystem
                 $"WHERE (Brand LIKE '%{searchTerm}%' OR " +
                 $"SerialNumber LIKE '%{searchTerm}%' OR " +
                 $"UsedNew LIKE '%{searchTerm}%' OR " +
-                $"Color LIKE '%{searchTerm}%') AND " +
-                $"Location='Fire-Tec'";
+                $"Color LIKE '%{searchTerm}%') AND " + firetec;
             return (select + where);
         }
 
@@ -80,8 +80,7 @@ namespace InventoryManagmentSystem
                 $"WHERE (Brand LIKE '%{searchTerm}%' OR " +
                 $"SerialNumber LIKE '%{searchTerm}%' OR " +
                 $"UsedNew LIKE '%{searchTerm}%' OR " +
-                $"Size LIKE '%{searchTerm}%') AND " +
-                $"Location='Fire-Tec'";
+                $"Size LIKE '%{searchTerm}%') AND " + firetec;
             return (select + from + where);
         }
 
@@ -98,6 +97,8 @@ namespace InventoryManagmentSystem
                 command = new SqlCommand(QueryItems(), connection);
                 connection.Open();
                 dr = command.ExecuteReader();
+                
+
 
                 //Check which item was selected
                 if (comboBoxItem.Text == "Helmets")

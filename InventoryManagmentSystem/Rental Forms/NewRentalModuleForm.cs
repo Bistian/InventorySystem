@@ -819,7 +819,7 @@ namespace InventoryManagmentSystem
                     comboBoxItemType.SelectedIndex = 0;
                     //return item
                     cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", "FIRETEC");
+                    cm.Parameters.AddWithValue("@location", "Fire-Tec");
                     cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
                     cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
                     con.Open();
@@ -856,7 +856,7 @@ namespace InventoryManagmentSystem
 
                     //return item
                     cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", "FIRETEC");
+                    cm.Parameters.AddWithValue("@location", "Fire-Tec");
                     cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
                     cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
                     con.Open();
@@ -893,7 +893,7 @@ namespace InventoryManagmentSystem
 
                     //return item
                     cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", "FIRETEC");
+                    cm.Parameters.AddWithValue("@location", "Fire-Tec");
                     cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
                     cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
                     con.Open();
@@ -928,7 +928,7 @@ namespace InventoryManagmentSystem
 
                     //return item
                     cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", "FIRETEC");
+                    cm.Parameters.AddWithValue("@location", "Fire-Tec");
                     cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
                     cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
                     con.Open();
@@ -965,7 +965,7 @@ namespace InventoryManagmentSystem
 
                     //return item
                     cm = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", "FIRETEC");
+                    cm.Parameters.AddWithValue("@location", "Fire-Tec");
                     cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
                     cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
                     con.Open();
