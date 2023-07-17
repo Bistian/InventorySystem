@@ -172,7 +172,6 @@
             // 
             this.comboBoxSize.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxSize.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBoxSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSize.FormattingEnabled = true;
             this.comboBoxSize.Items.AddRange(new object[] {
             resources.GetString("comboBoxSize.Items"),

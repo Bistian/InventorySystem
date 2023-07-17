@@ -32,6 +32,7 @@ namespace InventoryManagmentSystem
         string Sizes = "";
         Guid ItemIdClient = Guid.Empty;
         Guid ItemIdInventory = Guid.Empty;
+        bool Measure = true;
 
         //Used for counting rentals
         int total = 0;
@@ -51,10 +52,10 @@ namespace InventoryManagmentSystem
         public NewRentalModuleForm(string rentalType = null, string clientName = null)
         {
             InitializeComponent();
+            panelRentalInfo.Visible = false;
+            panelMeasurments.Visible = false;
             panelAddress.Visible = false;
             panelContactInfo.Visible = false;
-            panelMeasurments.Visible = false;
-            panelRentalInfo.Visible = false;
             PopulateAcademyList();
             if (clientName != null)
             {
@@ -355,6 +356,7 @@ namespace InventoryManagmentSystem
             splitContainerInventories.Visible = true;
             panelRentals.Visible = true;
             LoadClient();
+            flowLayoutPanelProfile.Dock = DockStyle.Top;
         }
 
         public void UpdateProfile(bool isDepartment, String ClientDrivers)
@@ -409,13 +411,13 @@ namespace InventoryManagmentSystem
                     {
                         cm.Parameters.AddWithValue("@Academy", txtBoxDriversLicense.Text);
                     }
-                    cm.Parameters.AddWithValue("@Chest", textBoxChest.Text);
-                    cm.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
-                    cm.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
-                    cm.Parameters.AddWithValue("@Inseam", textBoxInseam.Text);
-                    cm.Parameters.AddWithValue("@Hips", textBoxHips.Text);
-                    cm.Parameters.AddWithValue("@Height", textBoxHeight.Text);
-                    cm.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
+                        cm.Parameters.AddWithValue("@Chest", textBoxChest.Text);
+                        cm.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
+                        cm.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
+                        cm.Parameters.AddWithValue("@Inseam", textBoxInseam.Text);
+                        cm.Parameters.AddWithValue("@Hips", textBoxHips.Text);
+                        cm.Parameters.AddWithValue("@Height", textBoxHeight.Text);
+                        cm.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
                     con.Open();
                     try
                     {
@@ -430,11 +432,11 @@ namespace InventoryManagmentSystem
                     Clear();
 
                     //hiding input panels
+                    panelFinalize.Visible = false;
+                    panelRentalInfo.Visible = false;
+                    panelMeasurments.Visible = false;
                     panelAddress.Visible = false;
                     panelContactInfo.Visible = false;
-                    panelMeasurments.Visible = false;
-                    panelRentalInfo.Visible = false;
-                    panelFinalize.Visible = false;
 
                     return true;
                 }
@@ -677,8 +679,8 @@ namespace InventoryManagmentSystem
             //nothing seleced
             if (type == "")
             {
-                panelAddress.Visible = false;
                 panelContactInfo.Visible = false;
+                panelAddress.Visible = false;
                 panelMeasurments.Visible = false;
                 panelRentalInfo.Visible = false;
             }
@@ -690,11 +692,11 @@ namespace InventoryManagmentSystem
                 labelDriversLicense.Text = "Drivers Licence #";
 
                 //show panels
-                panelAddress.Visible = true;
                 panelContactInfo.Visible = true;
+                panelAddress.Visible = true;
                 panelMeasurments.Visible = true;
-                panelRentalInfo.Visible = true;
                 panelAcademy.Visible = true;
+                panelRentalInfo.Visible = true;
 
                 //default values
                 textBoxChest.Text = "";
@@ -728,8 +730,8 @@ namespace InventoryManagmentSystem
                 comboBoxAcademy.SelectedIndex = 0;
 
                 //show pannels
-                panelAddress.Visible = true;
                 panelContactInfo.Visible = true;
+                panelAddress.Visible = true;
                 panelRentalInfo.Visible = true;
 
             }
@@ -755,9 +757,9 @@ namespace InventoryManagmentSystem
                 comboBoxAcademy.Text = "N/A";
 
                 //show pannels
+                panelContactInfo.Visible = true;
                 panelAddress.Visible = true;
                 panelRentalInfo.Visible = true;
-                panelContactInfo.Visible = true;
             }
         }
 
@@ -1384,6 +1386,62 @@ namespace InventoryManagmentSystem
             NewItemForm ModForm = new NewItemForm();
             ModForm.ShowDialog();
             LoadInventory();
+        }
+
+        private void checkBoxMeasure_CheckedChanged(object sender, EventArgs e)
+        {
+            Measure = !Measure;
+            if (Measure == false)
+            {
+                panel1.Visible = false;
+
+                textBoxChest.Text = "N/A";
+                panelChest.Visible = false;
+
+                textBoxSleeve.Text = "N/A";
+                panelSleeve.Visible = false;
+
+                textBoxWaist.Text = "N/A";
+                panelWaist.Visible = false;
+
+                textBoxInseam.Text = "N/A";
+                panelInseam.Visible = false;
+
+                textBoxHips.Text = "N/A";
+                panelHips.Visible = false;
+
+                textBoxHeight.Text = "N/A";
+                panelHeight.Visible = false;
+
+                textBoxWeight.Text = "N/A";
+                panel8.Visible = false;
+
+            }
+            else
+            {
+                panel1.Visible = true;
+
+                textBoxChest.Text = "";
+                panelChest.Visible = true;
+
+                textBoxSleeve.Text = "";
+                panelSleeve.Visible = true;
+
+                textBoxWaist.Text = "";
+                panelWaist.Visible = true;
+
+                textBoxInseam.Text = "";
+                panelInseam.Visible = true;
+
+                textBoxHips.Text = "";
+                panelHips.Visible = true;
+
+                textBoxHeight.Text = "";
+                panelHeight.Visible = true;
+
+                textBoxWeight.Text = "";
+                panel8.Visible = true;
+            }
         }
     }
 }

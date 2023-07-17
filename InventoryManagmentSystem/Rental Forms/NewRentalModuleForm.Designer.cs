@@ -69,6 +69,7 @@
             this.txtBoxStreet = new System.Windows.Forms.TextBox();
             this.labelAddress = new System.Windows.Forms.Label();
             this.panelMeasurments = new System.Windows.Forms.Panel();
+            this.checkBoxMeasure = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBoxGender = new System.Windows.Forms.ComboBox();
             this.labelGender = new System.Windows.Forms.Label();
@@ -235,14 +236,15 @@
             this.panelRentalType.BackColor = System.Drawing.Color.Transparent;
             this.panelRentalType.Controls.Add(this.comboBoxRentalType);
             this.panelRentalType.Controls.Add(this.labelRentalType);
-            this.panelRentalType.Location = new System.Drawing.Point(3, 856);
+            this.panelRentalType.Location = new System.Drawing.Point(3, 2);
             this.panelRentalType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelRentalType.Name = "panelRentalType";
-            this.panelRentalType.Size = new System.Drawing.Size(676, 72);
+            this.panelRentalType.Size = new System.Drawing.Size(369, 72);
             this.panelRentalType.TabIndex = 120;
             // 
             // comboBoxRentalType
             // 
+            this.comboBoxRentalType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRentalType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxRentalType.FormattingEnabled = true;
             this.comboBoxRentalType.Items.AddRange(new object[] {
@@ -253,7 +255,7 @@
             this.comboBoxRentalType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxRentalType.Name = "comboBoxRentalType";
             this.comboBoxRentalType.Size = new System.Drawing.Size(132, 33);
-            this.comboBoxRentalType.TabIndex = 118;
+            this.comboBoxRentalType.TabIndex = 6666666;
             this.comboBoxRentalType.SelectedIndexChanged += new System.EventHandler(this.comboBoxRentalType_SelectedIndexChanged);
             // 
             // labelRentalType
@@ -278,10 +280,10 @@
             this.panelContactInfo.Controls.Add(this.panelName);
             this.panelContactInfo.Controls.Add(this.panelEmail);
             this.panelContactInfo.Controls.Add(this.panelPhone);
-            this.panelContactInfo.Location = new System.Drawing.Point(4, 930);
+            this.panelContactInfo.Location = new System.Drawing.Point(3, 74);
             this.panelContactInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelContactInfo.Name = "panelContactInfo";
-            this.panelContactInfo.Size = new System.Drawing.Size(353, 310);
+            this.panelContactInfo.Size = new System.Drawing.Size(369, 310);
             this.panelContactInfo.TabIndex = 116;
             // 
             // panelLicence
@@ -437,10 +439,10 @@
             this.panelAddress.Controls.Add(this.panelCity);
             this.panelAddress.Controls.Add(this.panelStreet);
             this.panelAddress.Controls.Add(this.labelAddress);
-            this.panelAddress.Location = new System.Drawing.Point(3, 1245);
+            this.panelAddress.Location = new System.Drawing.Point(3, 388);
             this.panelAddress.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAddress.Name = "panelAddress";
-            this.panelAddress.Size = new System.Drawing.Size(354, 227);
+            this.panelAddress.Size = new System.Drawing.Size(369, 227);
             this.panelAddress.TabIndex = 117;
             // 
             // panelZip
@@ -591,6 +593,7 @@
             // panelMeasurments
             // 
             this.panelMeasurments.BackColor = System.Drawing.Color.Transparent;
+            this.panelMeasurments.Controls.Add(this.checkBoxMeasure);
             this.panelMeasurments.Controls.Add(this.panel1);
             this.panelMeasurments.Controls.Add(this.panel8);
             this.panelMeasurments.Controls.Add(this.panelHeight);
@@ -600,11 +603,24 @@
             this.panelMeasurments.Controls.Add(this.labelMeasurments);
             this.panelMeasurments.Controls.Add(this.panelChest);
             this.panelMeasurments.Controls.Add(this.panelSleeve);
-            this.panelMeasurments.Location = new System.Drawing.Point(4, 1477);
+            this.panelMeasurments.Location = new System.Drawing.Point(0, 619);
             this.panelMeasurments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelMeasurments.Name = "panelMeasurments";
-            this.panelMeasurments.Size = new System.Drawing.Size(353, 276);
+            this.panelMeasurments.Size = new System.Drawing.Size(369, 276);
             this.panelMeasurments.TabIndex = 117;
+            // 
+            // checkBoxMeasure
+            // 
+            this.checkBoxMeasure.AutoSize = true;
+            this.checkBoxMeasure.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxMeasure.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.checkBoxMeasure.Location = new System.Drawing.Point(257, -2);
+            this.checkBoxMeasure.Name = "checkBoxMeasure";
+            this.checkBoxMeasure.Size = new System.Drawing.Size(99, 29);
+            this.checkBoxMeasure.TabIndex = 117;
+            this.checkBoxMeasure.Text = "Disable";
+            this.checkBoxMeasure.UseVisualStyleBackColor = true;
+            this.checkBoxMeasure.CheckedChanged += new System.EventHandler(this.checkBoxMeasure_CheckedChanged);
             // 
             // panel1
             // 
@@ -894,10 +910,10 @@
             this.panelRentalInfo.Controls.Add(this.panelAcademy);
             this.panelRentalInfo.Controls.Add(this.labelRentalInfo);
             this.panelRentalInfo.Controls.Add(this.panelFinalize);
-            this.panelRentalInfo.Location = new System.Drawing.Point(3, 1758);
+            this.panelRentalInfo.Location = new System.Drawing.Point(0, 895);
             this.panelRentalInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelRentalInfo.Name = "panelRentalInfo";
-            this.panelRentalInfo.Size = new System.Drawing.Size(354, 234);
+            this.panelRentalInfo.Size = new System.Drawing.Size(369, 234);
             this.panelRentalInfo.TabIndex = 115;
             // 
             // panelAcademy
@@ -919,12 +935,32 @@
             this.comboBoxAcademy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxAcademy.FormattingEnabled = true;
             this.comboBoxAcademy.Items.AddRange(new object[] {
+            "BFA",
+            "Ocala",
+            "Coral Springs",
+            "Pasco Hernando",
+            "Palm Beach",
+            "Miami Dade",
+            "Eastern",
+            "Monroe",
+            "Braxton",
+            "Barry",
+            "Citrus",
+            "SunCoast",
+            "Daytona",
+            "Ridge",
+            "Gateway",
+            "Aparicio Levy",
+            "Aparicio Levy",
+            "Resolve Maritime",
+            "S FL State (Avon Park)",
+            "Northwest",
             "N/A"});
             this.comboBoxAcademy.Location = new System.Drawing.Point(3, 25);
             this.comboBoxAcademy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxAcademy.Name = "comboBoxAcademy";
-            this.comboBoxAcademy.Size = new System.Drawing.Size(196, 33);
-            this.comboBoxAcademy.TabIndex = 17;
+            this.comboBoxAcademy.Size = new System.Drawing.Size(284, 33);
+            this.comboBoxAcademy.TabIndex = 16;
             // 
             // labelAcademy
             // 
@@ -940,6 +976,7 @@
             // 
             // btnAddBrand
             // 
+            this.btnAddBrand.Enabled = false;
             this.btnAddBrand.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddBrand.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnAddBrand.Location = new System.Drawing.Point(222, 25);
@@ -949,6 +986,7 @@
             this.btnAddBrand.TabIndex = 631;
             this.btnAddBrand.Text = "Add";
             this.btnAddBrand.UseVisualStyleBackColor = true;
+            this.btnAddBrand.Visible = false;
             this.btnAddBrand.Click += new System.EventHandler(this.btnAddBrand_Click);
             // 
             // labelRentalInfo
@@ -1016,7 +1054,7 @@
             this.txtBoxRep.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtBoxRep.Name = "txtBoxRep";
             this.txtBoxRep.Size = new System.Drawing.Size(185, 33);
-            this.txtBoxRep.TabIndex = 18;
+            this.txtBoxRep.TabIndex = 17;
             // 
             // ClearButton
             // 
@@ -1055,10 +1093,10 @@
             this.flowLayoutPanelProfile.Controls.Add(this.panelNotes);
             this.flowLayoutPanelProfile.Controls.Add(this.buttonEditNotes);
             this.flowLayoutPanelProfile.Controls.Add(this.buttonSaveNotes);
-            this.flowLayoutPanelProfile.Location = new System.Drawing.Point(9, 1996);
+            this.flowLayoutPanelProfile.Location = new System.Drawing.Point(0, 2163);
             this.flowLayoutPanelProfile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanelProfile.Name = "flowLayoutPanelProfile";
-            this.flowLayoutPanelProfile.Size = new System.Drawing.Size(351, 661);
+            this.flowLayoutPanelProfile.Size = new System.Drawing.Size(369, 659);
             this.flowLayoutPanelProfile.TabIndex = 112;
             this.flowLayoutPanelProfile.Visible = false;
             // 
@@ -1561,7 +1599,7 @@
             this.panelReplace.Location = new System.Drawing.Point(0, 1314);
             this.panelReplace.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
             this.panelReplace.Name = "panelReplace";
-            this.panelReplace.Size = new System.Drawing.Size(1415, 83);
+            this.panelReplace.Size = new System.Drawing.Size(1431, 83);
             this.panelReplace.TabIndex = 119;
             this.panelReplace.Visible = false;
             // 
@@ -1645,7 +1683,7 @@
             this.panelRentals.Location = new System.Drawing.Point(0, 1212);
             this.panelRentals.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
             this.panelRentals.Name = "panelRentals";
-            this.panelRentals.Size = new System.Drawing.Size(1415, 102);
+            this.panelRentals.Size = new System.Drawing.Size(1431, 102);
             this.panelRentals.TabIndex = 118;
             this.panelRentals.Visible = false;
             // 
@@ -1676,7 +1714,7 @@
             // splitContainerInventories.Panel2
             // 
             this.splitContainerInventories.Panel2.Controls.Add(this.panelFireTecInv);
-            this.splitContainerInventories.Size = new System.Drawing.Size(1415, 1397);
+            this.splitContainerInventories.Size = new System.Drawing.Size(1431, 1397);
             this.splitContainerInventories.SplitterDistance = 668;
             this.splitContainerInventories.SplitterWidth = 8;
             this.splitContainerInventories.TabIndex = 0;
@@ -1692,7 +1730,7 @@
             this.panelCustomerInv.Location = new System.Drawing.Point(0, 0);
             this.panelCustomerInv.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelCustomerInv.Name = "panelCustomerInv";
-            this.panelCustomerInv.Size = new System.Drawing.Size(1415, 668);
+            this.panelCustomerInv.Size = new System.Drawing.Size(1431, 668);
             this.panelCustomerInv.TabIndex = 119;
             // 
             // dataGridViewClient
@@ -1757,7 +1795,7 @@
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             this.dataGridViewClient.RowTemplate.Height = 40;
-            this.dataGridViewClient.Size = new System.Drawing.Size(1415, 630);
+            this.dataGridViewClient.Size = new System.Drawing.Size(1431, 630);
             this.dataGridViewClient.TabIndex = 112;
             this.dataGridViewClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellClick);
             this.dataGridViewClient.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewClient_ColumnHeaderMouseClick);
@@ -1837,7 +1875,7 @@
             this.panelFireTecInv.Location = new System.Drawing.Point(0, 0);
             this.panelFireTecInv.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelFireTecInv.Name = "panelFireTecInv";
-            this.panelFireTecInv.Size = new System.Drawing.Size(1415, 721);
+            this.panelFireTecInv.Size = new System.Drawing.Size(1431, 721);
             this.panelFireTecInv.TabIndex = 119;
             // 
             // flowLayoutPanel1
@@ -1970,7 +2008,7 @@
             this.dataGridInv.RowTemplate.Height = 40;
             this.dataGridInv.RowTemplate.ReadOnly = true;
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridInv.Size = new System.Drawing.Size(1415, 683);
+            this.dataGridInv.Size = new System.Drawing.Size(1431, 683);
             this.dataGridInv.TabIndex = 112;
             this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellClick_1);
             // 
@@ -2064,7 +2102,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(385, 1397);
+            this.panel2.Size = new System.Drawing.Size(369, 1397);
             this.panel2.TabIndex = 112;
             // 
             // panel3
@@ -2074,10 +2112,10 @@
             this.panel3.Controls.Add(this.panelReplace);
             this.panel3.Controls.Add(this.splitContainerInventories);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(385, 0);
+            this.panel3.Location = new System.Drawing.Point(369, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1415, 1397);
+            this.panel3.Size = new System.Drawing.Size(1431, 1397);
             this.panel3.TabIndex = 120;
             // 
             // DatepickerDue
@@ -2362,5 +2400,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorMaterial;
         private System.Windows.Forms.DataGridViewTextBoxColumn ItemIdInv;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.CheckBox checkBoxMeasure;
     }
 }
