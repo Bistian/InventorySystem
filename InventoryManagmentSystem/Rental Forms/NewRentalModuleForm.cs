@@ -30,6 +30,8 @@ namespace InventoryManagmentSystem
         string CurrTable = "";
         string FinalColumn = "";
         string Sizes = "";
+        Guid ItemIdClient = Guid.Empty;
+        Guid ItemIdInventory = Guid.Empty;
 
         //Used for counting rentals
         int total = 0;
@@ -821,6 +823,7 @@ namespace InventoryManagmentSystem
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
+                    UpdateHistory(ItemIdClient, ClientId);
 
                     //replace item
                     cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
@@ -830,6 +833,7 @@ namespace InventoryManagmentSystem
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
+                    InsertHistory(ItemIdInventory, ClientId);
 
                     MessageBox.Show("Item Replaced");
                 }
@@ -856,6 +860,7 @@ namespace InventoryManagmentSystem
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
+                    UpdateHistory(ItemIdClient, ClientId);
 
                     //replace item
                     cm = new SqlCommand("UPDATE tbJackets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
@@ -865,6 +870,7 @@ namespace InventoryManagmentSystem
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
+                    InsertHistory(ItemIdInventory, ClientId);
 
                     MessageBox.Show("Item Replaced");
                 }
@@ -891,6 +897,7 @@ namespace InventoryManagmentSystem
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
+                    UpdateHistory(ItemIdClient, ClientId);
 
                     //replace item
                     cm = new SqlCommand("UPDATE tbPants SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
@@ -900,6 +907,7 @@ namespace InventoryManagmentSystem
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
+                    InsertHistory(ItemIdInventory, ClientId);
                     MessageBox.Show("Item Replaced");
                 }
                 catch (Exception ex)
@@ -924,6 +932,7 @@ namespace InventoryManagmentSystem
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
+                    UpdateHistory(ItemIdClient, ClientId);
 
                     //replace item
                     cm = new SqlCommand("UPDATE tbBoots SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
@@ -933,6 +942,7 @@ namespace InventoryManagmentSystem
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
+                    InsertHistory(ItemIdInventory, ClientId);
                     MessageBox.Show("Item Replaced");
 
                 }
@@ -959,15 +969,17 @@ namespace InventoryManagmentSystem
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
+                    UpdateHistory(ItemIdClient, ClientId);
 
                     //replace item
-                    cm = new SqlCommand("UPDATE tbPants SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                    cm = new SqlCommand("UPDATE tbMasks SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
                     cm.Parameters.AddWithValue("@location", license);
                     cm.Parameters.AddWithValue("@DueDate", dueDate);
                     cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
                     con.Open();
                     cm.ExecuteNonQuery();
                     con.Close();
+                    InsertHistory(ItemIdInventory, ClientId);
                     MessageBox.Show("Item Replaced");
                 }
                 catch (Exception ex)
@@ -1133,6 +1145,7 @@ namespace InventoryManagmentSystem
 
                 dueDate = dataGridViewClient.Rows[e.RowIndex].Cells["DDate"].Value.ToString();
                 String SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
+                ItemIdClient = (Guid)dataGridViewClient.Rows[e.RowIndex].Cells["ItemId"].Value;
                 labelOldItem.Text = SelectedSerial;
                 labelTypeOfItem.Text = dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString();
 
@@ -1277,6 +1290,7 @@ namespace InventoryManagmentSystem
             {
                 ReplacmentSerial = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
                 labelReplacmentItem.Text = ReplacmentSerial;
+                ItemIdInventory = (Guid)dataGridInv.Rows[e.RowIndex].Cells["ItemIdInv"].Value;
                 SwapButton.Enabled = true;
             }
         }

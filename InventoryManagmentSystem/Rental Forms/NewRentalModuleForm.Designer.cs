@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewRentalModuleForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle77 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelRentalType = new System.Windows.Forms.Panel();
             this.comboBoxRentalType = new System.Windows.Forms.ComboBox();
             this.labelRentalType = new System.Windows.Forms.Label();
@@ -164,11 +164,12 @@
             this.ItemId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelProfileName = new System.Windows.Forms.Label();
             this.panelFireTecInv = new System.Windows.Forms.Panel();
-            this.labelNewItem = new System.Windows.Forms.Label();
-            this.textBoxSearchBar = new System.Windows.Forms.TextBox();
-            this.lableSearchBar = new System.Windows.Forms.Label();
-            this.comboBoxItemType = new System.Windows.Forms.ComboBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.labelItemType = new System.Windows.Forms.Label();
+            this.comboBoxItemType = new System.Windows.Forms.ComboBox();
+            this.lableSearchBar = new System.Windows.Forms.Label();
+            this.textBoxSearchBar = new System.Windows.Forms.TextBox();
+            this.labelNewItem = new System.Windows.Forms.Label();
             this.dataGridInv = new System.Windows.Forms.DataGridView();
             this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -180,7 +181,6 @@
             this.labelFireTecInv = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.DatepickerDue = new InventoryManagmentSystem.CustomDateTimePicker();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.gradientFlowLayoutCustomerInfo = new InventoryManagmentSystem.GradientFlowLayoutPanel();
@@ -223,10 +223,10 @@
             this.panelCustomerInv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).BeginInit();
             this.panelFireTecInv.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             this.SuspendLayout();
             // 
@@ -458,7 +458,7 @@
             // 
             this.textBoxZip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxZip.Location = new System.Drawing.Point(12, 25);
-            this.textBoxZip.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxZip.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxZip.Name = "textBoxZip";
             this.textBoxZip.Size = new System.Drawing.Size(95, 30);
             this.textBoxZip.TabIndex = 8;
@@ -524,7 +524,7 @@
             // 
             this.textBoxCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxCity.Location = new System.Drawing.Point(14, 27);
-            this.textBoxCity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxCity.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxCity.Name = "textBoxCity";
             this.textBoxCity.Size = new System.Drawing.Size(95, 30);
             this.textBoxCity.TabIndex = 6;
@@ -943,7 +943,7 @@
             this.btnAddBrand.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddBrand.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnAddBrand.Location = new System.Drawing.Point(222, 25);
-            this.btnAddBrand.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddBrand.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddBrand.Name = "btnAddBrand";
             this.btnAddBrand.Size = new System.Drawing.Size(62, 30);
             this.btnAddBrand.TabIndex = 631;
@@ -1024,7 +1024,7 @@
             this.ClearButton.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClearButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClearButton.Location = new System.Drawing.Point(21, 69);
-            this.ClearButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClearButton.Margin = new System.Windows.Forms.Padding(4);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(116, 53);
             this.ClearButton.TabIndex = 19;
@@ -1038,7 +1038,7 @@
             this.ButtonContinue.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonContinue.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ButtonContinue.Location = new System.Drawing.Point(179, 69);
-            this.ButtonContinue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ButtonContinue.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonContinue.Name = "ButtonContinue";
             this.ButtonContinue.Size = new System.Drawing.Size(116, 53);
             this.ButtonContinue.TabIndex = 20;
@@ -1558,10 +1558,10 @@
             this.panelReplace.Controls.Add(this.labelReplacmentItem);
             this.panelReplace.Controls.Add(this.labelOldItem);
             this.panelReplace.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelReplace.Location = new System.Drawing.Point(0, 1362);
+            this.panelReplace.Location = new System.Drawing.Point(0, 1314);
             this.panelReplace.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
             this.panelReplace.Name = "panelReplace";
-            this.panelReplace.Size = new System.Drawing.Size(1415, 35);
+            this.panelReplace.Size = new System.Drawing.Size(1415, 83);
             this.panelReplace.TabIndex = 119;
             this.panelReplace.Visible = false;
             // 
@@ -1642,7 +1642,7 @@
             this.panelRentals.Controls.Add(this.DatepickerDue);
             this.panelRentals.Controls.Add(this.labelDueDate);
             this.panelRentals.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelRentals.Location = new System.Drawing.Point(0, 1260);
+            this.panelRentals.Location = new System.Drawing.Point(0, 1212);
             this.panelRentals.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
             this.panelRentals.Name = "panelRentals";
             this.panelRentals.Size = new System.Drawing.Size(1415, 102);
@@ -1700,20 +1700,20 @@
             this.dataGridViewClient.AllowUserToAddRows = false;
             this.dataGridViewClient.AllowUserToDeleteRows = false;
             this.dataGridViewClient.AllowUserToResizeRows = false;
-            dataGridViewCellStyle76.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle76.ForeColor = System.Drawing.Color.Black;
-            this.dataGridViewClient.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle76;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            this.dataGridViewClient.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewClient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewClient.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewClient.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle77.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle77.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle77.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle77.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle77.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle77.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle77.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewClient.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle77;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewClient.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewClient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Item,
@@ -1723,14 +1723,14 @@
             this.CSize,
             this.ClientMFD,
             this.ItemId});
-            dataGridViewCellStyle78.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle78.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle78.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle78.ForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle78.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle78.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle78.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewClient.DefaultCellStyle = dataGridViewCellStyle78;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewClient.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewClient.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewClient.EnableHeadersVisualStyles = false;
             this.dataGridViewClient.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -1738,20 +1738,20 @@
             this.dataGridViewClient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
             this.dataGridViewClient.Name = "dataGridViewClient";
             this.dataGridViewClient.ReadOnly = true;
-            dataGridViewCellStyle79.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle79.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle79.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle79.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle79.Padding = new System.Windows.Forms.Padding(0, 0, 0, 4);
-            dataGridViewCellStyle79.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle79.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle79.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewClient.RowHeadersDefaultCellStyle = dataGridViewCellStyle79;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 0, 0, 4);
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewClient.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewClient.RowHeadersVisible = false;
             this.dataGridViewClient.RowHeadersWidth = 15;
-            dataGridViewCellStyle80.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle80.ForeColor = System.Drawing.Color.Transparent;
-            this.dataGridViewClient.RowsDefaultCellStyle = dataGridViewCellStyle80;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Transparent;
+            this.dataGridViewClient.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.Window;
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewClient.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
@@ -1840,40 +1840,31 @@
             this.panelFireTecInv.Size = new System.Drawing.Size(1415, 721);
             this.panelFireTecInv.TabIndex = 119;
             // 
-            // labelNewItem
+            // flowLayoutPanel1
             // 
-            this.labelNewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelNewItem.AutoSize = true;
-            this.labelNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNewItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelNewItem.Location = new System.Drawing.Point(351, 8);
-            this.labelNewItem.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.labelNewItem.Name = "labelNewItem";
-            this.labelNewItem.Size = new System.Drawing.Size(60, 25);
-            this.labelNewItem.TabIndex = 121;
-            this.labelNewItem.Text = "Item:";
+            this.flowLayoutPanel1.Controls.Add(this.labelItemType);
+            this.flowLayoutPanel1.Controls.Add(this.comboBoxItemType);
+            this.flowLayoutPanel1.Controls.Add(this.lableSearchBar);
+            this.flowLayoutPanel1.Controls.Add(this.textBoxSearchBar);
+            this.flowLayoutPanel1.Controls.Add(this.labelNewItem);
+            this.flowLayoutPanel1.Controls.Add(this.UsersButton);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(142, -2);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(532, 28);
+            this.flowLayoutPanel1.TabIndex = 120;
             // 
-            // textBoxSearchBar
+            // labelItemType
             // 
-            this.textBoxSearchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxSearchBar.Location = new System.Drawing.Point(240, 2);
-            this.textBoxSearchBar.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.textBoxSearchBar.Name = "textBoxSearchBar";
-            this.textBoxSearchBar.Size = new System.Drawing.Size(111, 27);
-            this.textBoxSearchBar.TabIndex = 32;
-            this.textBoxSearchBar.TextChanged += new System.EventHandler(this.textBoxSearchBar_TextChanged);
-            // 
-            // lableSearchBar
-            // 
-            this.lableSearchBar.AutoSize = true;
-            this.lableSearchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lableSearchBar.ForeColor = System.Drawing.Color.White;
-            this.lableSearchBar.Location = new System.Drawing.Point(152, 8);
-            this.lableSearchBar.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.lableSearchBar.Name = "lableSearchBar";
-            this.lableSearchBar.Size = new System.Drawing.Size(88, 25);
-            this.lableSearchBar.TabIndex = 33;
-            this.lableSearchBar.Text = "Search:";
+            this.labelItemType.AutoSize = true;
+            this.labelItemType.BackColor = System.Drawing.Color.Transparent;
+            this.labelItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelItemType.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelItemType.Location = new System.Drawing.Point(0, 8);
+            this.labelItemType.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
+            this.labelItemType.Name = "labelItemType";
+            this.labelItemType.Size = new System.Drawing.Size(68, 25);
+            this.labelItemType.TabIndex = 121;
+            this.labelItemType.Text = "Type:";
             // 
             // comboBoxItemType
             // 
@@ -1893,32 +1884,54 @@
             this.comboBoxItemType.TabIndex = 120;
             this.comboBoxItemType.SelectedIndexChanged += new System.EventHandler(this.comboBoxItemType_SelectedIndexChanged);
             // 
-            // labelItemType
+            // lableSearchBar
             // 
-            this.labelItemType.AutoSize = true;
-            this.labelItemType.BackColor = System.Drawing.Color.Transparent;
-            this.labelItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelItemType.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelItemType.Location = new System.Drawing.Point(0, 8);
-            this.labelItemType.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.labelItemType.Name = "labelItemType";
-            this.labelItemType.Size = new System.Drawing.Size(68, 25);
-            this.labelItemType.TabIndex = 121;
-            this.labelItemType.Text = "Type:";
+            this.lableSearchBar.AutoSize = true;
+            this.lableSearchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lableSearchBar.ForeColor = System.Drawing.Color.White;
+            this.lableSearchBar.Location = new System.Drawing.Point(152, 8);
+            this.lableSearchBar.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
+            this.lableSearchBar.Name = "lableSearchBar";
+            this.lableSearchBar.Size = new System.Drawing.Size(88, 25);
+            this.lableSearchBar.TabIndex = 33;
+            this.lableSearchBar.Text = "Search:";
+            // 
+            // textBoxSearchBar
+            // 
+            this.textBoxSearchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxSearchBar.Location = new System.Drawing.Point(240, 2);
+            this.textBoxSearchBar.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.textBoxSearchBar.Name = "textBoxSearchBar";
+            this.textBoxSearchBar.Size = new System.Drawing.Size(111, 27);
+            this.textBoxSearchBar.TabIndex = 32;
+            this.textBoxSearchBar.TextChanged += new System.EventHandler(this.textBoxSearchBar_TextChanged);
+            // 
+            // labelNewItem
+            // 
+            this.labelNewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelNewItem.AutoSize = true;
+            this.labelNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNewItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelNewItem.Location = new System.Drawing.Point(351, 8);
+            this.labelNewItem.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
+            this.labelNewItem.Name = "labelNewItem";
+            this.labelNewItem.Size = new System.Drawing.Size(60, 25);
+            this.labelNewItem.TabIndex = 121;
+            this.labelNewItem.Text = "Item:";
             // 
             // dataGridInv
             // 
             this.dataGridInv.AllowUserToAddRows = false;
             this.dataGridInv.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridInv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle73.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle73.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle73.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle73.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle73.SelectionForeColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle73.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridInv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle73;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridInv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridInv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridInv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Brand,
@@ -1928,14 +1941,14 @@
             this.UsedNew,
             this.ColorMaterial,
             this.ItemIdInv});
-            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle74.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle74.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle74.ForeColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle74.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle74.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle74.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridInv.DefaultCellStyle = dataGridViewCellStyle74;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridInv.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridInv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridInv.EnableHeadersVisualStyles = false;
             this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -1943,14 +1956,14 @@
             this.dataGridInv.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridInv.Name = "dataGridInv";
             this.dataGridInv.ReadOnly = true;
-            dataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle75.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle75.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle75.ForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle75.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle75.SelectionForeColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle75.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridInv.RowHeadersDefaultCellStyle = dataGridViewCellStyle75;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridInv.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridInv.RowHeadersVisible = false;
             this.dataGridInv.RowHeadersWidth = 51;
             this.dataGridInv.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2066,19 +2079,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1415, 1397);
             this.panel3.TabIndex = 120;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.labelItemType);
-            this.flowLayoutPanel1.Controls.Add(this.comboBoxItemType);
-            this.flowLayoutPanel1.Controls.Add(this.lableSearchBar);
-            this.flowLayoutPanel1.Controls.Add(this.textBoxSearchBar);
-            this.flowLayoutPanel1.Controls.Add(this.labelNewItem);
-            this.flowLayoutPanel1.Controls.Add(this.UsersButton);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(142, -2);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(532, 28);
-            this.flowLayoutPanel1.TabIndex = 120;
             // 
             // DatepickerDue
             // 
@@ -2204,11 +2204,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).EndInit();
             this.panelFireTecInv.ResumeLayout(false);
             this.panelFireTecInv.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             this.ResumeLayout(false);
 
