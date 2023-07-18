@@ -294,7 +294,7 @@ namespace InventoryManagmentSystem
                         Console.WriteLine(ex.ToString());
                     #endif
                     // If I cannot connect the item, I need to delete it.
-                    HelperDatabaseCall.DeleteItem(command, connection, uuid);
+                    HelperDatabaseCall.DeleteItem(connection, uuid);
                 }
             }
         }
@@ -352,7 +352,7 @@ namespace InventoryManagmentSystem
                     Console.WriteLine(ex.ToString());
                     #endif
                     // If I cannot connect the item, I need to delete it.
-                    HelperDatabaseCall.DeleteItem(command, connection, uuid);
+                    HelperDatabaseCall.DeleteItem(connection, uuid);
                 }
             }
         }
@@ -410,7 +410,7 @@ namespace InventoryManagmentSystem
                     Console.WriteLine(ex.ToString());
                     #endif
                     // If I cannot connect the item, I need to delete it.
-                    HelperDatabaseCall.DeleteItem(command, connection, uuid);
+                    HelperDatabaseCall.DeleteItem(connection, uuid);
                 }
             }
         }

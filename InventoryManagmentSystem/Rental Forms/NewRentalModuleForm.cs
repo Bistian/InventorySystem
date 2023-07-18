@@ -222,7 +222,7 @@ namespace InventoryManagmentSystem
                     while (dr.Read())
                     {
                         i++;
-                        dataGridInv.Rows.Add(dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], dr[0]);
+                        dataGridInv.Rows.Add(dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], dr[6], dr[0]);
                     }
                 }
             }
@@ -1156,143 +1156,124 @@ namespace InventoryManagmentSystem
             }
         }
 
+        private void UpdateBoots(DataGridViewRow row)
+        {
+            string SelectedSerial = row.Cells["Serial"].Value.ToString();
+            cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+            cm.Parameters.AddWithValue("@location", license);
+            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+            cm.Parameters.AddWithValue("@serial", SelectedSerial);
+            con.Open();
+            cm.ExecuteNonQuery();
+            con.Close();
+        }
+
+        private void UpdateHelmet(DataGridViewRow row)
+        {
+            if(comboBoxItemType.Text.ToLower() != "helmet") { return; }
+
+            string SelectedSerial = row.Cells["Serial"].Value.ToString();
+            cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+            cm.Parameters.AddWithValue("@location", license);
+            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+            cm.Parameters.AddWithValue("@serial", SelectedSerial);
+            con.Open();
+            cm.ExecuteNonQuery();
+            con.Close();            
+        }
+
+        private void UpdateJacket(DataGridViewRow row)
+        {
+            if (comboBoxItemType.Text.ToLower() != "jacket") { return; }
+
+            string SelectedSerial = row.Cells["Serial"].Value.ToString();
+            cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+            cm.Parameters.AddWithValue("@location", license);
+            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+            cm.Parameters.AddWithValue("@serial", SelectedSerial);
+            con.Open();
+            cm.ExecuteNonQuery();
+            con.Close();
+        }
+
+        private void UpdateMask(DataGridViewRow row)
+        {
+            if (comboBoxItemType.Text.ToLower() != "mask") { return; }
+
+            string SelectedSerial = row.Cells["Serial"].Value.ToString();
+            cm = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+            cm.Parameters.AddWithValue("@location", license);
+            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+            cm.Parameters.AddWithValue("@serial", SelectedSerial);
+            con.Open();
+            cm.ExecuteNonQuery();
+            con.Close();
+        }
+
+        private void UpdatePants(DataGridViewRow row)
+        {
+            if (comboBoxItemType.Text.ToLower() != "pants") { return; }
+
+            string SelectedSerial = row.Cells["Serial"].Value.ToString();
+            cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+            cm.Parameters.AddWithValue("@location", license);
+            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+            cm.Parameters.AddWithValue("@serial", SelectedSerial);
+            con.Open();
+            cm.ExecuteNonQuery();
+            con.Close();
+        }
+
         private void dataGridInv_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) { return; }
 
+            DataGridViewRow row = dataGridInv.Rows[e.RowIndex];
             if (ReturnReplace == 1 || ReturnReplace == 0)
             {
+                string message = "Are you sure you want to rent this item to " + labelProfileName.Text;
+                if (!HelperFunctions.YesNoMessageBox(message, "Rent")) { return; }
 
 
-                if (MessageBox.Show("Are you sure you want to rent this item to " + labelProfileName.Text, "Rent", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (DateTime.Today == DatepickerDue.Value.Date)
                 {
-                    string SelectedSerial = "";
-
-                    if (DateTime.Today != DatepickerDue.Value.Date)
-                    {
-                        // Helmet
-                        if (comboBoxItemType.SelectedIndex == 0)
-                        {
-                            try
-                            {
-                                SelectedSerial = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                                cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                                cm.Parameters.AddWithValue("@location", license);
-                                cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-                                cm.Parameters.AddWithValue("@serial", SelectedSerial);
-                                con.Open();
-                                cm.ExecuteNonQuery();
-                                con.Close();
-                                InsertHistory((Guid)dataGridInv.Rows[e.RowIndex].Cells["ItemIdInv"].Value, ClientId);
-                                MessageBox.Show("Rental has been successfully completed");
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                                con.Close();
-                                return;
-                            }
-                        }
-
-                        // Jacket
-                        else if (comboBoxItemType.SelectedIndex == 1)
-                        {
-                            try
-                            {
-                                SelectedSerial = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                                cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                                cm.Parameters.AddWithValue("@location", license);
-                                cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-                                cm.Parameters.AddWithValue("@serial", SelectedSerial);
-                                con.Open();
-                                cm.ExecuteNonQuery();
-                                con.Close();
-                                InsertHistory((Guid)dataGridInv.Rows[e.RowIndex].Cells["ItemIdInv"].Value, ClientId);
-                                MessageBox.Show("Rental has been successfully completed");
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                                con.Close();
-                                return;
-                            }
-                        }
-
-                        // Pants
-                        else if (comboBoxItemType.SelectedIndex == 2)
-                        {
-                            try
-                            {
-                                SelectedSerial = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                                cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                                cm.Parameters.AddWithValue("@location", license);
-                                cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-                                cm.Parameters.AddWithValue("@serial", SelectedSerial);
-                                con.Open();
-                                cm.ExecuteNonQuery();
-                                con.Close();
-                                InsertHistory((Guid)dataGridInv.Rows[e.RowIndex].Cells["ItemIdInv"].Value, ClientId);
-                                MessageBox.Show("Rental has been successfully completed");
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                                con.Close();
-                                return;
-                            }
-                        }
-
-                        else if (comboBoxItemType.SelectedIndex == 3)
-                        {
-                            SelectedSerial = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                            cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                            cm.Parameters.AddWithValue("@location", license);
-                            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-                            cm.Parameters.AddWithValue("@serial", SelectedSerial);
-                            con.Open();
-                            cm.ExecuteNonQuery();
-                            con.Close();
-                            InsertHistory((Guid)dataGridInv.Rows[e.RowIndex].Cells["ItemIdInv"].Value, ClientId);
-                            MessageBox.Show("Rental has been successfully completed");
-                        }
-
-                        // Masks
-                        else if (comboBoxItemType.SelectedIndex == 4)
-                        {
-                            try
-                            {
-                                SelectedSerial = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-                                cm = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                                cm.Parameters.AddWithValue("@location", license);
-                                cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-                                cm.Parameters.AddWithValue("@serial", SelectedSerial);
-                                con.Open();
-                                cm.ExecuteNonQuery();
-                                con.Close();
-                                InsertHistory((Guid)dataGridInv.Rows[e.RowIndex].Cells["ItemIdInv"].Value, ClientId);
-                                MessageBox.Show("Rental has been successfully completed");
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                                con.Close();
-                                return;
-                            }
-                        }
-                        LoadClient();
-                        LoadInventory();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please select a due date");
-                    }
+                    MessageBox.Show("Please select a due date");
+                    return;
                 }
+                
+                var value = row.Cells["ItemIdInv"].Value;
+                if (value == null) { return; }
+
+                try
+                {
+                    UpdateBoots(row);
+                    UpdateHelmet(row);
+                    UpdateJacket(row);
+                    UpdateMask(row);
+                    UpdatePants(row);
+                    bool historyDone = InsertHistory((Guid)value, ClientId);
+                    if (!historyDone)
+                    {
+                        Console.Error.WriteLine("History failed.");
+                    }
+                    MessageBox.Show("Rental has been successfully completed");
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    con.Close();
+                    return;
+                }
+                
+                LoadClient();
+                LoadInventory();
+                
             }
             else if (ReturnReplace == 2)
             {
-                ReplacmentSerial = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+                ReplacmentSerial = row.Cells["Serial"].Value.ToString();
                 labelReplacmentItem.Text = ReplacmentSerial;
-                ItemIdInventory = (Guid)dataGridInv.Rows[e.RowIndex].Cells["ItemIdInv"].Value;
+                ItemIdInventory = (Guid)row.Cells["ItemIdInv"].Value;
                 SwapButton.Enabled = true;
             }
         }

@@ -128,16 +128,46 @@ namespace InventoryManagmentSystem
         {
             if(cbItemType.SelectedIndex < 0) { return; }
             if(!HelperFunctions.YesNoMessageBox("Do you want to add this Item?", "Add Item")) { return; }
-            Guid uuid = Guid.Empty;
-            if (cbItemType.SelectedIndex == 0)
+
+            string table = "";
+            if(cbItemType.Text == "boots") { table = "tbBoots"; }
+            else if (cbItemType.Text == "helmet") { table = "tbHelmets"; }
+            else if (cbItemType.Text == "jacket") { table = "tbJackets"; }
+            else if (cbItemType.Text == "mask") { table = "tbMasks"; }
+            else if (cbItemType.Text == "pants") { table = "tbPants"; }
+            else { return; }
+
+            // Loop through the table.
+            while(true)
             {
-                uuid = Guid.NewGuid();
+                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, cbItemType.Text);
+                // Add item id to null.
+                string query = $@"
+                    UPDATE TOP(1) {table}
+                    SET ItemId = '{uuid}'
+                    OUTPUT 1 
+                    WHERE ItemId IS NULL;
+                ";
+                HelperFunctions.RemoveLineBreaksFromString(ref query);
+                try
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery(); connection.Close();
+                    if(rowsAffected < 1) 
+                    { 
+                        HelperDatabaseCall.DeleteItem(connection, uuid);
+                        break; 
+                    }
+                }
+                catch (Exception ex)
+                {
+                    HelperDatabaseCall.DeleteItem(connection, uuid);
+                    Console.WriteLine(ex.Message);
+                    connection.Close();
+                }
             }
-            else
-            {
-                uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, cbItemType.Text);
-            }
-            tbUuid.Text = uuid.ToString();
+            Console.WriteLine("Gaje likes minors!");
         }
     }
 }

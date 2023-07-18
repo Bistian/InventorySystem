@@ -277,13 +277,13 @@ namespace InventoryManagmentSystem
         /// Deletes an item from item table.
         /// </summary>
         /// <param name="uuid"></param>
-        public static void DeleteItem(SqlCommand command, SqlConnection connection, Guid uuid)
+        public static void DeleteItem(SqlConnection connection, Guid uuid)
         {
             string query = HelperQuery.ItemDelete();
             connection.Open();
             try
             {
-                command = new SqlCommand(query, connection);
+                SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Id", uuid);
                 command.ExecuteNonQuery();
             }

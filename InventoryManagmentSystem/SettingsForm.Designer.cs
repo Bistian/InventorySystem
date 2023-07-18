@@ -114,7 +114,7 @@
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(75, 23);
             this.btnAddItem.TabIndex = 7;
-            this.btnAddItem.Text = "Add Item";
+            this.btnAddItem.Text = "Add IDs";
             this.btnAddItem.UseVisualStyleBackColor = true;
             this.btnAddItem.Visible = false;
             this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
