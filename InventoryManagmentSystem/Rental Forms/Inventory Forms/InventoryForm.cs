@@ -244,6 +244,8 @@ namespace InventoryManagmentSystem
 
         private void dataGridInv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) { return; }
+
             string colName = dataGridInv.Columns[e.ColumnIndex].Name;
             string itemType = comboBoxItem.Text;
             string serialNumber = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();

@@ -92,7 +92,9 @@ namespace InventoryManagmentSystem
 
         private void dataGridUsers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(DeleteItem(e)) { return; }
+            if (e.RowIndex < 0) { return; }
+
+            if (DeleteItem(e)) { return; }
             if(UpdateItem(e)) { return; }
 
             if (MessageBox.Show("Are you sure you want to select this client", "Continue", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
