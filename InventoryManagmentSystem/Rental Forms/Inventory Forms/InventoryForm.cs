@@ -253,7 +253,7 @@ namespace InventoryManagmentSystem
             {
                 if (colName == "Edit")
                 {
-                    if (itemType == "Jackets" || itemType == "Pants" || itemType == "Masks") { UpdateJacketOrPantsOrMasks(e); }
+                    if (itemType == "Jackets" || itemType == "Pants" || itemType == "Masks") { UpdateJacketOrPantsOrMasks(e,itemType); }
                     else if (itemType == "Helmets") { UpdateHelmet(e); }
                     else if (itemType == "Boots") { UpdateBoots(e); }
                     LoadInventory();
@@ -281,6 +281,7 @@ namespace InventoryManagmentSystem
         private void UpdateBoots(DataGridViewCellEventArgs e)
         {
             NewItemForm itemForm = new NewItemForm(comboBoxItem.Text, true);
+            itemForm.cbItemType.Text = "boots";
             itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
             itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
             itemForm.comboBoxUsedNew.Text =                 GetCellValueAsString(e, "UsedNew");
@@ -295,6 +296,7 @@ namespace InventoryManagmentSystem
         private void UpdateHelmet(DataGridViewCellEventArgs e)
         {
             NewItemForm itemForm = new NewItemForm(comboBoxItem.Text, true);
+            itemForm.cbItemType.Text = "helmet";
             itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
             itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
             itemForm.comboBoxUsedNew.Text =                 GetCellValueAsString(e, "UsedNew");
@@ -306,9 +308,24 @@ namespace InventoryManagmentSystem
             itemForm.Close();
         }
 
-        private void UpdateJacketOrPantsOrMasks(DataGridViewCellEventArgs e)
+        private void UpdateJacketOrPantsOrMasks(DataGridViewCellEventArgs e,string ItemType)
         {
             NewItemForm itemForm = new NewItemForm(comboBoxItem.Text, true);
+
+
+            if (ItemType == "Masks")
+            {
+                itemForm.cbItemType.Text = "mask";
+            }
+            else if (ItemType == "Jackets")
+            {
+                itemForm.cbItemType.Text = "Jacket";
+            }
+            else if (ItemType == "Pants")
+            {
+                itemForm.cbItemType.Text = "Pants";
+            }
+
             itemForm.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
             itemForm.comboBoxBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
             itemForm.comboBoxUsedNew.Text = dataGridInv.Rows[e.RowIndex].Cells["UsedNew"].Value.ToString();
