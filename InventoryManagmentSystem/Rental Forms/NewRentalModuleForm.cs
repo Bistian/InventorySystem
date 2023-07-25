@@ -736,7 +736,7 @@ namespace InventoryManagmentSystem
 
             }
             //Academy
-            else if (type == "Academys")
+            else if (type == "Academies")
             {
                 //hide pannels
                 panelMeasurments.Visible = false;

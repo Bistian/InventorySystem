@@ -198,7 +198,7 @@ namespace InventoryManagmentSystem
             }
             else if (cbClientType.SelectedIndex == 2)
             {
-                clientType = "Academys";
+                clientType = "Academies";
                 dataGridUsers.Columns[0].HeaderText = "Point Of Contact";
                 dataGridUsers.Columns[3].HeaderText = "Academy";
             }
