@@ -708,6 +708,8 @@ namespace InventoryManagmentSystem
                 textBoxHeight.Text = "";
                 comboBoxAcademy.SelectedIndex = -1;
 
+                panelRentalInfo.Dock = DockStyle.Bottom;
+
             }
             //Department
             else if (type == "Departments")
@@ -730,9 +732,13 @@ namespace InventoryManagmentSystem
                 comboBoxAcademy.SelectedIndex = 0;
 
                 //show pannels
-                panelContactInfo.Visible = true;
-                panelAddress.Visible = true;
                 panelRentalInfo.Visible = true;
+
+                panelAddress.Visible = true;
+
+                panelContactInfo.Visible = true;
+
+                panelRentalInfo.Dock = DockStyle.Top;
 
             }
             //Academy
@@ -757,9 +763,13 @@ namespace InventoryManagmentSystem
                 comboBoxAcademy.Text = "N/A";
 
                 //show pannels
-                panelContactInfo.Visible = true;
-                panelAddress.Visible = true;
                 panelRentalInfo.Visible = true;
+
+                panelAddress.Visible = true;
+
+                panelContactInfo.Visible = true;
+
+                panelRentalInfo.Dock = DockStyle.Top;
             }
         }
 
