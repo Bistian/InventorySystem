@@ -152,10 +152,18 @@
             this.labelReplacmentItem = new System.Windows.Forms.Label();
             this.labelOldItem = new System.Windows.Forms.Label();
             this.panelRentals = new System.Windows.Forms.Panel();
+            this.DatepickerDue = new InventoryManagmentSystem.CustomDateTimePicker();
             this.labelDueDate = new System.Windows.Forms.Label();
             this.splitContainerInventories = new System.Windows.Forms.SplitContainer();
             this.panelCustomerInv = new System.Windows.Forms.Panel();
             this.dataGridViewClient = new System.Windows.Forms.DataGridView();
+            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientBrand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SerialNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientMFD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelProfileName = new System.Windows.Forms.Label();
             this.panelFireTecInv = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -164,6 +172,7 @@
             this.lableSearchBar = new System.Windows.Forms.Label();
             this.textBoxSearchBar = new System.Windows.Forms.TextBox();
             this.labelNewItem = new System.Windows.Forms.Label();
+            this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.dataGridInv = new System.Windows.Forms.DataGridView();
             this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -176,16 +185,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.DatepickerDue = new InventoryManagmentSystem.CustomDateTimePicker();
-            this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.gradientFlowLayoutCustomerInfo = new InventoryManagmentSystem.GradientFlowLayoutPanel();
-            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientBrand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SerialNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientMFD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelRentalType.SuspendLayout();
             this.panelContactInfo.SuspendLayout();
             this.panelLicence.SuspendLayout();
@@ -226,11 +226,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).BeginInit();
             this.panelFireTecInv.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.panel2.SuspendLayout();
             this.panelBottom.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             this.SuspendLayout();
             // 
             // panelRentalType
@@ -1690,6 +1690,17 @@
             this.panelRentals.TabIndex = 118;
             this.panelRentals.Visible = false;
             // 
+            // DatepickerDue
+            // 
+            this.DatepickerDue.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatepickerDue.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
+            this.DatepickerDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatepickerDue.Location = new System.Drawing.Point(3, 48);
+            this.DatepickerDue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DatepickerDue.Name = "DatepickerDue";
+            this.DatepickerDue.Size = new System.Drawing.Size(521, 49);
+            this.DatepickerDue.TabIndex = 40;
+            // 
             // labelDueDate
             // 
             this.labelDueDate.AutoSize = true;
@@ -1802,6 +1813,55 @@
             this.dataGridViewClient.TabIndex = 112;
             this.dataGridViewClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellClick);
             // 
+            // Item
+            // 
+            this.Item.HeaderText = "Item";
+            this.Item.MinimumWidth = 6;
+            this.Item.Name = "Item";
+            this.Item.ReadOnly = true;
+            // 
+            // DDate
+            // 
+            this.DDate.HeaderText = "DueDate";
+            this.DDate.MinimumWidth = 6;
+            this.DDate.Name = "DDate";
+            this.DDate.ReadOnly = true;
+            // 
+            // ClientBrand
+            // 
+            this.ClientBrand.HeaderText = "Brand";
+            this.ClientBrand.MinimumWidth = 6;
+            this.ClientBrand.Name = "ClientBrand";
+            this.ClientBrand.ReadOnly = true;
+            // 
+            // SerialNum
+            // 
+            this.SerialNum.HeaderText = "Serial";
+            this.SerialNum.MinimumWidth = 6;
+            this.SerialNum.Name = "SerialNum";
+            this.SerialNum.ReadOnly = true;
+            // 
+            // CSize
+            // 
+            this.CSize.HeaderText = "Size";
+            this.CSize.MinimumWidth = 6;
+            this.CSize.Name = "CSize";
+            this.CSize.ReadOnly = true;
+            // 
+            // ClientMFD
+            // 
+            this.ClientMFD.HeaderText = "MFD";
+            this.ClientMFD.MinimumWidth = 6;
+            this.ClientMFD.Name = "ClientMFD";
+            this.ClientMFD.ReadOnly = true;
+            // 
+            // ItemId
+            // 
+            this.ItemId.HeaderText = "ItemId";
+            this.ItemId.MinimumWidth = 8;
+            this.ItemId.Name = "ItemId";
+            this.ItemId.ReadOnly = true;
+            // 
             // labelProfileName
             // 
             this.labelProfileName.AutoSize = true;
@@ -1909,6 +1969,21 @@
             this.labelNewItem.Size = new System.Drawing.Size(60, 25);
             this.labelNewItem.TabIndex = 121;
             this.labelNewItem.Text = "Item:";
+            // 
+            // UsersButton
+            // 
+            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
+            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
+            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
+            this.UsersButton.Location = new System.Drawing.Point(411, 2);
+            this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
+            this.UsersButton.Name = "UsersButton";
+            this.UsersButton.Size = new System.Drawing.Size(27, 26);
+            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.UsersButton.TabIndex = 120;
+            this.UsersButton.TabStop = false;
+            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click);
             // 
             // dataGridInv
             // 
@@ -2080,32 +2155,6 @@
             this.panel3.Size = new System.Drawing.Size(1431, 1100);
             this.panel3.TabIndex = 120;
             // 
-            // DatepickerDue
-            // 
-            this.DatepickerDue.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DatepickerDue.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
-            this.DatepickerDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DatepickerDue.Location = new System.Drawing.Point(3, 48);
-            this.DatepickerDue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DatepickerDue.Name = "DatepickerDue";
-            this.DatepickerDue.Size = new System.Drawing.Size(521, 49);
-            this.DatepickerDue.TabIndex = 40;
-            // 
-            // UsersButton
-            // 
-            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
-            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
-            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
-            this.UsersButton.Location = new System.Drawing.Point(411, 2);
-            this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
-            this.UsersButton.Name = "UsersButton";
-            this.UsersButton.Size = new System.Drawing.Size(27, 26);
-            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.UsersButton.TabIndex = 120;
-            this.UsersButton.TabStop = false;
-            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click);
-            // 
             // gradientFlowLayoutCustomerInfo
             // 
             this.gradientFlowLayoutCustomerInfo.AutoScroll = true;
@@ -2119,55 +2168,6 @@
             this.gradientFlowLayoutCustomerInfo.Size = new System.Drawing.Size(4, 4);
             this.gradientFlowLayoutCustomerInfo.StartColor = System.Drawing.Color.Empty;
             this.gradientFlowLayoutCustomerInfo.TabIndex = 112;
-            // 
-            // Item
-            // 
-            this.Item.HeaderText = "Item";
-            this.Item.MinimumWidth = 6;
-            this.Item.Name = "Item";
-            this.Item.ReadOnly = true;
-            // 
-            // DDate
-            // 
-            this.DDate.HeaderText = "DueDate";
-            this.DDate.MinimumWidth = 6;
-            this.DDate.Name = "DDate";
-            this.DDate.ReadOnly = true;
-            // 
-            // ClientBrand
-            // 
-            this.ClientBrand.HeaderText = "Brand";
-            this.ClientBrand.MinimumWidth = 6;
-            this.ClientBrand.Name = "ClientBrand";
-            this.ClientBrand.ReadOnly = true;
-            // 
-            // SerialNum
-            // 
-            this.SerialNum.HeaderText = "Serial";
-            this.SerialNum.MinimumWidth = 6;
-            this.SerialNum.Name = "SerialNum";
-            this.SerialNum.ReadOnly = true;
-            // 
-            // CSize
-            // 
-            this.CSize.HeaderText = "Size";
-            this.CSize.MinimumWidth = 6;
-            this.CSize.Name = "CSize";
-            this.CSize.ReadOnly = true;
-            // 
-            // ClientMFD
-            // 
-            this.ClientMFD.HeaderText = "MFD";
-            this.ClientMFD.MinimumWidth = 6;
-            this.ClientMFD.Name = "ClientMFD";
-            this.ClientMFD.ReadOnly = true;
-            // 
-            // ItemId
-            // 
-            this.ItemId.HeaderText = "ItemId";
-            this.ItemId.MinimumWidth = 8;
-            this.ItemId.Name = "ItemId";
-            this.ItemId.ReadOnly = true;
             // 
             // NewRentalModuleForm
             // 
@@ -2255,11 +2255,11 @@
             this.panelFireTecInv.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panelBottom.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             this.ResumeLayout(false);
 
         }
