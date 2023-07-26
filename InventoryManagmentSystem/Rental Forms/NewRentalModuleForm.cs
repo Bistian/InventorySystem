@@ -820,11 +820,6 @@ namespace InventoryManagmentSystem
             MessageBox.Show("Note has been successfully saved");
         }
 
-        private void SwapButton_Click_1(object sender, EventArgs e)
-        {
-           
-        }
-
         private void dataGridViewClient_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) { return; };

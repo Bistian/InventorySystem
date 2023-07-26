@@ -1618,7 +1618,7 @@
             this.SwapButton.TabIndex = 46;
             this.SwapButton.Text = "Swap Items";
             this.SwapButton.UseVisualStyleBackColor = true;
-            this.SwapButton.Click += new System.EventHandler(this.SwapButton_Click_1);
+    
             // 
             // labelTypeOfItem
             // 
