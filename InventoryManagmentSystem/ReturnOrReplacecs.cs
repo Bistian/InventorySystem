@@ -30,6 +30,7 @@ namespace InventoryManagmentSystem
         private void buttonReplace_Click(object sender, EventArgs e)
         {
             parentForm.ReturnReplace = 2;
+            parentForm.dataGridViewClient.Enabled = true;
             parentForm.SwapButton.Enabled = false;
             //parentForm.comboBoxItemType.Enabled = false;
             MessageBox.Show("Select a replacment");
