@@ -153,7 +153,7 @@ namespace InventoryManagmentSystem
                 while (dataReader.Read())
                 {
                     dataGridView1.Rows.Add(i++,
-                        dataReader[1].ToString());
+                        dataReader[2].ToString());
                 }
             }
             catch (Exception ex)

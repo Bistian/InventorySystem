@@ -74,6 +74,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcademyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AcademyForm.Designer.cs">
+      <DependentUpon>AcademyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClassForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,6 +269,9 @@
     <Compile Include="WorkOrderModuleForm.Designer.cs">
       <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AcademyForm.resx">
+      <DependentUpon>AcademyForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ClassForm.resx">
       <DependentUpon>ClassForm.cs</DependentUpon>
     </EmbeddedResource>

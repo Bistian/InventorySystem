@@ -92,13 +92,7 @@ namespace InventoryManagmentSystem
         private void btnAcademies_Click(object sender, EventArgs e)
         {
             ColorTabSwitch("Academies");
-            BrandForm form = new BrandForm();
-            form.dataGridView1.Columns["Brands"].HeaderText = "Academies";
-            form.cbItemType.Visible = false;
-            form.labelItemType.Visible = false;
-            form.cbItemType.SelectedIndex = 0;
-            form.labelBrand.Text = "Academy Name";
-            openChildForm(form);
+            openChildForm(new AcademyForm());
         }
 
         private void btnHistories_Click(object sender, EventArgs e)

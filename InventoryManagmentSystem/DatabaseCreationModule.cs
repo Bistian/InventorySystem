@@ -336,8 +336,8 @@ namespace InventoryManagmentSystem
         {
             string query = @"
                 CREATE TABLE[dbo].[tbDepartments] (
-                [DeptID]      INT IDENTITY(1, 1) NOT NULL,
-                [DeptName]    VARCHAR(50) NOT NULL,
+                [Id]      INT IDENTITY(1, 1) NOT NULL,
+                [Name]    VARCHAR(50) NOT NULL,
                 [ContactName] VARCHAR(50) NOT NULL,
                 [Phone]       VARCHAR(50) NOT NULL,
                 [Email]       VARCHAR(50) NOT NULL,
@@ -354,6 +354,7 @@ namespace InventoryManagmentSystem
         {
             string query = @"
                 CREATE TABLE[dbo].[tbUsers] (
+                [Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
                 [username] VARCHAR(50) NOT NULL,
                 [password] VARCHAR(50) NOT NULL,
                 [fullname] VARCHAR(50) NOT NULL
@@ -366,6 +367,7 @@ namespace InventoryManagmentSystem
         {
             string query = @"
                 CREATE TABLE[dbo].[tbBrands] (
+                [Id] INT IDENTITY(1, 1) NOT NULL,
                 [ItemType] VARCHAR(50) NOT NULL,
                 [Brand] VARCHAR(50) NOT NULL
             );";
@@ -377,7 +379,8 @@ namespace InventoryManagmentSystem
         {
             string query = @"
                 CREATE TABLE[dbo].[tbAcademies] (
-                [AcademyName] VARCHAR(50) NOT NULL,
+                [Id] INT IDENTITY(1, 1) NOT NULL,
+                [Name] VARCHAR(50) NOT NULL,
                 [Brand] VARCHAR(50) NOT NULL
             );";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
@@ -388,6 +391,7 @@ namespace InventoryManagmentSystem
         {
             string query = @"
                 CREATE TABLE[dbo].[tbPrices] (
+                [Id] INT IDENTITY(1, 1) NOT NULL,
                 [Name] VARCHAR(50) NOT NULL,
                 [Boots] FLOAT NOT NULL,
                 [Helmet] FLOAT NOT NULL,
