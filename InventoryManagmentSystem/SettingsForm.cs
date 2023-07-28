@@ -54,6 +54,7 @@ namespace InventoryManagmentSystem
             btnBrands.BackColor = offColor;
             btnPrices.BackColor = offColor;
             btnAcademies.BackColor = offColor;
+            btnClasses.BackColor = offColor;
 
             // Pick one tab and set it to the clicked color.
             if (tab == "Database") { btnDatabase.BackColor = onColor; }
@@ -61,6 +62,7 @@ namespace InventoryManagmentSystem
             else if (tab == "Brands") { btnBrands.BackColor = onColor; }
             else if (tab == "Prices") { btnPrices.BackColor = onColor; }
             else if (tab == "Academies") { btnAcademies.BackColor = onColor; }
+            else if (tab == "Classes") { btnClasses.BackColor = onColor; }
         }
 
         private void btnImport_Click(object sender, EventArgs e)
@@ -168,6 +170,12 @@ namespace InventoryManagmentSystem
                 }
             }
             Console.WriteLine("Gaje likes minors!");
+        }
+
+        private void btnClasses_Click(object sender, EventArgs e)
+        {
+            ColorTabSwitch("Classes");
+            openChildForm(new ClassForm());
         }
     }
 }

@@ -169,7 +169,8 @@ namespace InventoryManagmentSystem
                 [Id]            INT IDENTITY(1, 1) NOT NULL,
                 [Name]          VARCHAR(50) NOT NULL,
                 [StartDate]     DATE NOT NULL,
-                [EndDate]       DATE NOT NULL
+                [EndDate]       DATE NOT NULL,
+                [IsFinished]      BIT DEFAULT 0
             );";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
