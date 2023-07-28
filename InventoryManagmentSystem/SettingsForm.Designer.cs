@@ -38,6 +38,7 @@
             this.btnAddItem = new System.Windows.Forms.Button();
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.tbUuid = new System.Windows.Forms.TextBox();
+            this.btnClasses = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnImport
@@ -141,12 +142,23 @@
             this.tbUuid.TabIndex = 9;
             this.tbUuid.Visible = false;
             // 
+            // btnClasses
+            // 
+            this.btnClasses.Location = new System.Drawing.Point(13, 188);
+            this.btnClasses.Name = "btnClasses";
+            this.btnClasses.Size = new System.Drawing.Size(75, 23);
+            this.btnClasses.TabIndex = 10;
+            this.btnClasses.Text = "Classes";
+            this.btnClasses.UseVisualStyleBackColor = true;
+            this.btnClasses.Click += new System.EventHandler(this.btnClasses_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnClasses);
             this.Controls.Add(this.tbUuid);
             this.Controls.Add(this.cbItemType);
             this.Controls.Add(this.btnAddItem);
@@ -176,5 +188,6 @@
         private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.ComboBox cbItemType;
         private System.Windows.Forms.TextBox tbUuid;
+        private System.Windows.Forms.Button btnClasses;
     }
 }

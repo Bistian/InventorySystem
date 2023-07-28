@@ -74,6 +74,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcademyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AcademyForm.Designer.cs">
+      <DependentUpon>AcademyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClassForm.Designer.cs">
+      <DependentUpon>ClassForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Custom Item Classes\CustomButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -257,6 +269,12 @@
     <Compile Include="WorkOrderModuleForm.Designer.cs">
       <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AcademyForm.resx">
+      <DependentUpon>AcademyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClassForm.resx">
+      <DependentUpon>ClassForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Custom Item Classes\CustomButton.resx">
       <DependentUpon>CustomButton.cs</DependentUpon>
     </EmbeddedResource>

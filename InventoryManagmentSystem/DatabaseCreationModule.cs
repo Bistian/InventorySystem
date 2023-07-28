@@ -16,6 +16,7 @@ using static System.Windows.Forms.AxHost;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Configuration;
+using System.Collections;
 
 namespace InventoryManagmentSystem
 {
@@ -23,7 +24,6 @@ namespace InventoryManagmentSystem
     {
         private bool isInit;
         private string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True";
-        SqlConnection connection;
 
         public DatabaseCreationModule(bool isInit = true)
         {
@@ -32,6 +32,7 @@ namespace InventoryManagmentSystem
             btnDeleteDatabase.Enabled = true;
             btnDeleteDatabase.Visible = true;
 #endif
+
             this.isInit = isInit;
             labelName.Visible = false;
 
@@ -54,7 +55,13 @@ namespace InventoryManagmentSystem
             // If user canceled the action, just return.
             if (filePath == null) { return; }
 
-            CreateDatabase(filePath);
+            bool isOkay = CreateDatabase(filePath);
+            if(!isOkay)
+            {
+                DeleteFileAndDatabase(filePath);
+                this.Close();
+                return;
+            }
 
             UpdateConfigFile(filePath);
 
@@ -132,10 +139,275 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
+        /// Used as part the create tables call.
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        private bool RunQuery(SqlConnection connection, string query)
+        {
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                connection.Close();
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        private bool CreateTableClasses(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE[dbo].[tbClasses] (
+                [Id]            INT IDENTITY(1, 1) NOT NULL,
+                [Name]          VARCHAR(50) NOT NULL,
+                [StartDate]     DATE NOT NULL,
+                [EndDate]       DATE NOT NULL,
+                [IsFinished]      BIT DEFAULT 0
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableClients(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE [dbo].[tbClients] (
+                [Id]                    UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+                [IdClass]               INT NULL,
+                [Name]                  VARCHAR(50) NOT NULL,
+                [Phone]                 VARCHAR(50) NOT NULL,
+                [Email]                 VARCHAR(50) NOT NULL,
+                [Academy]               VARCHAR(50) NOT NULL,
+                [Type]                  VARCHAR(50) NULL,
+                [DriversLicenseNumber]  VARCHAR(50) NOT NULL,
+                [Address]               VARCHAR(50) NOT NULL,
+                [Chest]                 VARCHAR(50) NOT NULL,
+                [Sleeve]                VARCHAR(50) NOT NULL,
+                [Waist]                 VARCHAR(50) NOT NULL,
+                [Inseam]                VARCHAR(50) NOT NULL,
+                [Hips]                  VARCHAR(50) NOT NULL,
+                [Height]                VARCHAR(50) NOT NULL,
+                [Weight]                VARCHAR(50) NOT NULL,
+                [Notes]                 VARCHAR(MAX) NULL,
+                [FireTecRepresentative] VARCHAR(50) NULL,
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableItems(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE[dbo].[tbItems] (
+                [Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+                [ItemType] VARCHAR(50)
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableItemTypes(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE[dbo].[tbItemTypes] (
+                [Id] INT IDENTITY(1,1) PRIMARY KEY,
+                [ItemType] VARCHAR (50) NOT NULL
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableHistories(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE[dbo].[tbHistories] (
+                [Id] INT IDENTITY(1,1) PRIMARY KEY,
+                [ItemId] UNIQUEIDENTIFIER NOT NULL,
+                [ClientId] UNIQUEIDENTIFIER NOT NULL,
+                [RentDate] DATE NOT NULL,
+                [ReturnDate] DATE,
+                FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id]),
+                FOREIGN KEY (ClientId) REFERENCES [dbo].[tbClients] ([Id])
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableBoots(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE [dbo].[tbBoots] (
+                [ItemId]          UNIQUEIDENTIFIER NOT NULL,
+                [Brand]           VARCHAR (50) NOT NULL,
+                [SerialNumber]    VARCHAR (50) NOT NULL,
+                [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL,
+                [UsedNew]         VARCHAR (50) NOT NULL,
+                [ManufactureDate] DATE         NOT NULL,
+                [DueDate]         DATE         NULL,
+                [Size]            VARCHAR (50) NOT NULL,
+                [Material]        VARCHAR (50) NOT NULL,
+                FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id])
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableHelmets(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE [dbo].[tbHelmets] (
+                [ItemId]          UNIQUEIDENTIFIER NOT NULL,
+                [Brand]           VARCHAR (50) NOT NULL,
+                [SerialNumber]    VARCHAR (50) NOT NULL,
+                [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL,
+                [UsedNew]         VARCHAR (50) NOT NULL,
+                [ManufactureDate] DATE         NOT NULL,
+                [DueDate]         DATE         NULL,
+                [Color]           VARCHAR (50) NOT NULL,
+                FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id])
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableJackets(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE [dbo].[tbJackets] (
+                [ItemId]          UNIQUEIDENTIFIER NOT NULL,
+                [Brand]           VARCHAR (50) NOT NULL,
+                [SerialNumber]    VARCHAR (50) NOT NULL,
+                [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL,
+                [UsedNew]         VARCHAR (50) NOT NULL,
+                [ManufactureDate] DATE         NOT NULL,
+                [DueDate]         DATE         NULL,
+                [Size]            VARCHAR (50) NOT NULL,
+                FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id])
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableMasks(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE [dbo].[tbMasks] (
+                [ItemId]          UNIQUEIDENTIFIER NOT NULL,
+                [Brand]           VARCHAR (50) NOT NULL,
+                [SerialNumber]    VARCHAR (50) NOT NULL,
+                [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL,
+                [UsedNew]         VARCHAR (50) NULL,
+                [ManufactureDate] DATE         NOT NULL,
+                [DueDate]         DATE         NULL,
+                [Size]            VARCHAR (50) NOT NULL,
+                FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id])
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTablePants(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE [dbo].[tbPants] (
+                [ItemId]          UNIQUEIDENTIFIER NOT NULL,
+                [Brand]           VARCHAR (50) NOT NULL,
+                [SerialNumber]    VARCHAR (50) NOT NULL,
+                [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL,
+                [UsedNew]         VARCHAR (50) NULL,
+                [ManufactureDate] DATE         NOT NULL,
+                [DueDate]         DATE         NULL,
+                [Size]            VARCHAR (50) NOT NULL,
+                FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id])
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableDepartments(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE[dbo].[tbDepartments] (
+                [Id]      INT IDENTITY(1, 1) NOT NULL,
+                [Name]    VARCHAR(50) NOT NULL,
+                [ContactName] VARCHAR(50) NOT NULL,
+                [Phone]       VARCHAR(50) NOT NULL,
+                [Email]       VARCHAR(50) NOT NULL,
+                [Address]     VARCHAR(50) NOT NULL,
+                [City]        VARCHAR(50) NOT NULL,
+                [State]       VARCHAR(50) NOT NULL,
+                [Zip]         VARCHAR(50) NOT NULL
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableUsers(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE[dbo].[tbUsers] (
+                [Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+                [username] VARCHAR(50) NOT NULL,
+                [password] VARCHAR(50) NOT NULL,
+                [fullname] VARCHAR(50) NOT NULL
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableBrands(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE[dbo].[tbBrands] (
+                [Id] INT IDENTITY(1, 1) NOT NULL,
+                [ItemType] VARCHAR(50) NOT NULL,
+                [Brand] VARCHAR(50) NOT NULL
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableAcademies(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE[dbo].[tbAcademies] (
+                [Id] INT IDENTITY(1, 1) NOT NULL,
+                [Name] VARCHAR(50) NOT NULL,
+                [Brand] VARCHAR(50) NOT NULL
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTablePrices(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE[dbo].[tbPrices] (
+                [Id] INT IDENTITY(1, 1) NOT NULL,
+                [Name] VARCHAR(50) NOT NULL,
+                [Boots] FLOAT NOT NULL,
+                [Helmet] FLOAT NOT NULL,
+                [Jacket] FLOAT NOT NULL,
+                [Mask] FLOAT NOT NULL,
+                [Pants] FLOAT NOT NULL
+            );";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return RunQuery(connection, query);
+        }
+
+        /// <summary>
         /// Create a new database and its tables.
         /// </summary>
         /// <param name="connectionString"></param>
-        private void CreateDatabase(string filePath)
+        private bool CreateDatabase(string filePath)
         {
             string databaseName = Path.GetFileNameWithoutExtension(filePath);
 
@@ -156,284 +428,33 @@ namespace InventoryManagmentSystem
             }
 
             string connectDatabase = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=" + filePath + ";Integrated Security=True;Connect Timeout=30";
-
-            try
+            using (SqlConnection connection = new SqlConnection(connectDatabase))
             {
-                // Clients
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
+                string error_message = "Failed to create table for ";
+                try
                 {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE [dbo].[tbClients] (" +
-                        "[Id]                    UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY, " +
-                        "[Name]                  VARCHAR(50) NOT NULL," +
-                        "[Phone]                 VARCHAR(50) NOT NULL," +
-                        "[Email]                 VARCHAR(50) NOT NULL," +
-                        "[Academy]               VARCHAR(50) NOT NULL," +
-                        "[DayNight]              VARCHAR(50) NULL," +
-                        "[DriversLicenseNumber]  VARCHAR(50) NOT NULL," +
-                        "[Address]               VARCHAR(50) NOT NULL," +
-                        "[Chest]                 VARCHAR(50) NOT NULL," +
-                        "[Sleeve]                VARCHAR(50) NOT NULL," +
-                        "[Waist]                 VARCHAR(50) NOT NULL," +
-                        "[Inseam]                VARCHAR(50) NOT NULL," +
-                        "[Hips]                  VARCHAR(50) NOT NULL," +
-                        "[Height]                VARCHAR(50) NOT NULL," +
-                        "[Weight]                VARCHAR(50) NOT NULL," +
-                        "[Notes]                 VARCHAR(MAX) NULL," +
-                        "[FireTecRepresentative] VARCHAR(50) NULL);";
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
+                    if (!CreateTableClasses(connection)) { throw new Exception(error_message + "classes"); }
+                    if (!CreateTableClients(connection)) { throw new Exception(error_message + "client"); }
+                    if (!CreateTableItems(connection)) { throw new Exception(error_message + "items"); }
+                    if (!CreateTableItemTypes(connection)) { throw new Exception(error_message + "item types"); }
+                    if (!CreateTableHistories(connection)) { throw new Exception(error_message + "histories"); }
+                    if (!CreateTableBoots(connection)) { throw new Exception(error_message + "boots"); }
+                    if (!CreateTableHelmets(connection)) { throw new Exception(error_message + "helmets"); }
+                    if (!CreateTableJackets(connection)) { throw new Exception(error_message + "jackets"); }
+                    if (!CreateTableMasks(connection)) { throw new Exception(error_message + "masks"); }
+                    if (!CreateTablePants(connection)) { throw new Exception(error_message + "pants"); }
+                    if (!CreateTableDepartments(connection)) { throw new Exception(error_message + "departments"); }
+                    if (!CreateTableUsers(connection)) { throw new Exception(error_message + "users"); }
+                    if (!CreateTableBrands(connection)) { throw new Exception(error_message + "brands"); }
+                    if (!CreateTableAcademies(connection)) { throw new Exception(error_message + "academies"); }
+                    if (!CreateTablePrices(connection)) { throw new Exception(error_message + "prices"); }
+                    return true;
                 }
-
-                // Items
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
+                catch(Exception ex)
                 {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE[dbo].[tbItems] (" +
-                        "[Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY, " +
-                        "[ItemType] VARCHAR(50));";
-
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
+                    Console.WriteLine($"ERROR: {ex.Message}");
+                    return false;
                 }
-
-                // Item Types
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
-                {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE[dbo].[tbItemTypes] (" +
-                        "[Id] INT IDENTITY(1,1) PRIMARY KEY," +
-                        "[ItemType] VARCHAR (50) NOT NULL);";
-
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-
-                // History
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
-                {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE[dbo].[tbHistories] (" +
-                        "[Id] INT IDENTITY(1,1) PRIMARY KEY," +
-                        "[ItemId] UNIQUEIDENTIFIER NOT NULL," +
-                        "[ClientId] UNIQUEIDENTIFIER NOT NULL," +
-                        "[RentDate] DATE NOT NULL," +
-                        "[ReturnDate] DATE," +
-                        "FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id])," +
-                        "FOREIGN KEY (ClientId) REFERENCES [dbo].[tbClients] ([Id]));";
-
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-
-                // Boots
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
-                {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE [dbo].[tbBoots] (" +
-                    "    [ItemId]          UNIQUEIDENTIFIER          NOT NULL," +
-                    "    [Brand]           VARCHAR (50) NOT NULL," +
-                    "    [SerialNumber]    VARCHAR (50) NOT NULL," +
-                    "    [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL," +
-                    "    [UsedNew]         VARCHAR (50) NOT NULL," +
-                    "    [ManufactureDate] DATE         NOT NULL," +
-                    "    [DueDate]         DATE         NULL," +
-                    "    [Size]            VARCHAR (50) NOT NULL," +
-                    "    [Material]        VARCHAR (50) NOT NULL," +
-                    "    FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id]));";
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-
-                // Helmets
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
-                {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE [dbo].[tbHelmets] (" +
-                        "   [ItemId]          UNIQUEIDENTIFIER          NOT NULL," +
-                        "   [Brand]           VARCHAR (50) NOT NULL," +
-                        "   [SerialNumber]    VARCHAR (50) NOT NULL," +
-                        "   [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL," +
-                        "   [UsedNew]         VARCHAR (50) NOT NULL," +
-                        "   [ManufactureDate] DATE         NOT NULL," +
-                        "   [DueDate]         DATE         NULL," +
-                        "   [Color]           VARCHAR (50) NOT NULL," +
-                        "   FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id]));";
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-
-                // Jackets
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
-                {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE [dbo].[tbJackets] (" +
-                    "    [ItemId]          UNIQUEIDENTIFIER          NOT NULL," +
-                    "    [Brand]           VARCHAR (50) NOT NULL," +
-                    "    [SerialNumber]    VARCHAR (50) NOT NULL," +
-                    "    [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL," +
-                    "    [UsedNew]         VARCHAR (50) NOT NULL," +
-                    "    [ManufactureDate] DATE         NOT NULL," +
-                    "    [DueDate]         DATE         NULL," +
-                    "    [Size]            VARCHAR (50) NOT NULL," +
-                    "    FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id]));";
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-
-                // Mask
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
-                {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE [dbo].[tbMasks] (" +
-                    "    [ItemId]          UNIQUEIDENTIFIER          NOT NULL," +
-                    "    [Brand]           VARCHAR (50) NOT NULL," +
-                    "    [SerialNumber]    VARCHAR (50) NOT NULL," +
-                    "    [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL," +
-                    "    [UsedNew]         VARCHAR (50) NULL," +
-                    "    [ManufactureDate] DATE         NOT NULL," +
-                    "    [DueDate]         DATE         NULL," +
-                    "    [Size]            VARCHAR (50) NOT NULL," +
-                    "    FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id]));"; ;
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-
-                // Pants
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
-                {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE [dbo].[tbPants] (" +
-                    "    [ItemId]          UNIQUEIDENTIFIER          NOT NULL," +
-                    "    [Brand]           VARCHAR (50) NOT NULL," +
-                    "    [SerialNumber]    VARCHAR (50) NOT NULL," +
-                    "    [Location]        VARCHAR (50) DEFAULT ('Fire-Tec') NOT NULL," +
-                    "    [UsedNew]         VARCHAR (50) NULL," +
-                    "    [ManufactureDate] DATE         NOT NULL," +
-                    "    [DueDate]         DATE         NULL," +
-                    "    [Size]            VARCHAR (50) NOT NULL," +
-                    "    FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id]));"; ;
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-
-                // Departments
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
-                {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE[dbo].[tbDepartment] (" +
-                        "[DeptID]      INT IDENTITY(1, 1) NOT NULL, " +
-                        "[DeptName]    VARCHAR(50) NOT NULL," +
-                        "[ContactName] VARCHAR(50) NOT NULL," +
-                        "[Phone]       VARCHAR(50) NOT NULL," +
-                        "[Email]       VARCHAR(50) NOT NULL," +
-                        "[Address]     VARCHAR(50) NOT NULL," +
-                        "[City]        VARCHAR(50) NOT NULL," +
-                        "[State]       VARCHAR(50) NOT NULL," +
-                        "[Zip]         VARCHAR(50) NOT NULL);";
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-
-                // Users
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
-                {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE[dbo].[tbUsers] (" +
-                        "[username] VARCHAR(50) NOT NULL," +
-                        "[password] VARCHAR(50) NOT NULL," +
-                        "[fullname] VARCHAR(50) NOT NULL);";
-
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-
-                // Brands
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
-                {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE[dbo].[tbBrands] (" +
-                        "[ItemType] VARCHAR(50) NOT NULL," +
-                        "[Brand] VARCHAR(50) NOT NULL);";
-
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-
-                // Acadamies
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
-                {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE[dbo].[tbAcademies] (" +
-                        "[AcademyName] VARCHAR(50) NOT NULL," +
-                        "[Brand] VARCHAR(50) NOT NULL);";
-
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-
-                // Prices
-                using (SqlConnection connection = new SqlConnection(connectDatabase))
-                {
-                    connection.Open();
-
-                    string sql =
-                        "CREATE TABLE[dbo].[tbPrices] (" +
-                        "[Name] VARCHAR(50) NOT NULL," +
-                        "[Boots] FLOAT NOT NULL," +
-                        "[Helmet] FLOAT NOT NULL," +
-                        "[Jacket] FLOAT NOT NULL," +
-                        "[Mask] FLOAT NOT NULL," +
-                        "[Pants] FLOAT NOT NULL);";
-
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-            }
-            catch(Exception ex) {
-                Console.WriteLine("ERROR: Failed to create database.");
-                Console.WriteLine(ex.Message);
-                System.Windows.Forms.Application.Exit();
             }
         }
 
@@ -479,8 +500,8 @@ namespace InventoryManagmentSystem
 
         private void DeleteFileAndDatabase(string filePath)
         {
-            DetachDatabase(filePath);
             DropDatabase(filePath);
+            DetachDatabase(filePath);
             File.Delete(filePath);
         }
 

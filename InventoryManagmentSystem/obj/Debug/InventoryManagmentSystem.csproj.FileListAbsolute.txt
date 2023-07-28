@@ -269,3 +269,5 @@ C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\I
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.CopyComplete
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.exe
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.pdb
+C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ClassForm.resources
+C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.AcademyForm.resources

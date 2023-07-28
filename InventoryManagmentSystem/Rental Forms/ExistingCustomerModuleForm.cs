@@ -144,7 +144,7 @@ namespace InventoryManagmentSystem
         private void LoadUsers()
         {
             dataGridUsers.Rows.Clear();
-            cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE DayNight = @ClientType", con);
+            cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE Type = @ClientType", con);
             cm.Parameters.AddWithValue("@ClientType", clientType);
             con.Open();
             try

@@ -42,7 +42,7 @@ namespace InventoryManagmentSystem
         public bool ExistingUser = false;
         public string currentUser = "";
         string license = "";
-        string DayNight = "";
+        string Type = "";
         public int ReturnReplace = 0;
         string ReplacmentSerial = "";
         String dueDate = "";
@@ -395,13 +395,13 @@ namespace InventoryManagmentSystem
                 bool exists = CheckIfExists("tbClients", txtBoxDriversLicense.Text);
                 if (!exists)
                 {
-                    cm = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,DayNight,DriversLicenseNumber,Address,Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,FireTecRepresentative)" +
-                    "VALUES(@Name,@Phone,@Email,@Academy,@DayNight,@DriversLicenseNumber,@Address,@Chest,@Sleeve,@Waist,@Inseam,@Hips,@Height,@Weight,@FireTecRepresentative)", con);
+                    cm = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,Type,DriversLicenseNumber,Address,Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,FireTecRepresentative)" +
+                    "VALUES(@Name,@Phone,@Email,@Academy,@Type,@DriversLicenseNumber,@Address,@Chest,@Sleeve,@Waist,@Inseam,@Hips,@Height,@Weight,@FireTecRepresentative)", con);
                     cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
                     cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
                     cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
                     cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
-                    cm.Parameters.AddWithValue("@DayNight", comboBoxRentalType.Text);
+                    cm.Parameters.AddWithValue("@Type", comboBoxRentalType.Text);
                     cm.Parameters.AddWithValue("@Address", address);
                     cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
                     if (comboBoxRentalType.SelectedIndex == 0)
