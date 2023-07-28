@@ -354,6 +354,7 @@ namespace InventoryManagmentSystem
             flowLayoutPanelProfile.Visible = true;
             flowLayoutPanelProfile.AutoScroll = false;
             splitContainerInventories.Visible = true;
+            panelBottom.Visible = false;
             panelRentals.Visible = true;
             LoadClient();
             flowLayoutPanelProfile.Dock = DockStyle.Top;
@@ -708,6 +709,8 @@ namespace InventoryManagmentSystem
                 textBoxHeight.Text = "";
                 comboBoxAcademy.SelectedIndex = -1;
 
+                panelRentalInfo.Dock = DockStyle.Bottom;
+
             }
             //Department
             else if (type == "Departments")
@@ -730,13 +733,17 @@ namespace InventoryManagmentSystem
                 comboBoxAcademy.SelectedIndex = 0;
 
                 //show pannels
-                panelContactInfo.Visible = true;
-                panelAddress.Visible = true;
                 panelRentalInfo.Visible = true;
+
+                panelAddress.Visible = true;
+
+                panelContactInfo.Visible = true;
+
+                panelRentalInfo.Dock = DockStyle.Top;
 
             }
             //Academy
-            else if (type == "Academys")
+            else if (type == "Academies")
             {
                 //hide pannels
                 panelMeasurments.Visible = false;
@@ -757,9 +764,13 @@ namespace InventoryManagmentSystem
                 comboBoxAcademy.Text = "N/A";
 
                 //show pannels
-                panelContactInfo.Visible = true;
-                panelAddress.Visible = true;
                 panelRentalInfo.Visible = true;
+
+                panelAddress.Visible = true;
+
+                panelContactInfo.Visible = true;
+
+                panelRentalInfo.Dock = DockStyle.Top;
             }
         }
 
@@ -807,198 +818,6 @@ namespace InventoryManagmentSystem
             }
             con.Close();
             MessageBox.Show("Note has been successfully saved");
-        }
-
-        private void SwapButton_Click_1(object sender, EventArgs e)
-        {
-            // Helmet
-            if (labelTypeOfItem.Text == "Helmet")
-            {
-                try
-                {
-                    comboBoxItemType.SelectedIndex = 0;
-                    //return item
-                    cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                    cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                    cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    UpdateHistory(ItemIdClient, ClientId);
-
-                    //replace item
-                    cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", license);
-                    cm.Parameters.AddWithValue("@DueDate", dueDate);
-                    cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    InsertHistory(ItemIdInventory, ClientId);
-
-                    MessageBox.Show("Item Replaced");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                    con.Close();
-                    return;
-                }
-            }
-
-            // Jacket
-            else if (labelTypeOfItem.Text == "Jacket")
-            {
-                try
-                {
-                    comboBoxItemType.SelectedIndex = 1;
-
-                    //return item
-                    cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                    cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                    cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    UpdateHistory(ItemIdClient, ClientId);
-
-                    //replace item
-                    cm = new SqlCommand("UPDATE tbJackets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", license);
-                    cm.Parameters.AddWithValue("@DueDate", dueDate);
-                    cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    InsertHistory(ItemIdInventory, ClientId);
-
-                    MessageBox.Show("Item Replaced");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                    con.Close();
-                    return;
-                }
-            }
-
-            // Pants
-            else if (labelTypeOfItem.Text == "Pants")
-            {
-                try
-                {
-                    comboBoxItemType.SelectedIndex = 2;
-
-                    //return item
-                    cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                    cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                    cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    UpdateHistory(ItemIdClient, ClientId);
-
-                    //replace item
-                    cm = new SqlCommand("UPDATE tbPants SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", license);
-                    cm.Parameters.AddWithValue("@DueDate", dueDate);
-                    cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    InsertHistory(ItemIdInventory, ClientId);
-                    MessageBox.Show("Item Replaced");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                    con.Close();
-                    return;
-                }
-            }
-
-            else if (labelTypeOfItem.Text == "Boots")
-            {
-                try
-                {
-                    comboBoxItemType.SelectedIndex = 3;
-
-                    //return item
-                    cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                    cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                    cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    UpdateHistory(ItemIdClient, ClientId);
-
-                    //replace item
-                    cm = new SqlCommand("UPDATE tbBoots SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", license);
-                    cm.Parameters.AddWithValue("@DueDate", dueDate);
-                    cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    InsertHistory(ItemIdInventory, ClientId);
-                    MessageBox.Show("Item Replaced");
-
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                    con.Close();
-                    return;
-                }
-            }
-
-            // Maks
-            else if (labelTypeOfItem.Text == "Mask")
-            {
-                try
-                {
-                    comboBoxItemType.SelectedIndex = 2;
-
-                    //return item
-                    cm = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                    cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                    cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    UpdateHistory(ItemIdClient, ClientId);
-
-                    //replace item
-                    cm = new SqlCommand("UPDATE tbMasks SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                    cm.Parameters.AddWithValue("@location", license);
-                    cm.Parameters.AddWithValue("@DueDate", dueDate);
-                    cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    con.Close();
-                    InsertHistory(ItemIdInventory, ClientId);
-                    MessageBox.Show("Item Replaced");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                    con.Close();
-                    return;
-                }
-            }
-            LoadClient();
-            LoadInventory();
-            panelReplace.Visible = false;
-            dataGridInv.Enabled = true;
-            dataGridViewClient.Enabled = true;
-            panelRentals.Visible = true;
-            ReturnReplace = 0;
-
         }
 
         private void dataGridViewClient_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -1141,8 +960,6 @@ namespace InventoryManagmentSystem
 
             else if (ReturnReplace == 2)
             {
-                panelRentals.Visible = false;
-                panelReplace.Visible = true;
                 dataGridViewClient.Enabled = false;
 
                 dueDate = dataGridViewClient.Rows[e.RowIndex].Cells["DDate"].Value.ToString();
@@ -1150,8 +967,6 @@ namespace InventoryManagmentSystem
                 ItemIdClient = (Guid)dataGridViewClient.Rows[e.RowIndex].Cells["ItemId"].Value;
                 labelOldItem.Text = SelectedSerial;
                 labelTypeOfItem.Text = dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString();
-
-                SwapButton.Enabled = false;
 
             }
         }
@@ -1274,7 +1089,193 @@ namespace InventoryManagmentSystem
                 ReplacmentSerial = row.Cells["Serial"].Value.ToString();
                 labelReplacmentItem.Text = ReplacmentSerial;
                 ItemIdInventory = (Guid)row.Cells["ItemIdInv"].Value;
-                SwapButton.Enabled = true;
+
+
+                // Helmet
+                if (labelTypeOfItem.Text == "Helmet")
+                {
+                    try
+                    {
+                        comboBoxItemType.SelectedIndex = 0;
+                        //return item
+                        cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
+                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        UpdateHistory(ItemIdClient, ClientId);
+
+                        //replace item
+                        cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", license);
+                        cm.Parameters.AddWithValue("@DueDate", dueDate);
+                        cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        InsertHistory(ItemIdInventory, ClientId);
+
+                        MessageBox.Show("Item Replaced");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                        con.Close();
+                        return;
+                    }
+                }
+
+                // Jacket
+                else if (labelTypeOfItem.Text == "Jacket")
+                {
+                    try
+                    {
+                        comboBoxItemType.SelectedIndex = 1;
+
+                        //return item
+                        cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
+                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        UpdateHistory(ItemIdClient, ClientId);
+
+                        //replace item
+                        cm = new SqlCommand("UPDATE tbJackets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", license);
+                        cm.Parameters.AddWithValue("@DueDate", dueDate);
+                        cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        InsertHistory(ItemIdInventory, ClientId);
+
+                        MessageBox.Show("Item Replaced");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                        con.Close();
+                        return;
+                    }
+                }
+
+                // Pants
+                else if (labelTypeOfItem.Text == "Pants")
+                {
+                    try
+                    {
+                        comboBoxItemType.SelectedIndex = 2;
+
+                        //return item
+                        cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
+                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        UpdateHistory(ItemIdClient, ClientId);
+
+                        //replace item
+                        cm = new SqlCommand("UPDATE tbPants SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", license);
+                        cm.Parameters.AddWithValue("@DueDate", dueDate);
+                        cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        InsertHistory(ItemIdInventory, ClientId);
+                        MessageBox.Show("Item Replaced");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                        con.Close();
+                        return;
+                    }
+                }
+
+                else if (labelTypeOfItem.Text == "Boots")
+                {
+                    try
+                    {
+                        comboBoxItemType.SelectedIndex = 3;
+
+                        //return item
+                        cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
+                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        UpdateHistory(ItemIdClient, ClientId);
+
+                        //replace item
+                        cm = new SqlCommand("UPDATE tbBoots SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", license);
+                        cm.Parameters.AddWithValue("@DueDate", dueDate);
+                        cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        InsertHistory(ItemIdInventory, ClientId);
+                        MessageBox.Show("Item Replaced");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                        con.Close();
+                        return;
+                    }
+                }
+
+                // Maks
+                else if (labelTypeOfItem.Text == "Mask")
+                {
+                    try
+                    {
+                        comboBoxItemType.SelectedIndex = 2;
+
+                        //return item
+                        cm = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
+                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        UpdateHistory(ItemIdClient, ClientId);
+
+                        //replace item
+                        cm = new SqlCommand("UPDATE tbMasks SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
+                        cm.Parameters.AddWithValue("@location", license);
+                        cm.Parameters.AddWithValue("@DueDate", dueDate);
+                        cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                        con.Open();
+                        cm.ExecuteNonQuery();
+                        con.Close();
+                        InsertHistory(ItemIdInventory, ClientId);
+                        MessageBox.Show("Item Replaced");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
+                        con.Close();
+                        return;
+                    }
+                }
+                LoadClient();
+                LoadInventory();
+                ReturnReplace = 0;
+                dataGridViewClient.Enabled = true;
+
             }
         }
 
@@ -1352,14 +1353,6 @@ namespace InventoryManagmentSystem
                 Console.Write(ex.Message);
                 return false;
             }
-        }
-
-        private void dataGridViewClient_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            //if (e.RowIndex == -1 && e.ColumnIndex != -1)
-            //{
-            //    e. = true;
-            //}
         }
 
         private void UsersButton_Click(object sender, EventArgs e)
