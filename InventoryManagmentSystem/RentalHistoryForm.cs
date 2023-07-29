@@ -14,11 +14,8 @@ namespace InventoryManagmentSystem
 {
     public partial class RentalHistoryForm : Form
     {
-        #region SQL_Variables
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
-        SqlCommand command;
-        #endregion SQL_Variables
 
         public RentalHistoryForm(string itemType = null, string serial = null)
         {
@@ -28,6 +25,12 @@ namespace InventoryManagmentSystem
             dataGridHistory.Columns["column_rented"].DefaultCellStyle.Format = "d";
             dataGridHistory.Columns["column_returned"].DefaultCellStyle.Format = "d";
             LoadHistories();
+
+            // Add item types
+            cbItemType.Items.Add("all");
+            cbItemType.SelectedIndex = 0;
+            HelperFunctions.LoadItemTypes(connection, ref cbItemType);
+
             if (itemType != null && serial != null)
             {
                 InitWithSelectedItem(itemType, serial);
@@ -42,7 +45,7 @@ namespace InventoryManagmentSystem
         {
             // Click the item type.
             cbItemType.SelectedItem = itemType;
-            cbItemType_SelectedIndexChanged(cbItemType, EventArgs.Empty);
+            SwapVisibleRows();
 
             // Select a row by serial number.
             for (int i = 0; i < dataGridItems.Rows.Count; ++i)
@@ -59,14 +62,14 @@ namespace InventoryManagmentSystem
         private void LoadHistories()
         {
             string query = HelperQuery.HistoryGeneralInformation();
-            command = new SqlCommand(query, connection);
+            SqlCommand command = new SqlCommand(query, connection);
             connection.Open();
             try
             {
                 SqlDataReader dr = command.ExecuteReader();
                 while (dr.Read())
                 {
-                    dataGridItems.Rows.Add(dr[0], dr[1], dr[2], dr[3], dr[4], dr[5]);
+                    dataGridItems.Rows.Add(dr[0], dr[1], dr[2], dr[3], dr[4], dr[5], dr[6]);
                 }
 
             }catch (Exception ex)
@@ -90,7 +93,7 @@ namespace InventoryManagmentSystem
             Guid itemId = (Guid)row.Cells["column_item_id"].Value;
 
             string query = HelperQuery.HistoryClientAndDates(itemId);
-            command = new SqlCommand(query, connection);
+            SqlCommand command = new SqlCommand(query, connection);
             connection.Open();
             try
             {
@@ -112,15 +115,11 @@ namespace InventoryManagmentSystem
             this.Close();
         }
 
-        private void cbItemType_SelectedIndexChanged(object sender, EventArgs e)
+        private void SwapVisibleRows()
         {
             DataGridViewRow row;
-            string selectedType = cbItemType.SelectedItem.ToString().ToLower();
 
-            // Need to make words singular to match item type.
-            if (selectedType == "helmets") { selectedType = "helmet"; }
-            else if (selectedType == "jackets") { selectedType = "jacket"; }
-            else if (selectedType == "masks") { selectedType = "mask"; }
+            string selectedType = (string)cbItemType.SelectedItem;
 
             int length = dataGridItems.Rows.Count;
             for (int i = 0; i < length; ++i)
@@ -132,7 +131,7 @@ namespace InventoryManagmentSystem
                 {
                     row.Visible = true;
                 }
-                else if (itemType.ToLower() != selectedType)
+                else if (itemType != selectedType)
                 {
                     row.Visible = false;
                 }
@@ -140,7 +139,21 @@ namespace InventoryManagmentSystem
                 {
                     row.Visible = true;
                 }
+
+                if (checkRetired.Checked != true)
+                {
+                    string retired = row.Cells["column_condition"].Value.ToString();
+                    if (retired == "Retired")
+                    {
+                        row.Visible = false;
+                    }
+                }
             }
+        }
+
+        private void cbItemType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SwapVisibleRows();
         }
 
         private void dataGridItems_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -166,6 +179,11 @@ namespace InventoryManagmentSystem
                 grandparent.openChildForm(new ExistingCustomerModuleForm());
             }
             this.Close();
+        }
+
+        private void checkRetired_Click(object sender, EventArgs e)
+        {
+            SwapVisibleRows();
         }
     }
 }

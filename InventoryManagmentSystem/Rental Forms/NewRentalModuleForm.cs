@@ -27,9 +27,6 @@ namespace InventoryManagmentSystem
         SqlDataReader dr;
 
         //Used for query
-        string CurrTable = "";
-        string FinalColumn = "";
-        string Sizes = "";
         Guid ItemIdClient = Guid.Empty;
         Guid ItemIdInventory = Guid.Empty;
         bool Measure = true;
@@ -63,6 +60,8 @@ namespace InventoryManagmentSystem
                 AutoFillFields(rentalType, clientName);
 
             }
+
+            HelperFunctions.LoadItemTypes(con, ref comboBoxItemType);
         }
 
         private bool CheckIfExists(string tableName, string SerialNumber)
@@ -144,49 +143,60 @@ namespace InventoryManagmentSystem
             con.Close();
         }
 
+        /// <summary>
+        /// Load item types on combo box to select type.
+        /// </summary>
+
         private string QueryItems()
         {
-            string searchTerm = textBoxSearchBar.Text;
+            string CurrTable = "";
+            string FinalColumn = "";
+            string Sizes = "";
 
-            string firetec = "(Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC')";
-            if (comboBoxItemType.SelectedIndex == 0)
+            if (comboBoxItemType.Text == "helmet")
             {
                 FinalColumn = ", Color";
-                Sizes = "";
                 CurrTable = "tbHelmets";
             }
-            else if (comboBoxItemType.SelectedIndex == 1)
+            else if (comboBoxItemType.Text == "jacket")
             {
-                FinalColumn = "";
                 Sizes = " Size,";
                 CurrTable = "tbJackets";
             }
-            else if (comboBoxItemType.SelectedIndex == 2)
+            else if (comboBoxItemType.Text == "pants")
             {
-                FinalColumn = "";
                 Sizes = " Size,";
                 CurrTable = "tbPants";
             }
-            else if (comboBoxItemType.SelectedIndex == 3)
+            else if (comboBoxItemType.Text == "boots")
             {
                 FinalColumn = ", Material";
                 Sizes = " Size,";
                 CurrTable = "tbBoots";
             }
-            else if (comboBoxItemType.SelectedIndex == 4)
+            else if (comboBoxItemType.Text == "mask")
             {
-                FinalColumn = "";
                 Sizes = " Size,";
                 CurrTable = "tbMasks";
             }
-            else
+
+            if(CurrTable == "") 
             {
-                return ("SELECT ItemId,Brand,SerialNumber,Size,ManufactureDate,UsedNew FROM tbJackets WHERE " + firetec + "AND SerialNumber LIKE '%" + searchTerm + "%'");
+                Console.Error.WriteLine("ERROR: No table was set for query.");
+                return ""; 
             }
 
-            return ("SELECT ItemId, Brand, SerialNumber," + Sizes + " ManufactureDate, UsedNew "
-                + FinalColumn + " FROM " + CurrTable +
-                     " WHERE " + firetec + " AND SerialNumber LIKE '%" + searchTerm + "%'");
+            string searchTerm = textBoxSearchBar.Text;
+            string query = $@"
+                    SELECT ItemId,Brand,SerialNumber,{Sizes} ManufactureDate,Condition {FinalColumn}
+                    FROM {CurrTable}
+                    WHERE Location='Fire-Tec' AND 
+                        SerialNumber LIKE '%{searchTerm}%' AND
+                        Condition != 'Retired'
+                ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+
+            return query;
         }
 
         private void LoadInventory()

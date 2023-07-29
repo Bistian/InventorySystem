@@ -995,70 +995,70 @@
   <data name="&gt;&gt;dateTimePickerManufactureDate.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="labelUsedNew.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelCondition.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelUsedNew.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="labelCondition.Font" type="System.Drawing.Font, System.Drawing">
     <value>Trebuchet MS, 11.25pt, style=Bold</value>
   </data>
-  <data name="labelUsedNew.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelCondition.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="labelUsedNew.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelCondition.Location" type="System.Drawing.Point, System.Drawing">
     <value>139, 140</value>
   </data>
-  <data name="labelUsedNew.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="labelCondition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="labelUsedNew.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelCondition.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 24</value>
   </data>
-  <data name="labelUsedNew.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelCondition.TabIndex" type="System.Int32, mscorlib">
     <value>98</value>
   </data>
-  <data name="labelUsedNew.Text" xml:space="preserve">
+  <data name="labelCondition.Text" xml:space="preserve">
     <value>Condition</value>
   </data>
-  <data name="&gt;&gt;labelUsedNew.Name" xml:space="preserve">
-    <value>labelUsedNew</value>
+  <data name="&gt;&gt;labelCondition.Name" xml:space="preserve">
+    <value>labelCondition</value>
   </data>
-  <data name="&gt;&gt;labelUsedNew.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelCondition.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelUsedNew.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelCondition.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelUsedNew.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelCondition.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="comboBoxUsedNew.Items" xml:space="preserve">
+  <data name="comboBoxCondition.Items" xml:space="preserve">
     <value>Used</value>
   </data>
-  <data name="comboBoxUsedNew.Items1" xml:space="preserve">
+  <data name="comboBoxCondition.Items1" xml:space="preserve">
     <value>New</value>
   </data>
-  <data name="comboBoxUsedNew.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="comboBoxCondition.Location" type="System.Drawing.Point, System.Drawing">
     <value>142, 166</value>
   </data>
-  <data name="comboBoxUsedNew.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="comboBoxCondition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
-  <data name="comboBoxUsedNew.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="comboBoxCondition.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 26</value>
   </data>
-  <data name="comboBoxUsedNew.TabIndex" type="System.Int32, mscorlib">
+  <data name="comboBoxCondition.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;comboBoxUsedNew.Name" xml:space="preserve">
-    <value>comboBoxUsedNew</value>
+  <data name="&gt;&gt;comboBoxCondition.Name" xml:space="preserve">
+    <value>comboBoxCondition</value>
   </data>
-  <data name="&gt;&gt;comboBoxUsedNew.Type" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxCondition.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxUsedNew.Parent" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxCondition.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;comboBoxUsedNew.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxCondition.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="labelMaterial.AutoSize" type="System.Boolean, mscorlib">

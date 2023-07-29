@@ -37,8 +37,8 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.labelManufactureDate = new System.Windows.Forms.Label();
             this.dateTimePickerManufactureDate = new System.Windows.Forms.DateTimePicker();
-            this.labelUsedNew = new System.Windows.Forms.Label();
-            this.comboBoxUsedNew = new System.Windows.Forms.ComboBox();
+            this.labelCondition = new System.Windows.Forms.Label();
+            this.comboBoxCondition = new System.Windows.Forms.ComboBox();
             this.labelMaterial = new System.Windows.Forms.Label();
             this.comboBoxMaterial = new System.Windows.Forms.ComboBox();
             this.lableBrand = new System.Windows.Forms.Label();
@@ -115,22 +115,22 @@
             resources.ApplyResources(this.dateTimePickerManufactureDate, "dateTimePickerManufactureDate");
             this.dateTimePickerManufactureDate.Name = "dateTimePickerManufactureDate";
             // 
-            // labelUsedNew
+            // labelCondition
             // 
-            resources.ApplyResources(this.labelUsedNew, "labelUsedNew");
-            this.labelUsedNew.Name = "labelUsedNew";
+            resources.ApplyResources(this.labelCondition, "labelCondition");
+            this.labelCondition.Name = "labelCondition";
             // 
-            // comboBoxUsedNew
+            // comboBoxCondition
             // 
-            this.comboBoxUsedNew.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxUsedNew.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBoxUsedNew.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxUsedNew.FormattingEnabled = true;
-            this.comboBoxUsedNew.Items.AddRange(new object[] {
-            resources.GetString("comboBoxUsedNew.Items"),
-            resources.GetString("comboBoxUsedNew.Items1")});
-            resources.ApplyResources(this.comboBoxUsedNew, "comboBoxUsedNew");
-            this.comboBoxUsedNew.Name = "comboBoxUsedNew";
+            this.comboBoxCondition.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxCondition.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCondition.FormattingEnabled = true;
+            this.comboBoxCondition.Items.AddRange(new object[] {
+            resources.GetString("comboBoxCondition.Items"),
+            resources.GetString("comboBoxCondition.Items1")});
+            resources.ApplyResources(this.comboBoxCondition, "comboBoxCondition");
+            this.comboBoxCondition.Name = "comboBoxCondition";
             // 
             // labelMaterial
             // 
@@ -261,9 +261,9 @@
             this.Controls.Add(this.txtBoxSerialNumber);
             this.Controls.Add(this.dateTimePickerManufactureDate);
             this.Controls.Add(this.comboBoxSize);
-            this.Controls.Add(this.labelUsedNew);
+            this.Controls.Add(this.labelCondition);
             this.Controls.Add(this.labelSize);
-            this.Controls.Add(this.comboBoxUsedNew);
+            this.Controls.Add(this.comboBoxCondition);
             this.Controls.Add(this.comboBoxBrand);
             this.Controls.Add(this.labelMaterial);
             this.Controls.Add(this.lableBrand);
@@ -287,8 +287,8 @@
         public System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Label labelManufactureDate;
         public System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
-        private System.Windows.Forms.Label labelUsedNew;
-        public System.Windows.Forms.ComboBox comboBoxUsedNew;
+        private System.Windows.Forms.Label labelCondition;
+        public System.Windows.Forms.ComboBox comboBoxCondition;
         private System.Windows.Forms.Label labelMaterial;
         public System.Windows.Forms.ComboBox comboBoxMaterial;
         private System.Windows.Forms.Label lableBrand;

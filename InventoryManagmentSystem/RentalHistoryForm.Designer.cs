@@ -34,12 +34,6 @@
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.labelItemType = new System.Windows.Forms.Label();
             this.dataGridItems = new System.Windows.Forms.DataGridView();
-            this.column_item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_item_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_acquired = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_last_rent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridHistory = new System.Windows.Forms.DataGridView();
             this.column_client_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_customer_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +43,14 @@
             this.panelTop = new System.Windows.Forms.Panel();
             this.labelTitle = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.checkRetired = new System.Windows.Forms.CheckBox();
+            this.column_item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_item_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_condition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_acquired = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_last_rent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CloseButton = new InventoryManagmentSystem.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridHistory)).BeginInit();
@@ -69,17 +71,10 @@
             this.cbItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.cbItemType.FormattingEnabled = true;
-            this.cbItemType.Items.AddRange(new object[] {
-            "All",
-            "Boots",
-            "Helmets",
-            "Jackets",
-            "Masks",
-            "Pants"});
             this.cbItemType.Location = new System.Drawing.Point(293, 3);
             this.cbItemType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbItemType.Name = "cbItemType";
-            this.cbItemType.Size = new System.Drawing.Size(140, 26);
+            this.cbItemType.Size = new System.Drawing.Size(140, 23);
             this.cbItemType.TabIndex = 0;
             this.cbItemType.SelectedIndexChanged += new System.EventHandler(this.cbItemType_SelectedIndexChanged);
             // 
@@ -89,7 +84,7 @@
             this.labelItemType.ForeColor = System.Drawing.SystemColors.Window;
             this.labelItemType.Location = new System.Drawing.Point(219, 7);
             this.labelItemType.Name = "labelItemType";
-            this.labelItemType.Size = new System.Drawing.Size(79, 20);
+            this.labelItemType.Size = new System.Drawing.Size(67, 16);
             this.labelItemType.TabIndex = 1;
             this.labelItemType.Text = "Item Type";
             // 
@@ -115,6 +110,7 @@
             this.column_item_type,
             this.column_serial,
             this.column_brand,
+            this.column_condition,
             this.column_acquired,
             this.column_last_rent});
             this.dataGridItems.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -129,49 +125,6 @@
             this.dataGridItems.Size = new System.Drawing.Size(1241, 148);
             this.dataGridItems.TabIndex = 2;
             this.dataGridItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridItems_CellClick);
-            // 
-            // column_item_id
-            // 
-            this.column_item_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_item_id.HeaderText = "Item ID";
-            this.column_item_id.MinimumWidth = 8;
-            this.column_item_id.Name = "column_item_id";
-            this.column_item_id.Visible = false;
-            // 
-            // column_item_type
-            // 
-            this.column_item_type.HeaderText = "Item Type";
-            this.column_item_type.MinimumWidth = 8;
-            this.column_item_type.Name = "column_item_type";
-            this.column_item_type.Width = 150;
-            // 
-            // column_serial
-            // 
-            this.column_serial.HeaderText = "Serial";
-            this.column_serial.MinimumWidth = 8;
-            this.column_serial.Name = "column_serial";
-            this.column_serial.Width = 150;
-            // 
-            // column_brand
-            // 
-            this.column_brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_brand.HeaderText = "Brand";
-            this.column_brand.MinimumWidth = 8;
-            this.column_brand.Name = "column_brand";
-            // 
-            // column_acquired
-            // 
-            this.column_acquired.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_acquired.HeaderText = "Acquired";
-            this.column_acquired.MinimumWidth = 8;
-            this.column_acquired.Name = "column_acquired";
-            // 
-            // column_last_rent
-            // 
-            this.column_last_rent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_last_rent.HeaderText = "Last Rented";
-            this.column_last_rent.MinimumWidth = 8;
-            this.column_last_rent.Name = "column_last_rent";
             // 
             // dataGridHistory
             // 
@@ -257,6 +210,7 @@
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.checkRetired);
             this.panelTop.Controls.Add(this.labelTitle);
             this.panelTop.Controls.Add(this.CloseButton);
             this.panelTop.Controls.Add(this.cbItemType);
@@ -274,7 +228,7 @@
             this.labelTitle.ForeColor = System.Drawing.SystemColors.Window;
             this.labelTitle.Location = new System.Drawing.Point(-5, 3);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(186, 31);
+            this.labelTitle.Size = new System.Drawing.Size(147, 25);
             this.labelTitle.TabIndex = 70;
             this.labelTitle.Text = "Rental History";
             // 
@@ -296,6 +250,67 @@
             this.splitContainer2.SplitterDistance = 30;
             this.splitContainer2.TabIndex = 7;
             // 
+            // checkRetired
+            // 
+            this.checkRetired.AutoSize = true;
+            this.checkRetired.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkRetired.Location = new System.Drawing.Point(441, 5);
+            this.checkRetired.Name = "checkRetired";
+            this.checkRetired.Size = new System.Drawing.Size(106, 20);
+            this.checkRetired.TabIndex = 71;
+            this.checkRetired.Text = "Show Retired";
+            this.checkRetired.UseVisualStyleBackColor = true;
+            this.checkRetired.Click += new System.EventHandler(this.checkRetired_Click);
+            // 
+            // column_item_id
+            // 
+            this.column_item_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_item_id.HeaderText = "Item ID";
+            this.column_item_id.MinimumWidth = 8;
+            this.column_item_id.Name = "column_item_id";
+            this.column_item_id.Visible = false;
+            // 
+            // column_item_type
+            // 
+            this.column_item_type.HeaderText = "Item Type";
+            this.column_item_type.MinimumWidth = 8;
+            this.column_item_type.Name = "column_item_type";
+            this.column_item_type.Width = 150;
+            // 
+            // column_serial
+            // 
+            this.column_serial.HeaderText = "Serial";
+            this.column_serial.MinimumWidth = 8;
+            this.column_serial.Name = "column_serial";
+            this.column_serial.Width = 150;
+            // 
+            // column_brand
+            // 
+            this.column_brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_brand.HeaderText = "Brand";
+            this.column_brand.MinimumWidth = 8;
+            this.column_brand.Name = "column_brand";
+            // 
+            // column_condition
+            // 
+            this.column_condition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_condition.HeaderText = "Condition";
+            this.column_condition.Name = "column_condition";
+            // 
+            // column_acquired
+            // 
+            this.column_acquired.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_acquired.HeaderText = "Acquired";
+            this.column_acquired.MinimumWidth = 8;
+            this.column_acquired.Name = "column_acquired";
+            // 
+            // column_last_rent
+            // 
+            this.column_last_rent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_last_rent.HeaderText = "Last Rented";
+            this.column_last_rent.MinimumWidth = 8;
+            this.column_last_rent.Name = "column_last_rent";
+            // 
             // CloseButton
             // 
             this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
@@ -311,7 +326,7 @@
             // 
             // RentalHistoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(1241, 519);
@@ -344,12 +359,6 @@
         private System.Windows.Forms.Label labelItemType;
         private System.Windows.Forms.DataGridView dataGridItems;
         private System.Windows.Forms.DataGridView dataGridHistory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_item_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_item_type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_serial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_brand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_acquired;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_last_rent;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_client_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_customer_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_rented;
@@ -359,5 +368,13 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private CustomButton CloseButton;
         private System.Windows.Forms.Label labelTitle;
+        private System.Windows.Forms.CheckBox checkRetired;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_item_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_item_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_serial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_brand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_condition;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_acquired;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_last_rent;
     }
 }

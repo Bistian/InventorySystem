@@ -50,7 +50,7 @@
             this.Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ManufactureDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UsedNew = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Condition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColorMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InventoryPanel = new System.Windows.Forms.Panel();
             this.customButton1 = new InventoryManagmentSystem.CustomButton();
@@ -182,7 +182,7 @@
             this.Serial,
             this.Size,
             this.ManufactureDate,
-            this.UsedNew,
+            this.Condition,
             this.ColorMaterial});
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
@@ -267,14 +267,14 @@
             this.ManufactureDate.Name = "ManufactureDate";
             this.ManufactureDate.ReadOnly = true;
             // 
-            // UsedNew
+            // Condition
             // 
-            this.UsedNew.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.UsedNew.FillWeight = 50F;
-            this.UsedNew.HeaderText = "Used";
-            this.UsedNew.MinimumWidth = 6;
-            this.UsedNew.Name = "UsedNew";
-            this.UsedNew.ReadOnly = true;
+            this.Condition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Condition.FillWeight = 50F;
+            this.Condition.HeaderText = "Used";
+            this.Condition.MinimumWidth = 6;
+            this.Condition.Name = "Condition";
+            this.Condition.ReadOnly = true;
             // 
             // ColorMaterial
             // 
@@ -405,7 +405,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn ManufactureDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UsedNew;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Condition;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorMaterial;
         private System.Windows.Forms.Panel InventoryPanel;
         private CustomButton CloseButton;

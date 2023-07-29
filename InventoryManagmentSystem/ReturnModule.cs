@@ -88,10 +88,10 @@ namespace InventoryManagmentSystem
             }
             else
             {
-                return ("SELECT ItemType,Brand,SerialNumber,Size,ManufactureDate,UsedNew FROM tbJackets WHERE " + firetec);
+                return ("SELECT ItemType,Brand,SerialNumber,Size,ManufactureDate,Condition FROM tbJackets WHERE " + firetec);
             }
 
-            return ("SELECT ItemType, Brand, SerialNumber," + Sizes + " ManufactureDate, UsedNew "
+            return ("SELECT ItemType, Brand, SerialNumber," + Sizes + " ManufactureDate, Condition "
                 + FinalColumn + " FROM " + CurrTable +
                      " WHERE " + firetec);
         }

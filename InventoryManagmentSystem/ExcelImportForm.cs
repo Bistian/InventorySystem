@@ -264,7 +264,7 @@ namespace InventoryManagmentSystem
 
                 Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, row[0].ToString());
                 string query = $"INSERT INTO {table} " +
-                    $"(ItemId, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Size) " +
+                    $"(ItemId, Brand, SerialNumber, Location, Condition, ManufactureDate, DueDate, Size) " +
                     $"VALUES ('{uuid}','{row[1]}','{row[2]}','{row[7]}','{row[5]}','{row[4]}',@date,'{row[3]}')";
 
                 try
@@ -323,8 +323,8 @@ namespace InventoryManagmentSystem
                 }
                 Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, row[0].ToString());
                 string query = $"INSERT INTO {table} " +
-                    "(ItemId, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Size, [Material]) " +
-                    "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @UsedNew, @ManufactureDate, @DueDate, @Size, @Material)";
+                    "(ItemId, Brand, SerialNumber, Location, Condition, ManufactureDate, DueDate, Size, [Material]) " +
+                    "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @Condition, @ManufactureDate, @DueDate, @Size, @Material)";
 
                 try
                 {
@@ -335,7 +335,7 @@ namespace InventoryManagmentSystem
                     command.Parameters.AddWithValue("@Brand", row[1]);
                     command.Parameters.AddWithValue("@SerialNumber", row[2]);
                     command.Parameters.AddWithValue("@Location", row[8]);
-                    command.Parameters.AddWithValue("@UsedNew", row[5]);
+                    command.Parameters.AddWithValue("@Condition", row[5]);
                     command.Parameters.AddWithValue("@ManufactureDate", row[4]);
                     command.Parameters.AddWithValue("@DueDate", row[7] ?? DBNull.Value);
                     command.Parameters.AddWithValue("@Size", row[6]);
@@ -382,8 +382,8 @@ namespace InventoryManagmentSystem
 
                 Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, row[0].ToString());
                 string query = $"INSERT INTO {table} " +
-                    "(ItemId, Brand, SerialNumber, Location, UsedNew, ManufactureDate, DueDate, Color) " +
-                    "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @UsedNew, @ManufactureDate, @DueDate, @Color)";
+                    "(ItemId, Brand, SerialNumber, Location, Condition, ManufactureDate, DueDate, Color) " +
+                    "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @Condition, @ManufactureDate, @DueDate, @Color)";
 
                 try
                 {
@@ -394,7 +394,7 @@ namespace InventoryManagmentSystem
                     command.Parameters.AddWithValue("@Brand", row[1]);
                     command.Parameters.AddWithValue("@SerialNumber", row[2]);
                     command.Parameters.AddWithValue("@Location", row[7]);
-                    command.Parameters.AddWithValue("@UsedNew", row[5]);
+                    command.Parameters.AddWithValue("@Condition", row[5]);
                     command.Parameters.AddWithValue("@ManufactureDate", row[4]);
                     command.Parameters.AddWithValue("@DueDate", row[6] ?? DBNull.Value);
                     command.Parameters.AddWithValue("@Color", row[3]);

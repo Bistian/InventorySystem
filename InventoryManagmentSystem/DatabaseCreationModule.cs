@@ -146,6 +146,7 @@ namespace InventoryManagmentSystem
         /// <returns></returns>
         private bool RunQuery(SqlConnection connection, string query)
         {
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
                 connection.Open();
@@ -172,7 +173,6 @@ namespace InventoryManagmentSystem
                 [EndDate]       DATE NOT NULL,
                 [IsFinished]      BIT DEFAULT 0
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -199,7 +199,6 @@ namespace InventoryManagmentSystem
                 [Notes]                 VARCHAR(MAX) NULL,
                 [FireTecRepresentative] VARCHAR(50) NULL,
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -210,7 +209,6 @@ namespace InventoryManagmentSystem
                 [Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
                 [ItemType] VARCHAR(50)
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -221,7 +219,6 @@ namespace InventoryManagmentSystem
                 [Id] INT IDENTITY(1,1) PRIMARY KEY,
                 [ItemType] VARCHAR (50) NOT NULL
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -237,7 +234,6 @@ namespace InventoryManagmentSystem
                 FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id]),
                 FOREIGN KEY (ClientId) REFERENCES [dbo].[tbClients] ([Id])
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -256,7 +252,6 @@ namespace InventoryManagmentSystem
                 [Material]        VARCHAR (50) NOT NULL,
                 FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id])
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -274,7 +269,6 @@ namespace InventoryManagmentSystem
                 [Color]           VARCHAR (50) NOT NULL,
                 FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id])
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -292,7 +286,6 @@ namespace InventoryManagmentSystem
                 [Size]            VARCHAR (50) NOT NULL,
                 FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id])
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -310,7 +303,6 @@ namespace InventoryManagmentSystem
                 [Size]            VARCHAR (50) NOT NULL,
                 FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id])
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -328,7 +320,6 @@ namespace InventoryManagmentSystem
                 [Size]            VARCHAR (50) NOT NULL,
                 FOREIGN KEY (ItemId) REFERENCES [dbo].[tbItems] ([Id])
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -346,7 +337,6 @@ namespace InventoryManagmentSystem
                 [State]       VARCHAR(50) NOT NULL,
                 [Zip]         VARCHAR(50) NOT NULL
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -359,7 +349,6 @@ namespace InventoryManagmentSystem
                 [password] VARCHAR(50) NOT NULL,
                 [fullname] VARCHAR(50) NOT NULL
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -371,7 +360,6 @@ namespace InventoryManagmentSystem
                 [ItemType] VARCHAR(50) NOT NULL,
                 [Brand] VARCHAR(50) NOT NULL
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -383,7 +371,6 @@ namespace InventoryManagmentSystem
                 [Name] VARCHAR(50) NOT NULL,
                 [Brand] VARCHAR(50) NOT NULL
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -399,7 +386,6 @@ namespace InventoryManagmentSystem
                 [Mask] FLOAT NOT NULL,
                 [Pants] FLOAT NOT NULL
             );";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return RunQuery(connection, query);
         }
 
@@ -414,17 +400,18 @@ namespace InventoryManagmentSystem
             // Create the new database file
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                string sql =
-                    $"CREATE DATABASE {databaseName} " +
-                    $"ON PRIMARY (NAME={databaseName}_Data, " +
-                    $"FILENAME='{filePath}') " +
-                    $"LOG ON (NAME={databaseName}_Log, " +
-                    $"FILENAME='{filePath}.ldf')";
-
-                SqlCommand command = new SqlCommand(sql, connection);
-                command.ExecuteNonQuery();
-                connection.Close();
+                string query = $@"
+                    CREATE DATABASE {databaseName}
+                    ON PRIMARY (NAME={databaseName}_Data,
+                    FILENAME='{filePath}')
+                    LOG ON (NAME={databaseName}_Log,
+                    FILENAME='{filePath}.ldf')
+                ";
+                if(!RunQuery(connection, query)) 
+                {
+                    Console.Error.WriteLine("ERROR: Failed to create the database.");
+                    return false;
+                }
             }
 
             string connectDatabase = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=" + filePath + ";Integrated Security=True;Connect Timeout=30";
