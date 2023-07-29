@@ -1610,7 +1610,6 @@
             this.SwapButton.TabIndex = 46;
             this.SwapButton.Text = "Swap Items";
             this.SwapButton.UseVisualStyleBackColor = true;
-            this.SwapButton.Click += new System.EventHandler(this.SwapButton_Click_1);
             // 
             // labelTypeOfItem
             // 
@@ -1810,7 +1809,6 @@
             this.dataGridViewClient.Size = new System.Drawing.Size(1073, 395);
             this.dataGridViewClient.TabIndex = 112;
             this.dataGridViewClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellClick);
-            this.dataGridViewClient.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewClient_ColumnHeaderMouseClick);
             // 
             // Item
             // 
@@ -2358,7 +2356,6 @@
         public System.Windows.Forms.Label labelRentalInfo;
         private System.Windows.Forms.SplitContainer splitContainerInventories;
         public System.Windows.Forms.Panel panelCustomerInv;
-        private System.Windows.Forms.DataGridView dataGridViewClient;
         private System.Windows.Forms.Label labelProfileName;
         public System.Windows.Forms.Panel panelFireTecInv;
         private System.Windows.Forms.Label labelFireTecInv;
@@ -2403,5 +2400,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ItemIdInv;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.CheckBox checkBoxMeasure;
+        public System.Windows.Forms.DataGridView dataGridViewClient;
     }
 }

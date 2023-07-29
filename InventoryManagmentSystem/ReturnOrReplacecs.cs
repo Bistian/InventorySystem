@@ -32,7 +32,7 @@ namespace InventoryManagmentSystem
             parentForm.ReturnReplace = 2;
             parentForm.dataGridViewClient.Enabled = true;
             parentForm.SwapButton.Enabled = false;
-            //parentForm.comboBoxItemType.Enabled = false;
+            parentForm.comboBoxItemType.Enabled = false;
             MessageBox.Show("Select a replacment");
             this.Dispose();
         }

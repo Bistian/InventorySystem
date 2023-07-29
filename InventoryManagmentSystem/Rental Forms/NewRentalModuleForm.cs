@@ -354,7 +354,6 @@ namespace InventoryManagmentSystem
             flowLayoutPanelProfile.Visible = true;
             flowLayoutPanelProfile.AutoScroll = false;
             splitContainerInventories.Visible = true;
-            panelBottom.Visible = false;
             panelRentals.Visible = true;
             LoadClient();
             flowLayoutPanelProfile.Dock = DockStyle.Top;
