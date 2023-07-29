@@ -59,14 +59,14 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Material,@Size,@ManufactureDate)
+        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Material,@Size,@ManufactureDate)
         /// </summary>
         /// <returns></returns>
         public static string BootsInsert()
         {
             string query = @"
-                INSERT INTO tbBoots(ItemId,SerialNumber,Brand,UsedNew,Material,Size,ManufactureDate) 
-                VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Material,@Size,@ManufactureDate)
+                INSERT INTO tbBoots(ItemId,SerialNumber,Brand,Condition,Material,Size,ManufactureDate) 
+                VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Material,@Size,@ManufactureDate)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
@@ -82,14 +82,14 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Color,@ManufactureDate)
+        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Color,@ManufactureDate)
         /// </summary>
         /// <returns></returns>
         public static string HelmetInsert()
         {
             string query = @"
-                INSERT INTO tbHelmets(ItemId,SerialNumber,Brand,UsedNew,Color,ManufactureDate) 
-                VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Color,@ManufactureDate)
+                INSERT INTO tbHelmets(ItemId,SerialNumber,Brand,Condition,Color,ManufactureDate) 
+                VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Color,@ManufactureDate)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
@@ -162,7 +162,7 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// Get ItemId, ItemType, SerialNumber, Brand, ManufactureDate, LastRented.
+        /// Get ItemId, ItemType, SerialNumber, Brand, ManufactureDate, Condition, LastRented.
         /// Does not repeat ItemId.
         /// </summary>
         /// <returns></returns>
@@ -174,6 +174,7 @@ namespace InventoryManagmentSystem
                     it.ItemType,
                     COALESCE(tb.SerialNumber, th.SerialNumber, tj.SerialNumber, tp.SerialNumber, tm.SerialNumber) AS SerialNumber,
                     COALESCE(tb.Brand, th.Brand, tj.Brand, tp.Brand, tm.Brand) AS Brand,
+                    COALESCE(tb.Condition, th.Condition, tj.Condition, tp.Condition, tm.Condition) AS Condition,
                     COALESCE(tb.ManufactureDate, th.ManufactureDate, tj.ManufactureDate, tp.ManufactureDate, tm.ManufactureDate) AS ManufactureDate,
                     ih.LastRented
                 FROM
@@ -196,53 +197,53 @@ namespace InventoryManagmentSystem
                         GROUP BY
                             ItemId
                     ) AS ih2 ON ih.ItemId = ih2.ItemId AND ih.LastRented = ih2.LastRented
-                    LEFT JOIN tbBoots tb ON it.ItemType = 'Boots' AND tb.ItemId = it.Id
-                    LEFT JOIN tbHelmets th ON it.ItemType = 'Helmet' AND th.ItemId = it.Id
-                    LEFT JOIN tbJackets tj ON it.ItemType = 'Jacket' AND tj.ItemId = it.Id
-                    LEFT JOIN tbPants tp ON it.ItemType = 'Pants' AND tp.ItemId = it.Id
-                    LEFT JOIN tbMasks tm ON it.ItemType = 'Mask' AND tm.ItemId = it.Id;
+                    LEFT JOIN tbBoots tb ON it.ItemType = 'boots' AND tb.ItemId = it.Id
+                    LEFT JOIN tbHelmets th ON it.ItemType = 'helmet' AND th.ItemId = it.Id
+                    LEFT JOIN tbJackets tj ON it.ItemType = 'jacket' AND tj.ItemId = it.Id
+                    LEFT JOIN tbPants tp ON it.ItemType = 'pants' AND tp.ItemId = it.Id
+                    LEFT JOIN tbMasks tm ON it.ItemType = 'mask' AND tm.ItemId = it.Id;
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
         }
 
         /// <summary>
-        /// VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)
+        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate)
         /// </summary>
         /// <returns></returns>
         public static string JacketInsert()
         {
             string query = @"
-                INSERT INTO tbJackets(ItemId,SerialNumber,Brand,UsedNew,Size,ManufactureDate) 
-                VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)
+                INSERT INTO tbJackets(ItemId,SerialNumber,Brand,Condition,Size,ManufactureDate) 
+                VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
         }
 
         /// <summary>
-        /// VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)
+        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate)
         /// </summary>
         /// <returns></returns>
         public static string MaskInsert()
         {
             string query = @"
-                INSERT INTO tbMasks(ItemId,SerialNumber,Brand,UsedNew,Size,ManufactureDate) 
-                VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)
+                INSERT INTO tbMasks(ItemId,SerialNumber,Brand,Condition,Size,ManufactureDate) 
+                VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
         }
 
         /// <summary>
-        /// VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)
+        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate)
         /// </summary>
         /// <returns></returns>
         public static string PantsInsert()
         {
             string query = @"
-                INSERT INTO tbPants(ItemId,SerialNumber,Brand,UsedNew,Size,ManufactureDate) 
-                VALUES(@ItemId,@SerialNumber,@Brand,@UsedNew,@Size,@ManufactureDate)
+                INSERT INTO tbPants(ItemId,SerialNumber,Brand,Condition,Size,ManufactureDate) 
+                VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
