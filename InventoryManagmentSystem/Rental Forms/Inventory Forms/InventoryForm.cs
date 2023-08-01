@@ -61,8 +61,9 @@ namespace InventoryManagmentSystem
 
         private string QueryBoots(string searchTerm)
         {
+            string standardColumns = HelperQuery.ItemStandardColumns();
             string initialQuery = $@"
-                SELECT Brand, SerialNumber, Condition, ManufactureDate, Size, Material, Location 
+                SELECT {standardColumns}, Location, Size, Material 
                 FROM tbBoots 
                 WHERE (Brand LIKE '%{searchTerm}%' OR 
                 SerialNumber LIKE '%{searchTerm}%' OR 
@@ -74,8 +75,9 @@ namespace InventoryManagmentSystem
         
         private string QueryHelmets(string searchTerm)
         {
+            string standardColumns = HelperQuery.ItemStandardColumns();
             string initialQuery = $@"
-                SELECT Brand, SerialNumber, Condition, ManufactureDate, Color, Location 
+                SELECT {standardColumns}, Location, Color 
                 FROM tbHelmets 
                 WHERE (Brand LIKE '%{searchTerm}%' OR 
                 SerialNumber LIKE '%{searchTerm}%' OR 
@@ -96,8 +98,9 @@ namespace InventoryManagmentSystem
             if(cbItemType.Text == "jacket") { from = "tbJackets "; }
             if (cbItemType.Text == "mask") { from = "tbMasks "; }
 
+            string standardColumns = HelperQuery.ItemStandardColumns();
             string initialQuery = $@"
-                SELECT Brand, SerialNumber, Condition, ManufactureDate, Size, Location 
+                SELECT {standardColumns}, Location, Size 
                 FROM {from}
                 WHERE (Brand LIKE '%{searchTerm}%' OR
                 SerialNumber LIKE '%{searchTerm}%' OR
@@ -127,7 +130,11 @@ namespace InventoryManagmentSystem
                     while (dr.Read())
                     {
                         i++;
-                        dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), "Size", "Material", dr[4].ToString(), dr[5].ToString());
+                        dataGridInv.Rows.Add(i, 
+                            dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), 
+                            dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), 
+                            dr[6].ToString(), "Size", "Material"
+                        );
                     }
                 }
                 else if(cbItemType.Text == "boots")
@@ -135,7 +142,11 @@ namespace InventoryManagmentSystem
                     while (dr.Read())
                     {
                         i++;
-                        dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString(), "Color");
+                        dataGridInv.Rows.Add(i, 
+                            dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), 
+                            dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), 
+                            dr[6].ToString(), "Color"
+                        );
                     }
                 }
                 else if (cbItemType.Text == "jacket" || cbItemType.Text == "pants" || cbItemType.Text == "mask")
@@ -143,7 +154,10 @@ namespace InventoryManagmentSystem
                     while (dr.Read())
                     {
                         i++;
-                        dataGridInv.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4], dr[5].ToString(), "Material", "Color");
+                        dataGridInv.Rows.Add(i, 
+                            dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), 
+                            dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), 
+                            dr[6].ToString(), "Material", "Color");
                     }
                 }
                 dr.Close();
@@ -306,7 +320,7 @@ namespace InventoryManagmentSystem
             itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
             itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
             itemForm.comboBoxCondition.Text =                 GetCellValueAsString(e, "Condition");
-            itemForm.dateTimePickerManufactureDate.Text =   GetCellValueAsString(e, "ManufactureDate");
+            itemForm.dtManufacture.Text =   GetCellValueAsString(e, "ManufactureDate");
             itemForm.comboBoxSize.Text =                    GetCellValueAsString(e, "Size");
             itemForm.comboBoxMaterial.Text =                GetCellValueAsString(e, "Material");
             itemForm.SaveButton.Enabled = true;
@@ -321,7 +335,7 @@ namespace InventoryManagmentSystem
             itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
             itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
             itemForm.comboBoxCondition.Text =                 GetCellValueAsString(e, "Condition");
-            itemForm.dateTimePickerManufactureDate.Text =   GetCellValueAsString(e, "ManufactureDate");
+            itemForm.dtManufacture.Text =   GetCellValueAsString(e, "ManufactureDate");
             itemForm.comboBoxSize.Text =                    GetCellValueAsString(e, "Size");
             itemForm.comboBoxColor.Text =                   GetCellValueAsString(e, "Color");
             itemForm.SaveButton.Enabled = true;
@@ -350,7 +364,7 @@ namespace InventoryManagmentSystem
             itemForm.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
             itemForm.comboBoxBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
             itemForm.comboBoxCondition.Text = dataGridInv.Rows[e.RowIndex].Cells["Condition"].Value.ToString();
-            itemForm.dateTimePickerManufactureDate.Text = dataGridInv.Rows[e.RowIndex].Cells["ManufactureDate"].Value.ToString();
+            itemForm.dtManufacture.Text = dataGridInv.Rows[e.RowIndex].Cells["ManufactureDate"].Value.ToString();
             itemForm.comboBoxSize.Text = dataGridInv.Rows[e.RowIndex].Cells["Size"].Value.ToString();
             itemForm.SaveButton.Enabled = true;
             itemForm.ShowDialog();

@@ -30,13 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewItemForm));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ButtonClose = new InventoryManagmentSystem.CustomButton();
             this.labelTitle = new System.Windows.Forms.Label();
             this.btnAddBrand = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
             this.labelManufactureDate = new System.Windows.Forms.Label();
-            this.dateTimePickerManufactureDate = new System.Windows.Forms.DateTimePicker();
+            this.dtManufacture = new System.Windows.Forms.DateTimePicker();
             this.labelCondition = new System.Windows.Forms.Label();
             this.comboBoxCondition = new System.Windows.Forms.ComboBox();
             this.labelMaterial = new System.Windows.Forms.Label();
@@ -51,6 +50,9 @@
             this.comboBoxColor = new System.Windows.Forms.ComboBox();
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.labelItemType = new System.Windows.Forms.Label();
+            this.labelAcquisition = new System.Windows.Forms.Label();
+            this.dtAcquisition = new System.Windows.Forms.DateTimePicker();
+            this.ButtonClose = new InventoryManagmentSystem.CustomButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ButtonClose)).BeginInit();
             this.SuspendLayout();
@@ -63,15 +65,6 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.panel1.Name = "panel1";
-            // 
-            // ButtonClose
-            // 
-            resources.ApplyResources(this.ButtonClose, "ButtonClose");
-            this.ButtonClose.ImageHover = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageHover")));
-            this.ButtonClose.ImageNormal = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageNormal")));
-            this.ButtonClose.Name = "ButtonClose";
-            this.ButtonClose.TabStop = false;
-            this.ButtonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // labelTitle
             // 
@@ -109,11 +102,11 @@
             resources.ApplyResources(this.labelManufactureDate, "labelManufactureDate");
             this.labelManufactureDate.Name = "labelManufactureDate";
             // 
-            // dateTimePickerManufactureDate
+            // dtManufacture
             // 
-            this.dateTimePickerManufactureDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            resources.ApplyResources(this.dateTimePickerManufactureDate, "dateTimePickerManufactureDate");
-            this.dateTimePickerManufactureDate.Name = "dateTimePickerManufactureDate";
+            this.dtManufacture.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            resources.ApplyResources(this.dtManufacture, "dtManufacture");
+            this.dtManufacture.Name = "dtManufacture";
             // 
             // labelCondition
             // 
@@ -242,11 +235,33 @@
             resources.ApplyResources(this.labelItemType, "labelItemType");
             this.labelItemType.Name = "labelItemType";
             // 
+            // labelAcquisition
+            // 
+            resources.ApplyResources(this.labelAcquisition, "labelAcquisition");
+            this.labelAcquisition.Name = "labelAcquisition";
+            // 
+            // dtAcquisition
+            // 
+            this.dtAcquisition.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            resources.ApplyResources(this.dtAcquisition, "dtAcquisition");
+            this.dtAcquisition.Name = "dtAcquisition";
+            // 
+            // ButtonClose
+            // 
+            resources.ApplyResources(this.ButtonClose, "ButtonClose");
+            this.ButtonClose.ImageHover = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageHover")));
+            this.ButtonClose.ImageNormal = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageNormal")));
+            this.ButtonClose.Name = "ButtonClose";
+            this.ButtonClose.TabStop = false;
+            this.ButtonClose.Click += new System.EventHandler(this.ButtonClose_Click);
+            // 
             // NewItemForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.Controls.Add(this.labelAcquisition);
+            this.Controls.Add(this.dtAcquisition);
             this.Controls.Add(this.labelItemType);
             this.Controls.Add(this.cbItemType);
             this.Controls.Add(this.labelColor);
@@ -259,7 +274,7 @@
             this.Controls.Add(this.lableSerialNumber);
             this.Controls.Add(this.labelManufactureDate);
             this.Controls.Add(this.txtBoxSerialNumber);
-            this.Controls.Add(this.dateTimePickerManufactureDate);
+            this.Controls.Add(this.dtManufacture);
             this.Controls.Add(this.comboBoxSize);
             this.Controls.Add(this.labelCondition);
             this.Controls.Add(this.labelSize);
@@ -286,7 +301,7 @@
         public System.Windows.Forms.Button ClearButton;
         public System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Label labelManufactureDate;
-        public System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
+        public System.Windows.Forms.DateTimePicker dtManufacture;
         private System.Windows.Forms.Label labelCondition;
         public System.Windows.Forms.ComboBox comboBoxCondition;
         private System.Windows.Forms.Label labelMaterial;
@@ -302,5 +317,7 @@
         public System.Windows.Forms.ComboBox cbItemType;
         private System.Windows.Forms.Label labelItemType;
         private CustomButton ButtonClose;
+        private System.Windows.Forms.Label labelAcquisition;
+        public System.Windows.Forms.DateTimePicker dtAcquisition;
     }
 }

@@ -59,14 +59,30 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Material,@Size,@ManufactureDate)
+        /// </summary>
+        /// <returns>ItemId,SerialNumber,Brand,Condition,AcquisitionDate,ManufactureDate</returns>
+        public static string ItemStandardColumns()
+        {
+            return "ItemId,Brand,SerialNumber,Condition,AcquisitionDate,ManufactureDate";
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <returns>@ItemId,@SerialNumber,@Brand,@Condition,@AcquisitionDate,@ManufactureDate</returns>
+        public static string ItemStandardValues()
+        {
+            return "@ItemId,@Brand,@SerialNumber,@Condition,@AcquisitionDate,@ManufactureDate";
+        }
+        
+        /// <summary>
+        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Material,@Size,@ManufactureDate,@AcquisitionDate)
         /// </summary>
         /// <returns></returns>
         public static string BootsInsert()
         {
-            string query = @"
-                INSERT INTO tbBoots(ItemId,SerialNumber,Brand,Condition,Material,Size,ManufactureDate) 
-                VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Material,@Size,@ManufactureDate)
+            string query = $@"
+                INSERT INTO tbBoots({ItemStandardColumns()},Material,Size) 
+                VALUES({ItemStandardValues()},@Material,@Size)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
@@ -76,20 +92,21 @@ namespace InventoryManagmentSystem
         {
             return "SELECT * FROM tbBrands";
         }
+        
         public static string ItemTypeLoad()
         {
             return "SELECT ItemType FROM tbItemTypes";
         }
 
         /// <summary>
-        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Color,@ManufactureDate)
+        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Color,@ManufactureDate,@AcquisitionDate)
         /// </summary>
         /// <returns></returns>
         public static string HelmetInsert()
         {
-            string query = @"
-                INSERT INTO tbHelmets(ItemId,SerialNumber,Brand,Condition,Color,ManufactureDate) 
-                VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Color,@ManufactureDate)
+            string query = $@"
+                INSERT INTO tbHelmets({ItemStandardColumns()},Color) 
+                VALUES({ItemStandardValues()},@Color)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
@@ -208,42 +225,42 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate)
+        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate, @AcquisitionDate)
         /// </summary>
         /// <returns></returns>
         public static string JacketInsert()
         {
-            string query = @"
-                INSERT INTO tbJackets(ItemId,SerialNumber,Brand,Condition,Size,ManufactureDate) 
-                VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate)
+            string query = $@"
+                INSERT INTO tbJackets({ItemStandardColumns()},Size) 
+                VALUES({ItemStandardValues()},@Size)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
         }
 
         /// <summary>
-        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate)
+        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate,@AcquisitionDate)
         /// </summary>
         /// <returns></returns>
         public static string MaskInsert()
         {
-            string query = @"
-                INSERT INTO tbMasks(ItemId,SerialNumber,Brand,Condition,Size,ManufactureDate) 
-                VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate)
+            string query = $@"
+                INSERT INTO tbMasks({ItemStandardColumns()},Size) 
+                VALUES({ItemStandardValues()},@Size)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
         }
 
         /// <summary>
-        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate)
+        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate,@AcquisitionDate)
         /// </summary>
         /// <returns></returns>
         public static string PantsInsert()
         {
-            string query = @"
-                INSERT INTO tbPants(ItemId,SerialNumber,Brand,Condition,Size,ManufactureDate) 
-                VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate)
+            string query = $@"
+                INSERT INTO tbPants({ItemStandardColumns()},Size) 
+                VALUES({ItemStandardValues()},@Size)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;

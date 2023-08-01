@@ -48,13 +48,9 @@ namespace InventoryManagmentSystem.Rental_Forms
             try
             {
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", uuid);
-                command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-                command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                command.Parameters.AddWithValue("@Condition", comboBoxCondition.Text);
+                QueryStandardParameters(ref command, uuid);
                 command.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
                 command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                command.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value.Date);
                 connection.Open();
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -80,12 +76,8 @@ namespace InventoryManagmentSystem.Rental_Forms
             try
             {
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", uuid);
-                command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-                command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
+                QueryStandardParameters(ref command, uuid);
                 command.Parameters.AddWithValue("@Color", comboBoxColor.Text);
-                command.Parameters.AddWithValue("@Condition", comboBoxCondition.Text);
-                command.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
                 connection.Open();
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -111,12 +103,8 @@ namespace InventoryManagmentSystem.Rental_Forms
             try
             {
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", uuid);
-                command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-                command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                command.Parameters.AddWithValue("@Condition", comboBoxCondition.Text);
+                QueryStandardParameters(ref command, uuid);
                 command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                command.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
                 connection.Open();
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -137,12 +125,8 @@ namespace InventoryManagmentSystem.Rental_Forms
             try
             {
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", uuid);
-                command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-                command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                command.Parameters.AddWithValue("@Condition", comboBoxCondition.Text);
+                QueryStandardParameters(ref command, uuid);
                 command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                command.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
                 connection.Open();
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -168,11 +152,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             try
             {
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", uuid);
-                command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-                command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                command.Parameters.AddWithValue("@Condition", comboBoxCondition.Text);
-                command.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value);
+                QueryStandardParameters(ref command, uuid);
                 command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -186,6 +166,21 @@ namespace InventoryManagmentSystem.Rental_Forms
                 Console.WriteLine(ex.StackTrace);
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Ad to paramets @ItemId, @SerialNumber, @Brand, @Condition, @AcquisitionDate, @ManufactureDate
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="uuid"></param>
+        private void QueryStandardParameters(ref SqlCommand command, Guid uuid)
+        {
+            command.Parameters.AddWithValue("@ItemId", uuid);
+            command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
+            command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
+            command.Parameters.AddWithValue("@Condition", comboBoxCondition.Text);
+            command.Parameters.AddWithValue("@AcquisitionDate", dtAcquisition.Value);
+            command.Parameters.AddWithValue("@ManufactureDate", dtManufacture.Value);
         }
 
         private bool SelectTableAndAddItem(Guid uuid)
@@ -267,7 +262,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                 command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
                 command.Parameters.AddWithValue("@Condition", comboBoxCondition.Text);
-                command.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value.Date);
+                command.Parameters.AddWithValue("@ManufactureDate", dtManufacture.Value.Date);
                 command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
                 command.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
                 command.ExecuteNonQuery();
@@ -302,7 +297,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                 command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
                 command.Parameters.AddWithValue("@Condition", comboBoxCondition.Text);
-                command.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value.Date);
+                command.Parameters.AddWithValue("@ManufactureDate", dtManufacture.Value.Date);
                 command.Parameters.AddWithValue("@Color", comboBoxColor.Text);
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -339,7 +334,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
                 command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
                 command.Parameters.AddWithValue("@Condition", comboBoxCondition.Text);
-                command.Parameters.AddWithValue("@ManufactureDate", dateTimePickerManufactureDate.Value.Date);
+                command.Parameters.AddWithValue("@ManufactureDate", dtManufacture.Value.Date);
                 command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -431,7 +426,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             {
                 labelTitle.Text = "Please select an item type";
                 txtBoxSerialNumber.Enabled = false;
-                dateTimePickerManufactureDate.Enabled = false;
+                dtManufacture.Enabled = false;
                 comboBoxBrand.Enabled = false;
                 btnAddBrand.Enabled = false;
                 comboBoxMaterial.Enabled = false;
@@ -443,7 +438,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             if(lastItemTypeIndex == -1)
             {
                 txtBoxSerialNumber.Enabled = true;
-                dateTimePickerManufactureDate.Enabled = true;
+                dtManufacture.Enabled = true;
                 comboBoxBrand.Enabled = true;
                 btnAddBrand.Enabled = true;
                 comboBoxCondition.Enabled = true;
@@ -463,7 +458,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             comboBoxMaterial.SelectedIndex = -1;
             comboBoxSize.SelectedIndex = -1;
             comboBoxColor.SelectedIndex = -1;
-            dateTimePickerManufactureDate.Value = DateTime.Today;
+            dtManufacture.Value = DateTime.Today;
         }
 
         /// <summary>
@@ -531,7 +526,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (string.IsNullOrEmpty(txtBoxSerialNumber.Text) ||
                 string.IsNullOrEmpty(comboBoxBrand.Text) ||
                 string.IsNullOrEmpty(comboBoxCondition.Text) ||
-                string.IsNullOrEmpty(dateTimePickerManufactureDate.Text))
+                string.IsNullOrEmpty(dtManufacture.Text))
             {
                 MessageBox.Show("Please fill the required fields");
                 return false;
