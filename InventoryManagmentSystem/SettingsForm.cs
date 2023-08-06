@@ -92,7 +92,7 @@ namespace InventoryManagmentSystem
         private void btnAcademies_Click(object sender, EventArgs e)
         {
             ColorTabSwitch("Academies");
-            openChildForm(new AcademyForm());
+            openChildForm(new CreateAcademyForm());
         }
 
         private void btnHistories_Click(object sender, EventArgs e)
@@ -169,7 +169,7 @@ namespace InventoryManagmentSystem
         private void btnClasses_Click(object sender, EventArgs e)
         {
             ColorTabSwitch("Classes");
-            openChildForm(new ClassForm());
+            openChildForm(new CreateClassForm());
         }
     }
 }

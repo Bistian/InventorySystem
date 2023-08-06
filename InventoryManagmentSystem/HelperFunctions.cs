@@ -32,6 +32,17 @@ namespace InventoryManagmentSystem
             connection.Close();
         }
 
+        public static void OpenChildForm(Form childForm, ref Panel panel)
+        {
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            panel.Controls.Add(childForm);
+            panel.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+        }
+
         /// <summary>
         /// This is needed to properly format a multiline string to be suitable for query --> @"Select...From..."
         /// </summary>

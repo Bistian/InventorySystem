@@ -37,7 +37,6 @@
             this.labelEndDate = new System.Windows.Forms.Label();
             this.dpEndDate = new System.Windows.Forms.DateTimePicker();
             this.dataGridClasses = new System.Windows.Forms.DataGridView();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.column_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,6 +44,9 @@
             this.column_end_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_finished = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.column_delete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.cbAcademy = new System.Windows.Forms.ComboBox();
+            this.labelAcademy = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridClasses)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +64,7 @@
             // labelClassName
             // 
             this.labelClassName.AutoSize = true;
-            this.labelClassName.Location = new System.Drawing.Point(13, 45);
+            this.labelClassName.Location = new System.Drawing.Point(13, 91);
             this.labelClassName.Name = "labelClassName";
             this.labelClassName.Size = new System.Drawing.Size(90, 18);
             this.labelClassName.TabIndex = 1;
@@ -70,7 +72,7 @@
             // 
             // tbClassName
             // 
-            this.tbClassName.Location = new System.Drawing.Point(16, 67);
+            this.tbClassName.Location = new System.Drawing.Point(16, 112);
             this.tbClassName.Name = "tbClassName";
             this.tbClassName.Size = new System.Drawing.Size(233, 24);
             this.tbClassName.TabIndex = 2;
@@ -78,7 +80,7 @@
             // labelStartDate
             // 
             this.labelStartDate.AutoSize = true;
-            this.labelStartDate.Location = new System.Drawing.Point(13, 94);
+            this.labelStartDate.Location = new System.Drawing.Point(13, 139);
             this.labelStartDate.Name = "labelStartDate";
             this.labelStartDate.Size = new System.Drawing.Size(74, 18);
             this.labelStartDate.TabIndex = 3;
@@ -87,7 +89,7 @@
             // dpStartDate
             // 
             this.dpStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.dpStartDate.Location = new System.Drawing.Point(16, 116);
+            this.dpStartDate.Location = new System.Drawing.Point(16, 160);
             this.dpStartDate.Name = "dpStartDate";
             this.dpStartDate.Size = new System.Drawing.Size(233, 23);
             this.dpStartDate.TabIndex = 4;
@@ -95,7 +97,7 @@
             // labelEndDate
             // 
             this.labelEndDate.AutoSize = true;
-            this.labelEndDate.Location = new System.Drawing.Point(13, 142);
+            this.labelEndDate.Location = new System.Drawing.Point(13, 186);
             this.labelEndDate.Name = "labelEndDate";
             this.labelEndDate.Size = new System.Drawing.Size(69, 18);
             this.labelEndDate.TabIndex = 5;
@@ -104,7 +106,7 @@
             // dpEndDate
             // 
             this.dpEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.dpEndDate.Location = new System.Drawing.Point(16, 163);
+            this.dpEndDate.Location = new System.Drawing.Point(16, 207);
             this.dpEndDate.Name = "dpEndDate";
             this.dpEndDate.Size = new System.Drawing.Size(233, 23);
             this.dpEndDate.TabIndex = 6;
@@ -141,20 +143,9 @@
             this.dataGridClasses.RowHeadersVisible = false;
             this.dataGridClasses.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.WindowText;
             this.dataGridClasses.RowTemplate.Height = 40;
-            this.dataGridClasses.Size = new System.Drawing.Size(468, 200);
+            this.dataGridClasses.Size = new System.Drawing.Size(468, 243);
             this.dataGridClasses.TabIndex = 7;
             this.dataGridClasses.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridClasses_CellClick);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnAdd.Location = new System.Drawing.Point(16, 193);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(233, 23);
-            this.btnAdd.TabIndex = 8;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // column_number
             // 
@@ -214,12 +205,42 @@
             this.column_delete.Name = "column_delete";
             this.column_delete.ReadOnly = true;
             // 
+            // btnAdd
+            // 
+            this.btnAdd.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnAdd.Location = new System.Drawing.Point(16, 236);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(233, 23);
+            this.btnAdd.TabIndex = 8;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // cbAcademy
+            // 
+            this.cbAcademy.FormattingEnabled = true;
+            this.cbAcademy.Location = new System.Drawing.Point(16, 62);
+            this.cbAcademy.Name = "cbAcademy";
+            this.cbAcademy.Size = new System.Drawing.Size(233, 26);
+            this.cbAcademy.TabIndex = 9;
+            // 
+            // labelAcademy
+            // 
+            this.labelAcademy.AutoSize = true;
+            this.labelAcademy.Location = new System.Drawing.Point(13, 41);
+            this.labelAcademy.Name = "labelAcademy";
+            this.labelAcademy.Size = new System.Drawing.Size(69, 18);
+            this.labelAcademy.TabIndex = 10;
+            this.labelAcademy.Text = "Academy";
+            // 
             // ClassForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(735, 229);
+            this.ClientSize = new System.Drawing.Size(735, 273);
+            this.Controls.Add(this.labelAcademy);
+            this.Controls.Add(this.cbAcademy);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dataGridClasses);
             this.Controls.Add(this.dpEndDate);
@@ -260,5 +281,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn column_end_date;
         private System.Windows.Forms.DataGridViewCheckBoxColumn column_finished;
         private System.Windows.Forms.DataGridViewImageColumn column_delete;
+        private System.Windows.Forms.ComboBox cbAcademy;
+        private System.Windows.Forms.Label labelAcademy;
     }
 }

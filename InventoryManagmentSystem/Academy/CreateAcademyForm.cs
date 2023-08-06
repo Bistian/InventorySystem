@@ -13,12 +13,12 @@ using System.Windows.Forms;
 
 namespace InventoryManagmentSystem
 {
-    public partial class AcademyForm : Form
+    public partial class CreateAcademyForm : Form
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
 
-        public AcademyForm()
+        public CreateAcademyForm()
         {
             InitializeComponent();
             LoadBrands();
@@ -35,7 +35,7 @@ namespace InventoryManagmentSystem
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    cbBrand.Items.Add(reader[2]);
+                    cbState.Items.Add(reader[2]);
                 }
             }
             catch(Exception ex)
@@ -85,7 +85,7 @@ namespace InventoryManagmentSystem
             {
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Name", tbAcademyName.Text);
-                command.Parameters.AddWithValue("@Brand", cbBrand.SelectedItem.ToString());
+                command.Parameters.AddWithValue("@Brand", cbState.SelectedItem.ToString());
                 connection.Open();
                 object result = command.ExecuteScalar();
                 if (result != null) { exists = true; }
@@ -114,7 +114,7 @@ namespace InventoryManagmentSystem
             {
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Name", tbAcademyName.Text);
-                command.Parameters.AddWithValue("@Brand", cbBrand.SelectedItem.ToString());
+                command.Parameters.AddWithValue("@Brand", cbState.SelectedItem.ToString());
                 connection.Open();
                 command.ExecuteNonQuery();
                 isAdded = true;
@@ -137,7 +137,7 @@ namespace InventoryManagmentSystem
                     throw new Exception("Need a name.");
                 }
 
-                if(cbBrand.SelectedIndex == -1 )
+                if(cbState.SelectedIndex == -1 )
                 {
                     throw new Exception("Need a brand.");
                 }
