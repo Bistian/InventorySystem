@@ -12,17 +12,42 @@ using System.Windows.Forms;
 
 namespace InventoryManagmentSystem
 {
-    public partial class ClassForm : Form
+    public partial class CreateClassForm : Form
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
+        Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
 
-        public ClassForm()
+        public CreateClassForm()
         {
             InitializeComponent();
             dataGridClasses.Columns["column_start_date"].DefaultCellStyle.Format = "d";
             dataGridClasses.Columns["column_end_date"].DefaultCellStyle.Format = "d";
+            LoadAcademies();
             LoadClasses();
+        }
+
+        private void LoadAcademies()
+        {
+            string query = "SELECT Id, Name FROM tbAcademies";
+            SqlCommand command = new SqlCommand(query, connection);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    // Create a map with the uuid as a key and the name as a value.
+                    academyMap.Add((Guid)reader[0], reader[1].ToString());
+                    // Fill the combo box with academy names.
+                    cbAcademy.Items.Add(reader[1]);
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            connection.Close();
         }
 
         private void LoadClasses()
@@ -53,12 +78,13 @@ namespace InventoryManagmentSystem
         /// Check if item already exists on the table.
         /// </summary>
         /// <returns>1 = exists | 0 = dosn't exist | -1 = error. </returns>
-        private int ItemAlreadyExists()
+        private int ItemAlreadyExists(Guid academyId)
         {
             string query = @"
                 SELECT * 
                 FROM tbClasses 
-                WHERE Name = @Name AND
+                WHERE AcademyId = @AcademyId AND
+                    Name = @Name AND
                     StartDate = @Start AND
                     EndDate = @End
             ";
@@ -68,6 +94,7 @@ namespace InventoryManagmentSystem
             try
             {
                 SqlCommand command = new SqlCommand(@query, connection);
+                command.Parameters.AddWithValue("@AcademyId", academyId);
                 command.Parameters.AddWithValue("@Name", tbClassName.Text);
                 command.Parameters.AddWithValue("@Start", dpStartDate.Value.Date);
                 command.Parameters.AddWithValue("@End", dpEndDate.Value.Date);
@@ -86,13 +113,24 @@ namespace InventoryManagmentSystem
 
         private bool AddClass()
         {
-            int exists = ItemAlreadyExists();
+
+            // Get the uuid from the selected academy.
+            Guid academyId = Guid.Empty;
+            foreach(var item in academyMap)
+            {
+                if(item.Value == cbAcademy.Text)
+                {
+                    academyId = item.Key;
+                }
+            }
+
+            int exists = ItemAlreadyExists(academyId);
             if(exists == 1 || exists == -1) { return false; }
 
             string query = @"
                 INSERT INTO tbClasses
-                (Name, StartDate, EndDate)
-                VALUES(@Name, @Start, @End)
+                (AcademyId, Name, StartDate, EndDate)
+                VALUES(@AcademyId, @Name, @Start, @End)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
@@ -100,6 +138,7 @@ namespace InventoryManagmentSystem
             try
             {
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@AcademyId", academyId);
                 command.Parameters.AddWithValue("@Name", tbClassName.Text);
                 command.Parameters.AddWithValue("@Start", dpStartDate.Value.Date);
                 command.Parameters.AddWithValue("@End", dpEndDate.Value.Date);
@@ -194,10 +233,11 @@ namespace InventoryManagmentSystem
         {
             try
             {
-                if(tbClassName.Text.Length == 0) { throw new Exception("Name needs to be filled."); }
-                if(dpStartDate.Value >= dpEndDate.Value ) { throw new Exception("End date cannot be equal or bigger than start date."); }
-                if(dpStartDate.Value < new DateTime()) { throw new Exception("Start date cannot be today or before."); }
-                if(!AddClass()) { throw new Exception("Failed to add class."); }
+                if (cbAcademy.SelectedIndex < 0) { throw new Exception("Academy needs to be filled."); }
+                if (tbClassName.Text.Length == 0) { throw new Exception("Name needs to be filled."); }
+                if (dpStartDate.Value >= dpEndDate.Value ) { throw new Exception("End date cannot be equal or bigger than start date."); }
+                if (dpStartDate.Value < new DateTime()) { throw new Exception("Start date cannot be today or before."); }
+                if (!AddClass()) { throw new Exception("Failed to add class."); }
                 LoadClasses();
             }
             catch (Exception ex)

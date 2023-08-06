@@ -1,6 +1,6 @@
 ﻿namespace InventoryManagmentSystem
 {
-    partial class ClassForm
+    partial class CreateClassForm
     {
         /// <summary>
         /// Required designer variable.
@@ -218,6 +218,7 @@
             // 
             // cbAcademy
             // 
+            this.cbAcademy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAcademy.FormattingEnabled = true;
             this.cbAcademy.Location = new System.Drawing.Point(16, 62);
             this.cbAcademy.Name = "cbAcademy";
@@ -233,7 +234,7 @@
             this.labelAcademy.TabIndex = 10;
             this.labelAcademy.Text = "Academy";
             // 
-            // ClassForm
+            // CreateClassForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -254,7 +255,7 @@
             this.ForeColor = System.Drawing.SystemColors.Window;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.Name = "ClassForm";
+            this.Name = "CreateClassForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Classes";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridClasses)).EndInit();
