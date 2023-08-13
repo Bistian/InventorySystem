@@ -18,56 +18,16 @@ namespace InventoryManagmentSystem
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
 
+        #region SQL_Variables
+        //Creating command
+        SqlCommand cm = new SqlCommand();
+        //Creatinng Reader
+        SqlDataReader dr;
+        #endregion SQL_Variables
+
         public CreateAcademyForm()
         {
             InitializeComponent();
-            LoadBrands();
-            LoadAcademies();
-        }
-
-        private void LoadBrands()
-        {
-            string query = HelperQuery.BrandsLoad();
-            try
-            {
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    cbState.Items.Add(reader[2]);
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
-        }
-
-        private void LoadAcademies()
-        {
-            dataGridAcademies.Rows.Clear();
-            string query = "SELECT * FROM tbAcademies";
-            try
-            {
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                int i = 0;
-                while(reader.Read())
-                {
-                    dataGridAcademies.Rows.Add(
-                        i++, reader[0], reader[1], reader[2]
-                    );
-                }
-            }
-            catch( Exception ex )
-            {
-                Console.WriteLine (ex.Message);
-            }
-            connection.Close();
-
         }
 
         private bool ItemExists()
@@ -76,7 +36,7 @@ namespace InventoryManagmentSystem
                 SELECT *
                 FROM tbAcademies
                 WHERE Name = @Name AND
-                    Brand = @Brand
+                    State = @State
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
@@ -85,7 +45,7 @@ namespace InventoryManagmentSystem
             {
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Name", tbAcademyName.Text);
-                command.Parameters.AddWithValue("@Brand", cbState.SelectedItem.ToString());
+                command.Parameters.AddWithValue("@State", cbState.SelectedItem.ToString());
                 connection.Open();
                 object result = command.ExecuteScalar();
                 if (result != null) { exists = true; }
@@ -103,8 +63,8 @@ namespace InventoryManagmentSystem
         {
             string query = @"
                 INSERT INTO tbAcademies
-                (Name, Brand)
-                VALUES (@Name, @Brand)
+                (Name, Email, Phone, Street, City, State, Zip)
+                VALUES (@Name, @Email, @Phone, @Street, @City, @State, @Zip)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
@@ -114,17 +74,24 @@ namespace InventoryManagmentSystem
             {
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Name", tbAcademyName.Text);
-                command.Parameters.AddWithValue("@Brand", cbState.SelectedItem.ToString());
+                command.Parameters.AddWithValue("@Email", tbEmail.Text);
+                command.Parameters.AddWithValue("@Phone", tbPhone.Text);
+                command.Parameters.AddWithValue("@Street", tbStreet.Text);
+                command.Parameters.AddWithValue("@City", tbCity.Text);
+                command.Parameters.AddWithValue("@State", cbState.SelectedItem.ToString());
+                command.Parameters.AddWithValue("@Zip", tbZip.Text);
+
+
                 connection.Open();
                 command.ExecuteNonQuery();
                 isAdded = true;
-                LoadAcademies();
+                connection.Close();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                connection.Close();
             }
-
             return isAdded;
         }
 

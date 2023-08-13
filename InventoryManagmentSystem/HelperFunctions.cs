@@ -66,6 +66,22 @@ namespace InventoryManagmentSystem
             return true;
         }
 
-        
+        public static void openChildFormToPanel(Panel panel, Form childForm, Form activeForm = null)
+        {
+            if (activeForm != null)
+            {
+                activeForm.Close();
+            }
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            panel.Controls.Add(childForm);
+            panel.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+        }
+
+
     }
 }
