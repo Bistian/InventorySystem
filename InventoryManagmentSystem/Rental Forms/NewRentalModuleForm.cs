@@ -1426,5 +1426,10 @@ namespace InventoryManagmentSystem
                 panel8.Visible = true;
             }
         }
+
+        private void NewRentalModuleForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

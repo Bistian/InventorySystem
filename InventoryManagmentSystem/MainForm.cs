@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryManagmentSystem.Academy;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -138,6 +139,7 @@ namespace InventoryManagmentSystem
                 if (tab == "RentalHome") { PanelRentalHome.BackColor = onColor; }
                 else if (tab == "ActiveRentals") { panelActiveRentals.BackColor = onColor; }
                 else if (tab == "RentalsInv") { panelRentalInv.BackColor = onColor; }
+                else if (tab == "RentalsAcademy") { panelRentalAcademies.BackColor = onColor; }
             }
         }
 
@@ -173,6 +175,12 @@ namespace InventoryManagmentSystem
         {
             ColorTabSwitch("RentalsInv", false);
             openChildForm(new InventoryForm());
+        }
+
+        private void customButton1_Click(object sender, EventArgs e)
+        {
+            ColorTabSwitch("RentalsAcademy", false);
+            openChildForm(new AcademyForm());
         }
     }
 }
