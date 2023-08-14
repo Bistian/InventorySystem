@@ -18,6 +18,7 @@ namespace InventoryManagmentSystem.Academy
         SqlDataReader dr;
         #endregion SQL_Variables
 
+        bool minimized = false;
         public AcademyForm()
         {
             InitializeComponent();
@@ -34,7 +35,30 @@ namespace InventoryManagmentSystem.Academy
 
             Point position = new Point(width, height);
             btnRezsize.Location = position;
+
+            if(minimized)
+            {
+                btnRezsize.Text = "> p";
+            }
+            else
+            {
+                btnRezsize.Text = "< p";
+            }
         }
 
+        private void btnRezsize_Click(object sender, System.EventArgs e)
+        {
+            if (!minimized)
+            {
+                panelLeft.Width = panelLeft.Width / 10;
+                minimized = !minimized;
+            }
+            else
+            {
+                panelLeft.Width = panelLeft.Width * 10;
+                minimized = !minimized;
+            }
+            InitMinimizeButton();
+        }
     }
 }
