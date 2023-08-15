@@ -78,6 +78,7 @@
             this.searchBar.Name = "searchBar";
             this.searchBar.Size = new System.Drawing.Size(208, 24);
             this.searchBar.TabIndex = 20;
+            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
             // 
             // dataGridAcademies
             // 

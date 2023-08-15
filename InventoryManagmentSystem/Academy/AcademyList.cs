@@ -77,6 +77,5 @@ namespace InventoryManagmentSystem.Academy
             dr.Close();
             connection.Close();
         }
-
     }
 }

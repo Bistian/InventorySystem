@@ -25,7 +25,7 @@ namespace InventoryManagmentSystem.Academy
             InitMinimizeButton();
 
             AcademyList ListForm = new AcademyList();
-            HelperFunctions.openChildFormToPanel(panelDocker, ListForm);;
+            HelperFunctions.openChildFormToPanel(panelDocker, ListForm);
         }
 
         private void InitMinimizeButton()
@@ -61,6 +61,20 @@ namespace InventoryManagmentSystem.Academy
                 minimized = !minimized;
             }
             InitMinimizeButton();
+        }
+
+        private void btnCreateAcademy_Click(object sender, System.EventArgs e)
+        {
+            CreateAcademyForm AcadForm = new CreateAcademyForm();
+            HelperFunctions.openChildFormToPanel(panelDocker, AcadForm);
+            //need to close previous form
+        }
+
+        private void btnAcademyList_Click(object sender, System.EventArgs e)
+        {
+            AcademyList ListForm = new AcademyList();
+            HelperFunctions.openChildFormToPanel(panelDocker, ListForm);
+            //need to close previous form
         }
     }
 }

@@ -115,6 +115,7 @@ namespace InventoryManagmentSystem
                 }
 
                 AddAcademy();
+                this.Dispose();
 
             }
             catch(Exception ex)
