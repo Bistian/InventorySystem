@@ -31,9 +31,9 @@
             this.labelAcademies = new System.Windows.Forms.Label();
             this.btnRezsize = new System.Windows.Forms.Button();
             this.panelLeft = new System.Windows.Forms.Panel();
-            this.panelDocker = new System.Windows.Forms.Panel();
-            this.btnCreateAcademy = new System.Windows.Forms.Button();
             this.btnAcademyList = new System.Windows.Forms.Button();
+            this.btnCreateAcademy = new System.Windows.Forms.Button();
+            this.panelDocker = new System.Windows.Forms.Panel();
             this.panelLeft.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,14 +74,17 @@
             this.panelLeft.Size = new System.Drawing.Size(200, 450);
             this.panelLeft.TabIndex = 0;
             // 
-            // panelDocker
+            // btnAcademyList
             // 
-            this.panelDocker.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDocker.Location = new System.Drawing.Point(200, 0);
-            this.panelDocker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panelDocker.Name = "panelDocker";
-            this.panelDocker.Size = new System.Drawing.Size(872, 450);
-            this.panelDocker.TabIndex = 27;
+            this.btnAcademyList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAcademyList.ForeColor = System.Drawing.Color.Black;
+            this.btnAcademyList.Location = new System.Drawing.Point(30, 48);
+            this.btnAcademyList.Name = "btnAcademyList";
+            this.btnAcademyList.Size = new System.Drawing.Size(164, 51);
+            this.btnAcademyList.TabIndex = 28;
+            this.btnAcademyList.Text = "Academy List";
+            this.btnAcademyList.UseVisualStyleBackColor = true;
+            this.btnAcademyList.Click += new System.EventHandler(this.btnAcademyList_Click);
             // 
             // btnCreateAcademy
             // 
@@ -95,17 +98,14 @@
             this.btnCreateAcademy.UseVisualStyleBackColor = true;
             this.btnCreateAcademy.Click += new System.EventHandler(this.btnCreateAcademy_Click);
             // 
-            // btnAcademyList
+            // panelDocker
             // 
-            this.btnAcademyList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAcademyList.ForeColor = System.Drawing.Color.Black;
-            this.btnAcademyList.Location = new System.Drawing.Point(30, 48);
-            this.btnAcademyList.Name = "btnAcademyList";
-            this.btnAcademyList.Size = new System.Drawing.Size(164, 51);
-            this.btnAcademyList.TabIndex = 28;
-            this.btnAcademyList.Text = "Academy List";
-            this.btnAcademyList.UseVisualStyleBackColor = true;
-            this.btnAcademyList.Click += new System.EventHandler(this.btnAcademyList_Click);
+            this.panelDocker.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDocker.Location = new System.Drawing.Point(200, 0);
+            this.panelDocker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelDocker.Name = "panelDocker";
+            this.panelDocker.Size = new System.Drawing.Size(872, 450);
+            this.panelDocker.TabIndex = 27;
             // 
             // AcademyForm
             // 
@@ -130,8 +130,8 @@
         private System.Windows.Forms.Label labelAcademies;
         private System.Windows.Forms.Button btnRezsize;
         private System.Windows.Forms.Panel panelLeft;
-        private System.Windows.Forms.Panel panelDocker;
         private System.Windows.Forms.Button btnCreateAcademy;
         private System.Windows.Forms.Button btnAcademyList;
+        public System.Windows.Forms.Panel panelDocker;
     }
 }

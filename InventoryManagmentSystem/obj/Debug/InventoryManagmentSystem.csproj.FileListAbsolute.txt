@@ -277,3 +277,4 @@ C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\I
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.CreateClassForm.resources
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Academy.AcademyForm.resources
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Academy.AcademyList.resources
+C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Academy.ClassList.resources
