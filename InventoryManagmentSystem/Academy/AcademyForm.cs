@@ -39,10 +39,12 @@ namespace InventoryManagmentSystem.Academy
             if(minimized)
             {
                 btnRezsize.Text = "> p";
+                labelAcademies.Visible = false;
             }
             else
             {
                 btnRezsize.Text = "< p";
+                labelAcademies.Visible = true;
             }
         }
 
