@@ -18,10 +18,11 @@ namespace InventoryManagmentSystem.Academy
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
         Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
-
-        public ClassList()
+        string AcademyId;
+        public ClassList(string AcadId)
         {
             InitializeComponent();
+            AcademyId = AcadId;
             dataGridClasses.Columns["column_start_date"].DefaultCellStyle.Format = "d";
             dataGridClasses.Columns["column_end_date"].DefaultCellStyle.Format = "d";
             LoadClasses();
@@ -30,7 +31,7 @@ namespace InventoryManagmentSystem.Academy
         private void LoadClasses()
         {
             dataGridClasses.Rows.Clear();
-            string query = "SELECT * FROM tbClasses";
+            string query = "SELECT * FROM tbClasses WHERE AcademyId ='" + AcademyId + "' ";
             try
             {
                 connection.Open();
@@ -40,7 +41,7 @@ namespace InventoryManagmentSystem.Academy
                 while (reader.Read())
                 {
                     dataGridClasses.Rows.Add(
-                        i++, reader[0], reader[1], reader[2], reader[3], reader[4]
+                        i++, reader[1], reader[2], reader[3], reader[4], reader[5]
                     );
                 }
             }

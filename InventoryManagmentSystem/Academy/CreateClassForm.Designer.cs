@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelTitle = new System.Windows.Forms.Label();
             this.labelClassName = new System.Windows.Forms.Label();
             this.tbClassName = new System.Windows.Forms.TextBox();
@@ -36,190 +35,85 @@
             this.dpStartDate = new System.Windows.Forms.DateTimePicker();
             this.labelEndDate = new System.Windows.Forms.Label();
             this.dpEndDate = new System.Windows.Forms.DateTimePicker();
-            this.dataGridClasses = new System.Windows.Forms.DataGridView();
-            this.column_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_start_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_end_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_finished = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.column_delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.btnAdd = new System.Windows.Forms.Button();
             this.cbAcademy = new System.Windows.Forms.ComboBox();
             this.labelAcademy = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridClasses)).BeginInit();
             this.SuspendLayout();
             // 
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.labelTitle.Location = new System.Drawing.Point(11, 16);
-            this.labelTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitle.Location = new System.Drawing.Point(18, 23);
+            this.labelTitle.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(186, 29);
+            this.labelTitle.Size = new System.Drawing.Size(264, 39);
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "Create Classes";
             // 
             // labelClassName
             // 
             this.labelClassName.AutoSize = true;
-            this.labelClassName.Location = new System.Drawing.Point(13, 91);
+            this.labelClassName.Location = new System.Drawing.Point(21, 128);
+            this.labelClassName.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.labelClassName.Name = "labelClassName";
-            this.labelClassName.Size = new System.Drawing.Size(111, 24);
+            this.labelClassName.Size = new System.Drawing.Size(167, 32);
             this.labelClassName.TabIndex = 1;
             this.labelClassName.Text = "Class Name";
             // 
             // tbClassName
             // 
-            this.tbClassName.Location = new System.Drawing.Point(16, 112);
+            this.tbClassName.Location = new System.Drawing.Point(25, 157);
+            this.tbClassName.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.tbClassName.Name = "tbClassName";
-            this.tbClassName.Size = new System.Drawing.Size(233, 28);
+            this.tbClassName.Size = new System.Drawing.Size(370, 38);
             this.tbClassName.TabIndex = 2;
             // 
             // labelStartDate
             // 
             this.labelStartDate.AutoSize = true;
-            this.labelStartDate.Location = new System.Drawing.Point(13, 139);
+            this.labelStartDate.Location = new System.Drawing.Point(21, 196);
+            this.labelStartDate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.labelStartDate.Name = "labelStartDate";
-            this.labelStartDate.Size = new System.Drawing.Size(89, 24);
+            this.labelStartDate.Size = new System.Drawing.Size(141, 32);
             this.labelStartDate.TabIndex = 3;
             this.labelStartDate.Text = "Start Date";
             // 
             // dpStartDate
             // 
             this.dpStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.dpStartDate.Location = new System.Drawing.Point(16, 160);
+            this.dpStartDate.Location = new System.Drawing.Point(25, 225);
+            this.dpStartDate.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.dpStartDate.Name = "dpStartDate";
-            this.dpStartDate.Size = new System.Drawing.Size(233, 26);
+            this.dpStartDate.Size = new System.Drawing.Size(370, 26);
             this.dpStartDate.TabIndex = 4;
             // 
             // labelEndDate
             // 
             this.labelEndDate.AutoSize = true;
-            this.labelEndDate.Location = new System.Drawing.Point(13, 186);
+            this.labelEndDate.Location = new System.Drawing.Point(21, 262);
+            this.labelEndDate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.labelEndDate.Name = "labelEndDate";
-            this.labelEndDate.Size = new System.Drawing.Size(88, 24);
+            this.labelEndDate.Size = new System.Drawing.Size(132, 32);
             this.labelEndDate.TabIndex = 5;
             this.labelEndDate.Text = "End Date";
             // 
             // dpEndDate
             // 
             this.dpEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.dpEndDate.Location = new System.Drawing.Point(16, 207);
+            this.dpEndDate.Location = new System.Drawing.Point(25, 292);
+            this.dpEndDate.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.dpEndDate.Name = "dpEndDate";
-            this.dpEndDate.Size = new System.Drawing.Size(233, 26);
+            this.dpEndDate.Size = new System.Drawing.Size(370, 26);
             this.dpEndDate.TabIndex = 6;
-            // 
-            // dataGridClasses
-            // 
-            this.dataGridClasses.AllowUserToAddRows = false;
-            this.dataGridClasses.AllowUserToResizeColumns = false;
-            this.dataGridClasses.AllowUserToResizeRows = false;
-            this.dataGridClasses.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridClasses.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MediumBlue;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridClasses.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridClasses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridClasses.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.column_number,
-            this.column_id,
-            this.column_name,
-            this.column_start_date,
-            this.column_end_date,
-            this.column_finished,
-            this.column_delete});
-            this.dataGridClasses.EnableHeadersVisualStyles = false;
-            this.dataGridClasses.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridClasses.Location = new System.Drawing.Point(255, 16);
-            this.dataGridClasses.Name = "dataGridClasses";
-            this.dataGridClasses.ReadOnly = true;
-            this.dataGridClasses.RowHeadersVisible = false;
-            this.dataGridClasses.RowHeadersWidth = 51;
-            this.dataGridClasses.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.dataGridClasses.RowTemplate.Height = 40;
-            this.dataGridClasses.Size = new System.Drawing.Size(468, 243);
-            this.dataGridClasses.TabIndex = 7;
-            this.dataGridClasses.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridClasses_CellClick);
-            // 
-            // column_number
-            // 
-            this.column_number.FillWeight = 25F;
-            this.column_number.HeaderText = "#";
-            this.column_number.MinimumWidth = 6;
-            this.column_number.Name = "column_number";
-            this.column_number.ReadOnly = true;
-            this.column_number.Width = 25;
-            // 
-            // column_id
-            // 
-            this.column_id.FillWeight = 1F;
-            this.column_id.HeaderText = "Id";
-            this.column_id.MinimumWidth = 6;
-            this.column_id.Name = "column_id";
-            this.column_id.ReadOnly = true;
-            this.column_id.Visible = false;
-            this.column_id.Width = 125;
-            // 
-            // column_name
-            // 
-            this.column_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_name.FillWeight = 78.16801F;
-            this.column_name.HeaderText = "Name";
-            this.column_name.MinimumWidth = 6;
-            this.column_name.Name = "column_name";
-            this.column_name.ReadOnly = true;
-            // 
-            // column_start_date
-            // 
-            this.column_start_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_start_date.FillWeight = 46.90081F;
-            this.column_start_date.HeaderText = "Start";
-            this.column_start_date.MinimumWidth = 6;
-            this.column_start_date.Name = "column_start_date";
-            this.column_start_date.ReadOnly = true;
-            // 
-            // column_end_date
-            // 
-            this.column_end_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_end_date.FillWeight = 46.90081F;
-            this.column_end_date.HeaderText = "End";
-            this.column_end_date.MinimumWidth = 6;
-            this.column_end_date.Name = "column_end_date";
-            this.column_end_date.ReadOnly = true;
-            // 
-            // column_finished
-            // 
-            this.column_finished.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_finished.FillWeight = 35F;
-            this.column_finished.HeaderText = "Finished";
-            this.column_finished.MinimumWidth = 6;
-            this.column_finished.Name = "column_finished";
-            this.column_finished.ReadOnly = true;
-            this.column_finished.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.column_finished.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // column_delete
-            // 
-            this.column_delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_delete.FillWeight = 19.542F;
-            this.column_delete.HeaderText = "";
-            this.column_delete.MinimumWidth = 6;
-            this.column_delete.Name = "column_delete";
-            this.column_delete.ReadOnly = true;
             // 
             // btnAdd
             // 
             this.btnAdd.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnAdd.Location = new System.Drawing.Point(16, 236);
+            this.btnAdd.Location = new System.Drawing.Point(25, 333);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(233, 23);
+            this.btnAdd.Size = new System.Drawing.Size(373, 33);
             this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -229,30 +123,31 @@
             // 
             this.cbAcademy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAcademy.FormattingEnabled = true;
-            this.cbAcademy.Location = new System.Drawing.Point(16, 62);
+            this.cbAcademy.Location = new System.Drawing.Point(25, 87);
+            this.cbAcademy.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.cbAcademy.Name = "cbAcademy";
-            this.cbAcademy.Size = new System.Drawing.Size(233, 30);
+            this.cbAcademy.Size = new System.Drawing.Size(370, 39);
             this.cbAcademy.TabIndex = 9;
             // 
             // labelAcademy
             // 
             this.labelAcademy.AutoSize = true;
-            this.labelAcademy.Location = new System.Drawing.Point(13, 41);
+            this.labelAcademy.Location = new System.Drawing.Point(21, 58);
+            this.labelAcademy.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.labelAcademy.Name = "labelAcademy";
-            this.labelAcademy.Size = new System.Drawing.Size(90, 24);
+            this.labelAcademy.Size = new System.Drawing.Size(132, 32);
             this.labelAcademy.TabIndex = 10;
             this.labelAcademy.Text = "Academy";
             // 
             // CreateClassForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(917, 515);
+            this.ClientSize = new System.Drawing.Size(1467, 726);
             this.Controls.Add(this.labelAcademy);
             this.Controls.Add(this.cbAcademy);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.dataGridClasses);
             this.Controls.Add(this.dpEndDate);
             this.Controls.Add(this.labelEndDate);
             this.Controls.Add(this.dpStartDate);
@@ -260,14 +155,13 @@
             this.Controls.Add(this.tbClassName);
             this.Controls.Add(this.labelClassName);
             this.Controls.Add(this.labelTitle);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.Window;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.Name = "CreateClassForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Classes";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridClasses)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -282,15 +176,7 @@
         private System.Windows.Forms.DateTimePicker dpStartDate;
         private System.Windows.Forms.Label labelEndDate;
         private System.Windows.Forms.DateTimePicker dpEndDate;
-        public System.Windows.Forms.DataGridView dataGridClasses;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_start_date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_end_date;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn column_finished;
-        private System.Windows.Forms.DataGridViewImageColumn column_delete;
         private System.Windows.Forms.ComboBox cbAcademy;
         private System.Windows.Forms.Label labelAcademy;
     }

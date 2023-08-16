@@ -25,6 +25,8 @@ namespace InventoryManagmentSystem.Academy
         SqlDataReader dr;
         #endregion SQL_Variables
 
+        AcademyForm parentForm;
+
         public AcademyList()
         {
             InitializeComponent();
@@ -80,10 +82,20 @@ namespace InventoryManagmentSystem.Academy
 
         private void dataGridAcademies_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var parentForm = this.ParentForm as AcademyForm;
-
-            ClassList ClassList = new ClassList();
+             string AcademyId = dataGridAcademies.Rows[e.RowIndex].Cells["column_id"].Value.ToString();
+            ClassList ClassList = new ClassList(AcademyId);
+            parentForm = this.ParentForm as AcademyForm;
             HelperFunctions.openChildFormToPanel(parentForm.panelDocker, ClassList, this);
+            SetToClass();
+        }
+
+        private void SetToClass()
+        {
+            parentForm.labelAcademies.Text = "Classes";
+            parentForm.btnClassList.Visible = true;
+            parentForm.btnCreateClass.Visible = true;
+
+            parentForm.btnCreateAcademy.Visible = false;
         }
     }
 }

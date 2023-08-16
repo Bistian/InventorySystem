@@ -75,6 +75,23 @@ namespace InventoryManagmentSystem.Academy
             AcademyList ListForm = new AcademyList();
             HelperFunctions.openChildFormToPanel(panelDocker, ListForm);
             //need to close previous form
+            btnClassList.Visible = false;
+            btnCreateClass.Visible = false;
+            btnCreateAcademy.Visible = true;
+            labelAcademies.Text = "Academies";
+        }
+
+        private void btnCreateClass_Click(object sender, System.EventArgs e)
+        {
+            CreateClassForm ListForm = new CreateClassForm();
+            HelperFunctions.openChildFormToPanel(panelDocker, ListForm);
+        }
+
+        private void btnClassList_Click(object sender, System.EventArgs e)
+        {
+            ClassList ClassList = new ClassList("");
+            HelperFunctions.openChildFormToPanel(panelDocker, ClassList);
+            //need to close previous form
         }
     }
 }
