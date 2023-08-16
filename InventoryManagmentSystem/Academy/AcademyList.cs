@@ -78,5 +78,12 @@ namespace InventoryManagmentSystem.Academy
             connection.Close();
         }
 
+        private void dataGridAcademies_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var parentForm = this.ParentForm as AcademyForm;
+
+            ClassList ClassList = new ClassList();
+            HelperFunctions.openChildFormToPanel(parentForm.panelDocker, ClassList, this);
+        }
     }
 }

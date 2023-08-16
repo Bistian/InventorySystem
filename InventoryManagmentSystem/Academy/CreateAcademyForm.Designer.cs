@@ -44,33 +44,47 @@
             this.labelZip = new System.Windows.Forms.Label();
             this.tbZip = new System.Windows.Forms.TextBox();
             this.labelTitle = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbAcademyName
             // 
-            this.tbAcademyName.Location = new System.Drawing.Point(37, 96);
-            this.tbAcademyName.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tbAcademyName.Location = new System.Drawing.Point(2, 28);
+            this.tbAcademyName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbAcademyName.Name = "tbAcademyName";
-            this.tbAcademyName.Size = new System.Drawing.Size(292, 38);
+            this.tbAcademyName.Size = new System.Drawing.Size(256, 34);
             this.tbAcademyName.TabIndex = 1;
             // 
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(32, 65);
-            this.labelName.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelName.Location = new System.Drawing.Point(-3, -1);
+            this.labelName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(89, 32);
+            this.labelName.Size = new System.Drawing.Size(78, 29);
             this.labelName.TabIndex = 3;
             this.labelName.Text = "Name";
             // 
             // btnAdd
             // 
             this.btnAdd.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnAdd.Location = new System.Drawing.Point(37, 508);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAdd.Location = new System.Drawing.Point(4, 488);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(295, 40);
+            this.btnAdd.Size = new System.Drawing.Size(258, 37);
             this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -79,10 +93,10 @@
             // labelState
             // 
             this.labelState.AutoSize = true;
-            this.labelState.Location = new System.Drawing.Point(32, 427);
-            this.labelState.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelState.Location = new System.Drawing.Point(-4, -2);
+            this.labelState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelState.Name = "labelState";
-            this.labelState.Size = new System.Drawing.Size(81, 32);
+            this.labelState.Size = new System.Drawing.Size(68, 29);
             this.labelState.TabIndex = 4;
             this.labelState.Text = "State";
             // 
@@ -141,143 +155,214 @@
             "WV",
             "WI",
             "WY"});
-            this.cbState.Location = new System.Drawing.Point(37, 458);
-            this.cbState.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.cbState.Location = new System.Drawing.Point(0, 27);
+            this.cbState.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbState.Name = "cbState";
-            this.cbState.Size = new System.Drawing.Size(93, 39);
+            this.cbState.Size = new System.Drawing.Size(82, 37);
             this.cbState.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(32, 138);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label1.Location = new System.Drawing.Point(-3, -1);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 32);
+            this.label1.Size = new System.Drawing.Size(74, 29);
             this.label1.TabIndex = 9;
             this.label1.Text = "Email";
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(37, 169);
-            this.tbEmail.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tbEmail.Location = new System.Drawing.Point(2, 28);
+            this.tbEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbEmail.Name = "tbEmail";
-            this.tbEmail.Size = new System.Drawing.Size(292, 38);
+            this.tbEmail.Size = new System.Drawing.Size(256, 34);
             this.tbEmail.TabIndex = 2;
             // 
             // labelPhone
             // 
             this.labelPhone.AutoSize = true;
-            this.labelPhone.Location = new System.Drawing.Point(32, 210);
-            this.labelPhone.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelPhone.Location = new System.Drawing.Point(-3, -1);
+            this.labelPhone.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPhone.Name = "labelPhone";
-            this.labelPhone.Size = new System.Drawing.Size(97, 32);
+            this.labelPhone.Size = new System.Drawing.Size(83, 29);
             this.labelPhone.TabIndex = 11;
             this.labelPhone.Text = "Phone";
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(37, 241);
-            this.tbPhone.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tbPhone.Location = new System.Drawing.Point(2, 28);
+            this.tbPhone.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(292, 38);
+            this.tbPhone.Size = new System.Drawing.Size(256, 34);
             this.tbPhone.TabIndex = 3;
             // 
             // labelStreet
             // 
             this.labelStreet.AutoSize = true;
-            this.labelStreet.Location = new System.Drawing.Point(32, 282);
-            this.labelStreet.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelStreet.Location = new System.Drawing.Point(-4, -1);
+            this.labelStreet.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStreet.Name = "labelStreet";
-            this.labelStreet.Size = new System.Drawing.Size(90, 32);
+            this.labelStreet.Size = new System.Drawing.Size(77, 29);
             this.labelStreet.TabIndex = 13;
             this.labelStreet.Text = "Street";
             // 
             // tbStreet
             // 
-            this.tbStreet.Location = new System.Drawing.Point(37, 313);
-            this.tbStreet.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tbStreet.Location = new System.Drawing.Point(0, 28);
+            this.tbStreet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbStreet.Name = "tbStreet";
-            this.tbStreet.Size = new System.Drawing.Size(292, 38);
+            this.tbStreet.Size = new System.Drawing.Size(256, 34);
             this.tbStreet.TabIndex = 4;
             // 
             // labelCity
             // 
             this.labelCity.AutoSize = true;
-            this.labelCity.Location = new System.Drawing.Point(32, 355);
-            this.labelCity.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelCity.Location = new System.Drawing.Point(-4, -1);
+            this.labelCity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelCity.Name = "labelCity";
-            this.labelCity.Size = new System.Drawing.Size(63, 32);
+            this.labelCity.Size = new System.Drawing.Size(53, 29);
             this.labelCity.TabIndex = 15;
             this.labelCity.Text = "City";
             // 
             // tbCity
             // 
-            this.tbCity.Location = new System.Drawing.Point(37, 386);
-            this.tbCity.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tbCity.Location = new System.Drawing.Point(0, 28);
+            this.tbCity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbCity.Name = "tbCity";
-            this.tbCity.Size = new System.Drawing.Size(292, 38);
+            this.tbCity.Size = new System.Drawing.Size(256, 34);
             this.tbCity.TabIndex = 5;
             // 
             // labelZip
             // 
             this.labelZip.AutoSize = true;
-            this.labelZip.Location = new System.Drawing.Point(139, 427);
-            this.labelZip.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelZip.Location = new System.Drawing.Point(89, -2);
+            this.labelZip.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelZip.Name = "labelZip";
-            this.labelZip.Size = new System.Drawing.Size(54, 32);
+            this.labelZip.Size = new System.Drawing.Size(47, 29);
             this.labelZip.TabIndex = 16;
             this.labelZip.Text = "Zip";
             // 
             // tbZip
             // 
-            this.tbZip.Location = new System.Drawing.Point(144, 458);
-            this.tbZip.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tbZip.Location = new System.Drawing.Point(94, 27);
+            this.tbZip.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbZip.Name = "tbZip";
-            this.tbZip.Size = new System.Drawing.Size(185, 38);
+            this.tbZip.Size = new System.Drawing.Size(162, 34);
             this.tbZip.TabIndex = 7;
             // 
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitle.Location = new System.Drawing.Point(31, 9);
-            this.labelTitle.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitle.Location = new System.Drawing.Point(6, 0);
+            this.labelTitle.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(341, 42);
+            this.labelTitle.Size = new System.Drawing.Size(284, 39);
             this.labelTitle.TabIndex = 1;
-            this.labelTitle.Text = "Create Academies";
+            this.labelTitle.Text = "Create Academy";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Controls.Add(this.labelTitle);
+            this.flowLayoutPanel1.Controls.Add(this.panel1);
+            this.flowLayoutPanel1.Controls.Add(this.panel2);
+            this.flowLayoutPanel1.Controls.Add(this.panel3);
+            this.flowLayoutPanel1.Controls.Add(this.panel4);
+            this.flowLayoutPanel1.Controls.Add(this.panel5);
+            this.flowLayoutPanel1.Controls.Add(this.panel6);
+            this.flowLayoutPanel1.Controls.Add(this.btnAdd);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(339, 531);
+            this.flowLayoutPanel1.TabIndex = 17;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tbAcademyName);
+            this.panel1.Controls.Add(this.labelName);
+            this.panel1.Location = new System.Drawing.Point(3, 42);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(265, 68);
+            this.panel1.TabIndex = 18;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.tbEmail);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Location = new System.Drawing.Point(3, 116);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(265, 68);
+            this.panel2.TabIndex = 19;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.tbPhone);
+            this.panel3.Controls.Add(this.labelPhone);
+            this.panel3.Location = new System.Drawing.Point(3, 190);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(265, 68);
+            this.panel3.TabIndex = 19;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.labelStreet);
+            this.panel4.Controls.Add(this.tbStreet);
+            this.panel4.Location = new System.Drawing.Point(3, 264);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(265, 68);
+            this.panel4.TabIndex = 20;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.labelCity);
+            this.panel5.Controls.Add(this.tbCity);
+            this.panel5.Location = new System.Drawing.Point(3, 338);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(265, 68);
+            this.panel5.TabIndex = 20;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.labelZip);
+            this.panel6.Controls.Add(this.labelState);
+            this.panel6.Controls.Add(this.tbZip);
+            this.panel6.Controls.Add(this.cbState);
+            this.panel6.Location = new System.Drawing.Point(3, 412);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(265, 68);
+            this.panel6.TabIndex = 20;
             // 
             // CreateAcademyForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(380, 568);
-            this.Controls.Add(this.tbZip);
-            this.Controls.Add(this.labelZip);
-            this.Controls.Add(this.labelCity);
-            this.Controls.Add(this.tbCity);
-            this.Controls.Add(this.labelStreet);
-            this.Controls.Add(this.tbStreet);
-            this.Controls.Add(this.labelPhone);
-            this.Controls.Add(this.tbPhone);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.tbEmail);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.cbState);
-            this.Controls.Add(this.labelState);
-            this.Controls.Add(this.labelName);
-            this.Controls.Add(this.tbAcademyName);
-            this.Controls.Add(this.labelTitle);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ClientSize = new System.Drawing.Size(351, 531);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.Window;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.Name = "CreateAcademyForm";
             this.Text = "Create Academy";
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -298,5 +383,12 @@
         private System.Windows.Forms.Label labelZip;
         private System.Windows.Forms.TextBox tbZip;
         private System.Windows.Forms.Label labelTitle;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel6;
     }
 }

@@ -78,6 +78,7 @@
             this.searchBar.Name = "searchBar";
             this.searchBar.Size = new System.Drawing.Size(208, 24);
             this.searchBar.TabIndex = 20;
+            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
             // 
             // dataGridAcademies
             // 
@@ -118,6 +119,7 @@
             this.dataGridAcademies.RowTemplate.Height = 40;
             this.dataGridAcademies.Size = new System.Drawing.Size(800, 417);
             this.dataGridAcademies.TabIndex = 26;
+            this.dataGridAcademies.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridAcademies_CellClick);
             // 
             // column_number
             // 
