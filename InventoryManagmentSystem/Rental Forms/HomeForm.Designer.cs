@@ -333,7 +333,7 @@
             this.panelTotal.Controls.Add(this.ButtonCurrentlyRented);
             this.panelTotal.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTotal.Location = new System.Drawing.Point(301, 25);
-            this.panelTotal.Margin = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.panelTotal.Margin = new System.Windows.Forms.Padding(20);
             this.panelTotal.Name = "panelTotal";
             this.panelTotal.Padding = new System.Windows.Forms.Padding(13, 14, 13, 0);
             this.panelTotal.Size = new System.Drawing.Size(553, 150);

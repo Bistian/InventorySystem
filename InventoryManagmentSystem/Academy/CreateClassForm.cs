@@ -21,10 +21,7 @@ namespace InventoryManagmentSystem
         public CreateClassForm()
         {
             InitializeComponent();
-            dataGridClasses.Columns["column_start_date"].DefaultCellStyle.Format = "d";
-            dataGridClasses.Columns["column_end_date"].DefaultCellStyle.Format = "d";
             LoadAcademies();
-            LoadClasses();
         }
 
         private void LoadAcademies()
@@ -50,29 +47,6 @@ namespace InventoryManagmentSystem
             connection.Close();
         }
 
-        private void LoadClasses()
-        {
-            dataGridClasses.Rows.Clear();
-            string query = "SELECT * FROM tbClasses";
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-                int i = 0;
-                while (reader.Read())
-                {
-                    dataGridClasses.Rows.Add(
-                        i++, reader[0], reader[1], reader[2], reader[3], reader[4]
-                    );
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
-        }
 
         /// <summary>
         /// Check if item already exists on the table.
@@ -238,7 +212,6 @@ namespace InventoryManagmentSystem
                 if (dpStartDate.Value >= dpEndDate.Value ) { throw new Exception("End date cannot be equal or bigger than start date."); }
                 if (dpStartDate.Value < new DateTime()) { throw new Exception("Start date cannot be today or before."); }
                 if (!AddClass()) { throw new Exception("Failed to add class."); }
-                LoadClasses();
             }
             catch (Exception ex)
             { 
@@ -248,22 +221,5 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void dataGridClasses_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            string columnName = dataGridClasses.Columns[e.ColumnIndex].Name;
-            DataGridViewRow row = dataGridClasses.Rows[e.RowIndex];
-
-            if(columnName == "column_delete") 
-            {
-                if (DeleteClass(row)) { LoadClasses(); }
-                return;
-            }
-
-            if (columnName == "column_finished")
-            {
-                if(UpdateClassStatus(row)) { LoadClasses(); }
-                return;
-            }
-        }
     }
 }
