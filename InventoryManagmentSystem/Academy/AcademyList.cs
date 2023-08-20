@@ -17,17 +17,12 @@ namespace InventoryManagmentSystem.Academy
 
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
+        AcademyForm parent;
 
-        #region SQL_Variables
-        //Creating command
-        SqlCommand cm = new SqlCommand();
-        //Creatinng Reader
-        SqlDataReader dr;
-        #endregion SQL_Variables
-
-        public AcademyList()
+        public AcademyList(AcademyForm parent)
         {
             InitializeComponent();
+            this.parent = parent;
             LoadAcademies();
         }
 
@@ -57,6 +52,22 @@ namespace InventoryManagmentSystem.Academy
 
         }
 
+        private void UpdateAcademy(DataGridViewRow row)
+        {
+            dataGridAcademies.Visible = false;
+            AcademyForm.Academy academy = new AcademyForm.Academy();
+            academy.uuid = (Guid)row.Cells["column_id"].Value;
+            academy.name = row.Cells["column_name"].Value.ToString();
+            academy.email = row.Cells["column_email"].Value.ToString();
+            academy.phone = row.Cells["column_phone"].Value.ToString();
+            academy.street = row.Cells["column_street"].Value.ToString();
+            academy.city = row.Cells["column_city"].Value.ToString();
+            academy.state = row.Cells["column_state"].Value.ToString();
+            academy.zip = row.Cells["column_zip"].Value.ToString();
+            HelperFunctions.openChildFormToPanel(parent.panelDocker, new CreateAcademyForm(parent, academy));
+            this.Close();
+        }
+
         private void searchBar_TextChanged(object sender, EventArgs e)
         {
             string searchTerm = searchBar.Text;
@@ -65,21 +76,30 @@ namespace InventoryManagmentSystem.Academy
             // SQL
             int i = 0;
             dataGridAcademies.Rows.Clear();
-            cm = new SqlCommand("SELECT * FROM tbAcademies WHERE Name LIKE '%" + searchTerm + "%'", connection);
+            SqlCommand command = new SqlCommand($"SELECT * FROM tbAcademies WHERE Name LIKE '%{searchTerm}%'", connection);
             connection.Open();
-            dr = cm.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            while (dr.Read())
+            while (reader.Read())
             {
                 i++;
-                dataGridAcademies.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[5].ToString(), dr[5].ToString(), dr[6].ToString(), dr[7].ToString());
+                dataGridAcademies.Rows.Add(i, reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[5].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString());
             }
-            dr.Close();
+            reader.Close();
             connection.Close();
         }
 
         private void dataGridAcademies_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            DataGridViewRow row = dataGridAcademies.Rows[e.RowIndex];
+            string column = dataGridAcademies.Columns[e.ColumnIndex].Name;
+
+            if (column == "column_update")
+            {
+                UpdateAcademy(row);
+                return;
+            }
+
             var parentForm = this.ParentForm as AcademyForm;
 
             ClassList ClassList = new ClassList();

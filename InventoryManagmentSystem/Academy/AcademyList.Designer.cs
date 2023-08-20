@@ -44,8 +44,10 @@
             this.column_state = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_zip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_update = new System.Windows.Forms.DataGridViewImageColumn();
+            this.panelBot = new System.Windows.Forms.Panel();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAcademies)).BeginInit();
+            this.panelBot.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTop
@@ -54,8 +56,9 @@
             this.panelTop.Controls.Add(this.searchBar);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(800, 33);
+            this.panelTop.Size = new System.Drawing.Size(600, 27);
             this.panelTop.TabIndex = 25;
             // 
             // labelSearch
@@ -63,20 +66,19 @@
             this.labelSearch.AutoSize = true;
             this.labelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSearch.Location = new System.Drawing.Point(5, 8);
+            this.labelSearch.Location = new System.Drawing.Point(4, 6);
             this.labelSearch.Margin = new System.Windows.Forms.Padding(0);
             this.labelSearch.Name = "labelSearch";
-            this.labelSearch.Size = new System.Drawing.Size(88, 25);
+            this.labelSearch.Size = new System.Drawing.Size(71, 20);
             this.labelSearch.TabIndex = 21;
             this.labelSearch.Text = "Search:";
             // 
             // searchBar
             // 
             this.searchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBar.Location = new System.Drawing.Point(81, 8);
-            this.searchBar.Margin = new System.Windows.Forms.Padding(4);
+            this.searchBar.Location = new System.Drawing.Point(61, 6);
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(208, 24);
+            this.searchBar.Size = new System.Drawing.Size(157, 21);
             this.searchBar.TabIndex = 20;
             this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
             // 
@@ -110,14 +112,15 @@
             this.dataGridAcademies.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridAcademies.EnableHeadersVisualStyles = false;
             this.dataGridAcademies.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridAcademies.Location = new System.Drawing.Point(0, 33);
+            this.dataGridAcademies.Location = new System.Drawing.Point(0, 0);
+            this.dataGridAcademies.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridAcademies.Name = "dataGridAcademies";
             this.dataGridAcademies.ReadOnly = true;
             this.dataGridAcademies.RowHeadersVisible = false;
             this.dataGridAcademies.RowHeadersWidth = 51;
             this.dataGridAcademies.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.WindowText;
             this.dataGridAcademies.RowTemplate.Height = 40;
-            this.dataGridAcademies.Size = new System.Drawing.Size(800, 417);
+            this.dataGridAcademies.Size = new System.Drawing.Size(600, 337);
             this.dataGridAcademies.TabIndex = 26;
             this.dataGridAcademies.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridAcademies_CellClick);
             // 
@@ -209,21 +212,32 @@
             this.column_update.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.column_update.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // panelBot
+            // 
+            this.panelBot.Controls.Add(this.dataGridAcademies);
+            this.panelBot.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBot.Location = new System.Drawing.Point(0, 29);
+            this.panelBot.Name = "panelBot";
+            this.panelBot.Size = new System.Drawing.Size(600, 337);
+            this.panelBot.TabIndex = 27;
+            // 
             // AcademyList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dataGridAcademies);
+            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.panelBot);
             this.Controls.Add(this.panelTop);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AcademyList";
             this.Text = "AcademyList";
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAcademies)).EndInit();
+            this.panelBot.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -244,5 +258,6 @@
         private System.Windows.Forms.DataGridViewImageColumn column_update;
         private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.TextBox searchBar;
+        private System.Windows.Forms.Panel panelBot;
     }
 }
