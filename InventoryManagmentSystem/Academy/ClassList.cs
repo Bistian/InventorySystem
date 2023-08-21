@@ -18,8 +18,8 @@ namespace InventoryManagmentSystem.Academy
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
         Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
-        string AcademyId;
-        public ClassList(string AcadId)
+        Guid AcademyId;
+        public ClassList(Guid AcadId)
         {
             InitializeComponent();
             AcademyId = AcadId;
@@ -28,7 +28,7 @@ namespace InventoryManagmentSystem.Academy
             LoadClasses();
         }
 
-        private void LoadClasses()
+        public void LoadClasses()
         {
             dataGridClasses.Rows.Clear();
             string query = "SELECT * FROM tbClasses WHERE AcademyId ='" + AcademyId + "' ";

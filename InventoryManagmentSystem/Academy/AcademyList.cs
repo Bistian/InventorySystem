@@ -14,7 +14,6 @@ namespace InventoryManagmentSystem.Academy
 {
     public partial class AcademyList : Form
     {
-
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
         AcademyForm parent;
@@ -93,6 +92,7 @@ namespace InventoryManagmentSystem.Academy
         {
             DataGridViewRow row = dataGridAcademies.Rows[e.RowIndex];
             string column = dataGridAcademies.Columns[e.ColumnIndex].Name;
+            Guid AcademyId = (Guid)row.Cells["column_id"].Value;
 
             if (column == "column_update")
             {
@@ -102,8 +102,8 @@ namespace InventoryManagmentSystem.Academy
 
             var parentForm = this.ParentForm as AcademyForm;
 
-            ClassList ClassList = new ClassList();
-            HelperFunctions.openChildFormToPanel(parentForm.panelDocker, ClassList, this);
+            ClassList ClassListForm = new ClassList(AcademyId);
+            HelperFunctions.openChildFormToPanel(parentForm.panelDocker, ClassListForm, this);
         }
     }
 }
