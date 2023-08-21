@@ -25,7 +25,7 @@ namespace InventoryManagmentSystem.Academy
             {
                 activeForm.Close();
             }
-            activeForm = new CreateAcademyForm();
+            //activeForm = new CreateAcademyForm();
 
             HelperFunctions.OpenChildForm(activeForm, ref panelDocker);
         }

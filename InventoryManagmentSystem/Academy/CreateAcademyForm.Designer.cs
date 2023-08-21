@@ -46,11 +46,18 @@
             this.labelTitle = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnResetName = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnResetEmail = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnResetPhone = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnResetStreet = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnResetCity = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.btnResetZip = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -65,7 +72,7 @@
             this.tbAcademyName.Location = new System.Drawing.Point(2, 28);
             this.tbAcademyName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbAcademyName.Name = "tbAcademyName";
-            this.tbAcademyName.Size = new System.Drawing.Size(256, 34);
+            this.tbAcademyName.Size = new System.Drawing.Size(256, 28);
             this.tbAcademyName.TabIndex = 1;
             // 
             // labelName
@@ -74,14 +81,14 @@
             this.labelName.Location = new System.Drawing.Point(-3, -1);
             this.labelName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(78, 29);
+            this.labelName.Size = new System.Drawing.Size(61, 24);
             this.labelName.TabIndex = 3;
             this.labelName.Text = "Name";
             // 
             // btnAdd
             // 
             this.btnAdd.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnAdd.Location = new System.Drawing.Point(4, 488);
+            this.btnAdd.Location = new System.Drawing.Point(4, 480);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(258, 37);
@@ -96,7 +103,7 @@
             this.labelState.Location = new System.Drawing.Point(-4, -2);
             this.labelState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelState.Name = "labelState";
-            this.labelState.Size = new System.Drawing.Size(68, 29);
+            this.labelState.Size = new System.Drawing.Size(51, 24);
             this.labelState.TabIndex = 4;
             this.labelState.Text = "State";
             // 
@@ -158,7 +165,7 @@
             this.cbState.Location = new System.Drawing.Point(0, 27);
             this.cbState.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbState.Name = "cbState";
-            this.cbState.Size = new System.Drawing.Size(82, 37);
+            this.cbState.Size = new System.Drawing.Size(82, 30);
             this.cbState.TabIndex = 6;
             // 
             // label1
@@ -167,7 +174,7 @@
             this.label1.Location = new System.Drawing.Point(-3, -1);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 29);
+            this.label1.Size = new System.Drawing.Size(57, 24);
             this.label1.TabIndex = 9;
             this.label1.Text = "Email";
             // 
@@ -176,7 +183,7 @@
             this.tbEmail.Location = new System.Drawing.Point(2, 28);
             this.tbEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbEmail.Name = "tbEmail";
-            this.tbEmail.Size = new System.Drawing.Size(256, 34);
+            this.tbEmail.Size = new System.Drawing.Size(256, 28);
             this.tbEmail.TabIndex = 2;
             // 
             // labelPhone
@@ -185,7 +192,7 @@
             this.labelPhone.Location = new System.Drawing.Point(-3, -1);
             this.labelPhone.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPhone.Name = "labelPhone";
-            this.labelPhone.Size = new System.Drawing.Size(83, 29);
+            this.labelPhone.Size = new System.Drawing.Size(66, 24);
             this.labelPhone.TabIndex = 11;
             this.labelPhone.Text = "Phone";
             // 
@@ -194,7 +201,7 @@
             this.tbPhone.Location = new System.Drawing.Point(2, 28);
             this.tbPhone.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(256, 34);
+            this.tbPhone.Size = new System.Drawing.Size(256, 28);
             this.tbPhone.TabIndex = 3;
             // 
             // labelStreet
@@ -203,7 +210,7 @@
             this.labelStreet.Location = new System.Drawing.Point(-4, -1);
             this.labelStreet.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStreet.Name = "labelStreet";
-            this.labelStreet.Size = new System.Drawing.Size(77, 29);
+            this.labelStreet.Size = new System.Drawing.Size(58, 24);
             this.labelStreet.TabIndex = 13;
             this.labelStreet.Text = "Street";
             // 
@@ -212,7 +219,7 @@
             this.tbStreet.Location = new System.Drawing.Point(0, 28);
             this.tbStreet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbStreet.Name = "tbStreet";
-            this.tbStreet.Size = new System.Drawing.Size(256, 34);
+            this.tbStreet.Size = new System.Drawing.Size(259, 28);
             this.tbStreet.TabIndex = 4;
             // 
             // labelCity
@@ -221,7 +228,7 @@
             this.labelCity.Location = new System.Drawing.Point(-4, -1);
             this.labelCity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelCity.Name = "labelCity";
-            this.labelCity.Size = new System.Drawing.Size(53, 29);
+            this.labelCity.Size = new System.Drawing.Size(40, 24);
             this.labelCity.TabIndex = 15;
             this.labelCity.Text = "City";
             // 
@@ -230,7 +237,7 @@
             this.tbCity.Location = new System.Drawing.Point(0, 28);
             this.tbCity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbCity.Name = "tbCity";
-            this.tbCity.Size = new System.Drawing.Size(256, 34);
+            this.tbCity.Size = new System.Drawing.Size(259, 28);
             this.tbCity.TabIndex = 5;
             // 
             // labelZip
@@ -239,7 +246,7 @@
             this.labelZip.Location = new System.Drawing.Point(89, -2);
             this.labelZip.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelZip.Name = "labelZip";
-            this.labelZip.Size = new System.Drawing.Size(47, 29);
+            this.labelZip.Size = new System.Drawing.Size(37, 24);
             this.labelZip.TabIndex = 16;
             this.labelZip.Text = "Zip";
             // 
@@ -248,7 +255,7 @@
             this.tbZip.Location = new System.Drawing.Point(94, 27);
             this.tbZip.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbZip.Name = "tbZip";
-            this.tbZip.Size = new System.Drawing.Size(162, 34);
+            this.tbZip.Size = new System.Drawing.Size(165, 28);
             this.tbZip.TabIndex = 7;
             // 
             // labelTitle
@@ -258,7 +265,7 @@
             this.labelTitle.Location = new System.Drawing.Point(6, 0);
             this.labelTitle.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(284, 39);
+            this.labelTitle.Size = new System.Drawing.Size(230, 31);
             this.labelTitle.TabIndex = 1;
             this.labelTitle.Text = "Create Academy";
             // 
@@ -273,74 +280,173 @@
             this.flowLayoutPanel1.Controls.Add(this.panel5);
             this.flowLayoutPanel1.Controls.Add(this.panel6);
             this.flowLayoutPanel1.Controls.Add(this.btnAdd);
+            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(339, 531);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(339, 596);
             this.flowLayoutPanel1.TabIndex = 17;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnResetName);
             this.panel1.Controls.Add(this.tbAcademyName);
             this.panel1.Controls.Add(this.labelName);
-            this.panel1.Location = new System.Drawing.Point(3, 42);
+            this.panel1.Location = new System.Drawing.Point(3, 34);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(265, 68);
+            this.panel1.Size = new System.Drawing.Size(336, 68);
             this.panel1.TabIndex = 18;
+            // 
+            // btnResetName
+            // 
+            this.btnResetName.Enabled = false;
+            this.btnResetName.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnResetName.Location = new System.Drawing.Point(265, 28);
+            this.btnResetName.Name = "btnResetName";
+            this.btnResetName.Size = new System.Drawing.Size(44, 28);
+            this.btnResetName.TabIndex = 4;
+            this.btnResetName.Text = "X";
+            this.btnResetName.UseVisualStyleBackColor = true;
+            this.btnResetName.Visible = false;
+            this.btnResetName.Click += new System.EventHandler(this.btnResetName_Click);
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnResetEmail);
             this.panel2.Controls.Add(this.tbEmail);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(3, 116);
+            this.panel2.Location = new System.Drawing.Point(3, 108);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(265, 68);
+            this.panel2.Size = new System.Drawing.Size(336, 68);
             this.panel2.TabIndex = 19;
+            // 
+            // btnResetEmail
+            // 
+            this.btnResetEmail.Enabled = false;
+            this.btnResetEmail.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnResetEmail.Location = new System.Drawing.Point(265, 28);
+            this.btnResetEmail.Name = "btnResetEmail";
+            this.btnResetEmail.Size = new System.Drawing.Size(44, 28);
+            this.btnResetEmail.TabIndex = 10;
+            this.btnResetEmail.Text = "X";
+            this.btnResetEmail.UseVisualStyleBackColor = true;
+            this.btnResetEmail.Visible = false;
+            this.btnResetEmail.Click += new System.EventHandler(this.btnResetEmail_Click);
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnResetPhone);
             this.panel3.Controls.Add(this.tbPhone);
             this.panel3.Controls.Add(this.labelPhone);
-            this.panel3.Location = new System.Drawing.Point(3, 190);
+            this.panel3.Location = new System.Drawing.Point(3, 182);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(265, 68);
+            this.panel3.Size = new System.Drawing.Size(336, 68);
             this.panel3.TabIndex = 19;
+            // 
+            // btnResetPhone
+            // 
+            this.btnResetPhone.Enabled = false;
+            this.btnResetPhone.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnResetPhone.Location = new System.Drawing.Point(265, 28);
+            this.btnResetPhone.Name = "btnResetPhone";
+            this.btnResetPhone.Size = new System.Drawing.Size(44, 28);
+            this.btnResetPhone.TabIndex = 12;
+            this.btnResetPhone.Text = "X";
+            this.btnResetPhone.UseVisualStyleBackColor = true;
+            this.btnResetPhone.Visible = false;
+            this.btnResetPhone.Click += new System.EventHandler(this.btnResetPhone_Click);
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btnResetStreet);
             this.panel4.Controls.Add(this.labelStreet);
             this.panel4.Controls.Add(this.tbStreet);
-            this.panel4.Location = new System.Drawing.Point(3, 264);
+            this.panel4.Location = new System.Drawing.Point(3, 256);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(265, 68);
+            this.panel4.Size = new System.Drawing.Size(336, 68);
             this.panel4.TabIndex = 20;
+            // 
+            // btnResetStreet
+            // 
+            this.btnResetStreet.Enabled = false;
+            this.btnResetStreet.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnResetStreet.Location = new System.Drawing.Point(265, 28);
+            this.btnResetStreet.Name = "btnResetStreet";
+            this.btnResetStreet.Size = new System.Drawing.Size(44, 28);
+            this.btnResetStreet.TabIndex = 14;
+            this.btnResetStreet.Text = "X";
+            this.btnResetStreet.UseVisualStyleBackColor = true;
+            this.btnResetStreet.Visible = false;
+            this.btnResetStreet.Click += new System.EventHandler(this.btnResetStreet_Click);
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnResetCity);
             this.panel5.Controls.Add(this.labelCity);
             this.panel5.Controls.Add(this.tbCity);
-            this.panel5.Location = new System.Drawing.Point(3, 338);
+            this.panel5.Location = new System.Drawing.Point(3, 330);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(265, 68);
+            this.panel5.Size = new System.Drawing.Size(336, 68);
             this.panel5.TabIndex = 20;
+            // 
+            // btnResetCity
+            // 
+            this.btnResetCity.Enabled = false;
+            this.btnResetCity.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnResetCity.Location = new System.Drawing.Point(265, 28);
+            this.btnResetCity.Name = "btnResetCity";
+            this.btnResetCity.Size = new System.Drawing.Size(44, 28);
+            this.btnResetCity.TabIndex = 16;
+            this.btnResetCity.Text = "X";
+            this.btnResetCity.UseVisualStyleBackColor = true;
+            this.btnResetCity.Visible = false;
+            this.btnResetCity.Click += new System.EventHandler(this.btnResetCity_Click);
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.btnResetZip);
             this.panel6.Controls.Add(this.labelZip);
             this.panel6.Controls.Add(this.labelState);
             this.panel6.Controls.Add(this.tbZip);
             this.panel6.Controls.Add(this.cbState);
-            this.panel6.Location = new System.Drawing.Point(3, 412);
+            this.panel6.Location = new System.Drawing.Point(3, 404);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(265, 68);
+            this.panel6.Size = new System.Drawing.Size(336, 68);
             this.panel6.TabIndex = 20;
+            // 
+            // btnResetZip
+            // 
+            this.btnResetZip.Enabled = false;
+            this.btnResetZip.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnResetZip.Location = new System.Drawing.Point(265, 27);
+            this.btnResetZip.Name = "btnResetZip";
+            this.btnResetZip.Size = new System.Drawing.Size(44, 28);
+            this.btnResetZip.TabIndex = 17;
+            this.btnResetZip.Text = "X";
+            this.btnResetZip.UseVisualStyleBackColor = true;
+            this.btnResetZip.Visible = false;
+            this.btnResetZip.Click += new System.EventHandler(this.btnResetZip_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Enabled = false;
+            this.btnCancel.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnCancel.Location = new System.Drawing.Point(4, 527);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(258, 37);
+            this.btnCancel.TabIndex = 21;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Visible = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // CreateAcademyForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(351, 531);
+            this.ClientSize = new System.Drawing.Size(351, 596);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.Window;
@@ -390,5 +496,12 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnResetName;
+        private System.Windows.Forms.Button btnResetEmail;
+        private System.Windows.Forms.Button btnResetPhone;
+        private System.Windows.Forms.Button btnResetStreet;
+        private System.Windows.Forms.Button btnResetCity;
+        private System.Windows.Forms.Button btnResetZip;
     }
 }

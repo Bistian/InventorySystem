@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,16 +8,20 @@ namespace InventoryManagmentSystem.Academy
 {
     public partial class AcademyForm : Form
     {
+        public struct Academy
+        {
+            public Guid uuid;
+            public string name;
+            public string email;
+            public string phone;
+            public string street;
+            public string city;
+            public string state;
+            public string zip;
+        }
 
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
-
-        #region SQL_Variables
-        //Creating command
-        SqlCommand cm = new SqlCommand();
-        //Creatinng Reader
-        SqlDataReader dr;
-        #endregion SQL_Variables
 
         bool minimized = false;
         public AcademyForm()
@@ -24,7 +29,7 @@ namespace InventoryManagmentSystem.Academy
             InitializeComponent();
             InitMinimizeButton();
 
-            AcademyList ListForm = new AcademyList();
+            AcademyList ListForm = new AcademyList(this);
             HelperFunctions.openChildFormToPanel(panelDocker, ListForm);
         }
 
@@ -65,14 +70,14 @@ namespace InventoryManagmentSystem.Academy
 
         private void btnCreateAcademy_Click(object sender, System.EventArgs e)
         {
-            CreateAcademyForm AcadForm = new CreateAcademyForm();
+            CreateAcademyForm AcadForm = new CreateAcademyForm(this);
             HelperFunctions.openChildFormToPanel(panelDocker, AcadForm);
             //need to close previous form
         }
 
         private void btnAcademyList_Click(object sender, System.EventArgs e)
         {
-            AcademyList ListForm = new AcademyList();
+            AcademyList ListForm = new AcademyList(this);
             HelperFunctions.openChildFormToPanel(panelDocker, ListForm);
             //need to close previous form
             btnClassList.Visible = false;

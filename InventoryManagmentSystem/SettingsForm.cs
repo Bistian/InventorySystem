@@ -92,7 +92,7 @@ namespace InventoryManagmentSystem
         private void btnAcademies_Click(object sender, EventArgs e)
         {
             ColorTabSwitch("Academies");
-            openChildForm(new CreateAcademyForm());
+            //openChildForm(new CreateAcademyForm());
         }
 
         private void btnHistories_Click(object sender, EventArgs e)
