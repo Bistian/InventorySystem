@@ -28,7 +28,7 @@ namespace InventoryManagmentSystem.Academy
             AcademyId = parent.AcademyId;
             dataGridClasses.Columns["column_start_date"].DefaultCellStyle.Format = "d";
             dataGridClasses.Columns["column_end_date"].DefaultCellStyle.Format = "d";
-          
+
 
             LoadClasses();
         }
@@ -36,7 +36,15 @@ namespace InventoryManagmentSystem.Academy
         public void LoadClasses()
         {
             dataGridClasses.Rows.Clear();
-            string query = "SELECT * FROM tbClasses WHERE AcademyId ='" + AcademyId + "' ";
+            string query;
+            if (AcademyId != Guid.Empty)
+            {
+                query = "SELECT * FROM tbClasses WHERE AcademyId ='" + AcademyId + "' ";
+            }
+            else
+            {
+                query = "SELECT * FROM tbClasses";
+            }
             try
             {
                 connection.Open();
@@ -56,5 +64,5 @@ namespace InventoryManagmentSystem.Academy
             }
             connection.Close();
         }
-    }  
+    }
 }
