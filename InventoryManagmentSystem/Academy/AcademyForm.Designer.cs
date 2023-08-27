@@ -31,11 +31,11 @@
             this.labelAcademies = new System.Windows.Forms.Label();
             this.btnRezsize = new System.Windows.Forms.Button();
             this.panelLeft = new System.Windows.Forms.Panel();
+            this.btnCreateClass = new System.Windows.Forms.Button();
+            this.btnClassList = new System.Windows.Forms.Button();
             this.btnAcademyList = new System.Windows.Forms.Button();
             this.btnCreateAcademy = new System.Windows.Forms.Button();
             this.panelDocker = new System.Windows.Forms.Panel();
-            this.btnClassList = new System.Windows.Forms.Button();
-            this.btnCreateClass = new System.Windows.Forms.Button();
             this.panelLeft.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,6 +78,30 @@
             this.panelLeft.Size = new System.Drawing.Size(200, 450);
             this.panelLeft.TabIndex = 0;
             // 
+            // btnCreateClass
+            // 
+            this.btnCreateClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateClass.ForeColor = System.Drawing.Color.Black;
+            this.btnCreateClass.Location = new System.Drawing.Point(3, 219);
+            this.btnCreateClass.Name = "btnCreateClass";
+            this.btnCreateClass.Size = new System.Drawing.Size(191, 51);
+            this.btnCreateClass.TabIndex = 30;
+            this.btnCreateClass.Text = "New Class";
+            this.btnCreateClass.UseVisualStyleBackColor = true;
+            this.btnCreateClass.Click += new System.EventHandler(this.btnCreateClass_Click);
+            // 
+            // btnClassList
+            // 
+            this.btnClassList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClassList.ForeColor = System.Drawing.Color.Black;
+            this.btnClassList.Location = new System.Drawing.Point(3, 162);
+            this.btnClassList.Name = "btnClassList";
+            this.btnClassList.Size = new System.Drawing.Size(191, 51);
+            this.btnClassList.TabIndex = 29;
+            this.btnClassList.Text = "Class List";
+            this.btnClassList.UseVisualStyleBackColor = true;
+            this.btnClassList.Click += new System.EventHandler(this.btnClassList_Click);
+            // 
             // btnAcademyList
             // 
             this.btnAcademyList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -94,7 +118,7 @@
             // 
             this.btnCreateAcademy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateAcademy.ForeColor = System.Drawing.Color.Black;
-            this.btnCreateAcademy.Location = new System.Drawing.Point(3, 162);
+            this.btnCreateAcademy.Location = new System.Drawing.Point(3, 105);
             this.btnCreateAcademy.Name = "btnCreateAcademy";
             this.btnCreateAcademy.Size = new System.Drawing.Size(191, 51);
             this.btnCreateAcademy.TabIndex = 27;
@@ -110,32 +134,6 @@
             this.panelDocker.Name = "panelDocker";
             this.panelDocker.Size = new System.Drawing.Size(872, 450);
             this.panelDocker.TabIndex = 27;
-            // 
-            // btnClassList
-            // 
-            this.btnClassList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClassList.ForeColor = System.Drawing.Color.Black;
-            this.btnClassList.Location = new System.Drawing.Point(3, 105);
-            this.btnClassList.Name = "btnClassList";
-            this.btnClassList.Size = new System.Drawing.Size(191, 51);
-            this.btnClassList.TabIndex = 29;
-            this.btnClassList.Text = "Class List";
-            this.btnClassList.UseVisualStyleBackColor = true;
-            this.btnClassList.Visible = false;
-            this.btnClassList.Click += new System.EventHandler(this.btnClassList_Click);
-            // 
-            // btnCreateClass
-            // 
-            this.btnCreateClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateClass.ForeColor = System.Drawing.Color.Black;
-            this.btnCreateClass.Location = new System.Drawing.Point(3, 162);
-            this.btnCreateClass.Name = "btnCreateClass";
-            this.btnCreateClass.Size = new System.Drawing.Size(191, 51);
-            this.btnCreateClass.TabIndex = 30;
-            this.btnCreateClass.Text = "New Class";
-            this.btnCreateClass.UseVisualStyleBackColor = true;
-            this.btnCreateClass.Visible = false;
-            this.btnCreateClass.Click += new System.EventHandler(this.btnCreateClass_Click);
             // 
             // AcademyForm
             // 

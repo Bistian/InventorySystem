@@ -9,6 +9,9 @@ namespace InventoryManagmentSystem.Academy
 {
     public partial class AcademyForm : Form
     {
+
+        public Guid AcademyId;
+        public Guid ClassId;
         public struct Academy
         {
             public Guid uuid;
@@ -51,7 +54,7 @@ namespace InventoryManagmentSystem.Academy
             Point position = new Point(width, height);
             btnRezsize.Location = position;
 
-            if(minimized)
+            if (minimized)
             {
                 btnRezsize.Text = "> p";
                 labelAcademies.Visible = false;
@@ -82,9 +85,10 @@ namespace InventoryManagmentSystem.Academy
         {
             CreateAcademyForm AcadForm = new CreateAcademyForm(this);
 
-           Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
+            Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
             HelperFunctions.openChildFormToPanel(panelDocker, AcadForm, currDocked);
 
+            labelAcademies.Text = "Academies";
         }
 
         private void btnAcademyList_Click(object sender, System.EventArgs e)
@@ -92,10 +96,7 @@ namespace InventoryManagmentSystem.Academy
             AcademyList ListForm = new AcademyList(this);
             Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
             HelperFunctions.openChildFormToPanel(panelDocker, ListForm, currDocked);
- 
-            btnClassList.Visible = false;
-            btnCreateClass.Visible = false;
-            btnCreateAcademy.Visible = true;
+
             labelAcademies.Text = "Academies";
         }
 
@@ -104,14 +105,17 @@ namespace InventoryManagmentSystem.Academy
             CreateClassForm ListForm = new CreateClassForm();
             Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
             HelperFunctions.openChildFormToPanel(panelDocker, ListForm, currDocked);
+
+            labelAcademies.Text = "Classes";
         }
 
         private void btnClassList_Click(object sender, System.EventArgs e)
         {
-            //ClassList ClassList = new ClassList();
-            //Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
-            //HelperFunctions.openChildFormToPanel(panelDocker, ClassList, currDocked);
-            //need to close previous form
+            ClassList ClassList = new ClassList(this);
+            Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
+            HelperFunctions.openChildFormToPanel(panelDocker, ClassList, currDocked);
+
+            labelAcademies.Text = "Classes";
         }
     }
 }

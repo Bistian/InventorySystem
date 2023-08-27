@@ -90,9 +90,12 @@ namespace InventoryManagmentSystem.Academy
 
         private void dataGridAcademies_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             DataGridViewRow row = dataGridAcademies.Rows[e.RowIndex];
             string column = dataGridAcademies.Columns[e.ColumnIndex].Name;
             Guid AcademyId = (Guid)row.Cells["column_id"].Value;
+
+            parent.AcademyId = AcademyId;
 
             if (column == "column_update")
             {
@@ -102,7 +105,7 @@ namespace InventoryManagmentSystem.Academy
 
             var parentForm = this.ParentForm as AcademyForm;
 
-            ClassList ClassListForm = new ClassList(parent);
+            ClassList ClassListForm = new ClassList(this.parent);
             HelperFunctions.openChildFormToPanel(parentForm.panelDocker, ClassListForm, this);
         }
     }

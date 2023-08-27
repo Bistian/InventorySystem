@@ -18,12 +18,18 @@ namespace InventoryManagmentSystem.Academy
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
         Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
+        Guid AcademyId;
         AcademyForm parent;
         public ClassList(AcademyForm parent)
         {
+            this.parent = parent;
             InitializeComponent();
+            parent.labelAcademies.Text = "Classes";
+            AcademyId = parent.AcademyId;
             dataGridClasses.Columns["column_start_date"].DefaultCellStyle.Format = "d";
             dataGridClasses.Columns["column_end_date"].DefaultCellStyle.Format = "d";
+          
+
             LoadClasses();
             this.parent = parent;
         }
