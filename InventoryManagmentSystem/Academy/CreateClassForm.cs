@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryManagmentSystem.Academy;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -18,10 +19,42 @@ namespace InventoryManagmentSystem
         SqlConnection connection = new SqlConnection(connectionString);
         Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
 
+        private bool isUpdate = false;
+        AcademyForm parent;
+        private AcademyForm.Class editingClass;
+
         public CreateClassForm()
         {
             InitializeComponent();
             LoadAcademies();
+        }
+        public CreateClassForm(AcademyForm parent, AcademyForm.Class classToEdit)
+        {
+            InitializeComponent();
+            LoadAcademies();
+
+            this.parent = parent;
+            editingClass = classToEdit;
+            InitUpdate();
+        }
+
+        private void InitUpdate()
+        {
+            isUpdate = true;
+            btnAdd.Text = "Update";
+            cbAcademy.Enabled = false;
+
+            btnResetName.Enabled = true;
+            btnResetName.Visible = true;
+
+            btnResetStart.Enabled = true;
+            btnResetStart.Visible = true;
+
+            btnResetEnd.Enabled = true;
+            btnResetEnd.Visible = true;
+
+            btnCancel.Enabled = true;
+            btnCancel.Visible = true;
         }
 
         private void LoadAcademies()
@@ -46,7 +79,6 @@ namespace InventoryManagmentSystem
             }
             connection.Close();
         }
-
 
         /// <summary>
         /// Check if item already exists on the table.
@@ -203,8 +235,46 @@ namespace InventoryManagmentSystem
             return isUpdated;
         }
 
+        private bool UpdateClass()
+        {
+            string query = @"
+                Update tbClasses
+                Set Name=@Name, StartDate=@Start, EndDate=@End
+                Where Id=@Id
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Name", tbClassName);
+                command.Parameters.AddWithValue("@Start", dpStartDate.Value);
+                command.Parameters.AddWithValue("@End", dpEndDate.Value);
+                command.Parameters.AddWithValue("@Id", editingClass.uuid);
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+        
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if(isUpdate)
+            {
+                if(!UpdateClass())
+                {
+                    return;
+                }
+                HelperFunctions.openChildFormToPanel(parent.panelDocker, new ClassList());
+                this.Close();
+            }
+
             try
             {
                 if (cbAcademy.SelectedIndex < 0) { throw new Exception("Academy needs to be filled."); }
@@ -221,5 +291,9 @@ namespace InventoryManagmentSystem
             }
         }
 
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

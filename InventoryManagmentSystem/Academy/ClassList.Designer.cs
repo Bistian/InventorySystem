@@ -39,7 +39,7 @@
             this.column_start_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_end_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_finished = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.column_delete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.column_update = new System.Windows.Forms.DataGridViewImageColumn();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridClasses)).BeginInit();
             this.SuspendLayout();
@@ -50,8 +50,9 @@
             this.panelTop.Controls.Add(this.searchBar);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(2);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(888, 33);
+            this.panelTop.Size = new System.Drawing.Size(666, 27);
             this.panelTop.TabIndex = 26;
             // 
             // labelSearch
@@ -59,20 +60,19 @@
             this.labelSearch.AutoSize = true;
             this.labelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSearch.Location = new System.Drawing.Point(5, 8);
+            this.labelSearch.Location = new System.Drawing.Point(4, 6);
             this.labelSearch.Margin = new System.Windows.Forms.Padding(0);
             this.labelSearch.Name = "labelSearch";
-            this.labelSearch.Size = new System.Drawing.Size(88, 25);
+            this.labelSearch.Size = new System.Drawing.Size(71, 20);
             this.labelSearch.TabIndex = 21;
             this.labelSearch.Text = "Search:";
             // 
             // searchBar
             // 
             this.searchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBar.Location = new System.Drawing.Point(81, 8);
-            this.searchBar.Margin = new System.Windows.Forms.Padding(4);
+            this.searchBar.Location = new System.Drawing.Point(61, 6);
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(208, 24);
+            this.searchBar.Size = new System.Drawing.Size(157, 21);
             this.searchBar.TabIndex = 20;
             // 
             // dataGridClasses
@@ -98,19 +98,21 @@
             this.column_start_date,
             this.column_end_date,
             this.column_finished,
-            this.column_delete});
+            this.column_update});
             this.dataGridClasses.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridClasses.EnableHeadersVisualStyles = false;
             this.dataGridClasses.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridClasses.Location = new System.Drawing.Point(0, 33);
+            this.dataGridClasses.Location = new System.Drawing.Point(0, 27);
+            this.dataGridClasses.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridClasses.Name = "dataGridClasses";
             this.dataGridClasses.ReadOnly = true;
             this.dataGridClasses.RowHeadersVisible = false;
             this.dataGridClasses.RowHeadersWidth = 51;
             this.dataGridClasses.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.WindowText;
             this.dataGridClasses.RowTemplate.Height = 40;
-            this.dataGridClasses.Size = new System.Drawing.Size(888, 545);
+            this.dataGridClasses.Size = new System.Drawing.Size(666, 443);
             this.dataGridClasses.TabIndex = 27;
+            this.dataGridClasses.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridClasses_CellContentClick);
             // 
             // column_number
             // 
@@ -169,24 +171,25 @@
             this.column_finished.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.column_finished.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // column_delete
+            // column_update
             // 
-            this.column_delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_delete.FillWeight = 19.542F;
-            this.column_delete.HeaderText = "";
-            this.column_delete.MinimumWidth = 6;
-            this.column_delete.Name = "column_delete";
-            this.column_delete.ReadOnly = true;
+            this.column_update.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_update.FillWeight = 19.542F;
+            this.column_update.HeaderText = "";
+            this.column_update.MinimumWidth = 6;
+            this.column_update.Name = "column_update";
+            this.column_update.ReadOnly = true;
             // 
             // ClassList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(888, 578);
+            this.ClientSize = new System.Drawing.Size(666, 470);
             this.Controls.Add(this.dataGridClasses);
             this.Controls.Add(this.panelTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ClassList";
             this.Text = "ClassList";
             this.panelTop.ResumeLayout(false);
@@ -208,6 +211,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn column_start_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_end_date;
         private System.Windows.Forms.DataGridViewCheckBoxColumn column_finished;
-        private System.Windows.Forms.DataGridViewImageColumn column_delete;
+        private System.Windows.Forms.DataGridViewImageColumn column_update;
     }
 }

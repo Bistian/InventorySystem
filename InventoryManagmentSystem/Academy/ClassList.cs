@@ -18,20 +18,20 @@ namespace InventoryManagmentSystem.Academy
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
         Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
-        string AcademyId;
-        public ClassList(string AcadId)
+        AcademyForm parent;
+        public ClassList(AcademyForm parent)
         {
             InitializeComponent();
-            AcademyId = AcadId;
             dataGridClasses.Columns["column_start_date"].DefaultCellStyle.Format = "d";
             dataGridClasses.Columns["column_end_date"].DefaultCellStyle.Format = "d";
             LoadClasses();
+            this.parent = parent;
         }
 
-        private void LoadClasses()
+        public void LoadClasses()
         {
             dataGridClasses.Rows.Clear();
-            string query = "SELECT * FROM tbClasses WHERE AcademyId ='" + AcademyId + "' ";
+            //string query = "SELECT * FROM tbClasses WHERE AcademyId ='" + AcademyId + "' ";
             try
             {
                 connection.Open();
@@ -50,6 +50,31 @@ namespace InventoryManagmentSystem.Academy
                 Console.WriteLine(ex.Message);
             }
             connection.Close();
+        }
+
+        private void UpdateClass(DataGridViewRow row)
+        {
+
+        }
+
+        public void ChangeClassStatus()
+        {
+
+        }
+
+        private void dataGridClasses_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = dataGridClasses.Rows[e.RowIndex];
+            string column = dataGridClasses.Columns[e.ColumnIndex].Name;
+
+            if(column == "column_finished")
+            {
+                ChangeClassStatus();
+            }
+            else if(column == "column_update")
+            {
+                UpdateClass(row);
+            }
         }
     }  
 }

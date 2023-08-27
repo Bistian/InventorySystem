@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace InventoryManagmentSystem.Academy
@@ -18,6 +19,15 @@ namespace InventoryManagmentSystem.Academy
             public string city;
             public string state;
             public string zip;
+        }
+
+        public struct Class
+        {
+            public Guid uuid;
+            public Guid academyId;
+            public string name;
+            public DateTime start;
+            public DateTime end;
         }
 
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
@@ -71,15 +81,18 @@ namespace InventoryManagmentSystem.Academy
         private void btnCreateAcademy_Click(object sender, System.EventArgs e)
         {
             CreateAcademyForm AcadForm = new CreateAcademyForm(this);
-            HelperFunctions.openChildFormToPanel(panelDocker, AcadForm);
-            //need to close previous form
+
+           Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
+            HelperFunctions.openChildFormToPanel(panelDocker, AcadForm, currDocked);
+
         }
 
         private void btnAcademyList_Click(object sender, System.EventArgs e)
         {
             AcademyList ListForm = new AcademyList(this);
-            HelperFunctions.openChildFormToPanel(panelDocker, ListForm);
-            //need to close previous form
+            Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
+            HelperFunctions.openChildFormToPanel(panelDocker, ListForm, currDocked);
+ 
             btnClassList.Visible = false;
             btnCreateClass.Visible = false;
             btnCreateAcademy.Visible = true;
@@ -89,13 +102,15 @@ namespace InventoryManagmentSystem.Academy
         private void btnCreateClass_Click(object sender, System.EventArgs e)
         {
             CreateClassForm ListForm = new CreateClassForm();
-            HelperFunctions.openChildFormToPanel(panelDocker, ListForm);
+            Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
+            HelperFunctions.openChildFormToPanel(panelDocker, ListForm, currDocked);
         }
 
         private void btnClassList_Click(object sender, System.EventArgs e)
         {
-            ClassList ClassList = new ClassList("");
-            HelperFunctions.openChildFormToPanel(panelDocker, ClassList);
+            //ClassList ClassList = new ClassList();
+            //Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
+            //HelperFunctions.openChildFormToPanel(panelDocker, ClassList, currDocked);
             //need to close previous form
         }
     }
