@@ -27,7 +27,7 @@ namespace InventoryManagmentSystem.Academy
         public struct Class
         {
             public Guid uuid;
-            public Guid academyId;
+            public string academyName;
             public string name;
             public DateTime start;
             public DateTime end;
@@ -111,6 +111,7 @@ namespace InventoryManagmentSystem.Academy
 
         private void btnClassList_Click(object sender, System.EventArgs e)
         {
+            AcademyId = Guid.Empty;
             ClassList ClassList = new ClassList(this);
             Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
             HelperFunctions.openChildFormToPanel(panelDocker, ClassList, currDocked);

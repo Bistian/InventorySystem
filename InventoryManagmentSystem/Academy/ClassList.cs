@@ -20,6 +20,8 @@ namespace InventoryManagmentSystem.Academy
         Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
         Guid AcademyId;
         AcademyForm parent;
+        AcademyForm.Class selectedClass;
+
         public ClassList(AcademyForm parent)
         {
             this.parent = parent;
@@ -40,11 +42,22 @@ namespace InventoryManagmentSystem.Academy
             string query;
             if (AcademyId != Guid.Empty)
             {
-                query = "SELECT * FROM tbClasses WHERE AcademyId ='" + AcademyId + "' ";
+                query = $@"
+                    SELECT c.id, a.Name, c.Name, c.StartDate, c.EndDate, c.IsFinished
+                    FROM tbClasses as c 
+                    Join tbAcademies as a ON c.AcademyId = a.Id
+                    WHERE c.AcademyId ='{AcademyId}'
+                ";
+                HelperFunctions.RemoveLineBreaksFromString(ref query);
             }
             else
             {
-                query = "SELECT * FROM tbClasses";
+                query = $@"
+                    SELECT c.id, a.Name, c.Name, c.StartDate, c.EndDate, c.IsFinished
+                    FROM tbClasses as c 
+                    Join tbAcademies as a ON c.AcademyId = a.Id
+                ";
+                HelperFunctions.RemoveLineBreaksFromString(ref query);
             }
             try
             {
@@ -55,7 +68,7 @@ namespace InventoryManagmentSystem.Academy
                 while (reader.Read())
                 {
                     dataGridClasses.Rows.Add(
-                        i++, reader[1], reader[2], reader[3], reader[4], reader[5]
+                        i++,reader[0], reader[1], reader[2], reader[3], reader[4], reader[5]
                     );
                 }
             }
@@ -68,27 +81,56 @@ namespace InventoryManagmentSystem.Academy
 
         private void UpdateClass(DataGridViewRow row)
         {
-
+            selectedClass.uuid = (Guid)row.Cells["column_id"].Value;
+            selectedClass.academyName = row.Cells["column_academy"].Value.ToString();
+            selectedClass.name = row.Cells["column_name"].Value.ToString();
+            selectedClass.start = (DateTime)row.Cells["column_start_date"].Value;
+            selectedClass.end = (DateTime)row.Cells["column_end_date"].Value;
+            HelperFunctions.openChildFormToPanel(parent.panelDocker, new CreateClassForm(parent, selectedClass));
+            this.Close();
         }
 
-        public void ChangeClassStatus()
+        public void ChangeClassStatus(DataGridViewRow row)
         {
-
+            bool isFinished = (bool)row.Cells["column_finished"].Value;
+            Guid uuid = (Guid)row.Cells["column_id"].Value;
+            string query = $@"
+                UPDATE tbClasses
+                SET IsFinished='{!isFinished}'
+                WHERE Id='{uuid}'
+            ";
+            try
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            connection.Close();
+            LoadClasses();
         }
 
-        private void dataGridClasses_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridClasses_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = dataGridClasses.Rows[e.RowIndex];
             string column = dataGridClasses.Columns[e.ColumnIndex].Name;
 
             if(column == "column_finished")
             {
-                ChangeClassStatus();
+                ChangeClassStatus(row);
             }
             else if(column == "column_update")
             {
                 UpdateClass(row);
             }
+        }
+
+        private void searchBar_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }  
 }

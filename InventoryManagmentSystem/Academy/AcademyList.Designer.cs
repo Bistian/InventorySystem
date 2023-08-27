@@ -56,7 +56,7 @@
             this.panelTop.Controls.Add(this.searchBar);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(2);
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(600, 27);
             this.panelTop.TabIndex = 25;
@@ -113,14 +113,14 @@
             this.dataGridAcademies.EnableHeadersVisualStyles = false;
             this.dataGridAcademies.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridAcademies.Location = new System.Drawing.Point(0, 0);
-            this.dataGridAcademies.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridAcademies.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridAcademies.Name = "dataGridAcademies";
             this.dataGridAcademies.ReadOnly = true;
             this.dataGridAcademies.RowHeadersVisible = false;
             this.dataGridAcademies.RowHeadersWidth = 51;
             this.dataGridAcademies.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.WindowText;
             this.dataGridAcademies.RowTemplate.Height = 40;
-            this.dataGridAcademies.Size = new System.Drawing.Size(600, 337);
+            this.dataGridAcademies.Size = new System.Drawing.Size(600, 339);
             this.dataGridAcademies.TabIndex = 26;
             this.dataGridAcademies.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridAcademies_CellClick);
             // 
@@ -215,10 +215,10 @@
             // panelBot
             // 
             this.panelBot.Controls.Add(this.dataGridAcademies);
-            this.panelBot.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBot.Location = new System.Drawing.Point(0, 29);
+            this.panelBot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelBot.Location = new System.Drawing.Point(0, 27);
             this.panelBot.Name = "panelBot";
-            this.panelBot.Size = new System.Drawing.Size(600, 337);
+            this.panelBot.Size = new System.Drawing.Size(600, 339);
             this.panelBot.TabIndex = 27;
             // 
             // AcademyList
@@ -231,7 +231,7 @@
             this.Controls.Add(this.panelTop);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AcademyList";
             this.Text = "AcademyList";
             this.panelTop.ResumeLayout(false);

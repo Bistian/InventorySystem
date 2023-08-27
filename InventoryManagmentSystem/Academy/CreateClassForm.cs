@@ -42,6 +42,7 @@ namespace InventoryManagmentSystem
         {
             isUpdate = true;
             btnAdd.Text = "Update";
+            cbAcademy.Text = editingClass.academyName;
             cbAcademy.Enabled = false;
 
             btnResetName.Enabled = true;
@@ -55,6 +56,11 @@ namespace InventoryManagmentSystem
 
             btnCancel.Enabled = true;
             btnCancel.Visible = true;
+
+            tbClassName.Text = editingClass.name;
+            dpStartDate.Value = editingClass.start;
+            dpEndDate.Value = editingClass.end;
+
         }
 
         private void LoadAcademies()
@@ -246,7 +252,7 @@ namespace InventoryManagmentSystem
             try
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Name", tbClassName);
+                command.Parameters.AddWithValue("@Name", tbClassName.Text);
                 command.Parameters.AddWithValue("@Start", dpStartDate.Value);
                 command.Parameters.AddWithValue("@End", dpEndDate.Value);
                 command.Parameters.AddWithValue("@Id", editingClass.uuid);
@@ -271,8 +277,9 @@ namespace InventoryManagmentSystem
                 {
                     return;
                 }
-                HelperFunctions.openChildFormToPanel(parent.panelDocker, new ClassList());
+                HelperFunctions.openChildFormToPanel(parent.panelDocker, new ClassList(parent));
                 this.Close();
+                return;
             }
 
             try
@@ -293,7 +300,23 @@ namespace InventoryManagmentSystem
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            HelperFunctions.openChildFormToPanel(parent.panelDocker, new ClassList(parent));
             this.Close();
+        }
+
+        private void btnResetName_Click(object sender, EventArgs e)
+        {
+            tbClassName.Text = editingClass.name;
+        }
+
+        private void btnResetStart_Click(object sender, EventArgs e)
+        {
+            dpStartDate.Value = editingClass.start;
+        }
+
+        private void btnResetEnd_Click(object sender, EventArgs e)
+        {
+            dpEndDate.Value = editingClass.end;
         }
     }
 }

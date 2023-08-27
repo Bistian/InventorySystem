@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClassList));
             this.panelTop = new System.Windows.Forms.Panel();
             this.labelSearch = new System.Windows.Forms.Label();
             this.searchBar = new System.Windows.Forms.TextBox();
             this.dataGridClasses = new System.Windows.Forms.DataGridView();
             this.column_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_academy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_start_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_end_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,6 +76,7 @@
             this.searchBar.Name = "searchBar";
             this.searchBar.Size = new System.Drawing.Size(157, 21);
             this.searchBar.TabIndex = 20;
+            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
             // 
             // dataGridClasses
             // 
@@ -94,6 +97,7 @@
             this.dataGridClasses.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.column_number,
             this.column_id,
+            this.column_academy,
             this.column_name,
             this.column_start_date,
             this.column_end_date,
@@ -112,7 +116,7 @@
             this.dataGridClasses.RowTemplate.Height = 40;
             this.dataGridClasses.Size = new System.Drawing.Size(666, 443);
             this.dataGridClasses.TabIndex = 27;
-            this.dataGridClasses.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridClasses_CellContentClick);
+            this.dataGridClasses.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridClasses_CellClick);
             // 
             // column_number
             // 
@@ -132,6 +136,12 @@
             this.column_id.ReadOnly = true;
             this.column_id.Visible = false;
             this.column_id.Width = 125;
+            // 
+            // column_academy
+            // 
+            this.column_academy.HeaderText = "Academy";
+            this.column_academy.Name = "column_academy";
+            this.column_academy.ReadOnly = true;
             // 
             // column_name
             // 
@@ -176,6 +186,7 @@
             this.column_update.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.column_update.FillWeight = 19.542F;
             this.column_update.HeaderText = "";
+            this.column_update.Image = ((System.Drawing.Image)(resources.GetObject("column_update.Image")));
             this.column_update.MinimumWidth = 6;
             this.column_update.Name = "column_update";
             this.column_update.ReadOnly = true;
@@ -207,6 +218,7 @@
         public System.Windows.Forms.DataGridView dataGridClasses;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_academy;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_start_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_end_date;

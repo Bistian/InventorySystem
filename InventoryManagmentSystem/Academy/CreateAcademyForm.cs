@@ -220,6 +220,7 @@ namespace InventoryManagmentSystem
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            HelperFunctions.openChildFormToPanel(parent.panelDocker, new AcademyList(parent));
             this.Close();
         }
 

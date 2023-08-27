@@ -168,6 +168,7 @@
             this.btnResetStart.Text = "X";
             this.btnResetStart.UseVisualStyleBackColor = true;
             this.btnResetStart.Visible = false;
+            this.btnResetStart.Click += new System.EventHandler(this.btnResetStart_Click);
             // 
             // btnResetEnd
             // 
@@ -180,6 +181,7 @@
             this.btnResetEnd.Text = "X";
             this.btnResetEnd.UseVisualStyleBackColor = true;
             this.btnResetEnd.Visible = false;
+            this.btnResetEnd.Click += new System.EventHandler(this.btnResetEnd_Click);
             // 
             // btnResetName
             // 
@@ -192,6 +194,7 @@
             this.btnResetName.Text = "X";
             this.btnResetName.UseVisualStyleBackColor = true;
             this.btnResetName.Visible = false;
+            this.btnResetName.Click += new System.EventHandler(this.btnResetName_Click);
             // 
             // CreateClassForm
             // 
