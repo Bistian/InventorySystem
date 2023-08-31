@@ -20,9 +20,9 @@ namespace InventoryManagmentSystem
         // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         //Creating command
-        SqlConnection con = new SqlConnection(connectionString);
+        SqlConnection connection = new SqlConnection(connectionString);
         //Creating command
-        SqlCommand cm = new SqlCommand();
+        SqlCommand command = new SqlCommand();
         //Creatinng Reader
         SqlDataReader dr;
 
@@ -39,7 +39,6 @@ namespace InventoryManagmentSystem
         public bool ExistingUser = false;
         public string currentUser = "";
         string license = "";
-        string Type = "";
         public int ReturnReplace = 0;
         string ReplacmentSerial = "";
         String dueDate = "";
@@ -49,6 +48,10 @@ namespace InventoryManagmentSystem
         public NewRentalModuleForm(string rentalType = null, string clientName = null)
         {
             InitializeComponent();
+            if (clientName != null)
+            {
+                labelProfileName.Text = clientName;
+            }
             panelRentalInfo.Visible = false;
             panelMeasurments.Visible = false;
             panelAddress.Visible = false;
@@ -61,7 +64,7 @@ namespace InventoryManagmentSystem
 
             }
 
-            HelperFunctions.LoadItemTypes(con, ref comboBoxItemType);
+            HelperFunctions.LoadItemTypes(connection, ref comboBoxItemType);
         }
 
         private bool CheckIfExists(string tableName, string SerialNumber)
@@ -69,10 +72,10 @@ namespace InventoryManagmentSystem
             try
             {
                 bool Exists = false;
-                cm = new SqlCommand($"Select Count (*) FROM {tableName} WHERE DriversLicenseNumber = @SerialNumber", con);
-                cm.Parameters.AddWithValue("@SerialNumber", SerialNumber);
-                con.Open();
-                object result = cm.ExecuteScalar();
+                command = new SqlCommand($"Select Count (*) FROM {tableName} WHERE DriversLicenseNumber = @SerialNumber", connection);
+                command.Parameters.AddWithValue("@SerialNumber", SerialNumber);
+                connection.Open();
+                object result = command.ExecuteScalar();
                 if (result != null)
                 {
                     int r = (int)result;
@@ -83,13 +86,13 @@ namespace InventoryManagmentSystem
                     // Null is an error!! don't add plz
                     Exists = true;
                 }
-                con.Close();
+                connection.Close();
                 return Exists;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"ERROR NewRentalModuleForm.cs --> CheckIfExists(): {ex.Message}");
-                con.Close();
+                connection.Close();
                 // If there was an error, pretend you found something just so you don't add it.
                 return true;
             }
@@ -118,11 +121,11 @@ namespace InventoryManagmentSystem
             dataGridViewClient.Columns["ClientMFD"].DefaultCellStyle.Format = "d";
 
             dataGridViewClient.Rows.Clear();
-            cm = new SqlCommand(QueryClient(), con);
-            con.Open();
+            command = new SqlCommand(QueryClient(), connection);
+            connection.Open();
             try
             {
-                dr = cm.ExecuteReader();
+                dr = command.ExecuteReader();
 
                 while (dr.Read())
                 {
@@ -140,7 +143,7 @@ namespace InventoryManagmentSystem
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
 
             dr.Close();
-            con.Close();
+            connection.Close();
         }
 
         /// <summary>
@@ -204,12 +207,12 @@ namespace InventoryManagmentSystem
             dataGridInv.Columns["ManufactureDate"].DefaultCellStyle.Format = "d";
             int i = 0;
             dataGridInv.Rows.Clear();
-            cm = new SqlCommand(QueryItems(), con);
-            con.Open();
+            command = new SqlCommand(QueryItems(), connection);
+            connection.Open();
 
             try
             {
-                dr = cm.ExecuteReader();
+                dr = command.ExecuteReader();
 
                 if (comboBoxItemType.SelectedIndex == 0)
                 {
@@ -242,7 +245,7 @@ namespace InventoryManagmentSystem
             }
 
             dr.Close();
-            con.Close();
+            connection.Close();
         }
 
         public void Clear()
@@ -285,14 +288,18 @@ namespace InventoryManagmentSystem
             panelRentalType.Visible = false;
             if (!isDepartment)
             {
+                string query = @"
+                    SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address,
+                    Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,Notes,Id 
+                    FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber
+                ";
+                HelperFunctions.RemoveLineBreaksFromString(ref query);
                 try
                 {
-                    cm = new SqlCommand("SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address," +
-                        "Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,Notes,Id " +
-                        "FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber", con);
-                    cm.Parameters.AddWithValue("@DriversLicenseNumber", ClientDrivers);
-                    con.Open();
-                    dr = cm.ExecuteReader();
+                    command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@DriversLicenseNumber", ClientDrivers);
+                    connection.Open();
+                    dr = command.ExecuteReader();
                     while (dr.Read())
                     {
                         labelProfileName.Text = dr[0].ToString();
@@ -312,14 +319,14 @@ namespace InventoryManagmentSystem
                         ClientId = (Guid)dr[14];
                     }
                     dr.Close();
-                    con.Close();
+                    connection.Close();
                     license = labelClientDrivers.Text;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     dr.Close();
-                    con.Close();
+                    connection.Close();
                 }
             }
             else if (isDepartment)
@@ -327,12 +334,12 @@ namespace InventoryManagmentSystem
                 try
                 {
 
-                    cm = new SqlCommand("SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address," +
+                    command = new SqlCommand("SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address," +
                            "Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,Notes,Id " +
-                           "FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber", con);
-                    cm.Parameters.AddWithValue("@DriversLicenseNumber", ClientDrivers);
-                    con.Open();
-                    dr = cm.ExecuteReader();
+                           "FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber", connection);
+                    command.Parameters.AddWithValue("@DriversLicenseNumber", ClientDrivers);
+                    connection.Open();
+                    dr = command.ExecuteReader();
                     while (dr.Read())
                     {
                         labelProfileName.Text = dr[4].ToString();
@@ -347,7 +354,7 @@ namespace InventoryManagmentSystem
                         ClientId = (Guid)dr[14];
                     }
                     dr.Close();
-                    con.Close();
+                    connection.Close();
                     flowLayoutPanelProfile.Visible = true;
                     panelProfileRentalInfo.Visible = false;
                     panelProfileMeasurments.Visible = false;
@@ -358,7 +365,7 @@ namespace InventoryManagmentSystem
                 {
                     Console.WriteLine(ex.Message);
                     dr.Close();
-                    con.Close();
+                    connection.Close();
                 }
             }
             flowLayoutPanelProfile.Visible = true;
@@ -386,7 +393,7 @@ namespace InventoryManagmentSystem
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    con.Close();
+                    connection.Close();
                 }
             }
             flowLayoutPanelProfile.Visible = false;
@@ -404,40 +411,40 @@ namespace InventoryManagmentSystem
                 bool exists = CheckIfExists("tbClients", txtBoxDriversLicense.Text);
                 if (!exists)
                 {
-                    cm = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,Type,DriversLicenseNumber,Address,Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,FireTecRepresentative)" +
-                    "VALUES(@Name,@Phone,@Email,@Academy,@Type,@DriversLicenseNumber,@Address,@Chest,@Sleeve,@Waist,@Inseam,@Hips,@Height,@Weight,@FireTecRepresentative)", con);
-                    cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
-                    cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
-                    cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
-                    cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
-                    cm.Parameters.AddWithValue("@Type", comboBoxRentalType.Text);
-                    cm.Parameters.AddWithValue("@Address", address);
-                    cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
+                    command = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,Type,DriversLicenseNumber,Address,Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,FireTecRepresentative)" +
+                    "VALUES(@Name,@Phone,@Email,@Academy,@Type,@DriversLicenseNumber,@Address,@Chest,@Sleeve,@Waist,@Inseam,@Hips,@Height,@Weight,@FireTecRepresentative)", connection);
+                    command.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
+                    command.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
+                    command.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
+                    command.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
+                    command.Parameters.AddWithValue("@Type", comboBoxRentalType.Text);
+                    command.Parameters.AddWithValue("@Address", address);
+                    command.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
                     if (comboBoxRentalType.SelectedIndex == 0)
                     {
-                        cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
+                        command.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
                     }
                     else
                     {
-                        cm.Parameters.AddWithValue("@Academy", txtBoxDriversLicense.Text);
+                        command.Parameters.AddWithValue("@Academy", txtBoxDriversLicense.Text);
                     }
-                        cm.Parameters.AddWithValue("@Chest", textBoxChest.Text);
-                        cm.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
-                        cm.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
-                        cm.Parameters.AddWithValue("@Inseam", textBoxInseam.Text);
-                        cm.Parameters.AddWithValue("@Hips", textBoxHips.Text);
-                        cm.Parameters.AddWithValue("@Height", textBoxHeight.Text);
-                        cm.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
-                    con.Open();
+                        command.Parameters.AddWithValue("@Chest", textBoxChest.Text);
+                        command.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
+                        command.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
+                        command.Parameters.AddWithValue("@Inseam", textBoxInseam.Text);
+                        command.Parameters.AddWithValue("@Hips", textBoxHips.Text);
+                        command.Parameters.AddWithValue("@Height", textBoxHeight.Text);
+                        command.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
+                    connection.Open();
                     try
                     {
-                        cm.ExecuteNonQuery();
+                        command.ExecuteNonQuery();
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.ToString());
                     }
-                    con.Close();
+                    connection.Close();
                     MessageBox.Show("Info has been successfully saved");
                     Clear();
 
@@ -474,11 +481,11 @@ namespace InventoryManagmentSystem
             RentalTypeSelector(type);
 
             string query = "SELECT * FROM tbClients WHERE Name = '" + clientName + "'";
-            cm = new SqlCommand(query, con);
-            con.Open();
+            command = new SqlCommand(query, connection);
+            connection.Open();
             try
             {
-                SqlDataReader dataReader = cm.ExecuteReader();
+                SqlDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
                     txtBoxCustomerName.Text = dataReader[1].ToString();
@@ -502,7 +509,7 @@ namespace InventoryManagmentSystem
             {
                 Console.WriteLine(ex.Message);
             }
-            con.Close();
+            connection.Close();
         }
 
         public void UpdateClient()
@@ -519,51 +526,51 @@ namespace InventoryManagmentSystem
                     "WHERE DriversLicenseNumber LIKE @DriversLicenseNumber";
 
             string address = txtBoxStreet.Text + " " + textBoxCity.Text + " " + textBoxState.Text + " " + textBoxZip.Text;
-            cm = new SqlCommand(query, con);
+            command = new SqlCommand(query, connection);
             try
             {
-                if (con.State == ConnectionState.Open) { con.Close(); }
-                con.Open();
-                cm.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
-                cm.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
-                cm.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+                command.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
+                command.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
+                command.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
                 if (comboBoxRentalType.SelectedIndex == 0)
                 {
-                    cm.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
+                    command.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
                 }
                 else
                 {
-                    cm.Parameters.AddWithValue("@Academy", txtBoxDriversLicense.Text);
+                    command.Parameters.AddWithValue("@Academy", txtBoxDriversLicense.Text);
                 }
-                cm.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
-                cm.Parameters.AddWithValue("@Address", address);
-                cm.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
-                cm.Parameters.AddWithValue("@Chest", textBoxChest.Text);
-                cm.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
-                cm.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
-                cm.Parameters.AddWithValue("@Inseam", textBoxInseam.Text);
-                cm.Parameters.AddWithValue("@Hips", textBoxHips.Text);
-                cm.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
-                cm.Parameters.AddWithValue("@Height", textBoxHeight.Text);
+                command.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
+                command.Parameters.AddWithValue("@Address", address);
+                command.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
+                command.Parameters.AddWithValue("@Chest", textBoxChest.Text);
+                command.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
+                command.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
+                command.Parameters.AddWithValue("@Inseam", textBoxInseam.Text);
+                command.Parameters.AddWithValue("@Hips", textBoxHips.Text);
+                command.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
+                command.Parameters.AddWithValue("@Height", textBoxHeight.Text);
 
-                cm.ExecuteNonQuery();
+                command.ExecuteNonQuery();
                 MessageBox.Show("Client has been successfully updated.");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            con.Close();
+            connection.Close();
         }
 
         private void PopulateAcademyList()
         {
             string query = "SELECT * FROM tbBrands WHERE ItemType = 'Academies'";
-            cm = new SqlCommand(query, con);
-            con.Open();
+            command = new SqlCommand(query, connection);
+            connection.Open();
             try
             {
-                dr = cm.ExecuteReader();
+                dr = command.ExecuteReader();
                 while (dr.Read())
                 {
                     comboBoxAcademy.Items.Add(dr[1]);
@@ -573,19 +580,19 @@ namespace InventoryManagmentSystem
             {
                 Console.WriteLine(ex.Message);
             }
-            con.Close();
+            connection.Close();
         }
 
         private int ClientExists(string driversLicense)
         {
             string query = "SELECT COUNT(*) FROM tbClients WHERE DriversLicenseNumber = @license";
-            cm = new SqlCommand(query, con);
-            con.Open();
+            command = new SqlCommand(query, connection);
+            connection.Open();
             try
             {
-                cm.Parameters.AddWithValue("@license", driversLicense);
+                command.Parameters.AddWithValue("@license", driversLicense);
 
-                int count = Convert.ToInt32(cm.ExecuteScalar());
+                int count = Convert.ToInt32(command.ExecuteScalar());
 
                 if (count > 0) { return 1; }
             }
@@ -594,7 +601,7 @@ namespace InventoryManagmentSystem
                 Console.WriteLine(ex.Message);
                 return -1;
             }
-            con.Close();
+            connection.Close();
             return 0;
         }
 
@@ -811,21 +818,21 @@ namespace InventoryManagmentSystem
             buttonSaveNotes.Enabled = false;
 
 
-            cm = new SqlCommand("UPDATE tbClients SET Notes = @Notes " +
-                   "WHERE DriversLicenseNumber = @DriversLicenseNumber", con);
-            cm.Parameters.AddWithValue("@Notes", textBoxNotes.Text);
-            cm.Parameters.AddWithValue("@DriversLicenseNumber", license);
+            command = new SqlCommand("UPDATE tbClients SET Notes = @Notes " +
+                   "WHERE DriversLicenseNumber = @DriversLicenseNumber", connection);
+            command.Parameters.AddWithValue("@Notes", textBoxNotes.Text);
+            command.Parameters.AddWithValue("@DriversLicenseNumber", license);
 
-            con.Open();
+            connection.Open();
             try
             {
-                cm.ExecuteNonQuery();
+                command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
-            con.Close();
+            connection.Close();
             MessageBox.Show("Note has been successfully saved");
         }
 
@@ -846,20 +853,20 @@ namespace InventoryManagmentSystem
                     {
                         comboBoxItemType.SelectedIndex = 0;
                         SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
-                        cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        cm.Parameters.AddWithValue("@serial", SelectedSerial);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", "Fire-Tec");
+                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        command.Parameters.AddWithValue("@serial", SelectedSerial);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         UpdateHistory((Guid)dataGridViewClient.Rows[e.RowIndex].Cells["ItemId"].Value, ClientId);
                         MessageBox.Show("Item Returned");
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        con.Close();
+                        connection.Close();
                         return;
                     }
                 }
@@ -871,20 +878,20 @@ namespace InventoryManagmentSystem
                     {
                         comboBoxItemType.SelectedIndex = 1;
                         SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
-                        cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        cm.Parameters.AddWithValue("@serial", SelectedSerial);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", "Fire-Tec");
+                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        command.Parameters.AddWithValue("@serial", SelectedSerial);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         UpdateHistory((Guid)dataGridViewClient.Rows[e.RowIndex].Cells["ItemId"].Value, ClientId);
                         MessageBox.Show("Item Returned");
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridClient_CellContentClick(): {ex.Message}");
-                        con.Close();
+                        connection.Close();
                         return;
                     }
                 }
@@ -896,20 +903,20 @@ namespace InventoryManagmentSystem
                     {
                         comboBoxItemType.SelectedIndex = 2;
                         SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
-                        cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        cm.Parameters.AddWithValue("@serial", SelectedSerial);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", "Fire-Tec");
+                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        command.Parameters.AddWithValue("@serial", SelectedSerial);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         UpdateHistory((Guid)dataGridViewClient.Rows[e.RowIndex].Cells["ItemId"].Value, ClientId);
                         MessageBox.Show("Item Returned");
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        con.Close();
+                        connection.Close();
                         return;
                     }
                 }
@@ -921,19 +928,19 @@ namespace InventoryManagmentSystem
                     {
                         comboBoxItemType.SelectedIndex = 3;
                         SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
-                        cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        cm.Parameters.AddWithValue("@serial", SelectedSerial);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", "Fire-Tec");
+                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        command.Parameters.AddWithValue("@serial", SelectedSerial);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         UpdateHistory((Guid)dataGridViewClient.Rows[e.RowIndex].Cells["ItemId"].Value, ClientId);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
-                        con.Close();
+                        connection.Close();
                         return;
                     }
                     MessageBox.Show("Item Returned");
@@ -946,20 +953,20 @@ namespace InventoryManagmentSystem
                     {
                         comboBoxItemType.SelectedIndex = 1;
                         SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
-                        cm = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        cm.Parameters.AddWithValue("@serial", SelectedSerial);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", "Fire-Tec");
+                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        command.Parameters.AddWithValue("@serial", SelectedSerial);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         UpdateHistory((Guid)dataGridViewClient.Rows[e.RowIndex].Cells["ItemId"].Value, ClientId);
                         MessageBox.Show("Item Returned");
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        con.Close();
+                        connection.Close();
                         return;
                     }
                 }
@@ -983,13 +990,13 @@ namespace InventoryManagmentSystem
         private void UpdateBoots(DataGridViewRow row)
         {
             string SelectedSerial = row.Cells["Serial"].Value.ToString();
-            cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-            cm.Parameters.AddWithValue("@location", license);
-            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-            cm.Parameters.AddWithValue("@serial", SelectedSerial);
-            con.Open();
-            cm.ExecuteNonQuery();
-            con.Close();
+            command = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+            command.Parameters.AddWithValue("@location", license);
+            command.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+            command.Parameters.AddWithValue("@serial", SelectedSerial);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
         }
 
         private void UpdateHelmet(DataGridViewRow row)
@@ -997,13 +1004,13 @@ namespace InventoryManagmentSystem
             if(comboBoxItemType.Text.ToLower() != "helmet") { return; }
 
             string SelectedSerial = row.Cells["Serial"].Value.ToString();
-            cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-            cm.Parameters.AddWithValue("@location", license);
-            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-            cm.Parameters.AddWithValue("@serial", SelectedSerial);
-            con.Open();
-            cm.ExecuteNonQuery();
-            con.Close();            
+            command = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+            command.Parameters.AddWithValue("@location", license);
+            command.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+            command.Parameters.AddWithValue("@serial", SelectedSerial);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();            
         }
 
         private void UpdateJacket(DataGridViewRow row)
@@ -1011,13 +1018,13 @@ namespace InventoryManagmentSystem
             if (comboBoxItemType.Text.ToLower() != "jacket") { return; }
 
             string SelectedSerial = row.Cells["Serial"].Value.ToString();
-            cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-            cm.Parameters.AddWithValue("@location", license);
-            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-            cm.Parameters.AddWithValue("@serial", SelectedSerial);
-            con.Open();
-            cm.ExecuteNonQuery();
-            con.Close();
+            command = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+            command.Parameters.AddWithValue("@location", license);
+            command.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+            command.Parameters.AddWithValue("@serial", SelectedSerial);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
         }
 
         private void UpdateMask(DataGridViewRow row)
@@ -1025,13 +1032,13 @@ namespace InventoryManagmentSystem
             if (comboBoxItemType.Text.ToLower() != "mask") { return; }
 
             string SelectedSerial = row.Cells["Serial"].Value.ToString();
-            cm = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-            cm.Parameters.AddWithValue("@location", license);
-            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-            cm.Parameters.AddWithValue("@serial", SelectedSerial);
-            con.Open();
-            cm.ExecuteNonQuery();
-            con.Close();
+            command = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+            command.Parameters.AddWithValue("@location", license);
+            command.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+            command.Parameters.AddWithValue("@serial", SelectedSerial);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
         }
 
         private void UpdatePants(DataGridViewRow row)
@@ -1039,13 +1046,13 @@ namespace InventoryManagmentSystem
             if (comboBoxItemType.Text.ToLower() != "pants") { return; }
 
             string SelectedSerial = row.Cells["Serial"].Value.ToString();
-            cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-            cm.Parameters.AddWithValue("@location", license);
-            cm.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-            cm.Parameters.AddWithValue("@serial", SelectedSerial);
-            con.Open();
-            cm.ExecuteNonQuery();
-            con.Close();
+            command = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+            command.Parameters.AddWithValue("@location", license);
+            command.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
+            command.Parameters.AddWithValue("@serial", SelectedSerial);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
         }
 
         private void dataGridInv_CellClick_1(object sender, DataGridViewCellEventArgs e)
@@ -1085,7 +1092,7 @@ namespace InventoryManagmentSystem
                 catch(Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    con.Close();
+                    connection.Close();
                     return;
                 }
                 
@@ -1107,23 +1114,23 @@ namespace InventoryManagmentSystem
                     {
                         comboBoxItemType.SelectedIndex = 0;
                         //return item
-                        cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", "Fire-Tec");
+                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        command.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         UpdateHistory(ItemIdClient, ClientId);
 
                         //replace item
-                        cm = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", license);
-                        cm.Parameters.AddWithValue("@DueDate", dueDate);
-                        cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", license);
+                        command.Parameters.AddWithValue("@DueDate", dueDate);
+                        command.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         InsertHistory(ItemIdInventory, ClientId);
 
                         MessageBox.Show("Item Replaced");
@@ -1131,7 +1138,7 @@ namespace InventoryManagmentSystem
                     catch (Exception ex)
                     {
                         Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        con.Close();
+                        connection.Close();
                         return;
                     }
                 }
@@ -1144,23 +1151,23 @@ namespace InventoryManagmentSystem
                         comboBoxItemType.SelectedIndex = 1;
 
                         //return item
-                        cm = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", "Fire-Tec");
+                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        command.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         UpdateHistory(ItemIdClient, ClientId);
 
                         //replace item
-                        cm = new SqlCommand("UPDATE tbJackets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", license);
-                        cm.Parameters.AddWithValue("@DueDate", dueDate);
-                        cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbJackets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", license);
+                        command.Parameters.AddWithValue("@DueDate", dueDate);
+                        command.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         InsertHistory(ItemIdInventory, ClientId);
 
                         MessageBox.Show("Item Replaced");
@@ -1168,7 +1175,7 @@ namespace InventoryManagmentSystem
                     catch (Exception ex)
                     {
                         Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        con.Close();
+                        connection.Close();
                         return;
                     }
                 }
@@ -1181,30 +1188,30 @@ namespace InventoryManagmentSystem
                         comboBoxItemType.SelectedIndex = 2;
 
                         //return item
-                        cm = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", "Fire-Tec");
+                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        command.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         UpdateHistory(ItemIdClient, ClientId);
 
                         //replace item
-                        cm = new SqlCommand("UPDATE tbPants SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", license);
-                        cm.Parameters.AddWithValue("@DueDate", dueDate);
-                        cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbPants SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", license);
+                        command.Parameters.AddWithValue("@DueDate", dueDate);
+                        command.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         InsertHistory(ItemIdInventory, ClientId);
                         MessageBox.Show("Item Replaced");
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        con.Close();
+                        connection.Close();
                         return;
                     }
                 }
@@ -1216,23 +1223,23 @@ namespace InventoryManagmentSystem
                         comboBoxItemType.SelectedIndex = 3;
 
                         //return item
-                        cm = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", "Fire-Tec");
+                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        command.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         UpdateHistory(ItemIdClient, ClientId);
 
                         //replace item
-                        cm = new SqlCommand("UPDATE tbBoots SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", license);
-                        cm.Parameters.AddWithValue("@DueDate", dueDate);
-                        cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbBoots SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", license);
+                        command.Parameters.AddWithValue("@DueDate", dueDate);
+                        command.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         InsertHistory(ItemIdInventory, ClientId);
                         MessageBox.Show("Item Replaced");
 
@@ -1240,7 +1247,7 @@ namespace InventoryManagmentSystem
                     catch (Exception ex)
                     {
                         Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        con.Close();
+                        connection.Close();
                         return;
                     }
                 }
@@ -1253,30 +1260,30 @@ namespace InventoryManagmentSystem
                         comboBoxItemType.SelectedIndex = 2;
 
                         //return item
-                        cm = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", "Fire-Tec");
-                        cm.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        cm.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", "Fire-Tec");
+                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
+                        command.Parameters.AddWithValue("@serial", labelOldItem.Text);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         UpdateHistory(ItemIdClient, ClientId);
 
                         //replace item
-                        cm = new SqlCommand("UPDATE tbMasks SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", con);
-                        cm.Parameters.AddWithValue("@location", license);
-                        cm.Parameters.AddWithValue("@DueDate", dueDate);
-                        cm.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                        con.Open();
-                        cm.ExecuteNonQuery();
-                        con.Close();
+                        command = new SqlCommand("UPDATE tbMasks SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
+                        command.Parameters.AddWithValue("@location", license);
+                        command.Parameters.AddWithValue("@DueDate", dueDate);
+                        command.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
                         InsertHistory(ItemIdInventory, ClientId);
                         MessageBox.Show("Item Replaced");
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        con.Close();
+                        connection.Close();
                         return;
                     }
                 }
@@ -1303,9 +1310,9 @@ namespace InventoryManagmentSystem
             string query = "SELECT * FROM tbAcademies WHERE AcademyName='academies'";
             try
             {
-                cm = new SqlCommand(query, con);
-                con.Open();
-                SqlDataReader dataReader = cm.ExecuteReader();
+                command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
                     comboBoxAcademy.Items.Add(dataReader[1]);
@@ -1315,7 +1322,7 @@ namespace InventoryManagmentSystem
             {
                 Console.WriteLine(ex.Message);
             }
-            con.Close();
+            connection.Close();
         }
 
         private bool InsertHistory(Guid ItemId, Guid ClientId)
@@ -1323,19 +1330,19 @@ namespace InventoryManagmentSystem
             string query = HelperQuery.HistoryInsert();
             try
             {
-                cm = new SqlCommand(query, con);
-                con.Open();
-                cm.Parameters.AddWithValue("@ItemId", ItemId);
-                cm.Parameters.AddWithValue("@ClientId", ClientId);
+                command = new SqlCommand(query, connection);
+                connection.Open();
+                command.Parameters.AddWithValue("@ItemId", ItemId);
+                command.Parameters.AddWithValue("@ClientId", ClientId);
 
-                cm.ExecuteNonQuery();
-                con.Close();
+                command.ExecuteNonQuery();
+                connection.Close();
                 return true;
 
             }
             catch (Exception ex)
             {
-                con.Close();
+                connection.Close();
                 Console.Write(ex.Message);
                 return false;
             }
@@ -1346,19 +1353,19 @@ namespace InventoryManagmentSystem
             string query = HelperQuery.HistoryUpdate();
             try
             {
-                cm = new SqlCommand(query, con);
-                con.Open();
-                cm.Parameters.AddWithValue("@ItemId", ItemId);
-                cm.Parameters.AddWithValue("@ClientId", ClientId);
+                command = new SqlCommand(query, connection);
+                connection.Open();
+                command.Parameters.AddWithValue("@ItemId", ItemId);
+                command.Parameters.AddWithValue("@ClientId", ClientId);
 
-                cm.ExecuteNonQuery();
-                con.Close();
+                command.ExecuteNonQuery();
+                connection.Close();
                 return true;
 
             }
             catch (Exception ex)
             {
-                con.Close();
+                connection.Close();
                 Console.Write(ex.Message);
                 return false;
             }

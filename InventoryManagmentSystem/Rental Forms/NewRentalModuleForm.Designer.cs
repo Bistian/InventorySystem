@@ -152,7 +152,6 @@
             this.labelReplacmentItem = new System.Windows.Forms.Label();
             this.labelOldItem = new System.Windows.Forms.Label();
             this.panelRentals = new System.Windows.Forms.Panel();
-            this.DatepickerDue = new InventoryManagmentSystem.CustomDateTimePicker();
             this.labelDueDate = new System.Windows.Forms.Label();
             this.splitContainerInventories = new System.Windows.Forms.SplitContainer();
             this.panelCustomerInv = new System.Windows.Forms.Panel();
@@ -172,7 +171,6 @@
             this.lableSearchBar = new System.Windows.Forms.Label();
             this.textBoxSearchBar = new System.Windows.Forms.TextBox();
             this.labelNewItem = new System.Windows.Forms.Label();
-            this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.dataGridInv = new System.Windows.Forms.DataGridView();
             this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -184,6 +182,8 @@
             this.labelFireTecInv = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.DatepickerDue = new InventoryManagmentSystem.CustomDateTimePicker();
+            this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.gradientFlowLayoutCustomerInfo = new InventoryManagmentSystem.GradientFlowLayoutPanel();
             this.panelRentalType.SuspendLayout();
             this.panelContactInfo.SuspendLayout();
@@ -225,10 +225,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).BeginInit();
             this.panelFireTecInv.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             this.SuspendLayout();
             // 
             // panelRentalType
@@ -236,8 +236,8 @@
             this.panelRentalType.BackColor = System.Drawing.Color.Transparent;
             this.panelRentalType.Controls.Add(this.comboBoxRentalType);
             this.panelRentalType.Controls.Add(this.labelRentalType);
-            this.panelRentalType.Location = new System.Drawing.Point(2, 2);
-            this.panelRentalType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelRentalType.Location = new System.Drawing.Point(2, 14106);
+            this.panelRentalType.Margin = new System.Windows.Forms.Padding(2);
             this.panelRentalType.Name = "panelRentalType";
             this.panelRentalType.Size = new System.Drawing.Size(277, 58);
             this.panelRentalType.TabIndex = 120;
@@ -252,7 +252,7 @@
             "Departments",
             "Academys"});
             this.comboBoxRentalType.Location = new System.Drawing.Point(4, 20);
-            this.comboBoxRentalType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxRentalType.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxRentalType.Name = "comboBoxRentalType";
             this.comboBoxRentalType.Size = new System.Drawing.Size(100, 28);
             this.comboBoxRentalType.TabIndex = 6666666;
@@ -280,8 +280,8 @@
             this.panelContactInfo.Controls.Add(this.panelName);
             this.panelContactInfo.Controls.Add(this.panelEmail);
             this.panelContactInfo.Controls.Add(this.panelPhone);
-            this.panelContactInfo.Location = new System.Drawing.Point(2, 60);
-            this.panelContactInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelContactInfo.Location = new System.Drawing.Point(2, 14164);
+            this.panelContactInfo.Margin = new System.Windows.Forms.Padding(2);
             this.panelContactInfo.Name = "panelContactInfo";
             this.panelContactInfo.Size = new System.Drawing.Size(277, 252);
             this.panelContactInfo.TabIndex = 116;
@@ -292,7 +292,7 @@
             this.panelLicence.Controls.Add(this.labelDriversLicense);
             this.panelLicence.Controls.Add(this.txtBoxDriversLicense);
             this.panelLicence.Location = new System.Drawing.Point(10, 82);
-            this.panelLicence.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelLicence.Margin = new System.Windows.Forms.Padding(2);
             this.panelLicence.Name = "panelLicence";
             this.panelLicence.Size = new System.Drawing.Size(214, 50);
             this.panelLicence.TabIndex = 2;
@@ -338,7 +338,7 @@
             this.panelName.Controls.Add(this.LableCustomerName);
             this.panelName.Controls.Add(this.txtBoxCustomerName);
             this.panelName.Location = new System.Drawing.Point(10, 29);
-            this.panelName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelName.Margin = new System.Windows.Forms.Padding(2);
             this.panelName.Name = "panelName";
             this.panelName.Size = new System.Drawing.Size(214, 50);
             this.panelName.TabIndex = 1;
@@ -371,7 +371,7 @@
             this.panelEmail.Controls.Add(this.labelEmail);
             this.panelEmail.Controls.Add(this.txtBoxEmail);
             this.panelEmail.Location = new System.Drawing.Point(10, 193);
-            this.panelEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelEmail.Margin = new System.Windows.Forms.Padding(2);
             this.panelEmail.Name = "panelEmail";
             this.panelEmail.Size = new System.Drawing.Size(214, 50);
             this.panelEmail.TabIndex = 4;
@@ -404,7 +404,7 @@
             this.panelPhone.Controls.Add(this.labelPhone);
             this.panelPhone.Controls.Add(this.txtBoxPhone);
             this.panelPhone.Location = new System.Drawing.Point(10, 136);
-            this.panelPhone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelPhone.Margin = new System.Windows.Forms.Padding(2);
             this.panelPhone.Name = "panelPhone";
             this.panelPhone.Size = new System.Drawing.Size(214, 54);
             this.panelPhone.TabIndex = 3;
@@ -439,8 +439,8 @@
             this.panelAddress.Controls.Add(this.panelCity);
             this.panelAddress.Controls.Add(this.panelStreet);
             this.panelAddress.Controls.Add(this.labelAddress);
-            this.panelAddress.Location = new System.Drawing.Point(2, 315);
-            this.panelAddress.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelAddress.Location = new System.Drawing.Point(2, 14419);
+            this.panelAddress.Margin = new System.Windows.Forms.Padding(2);
             this.panelAddress.Name = "panelAddress";
             this.panelAddress.Size = new System.Drawing.Size(277, 184);
             this.panelAddress.TabIndex = 117;
@@ -451,7 +451,7 @@
             this.panelZip.Controls.Add(this.textBoxZip);
             this.panelZip.Controls.Add(this.labelZip);
             this.panelZip.Location = new System.Drawing.Point(141, 89);
-            this.panelZip.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelZip.Margin = new System.Windows.Forms.Padding(2);
             this.panelZip.Name = "panelZip";
             this.panelZip.Size = new System.Drawing.Size(99, 50);
             this.panelZip.TabIndex = 8;
@@ -483,7 +483,7 @@
             this.panelState.Controls.Add(this.labelState);
             this.panelState.Controls.Add(this.textBoxState);
             this.panelState.Location = new System.Drawing.Point(2, 86);
-            this.panelState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelState.Margin = new System.Windows.Forms.Padding(2);
             this.panelState.Name = "panelState";
             this.panelState.Size = new System.Drawing.Size(130, 50);
             this.panelState.TabIndex = 7;
@@ -516,7 +516,7 @@
             this.panelCity.Controls.Add(this.textBoxCity);
             this.panelCity.Controls.Add(this.labelCity);
             this.panelCity.Location = new System.Drawing.Point(140, 34);
-            this.panelCity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelCity.Margin = new System.Windows.Forms.Padding(2);
             this.panelCity.Name = "panelCity";
             this.panelCity.Size = new System.Drawing.Size(98, 50);
             this.panelCity.TabIndex = 6;
@@ -548,7 +548,7 @@
             this.panelStreet.Controls.Add(this.labelStreet);
             this.panelStreet.Controls.Add(this.txtBoxStreet);
             this.panelStreet.Location = new System.Drawing.Point(2, 34);
-            this.panelStreet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelStreet.Margin = new System.Windows.Forms.Padding(2);
             this.panelStreet.Name = "panelStreet";
             this.panelStreet.Size = new System.Drawing.Size(134, 50);
             this.panelStreet.TabIndex = 5;
@@ -601,8 +601,8 @@
             this.panelMeasurments.Controls.Add(this.labelMeasurments);
             this.panelMeasurments.Controls.Add(this.panelChest);
             this.panelMeasurments.Controls.Add(this.panelSleeve);
-            this.panelMeasurments.Location = new System.Drawing.Point(0, 503);
-            this.panelMeasurments.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelMeasurments.Location = new System.Drawing.Point(0, 14607);
+            this.panelMeasurments.Margin = new System.Windows.Forms.Padding(2);
             this.panelMeasurments.Name = "panelMeasurments";
             this.panelMeasurments.Size = new System.Drawing.Size(277, 224);
             this.panelMeasurments.TabIndex = 117;
@@ -613,7 +613,7 @@
             this.checkBoxMeasure.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxMeasure.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.checkBoxMeasure.Location = new System.Drawing.Point(193, -2);
-            this.checkBoxMeasure.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxMeasure.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxMeasure.Name = "checkBoxMeasure";
             this.checkBoxMeasure.Size = new System.Drawing.Size(81, 24);
             this.checkBoxMeasure.TabIndex = 117;
@@ -626,7 +626,7 @@
             this.panel1.Controls.Add(this.comboBoxGender);
             this.panel1.Controls.Add(this.labelGender);
             this.panel1.Location = new System.Drawing.Point(16, 24);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(113, 47);
             this.panel1.TabIndex = 115;
@@ -640,7 +640,7 @@
             "Female",
             "Other"});
             this.comboBoxGender.Location = new System.Drawing.Point(14, 23);
-            this.comboBoxGender.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxGender.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxGender.Name = "comboBoxGender";
             this.comboBoxGender.Size = new System.Drawing.Size(86, 28);
             this.comboBoxGender.TabIndex = 116;
@@ -665,7 +665,7 @@
             this.panel8.Controls.Add(this.labelWeight);
             this.panel8.Controls.Add(this.textBoxWeight);
             this.panel8.Location = new System.Drawing.Point(16, 171);
-            this.panel8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel8.Margin = new System.Windows.Forms.Padding(2);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(111, 47);
             this.panel8.TabIndex = 14;
@@ -698,7 +698,7 @@
             this.panelHeight.Controls.Add(this.labelHeight);
             this.panelHeight.Controls.Add(this.textBoxHeight);
             this.panelHeight.Location = new System.Drawing.Point(127, 169);
-            this.panelHeight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelHeight.Margin = new System.Windows.Forms.Padding(2);
             this.panelHeight.Name = "panelHeight";
             this.panelHeight.Size = new System.Drawing.Size(113, 50);
             this.panelHeight.TabIndex = 15;
@@ -731,7 +731,7 @@
             this.panelHips.Controls.Add(this.labelHips);
             this.panelHips.Controls.Add(this.textBoxHips);
             this.panelHips.Location = new System.Drawing.Point(127, 124);
-            this.panelHips.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelHips.Margin = new System.Windows.Forms.Padding(2);
             this.panelHips.Name = "panelHips";
             this.panelHips.Size = new System.Drawing.Size(113, 49);
             this.panelHips.TabIndex = 13;
@@ -764,7 +764,7 @@
             this.panelInseam.Controls.Add(this.labelInseam);
             this.panelInseam.Controls.Add(this.textBoxInseam);
             this.panelInseam.Location = new System.Drawing.Point(16, 124);
-            this.panelInseam.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelInseam.Margin = new System.Windows.Forms.Padding(2);
             this.panelInseam.Name = "panelInseam";
             this.panelInseam.Size = new System.Drawing.Size(113, 47);
             this.panelInseam.TabIndex = 12;
@@ -797,7 +797,7 @@
             this.panelWaist.Controls.Add(this.labelWaist);
             this.panelWaist.Controls.Add(this.textBoxWaist);
             this.panelWaist.Location = new System.Drawing.Point(127, 72);
-            this.panelWaist.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelWaist.Margin = new System.Windows.Forms.Padding(2);
             this.panelWaist.Name = "panelWaist";
             this.panelWaist.Size = new System.Drawing.Size(113, 50);
             this.panelWaist.TabIndex = 11;
@@ -843,7 +843,7 @@
             this.panelChest.Controls.Add(this.labelChest);
             this.panelChest.Controls.Add(this.textBoxChest);
             this.panelChest.Location = new System.Drawing.Point(127, 24);
-            this.panelChest.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelChest.Margin = new System.Windows.Forms.Padding(2);
             this.panelChest.Name = "panelChest";
             this.panelChest.Size = new System.Drawing.Size(113, 50);
             this.panelChest.TabIndex = 9;
@@ -876,7 +876,7 @@
             this.panelSleeve.Controls.Add(this.labelSleeve);
             this.panelSleeve.Controls.Add(this.textBoxSleeve);
             this.panelSleeve.Location = new System.Drawing.Point(16, 75);
-            this.panelSleeve.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelSleeve.Margin = new System.Windows.Forms.Padding(2);
             this.panelSleeve.Name = "panelSleeve";
             this.panelSleeve.Size = new System.Drawing.Size(113, 47);
             this.panelSleeve.TabIndex = 10;
@@ -909,8 +909,8 @@
             this.panelRentalInfo.Controls.Add(this.panelAcademy);
             this.panelRentalInfo.Controls.Add(this.labelRentalInfo);
             this.panelRentalInfo.Controls.Add(this.panelFinalize);
-            this.panelRentalInfo.Location = new System.Drawing.Point(0, 727);
-            this.panelRentalInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelRentalInfo.Location = new System.Drawing.Point(0, 14831);
+            this.panelRentalInfo.Margin = new System.Windows.Forms.Padding(2);
             this.panelRentalInfo.Name = "panelRentalInfo";
             this.panelRentalInfo.Size = new System.Drawing.Size(277, 190);
             this.panelRentalInfo.TabIndex = 115;
@@ -922,7 +922,7 @@
             this.panelAcademy.Controls.Add(this.labelAcademy);
             this.panelAcademy.Controls.Add(this.btnAddBrand);
             this.panelAcademy.Location = new System.Drawing.Point(9, 30);
-            this.panelAcademy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelAcademy.Margin = new System.Windows.Forms.Padding(2);
             this.panelAcademy.Name = "panelAcademy";
             this.panelAcademy.Size = new System.Drawing.Size(222, 47);
             this.panelAcademy.TabIndex = 120;
@@ -956,7 +956,7 @@
             "Northwest",
             "N/A"});
             this.comboBoxAcademy.Location = new System.Drawing.Point(2, 20);
-            this.comboBoxAcademy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxAcademy.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxAcademy.Name = "comboBoxAcademy";
             this.comboBoxAcademy.Size = new System.Drawing.Size(214, 28);
             this.comboBoxAcademy.TabIndex = 16;
@@ -1018,7 +1018,7 @@
             this.panelrep.Controls.Add(this.labelRep);
             this.panelrep.Controls.Add(this.txtBoxRep);
             this.panelrep.Location = new System.Drawing.Point(9, 2);
-            this.panelrep.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelrep.Margin = new System.Windows.Forms.Padding(2);
             this.panelrep.Name = "panelrep";
             this.panelrep.Size = new System.Drawing.Size(214, 55);
             this.panelrep.TabIndex = 15;
@@ -1048,7 +1048,7 @@
             "Leo Rodriguez",
             "Silvia Cordova"});
             this.txtBoxRep.Location = new System.Drawing.Point(48, 26);
-            this.txtBoxRep.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBoxRep.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxRep.Name = "txtBoxRep";
             this.txtBoxRep.Size = new System.Drawing.Size(140, 28);
             this.txtBoxRep.TabIndex = 17;
@@ -1088,8 +1088,8 @@
             this.flowLayoutPanelProfile.Controls.Add(this.panelNotes);
             this.flowLayoutPanelProfile.Controls.Add(this.buttonEditNotes);
             this.flowLayoutPanelProfile.Controls.Add(this.buttonSaveNotes);
-            this.flowLayoutPanelProfile.Location = new System.Drawing.Point(0, 1757);
-            this.flowLayoutPanelProfile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanelProfile.Location = new System.Drawing.Point(0, 15861);
+            this.flowLayoutPanelProfile.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanelProfile.Name = "flowLayoutPanelProfile";
             this.flowLayoutPanelProfile.Size = new System.Drawing.Size(277, 535);
             this.flowLayoutPanelProfile.TabIndex = 112;
@@ -1533,7 +1533,7 @@
             this.textBoxNotes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxNotes.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.textBoxNotes.Location = new System.Drawing.Point(2, 28);
-            this.textBoxNotes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxNotes.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNotes.Multiline = true;
             this.textBoxNotes.Name = "textBoxNotes";
             this.textBoxNotes.ReadOnly = true;
@@ -1571,7 +1571,7 @@
             this.buttonSaveNotes.BackColor = System.Drawing.Color.Lime;
             this.buttonSaveNotes.Enabled = false;
             this.buttonSaveNotes.Location = new System.Drawing.Point(154, 505);
-            this.buttonSaveNotes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonSaveNotes.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSaveNotes.Name = "buttonSaveNotes";
             this.buttonSaveNotes.Size = new System.Drawing.Size(80, 28);
             this.buttonSaveNotes.TabIndex = 123;
@@ -1604,7 +1604,7 @@
             this.SwapButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SwapButton.Image = ((System.Drawing.Image)(resources.GetObject("SwapButton.Image")));
             this.SwapButton.Location = new System.Drawing.Point(220, 11);
-            this.SwapButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SwapButton.Margin = new System.Windows.Forms.Padding(2);
             this.SwapButton.Name = "SwapButton";
             this.SwapButton.Size = new System.Drawing.Size(82, 41);
             this.SwapButton.TabIndex = 46;
@@ -1686,17 +1686,6 @@
             this.panelRentals.TabIndex = 118;
             this.panelRentals.Visible = false;
             // 
-            // DatepickerDue
-            // 
-            this.DatepickerDue.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DatepickerDue.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
-            this.DatepickerDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DatepickerDue.Location = new System.Drawing.Point(2, 39);
-            this.DatepickerDue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.DatepickerDue.Name = "DatepickerDue";
-            this.DatepickerDue.Size = new System.Drawing.Size(392, 41);
-            this.DatepickerDue.TabIndex = 40;
-            // 
             // labelDueDate
             // 
             this.labelDueDate.AutoSize = true;
@@ -1714,7 +1703,7 @@
             this.splitContainerInventories.BackColor = System.Drawing.Color.Maroon;
             this.splitContainerInventories.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerInventories.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerInventories.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainerInventories.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainerInventories.Name = "splitContainerInventories";
             this.splitContainerInventories.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -1739,7 +1728,7 @@
             this.panelCustomerInv.Controls.Add(this.labelProfileName);
             this.panelCustomerInv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCustomerInv.Location = new System.Drawing.Point(0, 0);
-            this.panelCustomerInv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelCustomerInv.Margin = new System.Windows.Forms.Padding(2);
             this.panelCustomerInv.Name = "panelCustomerInv";
             this.panelCustomerInv.Size = new System.Drawing.Size(1073, 425);
             this.panelCustomerInv.TabIndex = 119;
@@ -1883,7 +1872,7 @@
             this.panelFireTecInv.Controls.Add(this.labelFireTecInv);
             this.panelFireTecInv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFireTecInv.Location = new System.Drawing.Point(0, 0);
-            this.panelFireTecInv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelFireTecInv.Margin = new System.Windows.Forms.Padding(2);
             this.panelFireTecInv.Name = "panelFireTecInv";
             this.panelFireTecInv.Size = new System.Drawing.Size(1073, 463);
             this.panelFireTecInv.TabIndex = 119;
@@ -1897,7 +1886,7 @@
             this.flowLayoutPanel1.Controls.Add(this.labelNewItem);
             this.flowLayoutPanel1.Controls.Add(this.UsersButton);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(106, -2);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(399, 23);
             this.flowLayoutPanel1.TabIndex = 120;
@@ -1962,21 +1951,6 @@
             this.labelNewItem.TabIndex = 121;
             this.labelNewItem.Text = "Item:";
             // 
-            // UsersButton
-            // 
-            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
-            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
-            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
-            this.UsersButton.Location = new System.Drawing.Point(321, 2);
-            this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
-            this.UsersButton.Name = "UsersButton";
-            this.UsersButton.Size = new System.Drawing.Size(20, 21);
-            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.UsersButton.TabIndex = 120;
-            this.UsersButton.TabStop = false;
-            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click);
-            // 
             // dataGridInv
             // 
             this.dataGridInv.AllowUserToAddRows = false;
@@ -2011,7 +1985,7 @@
             this.dataGridInv.EnableHeadersVisualStyles = false;
             this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridInv.Location = new System.Drawing.Point(0, 31);
-            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridInv.Name = "dataGridInv";
             this.dataGridInv.ReadOnly = true;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -2120,7 +2094,7 @@
             this.panel2.Controls.Add(this.panelRentalType);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(277, 894);
             this.panel2.TabIndex = 112;
@@ -2133,10 +2107,36 @@
             this.panel3.Controls.Add(this.splitContainerInventories);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(277, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1073, 894);
             this.panel3.TabIndex = 120;
+            // 
+            // DatepickerDue
+            // 
+            this.DatepickerDue.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatepickerDue.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
+            this.DatepickerDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatepickerDue.Location = new System.Drawing.Point(2, 39);
+            this.DatepickerDue.Margin = new System.Windows.Forms.Padding(2);
+            this.DatepickerDue.Name = "DatepickerDue";
+            this.DatepickerDue.Size = new System.Drawing.Size(392, 41);
+            this.DatepickerDue.TabIndex = 40;
+            // 
+            // UsersButton
+            // 
+            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
+            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
+            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
+            this.UsersButton.Location = new System.Drawing.Point(321, 2);
+            this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
+            this.UsersButton.Name = "UsersButton";
+            this.UsersButton.Size = new System.Drawing.Size(20, 21);
+            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.UsersButton.TabIndex = 120;
+            this.UsersButton.TabStop = false;
+            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click);
             // 
             // gradientFlowLayoutCustomerInfo
             // 
@@ -2161,7 +2161,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NewRentalModuleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewRentalModule";
@@ -2239,10 +2239,10 @@
             this.panelFireTecInv.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             this.ResumeLayout(false);
 
         }
