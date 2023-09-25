@@ -36,6 +36,8 @@ namespace InventoryManagmentSystem.Academy
             this.parent = parent;
         }
 
+        
+
         public void LoadClasses()
         {
             dataGridClasses.Rows.Clear();
