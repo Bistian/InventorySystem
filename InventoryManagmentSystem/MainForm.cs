@@ -133,7 +133,7 @@ namespace InventoryManagmentSystem
                 PanelRentalHome.BackColor = offColor;
                 panelActiveRentals.BackColor = offColor;
                 panelRentalInv.BackColor = offColor;
-
+                panelRentalAcademies.BackColor = offColor;
 
                 //Pick one tab and set it to the clicked color
                 if (tab == "RentalHome") { PanelRentalHome.BackColor = onColor; }
@@ -182,5 +182,6 @@ namespace InventoryManagmentSystem
             ColorTabSwitch("RentalsAcademy", false);
             openChildForm(new AcademyForm());
         }
+
     }
 }

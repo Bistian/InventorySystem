@@ -38,7 +38,7 @@ namespace InventoryManagmentSystem
 
         public bool ExistingUser = false;
         public string currentUser = "";
-        string license = "";
+        public string license = "";
         public int ReturnReplace = 0;
         string ReplacmentSerial = "";
         String dueDate = "";
@@ -48,6 +48,11 @@ namespace InventoryManagmentSystem
         public NewRentalModuleForm(string rentalType = null, string clientName = null)
         {
             InitializeComponent();
+
+     
+            NewClientForm clientForm = new NewClientForm();
+           
+
             if (clientName != null)
             {
                 labelProfileName.Text = clientName;
@@ -65,6 +70,7 @@ namespace InventoryManagmentSystem
             }
 
             HelperFunctions.LoadItemTypes(connection, ref comboBoxItemType);
+            HelperFunctions.openChildFormToPanel(panel2, clientForm);
         }
 
         private bool CheckIfExists(string tableName, string SerialNumber)
