@@ -52,7 +52,6 @@ namespace InventoryManagmentSystem
      
             NewClientForm clientForm = new NewClientForm();
            
-            HelperFunctions.openChildFormToPanel(panel2, clientForm);
 
             if (clientName != null)
             {
@@ -71,6 +70,7 @@ namespace InventoryManagmentSystem
             }
 
             HelperFunctions.LoadItemTypes(connection, ref comboBoxItemType);
+            HelperFunctions.openChildFormToPanel(panel2, clientForm);
         }
 
         private bool CheckIfExists(string tableName, string SerialNumber)
