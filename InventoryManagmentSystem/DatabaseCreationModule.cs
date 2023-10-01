@@ -168,7 +168,7 @@ namespace InventoryManagmentSystem
             string query = @"
                 CREATE TABLE [dbo].[tbClients] (
                 [Id]                    UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
-                [IdClass]               INT NULL,
+                [IdClass]               UNIQUEIDENTIFIER NULL,
                 [Name]                  VARCHAR(50) NOT NULL,
                 [Phone]                 VARCHAR(50) NOT NULL,
                 [Email]                 VARCHAR(50) NOT NULL,

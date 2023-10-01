@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -271,6 +272,34 @@ namespace InventoryManagmentSystem
 
     public class HelperDatabaseCall
     {
+        public static Dictionary<Guid, string> ClassListNames(SqlConnection connection, Guid AcademyId)
+        {
+            string query = $"SELECT Id, Name FROM tbClasses WHERE AcademyId = '{AcademyId}'";
+            connection.Close();
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                Dictionary<Guid, string> dict = new Dictionary<Guid, string>(); ;
+                while (reader.Read())
+                {
+                    dict.Add(reader.GetGuid(
+                        reader.GetOrdinal("Id")), 
+                        reader.GetString(reader.GetOrdinal("Name"))
+                    );
+                }
+                connection.Close();
+                return dict;
+            }
+            catch (Exception ex)
+            {
+                connection.Close();
+                Console.WriteLine($"ERROR listing classes {ex.Message}");
+                return null;
+            }
+        }
+
         /// <summary>
         /// Add an item to Items table.
         /// </summary>
@@ -299,7 +328,7 @@ namespace InventoryManagmentSystem
         /// Deletes an item from item table.
         /// </summary>
         /// <param name="uuid"></param>
-        public static void DeleteItem(SqlConnection connection, Guid uuid)
+        public static void ItemDelete(SqlConnection connection, Guid uuid)
         {
             string query = HelperQuery.ItemDelete();
             connection.Open();

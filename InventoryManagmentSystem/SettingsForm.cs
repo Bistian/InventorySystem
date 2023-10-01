@@ -152,13 +152,13 @@ namespace InventoryManagmentSystem
                     int rowsAffected = command.ExecuteNonQuery(); connection.Close();
                     if(rowsAffected < 1) 
                     { 
-                        HelperDatabaseCall.DeleteItem(connection, uuid);
+                        HelperDatabaseCall.ItemDelete(connection, uuid);
                         break; 
                     }
                 }
                 catch (Exception ex)
                 {
-                    HelperDatabaseCall.DeleteItem(connection, uuid);
+                    HelperDatabaseCall.ItemDelete(connection, uuid);
                     Console.WriteLine(ex.Message);
                     connection.Close();
                 }

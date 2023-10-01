@@ -22,30 +22,66 @@ namespace InventoryManagmentSystem.Rental_Forms
         SqlConnection connection = new SqlConnection(connectionString);
         //Creating command
         SqlCommand command = new SqlCommand();
-        //Creatinng Reader
-        SqlDataReader dr;
-
-        //Used for query
-        Guid ItemIdClient = Guid.Empty;
-        Guid ItemIdInventory = Guid.Empty;
-        bool Measure = true;
-
-        //Used for counting rentals
-        int total = 0;
-
         #endregion SQL_Variables
 
-        //NewRentalModuleForm parentForm;
-        public NewClientForm()
+        Dictionary<string, Guid> academyList;
+        Dictionary<Guid, string> classList;
+
+        public NewClientForm(string rentalType = null, string clientName = null)
         {
             InitializeComponent();
-
-             
+            PopulateAcademyList();
+            classList = new Dictionary<Guid, string>();
+            comboBoxRentalType.SelectedIndex = 0;
+            if (clientName != null)
+            {
+                AutoFillFields(rentalType, clientName);
+            }
         }
 
-        private void comboBoxRentalType_SelectedIndexChanged(object sender, EventArgs e)
+        public void AutoFillFields(string type, string clientName)
         {
-            RentalTypeSelector(comboBoxRentalType.Text);
+            RentalTypeSelector(type);
+
+            string query = $@"
+                SELECT 
+                    Name, DriversLicenseNumber, Phone, Email,
+                    Chest, Sleeve, Waist, Inseam, Hips, Weight, Height,
+                    Academy, FireTecRepresentative, IdClass
+                FROM tbClients WHERE Name = '{clientName}'
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+
+            command = new SqlCommand(query, connection);
+            connection.Open();
+            try
+            {
+                object[] rows = new object[14]; ;
+                SqlDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    dataReader.GetValues(rows);
+                }
+                txtBoxCustomerName.Text = rows[0].ToString();
+                txtBoxDriversLicense.Text = rows[1].ToString();
+                txtBoxPhone.Text = rows[2].ToString();
+                txtBoxEmail.Text = rows[3].ToString();
+                textBoxChest.Text = rows[4].ToString();
+                textBoxSleeve.Text = rows[5].ToString();
+                textBoxWaist.Text = rows[6].ToString();
+                textBoxInseam.Text = rows[7].ToString();
+                textBoxHips.Text = rows[8].ToString();
+                textBoxWeight.Text = rows[9].ToString();
+                textBoxHeight.Text = rows[10].ToString();
+                comboBoxAcademy.Text = rows[11].ToString();
+                cbRep.Text = rows[12].ToString();
+                cbClass.Text = classList[(Guid)rows[13]];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            connection.Close();
         }
 
         private bool CheckIfExists(string tableName, string SerialNumber)
@@ -77,6 +113,84 @@ namespace InventoryManagmentSystem.Rental_Forms
                 // If there was an error, pretend you found something just so you don't add it.
                 return true;
             }
+        }
+
+        public void Clear()
+        {
+            txtBoxCustomerName.Clear();
+            txtBoxPhone.Clear();
+            txtBoxEmail.Clear();
+            txtBoxStreet.Clear();
+            txtBoxDriversLicense.Clear();
+            textBoxChest.Clear();
+            textBoxCity.Clear();
+            textBoxHeight.Clear();
+            textBoxHips.Clear();
+            textBoxInseam.Clear();
+            textBoxSleeve.Clear();
+            textBoxState.Clear();
+            textBoxWaist.Clear();
+            textBoxWeight.Clear();
+            textBoxZip.Clear();
+            cbRep.SelectedIndex = -1;
+            comboBoxAcademy.SelectedIndex = -1;
+
+        }
+
+        private bool IsBoxEmpty()
+        {
+            bool normalChecks = (
+                !string.IsNullOrEmpty(txtBoxStreet.Text) &&
+                !string.IsNullOrEmpty(textBoxState.Text) &&
+                !string.IsNullOrEmpty(textBoxZip.Text) &&
+                !string.IsNullOrEmpty(txtBoxCustomerName.Text) &&
+                !string.IsNullOrEmpty(txtBoxDriversLicense.Text) &&
+                !string.IsNullOrEmpty(txtBoxEmail.Text) &&
+                !string.IsNullOrEmpty(txtBoxPhone.Text) &&
+                !string.IsNullOrEmpty(cbRep.Text) &&
+                !string.IsNullOrEmpty(comboBoxAcademy.Text) &&
+                !string.IsNullOrEmpty(textBoxCity.Text)
+            );
+            bool measureChecks;
+            if (checkBoxMeasure.Checked)
+            {
+                measureChecks = true;
+            }
+            else
+            {
+                measureChecks = (
+                    !string.IsNullOrEmpty(textBoxChest.Text) &&
+                    !string.IsNullOrEmpty(textBoxSleeve.Text) &&
+                    !string.IsNullOrEmpty(textBoxWaist.Text) &&
+                    !string.IsNullOrEmpty(textBoxInseam.Text) &&
+                    !string.IsNullOrEmpty(textBoxHips.Text) &&
+                    !string.IsNullOrEmpty(textBoxHeight.Text) &&
+                    !string.IsNullOrEmpty(textBoxWeight.Text)
+                );
+            }
+            return normalChecks && measureChecks;
+        }
+
+        private void PopulateAcademyList()
+        {
+            academyList = new Dictionary<string, Guid>();
+            string query = "SELECT Name, Id FROM tbAcademies";
+            command = new SqlCommand(query, connection);
+            connection.Open();
+            try
+            {
+                SqlDataReader dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    academyList.Add(dr[0].ToString(), (Guid)dr[1]);
+                    comboBoxAcademy.Items.Add(dr[0]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            connection.Close();
         }
 
         private void RentalTypeSelector(string type)
@@ -180,45 +294,46 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
         }
 
-        public void Clear()
-        {
-            txtBoxCustomerName.Clear();
-            txtBoxPhone.Clear();
-            txtBoxEmail.Clear();
-            txtBoxStreet.Clear();
-            txtBoxDriversLicense.Clear();
-            textBoxChest.Clear();
-            textBoxCity.Clear();
-            textBoxHeight.Clear();
-            textBoxHips.Clear();
-            textBoxInseam.Clear();
-            textBoxSleeve.Clear();
-            textBoxState.Clear();
-            textBoxWaist.Clear();
-            textBoxWeight.Clear();
-            textBoxZip.Clear();
-            txtBoxRep.SelectedIndex = -1;
-            comboBoxAcademy.SelectedIndex = -1;
-
-        }
-
         private bool SaveClient()
         {
             try
             {
-                string address = txtBoxStreet.Text + " " + textBoxCity.Text + " " + textBoxState.Text + " " + textBoxZip.Text;
+                string address = $"{txtBoxStreet.Text} {textBoxCity.Text} {textBoxState.Text} {textBoxZip.Text}";
                 bool exists = CheckIfExists("tbClients", txtBoxDriversLicense.Text);
+                string query = $@"
+                    INSERT INTO tbClients(
+                        Name, Phone, Email, Type, DriversLicenseNumber, Address,
+                        Chest, Sleeve, Waist, Inseam, Hips, Height, Weight,
+                        FireTecRepresentative, Academy, IdClass
+                    )
+                    VALUES(
+                        @Name, @Phone, @Email, @Type, @DriversLicenseNumber, @Address, 
+                        @Chest, @Sleeve, @Waist, @Inseam, @Hips, @Height, @Weight, 
+                        @FireTecRepresentative, @Academy,  @IdClass
+                    )
+                ";
+                HelperFunctions.RemoveLineBreaksFromString(ref query);
+
+                Guid classId = Guid.Empty;
+                foreach(var item in classList)
+                {
+                    if(item.Value == cbClass.Text)
+                    {
+                        classId = item.Key;
+                        break;
+                    }
+                }
+
                 if (!exists)
                 {
-                    command = new SqlCommand("INSERT INTO tbClients(Name,Phone,Email,Academy,Type,DriversLicenseNumber,Address,Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,FireTecRepresentative)" +
-                    "VALUES(@Name,@Phone,@Email,@Academy,@Type,@DriversLicenseNumber,@Address,@Chest,@Sleeve,@Waist,@Inseam,@Hips,@Height,@Weight,@FireTecRepresentative)", connection);
+                    command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
                     command.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
                     command.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
                     command.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
                     command.Parameters.AddWithValue("@Type", comboBoxRentalType.Text);
                     command.Parameters.AddWithValue("@Address", address);
-                    command.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
+                    command.Parameters.AddWithValue("@FireTecRepresentative", cbRep.Text);
                     if (comboBoxRentalType.SelectedIndex == 0)
                     {
                         command.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
@@ -234,6 +349,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                     command.Parameters.AddWithValue("@Hips", textBoxHips.Text);
                     command.Parameters.AddWithValue("@Height", textBoxHeight.Text);
                     command.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
+                    command.Parameters.AddWithValue("@IdClass", classId);
                     connection.Open();
                     try
                     {
@@ -301,7 +417,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 }
                 command.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
                 command.Parameters.AddWithValue("@Address", address);
-                command.Parameters.AddWithValue("@FireTecRepresentative", txtBoxRep.Text);
+                command.Parameters.AddWithValue("@FireTecRepresentative", cbRep.Text);
                 command.Parameters.AddWithValue("@Chest", textBoxChest.Text);
                 command.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
                 command.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
@@ -319,35 +435,12 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
             connection.Close();
         }
-
-        private bool IsBoxEmpty()
-        {
-            return (!string.IsNullOrEmpty(txtBoxStreet.Text) &&
-                !string.IsNullOrEmpty(textBoxState.Text) &&
-                !string.IsNullOrEmpty(textBoxZip.Text) &&
-                !string.IsNullOrEmpty(txtBoxCustomerName.Text) &&
-                !string.IsNullOrEmpty(txtBoxDriversLicense.Text) &&
-                !string.IsNullOrEmpty(txtBoxEmail.Text) &&
-                !string.IsNullOrEmpty(txtBoxPhone.Text) &&
-                !string.IsNullOrEmpty(txtBoxRep.Text) &&
-                !string.IsNullOrEmpty(comboBoxAcademy.Text) &&
-                !string.IsNullOrEmpty(textBoxCity.Text) &&
-                !string.IsNullOrEmpty(textBoxChest.Text) &&
-                !string.IsNullOrEmpty(textBoxSleeve.Text) &&
-                !string.IsNullOrEmpty(textBoxWaist.Text) &&
-                !string.IsNullOrEmpty(textBoxInseam.Text) &&
-                !string.IsNullOrEmpty(textBoxHips.Text) &&
-                !string.IsNullOrEmpty(textBoxHeight.Text) &&
-                !string.IsNullOrEmpty(textBoxWeight.Text) &&
-                !string.IsNullOrEmpty(comboBoxAcademy.Text));
-        }
-
-        private void ButtonContinue_Click_1(object sender, EventArgs e)
+       
+        private void ButtonContinue_Click(object sender, EventArgs e)
         {
             NewRentalModuleForm DockedIn = this.Parent.Parent as NewRentalModuleForm;
             if (IsBoxEmpty())
             {
-
                 DockedIn.currentUser = txtBoxCustomerName.Text;
                 DockedIn.license = txtBoxDriversLicense.Text;
                 panelRentalType.Visible = false;
@@ -398,6 +491,70 @@ namespace InventoryManagmentSystem.Rental_Forms
         private void ClearButton_Click(object sender, EventArgs e)
         {
             Clear();
+        }
+        
+        private void comboBoxGender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(comboBoxGender.Text == "Male")
+            {
+                panelHips.Visible = false;
+                textBoxHips.Text = "N/A";
+            } 
+            else
+            {
+                panelHips.Visible = true;
+                textBoxHips.Text = "";
+            }
+        }
+
+        private void comboBoxRentalType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RentalTypeSelector(comboBoxRentalType.Text);
+        }
+
+        private void checkBoxMeasure_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxMeasure.Checked)
+            {
+                panelMeasurments.Visible=false;
+            }
+            else
+            {
+                panelMeasurments.Visible = true;
+            }
+        }
+
+        private void checkAcademy_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkAcademy.Checked)
+            {
+                panelAcademy.Visible = false;
+                comboBoxAcademy.Text = "N/A";
+            }
+            else
+            {
+                panelAcademy.Visible = true;
+                comboBoxAcademy.Text = "";
+            }
+        }
+
+        private void comboBoxAcademy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string name = comboBoxAcademy.Text;
+            if(classList != null)
+            {
+                classList.Clear();
+            }
+            cbClass.Items.Clear();
+            classList = HelperDatabaseCall.ClassListNames(connection, academyList[name]);
+            if(classList == null)
+            {
+                return;
+            }
+            foreach(var item in classList)
+            {
+                cbClass.Items.Add(item.Value);
+            }
         }
     }
 }
