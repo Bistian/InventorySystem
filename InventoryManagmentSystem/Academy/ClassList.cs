@@ -36,8 +36,6 @@ namespace InventoryManagmentSystem.Academy
             this.parent = parent;
         }
 
-        
-
         public void LoadClasses()
         {
             dataGridClasses.Rows.Clear();
@@ -119,14 +117,25 @@ namespace InventoryManagmentSystem.Academy
         {
             DataGridViewRow row = dataGridClasses.Rows[e.RowIndex];
             string column = dataGridClasses.Columns[e.ColumnIndex].Name;
+            Guid ClassId = (Guid)row.Cells["column_id"].Value;
 
-            if(column == "column_finished")
+            if (column == "column_finished")
             {
                 ChangeClassStatus(row);
             }
             else if(column == "column_update")
             {
                 UpdateClass(row);
+            }
+            else if(column == "column_finished")
+            {
+
+            }
+            else
+            {
+                parent.ClassId = ClassId;
+                ClassRosterForm roster = new ClassRosterForm(parent);
+                HelperFunctions.openChildFormToPanel(parent.panelDocker, roster, this);
             }
         }
 

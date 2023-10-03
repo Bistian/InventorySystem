@@ -86,17 +86,17 @@
     <Compile Include="Academy\AcademyList.Designer.cs">
       <DependentUpon>AcademyList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Academy\AcademyManagerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Academy\AcademyManagerForm.Designer.cs">
-      <DependentUpon>AcademyManagerForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Academy\ClassList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Academy\ClassList.Designer.cs">
       <DependentUpon>ClassList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Academy\ClassRosterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academy\ClassRosterForm.Designer.cs">
+      <DependentUpon>ClassRosterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Academy\CreateAcademyForm.cs">
       <SubType>Form</SubType>
@@ -305,11 +305,11 @@
     <EmbeddedResource Include="Academy\AcademyList.resx">
       <DependentUpon>AcademyList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Academy\AcademyManagerForm.resx">
-      <DependentUpon>AcademyManagerForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Academy\ClassList.resx">
       <DependentUpon>ClassList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academy\ClassRosterForm.resx">
+      <DependentUpon>ClassRosterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Academy\CreateAcademyForm.resx">
       <DependentUpon>CreateAcademyForm.cs</DependentUpon>

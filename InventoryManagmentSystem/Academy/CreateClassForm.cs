@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static InventoryManagmentSystem.Academy.AcademyForm;
 
 namespace InventoryManagmentSystem
 {
@@ -23,17 +24,18 @@ namespace InventoryManagmentSystem
         AcademyForm parent;
         private AcademyForm.Class editingClass;
 
-        public CreateClassForm()
+        public CreateClassForm(AcademyForm parent)
         {
             InitializeComponent();
             LoadAcademies();
+            this.parent = parent;
         }
         public CreateClassForm(AcademyForm parent, AcademyForm.Class classToEdit)
         {
             InitializeComponent();
             LoadAcademies();
 
-            this.parent = parent;
+            
             editingClass = classToEdit;
             InitUpdate();
         }
@@ -289,6 +291,10 @@ namespace InventoryManagmentSystem
                 if (dpStartDate.Value >= dpEndDate.Value ) { throw new Exception("End date cannot be equal or bigger than start date."); }
                 if (dpStartDate.Value < new DateTime()) { throw new Exception("Start date cannot be today or before."); }
                 if (!AddClass()) { throw new Exception("Failed to add class."); }
+
+                ClassList ClassList = new ClassList(parent);
+                Form currDocked = parent.panelDocker.Controls.OfType<Form>().FirstOrDefault();
+                HelperFunctions.openChildFormToPanel(parent.panelDocker, ClassList, currDocked);
             }
             catch (Exception ex)
             { 

@@ -102,7 +102,7 @@ namespace InventoryManagmentSystem.Academy
 
         private void btnCreateClass_Click(object sender, System.EventArgs e)
         {
-            CreateClassForm ListForm = new CreateClassForm();
+            CreateClassForm ListForm = new CreateClassForm(this);
             Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
             HelperFunctions.openChildFormToPanel(panelDocker, ListForm, currDocked);
 

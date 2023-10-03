@@ -169,7 +169,6 @@ namespace InventoryManagmentSystem
         private void btnClasses_Click(object sender, EventArgs e)
         {
             ColorTabSwitch("Classes");
-            openChildForm(new CreateClassForm());
         }
     }
 }
