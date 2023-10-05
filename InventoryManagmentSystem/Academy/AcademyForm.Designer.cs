@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelAcademies = new System.Windows.Forms.Label();
-            this.btnRezsize = new System.Windows.Forms.Button();
             this.panelLeft = new System.Windows.Forms.Panel();
+            this.btnAssignStudent = new System.Windows.Forms.Button();
             this.btnCreateClass = new System.Windows.Forms.Button();
             this.btnClassList = new System.Windows.Forms.Button();
             this.btnAcademyList = new System.Windows.Forms.Button();
@@ -39,45 +38,32 @@
             this.panelLeft.SuspendLayout();
             this.SuspendLayout();
             // 
-            // labelAcademies
-            // 
-            this.labelAcademies.AutoSize = true;
-            this.labelAcademies.BackColor = System.Drawing.Color.Transparent;
-            this.labelAcademies.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAcademies.ForeColor = System.Drawing.Color.White;
-            this.labelAcademies.Location = new System.Drawing.Point(18, 7);
-            this.labelAcademies.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelAcademies.Name = "labelAcademies";
-            this.labelAcademies.Size = new System.Drawing.Size(142, 29);
-            this.labelAcademies.TabIndex = 25;
-            this.labelAcademies.Text = "Academies";
-            // 
-            // btnRezsize
-            // 
-            this.btnRezsize.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRezsize.Location = new System.Drawing.Point(120, 174);
-            this.btnRezsize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnRezsize.Name = "btnRezsize";
-            this.btnRezsize.Size = new System.Drawing.Size(61, 29);
-            this.btnRezsize.TabIndex = 26;
-            this.btnRezsize.Text = "< p";
-            this.btnRezsize.UseVisualStyleBackColor = true;
-            this.btnRezsize.Click += new System.EventHandler(this.btnRezsize_Click);
-            // 
             // panelLeft
             // 
-            this.panelLeft.Controls.Add(this.btnRezsize);
+            this.panelLeft.Controls.Add(this.btnAssignStudent);
             this.panelLeft.Controls.Add(this.btnCreateClass);
             this.panelLeft.Controls.Add(this.btnClassList);
             this.panelLeft.Controls.Add(this.btnAcademyList);
             this.panelLeft.Controls.Add(this.btnCreateAcademy);
-            this.panelLeft.Controls.Add(this.labelAcademies);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeft.Location = new System.Drawing.Point(0, 0);
             this.panelLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelLeft.Name = "panelLeft";
             this.panelLeft.Size = new System.Drawing.Size(150, 366);
             this.panelLeft.TabIndex = 0;
+            // 
+            // btnAssignStudent
+            // 
+            this.btnAssignStudent.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAssignStudent.ForeColor = System.Drawing.Color.Black;
+            this.btnAssignStudent.Location = new System.Drawing.Point(2, 223);
+            this.btnAssignStudent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAssignStudent.Name = "btnAssignStudent";
+            this.btnAssignStudent.Size = new System.Drawing.Size(143, 41);
+            this.btnAssignStudent.TabIndex = 31;
+            this.btnAssignStudent.Text = "Assign Student";
+            this.btnAssignStudent.UseVisualStyleBackColor = true;
+            this.btnAssignStudent.Click += new System.EventHandler(this.btnAssignStudent_Click);
             // 
             // btnCreateClass
             // 
@@ -154,19 +140,17 @@
             this.Name = "AcademyForm";
             this.Text = "AcademyForm";
             this.panelLeft.ResumeLayout(false);
-            this.panelLeft.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Button btnRezsize;
         private System.Windows.Forms.Panel panelLeft;
         public System.Windows.Forms.Panel panelDocker;
-        public System.Windows.Forms.Label labelAcademies;
         public System.Windows.Forms.Button btnCreateAcademy;
         public System.Windows.Forms.Button btnAcademyList;
         public System.Windows.Forms.Button btnClassList;
         public System.Windows.Forms.Button btnCreateClass;
+        public System.Windows.Forms.Button btnAssignStudent;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using static InventoryManagmentSystem.Academy.AcademyForm;
 
 namespace InventoryManagmentSystem
 {
@@ -285,6 +286,12 @@ namespace InventoryManagmentSystem
 
     public class HelperDatabaseCall
     {
+        /// <summary>
+        /// Returns a dictionary with classes id and name.
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="AcademyId"></param>
+        /// <returns></returns>
         public static Dictionary<Guid, string> ClassListNames(SqlConnection connection, Guid AcademyId)
         {
             string query = $"SELECT Id, Name FROM tbClasses WHERE AcademyId = '{AcademyId}'";
@@ -311,6 +318,34 @@ namespace InventoryManagmentSystem
                 Console.WriteLine($"ERROR listing classes {ex.Message}");
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Returns a dictionary with academies id and name.
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <returns></returns>
+        public static Dictionary<Guid, string> AcademyListNames(SqlConnection connection)
+        {
+            Dictionary<Guid, string> map = new Dictionary<Guid, string>();
+            string query = "SELECT Id, Name FROM tbAcademies";
+            SqlCommand command = new SqlCommand(query, connection);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    // Create a map with the uuid as a key and the name as a value.
+                    map.Add((Guid)reader[0], reader[1].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            connection.Close();
+            return map;
         }
 
         /// <summary>

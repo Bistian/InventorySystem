@@ -67,25 +67,11 @@ namespace InventoryManagmentSystem
 
         private void LoadAcademies()
         {
-            string query = "SELECT Id, Name FROM tbAcademies";
-            SqlCommand command = new SqlCommand(query, connection);
-            try
+            academyMap = HelperDatabaseCall.AcademyListNames(connection);
+            foreach(var item in academyMap.Values)
             {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    // Create a map with the uuid as a key and the name as a value.
-                    academyMap.Add((Guid)reader[0], reader[1].ToString());
-                    // Fill the combo box with academy names.
-                    cbAcademy.Items.Add(reader[1]);
-                }
+                cbAcademy.Items.Add(item);
             }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
         }
 
         /// <summary>
