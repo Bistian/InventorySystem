@@ -20,6 +20,38 @@ namespace InventoryManagmentSystem
 
     public class HelperQuery
     {
+
+        /// <summary>
+        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Material,@Size,@ManufactureDate,@AcquisitionDate)
+        /// </summary>
+        /// <returns></returns>
+        public static string BootsInsert()
+        {
+            string query = $@"
+                INSERT INTO tbBoots({ItemStandardColumns()},Material,Size) 
+                VALUES({ItemStandardValues()},@Material,@Size)
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return query;
+        }
+
+        public static string BrandsLoad()
+        {
+            return "SELECT * FROM tbBrands";
+        }
+
+        public static string ClientLateItems()
+        {
+            string query = @"
+                SELECT cliets.Id, cliets.Name, Count
+                FROM tbCliets as clients
+                JOIN tbBoots ON tbBoots.Location = clients.DriversLicenseNumber
+                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return query;
+        }
+
         /// <summary>
         /// VALUES(@ItemType)
         /// </summary>
@@ -73,25 +105,6 @@ namespace InventoryManagmentSystem
         public static string ItemStandardValues()
         {
             return "@ItemId,@Brand,@SerialNumber,@Condition,@AcquisitionDate,@ManufactureDate";
-        }
-        
-        /// <summary>
-        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Material,@Size,@ManufactureDate,@AcquisitionDate)
-        /// </summary>
-        /// <returns></returns>
-        public static string BootsInsert()
-        {
-            string query = $@"
-                INSERT INTO tbBoots({ItemStandardColumns()},Material,Size) 
-                VALUES({ItemStandardValues()},@Material,@Size)
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            return query;
-        }
-
-        public static string BrandsLoad()
-        {
-            return "SELECT * FROM tbBrands";
         }
         
         public static string ItemTypeLoad()

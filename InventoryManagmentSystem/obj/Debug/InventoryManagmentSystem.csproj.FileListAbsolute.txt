@@ -237,7 +237,6 @@ C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryMan
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.SuggestedBindingRedirects.cache
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Academy.AcademyForm.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Academy.AcademyList.resources
-C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Academy.AcademyManagerForm.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Academy.ClassList.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.CreateAcademyForm.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.CreateClassForm.resources
@@ -282,3 +281,5 @@ C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\I
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.CreateAcademyForm.resources
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.CreateClassForm.resources
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Rental_Forms.NewClientForm.resources
+C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Rental_Forms.NewClientForm.resources
+C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Academy.ClassRosterForm.resources
