@@ -40,45 +40,9 @@ namespace InventoryManagmentSystem.Academy
         public AcademyForm()
         {
             InitializeComponent();
-            InitMinimizeButton();
 
             AcademyList ListForm = new AcademyList(this);
             HelperFunctions.openChildFormToPanel(panelDocker, ListForm);
-        }
-
-        private void InitMinimizeButton()
-        {
-            int height = (int)(panelLeft.Size.Height * .5) - btnRezsize.Size.Height / 2;
-            int width = panelLeft.Size.Width - btnRezsize.Size.Width / 2;
-
-            Point position = new Point(width, height);
-            btnRezsize.Location = position;
-
-            if (minimized)
-            {
-                btnRezsize.Text = "> p";
-                labelAcademies.Visible = false;
-            }
-            else
-            {
-                btnRezsize.Text = "< p";
-                labelAcademies.Visible = true;
-            }
-        }
-
-        private void btnRezsize_Click(object sender, System.EventArgs e)
-        {
-            if (!minimized)
-            {
-                panelLeft.Width = panelLeft.Width / 10;
-                minimized = !minimized;
-            }
-            else
-            {
-                panelLeft.Width = panelLeft.Width * 10;
-                minimized = !minimized;
-            }
-            InitMinimizeButton();
         }
 
         private void btnCreateAcademy_Click(object sender, System.EventArgs e)
@@ -87,8 +51,6 @@ namespace InventoryManagmentSystem.Academy
 
             Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
             HelperFunctions.openChildFormToPanel(panelDocker, AcadForm, currDocked);
-
-            labelAcademies.Text = "Academies";
         }
 
         private void btnAcademyList_Click(object sender, System.EventArgs e)
@@ -96,8 +58,6 @@ namespace InventoryManagmentSystem.Academy
             AcademyList ListForm = new AcademyList(this);
             Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
             HelperFunctions.openChildFormToPanel(panelDocker, ListForm, currDocked);
-
-            labelAcademies.Text = "Academies";
         }
 
         private void btnCreateClass_Click(object sender, System.EventArgs e)
@@ -105,8 +65,6 @@ namespace InventoryManagmentSystem.Academy
             CreateClassForm ListForm = new CreateClassForm(this);
             Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
             HelperFunctions.openChildFormToPanel(panelDocker, ListForm, currDocked);
-
-            labelAcademies.Text = "Classes";
         }
 
         private void btnClassList_Click(object sender, System.EventArgs e)
@@ -115,8 +73,6 @@ namespace InventoryManagmentSystem.Academy
             ClassList ClassList = new ClassList(this);
             Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
             HelperFunctions.openChildFormToPanel(panelDocker, ClassList, currDocked);
-
-            labelAcademies.Text = "Classes";
         }
     }
 }

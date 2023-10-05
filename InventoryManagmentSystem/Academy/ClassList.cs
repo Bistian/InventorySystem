@@ -26,13 +26,13 @@ namespace InventoryManagmentSystem.Academy
         {
             this.parent = parent;
             InitializeComponent();
-            parent.labelAcademies.Text = "Classes";
             AcademyId = parent.AcademyId;
             dataGridClasses.Columns["column_start_date"].DefaultCellStyle.Format = "d";
             dataGridClasses.Columns["column_end_date"].DefaultCellStyle.Format = "d";
 
 
             LoadClasses();
+            initLable();
             this.parent = parent;
         }
 
@@ -77,6 +77,34 @@ namespace InventoryManagmentSystem.Academy
                 Console.WriteLine(ex.Message);
             }
             connection.Close();
+        }
+
+        public void initLable()
+        {
+            if (parent.AcademyId != Guid.Empty)
+            {
+                string query = $"SELECT Name FROM tbAcademies WHERE Id = '{parent.AcademyId}'";
+
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        labelAcademyName.Text = $"{reader[0]} class list";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                connection.Close();
+            }
+            else
+            {
+                labelAcademyName.Text = "All Classes";
+            }
         }
 
         private void UpdateClass(DataGridViewRow row)
