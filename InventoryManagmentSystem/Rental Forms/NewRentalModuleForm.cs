@@ -1,4 +1,5 @@
-﻿using InventoryManagmentSystem.Rental_Forms;
+﻿using InventoryManagmentSystem.Academy;
+using InventoryManagmentSystem.Rental_Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +31,6 @@ namespace InventoryManagmentSystem
         //Used for query
         Guid ItemIdClient = Guid.Empty;
         Guid ItemIdInventory = Guid.Empty;
-        bool Measure = true;
 
         //Used for counting rentals
         int total = 0;
@@ -45,6 +45,7 @@ namespace InventoryManagmentSystem
         String dueDate = "";
         Guid ClientId = Guid.Empty;
         Guid ClassId = Guid.Empty;
+        public string drivers;
 
 
         public NewRentalModuleForm(string rentalType = null, string clientName = null)
@@ -253,6 +254,7 @@ namespace InventoryManagmentSystem
                 HelperFunctions.RemoveLineBreaksFromString(ref query);
                 try
                 {
+                    drivers = ClientDrivers;
                     command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@DriversLicenseNumber", ClientDrivers);
                     connection.Open();
@@ -922,11 +924,19 @@ namespace InventoryManagmentSystem
         private void btnProfile_Click(object sender, EventArgs e)
         {
             flowLayoutPanelProfile.Visible = true;
+            AssignStudentForm dockedForm = panel2.Controls.OfType<AssignStudentForm>().FirstOrDefault();
+            if (dockedForm != null)
+            {
+                dockedForm.Dispose();
+            }
         }
 
         private void btnClass_Click(object sender, EventArgs e)
         {
             flowLayoutPanelProfile.Visible = false ;
+
+            AssignStudentForm AssignForm = new AssignStudentForm(null);
+            HelperFunctions.openChildFormToPanel(panel2, AssignForm);
         }
     }
 }
