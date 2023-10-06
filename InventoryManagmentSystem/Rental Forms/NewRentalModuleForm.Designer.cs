@@ -560,9 +560,8 @@
             this.labelClientClass.Location = new System.Drawing.Point(0, 25);
             this.labelClientClass.Margin = new System.Windows.Forms.Padding(20, 0, 4, 0);
             this.labelClientClass.Name = "labelClientClass";
-            this.labelClientClass.Size = new System.Drawing.Size(152, 25);
+            this.labelClientClass.Size = new System.Drawing.Size(0, 25);
             this.labelClientClass.TabIndex = 126;
-            this.labelClientClass.Text = "Academy Name";
             // 
             // lableRentalInfo
             // 
@@ -573,9 +572,9 @@
             this.lableRentalInfo.Location = new System.Drawing.Point(91, -2);
             this.lableRentalInfo.Margin = new System.Windows.Forms.Padding(60, 50, 3, 0);
             this.lableRentalInfo.Name = "lableRentalInfo";
-            this.lableRentalInfo.Size = new System.Drawing.Size(161, 38);
+            this.lableRentalInfo.Size = new System.Drawing.Size(208, 38);
             this.lableRentalInfo.TabIndex = 112;
-            this.lableRentalInfo.Text = "Academy";
+            this.lableRentalInfo.Text = "Not Enrolled";
             // 
             // panelNotes
             // 
