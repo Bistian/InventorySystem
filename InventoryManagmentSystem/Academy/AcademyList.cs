@@ -75,14 +75,14 @@ namespace InventoryManagmentSystem.Academy
             // SQL
             int i = 0;
             dataGridAcademies.Rows.Clear();
-            SqlCommand command = new SqlCommand($"SELECT * FROM tbAcademies WHERE Name LIKE '%{searchTerm}%'", connection);
+            SqlCommand command = new SqlCommand($"SELECT Id, Name, Email, Phone, Street, City, State, Zip FROM tbAcademies WHERE Name LIKE '%{searchTerm}%'", connection);
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
                 i++;
-                dataGridAcademies.Rows.Add(i, reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[5].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString());
+                dataGridAcademies.Rows.Add(i, reader[0], reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString());
             }
             reader.Close();
             connection.Close();

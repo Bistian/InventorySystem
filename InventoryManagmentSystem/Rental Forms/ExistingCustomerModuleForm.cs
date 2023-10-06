@@ -166,7 +166,7 @@ namespace InventoryManagmentSystem
             //SQL
             int i = 0;
             dataGridUsers.Rows.Clear();
-            cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE (Name LIKE '%" + searchTerm + "%' OR Academy LIKE '%" + searchTerm + "%') AND DayNight = @ClientType", con);
+            cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE (Name LIKE '%" + searchTerm + "%' OR Academy LIKE '%" + searchTerm + "%') AND Type = @ClientType", con);
             cm.Parameters.AddWithValue("@ClientType", clientType);
             con.Open();
             dr = cm.ExecuteReader();

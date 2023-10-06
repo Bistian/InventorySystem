@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static InventoryManagmentSystem.Academy.AcademyForm;
 
 namespace InventoryManagmentSystem.Academy
 {
@@ -17,6 +18,10 @@ namespace InventoryManagmentSystem.Academy
 
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
+        //Creating command
+        SqlCommand command = new SqlCommand();
+        //Creatinng Reader
+        SqlDataReader dr2;
         Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
         Guid AcademyId;
         AcademyForm parent;
@@ -167,9 +172,59 @@ namespace InventoryManagmentSystem.Academy
             }
         }
 
+        private string GetAcademyName(Guid SearchId)
+        {
+            SqlConnection connection2 = new SqlConnection(connectionString);
+            //Creating command
+            SqlCommand command2 = new SqlCommand();
+
+
+            string AcademyName = "";
+            string query = $@"
+                    SELECT Name FROM tbAcademies WHERE Id = '{SearchId}'
+                    ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                command2 = new SqlCommand(query, connection2);
+                connection2.Open();
+                dr2 = command2.ExecuteReader();
+                while (dr2.Read())
+                {
+                    AcademyName = dr2[0].ToString();
+                }
+                dr2.Close();
+                connection2.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                dr2.Close();
+                connection2.Close();
+            }
+            return AcademyName;
+        }
+
         private void searchBar_TextChanged(object sender, EventArgs e)
         {
+            string searchTerm = searchBar.Text;
+            if (string.IsNullOrEmpty(searchTerm)) { LoadClasses(); }
 
+            // SQL
+            int i = 0;
+            dataGridClasses.Rows.Clear();
+            SqlCommand command = new SqlCommand($"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses WHERE Name LIKE '%{searchTerm}%' AND  AcademyId ='{AcademyId}'", connection);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                
+                i++;
+                dataGridClasses.Rows.Add(i, reader[0], GetAcademyName((Guid)reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString());
+            }
+            reader.Close();
+            connection.Close();
         }
     }  
 }

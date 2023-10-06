@@ -86,6 +86,12 @@
     <Compile Include="Academy\AcademyList.Designer.cs">
       <DependentUpon>AcademyList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Academy\AssignStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academy\AssignStudentForm.Designer.cs">
+      <DependentUpon>AssignStudentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Academy\ClassList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -304,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Academy\AcademyList.resx">
       <DependentUpon>AcademyList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academy\AssignStudentForm.resx">
+      <DependentUpon>AssignStudentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Academy\ClassList.resx">
       <DependentUpon>ClassList.cs</DependentUpon>

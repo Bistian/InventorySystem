@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridStudents = new System.Windows.Forms.DataGridView();
             this.column_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_drivers_license = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -36,9 +36,9 @@
             this.column_phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.labelAcademyName = new System.Windows.Forms.Label();
             this.labelSearch = new System.Windows.Forms.Label();
             this.searchBar = new System.Windows.Forms.TextBox();
-            this.labelAcademyName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridStudents)).BeginInit();
             this.panelTop.SuspendLayout();
             this.SuspendLayout();
@@ -50,14 +50,14 @@
             this.dataGridStudents.AllowUserToResizeRows = false;
             this.dataGridStudents.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridStudents.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.MediumBlue;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridStudents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MediumBlue;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridStudents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridStudents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.column_number,
@@ -78,6 +78,7 @@
             this.dataGridStudents.RowTemplate.Height = 40;
             this.dataGridStudents.Size = new System.Drawing.Size(933, 477);
             this.dataGridStudents.TabIndex = 29;
+            this.dataGridStudents.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridStudents_CellClick);
             // 
             // column_number
             // 
@@ -136,6 +137,17 @@
             this.panelTop.Size = new System.Drawing.Size(933, 42);
             this.panelTop.TabIndex = 28;
             // 
+            // labelAcademyName
+            // 
+            this.labelAcademyName.AutoSize = true;
+            this.labelAcademyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAcademyName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelAcademyName.Location = new System.Drawing.Point(3, 3);
+            this.labelAcademyName.Name = "labelAcademyName";
+            this.labelAcademyName.Size = new System.Drawing.Size(202, 37);
+            this.labelAcademyName.TabIndex = 24;
+            this.labelAcademyName.Text = "Class Name";
+            // 
             // labelSearch
             // 
             this.labelSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -158,17 +170,7 @@
             this.searchBar.Name = "searchBar";
             this.searchBar.Size = new System.Drawing.Size(234, 28);
             this.searchBar.TabIndex = 22;
-            // 
-            // labelAcademyName
-            // 
-            this.labelAcademyName.AutoSize = true;
-            this.labelAcademyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAcademyName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelAcademyName.Location = new System.Drawing.Point(3, 3);
-            this.labelAcademyName.Name = "labelAcademyName";
-            this.labelAcademyName.Size = new System.Drawing.Size(202, 37);
-            this.labelAcademyName.TabIndex = 24;
-            this.labelAcademyName.Text = "Class Name";
+            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
             // 
             // ClassRosterForm
             // 

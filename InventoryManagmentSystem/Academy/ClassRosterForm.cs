@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -9,13 +10,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static InventoryManagmentSystem.Academy.AcademyForm;
 
 namespace InventoryManagmentSystem.Academy
 {
     public partial class ClassRosterForm : Form
     {
+
+
+        #region SQL_Variables
+        //Database Path
+        // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
+        //Creating command
+        SqlCommand cm = new SqlCommand();
+        //Creatinng Reader
+        SqlDataReader dr;
+        #endregion SQL_Variables
 
         AcademyForm parent;
         public ClassRosterForm(AcademyForm parent)
@@ -59,9 +71,10 @@ namespace InventoryManagmentSystem.Academy
                 labelAcademyName.Text = "All students";
             }
         }
+
         private void LoadStudents()
         {
-            string query = $"SELECT DriversLicense, Name, Phone, Email FROM tbClients WHERE IdClass = '{parent.ClassId}'";
+            string query = $"SELECT DriversLicenseNumber, Name, Phone, Email FROM tbClients WHERE IdClass = '{parent.ClassId}'";
             try
             {
                 connection.Open();
@@ -78,6 +91,56 @@ namespace InventoryManagmentSystem.Academy
             {
                 Console.WriteLine(ex.Message);
             }
+            connection.Close();
+        }
+
+        private void dataGridStudents_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = dataGridStudents.Rows[e.RowIndex];
+            string column = dataGridStudents.Columns[e.ColumnIndex].Name;
+            if (e.RowIndex < 0) { return; }
+
+            string clientName = row.Cells["column_student"].Value.ToString();
+            string licence = row.Cells["column_drivers_license"].Value.ToString();
+
+            string message = "Are you sure you want to select this client";
+            if (!HelperFunctions.YesNoMessageBox(message, "Continue"))
+            {
+                return;
+            }
+
+            var parentForm = this.ParentForm.ParentForm as MainForm;
+            NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
+            try
+            {
+                Profile.LoadProfile(false, licence);
+                parentForm.openChildForm(Profile);
+                this.parent.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
+            }
+        }
+
+        private void searchBar_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = searchBar.Text;
+            if (string.IsNullOrEmpty(searchTerm)) { LoadStudents(); }
+
+            // SQL
+            int i = 0;
+            dataGridStudents.Rows.Clear();
+            SqlCommand command = new SqlCommand($"SELECT DriversLicenseNumber, Name, Phone, Email FROM tbClients WHERE Name LIKE '%{searchTerm}%' AND  IdClass ='{this.parent.ClassId}'", connection);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                i++;
+                dataGridStudents.Rows.Add(i, reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString());
+            }
+            reader.Close();
             connection.Close();
         }
     }

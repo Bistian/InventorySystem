@@ -134,6 +134,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             textBoxZip.Clear();
             cbRep.SelectedIndex = -1;
             comboBoxAcademy.SelectedIndex = -1;
+            cbClass.SelectedIndex = -1;
 
         }
 
@@ -540,6 +541,10 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void comboBoxAcademy_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(comboBoxAcademy.SelectedIndex == -1)
+            {
+                return;
+            }
             string name = comboBoxAcademy.Text;
             if(classList != null)
             {

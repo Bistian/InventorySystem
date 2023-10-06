@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace InventoryManagmentSystem
 {
@@ -43,21 +44,25 @@ namespace InventoryManagmentSystem
         string ReplacmentSerial = "";
         String dueDate = "";
         Guid ClientId = Guid.Empty;
+        Guid ClassId = Guid.Empty;
 
 
         public NewRentalModuleForm(string rentalType = null, string clientName = null)
         {
             InitializeComponent();
      
-            NewClientForm clientForm = new NewClientForm(rentalType, clientName);
 
             if (clientName != null)
             {
                 labelProfileName.Text = clientName;
             }
-
-            HelperFunctions.LoadItemTypes(connection, ref comboBoxItemType);
-            HelperFunctions.openChildFormToPanel(panel2, clientForm);
+            else
+            {
+                panelButtons.Visible = false;
+                NewClientForm clientForm = new NewClientForm(rentalType, clientName);
+                HelperFunctions.LoadItemTypes(connection, ref comboBoxItemType);
+                HelperFunctions.openChildFormToPanel(panel2, clientForm);
+            }
         }
 
         private string QueryClient()
@@ -210,13 +215,39 @@ namespace InventoryManagmentSystem
             connection.Close();
         }
 
+        private void GetClassName()
+        {
+            string query = $@"
+                    SELECT Name FROM tbClasses WHERE Id = '{ClassId}'
+                    ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                command = new SqlCommand(query, connection);
+                connection.Open();
+                dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    labelClientClass.Text = dr[0].ToString();
+                }
+                dr.Close();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                dr.Close();
+                connection.Close();
+            }
+        }
+
         public void LoadProfile(bool isDepartment, String ClientDrivers)
         {
             if (!isDepartment)
             {
                 string query = @"
                     SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address,
-                    Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,Notes,Id 
+                    Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,Notes,Id,IdClass
                     FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber
                 ";
                 HelperFunctions.RemoveLineBreaksFromString(ref query);
@@ -231,7 +262,7 @@ namespace InventoryManagmentSystem
                         labelProfileName.Text = dr[0].ToString();
                         labelClientPhone.Text = dr[1].ToString();
                         labelClientEmail.Text = dr[2].ToString();
-                        labelClientAcademy.Text = dr[3].ToString();
+                        lableRentalInfo.Text = dr[3].ToString();
                         labelClientDrivers.Text = dr[4].ToString();
                         labelClientAddress.Text = dr[5].ToString();
                         labelClientChest.Text = dr[6].ToString();
@@ -243,6 +274,7 @@ namespace InventoryManagmentSystem
                         labelClientWeight.Text = dr[12].ToString();
                         textBoxNotes.Text = dr[13].ToString();
                         ClientId = (Guid)dr[14];
+                        ClassId = (Guid)dr[15];
                     }
                     dr.Close();
                     connection.Close();
@@ -254,6 +286,7 @@ namespace InventoryManagmentSystem
                     dr.Close();
                     connection.Close();
                 }
+                GetClassName();
             }
             else if (isDepartment)
             {
@@ -299,7 +332,8 @@ namespace InventoryManagmentSystem
             splitContainerInventories.Visible = true;
             panelRentals.Visible = true;
             LoadClient();
-            flowLayoutPanelProfile.Dock = DockStyle.Top;
+            panelButtons.Dock = DockStyle.Top;
+            flowLayoutPanelProfile.Dock = DockStyle.Bottom;
         }
 
         public void UpdateProfile(bool isDepartment, String ClientDrivers)
@@ -883,6 +917,16 @@ namespace InventoryManagmentSystem
         private void NewRentalModuleForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanelProfile.Visible = true;
+        }
+
+        private void btnClass_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanelProfile.Visible = false ;
         }
     }
 }
