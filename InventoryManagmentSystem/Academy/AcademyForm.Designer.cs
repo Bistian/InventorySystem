@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.panelLeft = new System.Windows.Forms.Panel();
-            this.btnAssignStudent = new System.Windows.Forms.Button();
             this.btnCreateClass = new System.Windows.Forms.Button();
             this.btnClassList = new System.Windows.Forms.Button();
             this.btnAcademyList = new System.Windows.Forms.Button();
@@ -40,39 +39,25 @@
             // 
             // panelLeft
             // 
-            this.panelLeft.Controls.Add(this.btnAssignStudent);
             this.panelLeft.Controls.Add(this.btnCreateClass);
             this.panelLeft.Controls.Add(this.btnClassList);
             this.panelLeft.Controls.Add(this.btnAcademyList);
             this.panelLeft.Controls.Add(this.btnCreateAcademy);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeft.Location = new System.Drawing.Point(0, 0);
-            this.panelLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Size = new System.Drawing.Size(150, 366);
+            this.panelLeft.Size = new System.Drawing.Size(200, 450);
             this.panelLeft.TabIndex = 0;
-            // 
-            // btnAssignStudent
-            // 
-            this.btnAssignStudent.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAssignStudent.ForeColor = System.Drawing.Color.Black;
-            this.btnAssignStudent.Location = new System.Drawing.Point(2, 223);
-            this.btnAssignStudent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnAssignStudent.Name = "btnAssignStudent";
-            this.btnAssignStudent.Size = new System.Drawing.Size(143, 41);
-            this.btnAssignStudent.TabIndex = 31;
-            this.btnAssignStudent.Text = "Assign Student";
-            this.btnAssignStudent.UseVisualStyleBackColor = true;
-            this.btnAssignStudent.Click += new System.EventHandler(this.btnAssignStudent_Click);
             // 
             // btnCreateClass
             // 
             this.btnCreateClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateClass.ForeColor = System.Drawing.Color.Black;
-            this.btnCreateClass.Location = new System.Drawing.Point(2, 178);
-            this.btnCreateClass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCreateClass.Location = new System.Drawing.Point(3, 219);
+            this.btnCreateClass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateClass.Name = "btnCreateClass";
-            this.btnCreateClass.Size = new System.Drawing.Size(143, 41);
+            this.btnCreateClass.Size = new System.Drawing.Size(191, 50);
             this.btnCreateClass.TabIndex = 30;
             this.btnCreateClass.Text = "New Class";
             this.btnCreateClass.UseVisualStyleBackColor = true;
@@ -82,10 +67,10 @@
             // 
             this.btnClassList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClassList.ForeColor = System.Drawing.Color.Black;
-            this.btnClassList.Location = new System.Drawing.Point(2, 132);
-            this.btnClassList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClassList.Location = new System.Drawing.Point(3, 162);
+            this.btnClassList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClassList.Name = "btnClassList";
-            this.btnClassList.Size = new System.Drawing.Size(143, 41);
+            this.btnClassList.Size = new System.Drawing.Size(191, 50);
             this.btnClassList.TabIndex = 29;
             this.btnClassList.Text = "Class List";
             this.btnClassList.UseVisualStyleBackColor = true;
@@ -95,10 +80,10 @@
             // 
             this.btnAcademyList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAcademyList.ForeColor = System.Drawing.Color.Black;
-            this.btnAcademyList.Location = new System.Drawing.Point(2, 39);
-            this.btnAcademyList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAcademyList.Location = new System.Drawing.Point(3, 48);
+            this.btnAcademyList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAcademyList.Name = "btnAcademyList";
-            this.btnAcademyList.Size = new System.Drawing.Size(143, 41);
+            this.btnAcademyList.Size = new System.Drawing.Size(191, 50);
             this.btnAcademyList.TabIndex = 28;
             this.btnAcademyList.Text = "Academy List";
             this.btnAcademyList.UseVisualStyleBackColor = true;
@@ -108,10 +93,10 @@
             // 
             this.btnCreateAcademy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateAcademy.ForeColor = System.Drawing.Color.Black;
-            this.btnCreateAcademy.Location = new System.Drawing.Point(2, 85);
-            this.btnCreateAcademy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCreateAcademy.Location = new System.Drawing.Point(3, 105);
+            this.btnCreateAcademy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateAcademy.Name = "btnCreateAcademy";
-            this.btnCreateAcademy.Size = new System.Drawing.Size(143, 41);
+            this.btnCreateAcademy.Size = new System.Drawing.Size(191, 50);
             this.btnCreateAcademy.TabIndex = 27;
             this.btnCreateAcademy.Text = "New Academy";
             this.btnCreateAcademy.UseVisualStyleBackColor = true;
@@ -120,23 +105,23 @@
             // panelDocker
             // 
             this.panelDocker.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDocker.Location = new System.Drawing.Point(150, 0);
-            this.panelDocker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelDocker.Location = new System.Drawing.Point(200, 0);
+            this.panelDocker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelDocker.Name = "panelDocker";
-            this.panelDocker.Size = new System.Drawing.Size(654, 366);
+            this.panelDocker.Size = new System.Drawing.Size(872, 450);
             this.panelDocker.TabIndex = 27;
             // 
             // AcademyForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(804, 366);
+            this.ClientSize = new System.Drawing.Size(1072, 450);
             this.Controls.Add(this.panelDocker);
             this.Controls.Add(this.panelLeft);
             this.ForeColor = System.Drawing.Color.Maroon;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AcademyForm";
             this.Text = "AcademyForm";
             this.panelLeft.ResumeLayout(false);
@@ -151,6 +136,5 @@
         public System.Windows.Forms.Button btnAcademyList;
         public System.Windows.Forms.Button btnClassList;
         public System.Windows.Forms.Button btnCreateClass;
-        public System.Windows.Forms.Button btnAssignStudent;
     }
 }

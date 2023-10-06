@@ -36,10 +36,6 @@ namespace InventoryManagmentSystem
             return query;
         }
 
-        public static string BrandsLoad()
-        {
-            return "SELECT * FROM tbBrands";
-        }
 
         public static string ClientLateItems()
         {
