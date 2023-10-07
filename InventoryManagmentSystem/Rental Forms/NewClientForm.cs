@@ -149,7 +149,6 @@ namespace InventoryManagmentSystem.Rental_Forms
                 !string.IsNullOrEmpty(txtBoxEmail.Text) &&
                 !string.IsNullOrEmpty(txtBoxPhone.Text) &&
                 !string.IsNullOrEmpty(cbRep.Text) &&
-                !string.IsNullOrEmpty(comboBoxAcademy.Text) &&
                 !string.IsNullOrEmpty(textBoxCity.Text)
             );
             bool measureChecks;
