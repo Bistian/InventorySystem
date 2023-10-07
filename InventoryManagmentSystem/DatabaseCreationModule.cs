@@ -163,25 +163,12 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private bool CreateTableClasses(SqlConnection connection)
-        {
-            string query = @"
-                CREATE TABLE[dbo].[tbClasses] (
-                [Id]            INT IDENTITY(1, 1) NOT NULL,
-                [Name]          VARCHAR(50) NOT NULL,
-                [StartDate]     DATE NOT NULL,
-                [EndDate]       DATE NOT NULL,
-                [IsFinished]      BIT DEFAULT 0
-            );";
-            return RunQuery(connection, query);
-        }
-
         private bool CreateTableClients(SqlConnection connection)
         {
             string query = @"
                 CREATE TABLE [dbo].[tbClients] (
                 [Id]                    UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
-                [IdClass]               INT NULL,
+                [IdClass]               UNIQUEIDENTIFIER NULL,
                 [Name]                  VARCHAR(50) NOT NULL,
                 [Phone]                 VARCHAR(50) NOT NULL,
                 [Email]                 VARCHAR(50) NOT NULL,
@@ -372,9 +359,41 @@ namespace InventoryManagmentSystem
         {
             string query = @"
                 CREATE TABLE[dbo].[tbAcademies] (
-                [Id] INT IDENTITY(1, 1) NOT NULL,
+                [Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
                 [Name] VARCHAR(50) NOT NULL,
-                [Brand] VARCHAR(50) NOT NULL
+                [Email] VARCHAR(50) NOT NULL,
+                [Phone] VARCHAR(50) NOT NULL,
+                [Street] VARCHAR(50) NOT NULL,
+                [City] VARCHAR(50) NOT NULL,
+                [State] VARCHAR(50) NOT NULL,
+                [Zip] VARCHAR(50) NOT NULL,
+            );";
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableClasses(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE[dbo].[tbClasses] (
+                [Id]            UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
+                [AcademyId]     UNIQUEIDENTIFIER NOT NULL,
+                [Name]          VARCHAR(50) NOT NULL,
+                [StartDate]     DATE NOT NULL,
+                [EndDate]       DATE NOT NULL,
+                [IsFinished]    BIT DEFAULT 0,
+                FOREIGN KEY (AcademyId) REFERENCES [dbo].[tbAcademies] ([Id])
+            );";
+            return RunQuery(connection, query);
+        }
+
+        private bool CreateTableStudents(SqlConnection connection)
+        {
+            string query = @"
+                CREATE TABLE[dbo].[tbStudents] (
+                [ClientId]      UNIQUEIDENTIFIER NOT NULL,
+                [ClassId]       UNIQUEIDENTIFIER NOT NULL,
+                FOREIGN KEY (ClientId) REFERENCES [dbo].[tbClients] ([Id]),
+                FOREIGN KEY (ClassId) REFERENCES [dbo].[tbClasses] ([Id])
             );";
             return RunQuery(connection, query);
         }
@@ -425,7 +444,6 @@ namespace InventoryManagmentSystem
                 string error_message = "Failed to create table for ";
                 try
                 {
-                    if (!CreateTableClasses(connection)) { throw new Exception(error_message + "classes"); }
                     if (!CreateTableClients(connection)) { throw new Exception(error_message + "client"); }
                     if (!CreateTableItems(connection)) { throw new Exception(error_message + "items"); }
                     if (!CreateTableItemTypes(connection)) { throw new Exception(error_message + "item types"); }
@@ -439,6 +457,8 @@ namespace InventoryManagmentSystem
                     if (!CreateTableUsers(connection)) { throw new Exception(error_message + "users"); }
                     if (!CreateTableBrands(connection)) { throw new Exception(error_message + "brands"); }
                     if (!CreateTableAcademies(connection)) { throw new Exception(error_message + "academies"); }
+                    if (!CreateTableClasses(connection)) { throw new Exception(error_message + "classes"); }
+                    if (!CreateTableStudents(connection)) { throw new Exception(error_message + "students"); }
                     if (!CreateTablePrices(connection)) { throw new Exception(error_message + "prices"); }
                     return true;
                 }

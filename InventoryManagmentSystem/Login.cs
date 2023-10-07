@@ -75,7 +75,7 @@ namespace InventoryManagmentSystem
 
                 if (dr.HasRows)
                 {
-                    //MessageBox.Show("Welcome " + dr["fullname"].ToString(), "ACCESS GRANTED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Welcome " + reader["fullname"].ToString(), "ACCESS GRANTED", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     MainForm main = new MainForm();
                     main.ShowDialog();
                 }

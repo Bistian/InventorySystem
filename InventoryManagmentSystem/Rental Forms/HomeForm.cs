@@ -83,19 +83,19 @@ namespace InventoryManagmentSystem
             string query = @"
                 SELECT ItemType, Location, DueDate FROM tbItems 
                 JOIN tbBoots ON tbBoots.ItemId = tbItems.Id 
-                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 0
+                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0
 
                 UNION SELECT ItemType, Location, DueDate FROM tbItems 
                 JOIN tbHelmets ON tbHelmets.ItemId = tbItems.Id 
-                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 0
+                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0
 
                 UNION SELECT ItemType, Location, DueDate FROM tbItems 
                 JOIN tbJackets ON tbJackets.ItemId = tbItems.Id 
-                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 0 
+                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0 
 
                 UNION SELECT ItemType, Location, DueDate FROM tbItems 
                 JOIN tbPants ON tbPants.ItemId = tbItems.Id 
-                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) >= 0
+                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0
             ";
             query = query.Replace("\r\n", " ");
             return query;

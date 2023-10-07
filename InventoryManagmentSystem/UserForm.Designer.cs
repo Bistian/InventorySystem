@@ -86,7 +86,7 @@
             this.UserTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.UserTxt.Location = new System.Drawing.Point(12, 14);
             this.UserTxt.Name = "UserTxt";
-            this.UserTxt.Size = new System.Drawing.Size(130, 24);
+            this.UserTxt.Size = new System.Drawing.Size(164, 29);
             this.UserTxt.TabIndex = 14;
             this.UserTxt.Text = "Manage Users";
             this.UserTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -140,7 +140,7 @@
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column1.Width = 97;
+            this.Column1.Width = 123;
             // 
             // Column2
             // 
@@ -150,7 +150,7 @@
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.Width = 88;
+            this.Column2.Width = 110;
             // 
             // Column3
             // 
@@ -191,7 +191,7 @@
             this.DepartmentsTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.DepartmentsTxt.Location = new System.Drawing.Point(12, 14);
             this.DepartmentsTxt.Name = "DepartmentsTxt";
-            this.DepartmentsTxt.Size = new System.Drawing.Size(130, 24);
+            this.DepartmentsTxt.Size = new System.Drawing.Size(164, 29);
             this.DepartmentsTxt.TabIndex = 14;
             this.DepartmentsTxt.Text = "Manage Users";
             this.DepartmentsTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -208,6 +208,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1034, 53);
             this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label1
             // 
@@ -218,7 +219,7 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label1.Location = new System.Drawing.Point(686, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 17);
+            this.label1.Size = new System.Drawing.Size(68, 20);
             this.label1.TabIndex = 19;
             this.label1.Text = "Search";
             // 
@@ -227,7 +228,7 @@
             this.searchBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.searchBar.Location = new System.Drawing.Point(764, 18);
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(208, 23);
+            this.searchBar.Size = new System.Drawing.Size(208, 26);
             this.searchBar.TabIndex = 18;
             this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged_1);
             // 
@@ -247,7 +248,7 @@
             // 
             // UserForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 542);
             this.Controls.Add(this.panel1);

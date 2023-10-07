@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using static InventoryManagmentSystem.Academy.AcademyForm;
 
 namespace InventoryManagmentSystem
 {
@@ -19,6 +21,34 @@ namespace InventoryManagmentSystem
 
     public class HelperQuery
     {
+
+        /// <summary>
+        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Material,@Size,@ManufactureDate,@AcquisitionDate)
+        /// </summary>
+        /// <returns></returns>
+        public static string BootsInsert()
+        {
+            string query = $@"
+                INSERT INTO tbBoots({ItemStandardColumns()},Material,Size) 
+                VALUES({ItemStandardValues()},@Material,@Size)
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return query;
+        }
+
+
+        public static string ClientLateItems()
+        {
+            string query = @"
+                SELECT cliets.Id, cliets.Name, Count
+                FROM tbCliets as clients
+                JOIN tbBoots ON tbBoots.Location = clients.DriversLicenseNumber
+                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return query;
+        }
+
         /// <summary>
         /// VALUES(@ItemType)
         /// </summary>
@@ -72,25 +102,6 @@ namespace InventoryManagmentSystem
         public static string ItemStandardValues()
         {
             return "@ItemId,@Brand,@SerialNumber,@Condition,@AcquisitionDate,@ManufactureDate";
-        }
-        
-        /// <summary>
-        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Material,@Size,@ManufactureDate,@AcquisitionDate)
-        /// </summary>
-        /// <returns></returns>
-        public static string BootsInsert()
-        {
-            string query = $@"
-                INSERT INTO tbBoots({ItemStandardColumns()},Material,Size) 
-                VALUES({ItemStandardValues()},@Material,@Size)
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            return query;
-        }
-
-        public static string BrandsLoad()
-        {
-            return "SELECT * FROM tbBrands";
         }
         
         public static string ItemTypeLoad()
@@ -272,6 +283,68 @@ namespace InventoryManagmentSystem
     public class HelperDatabaseCall
     {
         /// <summary>
+        /// Returns a dictionary with classes id and name.
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="AcademyId"></param>
+        /// <returns></returns>
+        public static Dictionary<Guid, string> ClassListNames(SqlConnection connection, Guid AcademyId)
+        {
+            string query = $"SELECT Id, Name FROM tbClasses WHERE AcademyId = '{AcademyId}'";
+            connection.Close();
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                Dictionary<Guid, string> dict = new Dictionary<Guid, string>(); ;
+                while (reader.Read())
+                {
+                    dict.Add(reader.GetGuid(
+                        reader.GetOrdinal("Id")), 
+                        reader.GetString(reader.GetOrdinal("Name"))
+                    );
+                }
+                connection.Close();
+                return dict;
+            }
+            catch (Exception ex)
+            {
+                connection.Close();
+                Console.WriteLine($"ERROR listing classes {ex.Message}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Returns a dictionary with academies id and name.
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <returns></returns>
+        public static Dictionary<Guid, string> AcademyListNames(SqlConnection connection)
+        {
+            Dictionary<Guid, string> map = new Dictionary<Guid, string>();
+            string query = "SELECT Id, Name FROM tbAcademies";
+            SqlCommand command = new SqlCommand(query, connection);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    // Create a map with the uuid as a key and the name as a value.
+                    map.Add((Guid)reader[0], reader[1].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            connection.Close();
+            return map;
+        }
+
+        /// <summary>
         /// Add an item to Items table.
         /// </summary>
         /// <returns>Created item's uuid or empty if it failed.</returns>
@@ -299,7 +372,7 @@ namespace InventoryManagmentSystem
         /// Deletes an item from item table.
         /// </summary>
         /// <param name="uuid"></param>
-        public static void DeleteItem(SqlConnection connection, Guid uuid)
+        public static void ItemDelete(SqlConnection connection, Guid uuid)
         {
             string query = HelperQuery.ItemDelete();
             connection.Open();

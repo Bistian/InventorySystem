@@ -232,7 +232,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (!wasAdded)
             {
                 // If item was not added to the specific table, delete from Items Table.
-                HelperDatabaseCall.DeleteItem(connection, uuid);
+                HelperDatabaseCall.ItemDelete(connection, uuid);
                 MessageBox.Show("Could not save the item.");
                 return false;
             }

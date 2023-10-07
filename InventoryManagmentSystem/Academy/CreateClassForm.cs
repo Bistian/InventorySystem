@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryManagmentSystem.Academy;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -9,56 +10,81 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static InventoryManagmentSystem.Academy.AcademyForm;
 
 namespace InventoryManagmentSystem
 {
-    public partial class ClassForm : Form
+    public partial class CreateClassForm : Form
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
+        Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
 
-        public ClassForm()
+        private bool isUpdate = false;
+        AcademyForm parent;
+        private AcademyForm.Class editingClass;
+
+        public CreateClassForm(AcademyForm parent)
         {
             InitializeComponent();
-            dataGridClasses.Columns["column_start_date"].DefaultCellStyle.Format = "d";
-            dataGridClasses.Columns["column_end_date"].DefaultCellStyle.Format = "d";
-            LoadClasses();
+            LoadAcademies();
+            this.parent = parent;
+        }
+        public CreateClassForm(AcademyForm parent, AcademyForm.Class classToEdit)
+        {
+            InitializeComponent();
+            LoadAcademies();
+
+            
+            editingClass = classToEdit;
+            InitUpdate();
         }
 
-        private void LoadClasses()
+        private void InitUpdate()
         {
-            dataGridClasses.Rows.Clear();
-            string query = "SELECT * FROM tbClasses";
-            try
+            isUpdate = true;
+            btnAdd.Text = "Update";
+            cbAcademy.Text = editingClass.academyName;
+            cbAcademy.Enabled = false;
+
+            btnResetName.Enabled = true;
+            btnResetName.Visible = true;
+
+            btnResetStart.Enabled = true;
+            btnResetStart.Visible = true;
+
+            btnResetEnd.Enabled = true;
+            btnResetEnd.Visible = true;
+
+            btnCancel.Enabled = true;
+            btnCancel.Visible = true;
+
+            tbClassName.Text = editingClass.name;
+            dpStartDate.Value = editingClass.start;
+            dpEndDate.Value = editingClass.end;
+
+        }
+
+        private void LoadAcademies()
+        {
+            academyMap = HelperDatabaseCall.AcademyListNames(connection);
+            foreach(var item in academyMap.Values)
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-                int i = 0;
-                while (reader.Read())
-                {
-                    dataGridClasses.Rows.Add(
-                        i++, reader[0], reader[1], reader[2], reader[3], reader[4]
-                    );
-                }
+                cbAcademy.Items.Add(item);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
         }
 
         /// <summary>
         /// Check if item already exists on the table.
         /// </summary>
         /// <returns>1 = exists | 0 = dosn't exist | -1 = error. </returns>
-        private int ItemAlreadyExists()
+        private int ItemAlreadyExists(Guid academyId)
         {
             string query = @"
                 SELECT * 
                 FROM tbClasses 
-                WHERE Name = @Name AND
+                WHERE AcademyId = @AcademyId AND
+                    Name = @Name AND
                     StartDate = @Start AND
                     EndDate = @End
             ";
@@ -68,6 +94,7 @@ namespace InventoryManagmentSystem
             try
             {
                 SqlCommand command = new SqlCommand(@query, connection);
+                command.Parameters.AddWithValue("@AcademyId", academyId);
                 command.Parameters.AddWithValue("@Name", tbClassName.Text);
                 command.Parameters.AddWithValue("@Start", dpStartDate.Value.Date);
                 command.Parameters.AddWithValue("@End", dpEndDate.Value.Date);
@@ -86,13 +113,24 @@ namespace InventoryManagmentSystem
 
         private bool AddClass()
         {
-            int exists = ItemAlreadyExists();
+
+            // Get the uuid from the selected academy.
+            Guid academyId = Guid.Empty;
+            foreach(var item in academyMap)
+            {
+                if(item.Value == cbAcademy.Text)
+                {
+                    academyId = item.Key;
+                }
+            }
+
+            int exists = ItemAlreadyExists(academyId);
             if(exists == 1 || exists == -1) { return false; }
 
             string query = @"
                 INSERT INTO tbClasses
-                (Name, StartDate, EndDate)
-                VALUES(@Name, @Start, @End)
+                (AcademyId, Name, StartDate, EndDate)
+                VALUES(@AcademyId, @Name, @Start, @End)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
@@ -100,6 +138,7 @@ namespace InventoryManagmentSystem
             try
             {
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@AcademyId", academyId);
                 command.Parameters.AddWithValue("@Name", tbClassName.Text);
                 command.Parameters.AddWithValue("@Start", dpStartDate.Value.Date);
                 command.Parameters.AddWithValue("@End", dpEndDate.Value.Date);
@@ -190,15 +229,58 @@ namespace InventoryManagmentSystem
             return isUpdated;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private bool UpdateClass()
         {
+            string query = @"
+                Update tbClasses
+                Set Name=@Name, StartDate=@Start, EndDate=@End
+                Where Id=@Id
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
-                if(tbClassName.Text.Length == 0) { throw new Exception("Name needs to be filled."); }
-                if(dpStartDate.Value >= dpEndDate.Value ) { throw new Exception("End date cannot be equal or bigger than start date."); }
-                if(dpStartDate.Value < new DateTime()) { throw new Exception("Start date cannot be today or before."); }
-                if(!AddClass()) { throw new Exception("Failed to add class."); }
-                LoadClasses();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Name", tbClassName.Text);
+                command.Parameters.AddWithValue("@Start", dpStartDate.Value);
+                command.Parameters.AddWithValue("@End", dpEndDate.Value);
+                command.Parameters.AddWithValue("@Id", editingClass.uuid);
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+        
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if(isUpdate)
+            {
+                if(!UpdateClass())
+                {
+                    return;
+                }
+                HelperFunctions.openChildFormToPanel(parent.panelDocker, new ClassList(parent));
+                this.Close();
+                return;
+            }
+
+            try
+            {
+                if (cbAcademy.SelectedIndex < 0) { throw new Exception("Academy needs to be filled."); }
+                if (tbClassName.Text.Length == 0) { throw new Exception("Name needs to be filled."); }
+                if (dpStartDate.Value >= dpEndDate.Value ) { throw new Exception("End date cannot be equal or bigger than start date."); }
+                if (dpStartDate.Value < new DateTime()) { throw new Exception("Start date cannot be today or before."); }
+                if (!AddClass()) { throw new Exception("Failed to add class."); }
+
+                ClassList ClassList = new ClassList(parent);
+                Form currDocked = parent.panelDocker.Controls.OfType<Form>().FirstOrDefault();
+                HelperFunctions.openChildFormToPanel(parent.panelDocker, ClassList, currDocked);
             }
             catch (Exception ex)
             { 
@@ -208,22 +290,25 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void dataGridClasses_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            string columnName = dataGridClasses.Columns[e.ColumnIndex].Name;
-            DataGridViewRow row = dataGridClasses.Rows[e.RowIndex];
+            HelperFunctions.openChildFormToPanel(parent.panelDocker, new ClassList(parent));
+            this.Close();
+        }
 
-            if(columnName == "column_delete") 
-            {
-                if (DeleteClass(row)) { LoadClasses(); }
-                return;
-            }
+        private void btnResetName_Click(object sender, EventArgs e)
+        {
+            tbClassName.Text = editingClass.name;
+        }
 
-            if (columnName == "column_finished")
-            {
-                if(UpdateClassStatus(row)) { LoadClasses(); }
-                return;
-            }
+        private void btnResetStart_Click(object sender, EventArgs e)
+        {
+            dpStartDate.Value = editingClass.start;
+        }
+
+        private void btnResetEnd_Click(object sender, EventArgs e)
+        {
+            dpEndDate.Value = editingClass.end;
         }
     }
 }

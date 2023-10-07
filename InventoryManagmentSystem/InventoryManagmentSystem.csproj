@@ -74,17 +74,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcademyForm.cs">
+    <Compile Include="Academy\AcademyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AcademyForm.Designer.cs">
+    <Compile Include="Academy\AcademyForm.Designer.cs">
       <DependentUpon>AcademyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClassForm.cs">
+    <Compile Include="Academy\AcademyList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClassForm.Designer.cs">
-      <DependentUpon>ClassForm.cs</DependentUpon>
+    <Compile Include="Academy\AcademyList.Designer.cs">
+      <DependentUpon>AcademyList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Academy\AssignStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academy\AssignStudentForm.Designer.cs">
+      <DependentUpon>AssignStudentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Academy\ClassList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academy\ClassList.Designer.cs">
+      <DependentUpon>ClassList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Academy\ClassRosterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academy\ClassRosterForm.Designer.cs">
+      <DependentUpon>ClassRosterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Academy\CreateAcademyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academy\CreateAcademyForm.Designer.cs">
+      <DependentUpon>CreateAcademyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Academy\CreateClassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academy\CreateClassForm.Designer.cs">
+      <DependentUpon>CreateClassForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Custom Item Classes\CustomButton.cs">
       <SubType>Component</SubType>
@@ -178,6 +208,12 @@
     <Compile Include="NewOrExistingCustomerModuleForm.Designer.cs">
       <DependentUpon>NewOrExistingCustomerModuleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Rental Forms\NewClientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rental Forms\NewClientForm.Designer.cs">
+      <DependentUpon>NewClientForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Rental Forms\NewItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -269,11 +305,26 @@
     <Compile Include="WorkOrderModuleForm.Designer.cs">
       <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AcademyForm.resx">
+    <EmbeddedResource Include="Academy\AcademyForm.resx">
       <DependentUpon>AcademyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClassForm.resx">
-      <DependentUpon>ClassForm.cs</DependentUpon>
+    <EmbeddedResource Include="Academy\AcademyList.resx">
+      <DependentUpon>AcademyList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academy\AssignStudentForm.resx">
+      <DependentUpon>AssignStudentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academy\ClassList.resx">
+      <DependentUpon>ClassList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academy\ClassRosterForm.resx">
+      <DependentUpon>ClassRosterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academy\CreateAcademyForm.resx">
+      <DependentUpon>CreateAcademyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academy\CreateClassForm.resx">
+      <DependentUpon>CreateClassForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Item Classes\CustomButton.resx">
       <DependentUpon>CustomButton.cs</DependentUpon>
@@ -310,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewOrExistingCustomerModuleForm.resx">
       <DependentUpon>NewOrExistingCustomerModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rental Forms\NewClientForm.resx">
+      <DependentUpon>NewClientForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Rental Forms\NewItemForm.resx">
       <DependentUpon>NewItemForm.cs</DependentUpon>

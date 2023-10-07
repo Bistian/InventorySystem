@@ -62,18 +62,13 @@ namespace InventoryManagmentSystem
             return true;
         }
 
-        private bool UpdateItem(DataGridViewCellEventArgs e)
+        private void UpdateItem(string clientName, string licence)
         {
-            if (e.ColumnIndex != 7) { return false; }
-            string clientName = dataGridUsers.Rows[e.RowIndex].Cells[0].Value.ToString();
             NewRentalModuleForm form = new NewRentalModuleForm(cbClientType.Text, clientName);
-
+            var parentForm = this.ParentForm as MainForm;
+            bool isNotIndividual = true;
             try
             {
-                var parentForm = this.ParentForm as MainForm;
-                string licence = dataGridUsers.Rows[e.RowIndex].Cells["ID"].Value.ToString();
-
-                bool isNotIndividual = true;
                 if (cbClientType.SelectedIndex == 0)
                 {
                     isNotIndividual = false;
@@ -83,53 +78,56 @@ namespace InventoryManagmentSystem
             }
             catch (Exception ex)
             {
-                Console.WriteLine("ERROR Existing Customer Module:" + ex.Message);
+                Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
             }
 
             LoadUsers();
-            return true;
         }
 
         private void dataGridUsers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            DataGridViewRow row = dataGridUsers.Rows[e.RowIndex];
+            string column = dataGridUsers.Columns[e.ColumnIndex].Name;
             if (e.RowIndex < 0) { return; }
 
-            if (DeleteItem(e)) { return; }
-            if(UpdateItem(e)) { return; }
-
-            if (MessageBox.Show("Are you sure you want to select this client", "Continue", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            string clientName = row.Cells["column_name"].Value.ToString();
+            string licence = row.Cells["column_id"].Value.ToString();
+            if (column == "column_update")
             {
-                try
-                {
-                    DataGridViewRow row = dataGridUsers.Rows[e.RowIndex];
-                    string clientName = row.Cells["Name1"].Value.ToString();
-                    var parentForm = this.ParentForm as MainForm;
-                    NewRentalModuleForm Profile = new NewRentalModuleForm(null,clientName);
-                    string licence = row.Cells["ID"].Value.ToString();
+                UpdateItem(clientName, licence);
+                return;
+            }
+            if (DeleteItem(e)) { return; }
 
-                    //is an individuals
-                    if (cbClientType.SelectedIndex == 0)
-                    {
-                        Profile.LoadProfile(false, licence);
-                    }
-                    //is a departments
-                    else if(cbClientType.SelectedIndex == 1)
-                    {
-                        Profile.LoadProfile(true, licence);
-                    }
-                    //is an academys
-                    else if(cbClientType.SelectedIndex == 2)
-                    {
-                        Profile.LoadProfile(true, licence);
-                    }
-                    parentForm.openChildForm(Profile);
+            string message = "Are you sure you want to select this client";
+            if (!HelperFunctions.YesNoMessageBox(message, "Continue"))
+            {
+                return;
+            }
 
-                    this.Dispose();
-                }
-                catch (Exception ex)
+            var parentForm = this.ParentForm as MainForm;
+            NewRentalModuleForm Profile = new NewRentalModuleForm(null,clientName);
+            try
+            {
+                if (cbClientType.Text == "Individuals")
                 {
-                    Console.WriteLine("ERROR Existing Customer Module:" + ex.Message);
+                    Profile.LoadProfile(false, licence);
                 }
+                else if(cbClientType.Text == "Departments")
+                {
+                    Profile.LoadProfile(true, licence);
+                }
+                else if(cbClientType.Text == "Academies")
+                {
+                    Profile.LoadProfile(true, licence);
+                }
+                parentForm.openChildForm(Profile);
+
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
             }
         }
 
@@ -168,7 +166,7 @@ namespace InventoryManagmentSystem
             //SQL
             int i = 0;
             dataGridUsers.Rows.Clear();
-            cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE (Name LIKE '%" + searchTerm + "%' OR Academy LIKE '%" + searchTerm + "%') AND DayNight = @ClientType", con);
+            cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE (Name LIKE '%" + searchTerm + "%' OR Academy LIKE '%" + searchTerm + "%') AND Type = @ClientType", con);
             cm.Parameters.AddWithValue("@ClientType", clientType);
             con.Open();
             dr = cm.ExecuteReader();

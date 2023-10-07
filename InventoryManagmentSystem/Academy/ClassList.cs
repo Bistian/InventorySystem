@@ -1,0 +1,230 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static InventoryManagmentSystem.Academy.AcademyForm;
+
+namespace InventoryManagmentSystem.Academy
+{
+    public partial class ClassList : Form
+    {
+
+        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(connectionString);
+        //Creating command
+        SqlCommand command = new SqlCommand();
+        //Creatinng Reader
+        SqlDataReader dr2;
+        Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
+        Guid AcademyId;
+        AcademyForm parent;
+        AcademyForm.Class selectedClass;
+
+        public ClassList(AcademyForm parent)
+        {
+            this.parent = parent;
+            InitializeComponent();
+            AcademyId = parent.AcademyId;
+            dataGridClasses.Columns["column_start_date"].DefaultCellStyle.Format = "d";
+            dataGridClasses.Columns["column_end_date"].DefaultCellStyle.Format = "d";
+
+
+            LoadClasses();
+            initLable();
+            this.parent = parent;
+        }
+
+        public void LoadClasses()
+        {
+            dataGridClasses.Rows.Clear();
+            string query;
+            if (AcademyId != Guid.Empty)
+            {
+                query = $@"
+                    SELECT c.id, a.Name, c.Name, c.StartDate, c.EndDate, c.IsFinished
+                    FROM tbClasses as c 
+                    Join tbAcademies as a ON c.AcademyId = a.Id
+                    WHERE c.AcademyId ='{AcademyId}'
+                ";
+                HelperFunctions.RemoveLineBreaksFromString(ref query);
+            }
+            else
+            {
+                query = $@"
+                    SELECT c.id, a.Name, c.Name, c.StartDate, c.EndDate, c.IsFinished
+                    FROM tbClasses as c 
+                    Join tbAcademies as a ON c.AcademyId = a.Id
+                ";
+                HelperFunctions.RemoveLineBreaksFromString(ref query);
+            }
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int i = 0;
+                while (reader.Read())
+                {
+                    dataGridClasses.Rows.Add(
+                        i++,reader[0], reader[1], reader[2], reader[3], reader[4], reader[5]
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            connection.Close();
+        }
+
+        public void initLable()
+        {
+            if (parent.AcademyId != Guid.Empty)
+            {
+                string query = $"SELECT Name FROM tbAcademies WHERE Id = '{parent.AcademyId}'";
+
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        labelAcademyName.Text = $"{reader[0]} class list";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                connection.Close();
+            }
+            else
+            {
+                labelAcademyName.Text = "All Classes";
+            }
+        }
+
+        private void UpdateClass(DataGridViewRow row)
+        {
+            selectedClass.uuid = (Guid)row.Cells["column_id"].Value;
+            selectedClass.academyName = row.Cells["column_academy"].Value.ToString();
+            selectedClass.name = row.Cells["column_name"].Value.ToString();
+            selectedClass.start = (DateTime)row.Cells["column_start_date"].Value;
+            selectedClass.end = (DateTime)row.Cells["column_end_date"].Value;
+            HelperFunctions.openChildFormToPanel(parent.panelDocker, new CreateClassForm(parent, selectedClass));
+            this.Close();
+        }
+
+        public void ChangeClassStatus(DataGridViewRow row)
+        {
+            bool isFinished = (bool)row.Cells["column_finished"].Value;
+            Guid uuid = (Guid)row.Cells["column_id"].Value;
+            string query = $@"
+                UPDATE tbClasses
+                SET IsFinished='{!isFinished}'
+                WHERE Id='{uuid}'
+            ";
+            try
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            connection.Close();
+            LoadClasses();
+        }
+
+        private void dataGridClasses_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = dataGridClasses.Rows[e.RowIndex];
+            string column = dataGridClasses.Columns[e.ColumnIndex].Name;
+            Guid ClassId = (Guid)row.Cells["column_id"].Value;
+
+            if (column == "column_finished")
+            {
+                ChangeClassStatus(row);
+            }
+            else if(column == "column_update")
+            {
+                UpdateClass(row);
+            }
+            else if(column == "column_finished")
+            {
+
+            }
+            else
+            {
+                parent.ClassId = ClassId;
+                ClassRosterForm roster = new ClassRosterForm(parent);
+                HelperFunctions.openChildFormToPanel(parent.panelDocker, roster, this);
+            }
+        }
+
+        private string GetAcademyName(Guid SearchId)
+        {
+            SqlConnection connection2 = new SqlConnection(connectionString);
+            //Creating command
+            SqlCommand command2 = new SqlCommand();
+
+
+            string AcademyName = "";
+            string query = $@"
+                    SELECT Name FROM tbAcademies WHERE Id = '{SearchId}'
+                    ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                command2 = new SqlCommand(query, connection2);
+                connection2.Open();
+                dr2 = command2.ExecuteReader();
+                while (dr2.Read())
+                {
+                    AcademyName = dr2[0].ToString();
+                }
+                dr2.Close();
+                connection2.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                dr2.Close();
+                connection2.Close();
+            }
+            return AcademyName;
+        }
+
+        private void searchBar_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = searchBar.Text;
+            if (string.IsNullOrEmpty(searchTerm)) { LoadClasses(); }
+
+            // SQL
+            int i = 0;
+            dataGridClasses.Rows.Clear();
+            SqlCommand command = new SqlCommand($"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses WHERE Name LIKE '%{searchTerm}%' AND  AcademyId ='{AcademyId}'", connection);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                
+                i++;
+                dataGridClasses.Rows.Add(i, reader[0], GetAcademyName((Guid)reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString());
+            }
+            reader.Close();
+            connection.Close();
+        }
+    }  
+}

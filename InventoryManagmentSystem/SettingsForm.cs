@@ -92,7 +92,7 @@ namespace InventoryManagmentSystem
         private void btnAcademies_Click(object sender, EventArgs e)
         {
             ColorTabSwitch("Academies");
-            openChildForm(new AcademyForm());
+            //openChildForm(new CreateAcademyForm());
         }
 
         private void btnHistories_Click(object sender, EventArgs e)
@@ -152,13 +152,13 @@ namespace InventoryManagmentSystem
                     int rowsAffected = command.ExecuteNonQuery(); connection.Close();
                     if(rowsAffected < 1) 
                     { 
-                        HelperDatabaseCall.DeleteItem(connection, uuid);
+                        HelperDatabaseCall.ItemDelete(connection, uuid);
                         break; 
                     }
                 }
                 catch (Exception ex)
                 {
-                    HelperDatabaseCall.DeleteItem(connection, uuid);
+                    HelperDatabaseCall.ItemDelete(connection, uuid);
                     Console.WriteLine(ex.Message);
                     connection.Close();
                 }
@@ -169,7 +169,6 @@ namespace InventoryManagmentSystem
         private void btnClasses_Click(object sender, EventArgs e)
         {
             ColorTabSwitch("Classes");
-            openChildForm(new ClassForm());
         }
     }
 }
