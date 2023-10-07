@@ -29,7 +29,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             InitializeComponent();
             this.cbItemType.Text = itemType.ToLower();
             this.isUpdate = isUpdate;
-            if(isUpdate)
+            if (isUpdate)
             {
                 LoadBrands();
             }
@@ -132,7 +132,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 connection.Close();
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 connection.Close();
                 Console.WriteLine(ex.Message);
@@ -221,7 +221,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 return false;
             }
 
-            Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection,cbItemType.Text);
+            Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, cbItemType.Text);
             if (uuid.Equals(Guid.Empty))
             {
                 Console.WriteLine("ERROR: UUID not found.");
@@ -399,7 +399,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 comboBoxMaterial.Enabled = true;
                 comboBoxColor.Enabled = false;
             }
-            
+
             else if (cbItemType.Text == "helmet")
             {
                 comboBoxColor.Enabled = true;
@@ -407,7 +407,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 comboBoxMaterial.Enabled = false;
             }
 
-            else if(cbItemType.Text == "mask")
+            else if (cbItemType.Text == "mask")
             {
                 comboBoxSize.Enabled = true;
                 comboBoxMaterial.Enabled = false;
@@ -417,12 +417,12 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void ManageFieldsAvailability()
         {
-            if(isUpdate)
+            if (isUpdate)
             {
                 cbItemType.Enabled = false;
             }
 
-            if(cbItemType.SelectedIndex == -1)
+            if (cbItemType.SelectedIndex == -1)
             {
                 labelTitle.Text = "Please select an item type";
                 txtBoxSerialNumber.Enabled = false;
@@ -435,7 +435,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 comboBoxColor.Enabled = false;
                 return;
             }
-            if(lastItemTypeIndex == -1)
+            if (lastItemTypeIndex == -1)
             {
                 txtBoxSerialNumber.Enabled = true;
                 dtManufacture.Enabled = true;
@@ -492,12 +492,12 @@ namespace InventoryManagmentSystem.Rental_Forms
                 command = new SqlCommand(query, connection);
                 connection.Open();
                 SqlDataReader dataReader = command.ExecuteReader();
-                while(dataReader.Read())
+                while (dataReader.Read())
                 {
                     cbItemType.Items.Add(dataReader[0]);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"{ex.Message}");
             }
@@ -590,8 +590,8 @@ namespace InventoryManagmentSystem.Rental_Forms
                     Exists = true;
                 }
             }
-            catch (Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
             }
             connection.Close();
@@ -622,7 +622,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         private void btnAddBrand_Click(object sender, EventArgs e)
         {
             BrandForm form = new BrandForm();
-            form.cbItemType.Text= cbItemType.Text;
+            form.cbItemType.Text = cbItemType.Text;
             form.close = true;
             form.ShowDialog();
             LoadBrands();
@@ -637,7 +637,43 @@ namespace InventoryManagmentSystem.Rental_Forms
         private void cbItemType_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadBrands();
-            ManageFieldsAvailability();            
+            LoadSizes();
+            ManageFieldsAvailability();
+        }
+
+        private void LoadSizes()
+        {
+            if (cbItemType.Text == "boots")
+            {
+                comboBoxSize.Items.Clear();
+                comboBoxSize.Items.Add("5");
+                comboBoxSize.Items.Add("5.5");
+                comboBoxSize.Items.Add("6");
+                comboBoxSize.Items.Add("6.5");
+                comboBoxSize.Items.Add("7");
+                comboBoxSize.Items.Add("7.5");
+                comboBoxSize.Items.Add("8");
+                comboBoxSize.Items.Add("8.5");
+                comboBoxSize.Items.Add("9");
+                comboBoxSize.Items.Add("10");
+                comboBoxSize.Items.Add("10.5");
+                comboBoxSize.Items.Add("11");
+                comboBoxSize.Items.Add("11.5");
+                comboBoxSize.Items.Add("12");
+                comboBoxSize.Items.Add("12.5");
+                comboBoxSize.Items.Add("13");
+                comboBoxSize.Items.Add("13.5");
+                comboBoxSize.Items.Add("14");
+                comboBoxSize.Items.Add("14.5");
+                comboBoxSize.Items.Add("15");
+                comboBoxSize.Items.Add("15.5");
+                comboBoxSize.Items.Add("16");
+            }
+            else
+            {
+                comboBoxSize.Items.Clear();
+            }
+
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
