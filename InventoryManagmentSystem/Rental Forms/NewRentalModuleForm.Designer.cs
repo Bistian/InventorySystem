@@ -864,6 +864,7 @@
             this.dataGridViewClient.Size = new System.Drawing.Size(1354, 378);
             this.dataGridViewClient.TabIndex = 112;
             this.dataGridViewClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellClick);
+            this.dataGridViewClient.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClient_CellContentClick);
             // 
             // Item
             // 
@@ -975,6 +976,12 @@
             this.comboBoxItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxItemType.FormattingEnabled = true;
+            this.comboBoxItemType.Items.AddRange(new object[] {
+            "helmet",
+            "jacket",
+            "pants",
+            "boots",
+            "mask"});
             this.comboBoxItemType.Location = new System.Drawing.Point(68, 2);
             this.comboBoxItemType.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
             this.comboBoxItemType.Name = "comboBoxItemType";

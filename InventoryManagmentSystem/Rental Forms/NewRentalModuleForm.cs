@@ -544,6 +544,22 @@ namespace InventoryManagmentSystem
 
             else if (ReturnReplace == 2)
             {
+                if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Helmet")
+                {
+                    comboBoxItemType.SelectedIndex = 0;
+                }
+                if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Jacket")
+                {
+                    comboBoxItemType.SelectedIndex = 1;
+                }
+                if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Pants")
+                {
+                    comboBoxItemType.SelectedIndex = 2;
+                }
+                if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Boots")
+                {
+                    comboBoxItemType.SelectedIndex = 3;
+                }
                 dataGridViewClient.Enabled = false;
 
                 dueDate = dataGridViewClient.Rows[e.RowIndex].Cells["DDate"].Value.ToString();
@@ -937,6 +953,11 @@ namespace InventoryManagmentSystem
 
             AssignStudentForm AssignForm = new AssignStudentForm(null);
             HelperFunctions.openChildFormToPanel(panel2, AssignForm);
+        }
+
+        private void dataGridViewClient_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
