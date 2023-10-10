@@ -96,6 +96,7 @@ namespace InventoryManagmentSystem.Academy
 
         private void dataGridStudents_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) { return; }
             DataGridViewRow row = dataGridStudents.Rows[e.RowIndex];
             string column = dataGridStudents.Columns[e.ColumnIndex].Name;
             if (e.RowIndex < 0) { return; }

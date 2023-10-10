@@ -148,6 +148,7 @@ namespace InventoryManagmentSystem.Academy
 
         private void dataGridClasses_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) { return; }
             DataGridViewRow row = dataGridClasses.Rows[e.RowIndex];
             string column = dataGridClasses.Columns[e.ColumnIndex].Name;
             Guid ClassId = (Guid)row.Cells["column_id"].Value;

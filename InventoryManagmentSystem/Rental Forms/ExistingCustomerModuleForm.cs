@@ -86,6 +86,7 @@ namespace InventoryManagmentSystem
 
         private void dataGridUsers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) { return; }
             DataGridViewRow row = dataGridUsers.Rows[e.RowIndex];
             string column = dataGridUsers.Columns[e.ColumnIndex].Name;
             if (e.RowIndex < 0) { return; }

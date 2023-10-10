@@ -544,22 +544,9 @@ namespace InventoryManagmentSystem
 
             else if (ReturnReplace == 2)
             {
-                if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Helmet")
-                {
-                    comboBoxItemType.SelectedIndex = 0;
-                }
-                if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Jacket")
-                {
-                    comboBoxItemType.SelectedIndex = 1;
-                }
-                if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Pants")
-                {
-                    comboBoxItemType.SelectedIndex = 2;
-                }
-                if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Boots")
-                {
-                    comboBoxItemType.SelectedIndex = 3;
-                }
+                //lock the item type that is shown when a replacment is being done to match the item type of the item being replaced
+                SetItemType(e);
+
                 dataGridViewClient.Enabled = false;
 
                 dueDate = dataGridViewClient.Rows[e.RowIndex].Cells["DDate"].Value.ToString();
@@ -568,6 +555,26 @@ namespace InventoryManagmentSystem
                 labelOldItem.Text = SelectedSerial;
                 labelTypeOfItem.Text = dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString();
 
+            }
+        }
+
+        private void SetItemType(DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Helmet")
+            {
+                comboBoxItemType.SelectedIndex = 0;
+            }
+            if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Jacket")
+            {
+                comboBoxItemType.SelectedIndex = 1;
+            }
+            if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Pants")
+            {
+                comboBoxItemType.SelectedIndex = 2;
+            }
+            if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Boots")
+            {
+                comboBoxItemType.SelectedIndex = 3;
             }
         }
 
@@ -874,6 +881,7 @@ namespace InventoryManagmentSystem
                 LoadClient();
                 LoadInventory();
                 ReturnReplace = 0;
+                comboBoxItemType.Enabled = true;
                 dataGridViewClient.Enabled = true;
 
             }

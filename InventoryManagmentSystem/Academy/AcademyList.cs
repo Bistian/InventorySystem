@@ -90,7 +90,7 @@ namespace InventoryManagmentSystem.Academy
 
         private void dataGridAcademies_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (e.RowIndex < 0) { return; }
             DataGridViewRow row = dataGridAcademies.Rows[e.RowIndex];
             string column = dataGridAcademies.Columns[e.ColumnIndex].Name;
             Guid AcademyId = (Guid)row.Cells["column_id"].Value;
