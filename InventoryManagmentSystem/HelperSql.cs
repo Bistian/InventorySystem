@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
 using static InventoryManagmentSystem.Academy.AcademyForm;
 
@@ -290,19 +291,26 @@ namespace InventoryManagmentSystem
         /// <returns></returns>
         public static Dictionary<Guid, string> ClassListNames(SqlConnection connection, Guid AcademyId)
         {
-            string query = $"SELECT Id, Name FROM tbClasses WHERE AcademyId = '{AcademyId}'";
+            string query = $"SELECT Id, Name, StartDate, EndDate FROM tbClasses WHERE AcademyId = '{AcademyId}'";
             connection.Close();
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
-                Dictionary<Guid, string> dict = new Dictionary<Guid, string>(); ;
+                Dictionary<Guid, string> dict = new Dictionary<Guid, string>(); 
                 while (reader.Read())
                 {
+                    string className = reader.GetString(reader.GetOrdinal("Name"));
+                    DateTime classStartDate = reader.GetDateTime(reader.GetOrdinal("StartDate"));
+                    DateTime classEndDate = reader.GetDateTime(reader.GetOrdinal("EndDate"));
+
+                    string starDate = $"{classStartDate.Month}/{classStartDate.Day}/{classStartDate.Year}";
+                    string EndDate = $"{classEndDate.Month}/{classEndDate.Day}/{classEndDate.Year}";
+
                     dict.Add(reader.GetGuid(
                         reader.GetOrdinal("Id")), 
-                        reader.GetString(reader.GetOrdinal("Name"))
+                        $"{className} {starDate} - {EndDate}" 
                     );
                 }
                 connection.Close();
