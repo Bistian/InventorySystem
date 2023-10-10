@@ -85,21 +85,6 @@ namespace InventoryManagmentSystem
             openChildForm(new PricesForm());
         }
 
-        private void btnAcademies_Click(object sender, EventArgs e)
-        {
-            ColorTabSwitch("Academies");
-            //openChildForm(new CreateAcademyForm());
-        }
-
-        private void btnHistories_Click(object sender, EventArgs e)
-        {
-            ColorTabSwitch("Histories");
-            List<string> comboBoxSelection = new List<string>();
-            comboBoxSelection.Add("Histories");
-            RentalHistoryForm form = new RentalHistoryForm();
-            openChildForm(form);
-        }
-
         private void devInitAddItem()
         {
 #if DEBUG
@@ -160,11 +145,6 @@ namespace InventoryManagmentSystem
                 }
             }
             Console.WriteLine("Gaje likes minors!");
-        }
-
-        private void btnClasses_Click(object sender, EventArgs e)
-        {
-            ColorTabSwitch("Classes");
         }
     }
 }
