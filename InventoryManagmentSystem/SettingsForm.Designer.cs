@@ -33,19 +33,17 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnBrands = new System.Windows.Forms.Button();
             this.btnPrices = new System.Windows.Forms.Button();
-            this.btnAcademies = new System.Windows.Forms.Button();
-            this.btnHistories = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.tbUuid = new System.Windows.Forms.TextBox();
-            this.btnClasses = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnImport
             // 
-            this.btnImport.Location = new System.Drawing.Point(12, 12);
+            this.btnImport.Location = new System.Drawing.Point(16, 15);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(75, 23);
+            this.btnImport.Size = new System.Drawing.Size(100, 28);
             this.btnImport.TabIndex = 0;
             this.btnImport.Text = "Import";
             this.btnImport.UseVisualStyleBackColor = true;
@@ -53,9 +51,10 @@
             // 
             // btnDatabase
             // 
-            this.btnDatabase.Location = new System.Drawing.Point(13, 42);
+            this.btnDatabase.Location = new System.Drawing.Point(17, 52);
+            this.btnDatabase.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDatabase.Name = "btnDatabase";
-            this.btnDatabase.Size = new System.Drawing.Size(75, 23);
+            this.btnDatabase.Size = new System.Drawing.Size(100, 28);
             this.btnDatabase.TabIndex = 1;
             this.btnDatabase.Text = "Database";
             this.btnDatabase.UseVisualStyleBackColor = true;
@@ -63,16 +62,18 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(121, 12);
+            this.panel1.Location = new System.Drawing.Point(161, 15);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(667, 426);
+            this.panel1.Size = new System.Drawing.Size(889, 524);
             this.panel1.TabIndex = 2;
             // 
             // btnBrands
             // 
-            this.btnBrands.Location = new System.Drawing.Point(13, 72);
+            this.btnBrands.Location = new System.Drawing.Point(17, 89);
+            this.btnBrands.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBrands.Name = "btnBrands";
-            this.btnBrands.Size = new System.Drawing.Size(75, 23);
+            this.btnBrands.Size = new System.Drawing.Size(100, 28);
             this.btnBrands.TabIndex = 3;
             this.btnBrands.Text = "Brands";
             this.btnBrands.UseVisualStyleBackColor = true;
@@ -80,40 +81,22 @@
             // 
             // btnPrices
             // 
-            this.btnPrices.Location = new System.Drawing.Point(12, 101);
+            this.btnPrices.Location = new System.Drawing.Point(16, 124);
+            this.btnPrices.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPrices.Name = "btnPrices";
-            this.btnPrices.Size = new System.Drawing.Size(75, 23);
+            this.btnPrices.Size = new System.Drawing.Size(100, 28);
             this.btnPrices.TabIndex = 4;
             this.btnPrices.Text = "Prices";
             this.btnPrices.UseVisualStyleBackColor = true;
             this.btnPrices.Click += new System.EventHandler(this.btnPrices_Click);
             // 
-            // btnAcademies
-            // 
-            this.btnAcademies.Location = new System.Drawing.Point(12, 130);
-            this.btnAcademies.Name = "btnAcademies";
-            this.btnAcademies.Size = new System.Drawing.Size(75, 23);
-            this.btnAcademies.TabIndex = 5;
-            this.btnAcademies.Text = "Academies";
-            this.btnAcademies.UseVisualStyleBackColor = true;
-            this.btnAcademies.Click += new System.EventHandler(this.btnAcademies_Click);
-            // 
-            // btnHistories
-            // 
-            this.btnHistories.Location = new System.Drawing.Point(13, 159);
-            this.btnHistories.Name = "btnHistories";
-            this.btnHistories.Size = new System.Drawing.Size(75, 23);
-            this.btnHistories.TabIndex = 6;
-            this.btnHistories.Text = "Histories";
-            this.btnHistories.UseVisualStyleBackColor = true;
-            this.btnHistories.Click += new System.EventHandler(this.btnHistories_Click);
-            // 
             // btnAddItem
             // 
             this.btnAddItem.Enabled = false;
-            this.btnAddItem.Location = new System.Drawing.Point(12, 341);
+            this.btnAddItem.Location = new System.Drawing.Point(16, 420);
+            this.btnAddItem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(75, 23);
+            this.btnAddItem.Size = new System.Drawing.Size(100, 28);
             this.btnAddItem.TabIndex = 7;
             this.btnAddItem.Text = "Add IDs";
             this.btnAddItem.UseVisualStyleBackColor = true;
@@ -127,48 +110,38 @@
             this.cbItemType.FormattingEnabled = true;
             this.cbItemType.Items.AddRange(new object[] {
             "Detached UUID"});
-            this.cbItemType.Location = new System.Drawing.Point(12, 314);
+            this.cbItemType.Location = new System.Drawing.Point(16, 386);
+            this.cbItemType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbItemType.Name = "cbItemType";
-            this.cbItemType.Size = new System.Drawing.Size(76, 21);
+            this.cbItemType.Size = new System.Drawing.Size(100, 24);
             this.cbItemType.TabIndex = 8;
             this.cbItemType.Visible = false;
             // 
             // tbUuid
             // 
             this.tbUuid.Enabled = false;
-            this.tbUuid.Location = new System.Drawing.Point(13, 288);
+            this.tbUuid.Location = new System.Drawing.Point(17, 354);
+            this.tbUuid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbUuid.Name = "tbUuid";
-            this.tbUuid.Size = new System.Drawing.Size(75, 20);
+            this.tbUuid.Size = new System.Drawing.Size(99, 22);
             this.tbUuid.TabIndex = 9;
             this.tbUuid.Visible = false;
             // 
-            // btnClasses
-            // 
-            this.btnClasses.Location = new System.Drawing.Point(13, 188);
-            this.btnClasses.Name = "btnClasses";
-            this.btnClasses.Size = new System.Drawing.Size(75, 23);
-            this.btnClasses.TabIndex = 10;
-            this.btnClasses.Text = "Classes";
-            this.btnClasses.UseVisualStyleBackColor = true;
-            this.btnClasses.Click += new System.EventHandler(this.btnClasses_Click);
-            // 
             // SettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnClasses);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.tbUuid);
             this.Controls.Add(this.cbItemType);
             this.Controls.Add(this.btnAddItem);
-            this.Controls.Add(this.btnHistories);
-            this.Controls.Add(this.btnAcademies);
             this.Controls.Add(this.btnPrices);
             this.Controls.Add(this.btnBrands);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnDatabase);
             this.Controls.Add(this.btnImport);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "SettingsForm";
             this.Text = "SettingsForm";
             this.ResumeLayout(false);
@@ -183,11 +156,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnBrands;
         private System.Windows.Forms.Button btnPrices;
-        private System.Windows.Forms.Button btnAcademies;
-        private System.Windows.Forms.Button btnHistories;
         private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.ComboBox cbItemType;
         private System.Windows.Forms.TextBox tbUuid;
-        private System.Windows.Forms.Button btnClasses;
     }
 }
