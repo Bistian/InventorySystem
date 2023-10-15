@@ -209,7 +209,7 @@ namespace InventoryManagmentSystem
             if (isUpdate)
             {
                 if(!UpdateAcademy()) { return; }
-                HelperFunctions.openChildFormToPanel(parent.panelDocker, new AcademyList(parent));
+                HelperFunctions.OpenChildFormToPanel(parent.panelDocker, new AcademyList(parent));
                 this.Close();
             }
             else
@@ -220,7 +220,7 @@ namespace InventoryManagmentSystem
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            HelperFunctions.openChildFormToPanel(parent.panelDocker, new AcademyList(parent));
+            HelperFunctions.OpenChildFormToPanel(parent.panelDocker, new AcademyList(parent));
             this.Close();
         }
 

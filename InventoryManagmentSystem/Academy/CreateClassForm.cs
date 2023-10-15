@@ -265,7 +265,7 @@ namespace InventoryManagmentSystem
                 {
                     return;
                 }
-                HelperFunctions.openChildFormToPanel(parent.panelDocker, new ClassList(parent));
+                HelperFunctions.OpenChildFormToPanel(parent.panelDocker, new ClassList(parent));
                 this.Close();
                 return;
             }
@@ -280,7 +280,7 @@ namespace InventoryManagmentSystem
 
                 ClassList ClassList = new ClassList(parent);
                 Form currDocked = parent.panelDocker.Controls.OfType<Form>().FirstOrDefault();
-                HelperFunctions.openChildFormToPanel(parent.panelDocker, ClassList, currDocked);
+                HelperFunctions.OpenChildFormToPanel(parent.panelDocker, ClassList, currDocked);
             }
             catch (Exception ex)
             { 
@@ -292,7 +292,7 @@ namespace InventoryManagmentSystem
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            HelperFunctions.openChildFormToPanel(parent.panelDocker, new ClassList(parent));
+            HelperFunctions.OpenChildFormToPanel(parent.panelDocker, new ClassList(parent));
             this.Close();
         }
 

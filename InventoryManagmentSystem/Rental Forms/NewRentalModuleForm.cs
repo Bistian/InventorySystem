@@ -62,7 +62,7 @@ namespace InventoryManagmentSystem
                 panelButtons.Visible = false;
                 NewClientForm clientForm = new NewClientForm(rentalType, clientName);
                 HelperFunctions.LoadItemTypes(connection, ref comboBoxItemType);
-                HelperFunctions.openChildFormToPanel(panel2, clientForm);
+                HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
             }
         }
 
@@ -960,7 +960,7 @@ namespace InventoryManagmentSystem
             flowLayoutPanelProfile.Visible = false ;
 
             AssignStudentForm AssignForm = new AssignStudentForm(null);
-            HelperFunctions.openChildFormToPanel(panel2, AssignForm);
+            HelperFunctions.OpenChildFormToPanel(panel2, AssignForm);
         }
 
         private void dataGridViewClient_CellContentClick(object sender, DataGridViewCellEventArgs e)

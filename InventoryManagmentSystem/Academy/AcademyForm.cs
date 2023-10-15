@@ -42,7 +42,7 @@ namespace InventoryManagmentSystem.Academy
             InitializeComponent();
 
             AcademyList ListForm = new AcademyList(this);
-            HelperFunctions.openChildFormToPanel(panelDocker, ListForm);
+            HelperFunctions.OpenChildFormToPanel(panelDocker, ListForm);
         }
 
         private void btnCreateAcademy_Click(object sender, System.EventArgs e)
@@ -50,21 +50,21 @@ namespace InventoryManagmentSystem.Academy
             CreateAcademyForm AcadForm = new CreateAcademyForm(this);
 
             Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
-            HelperFunctions.openChildFormToPanel(panelDocker, AcadForm, currDocked);
+            HelperFunctions.OpenChildFormToPanel(panelDocker, AcadForm, currDocked);
         }
 
         private void btnAcademyList_Click(object sender, System.EventArgs e)
         {
             AcademyList ListForm = new AcademyList(this);
             Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
-            HelperFunctions.openChildFormToPanel(panelDocker, ListForm, currDocked);
+            HelperFunctions.OpenChildFormToPanel(panelDocker, ListForm, currDocked);
         }
 
         private void btnCreateClass_Click(object sender, System.EventArgs e)
         {
             CreateClassForm ListForm = new CreateClassForm(this);
             Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
-            HelperFunctions.openChildFormToPanel(panelDocker, ListForm, currDocked);
+            HelperFunctions.OpenChildFormToPanel(panelDocker, ListForm, currDocked);
         }
 
         private void btnClassList_Click(object sender, System.EventArgs e)
@@ -72,7 +72,7 @@ namespace InventoryManagmentSystem.Academy
             AcademyId = Guid.Empty;
             ClassList ClassList = new ClassList(this);
             Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
-            HelperFunctions.openChildFormToPanel(panelDocker, ClassList, currDocked);
+            HelperFunctions.OpenChildFormToPanel(panelDocker, ClassList, currDocked);
         }
 
         private void btnAssignStudent_Click(object sender, EventArgs e)
@@ -80,7 +80,7 @@ namespace InventoryManagmentSystem.Academy
             AcademyId = Guid.Empty;
             AssignStudentForm ClassList = new AssignStudentForm(this);
             Form currDocked = panelDocker.Controls.OfType<Form>().FirstOrDefault();
-            HelperFunctions.openChildFormToPanel(panelDocker, ClassList, currDocked);
+            HelperFunctions.OpenChildFormToPanel(panelDocker, ClassList, currDocked);
         }
     }
 }

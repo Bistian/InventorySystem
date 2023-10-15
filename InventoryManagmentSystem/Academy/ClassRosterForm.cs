@@ -1,4 +1,6 @@
 ﻿using Microsoft.Office.Interop.Excel;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static InventoryManagmentSystem.Academy.AcademyForm;
 
 namespace InventoryManagmentSystem.Academy
@@ -57,7 +60,7 @@ namespace InventoryManagmentSystem.Academy
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        labelAcademyName.Text = $"{reader[0]} {reader[1]} student list";
+                        labelTitle.Text = $"{reader[0]} {reader[1]} student list";
                     }
                 }
                 catch (Exception ex)
@@ -68,7 +71,7 @@ namespace InventoryManagmentSystem.Academy
             }
             else
             {
-                labelAcademyName.Text = "All students";
+                labelTitle.Text = "All students";
             }
         }
 
@@ -143,6 +146,64 @@ namespace InventoryManagmentSystem.Academy
             }
             reader.Close();
             connection.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            HelperFunctions.PdfSaveDocument(WriteRosterToPdf);
+        }
+
+        private void WriteRosterToPdf(PdfDocument document)
+        {
+            // Add a new page to the PDF
+            PdfPage page = document.AddPage();
+            // Get the graphics object of the PDF page
+            XGraphics graphics = XGraphics.FromPdfPage(page);
+
+            const int startY = 50;
+            int positionY = startY;
+            int ExtraLineSpace = 10;
+
+            XFont fontTitle = new XFont("Arial", 16, XFontStyle.Bold);
+            double maxPageHeight = page.Height.Point;
+            int lineHeight = (int)fontTitle.Height;
+
+            string text = $"{labelTitle.Text}";
+            HelperFunctions.PdfWriteLine(graphics, fontTitle, text, positionY);
+            positionY += lineHeight + ExtraLineSpace;
+
+            XFont font = new XFont("Arial", 12, XFontStyle.Regular);
+            foreach (DataGridViewRow row in dataGridStudents.Rows)
+            {
+                if (!row.Visible)
+                {
+                    continue;
+                }
+                // Check if adding the next line exceeds the page height
+                if (positionY + (lineHeight * 4) > maxPageHeight)
+                {
+                    // Add a new page
+                    page = document.AddPage();
+                    graphics = XGraphics.FromPdfPage(page);
+                    positionY = startY;
+
+                    text = $"{labelTitle.Text}";
+                    HelperFunctions.PdfWriteLine(graphics, fontTitle, text, positionY);
+                    positionY += lineHeight + ExtraLineSpace;
+                }
+
+                text = $"Student: {row.Cells["column_student"].Value}";
+                HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
+                positionY += lineHeight;
+
+                text = $"Phone: {row.Cells["column_phone"].Value}";
+                HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
+                positionY += lineHeight;
+
+                text = $"Email: {row.Cells["column_email"].Value}";
+                HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
+                positionY += lineHeight + ExtraLineSpace;
+            }
         }
     }
 }

@@ -1,10 +1,13 @@
-﻿using System;
+﻿using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,7 +66,7 @@ namespace InventoryManagmentSystem.Academy
             academy.city = row.Cells["column_city"].Value.ToString();
             academy.state = row.Cells["column_state"].Value.ToString();
             academy.zip = row.Cells["column_zip"].Value.ToString();
-            HelperFunctions.openChildFormToPanel(parent.panelDocker, new CreateAcademyForm(parent, academy));
+            HelperFunctions.OpenChildFormToPanel(parent.panelDocker, new CreateAcademyForm(parent, academy));
             this.Close();
         }
 
@@ -106,7 +109,79 @@ namespace InventoryManagmentSystem.Academy
             var parentForm = this.ParentForm as AcademyForm;
 
             ClassList ClassListForm = new ClassList(this.parent);
-            HelperFunctions.openChildFormToPanel(parentForm.panelDocker, ClassListForm, this);
+            HelperFunctions.OpenChildFormToPanel(parentForm.panelDocker, ClassListForm, this);
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            HelperFunctions.PdfSaveDocument(WriteAcademyListToPdf);
+        }
+
+        private void WriteAcademyListToPdf(PdfDocument document)
+        {
+            /*  Format
+                Academy: name
+                Email: email@gmail.com
+                Phone: 123.456.789
+                Address: street, city, state, zip
+            */
+
+            // Add a new page to the PDF
+            PdfPage page = document.AddPage();
+            // Get the graphics object of the PDF page
+            XGraphics graphics = XGraphics.FromPdfPage(page);
+
+            const int startY = 50;
+            int positionY = startY;
+            int ExtraLineSpace = 10;
+
+            XFont fontTitle = new XFont("Arial", 16, XFontStyle.Bold);
+            double maxPageHeight = page.Height.Point;
+            int lineHeight = (int)fontTitle.Height;
+
+            string text = "Academy List";
+            HelperFunctions.PdfWriteLine(graphics, fontTitle, text, positionY);
+            positionY += lineHeight + ExtraLineSpace;
+
+            XFont font = new XFont("Arial", 12, XFontStyle.Regular);
+            foreach (DataGridViewRow row in dataGridAcademies.Rows)
+            {
+                if (!row.Visible)
+                {
+                    continue;
+                }
+                // Check if adding the next line exceeds the page height
+                if (positionY + (lineHeight * 4) > maxPageHeight)
+                {
+                    // Add a new page
+                    page = document.AddPage();
+                    graphics = XGraphics.FromPdfPage(page);
+                    positionY = startY;
+
+                    text = "Academy List";
+                    HelperFunctions.PdfWriteLine(graphics, fontTitle, text, positionY);
+                    positionY += lineHeight + ExtraLineSpace;
+                }
+
+                text = $"Academy: {row.Cells["column_name"].Value}";
+                HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
+                positionY += lineHeight;
+
+                text = $"Email: {row.Cells["column_email"].Value}";
+                HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
+                positionY += lineHeight;
+
+                text = $"Phone: {row.Cells["column_phone"].Value}";
+                HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
+                positionY += lineHeight;
+
+                text = $"Address: {row.Cells["column_street"].Value}, {row.Cells["column_city"].Value}, {row.Cells["column_state"].Value}, {row.Cells["column_zip"].Value}";
+                HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
+                positionY += lineHeight + ExtraLineSpace;
+
+            }
+        }
+
+       
     }
 }
