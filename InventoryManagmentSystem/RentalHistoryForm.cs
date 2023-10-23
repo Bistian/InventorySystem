@@ -172,7 +172,7 @@ namespace InventoryManagmentSystem
             else
             {
                 // This is inside of Settings, not Main.
-                var parent = this.ParentForm as SettingsForm;
+                var parent = this.ParentForm as ToolsForm;
                 var grandparent = parent.ParentForm as MainForm;
                 grandparent.OpenNavBar("Rentals");
                 grandparent.ColorTabSwitch("ActiveRentals", false);

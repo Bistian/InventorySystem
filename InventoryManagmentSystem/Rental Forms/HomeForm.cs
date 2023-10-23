@@ -8,11 +8,12 @@ namespace InventoryManagmentSystem
 {
     public partial class HomeForm : Form
     {
-        public int dueDays = 14;
+        public int dueDays;
 
         public HomeForm()
         {
             InitializeComponent();
+            dueDays = SettingsData.Instance.dueDaysFromToday;
             labelDueDate.Text = $"Due Within {dueDays} Days";
             PrintRented();
             LoadTables(dataGridViewDueIn10, QueryRentedItems(), "Due");

@@ -86,11 +86,11 @@ namespace InventoryManagmentSystem
             openChildForm(new InventoryForm());
         }
 
-        private void btnSettings_Click(object sender, EventArgs e)
+        private void btnTools_Click(object sender, EventArgs e)
         {
-            OpenNavBar("Settings");
-            ColorTabSwitch("Settings");
-            openChildForm(new SettingsForm());
+            OpenNavBar("Tools");
+            ColorTabSwitch("Tools");
+            openChildForm(new ToolsForm());
         }
 
         private void HomeButton_Click(object sender, EventArgs e)
@@ -117,13 +117,14 @@ namespace InventoryManagmentSystem
                 panelHome.BackColor = offColor;
                 panelRentals.BackColor = offColor;
                 panelUsers.BackColor = offColor;
-                panelImport.BackColor = offColor;
+                panelTools.BackColor = offColor;
 
                 // Pick one tab and set it to the clicked color.
                 if (tab == "Home") { panelHome.BackColor = onColor; }
                 else if (tab == "Rentals") { panelRentals.BackColor = onColor; }
                 else if (tab == "Users") { panelUsers.BackColor = onColor; }
-                else if (tab == "Settings") { panelImport.BackColor = onColor; }
+                else if (tab == "Tools") { panelTools.BackColor = onColor; }
+                else if (tab == "Settings") { panelSettings.BackColor = onColor; }
             }
 
             //Secondary Nav Bar
@@ -183,5 +184,11 @@ namespace InventoryManagmentSystem
             openChildForm(new AcademyForm());
         }
 
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            OpenNavBar("Settings");
+            ColorTabSwitch("Settings");
+            openChildForm(new SettingsForm());
+        }
     }
 }

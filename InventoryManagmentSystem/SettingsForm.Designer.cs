@@ -28,120 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnImport = new System.Windows.Forms.Button();
-            this.btnDatabase = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnBrands = new System.Windows.Forms.Button();
-            this.btnPrices = new System.Windows.Forms.Button();
-            this.btnAddItem = new System.Windows.Forms.Button();
-            this.cbItemType = new System.Windows.Forms.ComboBox();
-            this.tbUuid = new System.Windows.Forms.TextBox();
+            this.labelGeneralBehavior = new System.Windows.Forms.Label();
+            this.labelHome = new System.Windows.Forms.Label();
+            this.tbDueDays = new System.Windows.Forms.TextBox();
+            this.labelDueDays = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.labelFontSize = new System.Windows.Forms.Label();
+            this.tbFontSize = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // btnImport
+            // labelGeneralBehavior
             // 
-            this.btnImport.Location = new System.Drawing.Point(16, 15);
-            this.btnImport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(100, 28);
-            this.btnImport.TabIndex = 0;
-            this.btnImport.Text = "Import";
-            this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            this.labelGeneralBehavior.AutoSize = true;
+            this.labelGeneralBehavior.ForeColor = System.Drawing.SystemColors.Window;
+            this.labelGeneralBehavior.Location = new System.Drawing.Point(12, 9);
+            this.labelGeneralBehavior.Name = "labelGeneralBehavior";
+            this.labelGeneralBehavior.Size = new System.Drawing.Size(89, 13);
+            this.labelGeneralBehavior.TabIndex = 0;
+            this.labelGeneralBehavior.Text = "General Behavior";
             // 
-            // btnDatabase
+            // labelHome
             // 
-            this.btnDatabase.Location = new System.Drawing.Point(17, 52);
-            this.btnDatabase.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnDatabase.Name = "btnDatabase";
-            this.btnDatabase.Size = new System.Drawing.Size(100, 28);
-            this.btnDatabase.TabIndex = 1;
-            this.btnDatabase.Text = "Database";
-            this.btnDatabase.UseVisualStyleBackColor = true;
-            this.btnDatabase.Click += new System.EventHandler(this.btnDatabase_Click);
+            this.labelHome.AutoSize = true;
+            this.labelHome.ForeColor = System.Drawing.SystemColors.Window;
+            this.labelHome.Location = new System.Drawing.Point(12, 157);
+            this.labelHome.Name = "labelHome";
+            this.labelHome.Size = new System.Drawing.Size(35, 13);
+            this.labelHome.TabIndex = 1;
+            this.labelHome.Text = "Home";
             // 
-            // panel1
+            // tbDueDays
             // 
-            this.panel1.Location = new System.Drawing.Point(161, 15);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(889, 524);
-            this.panel1.TabIndex = 2;
+            this.tbDueDays.Location = new System.Drawing.Point(70, 167);
+            this.tbDueDays.Name = "tbDueDays";
+            this.tbDueDays.Size = new System.Drawing.Size(48, 20);
+            this.tbDueDays.TabIndex = 2;
             // 
-            // btnBrands
+            // labelDueDays
             // 
-            this.btnBrands.Location = new System.Drawing.Point(17, 89);
-            this.btnBrands.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnBrands.Name = "btnBrands";
-            this.btnBrands.Size = new System.Drawing.Size(100, 28);
-            this.btnBrands.TabIndex = 3;
-            this.btnBrands.Text = "Brands";
-            this.btnBrands.UseVisualStyleBackColor = true;
-            this.btnBrands.Click += new System.EventHandler(this.btnBrands_Click);
+            this.labelDueDays.AutoSize = true;
+            this.labelDueDays.ForeColor = System.Drawing.SystemColors.Window;
+            this.labelDueDays.Location = new System.Drawing.Point(12, 170);
+            this.labelDueDays.Name = "labelDueDays";
+            this.labelDueDays.Size = new System.Drawing.Size(52, 13);
+            this.labelDueDays.TabIndex = 3;
+            this.labelDueDays.Text = "Due days";
             // 
-            // btnPrices
+            // btnSave
             // 
-            this.btnPrices.Location = new System.Drawing.Point(16, 124);
-            this.btnPrices.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnPrices.Name = "btnPrices";
-            this.btnPrices.Size = new System.Drawing.Size(100, 28);
-            this.btnPrices.TabIndex = 4;
-            this.btnPrices.Text = "Prices";
-            this.btnPrices.UseVisualStyleBackColor = true;
-            this.btnPrices.Click += new System.EventHandler(this.btnPrices_Click);
+            this.btnSave.Location = new System.Drawing.Point(15, 220);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 4;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnAddItem
+            // labelFontSize
             // 
-            this.btnAddItem.Enabled = false;
-            this.btnAddItem.Location = new System.Drawing.Point(16, 420);
-            this.btnAddItem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(100, 28);
-            this.btnAddItem.TabIndex = 7;
-            this.btnAddItem.Text = "Add IDs";
-            this.btnAddItem.UseVisualStyleBackColor = true;
-            this.btnAddItem.Visible = false;
-            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            this.labelFontSize.AutoSize = true;
+            this.labelFontSize.ForeColor = System.Drawing.SystemColors.Window;
+            this.labelFontSize.Location = new System.Drawing.Point(12, 22);
+            this.labelFontSize.Name = "labelFontSize";
+            this.labelFontSize.Size = new System.Drawing.Size(51, 13);
+            this.labelFontSize.TabIndex = 5;
+            this.labelFontSize.Text = "Font Size";
             // 
-            // cbItemType
+            // tbFontSize
             // 
-            this.cbItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbItemType.Enabled = false;
-            this.cbItemType.FormattingEnabled = true;
-            this.cbItemType.Items.AddRange(new object[] {
-            "Detached UUID"});
-            this.cbItemType.Location = new System.Drawing.Point(16, 386);
-            this.cbItemType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cbItemType.Name = "cbItemType";
-            this.cbItemType.Size = new System.Drawing.Size(100, 24);
-            this.cbItemType.TabIndex = 8;
-            this.cbItemType.Visible = false;
-            // 
-            // tbUuid
-            // 
-            this.tbUuid.Enabled = false;
-            this.tbUuid.Location = new System.Drawing.Point(17, 354);
-            this.tbUuid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tbUuid.Name = "tbUuid";
-            this.tbUuid.Size = new System.Drawing.Size(99, 22);
-            this.tbUuid.TabIndex = 9;
-            this.tbUuid.Visible = false;
+            this.tbFontSize.Location = new System.Drawing.Point(70, 22);
+            this.tbFontSize.Name = "tbFontSize";
+            this.tbFontSize.Size = new System.Drawing.Size(48, 20);
+            this.tbFontSize.TabIndex = 6;
             // 
             // SettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
-            this.Controls.Add(this.tbUuid);
-            this.Controls.Add(this.cbItemType);
-            this.Controls.Add(this.btnAddItem);
-            this.Controls.Add(this.btnPrices);
-            this.Controls.Add(this.btnBrands);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnDatabase);
-            this.Controls.Add(this.btnImport);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tbFontSize);
+            this.Controls.Add(this.labelFontSize);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.labelDueDays);
+            this.Controls.Add(this.tbDueDays);
+            this.Controls.Add(this.labelHome);
+            this.Controls.Add(this.labelGeneralBehavior);
             this.Name = "SettingsForm";
             this.Text = "SettingsForm";
             this.ResumeLayout(false);
@@ -151,13 +123,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnImport;
-        private System.Windows.Forms.Button btnDatabase;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnBrands;
-        private System.Windows.Forms.Button btnPrices;
-        private System.Windows.Forms.Button btnAddItem;
-        private System.Windows.Forms.ComboBox cbItemType;
-        private System.Windows.Forms.TextBox tbUuid;
+        private System.Windows.Forms.Label labelGeneralBehavior;
+        private System.Windows.Forms.Label labelHome;
+        private System.Windows.Forms.TextBox tbDueDays;
+        private System.Windows.Forms.Label labelDueDays;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Label labelFontSize;
+        private System.Windows.Forms.TextBox tbFontSize;
     }
 }
