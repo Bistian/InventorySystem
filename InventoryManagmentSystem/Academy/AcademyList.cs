@@ -38,7 +38,7 @@ namespace InventoryManagmentSystem.Academy
                 SqlCommand command = new SqlCommand(query, connection);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                int i = 0;
+                int i = 1;
                 while (reader.Read())
                 {
                     dataGridAcademies.Rows.Add(

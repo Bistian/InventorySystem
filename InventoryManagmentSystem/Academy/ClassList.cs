@@ -71,7 +71,7 @@ namespace InventoryManagmentSystem.Academy
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
-                int i = 0;
+                int i = 1;
                 while (reader.Read())
                 {
                     dataGridClasses.Rows.Add(
