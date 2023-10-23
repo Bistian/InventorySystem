@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewItemForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ButtonClose = new InventoryManagmentSystem.CustomButton();
             this.labelTitle = new System.Windows.Forms.Label();
             this.btnAddBrand = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
@@ -52,7 +53,6 @@
             this.labelItemType = new System.Windows.Forms.Label();
             this.labelAcquisition = new System.Windows.Forms.Label();
             this.dtAcquisition = new System.Windows.Forms.DateTimePicker();
-            this.ButtonClose = new InventoryManagmentSystem.CustomButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ButtonClose)).BeginInit();
             this.SuspendLayout();
@@ -65,6 +65,15 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.panel1.Name = "panel1";
+            // 
+            // ButtonClose
+            // 
+            resources.ApplyResources(this.ButtonClose, "ButtonClose");
+            this.ButtonClose.ImageHover = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageHover")));
+            this.ButtonClose.ImageNormal = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageNormal")));
+            this.ButtonClose.Name = "ButtonClose";
+            this.ButtonClose.TabStop = false;
+            this.ButtonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // labelTitle
             // 
@@ -121,7 +130,8 @@
             this.comboBoxCondition.FormattingEnabled = true;
             this.comboBoxCondition.Items.AddRange(new object[] {
             resources.GetString("comboBoxCondition.Items"),
-            resources.GetString("comboBoxCondition.Items1")});
+            resources.GetString("comboBoxCondition.Items1"),
+            resources.GetString("comboBoxCondition.Items2")});
             resources.ApplyResources(this.comboBoxCondition, "comboBoxCondition");
             this.comboBoxCondition.Name = "comboBoxCondition";
             // 
@@ -245,15 +255,6 @@
             this.dtAcquisition.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             resources.ApplyResources(this.dtAcquisition, "dtAcquisition");
             this.dtAcquisition.Name = "dtAcquisition";
-            // 
-            // ButtonClose
-            // 
-            resources.ApplyResources(this.ButtonClose, "ButtonClose");
-            this.ButtonClose.ImageHover = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageHover")));
-            this.ButtonClose.ImageNormal = ((System.Drawing.Image)(resources.GetObject("ButtonClose.ImageNormal")));
-            this.ButtonClose.Name = "ButtonClose";
-            this.ButtonClose.TabStop = false;
-            this.ButtonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // NewItemForm
             // 

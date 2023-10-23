@@ -29,9 +29,9 @@ namespace InventoryManagmentSystem
 
         private string QueryItems(string searchTerm = "")
         {
-            if(cbItemType.Text == "boots") { return QueryBoots(searchTerm); }
-            if(cbItemType.Text == "helmet") { return QueryHelmets(searchTerm); }
-            if(cbItemType.Text == "jacket" || cbItemType.Text == "pants" || cbItemType.Text == "mask") { return QueryStandardItems(searchTerm); }
+            if(cbItemType.Text == "Boots") { return QueryBoots(searchTerm); }
+            if(cbItemType.Text == "Helmet") { return QueryHelmets(searchTerm); }
+            if(cbItemType.Text == "Jacket" || cbItemType.Text == "Pants" || cbItemType.Text == "Mask") { return QueryStandardItems(searchTerm); }
             return "";
         }
 
@@ -95,8 +95,8 @@ namespace InventoryManagmentSystem
         private string QueryStandardItems(string searchTerm)
         {
             string from = "tbPants ";
-            if(cbItemType.Text == "jacket") { from = "tbJackets "; }
-            if (cbItemType.Text == "mask") { from = "tbMasks "; }
+            if(cbItemType.Text == "Jacket") { from = "tbJackets "; }
+            if (cbItemType.Text == "Mask") { from = "tbMasks "; }
 
             string standardColumns = HelperQuery.ItemStandardColumns();
             string initialQuery = $@"
@@ -125,7 +125,7 @@ namespace InventoryManagmentSystem
                 SqlDataReader dr = command.ExecuteReader();
                 
                 //Check which item was selected
-                if (cbItemType.Text == "helmet")
+                if (cbItemType.Text == "Helmet")
                 {
                     while (dr.Read())
                     {
@@ -133,11 +133,11 @@ namespace InventoryManagmentSystem
                         dataGridInv.Rows.Add(i, 
                             dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), 
                             dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), 
-                            dr[6].ToString(), "Size", "Material"
+                            dr[6].ToString(),"N/A","N/A", dr[7].ToString()
                         );
                     }
                 }
-                else if(cbItemType.Text == "boots")
+                else if(cbItemType.Text == "Boots")
                 {
                     while (dr.Read())
                     {
@@ -145,11 +145,11 @@ namespace InventoryManagmentSystem
                         dataGridInv.Rows.Add(i, 
                             dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), 
                             dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), 
-                            dr[6].ToString(), "Color"
+                            dr[6].ToString(), dr[7].ToString(), dr[8].ToString()
                         );
                     }
                 }
-                else if (cbItemType.Text == "jacket" || cbItemType.Text == "pants" || cbItemType.Text == "mask")
+                else if (cbItemType.Text == "Jacket" || cbItemType.Text == "Pants" || cbItemType.Text == "Mask")
                 {
                     while (dr.Read())
                     {
@@ -157,7 +157,7 @@ namespace InventoryManagmentSystem
                         dataGridInv.Rows.Add(i, 
                             dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), 
                             dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), 
-                            dr[6].ToString(), "Material", "Color");
+                            dr[6].ToString(), dr[7].ToString());
                     }
                 }
                 dr.Close();
@@ -181,13 +181,13 @@ namespace InventoryManagmentSystem
                 dataGridInv.Columns["Size"].Visible = true;
                 dataGridInv.Columns["Material"].Visible = true;
             }
-            else if (cbItemType.Text == "Helmets")
+            else if (cbItemType.Text == "Helmet")
             {
                 dataGridInv.Columns["Color"].Visible = true;
                 dataGridInv.Columns["Size"].Visible = false;
                 dataGridInv.Columns["Material"].Visible = false;
             }
-            else if (cbItemType.Text == "Jackets" || cbItemType.Text == "Pants" || cbItemType.Text == "Masks")
+            else if (cbItemType.Text == "Jacket" || cbItemType.Text == "Pants" || cbItemType.Text == "Mask")
             {
                 dataGridInv.Columns["Color"].Visible = false;
                 dataGridInv.Columns["Size"].Visible = true;
@@ -230,38 +230,30 @@ namespace InventoryManagmentSystem
                 while (reader.Read())
                 {
                     i++;
-                    if (cbItemType.Text == "Helmets")
+                    if (cbItemType.Text == "Helmet")
                     {
                         dataGridInv.Rows.Add(i,
-                        reader[0].ToString(),
-                        reader[1].ToString(),
-                        reader[2].ToString(),
-                        reader[3].ToString(),
-                        "Size",
-                        "Material",
-                        reader[4].ToString(),
-                        reader[5].ToString());
+                           reader[0].ToString(), reader[1].ToString(), reader[2].ToString(),
+                           reader[3].ToString(), reader[4].ToString(), reader[5].ToString(),
+                           reader[6].ToString(), "N/A", "N/A", reader[7].ToString()
+                       );
                     }
                     else if (cbItemType.Text == "Boots")
                     {
+                        i++;
                         dataGridInv.Rows.Add(i,
-                            reader[0].ToString(),
-                            reader[1].ToString(),
-                            reader[2].ToString(),
-                            reader[3].ToString(),
-                            reader[4].ToString(),
-                            reader[5].ToString(),
-                            reader[6].ToString());
+                            reader[0].ToString(), reader[1].ToString(), reader[2].ToString(),
+                            reader[3].ToString(), reader[4].ToString(), reader[5].ToString(),
+                            reader[6].ToString(), reader[7].ToString(), reader[8].ToString()
+                        );
                     }
                     else // Pants && Jackets && Masks
                     {
+                        i++;
                         dataGridInv.Rows.Add(i,
-                            reader[0].ToString(),
-                            reader[1].ToString(),
-                            reader[2].ToString(),
-                            reader[3].ToString(),
-                            reader[4].ToString(),
-                            reader[5].ToString());
+                            reader[0].ToString(), reader[1].ToString(), reader[2].ToString(),
+                            reader[3].ToString(), reader[4].ToString(), reader[5].ToString(),
+                            reader[6].ToString(), reader[7].ToString());
                     }
                 }
 
@@ -288,8 +280,8 @@ namespace InventoryManagmentSystem
             {
                 if (colName == "Edit")
                 {
-                    if (itemType == "Jackets" || itemType == "Pants" || itemType == "Masks") { UpdateJacketOrPantsOrMasks(e,itemType); }
-                    else if (itemType == "Helmets") { UpdateHelmet(e); }
+                    if (itemType == "Jacket" || itemType == "Pants" || itemType == "Mask") { UpdateJacketOrPantsOrMasks(e,itemType); }
+                    else if (itemType == "Helmet") { UpdateHelmet(e); }
                     else if (itemType == "Boots") { UpdateBoots(e); }
                     LoadInventory();
                 }
@@ -316,7 +308,7 @@ namespace InventoryManagmentSystem
         private void UpdateBoots(DataGridViewCellEventArgs e)
         {
             NewItemForm itemForm = new NewItemForm(cbItemType.Text, true);
-            itemForm.cbItemType.Text = "boots";
+            itemForm.cbItemType.Text = "Boots";
             itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
             itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
             itemForm.comboBoxCondition.Text =                 GetCellValueAsString(e, "Condition");
@@ -331,7 +323,7 @@ namespace InventoryManagmentSystem
         private void UpdateHelmet(DataGridViewCellEventArgs e)
         {
             NewItemForm itemForm = new NewItemForm(cbItemType.Text, true);
-            itemForm.cbItemType.Text = "helmet";
+            itemForm.cbItemType.Text = "Helmet";
             itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
             itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
             itemForm.comboBoxCondition.Text =                 GetCellValueAsString(e, "Condition");
@@ -348,11 +340,11 @@ namespace InventoryManagmentSystem
             NewItemForm itemForm = new NewItemForm(cbItemType.Text, true);
 
 
-            if (ItemType == "Masks")
+            if (ItemType == "Mask")
             {
-                itemForm.cbItemType.Text = "mask";
+                itemForm.cbItemType.Text = "Mask";
             }
-            else if (ItemType == "Jackets")
+            else if (ItemType == "Jacket")
             {
                 itemForm.cbItemType.Text = "Jacket";
             }
