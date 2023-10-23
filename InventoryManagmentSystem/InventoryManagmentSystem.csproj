@@ -214,10 +214,10 @@
     <Compile Include="Rental Forms\NewClientForm.Designer.cs">
       <DependentUpon>NewClientForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rental Forms\NewItemForm.cs">
+    <Compile Include="Rental Forms\Inventory Forms\NewItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Rental Forms\NewItemForm.Designer.cs">
+    <Compile Include="Rental Forms\Inventory Forms\NewItemForm.Designer.cs">
       <DependentUpon>NewItemForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Rental Forms\NewRentalModuleForm.cs">
@@ -281,11 +281,18 @@
     <Compile Include="SetSelectionModuleForm.Designer.cs">
       <DependentUpon>SetSelectionModuleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingsData.cs" />
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolsForm.Designer.cs">
+      <DependentUpon>ToolsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UserForm.cs">
       <SubType>Form</SubType>
@@ -365,7 +372,7 @@
     <EmbeddedResource Include="Rental Forms\NewClientForm.resx">
       <DependentUpon>NewClientForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Rental Forms\NewItemForm.resx">
+    <EmbeddedResource Include="Rental Forms\Inventory Forms\NewItemForm.resx">
       <DependentUpon>NewItemForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -411,6 +418,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolsForm.resx">
+      <DependentUpon>ToolsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>

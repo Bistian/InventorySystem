@@ -186,11 +186,11 @@ namespace InventoryManagmentSystem.Rental_Forms
         private bool SelectTableAndAddItem(Guid uuid)
         {
             bool wasAdded = false;
-            if (cbItemType.Text == "boots") { wasAdded = AddBoots(uuid); }
-            else if (cbItemType.Text == "helmet") { wasAdded = AddHelmet(uuid); }
-            else if (cbItemType.Text == "mask") { wasAdded = AddMask(uuid); }
-            else if (cbItemType.Text == "jacket") { wasAdded = AddJacket(uuid); }
-            else if (cbItemType.Text == "pants") { wasAdded = AddPants(uuid); }
+            if (cbItemType.Text == "Boots") { wasAdded = AddBoots(uuid); }
+            else if (cbItemType.Text == "Helmet") { wasAdded = AddHelmet(uuid); }
+            else if (cbItemType.Text == "Mask") { wasAdded = AddMask(uuid); }
+            else if (cbItemType.Text == "Jacket") { wasAdded = AddJacket(uuid); }
+            else if (cbItemType.Text == "Pants") { wasAdded = AddPants(uuid); }
             return wasAdded;
         }
 
@@ -357,9 +357,9 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return false; }
 
             bool isUpdated = false;
-            if (cbItemType.Text == "boots") { isUpdated = UpdateBoots(); }
-            else if (cbItemType.Text == "helmet") { isUpdated = UpdateHelmet(); }
-            else if (cbItemType.Text == "jacket" || cbItemType.Text == "pants") { isUpdated = UpdateJacketOrHelmet(); }
+            if (cbItemType.Text == "Boots") { isUpdated = UpdateBoots(); }
+            else if (cbItemType.Text == "Helmet") { isUpdated = UpdateHelmet(); }
+            else if (cbItemType.Text == "Jacket" || cbItemType.Text == "Pants") { isUpdated = UpdateJacketOrHelmet(); }
 
             if (isUpdated)
             {
@@ -386,28 +386,28 @@ namespace InventoryManagmentSystem.Rental_Forms
                 labelTitle.Text = $"Update {cbItemType.Text}";
             }
 
-            if (cbItemType.Text == "pants" || cbItemType.Text == "jacket")
+            if (cbItemType.Text == "Pants" || cbItemType.Text == "Jacket")
             {
                 comboBoxSize.Enabled = true;
                 comboBoxMaterial.Enabled = false;
                 comboBoxColor.Enabled = false;
             }
 
-            else if (cbItemType.Text == "boots")
+            else if (cbItemType.Text == "Boots")
             {
                 comboBoxSize.Enabled = true;
                 comboBoxMaterial.Enabled = true;
                 comboBoxColor.Enabled = false;
             }
 
-            else if (cbItemType.Text == "helmet")
+            else if (cbItemType.Text == "Helmet")
             {
                 comboBoxColor.Enabled = true;
                 comboBoxSize.Enabled = false;
                 comboBoxMaterial.Enabled = false;
             }
 
-            else if (cbItemType.Text == "mask")
+            else if (cbItemType.Text == "Mask")
             {
                 comboBoxSize.Enabled = true;
                 comboBoxMaterial.Enabled = false;
@@ -507,11 +507,11 @@ namespace InventoryManagmentSystem.Rental_Forms
         private string GetTableName()
         {
             string table = "";
-            if (cbItemType.Text == "boots") { table = "tbBoots"; }
-            else if (cbItemType.Text == "helmet") { table = "tbHelmets"; }
-            else if (cbItemType.Text == "jacket") { table = "tbJackets"; }
-            else if (cbItemType.Text == "mask") { table = "tbMasks"; }
-            else if (cbItemType.Text == "pants") { table = "tbPants"; }
+            if (cbItemType.Text == "Boots") { table = "tbBoots"; }
+            else if (cbItemType.Text == "Helmet") { table = "tbHelmets"; }
+            else if (cbItemType.Text == "Jacket") { table = "tbJackets"; }
+            else if (cbItemType.Text == "Mask") { table = "tbMasks"; }
+            else if (cbItemType.Text == "Pants") { table = "tbPants"; }
 
             return table;
         }

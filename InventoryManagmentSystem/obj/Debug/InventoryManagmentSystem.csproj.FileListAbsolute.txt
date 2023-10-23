@@ -285,3 +285,4 @@ C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryMan
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Academy.ClassRosterForm.resources
 C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Academy.AssignStudentForm.resources
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.Academy.AssignStudentForm.resources
+C:\Users\sebas\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.ToolsForm.resources
