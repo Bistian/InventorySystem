@@ -13,9 +13,10 @@ namespace InventoryManagmentSystem
         public HomeForm()
         {
             InitializeComponent();
+            PrintRented();
+            PrintStock();
             dueDays = SettingsData.Instance.dueDaysFromToday;
             labelDueDate.Text = $"Due Within {dueDays} Days";
-            PrintRented();
             LoadTables(dataGridViewDueIn10, QueryRentedItems(), "Due");
             LoadTables(dataGridViewPast30, QueryLateItems(), "DueDate2");
 
@@ -41,7 +42,16 @@ namespace InventoryManagmentSystem
 
         private int CountRented(string tableName)
         {
-            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') AND Location IS NOT NULL", con);
+            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') AND Location IS NOT NULL AND Condition NOT IN ('Retired')", con);
+            con.Open();
+            int count = (int)cm.ExecuteScalar();
+            con.Close();
+            return count;
+        }
+
+        private int CountStock(string tableName)
+        {
+            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE Location IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') AND Location IS NOT NULL AND Condition NOT IN ('Retired')", con);
             con.Open();
             int count = (int)cm.ExecuteScalar();
             con.Close();
@@ -134,16 +144,19 @@ namespace InventoryManagmentSystem
             con.Close();
         }
 
-        private int CountTotalRented()
-        {
-            return CountRented("tbPants") + CountRented("tbJackets");
-        }
-
         private void PrintRented()
         {
-            ButtonCurrentlyRentedPants.Text = "Pants " + System.Environment.NewLine + CountRented("tbPants");
-            ButtonCurrentlyRentedJackets.Text = "Coats " + System.Environment.NewLine + CountRented("tbJackets");
-            ButtonCurrentlyRented.Text = "Items Rented" + System.Environment.NewLine + CountTotalRented();
+            btnCoats.Text = CountRented("tbJackets") + " Coats";
+            btnPants.Text = CountRented("tbPants") + " Pants ";
+            btnHelmets.Text = CountRented("tbHelmets") + " Helmets";
+        }
+
+        private void PrintStock()
+        {
+            ButtonInStockJackets.Text = CountStock("tbJackets") + " Coats";
+            ButtonInStockPants.Text = CountStock("tbPants") + " Pants ";
+            ButtonInStockHelmets.Text = CountStock("tbHelmets") + " Helmets";
+            ButtonInStockBoots.Text = CountStock("tbBoots") + " Boots";
         }
 
         private void OpenDockedForm(string formType)
@@ -180,27 +193,6 @@ namespace InventoryManagmentSystem
             childForm.BringToFront();
             childForm.Show();
             this.Dispose();
-        }
-
-        private void ButtonCurrentlyRented_Click_1(object sender, EventArgs e)
-        {
-            var parentForm = this.ParentForm as MainForm;
-            parentForm.ColorTabSwitch("Rentals");
-            OpenDockedForm("RentalForm");
-        }
-
-        private void ButtonCurrentlyRentedPants_Click(object sender, EventArgs e)
-        {
-            var parentForm = this.ParentForm as MainForm;
-            parentForm.ColorTabSwitch("Rentals");
-            OpenDockedForm("RentalForm");
-        }
-
-        private void ButtonCurrentlyRentedJackets_Click(object sender, EventArgs e)
-        {
-            var parentForm = this.ParentForm as MainForm;
-            parentForm.ColorTabSwitch("Rentals");
-            OpenDockedForm("RentalForm");
         }
 
         private void dataGridViewDueIn10_CellClick(object sender, DataGridViewCellEventArgs e)

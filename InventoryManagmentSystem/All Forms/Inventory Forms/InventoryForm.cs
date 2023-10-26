@@ -374,6 +374,11 @@ namespace InventoryManagmentSystem
             Guid uuid;
             
             string table = "tb" + cbItemType.Text;
+
+            if(cbItemType.Text == "Jacket" || cbItemType.Text == "Helmet" || cbItemType.Text == "Mask")
+            {
+                table += "s";
+            }
             try
             {
                 connection.Open();
