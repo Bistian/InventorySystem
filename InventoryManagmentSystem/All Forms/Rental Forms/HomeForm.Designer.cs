@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainerRentalOptions = new System.Windows.Forms.SplitContainer();
             this.buttonNewCustomer = new System.Windows.Forms.Button();
             this.buttonActiveRental = new System.Windows.Forms.Button();
@@ -96,6 +96,8 @@
             // 
             this.buttonNewCustomer.BackColor = System.Drawing.Color.Black;
             this.buttonNewCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonNewCustomer.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.buttonNewCustomer.FlatAppearance.BorderSize = 4;
             this.buttonNewCustomer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.buttonNewCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNewCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -113,6 +115,8 @@
             // 
             this.buttonActiveRental.BackColor = System.Drawing.Color.Black;
             this.buttonActiveRental.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonActiveRental.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.buttonActiveRental.FlatAppearance.BorderSize = 4;
             this.buttonActiveRental.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.buttonActiveRental.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonActiveRental.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -172,36 +176,36 @@
             this.dataGridViewDueIn10.AllowUserToDeleteRows = false;
             this.dataGridViewDueIn10.AllowUserToResizeRows = false;
             this.dataGridViewDueIn10.BackgroundColor = System.Drawing.Color.Maroon;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewDueIn10.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewDueIn10.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
             this.dataGridViewDueIn10.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDueIn10.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.num,
             this.Product,
             this.Rentee,
             this.Due});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewDueIn10.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewDueIn10.DefaultCellStyle = dataGridViewCellStyle32;
             this.dataGridViewDueIn10.Dock = System.Windows.Forms.DockStyle.Left;
             this.dataGridViewDueIn10.Location = new System.Drawing.Point(0, 25);
             this.dataGridViewDueIn10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridViewDueIn10.Name = "dataGridViewDueIn10";
             this.dataGridViewDueIn10.ReadOnly = true;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewDueIn10.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle33.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle33.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewDueIn10.RowHeadersDefaultCellStyle = dataGridViewCellStyle33;
             this.dataGridViewDueIn10.RowHeadersVisible = false;
             this.dataGridViewDueIn10.RowHeadersWidth = 51;
             this.dataGridViewDueIn10.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -250,25 +254,25 @@
             this.dataGridViewPast30.AllowUserToDeleteRows = false;
             this.dataGridViewPast30.AllowUserToResizeRows = false;
             this.dataGridViewPast30.BackgroundColor = System.Drawing.Color.Maroon;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewPast30.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPast30.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle34;
             this.dataGridViewPast30.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPast30.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nums,
             this.Product2,
             this.Rentee2,
             this.DueDate2});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewPast30.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle35.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle35.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewPast30.DefaultCellStyle = dataGridViewCellStyle35;
             this.dataGridViewPast30.Dock = System.Windows.Forms.DockStyle.Right;
             this.dataGridViewPast30.Location = new System.Drawing.Point(785, 25);
             this.dataGridViewPast30.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -319,6 +323,7 @@
             // 
             this.btnRented.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnRented.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnRented.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnRented.FlatAppearance.BorderSize = 2;
             this.btnRented.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.btnRented.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -327,7 +332,7 @@
             this.btnRented.Location = new System.Drawing.Point(0, 0);
             this.btnRented.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.btnRented.Name = "btnRented";
-            this.btnRented.Size = new System.Drawing.Size(233, 100);
+            this.btnRented.Size = new System.Drawing.Size(229, 100);
             this.btnRented.TabIndex = 2;
             this.btnRented.Text = "Rented";
             this.btnRented.UseVisualStyleBackColor = false;
@@ -336,6 +341,7 @@
             // 
             this.btnStock.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnStock.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnStock.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnStock.FlatAppearance.BorderSize = 2;
             this.btnStock.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.btnStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -344,7 +350,7 @@
             this.btnStock.Location = new System.Drawing.Point(0, 0);
             this.btnStock.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.btnStock.Name = "btnStock";
-            this.btnStock.Size = new System.Drawing.Size(241, 100);
+            this.btnStock.Size = new System.Drawing.Size(237, 100);
             this.btnStock.TabIndex = 2;
             this.btnStock.Text = "Stock";
             this.btnStock.UseVisualStyleBackColor = false;
@@ -352,6 +358,7 @@
             // splitContainerItems
             // 
             this.splitContainerItems.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.splitContainerItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainerItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerItems.Location = new System.Drawing.Point(301, 25);
             this.splitContainerItems.Margin = new System.Windows.Forms.Padding(13, 14, 13, 14);
@@ -359,7 +366,7 @@
             // 
             // splitContainerItems.Panel1
             // 
-            this.splitContainerItems.Panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.splitContainerItems.Panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.splitContainerItems.Panel1.Controls.Add(this.btnHelmets);
             this.splitContainerItems.Panel1.Controls.Add(this.btnPants);
             this.splitContainerItems.Panel1.Controls.Add(this.btnCoats);
@@ -367,7 +374,7 @@
             // 
             // splitContainerItems.Panel2
             // 
-            this.splitContainerItems.Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.splitContainerItems.Panel2.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.splitContainerItems.Panel2.Controls.Add(this.ButtonInStockBoots);
             this.splitContainerItems.Panel2.Controls.Add(this.ButtonInStockHelmets);
             this.splitContainerItems.Panel2.Controls.Add(this.ButtonInStockPants);
@@ -382,6 +389,7 @@
             // 
             this.btnHelmets.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnHelmets.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnHelmets.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnHelmets.FlatAppearance.BorderSize = 2;
             this.btnHelmets.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.btnHelmets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -390,7 +398,7 @@
             this.btnHelmets.Location = new System.Drawing.Point(0, 214);
             this.btnHelmets.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.btnHelmets.Name = "btnHelmets";
-            this.btnHelmets.Size = new System.Drawing.Size(233, 57);
+            this.btnHelmets.Size = new System.Drawing.Size(229, 57);
             this.btnHelmets.TabIndex = 5;
             this.btnHelmets.Text = "Helmets";
             this.btnHelmets.UseVisualStyleBackColor = false;
@@ -399,6 +407,7 @@
             // 
             this.btnPants.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnPants.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnPants.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnPants.FlatAppearance.BorderSize = 2;
             this.btnPants.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.btnPants.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -407,7 +416,7 @@
             this.btnPants.Location = new System.Drawing.Point(0, 157);
             this.btnPants.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.btnPants.Name = "btnPants";
-            this.btnPants.Size = new System.Drawing.Size(233, 57);
+            this.btnPants.Size = new System.Drawing.Size(229, 57);
             this.btnPants.TabIndex = 4;
             this.btnPants.Text = "Pants";
             this.btnPants.UseVisualStyleBackColor = false;
@@ -416,6 +425,7 @@
             // 
             this.btnCoats.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnCoats.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnCoats.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnCoats.FlatAppearance.BorderSize = 2;
             this.btnCoats.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.btnCoats.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -424,7 +434,7 @@
             this.btnCoats.Location = new System.Drawing.Point(0, 100);
             this.btnCoats.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.btnCoats.Name = "btnCoats";
-            this.btnCoats.Size = new System.Drawing.Size(233, 57);
+            this.btnCoats.Size = new System.Drawing.Size(229, 57);
             this.btnCoats.TabIndex = 3;
             this.btnCoats.Text = "Coats";
             this.btnCoats.UseVisualStyleBackColor = false;
@@ -433,6 +443,7 @@
             // 
             this.ButtonInStockBoots.BackColor = System.Drawing.Color.MidnightBlue;
             this.ButtonInStockBoots.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ButtonInStockBoots.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.ButtonInStockBoots.FlatAppearance.BorderSize = 2;
             this.ButtonInStockBoots.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.ButtonInStockBoots.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -441,7 +452,7 @@
             this.ButtonInStockBoots.Location = new System.Drawing.Point(0, 271);
             this.ButtonInStockBoots.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.ButtonInStockBoots.Name = "ButtonInStockBoots";
-            this.ButtonInStockBoots.Size = new System.Drawing.Size(241, 57);
+            this.ButtonInStockBoots.Size = new System.Drawing.Size(237, 57);
             this.ButtonInStockBoots.TabIndex = 22;
             this.ButtonInStockBoots.Text = "Boots";
             this.ButtonInStockBoots.UseVisualStyleBackColor = false;
@@ -450,6 +461,7 @@
             // 
             this.ButtonInStockHelmets.BackColor = System.Drawing.Color.MidnightBlue;
             this.ButtonInStockHelmets.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ButtonInStockHelmets.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.ButtonInStockHelmets.FlatAppearance.BorderSize = 2;
             this.ButtonInStockHelmets.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.ButtonInStockHelmets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -458,7 +470,7 @@
             this.ButtonInStockHelmets.Location = new System.Drawing.Point(0, 214);
             this.ButtonInStockHelmets.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.ButtonInStockHelmets.Name = "ButtonInStockHelmets";
-            this.ButtonInStockHelmets.Size = new System.Drawing.Size(241, 57);
+            this.ButtonInStockHelmets.Size = new System.Drawing.Size(237, 57);
             this.ButtonInStockHelmets.TabIndex = 21;
             this.ButtonInStockHelmets.Text = "Helmets";
             this.ButtonInStockHelmets.UseVisualStyleBackColor = false;
@@ -467,6 +479,7 @@
             // 
             this.ButtonInStockPants.BackColor = System.Drawing.Color.MidnightBlue;
             this.ButtonInStockPants.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ButtonInStockPants.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.ButtonInStockPants.FlatAppearance.BorderSize = 2;
             this.ButtonInStockPants.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.ButtonInStockPants.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -475,7 +488,7 @@
             this.ButtonInStockPants.Location = new System.Drawing.Point(0, 157);
             this.ButtonInStockPants.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.ButtonInStockPants.Name = "ButtonInStockPants";
-            this.ButtonInStockPants.Size = new System.Drawing.Size(241, 57);
+            this.ButtonInStockPants.Size = new System.Drawing.Size(237, 57);
             this.ButtonInStockPants.TabIndex = 20;
             this.ButtonInStockPants.Text = "Pants";
             this.ButtonInStockPants.UseVisualStyleBackColor = false;
@@ -484,6 +497,7 @@
             // 
             this.ButtonInStockJackets.BackColor = System.Drawing.Color.MidnightBlue;
             this.ButtonInStockJackets.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ButtonInStockJackets.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.ButtonInStockJackets.FlatAppearance.BorderSize = 2;
             this.ButtonInStockJackets.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.ButtonInStockJackets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -492,7 +506,7 @@
             this.ButtonInStockJackets.Location = new System.Drawing.Point(0, 100);
             this.ButtonInStockJackets.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.ButtonInStockJackets.Name = "ButtonInStockJackets";
-            this.ButtonInStockJackets.Size = new System.Drawing.Size(241, 57);
+            this.ButtonInStockJackets.Size = new System.Drawing.Size(237, 57);
             this.ButtonInStockJackets.TabIndex = 19;
             this.ButtonInStockJackets.Text = "Coats";
             this.ButtonInStockJackets.UseVisualStyleBackColor = false;
