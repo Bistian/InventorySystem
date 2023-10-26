@@ -74,46 +74,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Academy\AcademyForm.cs">
+    <Compile Include="Rental Forms\Academy Forms\AcademyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Academy\AcademyForm.Designer.cs">
+    <Compile Include="Rental Forms\Academy Forms\AcademyForm.Designer.cs">
       <DependentUpon>AcademyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Academy\AcademyList.cs">
+    <Compile Include="Rental Forms\Academy Forms\AcademyList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Academy\AcademyList.Designer.cs">
+    <Compile Include="Rental Forms\Academy Forms\AcademyList.Designer.cs">
       <DependentUpon>AcademyList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Academy\AssignStudentForm.cs">
+    <Compile Include="Rental Forms\Academy Forms\AssignStudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Academy\AssignStudentForm.Designer.cs">
+    <Compile Include="Rental Forms\Academy Forms\AssignStudentForm.Designer.cs">
       <DependentUpon>AssignStudentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Academy\ClassList.cs">
+    <Compile Include="Rental Forms\Academy Forms\ClassList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Academy\ClassList.Designer.cs">
+    <Compile Include="Rental Forms\Academy Forms\ClassList.Designer.cs">
       <DependentUpon>ClassList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Academy\ClassRosterForm.cs">
+    <Compile Include="Rental Forms\Academy Forms\ClassRosterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Academy\ClassRosterForm.Designer.cs">
+    <Compile Include="Rental Forms\Academy Forms\ClassRosterForm.Designer.cs">
       <DependentUpon>ClassRosterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Academy\CreateAcademyForm.cs">
+    <Compile Include="Rental Forms\Academy Forms\CreateAcademyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Academy\CreateAcademyForm.Designer.cs">
+    <Compile Include="Rental Forms\Academy Forms\CreateAcademyForm.Designer.cs">
       <DependentUpon>CreateAcademyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Academy\CreateClassForm.cs">
+    <Compile Include="Rental Forms\Academy Forms\CreateClassForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Academy\CreateClassForm.Designer.cs">
+    <Compile Include="Rental Forms\Academy Forms\CreateClassForm.Designer.cs">
       <DependentUpon>CreateClassForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Custom Item Classes\CustomButton.cs">
@@ -137,48 +137,48 @@
     <Compile Include="DatabaseCreationModule.Designer.cs">
       <DependentUpon>DatabaseCreationModule.cs</DependentUpon>
     </Compile>
-    <Compile Include="DepartmentForm.cs">
+    <Compile Include="Depricated\DepartmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DepartmentForm.Designer.cs">
+    <Compile Include="Depricated\DepartmentForm.Designer.cs">
       <DependentUpon>DepartmentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DeptModuleForm.cs">
+    <Compile Include="Depricated\DeptModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DeptModuleForm.Designer.cs">
+    <Compile Include="Depricated\DeptModuleForm.Designer.cs">
       <DependentUpon>DeptModuleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DialogBoxClient.cs">
+    <Compile Include="Depricated\DialogBoxClient.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DialogBoxClient.Designer.cs">
+    <Compile Include="Depricated\DialogBoxClient.Designer.cs">
       <DependentUpon>DialogBoxClient.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExcelImportForm.cs">
+    <Compile Include="Tools Forms\Excel\ExcelImportForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExcelImportForm.Designer.cs">
+    <Compile Include="Tools Forms\Excel\ExcelImportForm.Designer.cs">
       <DependentUpon>ExcelImportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExcelUserPromptForm.cs">
+    <Compile Include="Tools Forms\Excel\ExcelUserPromptForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExcelUserPromptForm.Designer.cs">
+    <Compile Include="Tools Forms\Excel\ExcelUserPromptForm.Designer.cs">
       <DependentUpon>ExcelUserPromptForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelperFunctions.cs" />
-    <Compile Include="HelperSql.cs" />
-    <Compile Include="PricesForm.cs">
+    <Compile Include="C# Files\HelperFunctions.cs" />
+    <Compile Include="C# Files\HelperSql.cs" />
+    <Compile Include="Tools Forms\PricesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PricesForm.Designer.cs">
+    <Compile Include="Tools Forms\PricesForm.Designer.cs">
       <DependentUpon>PricesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BrandForm.cs">
+    <Compile Include="Tools Forms\BrandForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BrandForm.Designer.cs">
+    <Compile Include="Tools Forms\BrandForm.Designer.cs">
       <DependentUpon>BrandForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Rental Forms\ExistingCustomerModuleForm.cs">
@@ -202,10 +202,10 @@
     <Compile Include="MainForm.designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewOrExistingCustomerModuleForm.cs">
+    <Compile Include="Depricated\NewOrExistingCustomerModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewOrExistingCustomerModuleForm.Designer.cs">
+    <Compile Include="Depricated\NewOrExistingCustomerModuleForm.Designer.cs">
       <DependentUpon>NewOrExistingCustomerModuleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Rental Forms\NewClientForm.cs">
@@ -214,10 +214,10 @@
     <Compile Include="Rental Forms\NewClientForm.Designer.cs">
       <DependentUpon>NewClientForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\NewItemForm.cs">
+    <Compile Include="Inventory Forms\NewItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\NewItemForm.Designer.cs">
+    <Compile Include="Inventory Forms\NewItemForm.Designer.cs">
       <DependentUpon>NewItemForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Rental Forms\NewRentalModuleForm.cs">
@@ -231,106 +231,106 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RentalForm.cs">
+    <Compile Include="Depricated\RentalForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RentalForm.Designer.cs">
+    <Compile Include="Depricated\RentalForm.Designer.cs">
       <DependentUpon>RentalForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\InventoryForm.cs">
+    <Compile Include="Inventory Forms\InventoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\InventoryForm.Designer.cs">
+    <Compile Include="Inventory Forms\InventoryForm.Designer.cs">
       <DependentUpon>InventoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
+    <Compile Include="Depricated\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
+    <Compile Include="Depricated\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\NewItemModuleForm.cs">
+    <Compile Include="Inventory Forms\NewItemModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Rental Forms\Inventory Forms\NewItemModuleForm.Designer.cs">
+    <Compile Include="Inventory Forms\NewItemModuleForm.Designer.cs">
       <DependentUpon>NewItemModuleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="C# Files\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RentalHistoryForm.cs">
+    <Compile Include="Rental Forms\RentalHistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RentalHistoryForm.Designer.cs">
+    <Compile Include="Rental Forms\RentalHistoryForm.Designer.cs">
       <DependentUpon>RentalHistoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReturnModule.cs">
+    <Compile Include="Depricated\ReturnModule.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReturnModule.Designer.cs">
+    <Compile Include="Depricated\ReturnModule.Designer.cs">
       <DependentUpon>ReturnModule.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReturnOrReplacecs.cs">
+    <Compile Include="Rental Forms\ReturnOrReplacecs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReturnOrReplacecs.Designer.cs">
+    <Compile Include="Rental Forms\ReturnOrReplacecs.Designer.cs">
       <DependentUpon>ReturnOrReplacecs.cs</DependentUpon>
     </Compile>
-    <Compile Include="SetSelectionModuleForm.cs">
+    <Compile Include="Depricated\SetSelectionModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SetSelectionModuleForm.Designer.cs">
+    <Compile Include="Depricated\SetSelectionModuleForm.Designer.cs">
       <DependentUpon>SetSelectionModuleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsData.cs" />
+    <Compile Include="C# Files\SettingsData.cs" />
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolsForm.cs">
+    <Compile Include="Tools Forms\ToolsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolsForm.Designer.cs">
+    <Compile Include="Tools Forms\ToolsForm.Designer.cs">
       <DependentUpon>ToolsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserForm.cs">
+    <Compile Include="Depricated\UserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserForm.Designer.cs">
+    <Compile Include="Depricated\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserModuleForm.cs">
+    <Compile Include="Depricated\UserModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserModuleForm.Designer.cs">
+    <Compile Include="Depricated\UserModuleForm.Designer.cs">
       <DependentUpon>UserModuleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WorkOrderModuleForm.cs">
+    <Compile Include="Depricated\WorkOrderModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WorkOrderModuleForm.Designer.cs">
+    <Compile Include="Depricated\WorkOrderModuleForm.Designer.cs">
       <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Academy\AcademyForm.resx">
+    <EmbeddedResource Include="Rental Forms\Academy Forms\AcademyForm.resx">
       <DependentUpon>AcademyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Academy\AcademyList.resx">
+    <EmbeddedResource Include="Rental Forms\Academy Forms\AcademyList.resx">
       <DependentUpon>AcademyList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Academy\AssignStudentForm.resx">
+    <EmbeddedResource Include="Rental Forms\Academy Forms\AssignStudentForm.resx">
       <DependentUpon>AssignStudentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Academy\ClassList.resx">
+    <EmbeddedResource Include="Rental Forms\Academy Forms\ClassList.resx">
       <DependentUpon>ClassList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Academy\ClassRosterForm.resx">
+    <EmbeddedResource Include="Rental Forms\Academy Forms\ClassRosterForm.resx">
       <DependentUpon>ClassRosterForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Academy\CreateAcademyForm.resx">
+    <EmbeddedResource Include="Rental Forms\Academy Forms\CreateAcademyForm.resx">
       <DependentUpon>CreateAcademyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Academy\CreateClassForm.resx">
+    <EmbeddedResource Include="Rental Forms\Academy Forms\CreateClassForm.resx">
       <DependentUpon>CreateClassForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Item Classes\CustomButton.resx">
@@ -342,19 +342,19 @@
     <EmbeddedResource Include="DatabaseCreationModule.resx">
       <DependentUpon>DatabaseCreationModule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DepartmentForm.resx">
+    <EmbeddedResource Include="Depricated\DepartmentForm.resx">
       <DependentUpon>DepartmentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DeptModuleForm.resx">
+    <EmbeddedResource Include="Depricated\DeptModuleForm.resx">
       <DependentUpon>DeptModuleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DialogBoxClient.resx">
+    <EmbeddedResource Include="Depricated\DialogBoxClient.resx">
       <DependentUpon>DialogBoxClient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PricesForm.resx">
+    <EmbeddedResource Include="Tools Forms\PricesForm.resx">
       <DependentUpon>PricesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BrandForm.resx">
+    <EmbeddedResource Include="Tools Forms\BrandForm.resx">
       <DependentUpon>BrandForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Rental Forms\ExistingCustomerModuleForm.resx">
@@ -366,13 +366,13 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewOrExistingCustomerModuleForm.resx">
+    <EmbeddedResource Include="Depricated\NewOrExistingCustomerModuleForm.resx">
       <DependentUpon>NewOrExistingCustomerModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Rental Forms\NewClientForm.resx">
       <DependentUpon>NewClientForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Rental Forms\Inventory Forms\NewItemForm.resx">
+    <EmbeddedResource Include="Inventory Forms\NewItemForm.resx">
       <DependentUpon>NewItemForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -380,23 +380,23 @@
       <DependentUpon>NewRentalModuleForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="RentalForm.resx">
+    <EmbeddedResource Include="Depricated\RentalForm.resx">
       <DependentUpon>RentalForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExcelImportForm.resx">
+    <EmbeddedResource Include="Tools Forms\Excel\ExcelImportForm.resx">
       <DependentUpon>ExcelImportForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExcelUserPromptForm.resx">
+    <EmbeddedResource Include="Tools Forms\Excel\ExcelUserPromptForm.resx">
       <DependentUpon>ExcelUserPromptForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Rental Forms\Inventory Forms\InventoryForm.resx">
+    <EmbeddedResource Include="Inventory Forms\InventoryForm.resx">
       <DependentUpon>InventoryForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="Depricated\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Rental Forms\Inventory Forms\NewItemModuleForm.resx">
+    <EmbeddedResource Include="Inventory Forms\NewItemModuleForm.resx">
       <DependentUpon>NewItemModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -404,31 +404,31 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="RentalHistoryForm.resx">
+    <EmbeddedResource Include="Rental Forms\RentalHistoryForm.resx">
       <DependentUpon>RentalHistoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReturnModule.resx">
+    <EmbeddedResource Include="Depricated\ReturnModule.resx">
       <DependentUpon>ReturnModule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReturnOrReplacecs.resx">
+    <EmbeddedResource Include="Rental Forms\ReturnOrReplacecs.resx">
       <DependentUpon>ReturnOrReplacecs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SetSelectionModuleForm.resx">
+    <EmbeddedResource Include="Depricated\SetSelectionModuleForm.resx">
       <DependentUpon>SetSelectionModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolsForm.resx">
+    <EmbeddedResource Include="Tools Forms\ToolsForm.resx">
       <DependentUpon>ToolsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserForm.resx">
+    <EmbeddedResource Include="Depricated\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserModuleForm.resx">
+    <EmbeddedResource Include="Depricated\UserModuleForm.resx">
       <DependentUpon>UserModuleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WorkOrderModuleForm.resx">
+    <EmbeddedResource Include="Depricated\WorkOrderModuleForm.resx">
       <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
