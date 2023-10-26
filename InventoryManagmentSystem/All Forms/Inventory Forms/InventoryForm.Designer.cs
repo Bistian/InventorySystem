@@ -28,23 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryForm));
             this.ItemLable = new System.Windows.Forms.Label();
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.dataGridInv = new System.Windows.Forms.DataGridView();
-            this.labelSearch = new System.Windows.Forms.Label();
-            this.searchBar = new System.Windows.Forms.TextBox();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.TopPanel = new System.Windows.Forms.Panel();
-            this.checkActive = new System.Windows.Forms.CheckBox();
-            this.checkAll = new System.Windows.Forms.CheckBox();
-            this.checkRetired = new System.Windows.Forms.CheckBox();
-            this.labelNewItem = new System.Windows.Forms.Label();
-            this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +48,16 @@
             this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.labelSearch = new System.Windows.Forms.Label();
+            this.searchBar = new System.Windows.Forms.TextBox();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.TopPanel = new System.Windows.Forms.Panel();
+            this.checkActive = new System.Windows.Forms.CheckBox();
+            this.checkAll = new System.Windows.Forms.CheckBox();
+            this.checkRetired = new System.Windows.Forms.CheckBox();
+            this.labelNewItem = new System.Windows.Forms.Label();
+            this.UsersButton = new InventoryManagmentSystem.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.TopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
@@ -66,27 +66,27 @@
             // ItemLable
             // 
             this.ItemLable.AutoSize = true;
-            this.ItemLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ItemLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ItemLable.ForeColor = System.Drawing.SystemColors.Control;
-            this.ItemLable.Location = new System.Drawing.Point(3, 3);
-            this.ItemLable.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
+            this.ItemLable.Location = new System.Drawing.Point(3, 16);
+            this.ItemLable.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.ItemLable.Name = "ItemLable";
-            this.ItemLable.Size = new System.Drawing.Size(88, 20);
+            this.ItemLable.Size = new System.Drawing.Size(156, 32);
             this.ItemLable.TabIndex = 0;
-            this.ItemLable.Text = "Item Type";
+            this.ItemLable.Text = "Item Type:";
             // 
             // cbItemType
             // 
             this.cbItemType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbItemType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbItemType.FormattingEnabled = true;
             this.cbItemType.IntegralHeight = false;
-            this.cbItemType.Location = new System.Drawing.Point(91, 2);
+            this.cbItemType.Location = new System.Drawing.Point(131, 11);
             this.cbItemType.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.cbItemType.Name = "cbItemType";
-            this.cbItemType.Size = new System.Drawing.Size(72, 21);
+            this.cbItemType.Size = new System.Drawing.Size(95, 46);
             this.cbItemType.TabIndex = 1;
             this.cbItemType.SelectedIndexChanged += new System.EventHandler(this.comboBoxItem_SelectedIndexChanged);
             // 
@@ -95,14 +95,14 @@
             this.dataGridInv.AllowUserToAddRows = false;
             this.dataGridInv.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridInv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridInv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridInv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridInv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridInv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Num,
@@ -118,161 +118,38 @@
             this.Color,
             this.Edit,
             this.Delete});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridInv.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridInv.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridInv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridInv.EnableHeadersVisualStyles = false;
             this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridInv.Location = new System.Drawing.Point(0, 24);
-            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridInv.Location = new System.Drawing.Point(0, 55);
+            this.dataGridInv.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridInv.Name = "dataGridInv";
             this.dataGridInv.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridInv.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridInv.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridInv.RowHeadersVisible = false;
             this.dataGridInv.RowHeadersWidth = 51;
             this.dataGridInv.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridInv.RowTemplate.Height = 40;
             this.dataGridInv.RowTemplate.ReadOnly = true;
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridInv.Size = new System.Drawing.Size(776, 373);
+            this.dataGridInv.Size = new System.Drawing.Size(1177, 503);
             this.dataGridInv.TabIndex = 1;
             this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellClick);
-            // 
-            // labelSearch
-            // 
-            this.labelSearch.AutoSize = true;
-            this.labelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSearch.Location = new System.Drawing.Point(175, 3);
-            this.labelSearch.Margin = new System.Windows.Forms.Padding(0);
-            this.labelSearch.Name = "labelSearch";
-            this.labelSearch.Size = new System.Drawing.Size(71, 20);
-            this.labelSearch.TabIndex = 19;
-            this.labelSearch.Text = "Search:";
-            // 
-            // searchBar
-            // 
-            this.searchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBar.Location = new System.Drawing.Point(232, 3);
-            this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(157, 21);
-            this.searchBar.TabIndex = 18;
-            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewImageColumn1.HeaderText = "";
-            this.dataGridViewImageColumn1.MinimumWidth = 6;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewImageColumn2
-            // 
-            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewImageColumn2.HeaderText = "";
-            this.dataGridViewImageColumn2.MinimumWidth = 6;
-            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            this.dataGridViewImageColumn2.ReadOnly = true;
-            // 
-            // TopPanel
-            // 
-            this.TopPanel.BackColor = System.Drawing.Color.Maroon;
-            this.TopPanel.Controls.Add(this.checkActive);
-            this.TopPanel.Controls.Add(this.checkAll);
-            this.TopPanel.Controls.Add(this.checkRetired);
-            this.TopPanel.Controls.Add(this.labelNewItem);
-            this.TopPanel.Controls.Add(this.UsersButton);
-            this.TopPanel.Controls.Add(this.labelSearch);
-            this.TopPanel.Controls.Add(this.ItemLable);
-            this.TopPanel.Controls.Add(this.searchBar);
-            this.TopPanel.Controls.Add(this.cbItemType);
-            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopPanel.Location = new System.Drawing.Point(0, 0);
-            this.TopPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(776, 24);
-            this.TopPanel.TabIndex = 20;
-            // 
-            // checkActive
-            // 
-            this.checkActive.AutoSize = true;
-            this.checkActive.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkActive.Location = new System.Drawing.Point(395, 5);
-            this.checkActive.Name = "checkActive";
-            this.checkActive.Size = new System.Drawing.Size(56, 17);
-            this.checkActive.TabIndex = 23;
-            this.checkActive.Text = "Active";
-            this.checkActive.UseVisualStyleBackColor = true;
-            this.checkActive.Click += new System.EventHandler(this.checkActive_Click);
-            // 
-            // checkAll
-            // 
-            this.checkAll.AutoSize = true;
-            this.checkAll.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkAll.Location = new System.Drawing.Point(523, 4);
-            this.checkAll.Name = "checkAll";
-            this.checkAll.Size = new System.Drawing.Size(37, 17);
-            this.checkAll.TabIndex = 22;
-            this.checkAll.Text = "All";
-            this.checkAll.UseVisualStyleBackColor = true;
-            this.checkAll.Click += new System.EventHandler(this.checkAll_Click);
-            // 
-            // checkRetired
-            // 
-            this.checkRetired.AutoSize = true;
-            this.checkRetired.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkRetired.Location = new System.Drawing.Point(457, 5);
-            this.checkRetired.Name = "checkRetired";
-            this.checkRetired.Size = new System.Drawing.Size(60, 17);
-            this.checkRetired.TabIndex = 21;
-            this.checkRetired.Text = "Retired";
-            this.checkRetired.UseVisualStyleBackColor = true;
-            this.checkRetired.Click += new System.EventHandler(this.checkRetired_Click);
-            // 
-            // labelNewItem
-            // 
-            this.labelNewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelNewItem.AutoSize = true;
-            this.labelNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNewItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelNewItem.Location = new System.Drawing.Point(661, 2);
-            this.labelNewItem.Margin = new System.Windows.Forms.Padding(0);
-            this.labelNewItem.Name = "labelNewItem";
-            this.labelNewItem.Size = new System.Drawing.Size(89, 20);
-            this.labelNewItem.TabIndex = 20;
-            this.labelNewItem.Text = "New Item:";
-            this.labelNewItem.Click += new System.EventHandler(this.labelNewItem_Click);
-            // 
-            // UsersButton
-            // 
-            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
-            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
-            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
-            this.UsersButton.Location = new System.Drawing.Point(729, 1);
-            this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 0, 2, 2);
-            this.UsersButton.Name = "UsersButton";
-            this.UsersButton.Size = new System.Drawing.Size(38, 21);
-            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.UsersButton.TabIndex = 17;
-            this.UsersButton.TabStop = false;
-            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click_1);
             // 
             // Num
             // 
@@ -286,9 +163,11 @@
             // column_item_id
             // 
             this.column_item_id.HeaderText = "Id";
+            this.column_item_id.MinimumWidth = 6;
             this.column_item_id.Name = "column_item_id";
             this.column_item_id.ReadOnly = true;
             this.column_item_id.Visible = false;
+            this.column_item_id.Width = 125;
             // 
             // Brand
             // 
@@ -319,6 +198,7 @@
             // 
             this.column_acquisition_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.column_acquisition_date.HeaderText = "Acquisition";
+            this.column_acquisition_date.MinimumWidth = 6;
             this.column_acquisition_date.Name = "column_acquisition_date";
             this.column_acquisition_date.ReadOnly = true;
             // 
@@ -387,15 +267,147 @@
             this.Delete.Name = "Delete";
             this.Delete.ReadOnly = true;
             // 
+            // labelSearch
+            // 
+            this.labelSearch.AutoSize = true;
+            this.labelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelSearch.Location = new System.Drawing.Point(233, 16);
+            this.labelSearch.Margin = new System.Windows.Forms.Padding(0);
+            this.labelSearch.Name = "labelSearch";
+            this.labelSearch.Size = new System.Drawing.Size(119, 32);
+            this.labelSearch.TabIndex = 19;
+            this.labelSearch.Text = "Search:";
+            // 
+            // searchBar
+            // 
+            this.searchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBar.Location = new System.Drawing.Point(333, 9);
+            this.searchBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.searchBar.Name = "searchBar";
+            this.searchBar.Size = new System.Drawing.Size(208, 45);
+            this.searchBar.TabIndex = 18;
+            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.MinimumWidth = 6;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewImageColumn1.Width = 125;
+            // 
+            // dataGridViewImageColumn2
+            // 
+            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewImageColumn2.HeaderText = "";
+            this.dataGridViewImageColumn2.MinimumWidth = 6;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            this.dataGridViewImageColumn2.ReadOnly = true;
+            this.dataGridViewImageColumn2.Width = 125;
+            // 
+            // TopPanel
+            // 
+            this.TopPanel.BackColor = System.Drawing.Color.Maroon;
+            this.TopPanel.Controls.Add(this.checkActive);
+            this.TopPanel.Controls.Add(this.checkAll);
+            this.TopPanel.Controls.Add(this.checkRetired);
+            this.TopPanel.Controls.Add(this.labelNewItem);
+            this.TopPanel.Controls.Add(this.UsersButton);
+            this.TopPanel.Controls.Add(this.labelSearch);
+            this.TopPanel.Controls.Add(this.ItemLable);
+            this.TopPanel.Controls.Add(this.searchBar);
+            this.TopPanel.Controls.Add(this.cbItemType);
+            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TopPanel.Location = new System.Drawing.Point(0, 0);
+            this.TopPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TopPanel.Name = "TopPanel";
+            this.TopPanel.Size = new System.Drawing.Size(1177, 55);
+            this.TopPanel.TabIndex = 20;
+            // 
+            // checkActive
+            // 
+            this.checkActive.AutoSize = true;
+            this.checkActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkActive.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkActive.Location = new System.Drawing.Point(549, -6);
+            this.checkActive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkActive.Name = "checkActive";
+            this.checkActive.Size = new System.Drawing.Size(105, 33);
+            this.checkActive.TabIndex = 23;
+            this.checkActive.Text = "Active";
+            this.checkActive.UseVisualStyleBackColor = true;
+            this.checkActive.Click += new System.EventHandler(this.checkActive_Click);
+            // 
+            // checkAll
+            // 
+            this.checkAll.AutoSize = true;
+            this.checkAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkAll.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkAll.Location = new System.Drawing.Point(549, 35);
+            this.checkAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkAll.Name = "checkAll";
+            this.checkAll.Size = new System.Drawing.Size(65, 33);
+            this.checkAll.TabIndex = 22;
+            this.checkAll.Text = "All";
+            this.checkAll.UseVisualStyleBackColor = true;
+            this.checkAll.Click += new System.EventHandler(this.checkAll_Click);
+            // 
+            // checkRetired
+            // 
+            this.checkRetired.AutoSize = true;
+            this.checkRetired.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkRetired.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkRetired.Location = new System.Drawing.Point(549, 14);
+            this.checkRetired.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkRetired.Name = "checkRetired";
+            this.checkRetired.Size = new System.Drawing.Size(121, 33);
+            this.checkRetired.TabIndex = 21;
+            this.checkRetired.Text = "Retired";
+            this.checkRetired.UseVisualStyleBackColor = true;
+            this.checkRetired.Click += new System.EventHandler(this.checkRetired_Click);
+            // 
+            // labelNewItem
+            // 
+            this.labelNewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelNewItem.AutoSize = true;
+            this.labelNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNewItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelNewItem.Location = new System.Drawing.Point(988, 17);
+            this.labelNewItem.Margin = new System.Windows.Forms.Padding(0);
+            this.labelNewItem.Name = "labelNewItem";
+            this.labelNewItem.Size = new System.Drawing.Size(148, 32);
+            this.labelNewItem.TabIndex = 20;
+            this.labelNewItem.Text = "New Item:";
+            this.labelNewItem.Click += new System.EventHandler(this.labelNewItem_Click);
+            // 
+            // UsersButton
+            // 
+            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
+            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
+            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
+            this.UsersButton.Location = new System.Drawing.Point(1105, 6);
+            this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 0, 3, 2);
+            this.UsersButton.Name = "UsersButton";
+            this.UsersButton.Size = new System.Drawing.Size(72, 45);
+            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.UsersButton.TabIndex = 17;
+            this.UsersButton.TabStop = false;
+            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click_1);
+            // 
             // InventoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 397);
+            this.ClientSize = new System.Drawing.Size(1177, 558);
             this.Controls.Add(this.dataGridInv);
             this.Controls.Add(this.TopPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "InventoryForm";
             this.Text = "InventoryForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();

@@ -113,8 +113,8 @@
             // 
             // dtManufacture
             // 
-            this.dtManufacture.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             resources.ApplyResources(this.dtManufacture, "dtManufacture");
+            this.dtManufacture.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtManufacture.Name = "dtManufacture";
             // 
             // labelCondition
@@ -127,12 +127,12 @@
             this.comboBoxCondition.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxCondition.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.comboBoxCondition, "comboBoxCondition");
             this.comboBoxCondition.FormattingEnabled = true;
             this.comboBoxCondition.Items.AddRange(new object[] {
             resources.GetString("comboBoxCondition.Items"),
             resources.GetString("comboBoxCondition.Items1"),
             resources.GetString("comboBoxCondition.Items2")});
-            resources.ApplyResources(this.comboBoxCondition, "comboBoxCondition");
             this.comboBoxCondition.Name = "comboBoxCondition";
             // 
             // labelMaterial
@@ -145,11 +145,11 @@
             this.comboBoxMaterial.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxMaterial.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.comboBoxMaterial, "comboBoxMaterial");
             this.comboBoxMaterial.FormattingEnabled = true;
             this.comboBoxMaterial.Items.AddRange(new object[] {
             resources.GetString("comboBoxMaterial.Items"),
             resources.GetString("comboBoxMaterial.Items1")});
-            resources.ApplyResources(this.comboBoxMaterial, "comboBoxMaterial");
             this.comboBoxMaterial.Name = "comboBoxMaterial";
             // 
             // lableBrand
@@ -162,8 +162,8 @@
             this.comboBoxBrand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxBrand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxBrand.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxBrand, "comboBoxBrand");
+            this.comboBoxBrand.FormattingEnabled = true;
             this.comboBoxBrand.Name = "comboBoxBrand";
             // 
             // labelSize
@@ -175,6 +175,7 @@
             // 
             this.comboBoxSize.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxSize.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            resources.ApplyResources(this.comboBoxSize, "comboBoxSize");
             this.comboBoxSize.FormattingEnabled = true;
             this.comboBoxSize.Items.AddRange(new object[] {
             resources.GetString("comboBoxSize.Items"),
@@ -200,7 +201,6 @@
             resources.GetString("comboBoxSize.Items20"),
             resources.GetString("comboBoxSize.Items21"),
             resources.GetString("comboBoxSize.Items22")});
-            resources.ApplyResources(this.comboBoxSize, "comboBoxSize");
             this.comboBoxSize.Name = "comboBoxSize";
             // 
             // txtBoxSerialNumber
@@ -223,11 +223,11 @@
             this.comboBoxColor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxColor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.comboBoxColor, "comboBoxColor");
             this.comboBoxColor.FormattingEnabled = true;
             this.comboBoxColor.Items.AddRange(new object[] {
             resources.GetString("comboBoxColor.Items"),
             resources.GetString("comboBoxColor.Items1")});
-            resources.ApplyResources(this.comboBoxColor, "comboBoxColor");
             this.comboBoxColor.Name = "comboBoxColor";
             // 
             // cbItemType
@@ -235,8 +235,8 @@
             this.cbItemType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbItemType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbItemType.FormattingEnabled = true;
             resources.ApplyResources(this.cbItemType, "cbItemType");
+            this.cbItemType.FormattingEnabled = true;
             this.cbItemType.Name = "cbItemType";
             this.cbItemType.SelectedIndexChanged += new System.EventHandler(this.cbItemType_SelectedIndexChanged);
             // 
@@ -252,8 +252,8 @@
             // 
             // dtAcquisition
             // 
-            this.dtAcquisition.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             resources.ApplyResources(this.dtAcquisition, "dtAcquisition");
+            this.dtAcquisition.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtAcquisition.Name = "dtAcquisition";
             // 
             // NewItemForm

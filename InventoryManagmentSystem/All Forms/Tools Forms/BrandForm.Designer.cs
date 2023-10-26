@@ -44,10 +44,11 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btnAdd.Location = new System.Drawing.Point(12, 116);
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(13, 170);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(121, 24);
+            this.btnAdd.Size = new System.Drawing.Size(317, 50);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -55,42 +56,46 @@
             // 
             // tbBrands
             // 
-            this.tbBrands.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.tbBrands.Location = new System.Drawing.Point(12, 34);
+            this.tbBrands.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBrands.Location = new System.Drawing.Point(16, 42);
+            this.tbBrands.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbBrands.Name = "tbBrands";
-            this.tbBrands.Size = new System.Drawing.Size(121, 24);
+            this.tbBrands.Size = new System.Drawing.Size(314, 45);
             this.tbBrands.TabIndex = 2;
             // 
             // labelItemType
             // 
             this.labelItemType.AutoSize = true;
-            this.labelItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.labelItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelItemType.ForeColor = System.Drawing.SystemColors.Window;
-            this.labelItemType.Location = new System.Drawing.Point(9, 63);
+            this.labelItemType.Location = new System.Drawing.Point(13, 86);
+            this.labelItemType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelItemType.Name = "labelItemType";
-            this.labelItemType.Size = new System.Drawing.Size(72, 18);
+            this.labelItemType.Size = new System.Drawing.Size(129, 29);
             this.labelItemType.TabIndex = 3;
             this.labelItemType.Text = "Item Type";
             // 
             // labelBrand
             // 
             this.labelBrand.AutoSize = true;
-            this.labelBrand.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.labelBrand.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelBrand.ForeColor = System.Drawing.SystemColors.Window;
-            this.labelBrand.Location = new System.Drawing.Point(9, 13);
+            this.labelBrand.Location = new System.Drawing.Point(13, 9);
+            this.labelBrand.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelBrand.Name = "labelBrand";
-            this.labelBrand.Size = new System.Drawing.Size(47, 18);
+            this.labelBrand.Size = new System.Drawing.Size(82, 29);
             this.labelBrand.TabIndex = 4;
             this.labelBrand.Text = "Brand";
             // 
             // cbItemType
             // 
             this.cbItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.cbItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbItemType.FormattingEnabled = true;
-            this.cbItemType.Location = new System.Drawing.Point(12, 84);
+            this.cbItemType.Location = new System.Drawing.Point(16, 116);
+            this.cbItemType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbItemType.Name = "cbItemType";
-            this.cbItemType.Size = new System.Drawing.Size(121, 26);
+            this.cbItemType.Size = new System.Drawing.Size(314, 46);
             this.cbItemType.TabIndex = 5;
             this.cbItemType.SelectedIndexChanged += new System.EventHandler(this.cbItemType_SelectedIndexChanged);
             // 
@@ -116,19 +121,22 @@
             this.Remove});
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridView1.Location = new System.Drawing.Point(139, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(371, 16);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView1.RowTemplate.Height = 40;
-            this.dataGridView1.Size = new System.Drawing.Size(210, 157);
+            this.dataGridView1.Size = new System.Drawing.Size(533, 454);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // Number
             // 
             this.Number.HeaderText = "#";
+            this.Number.MinimumWidth = 6;
             this.Number.Name = "Number";
             this.Number.ReadOnly = true;
             this.Number.Width = 25;
@@ -137,6 +145,7 @@
             // 
             this.Brands.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Brands.HeaderText = "Brands";
+            this.Brands.MinimumWidth = 6;
             this.Brands.Name = "Brands";
             this.Brands.ReadOnly = true;
             // 
@@ -145,16 +154,18 @@
             this.Remove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Remove.FillWeight = 30F;
             this.Remove.HeaderText = "";
+            this.Remove.MinimumWidth = 6;
             this.Remove.Name = "Remove";
             this.Remove.ReadOnly = true;
             // 
             // btnFiretecBrands
             // 
             this.btnFiretecBrands.Enabled = false;
-            this.btnFiretecBrands.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btnFiretecBrands.Location = new System.Drawing.Point(12, 146);
+            this.btnFiretecBrands.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFiretecBrands.Location = new System.Drawing.Point(13, 228);
+            this.btnFiretecBrands.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFiretecBrands.Name = "btnFiretecBrands";
-            this.btnFiretecBrands.Size = new System.Drawing.Size(121, 23);
+            this.btnFiretecBrands.Size = new System.Drawing.Size(317, 48);
             this.btnFiretecBrands.TabIndex = 7;
             this.btnFiretecBrands.Text = "Firetec Brands";
             this.btnFiretecBrands.UseVisualStyleBackColor = true;
@@ -163,10 +174,10 @@
             // 
             // BrandForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(364, 181);
+            this.ClientSize = new System.Drawing.Size(917, 482);
             this.Controls.Add(this.btnFiretecBrands);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cbItemType);
@@ -175,6 +186,7 @@
             this.Controls.Add(this.tbBrands);
             this.Controls.Add(this.btnAdd);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "BrandForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Brands";
