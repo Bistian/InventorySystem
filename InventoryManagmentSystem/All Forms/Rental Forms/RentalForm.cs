@@ -31,10 +31,10 @@ namespace InventoryManagmentSystem
         int daysForWarning = 14;
         int setSelection = 0;
 
-        public RentalForm()
+        public RentalForm(string ItemType)
         {
             InitializeComponent();
-            RefreshForm();
+            RefreshForm(ItemType);
         }
 
         /// <summary>
@@ -42,10 +42,54 @@ namespace InventoryManagmentSystem
         /// </summary>
         /// <param name="isRented">true for rented, false for past due</param>
         /// <returns></returns>
-        private string Query(bool isRented)
+        private string Query(bool isRented, string ItemType)
         {
+            string query = "";
             string sign = isRented ? ">=" : "<";
-            string query = $@"
+            if (ItemType == "Jacket")
+            {
+                query = $@"SELECT ItemType='Jacket', tbClients.Name, DueDate, SerialNumber FROM tbJackets 
+                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location 
+                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
+                ";
+            }
+            else if (ItemType == "Pants")
+            {
+                query = $@"SELECT ItemType='Pants', tbClients.Name, DueDate, SerialNumber FROM tbPants 
+                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location 
+                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
+                ";
+            }
+            else if (ItemType == "Boots")
+            {
+                query = $@"SELECT ItemType='Boots', tbClients.Name, DueDate, SerialNumber FROM tbBoots 
+                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location 
+                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
+                ";
+            }
+            else if (ItemType == "Helmet")
+            {
+                query = $@"SELECT ItemType='Helmet', tbClients.Name, DueDate, SerialNumber FROM tbHelmets 
+                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location 
+                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
+                ";
+            }
+            else if (ItemType == "Mask")
+            {
+                query = $@"SELECT ItemType='Mask', tbClients.Name, DueDate, SerialNumber FROM tbMasks 
+                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbMasks.Location 
+                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
+                ";
+            }
+
+
+
+
+
+
+            else if (ItemType == null)
+            {
+                query = $@"
                 SELECT ItemType='Boots', tbClients.Name, DueDate, SerialNumber FROM tbBoots 
                 INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location 
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
@@ -62,6 +106,7 @@ namespace InventoryManagmentSystem
                 INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location 
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
             ";
+            }
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
         }
@@ -162,11 +207,12 @@ namespace InventoryManagmentSystem
 
             cm = new SqlCommand(query, con);
             con.Open();
-            
+
             // If there are no matches with that name, return.
-            if((int) cm.ExecuteScalar() <= 0) {
+            if ((int)cm.ExecuteScalar() <= 0)
+            {
                 con.Close();
-                return; 
+                return;
             }
             con.Close();
 
@@ -179,22 +225,75 @@ namespace InventoryManagmentSystem
         {
             NewOrExistingCustomerModuleForm ModForm = new NewOrExistingCustomerModuleForm();
             ModForm.ShowDialog();
-            RefreshForm();
+            RefreshForm(null);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void RefreshForm(string ItemType)
         {
-            ExistingCustomerModuleForm ModForm = new ExistingCustomerModuleForm();
-            ModForm.isReturn = true;
-            ModForm.ShowDialog();
-            RefreshForm();
+            if (ItemType == null)
+            {
+                cbItemType.SelectedIndex = 5;
+                LoadTables(dataGridRented, Query(true, null), "DueDate");
+                LoadTables(dataGridPastDue, Query(false, null), "DDate");
+            }
+            else if (ItemType == "Jacket")
+            {
+                cbItemType.SelectedIndex = 0;
+                LoadTables(dataGridRented, Query(true, "Jacket"), "DueDate");
+                LoadTables(dataGridPastDue, Query(false, "Jacket"), "DDate");
+            }
+            else if (ItemType == "Pants")
+            {
+                cbItemType.SelectedIndex = 1;
+                LoadTables(dataGridRented, Query(true, "Pants"), "DueDate");
+                LoadTables(dataGridPastDue, Query(false, "Pants"), "DDate");
+            }
+            else if (ItemType == "Boots")
+            {
+                cbItemType.SelectedIndex = 2;
+                LoadTables(dataGridRented, Query(true, "Boots"), "DueDate");
+                LoadTables(dataGridPastDue, Query(false, "Boots"), "DDate");
+            }
+            else if (ItemType == "Helmet")
+            {
+                cbItemType.SelectedIndex = 3;
+                LoadTables(dataGridRented, Query(true, "Helmet"), "DueDate");
+                LoadTables(dataGridPastDue, Query(false, "Helmet"), "DDate");
+            }
+            else if (ItemType == "Mask")
+            {
+                cbItemType.SelectedIndex = 4;
+                LoadTables(dataGridRented, Query(true, "Mask"), "DueDate");
+                LoadTables(dataGridPastDue, Query(false, "Mask"), "DDate");
+            }
         }
 
-        private void RefreshForm()
+        private void cbItemType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadTables(dataGridRented, Query(true), "DueDate");
-            LoadTables(dataGridPastDue, Query(false), "DDate");
+            if(cbItemType.SelectedIndex == 0)
+            {
+                RefreshForm("Jacket");
+            }
+            else if (cbItemType.SelectedIndex == 1)
+            {
+                RefreshForm("Pants");
+            }
+            else if (cbItemType.SelectedIndex == 2)
+            {
+                RefreshForm("Boots");
+            }
+            else if (cbItemType.SelectedIndex == 3)
+            {
+                RefreshForm("Helmet");
+            }
+            else if (cbItemType.SelectedIndex == 4)
+            {
+                RefreshForm("Mask");
+            }
+            else if (cbItemType.SelectedIndex == 5)
+            {
+                RefreshForm(null);
+            }
         }
     }
-
 }

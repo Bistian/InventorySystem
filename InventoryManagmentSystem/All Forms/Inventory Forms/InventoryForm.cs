@@ -19,12 +19,13 @@ namespace InventoryManagmentSystem
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
 
-        public InventoryForm()
+        public InventoryForm(string ItemType)
         {
             InitializeComponent();
             checkActive.Checked = true;
             LoadInventory();
             HelperFunctions.LoadItemTypes(connection, ref cbItemType);
+            SetItemType(ItemType);
         }
 
         private string QueryItems(string searchTerm = "")
@@ -35,12 +36,36 @@ namespace InventoryManagmentSystem
             return "";
         }
 
-        /// <summary>
-        /// Add retired condition to item queries.
-        /// </summary>
-        /// <param name="initialQuery">Initial part of the query.</param>
-        /// <returns>Complete query</returns>
-        private string QueryRetiredCondition(string initialQuery)
+        private void SetItemType(string ItemType)
+        {
+            if (ItemType == "Jacket")
+            {
+                cbItemType.SelectedIndex = 0;
+            }
+            else if (ItemType == "Pants")
+            {
+                cbItemType.SelectedIndex = 1;
+            }
+            else if (ItemType == "Boots")
+            {
+                cbItemType.SelectedIndex = 2;
+            }
+            else if (ItemType == "Helmet")
+            {
+                cbItemType.SelectedIndex = 3;
+            }
+            else if (ItemType == "Mask")
+            {
+                cbItemType.SelectedIndex = 4;
+            }
+        }
+
+            /// <summary>
+            /// Add retired condition to item queries.
+            /// </summary>
+            /// <param name="initialQuery">Initial part of the query.</param>
+            /// <returns>Complete query</returns>
+            private string QueryRetiredCondition(string initialQuery)
         {
             string query = "";
             if (checkRetired.Checked)

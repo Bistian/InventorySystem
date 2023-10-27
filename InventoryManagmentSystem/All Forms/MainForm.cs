@@ -83,7 +83,7 @@ namespace InventoryManagmentSystem
         {
             OpenNavBar("Inv");
             ColorTabSwitch("Inv");
-            openChildForm(new InventoryForm());
+            openChildForm(new InventoryForm(null));
         }
 
         private void btnTools_Click(object sender, EventArgs e)
@@ -175,7 +175,7 @@ namespace InventoryManagmentSystem
         private void ButtonRentalInv_Click(object sender, EventArgs e)
         {
             ColorTabSwitch("RentalsInv", false);
-            openChildForm(new InventoryForm());
+            openChildForm(new InventoryForm(null));
         }
 
         private void customButton1_Click(object sender, EventArgs e)

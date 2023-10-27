@@ -159,7 +159,7 @@ namespace InventoryManagmentSystem
             ButtonInStockBoots.Text = CountStock("tbBoots") + " Boots";
         }
 
-        private void OpenDockedForm(string formType)
+        private void OpenDockedForm(string formType, string ItemType)
         {
             Form childForm = null;
             //access the main panel in the parent form that will be docked into
@@ -168,7 +168,7 @@ namespace InventoryManagmentSystem
             //deciding the type of form that will be docked
             if (formType == "RentalForm")
             {
-                childForm = new RentalForm();
+                childForm = new RentalForm(ItemType);
             }
             else if (formType == "NewRentalModuleForm")
             {
@@ -177,6 +177,10 @@ namespace InventoryManagmentSystem
             else if (formType == "ExistingCustomerModuleForm")
             {
                 childForm = new ExistingCustomerModuleForm();
+            }
+            else if (formType == "InventoryForm")
+            {
+                childForm = new InventoryForm(ItemType);
             }
 
 
@@ -257,14 +261,59 @@ namespace InventoryManagmentSystem
 
         private void buttonNewCustomer_Click(object sender, EventArgs e)
         {
-            OpenDockedForm("NewRentalModuleForm");
+            OpenDockedForm("NewRentalModuleForm", null);
         }
 
         private void buttonActiveRental_Click(object sender, EventArgs e)
         {
             var parentForm = this.ParentForm as MainForm;
-            OpenDockedForm("ExistingCustomerModuleForm");
+            OpenDockedForm("ExistingCustomerModuleForm", null);
             parentForm.ColorTabSwitch("ActiveRentals", false);
+        }
+
+        private void btnStock_Click(object sender, EventArgs e)
+        {
+            OpenDockedForm("InventoryForm", "Jacket");
+        }
+
+        private void ButtonInStockJackets_Click(object sender, EventArgs e)
+        {
+            OpenDockedForm("InventoryForm", "Jacket");
+        }
+
+        private void ButtonInStockPants_Click(object sender, EventArgs e)
+        {
+            OpenDockedForm("InventoryForm", "Pants");
+        }
+
+        private void ButtonInStockHelmets_Click(object sender, EventArgs e)
+        {
+            OpenDockedForm("InventoryForm", "Helmet");
+        }
+
+        private void ButtonInStockBoots_Click(object sender, EventArgs e)
+        {
+            OpenDockedForm("InventoryForm", "Boots");
+        }
+
+        private void btnRented_Click(object sender, EventArgs e)
+        {
+            OpenDockedForm("RentalForm", null);
+        }
+
+        private void btnCoats_Click(object sender, EventArgs e)
+        {
+            OpenDockedForm("RentalForm", "Jacket");
+        }
+
+        private void btnPants_Click(object sender, EventArgs e)
+        {
+            OpenDockedForm("RentalForm", "Pants");
+        }
+
+        private void btnHelmets_Click(object sender, EventArgs e)
+        {
+            OpenDockedForm("RentalForm", "Helmet");
         }
     }
 }
