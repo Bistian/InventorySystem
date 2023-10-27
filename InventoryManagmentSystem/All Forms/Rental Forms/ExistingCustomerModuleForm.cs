@@ -31,15 +31,15 @@ namespace InventoryManagmentSystem
         public ExistingCustomerModuleForm()
         {
             InitializeComponent();
-            LoadUsers();
+            LoadClients();
             cbClientType.SelectedIndex = 0;
         }
 
         private bool DeleteItem(DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex != 6) { return false; }
+            if (e.ColumnIndex != 7) { return false; }
 
-            string message = "Do you want to delete this price?";
+            string message = "Do you want to delete this Client?";
             DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.No) { return true; }
 
@@ -51,7 +51,7 @@ namespace InventoryManagmentSystem
                 cm.Parameters.AddWithValue("@name", name);
                 con.Open();
                 cm.ExecuteNonQuery();
-                LoadUsers();
+                LoadClients();
             }
             catch (Exception ex)
             {
@@ -59,6 +59,7 @@ namespace InventoryManagmentSystem
             }
             con.Close();
 
+            LoadClients();
             return true;
         }
 
@@ -81,7 +82,7 @@ namespace InventoryManagmentSystem
                 Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
             }
 
-            LoadUsers();
+            LoadClients();
         }
 
         private void dataGridUsers_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -140,7 +141,7 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void LoadUsers()
+        private void LoadClients()
         {
             dataGridUsers.Rows.Clear();
             cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE Type = @ClientType", con);
@@ -162,7 +163,7 @@ namespace InventoryManagmentSystem
         private void searchBar_TextChanged(object sender, EventArgs e)
         {
             string searchTerm = searchBar.Text;
-            if (string.IsNullOrEmpty(searchTerm)) { LoadUsers(); }
+            if (string.IsNullOrEmpty(searchTerm)) { LoadClients(); }
 
             //SQL
             int i = 0;
@@ -201,7 +202,7 @@ namespace InventoryManagmentSystem
                 dataGridUsers.Columns[0].HeaderText = "Point Of Contact";
                 dataGridUsers.Columns[3].HeaderText = "Academy";
             }
-            LoadUsers();
+            LoadClients();
         }
 
         private void dataGridUsers_CellContentClick(object sender, DataGridViewCellEventArgs e)

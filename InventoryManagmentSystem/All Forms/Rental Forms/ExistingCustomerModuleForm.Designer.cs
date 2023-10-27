@@ -30,9 +30,11 @@ namespace InventoryManagmentSystem
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExistingCustomerModuleForm));
             this.InventoryPanel = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbClientType = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.searchBar = new System.Windows.Forms.TextBox();
             this.dataGridUsers = new System.Windows.Forms.DataGridView();
@@ -42,10 +44,8 @@ namespace InventoryManagmentSystem
             this.Academy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.column_update = new System.Windows.Forms.DataGridViewImageColumn();
-            this.cbClientType = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.InventoryPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUsers)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +63,37 @@ namespace InventoryManagmentSystem
             this.InventoryPanel.Name = "InventoryPanel";
             this.InventoryPanel.Size = new System.Drawing.Size(1000, 48);
             this.InventoryPanel.TabIndex = 24;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label2.Location = new System.Drawing.Point(317, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(130, 25);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "Client Type:";
+            this.label2.Visible = false;
+            // 
+            // cbClientType
+            // 
+            this.cbClientType.AllowDrop = true;
+            this.cbClientType.DisplayMember = "Individual";
+            this.cbClientType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbClientType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbClientType.FormattingEnabled = true;
+            this.cbClientType.Items.AddRange(new object[] {
+            "Individuals",
+            "Departments",
+            "Academies"});
+            this.cbClientType.Location = new System.Drawing.Point(427, 4);
+            this.cbClientType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbClientType.Name = "cbClientType";
+            this.cbClientType.Size = new System.Drawing.Size(121, 26);
+            this.cbClientType.TabIndex = 27;
+            this.cbClientType.Visible = false;
+            this.cbClientType.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -92,14 +123,14 @@ namespace InventoryManagmentSystem
             this.dataGridUsers.AllowUserToResizeRows = false;
             this.dataGridUsers.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridUsers.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridUsers.ColumnHeadersHeight = 30;
             this.dataGridUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -109,8 +140,8 @@ namespace InventoryManagmentSystem
             this.Academy,
             this.Address,
             this.column_id,
-            this.Delete,
-            this.column_update});
+            this.column_update,
+            this.Delete});
             this.dataGridUsers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridUsers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridUsers.EnableHeadersVisualStyles = false;
@@ -172,14 +203,6 @@ namespace InventoryManagmentSystem
             this.column_id.Name = "column_id";
             this.column_id.Visible = false;
             // 
-            // Delete
-            // 
-            this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Delete.FillWeight = 30F;
-            this.Delete.HeaderText = "";
-            this.Delete.MinimumWidth = 6;
-            this.Delete.Name = "Delete";
-            // 
             // column_update
             // 
             this.column_update.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -189,36 +212,13 @@ namespace InventoryManagmentSystem
             this.column_update.MinimumWidth = 6;
             this.column_update.Name = "column_update";
             // 
-            // cbClientType
+            // Delete
             // 
-            this.cbClientType.AllowDrop = true;
-            this.cbClientType.DisplayMember = "Individual";
-            this.cbClientType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbClientType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbClientType.FormattingEnabled = true;
-            this.cbClientType.Items.AddRange(new object[] {
-            "Individuals",
-            "Departments",
-            "Academies"});
-            this.cbClientType.Location = new System.Drawing.Point(427, 4);
-            this.cbClientType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cbClientType.Name = "cbClientType";
-            this.cbClientType.Size = new System.Drawing.Size(121, 26);
-            this.cbClientType.TabIndex = 27;
-            this.cbClientType.Visible = false;
-            this.cbClientType.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(317, 5);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(130, 25);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "Client Type:";
-            this.label2.Visible = false;
+            this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Delete.FillWeight = 30F;
+            this.Delete.HeaderText = "";
+            this.Delete.MinimumWidth = 6;
+            this.Delete.Name = "Delete";
             // 
             // ExistingCustomerModuleForm
             // 
@@ -246,15 +246,15 @@ namespace InventoryManagmentSystem
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox searchBar;
         private System.Windows.Forms.DataGridView dataGridUsers;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cbClientType;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.DataGridViewTextBoxColumn Academy;
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_id;
-        private System.Windows.Forms.DataGridViewImageColumn Delete;
         private System.Windows.Forms.DataGridViewImageColumn column_update;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbClientType;
+        private System.Windows.Forms.DataGridViewImageColumn Delete;
     }
 }
