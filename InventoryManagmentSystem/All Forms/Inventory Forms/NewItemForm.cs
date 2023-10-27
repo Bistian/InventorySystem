@@ -311,10 +311,11 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
         }
 
-        private bool UpdateJacketOrHelmet()
+        private bool UpdateJacketOrPantsOrMask()
         {
             string table = "tbJackets";
-            if (cbItemType.Text == "pants") { table = "tbPants"; }
+            if (cbItemType.Text == "Pants") { table = "tbPants"; }
+            else if (cbItemType.Text == "Mask") { table = "tbMasks"; }
 
             Guid uuid = GetUuidFromItem(table);
             if (uuid.Equals(Guid.Empty)) { return false; }
@@ -359,7 +360,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             bool isUpdated = false;
             if (cbItemType.Text == "Boots") { isUpdated = UpdateBoots(); }
             else if (cbItemType.Text == "Helmet") { isUpdated = UpdateHelmet(); }
-            else if (cbItemType.Text == "Jacket" || cbItemType.Text == "Pants") { isUpdated = UpdateJacketOrHelmet(); }
+            else if (cbItemType.Text == "Jacket" || cbItemType.Text == "Pants" || cbItemType.Text == "Mask") { isUpdated = UpdateJacketOrPantsOrMask(); }
 
             if (isUpdated)
             {

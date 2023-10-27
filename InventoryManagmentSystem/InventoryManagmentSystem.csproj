@@ -250,10 +250,10 @@
     <Compile Include="All Forms\xDeprecatedx\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="All Forms\Inventory Forms\NewItemModuleForm.cs">
+    <Compile Include="All Forms\xDeprecatedx\NewItemModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="All Forms\Inventory Forms\NewItemModuleForm.Designer.cs">
+    <Compile Include="All Forms\xDeprecatedx\NewItemModuleForm.Designer.cs">
       <DependentUpon>NewItemModuleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="C# Files\Program.cs" />
@@ -397,7 +397,7 @@
     <EmbeddedResource Include="All Forms\xDeprecatedx\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="All Forms\Inventory Forms\NewItemModuleForm.resx">
+    <EmbeddedResource Include="All Forms\xDeprecatedx\NewItemModuleForm.resx">
       <DependentUpon>NewItemModuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

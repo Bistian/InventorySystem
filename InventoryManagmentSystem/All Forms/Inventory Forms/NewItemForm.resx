@@ -117,60 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;ButtonClose.Name" xml:space="preserve">
-    <value>ButtonClose</value>
-  </data>
-  <data name="&gt;&gt;ButtonClose.Type" xml:space="preserve">
-    <value>InventoryManagmentSystem.CustomButton, InventoryManagmentSystem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ButtonClose.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;ButtonClose.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;labelTitle.Name" xml:space="preserve">
-    <value>labelTitle</value>
-  </data>
-  <data name="&gt;&gt;labelTitle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelTitle.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;labelTitle.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 62</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="ButtonClose.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAPAAAADwCAYAAAA+VemSAAAABGdBTUEAALGPC/xhBQAAPPJJREFUeF7t
@@ -788,11 +735,12 @@
         e9bGAAAAAElFTkSuQmCC
 </value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ButtonClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="ButtonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>804, 4</value>
+    <value>915, 7</value>
   </data>
   <data name="ButtonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -803,6 +751,7 @@
   <data name="ButtonClose.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ButtonClose.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
@@ -863,6 +812,33 @@
   <data name="&gt;&gt;labelTitle.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>978, 62</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="btnAddBrand.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt, style=Bold</value>
   </data>
@@ -903,7 +879,7 @@
     <value>NoControl</value>
   </data>
   <data name="ClearButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 323</value>
+    <value>244, 323</value>
   </data>
   <data name="ClearButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -936,7 +912,7 @@
     <value>NoControl</value>
   </data>
   <data name="SaveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>436, 323</value>
+    <value>493, 323</value>
   </data>
   <data name="SaveButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -972,7 +948,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelManufactureDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>609, 81</value>
+    <value>744, 78</value>
   </data>
   <data name="labelManufactureDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1002,7 +978,7 @@
     <value>Microsoft Sans Serif, 19.8000011pt, style=Bold</value>
   </data>
   <data name="dtManufacture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>613, 109</value>
+    <value>748, 106</value>
   </data>
   <data name="dtManufacture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -1080,7 +1056,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="comboBoxCondition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 46</value>
+    <value>211, 46</value>
   </data>
   <data name="comboBoxCondition.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1107,7 +1083,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelMaterial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>527, 170</value>
+    <value>610, 169</value>
   </data>
   <data name="labelMaterial.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1143,13 +1119,13 @@
     <value>Leather</value>
   </data>
   <data name="comboBoxMaterial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>533, 196</value>
+    <value>616, 195</value>
   </data>
   <data name="comboBoxMaterial.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="comboBoxMaterial.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 46</value>
+    <value>163, 46</value>
   </data>
   <data name="comboBoxMaterial.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1239,7 +1215,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>373, 170</value>
+    <value>428, 169</value>
   </data>
   <data name="labelSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1338,13 +1314,13 @@
     <value>16</value>
   </data>
   <data name="comboBoxSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>375, 196</value>
+    <value>430, 195</value>
   </data>
   <data name="comboBoxSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="comboBoxSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 46</value>
+    <value>180, 46</value>
   </data>
   <data name="comboBoxSize.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1371,7 +1347,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txtBoxSerialNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 45</value>
+    <value>278, 45</value>
   </data>
   <data name="txtBoxSerialNumber.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1434,7 +1410,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>676, 170</value>
+    <value>781, 169</value>
   </data>
   <data name="labelColor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1470,13 +1446,13 @@
     <value>Yellow</value>
   </data>
   <data name="comboBoxColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>680, 196</value>
+    <value>785, 195</value>
   </data>
   <data name="comboBoxColor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="comboBoxColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 46</value>
+    <value>167, 46</value>
   </data>
   <data name="comboBoxColor.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1503,7 +1479,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="cbItemType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 46</value>
+    <value>181, 46</value>
   </data>
   <data name="cbItemType.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1566,7 +1542,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelAcquisition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>365, 81</value>
+    <value>500, 78</value>
   </data>
   <data name="labelAcquisition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1596,7 +1572,7 @@
     <value>Microsoft Sans Serif, 19.8000011pt, style=Bold</value>
   </data>
   <data name="dtAcquisition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>369, 109</value>
+    <value>504, 106</value>
   </data>
   <data name="dtAcquisition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -1626,7 +1602,7 @@
     <value>9, 18</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>867, 401</value>
+    <value>978, 401</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.25pt</value>
