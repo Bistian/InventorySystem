@@ -29,9 +29,11 @@ namespace InventoryManagmentSystem
 
         private string QueryItems(string searchTerm = "")
         {
-            if(cbItemType.Text == "Boots") { return QueryBoots(searchTerm); }
-            if(cbItemType.Text == "Helmet") { return QueryHelmets(searchTerm); }
-            if(cbItemType.Text == "Jacket" || cbItemType.Text == "Pants" || cbItemType.Text == "Mask") { return QueryStandardItems(searchTerm); }
+            if(cbItemType.Text.ToLower() == "boots") { return QueryBoots(searchTerm); }
+            if(cbItemType.Text.ToLower() == "helmet") { return QueryHelmets(searchTerm); }
+            if(cbItemType.Text.ToLower() == "jacket" || 
+                cbItemType.Text.ToLower() == "pants" || 
+                cbItemType.Text.ToLower() == "mask") { return QueryStandardItems(searchTerm); }
             return "";
         }
 
@@ -45,15 +47,36 @@ namespace InventoryManagmentSystem
             string query = "";
             if (checkRetired.Checked)
             {
-                query = $"{initialQuery} AND Condition = 'Retired' AND Location='Fire-Tec'";
+                if(searchBar.Text.Length == 0)
+                {
+                    query = $"{initialQuery} WHERE Condition = 'Retired' AND Location='Fire-Tec'";
+                } 
+                else
+                {
+                    query = $"{initialQuery} AND Condition = 'Retired' AND Location='Fire-Tec'";
+                }
             }
             else if(checkAll.Checked)
             {
-                query = $"{initialQuery} AND Location='Fire-Tec'";
+                if (searchBar.Text.Length == 0)
+                {
+                    query = $"{initialQuery} WHERE Location='Fire-Tec'";
+                }
+                else
+                {
+                    query = $"{initialQuery} AND Location='Fire-Tec'";
+                }
             }
             else
             {
-                query = $"{initialQuery} AND Condition != 'Retired' AND Location='Fire-Tec'";
+                if (searchBar.Text.Length == 0)
+                {
+                    query = $"{initialQuery} WHERE Condition != 'Retired' AND Location='Fire-Tec'";
+                }
+                else
+                {
+                    query = $"{initialQuery} AND Condition != 'Retired' AND Location='Fire-Tec'";
+                }
             }
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
@@ -62,28 +85,32 @@ namespace InventoryManagmentSystem
         private string QueryBoots(string searchTerm)
         {
             string standardColumns = HelperQuery.ItemStandardColumns();
-            string initialQuery = $@"
-                SELECT {standardColumns}, Location, Size, Material 
-                FROM tbBoots 
-                WHERE (Brand LIKE '%{searchTerm}%' OR 
-                SerialNumber LIKE '%{searchTerm}%' OR 
-                Condition LIKE '%{searchTerm}%' OR 
-                Size LIKE '%{searchTerm}%')
-            ";
+            string initialQuery = $"SELECT {standardColumns}, Location, Size, Material FROM tbBoots";
+            if(searchTerm.Length > 0)
+            {
+                initialQuery += $@"
+                    WHERE (Brand LIKE '%{searchTerm}%' OR 
+                    SerialNumber LIKE '%{searchTerm}%' OR 
+                    Condition LIKE '%{searchTerm}%' OR 
+                    Size LIKE '%{searchTerm}%')
+                ";
+            }
             return QueryRetiredCondition(initialQuery);
         }
         
         private string QueryHelmets(string searchTerm)
         {
             string standardColumns = HelperQuery.ItemStandardColumns();
-            string initialQuery = $@"
-                SELECT {standardColumns}, Location, Color 
-                FROM tbHelmets 
-                WHERE (Brand LIKE '%{searchTerm}%' OR 
-                SerialNumber LIKE '%{searchTerm}%' OR 
-                Condition LIKE '%{searchTerm}%' OR 
-                Color LIKE '%{searchTerm}%')
-            ";
+            string initialQuery = $"SELECT {standardColumns}, Location, Color FROM tbHelmets";
+            if (searchTerm.Length > 0)
+            {
+                initialQuery += $@"
+                    WHERE (Brand LIKE '%{searchTerm}%' OR 
+                    SerialNumber LIKE '%{searchTerm}%' OR 
+                    Condition LIKE '%{searchTerm}%' OR 
+                    Color LIKE '%{searchTerm}%')
+                ";
+            }
             return QueryRetiredCondition(initialQuery);
         }
 
@@ -95,18 +122,20 @@ namespace InventoryManagmentSystem
         private string QueryStandardItems(string searchTerm)
         {
             string from = "tbPants ";
-            if(cbItemType.Text == "Jacket") { from = "tbJackets "; }
-            if (cbItemType.Text == "Mask") { from = "tbMasks "; }
+            if(cbItemType.Text.ToLower() == "jacket") { from = "tbJackets "; }
+            if (cbItemType.Text.ToLower() == "mask") { from = "tbMasks "; }
 
             string standardColumns = HelperQuery.ItemStandardColumns();
-            string initialQuery = $@"
-                SELECT {standardColumns}, Location, Size 
-                FROM {from}
-                WHERE (Brand LIKE '%{searchTerm}%' OR
-                SerialNumber LIKE '%{searchTerm}%' OR
-                Condition LIKE '%{searchTerm}%' OR
-                Size LIKE '%{searchTerm}%') 
-            ";
+            string initialQuery = $"SELECT {standardColumns}, Location, Size FROM {from}";
+            if (searchTerm.Length > 0)
+            {
+                initialQuery += $@"
+                    WHERE (Brand LIKE '%{searchTerm}%' OR
+                    SerialNumber LIKE '%{searchTerm}%' OR
+                    Condition LIKE '%{searchTerm}%' OR
+                    Size LIKE '%{searchTerm}%') 
+                ";
+            }
             return QueryRetiredCondition(initialQuery);
         }
 
@@ -120,47 +149,57 @@ namespace InventoryManagmentSystem
             {
                 int i = 0;
                 dataGridInv.Rows.Clear();
-                SqlCommand command = new SqlCommand(QueryItems(), connection);
                 connection.Open();
-                SqlDataReader dr = command.ExecuteReader();
+                SqlCommand command = new SqlCommand(QueryItems(), connection);
+                SqlDataReader reader = null;
+                try
+                {
+                    reader = command.ExecuteReader();
+                }
+                catch (Exception ex)
+                {
+                    connection.Close();
+                    Console.WriteLine(ex.Message);
+                    return;
+                }
                 
                 //Check which item was selected
-                if (cbItemType.Text == "Helmet")
+                if (cbItemType.Text.ToLower() == "helmet")
                 {
-                    while (dr.Read())
+                    while (reader.Read())
                     {
                         i++;
                         dataGridInv.Rows.Add(i, 
-                            dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), 
-                            dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), 
-                            dr[6].ToString(),"N/A","N/A", dr[7].ToString()
+                            reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), 
+                            reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), 
+                            reader[6].ToString(),"N/A","N/A", reader[7].ToString()
                         );
                     }
                 }
-                else if(cbItemType.Text == "Boots")
+                else if(cbItemType.Text.ToLower() == "boots")
                 {
-                    while (dr.Read())
+                    while (reader.Read())
                     {
                         i++;
                         dataGridInv.Rows.Add(i, 
-                            dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), 
-                            dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), 
-                            dr[6].ToString(), dr[7].ToString(), dr[8].ToString()
+                            reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), 
+                            reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), 
+                            reader[6].ToString(), reader[7].ToString(), reader[8].ToString()
                         );
                     }
                 }
-                else if (cbItemType.Text == "Jacket" || cbItemType.Text == "Pants" || cbItemType.Text == "Mask")
+                else if (cbItemType.Text.ToLower() == "jacket" || cbItemType.Text.ToLower() == "pants" || cbItemType.Text.ToLower() == "mask")
                 {
-                    while (dr.Read())
+                    while (reader.Read())
                     {
                         i++;
                         dataGridInv.Rows.Add(i, 
-                            dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), 
-                            dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), 
-                            dr[6].ToString(), dr[7].ToString());
+                            reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), 
+                            reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), 
+                            reader[6].ToString(), reader[7].ToString());
                     }
                 }
-                dr.Close();
+                reader.Close();
                 connection.Close();
             }
         }
