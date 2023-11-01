@@ -1,2 +1,2 @@
-dueDaysFromToday: 100
+dueDaysFromToday: 10
 fontSize: 12

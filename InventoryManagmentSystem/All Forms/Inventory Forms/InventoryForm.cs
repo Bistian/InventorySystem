@@ -58,6 +58,10 @@ namespace InventoryManagmentSystem
             {
                 cbItemType.SelectedIndex = 4;
             }
+            else
+            {
+                cbItemType.SelectedIndex = 0;
+            }
         }
 
             /// <summary>
