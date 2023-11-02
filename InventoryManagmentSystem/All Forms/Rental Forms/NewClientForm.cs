@@ -26,6 +26,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         Dictionary<string, Guid> academyList;
         Dictionary<Guid, string> classList;
+        bool ExistingUser;
 
         public NewClientForm(string rentalType = null, string clientName = null)
         {
@@ -35,6 +36,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             comboBoxRentalType.SelectedIndex = 0;
             if (clientName != null)
             {
+                ExistingUser = true;
                 AutoFillFields(rentalType, clientName);
             }
         }
@@ -445,7 +447,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 DockedIn.license = txtBoxDriversLicense.Text;
                 panelRentalType.Visible = false;
 
-                if (DockedIn.ExistingUser == false)
+                if (ExistingUser == false)
                 {
                     if (SaveClient())
                     {

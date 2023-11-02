@@ -15,7 +15,7 @@ namespace InventoryManagmentSystem
         public SettingsForm()
         {
             InitializeComponent();
-            ChangeFormFontSize(SettingsData.Instance.fontSize);
+            //ChangeFormFontSize(SettingsData.Instance.fontSize);
             //ChangeControlFontSize(this.Controls, SettingsData.Instance.fontSize);
             InitializeFields();
         }
@@ -48,7 +48,10 @@ namespace InventoryManagmentSystem
         {
             try
             {
-                if(int.TryParse(tbDueDays.Text, out int newDueDays))
+                string message = "Are you sure you want to save this Setting?";
+                string title = "Save Setting";
+                if (!HelperFunctions.YesNoMessageBox(message, title)) { return; }
+                if (int.TryParse(tbDueDays.Text, out int newDueDays))
                 {
                     SettingsData.Instance.dueDaysFromToday = newDueDays;
                 }

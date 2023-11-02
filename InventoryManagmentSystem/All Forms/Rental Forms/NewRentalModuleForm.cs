@@ -276,7 +276,10 @@ namespace InventoryManagmentSystem
                         labelClientWeight.Text = dr[12].ToString();
                         textBoxNotes.Text = dr[13].ToString();
                         ClientId = (Guid)dr[14];
-                        ClassId = (Guid)dr[15];
+                        if (dr[15] != DBNull.Value)
+                        {
+                          ClassId = (Guid)dr[15];
+                        }
                     }
                     dr.Close();
                     connection.Close();
@@ -966,6 +969,15 @@ namespace InventoryManagmentSystem
         private void dataGridViewClient_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanelProfile.Visible = false;
+            NewClientForm clientForm = new NewClientForm("Individual", labelProfileName.Text);
+            clientForm.txtBoxDriversLicense.Enabled = false;
+            HelperFunctions.LoadItemTypes(connection, ref comboBoxItemType);
+            HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
         }
     }
 }

@@ -114,6 +114,7 @@
             this.labelFireTecInv = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelButtons = new System.Windows.Forms.Panel();
+            this.btnEdit = new System.Windows.Forms.Button();
             this.btnClass = new System.Windows.Forms.Button();
             this.btnProfile = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -150,10 +151,10 @@
             this.flowLayoutPanelProfile.Controls.Add(this.panelNotes);
             this.flowLayoutPanelProfile.Controls.Add(this.buttonEditNotes);
             this.flowLayoutPanelProfile.Controls.Add(this.buttonSaveNotes);
-            this.flowLayoutPanelProfile.Location = new System.Drawing.Point(3, 58);
+            this.flowLayoutPanelProfile.Location = new System.Drawing.Point(3, 77);
             this.flowLayoutPanelProfile.Margin = new System.Windows.Forms.Padding(3, 0, 3, 2);
             this.flowLayoutPanelProfile.Name = "flowLayoutPanelProfile";
-            this.flowLayoutPanelProfile.Size = new System.Drawing.Size(371, 588);
+            this.flowLayoutPanelProfile.Size = new System.Drawing.Size(371, 589);
             this.flowLayoutPanelProfile.TabIndex = 112;
             this.flowLayoutPanelProfile.Visible = false;
             // 
@@ -1186,22 +1187,35 @@
             // panelButtons
             // 
             this.panelButtons.BackColor = System.Drawing.Color.Maroon;
+            this.panelButtons.Controls.Add(this.btnEdit);
             this.panelButtons.Controls.Add(this.btnClass);
             this.panelButtons.Controls.Add(this.btnProfile);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelButtons.Location = new System.Drawing.Point(0, 0);
             this.panelButtons.Margin = new System.Windows.Forms.Padding(3, 2, 3, 0);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(374, 54);
+            this.panelButtons.Size = new System.Drawing.Size(374, 77);
             this.panelButtons.TabIndex = 113;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEdit.Location = new System.Drawing.Point(127, 10);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(110, 62);
+            this.btnEdit.TabIndex = 2;
+            this.btnEdit.Text = "Edit Profile";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnClass
             // 
             this.btnClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClass.Location = new System.Drawing.Point(188, 10);
+            this.btnClass.Location = new System.Drawing.Point(241, 10);
             this.btnClass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClass.Name = "btnClass";
-            this.btnClass.Size = new System.Drawing.Size(139, 34);
+            this.btnClass.Size = new System.Drawing.Size(110, 62);
             this.btnClass.TabIndex = 1;
             this.btnClass.Text = "Enroll Class";
             this.btnClass.UseVisualStyleBackColor = true;
@@ -1213,7 +1227,7 @@
             this.btnProfile.Location = new System.Drawing.Point(13, 10);
             this.btnProfile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnProfile.Name = "btnProfile";
-            this.btnProfile.Size = new System.Drawing.Size(139, 34);
+            this.btnProfile.Size = new System.Drawing.Size(110, 62);
             this.btnProfile.TabIndex = 0;
             this.btnProfile.Text = "Open Profile";
             this.btnProfile.UseVisualStyleBackColor = true;
@@ -1377,5 +1391,6 @@
         public System.Windows.Forms.Label labelClientDrivers;
         public System.Windows.Forms.FlowLayoutPanel flowLayoutPanelProfile;
         public System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnEdit;
     }
 }
