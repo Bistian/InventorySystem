@@ -416,5 +416,31 @@ namespace InventoryManagmentSystem
             }
             connection.Close();
         }
+
+        public static string TableFindByItemType(string itemType)
+        {
+            itemType = itemType.ToLower();
+            if (itemType == "boots")
+            {
+                return "tbBoots";
+            }
+            else if (itemType == "helmet")
+            {
+                return "tbHelmets";
+            }
+            else if (itemType == "jacket")
+            {
+                return "tbJackets";
+            }
+            else if(itemType == "mask")
+            {
+                return "tbMasks";
+            }
+            else if(itemType == "pants")
+            {
+                return "tbPants";
+            }
+            return null;
+        }
     }
 }

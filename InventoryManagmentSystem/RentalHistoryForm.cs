@@ -17,6 +17,81 @@ namespace InventoryManagmentSystem
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
 
+        private struct Item
+        {
+            public Guid id;
+            public string type;
+            public string serial;
+            public string brand;
+            public string location;
+            public string manufacture;
+            public string condition;
+        } Item item;
+
+        public RentalHistoryForm(Guid itemId, string itemType)
+        {
+            item.id = itemId;
+            item.type = itemType;
+            GetItemInformation();
+            GetItemHistory();
+        }
+
+        private void GetItemInformation()
+        {
+            string table = HelperDatabaseCall.TableFindByItemType(item.type);
+            string query = $@"
+                SELECT SerialNumber, Brand, Location, ManufactureDate, Condition
+                FROM {table}
+                WHERE ItemId = {item.id}
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    item.serial = reader.GetString(0);
+                    item.brand = reader.GetString(1);
+                    item.location = reader.GetString(2);
+                    item.manufacture = reader.GetString(3);
+                    item.condition = reader.GetString(4);
+                }
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                connection.Close();
+                Console.WriteLine(ex.Message);
+                this.Close();
+            }
+        }
+
+        private void GetItemHistory()
+        {
+            string query = HelperQuery.HistoryClientAndDates(item.id);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int i = 1;
+                while (reader.Read())
+                {
+                    dataGridHistory.Rows.Add(
+                        i, reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)
+                    );
+                }
+                connection.Close();
+            }
+            catch(Exception ex)
+            {
+                connection.Close();
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         public RentalHistoryForm(string itemType = null, string serial = null)
         {
             InitializeComponent();

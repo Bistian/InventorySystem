@@ -73,7 +73,7 @@
             this.splitContainerRentalOptions.BackColor = System.Drawing.Color.Transparent;
             this.splitContainerRentalOptions.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.splitContainerRentalOptions.Location = new System.Drawing.Point(226, 314);
-            this.splitContainerRentalOptions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainerRentalOptions.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainerRentalOptions.Name = "splitContainerRentalOptions";
             // 
             // splitContainerRentalOptions.Panel1
@@ -97,7 +97,7 @@
             this.buttonNewCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonNewCustomer.ForeColor = System.Drawing.Color.Transparent;
             this.buttonNewCustomer.Location = new System.Drawing.Point(0, 0);
-            this.buttonNewCustomer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonNewCustomer.Margin = new System.Windows.Forms.Padding(2);
             this.buttonNewCustomer.Name = "buttonNewCustomer";
             this.buttonNewCustomer.Size = new System.Drawing.Size(78, 72);
             this.buttonNewCustomer.TabIndex = 18;
@@ -114,7 +114,7 @@
             this.buttonActiveRental.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonActiveRental.ForeColor = System.Drawing.Color.Transparent;
             this.buttonActiveRental.Location = new System.Drawing.Point(0, 0);
-            this.buttonActiveRental.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonActiveRental.Margin = new System.Windows.Forms.Padding(2);
             this.buttonActiveRental.Name = "buttonActiveRental";
             this.buttonActiveRental.Size = new System.Drawing.Size(81, 72);
             this.buttonActiveRental.TabIndex = 19;
@@ -157,7 +157,7 @@
             this.PanelTitles.Controls.Add(this.labelDueDate);
             this.PanelTitles.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelTitles.Location = new System.Drawing.Point(0, 0);
-            this.PanelTitles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PanelTitles.Margin = new System.Windows.Forms.Padding(2);
             this.PanelTitles.Name = "PanelTitles";
             this.PanelTitles.Size = new System.Drawing.Size(614, 20);
             this.PanelTitles.TabIndex = 2;
@@ -189,7 +189,7 @@
             this.dataGridViewDueIn10.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewDueIn10.Dock = System.Windows.Forms.DockStyle.Left;
             this.dataGridViewDueIn10.Location = new System.Drawing.Point(0, 20);
-            this.dataGridViewDueIn10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewDueIn10.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewDueIn10.Name = "dataGridViewDueIn10";
             this.dataGridViewDueIn10.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -267,7 +267,7 @@
             this.dataGridViewPast30.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewPast30.Dock = System.Windows.Forms.DockStyle.Right;
             this.dataGridViewPast30.Location = new System.Drawing.Point(388, 20);
-            this.dataGridViewPast30.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewPast30.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewPast30.Name = "dataGridViewPast30";
             this.dataGridViewPast30.ReadOnly = true;
             this.dataGridViewPast30.RowHeadersVisible = false;
@@ -408,7 +408,7 @@
             this.Controls.Add(this.dataGridViewDueIn10);
             this.Controls.Add(this.PanelTitles);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "HomeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HomeForm";

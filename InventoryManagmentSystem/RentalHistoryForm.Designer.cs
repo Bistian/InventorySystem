@@ -34,16 +34,6 @@
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.labelItemType = new System.Windows.Forms.Label();
             this.dataGridItems = new System.Windows.Forms.DataGridView();
-            this.dataGridHistory = new System.Windows.Forms.DataGridView();
-            this.column_client_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_customer_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_rented = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_returned = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panelTop = new System.Windows.Forms.Panel();
-            this.labelTitle = new System.Windows.Forms.Label();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.checkRetired = new System.Windows.Forms.CheckBox();
             this.column_item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_item_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,7 +41,17 @@
             this.column_condition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_acquired = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_last_rent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridHistory = new System.Windows.Forms.DataGridView();
+            this.column_client_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_customer_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_rented = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_returned = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.checkRetired = new System.Windows.Forms.CheckBox();
+            this.labelTitle = new System.Windows.Forms.Label();
             this.CloseButton = new InventoryManagmentSystem.CustomButton();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -59,11 +59,11 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
             // 
             // cbItemType
@@ -125,6 +125,55 @@
             this.dataGridItems.Size = new System.Drawing.Size(1241, 148);
             this.dataGridItems.TabIndex = 2;
             this.dataGridItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridItems_CellClick);
+            // 
+            // column_item_id
+            // 
+            this.column_item_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_item_id.HeaderText = "Item ID";
+            this.column_item_id.MinimumWidth = 8;
+            this.column_item_id.Name = "column_item_id";
+            this.column_item_id.Visible = false;
+            // 
+            // column_item_type
+            // 
+            this.column_item_type.HeaderText = "Item Type";
+            this.column_item_type.MinimumWidth = 8;
+            this.column_item_type.Name = "column_item_type";
+            this.column_item_type.Width = 150;
+            // 
+            // column_serial
+            // 
+            this.column_serial.HeaderText = "Serial";
+            this.column_serial.MinimumWidth = 8;
+            this.column_serial.Name = "column_serial";
+            this.column_serial.Width = 150;
+            // 
+            // column_brand
+            // 
+            this.column_brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_brand.HeaderText = "Brand";
+            this.column_brand.MinimumWidth = 8;
+            this.column_brand.Name = "column_brand";
+            // 
+            // column_condition
+            // 
+            this.column_condition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_condition.HeaderText = "Condition";
+            this.column_condition.Name = "column_condition";
+            // 
+            // column_acquired
+            // 
+            this.column_acquired.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_acquired.HeaderText = "Acquired";
+            this.column_acquired.MinimumWidth = 8;
+            this.column_acquired.Name = "column_acquired";
+            // 
+            // column_last_rent
+            // 
+            this.column_last_rent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_last_rent.HeaderText = "Last Rented";
+            this.column_last_rent.MinimumWidth = 8;
+            this.column_last_rent.Name = "column_last_rent";
             // 
             // dataGridHistory
             // 
@@ -221,6 +270,18 @@
             this.panelTop.Size = new System.Drawing.Size(1241, 30);
             this.panelTop.TabIndex = 6;
             // 
+            // checkRetired
+            // 
+            this.checkRetired.AutoSize = true;
+            this.checkRetired.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkRetired.Location = new System.Drawing.Point(441, 5);
+            this.checkRetired.Name = "checkRetired";
+            this.checkRetired.Size = new System.Drawing.Size(106, 20);
+            this.checkRetired.TabIndex = 71;
+            this.checkRetired.Text = "Show Retired";
+            this.checkRetired.UseVisualStyleBackColor = true;
+            this.checkRetired.Click += new System.EventHandler(this.checkRetired_Click);
+            // 
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
@@ -231,6 +292,19 @@
             this.labelTitle.Size = new System.Drawing.Size(147, 25);
             this.labelTitle.TabIndex = 70;
             this.labelTitle.Text = "Rental History";
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
+            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
+            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
+            this.CloseButton.Location = new System.Drawing.Point(164, 3);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(39, 45);
+            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CloseButton.TabIndex = 69;
+            this.CloseButton.TabStop = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // splitContainer2
             // 
@@ -249,80 +323,6 @@
             this.splitContainer2.Size = new System.Drawing.Size(1241, 519);
             this.splitContainer2.SplitterDistance = 30;
             this.splitContainer2.TabIndex = 7;
-            // 
-            // checkRetired
-            // 
-            this.checkRetired.AutoSize = true;
-            this.checkRetired.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkRetired.Location = new System.Drawing.Point(441, 5);
-            this.checkRetired.Name = "checkRetired";
-            this.checkRetired.Size = new System.Drawing.Size(106, 20);
-            this.checkRetired.TabIndex = 71;
-            this.checkRetired.Text = "Show Retired";
-            this.checkRetired.UseVisualStyleBackColor = true;
-            this.checkRetired.Click += new System.EventHandler(this.checkRetired_Click);
-            // 
-            // column_item_id
-            // 
-            this.column_item_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_item_id.HeaderText = "Item ID";
-            this.column_item_id.MinimumWidth = 8;
-            this.column_item_id.Name = "column_item_id";
-            this.column_item_id.Visible = false;
-            // 
-            // column_item_type
-            // 
-            this.column_item_type.HeaderText = "Item Type";
-            this.column_item_type.MinimumWidth = 8;
-            this.column_item_type.Name = "column_item_type";
-            this.column_item_type.Width = 150;
-            // 
-            // column_serial
-            // 
-            this.column_serial.HeaderText = "Serial";
-            this.column_serial.MinimumWidth = 8;
-            this.column_serial.Name = "column_serial";
-            this.column_serial.Width = 150;
-            // 
-            // column_brand
-            // 
-            this.column_brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_brand.HeaderText = "Brand";
-            this.column_brand.MinimumWidth = 8;
-            this.column_brand.Name = "column_brand";
-            // 
-            // column_condition
-            // 
-            this.column_condition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_condition.HeaderText = "Condition";
-            this.column_condition.Name = "column_condition";
-            // 
-            // column_acquired
-            // 
-            this.column_acquired.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_acquired.HeaderText = "Acquired";
-            this.column_acquired.MinimumWidth = 8;
-            this.column_acquired.Name = "column_acquired";
-            // 
-            // column_last_rent
-            // 
-            this.column_last_rent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_last_rent.HeaderText = "Last Rented";
-            this.column_last_rent.MinimumWidth = 8;
-            this.column_last_rent.Name = "column_last_rent";
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.Image = ((System.Drawing.Image)(resources.GetObject("CloseButton.Image")));
-            this.CloseButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageHover")));
-            this.CloseButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("CloseButton.ImageNormal")));
-            this.CloseButton.Location = new System.Drawing.Point(164, 3);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(39, 45);
-            this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CloseButton.TabIndex = 69;
-            this.CloseButton.TabStop = false;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // RentalHistoryForm
             // 
@@ -344,11 +344,11 @@
             this.splitContainer1.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             this.ResumeLayout(false);
 
         }
