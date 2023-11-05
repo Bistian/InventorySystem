@@ -278,6 +278,46 @@ namespace InventoryManagmentSystem
             return query;
         }
 
+        /// <summary>
+        /// Get count of how many items are rented.
+        /// </summary>
+        /// <param name="itemType">Optional: Specify what item type you want to count.</param>
+        /// <returns></returns>
+        public static string RentItems(string itemType = null)
+        {
+            string query = $@"
+                SELECT * FROM tbItems 
+                WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') AND 
+                    Location IS NOT NULL AND Condition NOT IN ('Retired')
+            ";
+            if(itemType != null)
+            {
+                itemType = itemType.ToLower();
+                query = $"{query} AND ItemType = '{itemType}'";
+            }
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return query;
+        }
+
+        public static string StockCount(string itemType = null)
+        {
+            string query = $@"
+                SELECT * FROM tbItems
+                WHERE Location IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') AND 
+                    Location IS NOT NULL AND 
+                    Condition NOT IN ('Retired')
+            ";
+            if(itemType != null)
+            {
+                itemType = itemType.ToLower();
+                query = $"{query} AND ItemType = '{itemType}'";
+            }
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return query;
+        }
+
+       
+
 
     }
 

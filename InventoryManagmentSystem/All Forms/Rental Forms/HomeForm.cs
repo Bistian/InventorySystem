@@ -17,18 +17,16 @@ namespace InventoryManagmentSystem
             PrintStock();
             dueDays = SettingsData.Instance.dueDaysFromToday;
             labelDueDate.Text = $"Due Within {dueDays} Days";
-            LoadTables(dataGridViewDueIn10, QueryRentedItems(), "Due");
-            LoadTables(dataGridViewPast30, QueryLateItems(), "DueDate2");
-
+            InitTables();
         }
 
         #region SQL_Variables
         // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         //Creating command
-        SqlConnection con = new SqlConnection(connectionString);
+        SqlConnection connection = new SqlConnection(connectionString);
         //Creating command
-        SqlCommand cm = new SqlCommand();
+        SqlCommand command = new SqlCommand();
         //Creatinng Reader
         SqlDataReader dr;
 
@@ -40,27 +38,77 @@ namespace InventoryManagmentSystem
         private Form activeForm = null;
         string firetec = "Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'";
 
-        private int CountRented(string tableName)
+        private int CountRented(string itemType)
         {
-            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') AND Location IS NOT NULL AND Condition NOT IN ('Retired')", con);
-            con.Open();
-            int count = (int)cm.ExecuteScalar();
-            con.Close();
-            return count;
+            try
+            {
+                connection.Open();
+                string query = HelperQuery.RentItems(itemType);
+                command = new SqlCommand(query, connection);
+                object result = command.ExecuteScalar();
+                if(result != null && result != DBNull.Value)
+                {
+                    return (int)result;
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            { 
+                Console.WriteLine(ex.Message);
+                return -1;
+            }
+            finally { connection.Close(); }
+
         }
 
-        private int CountStock(string tableName)
+        private int CountStock(string itemType)
         {
-            cm = new SqlCommand("Select Count (*) FROM " + tableName + " WHERE Location IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') AND Location IS NOT NULL AND Condition NOT IN ('Retired')", con);
-            con.Open();
-            int count = (int)cm.ExecuteScalar();
-            con.Close();
-            return count;
+            try
+            {
+                connection.Open();
+                string query = HelperQuery.StockCount(itemType);
+                command = new SqlCommand(query, connection);
+                object result = command.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                {
+                    return (int)result;
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return -1;
+            }
+            finally { connection.Close(); }
+        }
+
+        private void InitTables()
+        {
+            string query = HelperQuery.RentItems();
+            query += $@"
+                AND DueDate IS NOT NULL AND CAST(DueDate AS DATE)
+                BETWEEN CAST(GETDATE() AS DATE) AND 
+                DATEADD(DAY, {dueDays}, CAST(GETDATE() AS DATE))
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            LoadTables(dataGridViewBeforeDue, query, "Due");
+
+            query = HelperQuery.RentItems();
+            query += " AND DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            LoadTables(dataGridViewPastDue, query, "DueDate2");
         }
 
         private string QueryRentedItems()
         {
-            string query = $@"
+            string query = HelperQuery.RentItems();
+            query += $@"
+                AND DueDate IS NOT NULL AND CAST(DueDate AS DATE)
+                BETWEEN CAST(GETDATE() AS DATE) AND 
+                DATEADD(DAY, {dueDays}, CAST(GETDATE() AS DATE))
+            ";
+            /*string query = $@"
                 SELECT ItemType, Location, DueDate FROM tbItems 
                 JOIN tbBoots ON tbBoots.ItemId = tbItems.Id 
                 WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) 
@@ -84,14 +132,16 @@ namespace InventoryManagmentSystem
                 WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) 
                     BETWEEN CAST(GETDATE() AS DATE) AND 
                     DATEADD(DAY, {dueDays}, CAST(GETDATE() AS DATE))
-            ";
-            query = query.Replace("\r\n", " ");
+            ";*/
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
         }
 
         private string QueryLateItems()
         {
-            string query = @"
+            string query = HelperQuery.RentItems();
+            query += " AND DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0";
+            /*query = @"
                 SELECT ItemType, Location, DueDate FROM tbItems 
                 JOIN tbBoots ON tbBoots.ItemId = tbItems.Id 
                 WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0
@@ -107,8 +157,8 @@ namespace InventoryManagmentSystem
                 UNION SELECT ItemType, Location, DueDate FROM tbItems 
                 JOIN tbPants ON tbPants.ItemId = tbItems.Id 
                 WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0
-            ";
-            query = query.Replace("\r\n", " ");
+            ";*/
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
         }
 
@@ -116,47 +166,44 @@ namespace InventoryManagmentSystem
         {
             // Change the styling for the date column.
             grid.Columns[columnName].DefaultCellStyle.Format = "d";
-
             grid.Rows.Clear();
-            cm = new SqlCommand(query, con);
-            con.Open();
             try
             {
-                dr = cm.ExecuteReader();
-
+                connection.Open();
+                command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
                 int i = 0;
-                while (dr.Read())
+                while (reader.Read())
                 {
                     ++i;
                     grid.Rows.Add(i,
-                        dr[0].ToString(),
-                        dr[1].ToString(),
-                        dr[2]
+                        reader[0].ToString(),
+                        reader[1].ToString(),
+                        reader[2]
                         );
                 }
-
-                dr.Close();
+                reader.Close();
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            con.Close();
+            finally { connection.Close(); }
         }
 
         private void PrintRented()
         {
-            btnCoats.Text = CountRented("tbJackets") + " Coats";
-            btnPants.Text = CountRented("tbPants") + " Pants ";
-            btnHelmets.Text = CountRented("tbHelmets") + " Helmets";
+            btnCoats.Text = $"{CountRented("jackets")} Coats";
+            btnPants.Text = $"{CountRented("pants")} Pants";
+            btnHelmets.Text = $"{CountRented("helmets")} Helmets";
         }
 
         private void PrintStock()
         {
-            ButtonInStockJackets.Text = CountStock("tbJackets") + " Coats";
-            ButtonInStockPants.Text = CountStock("tbPants") + " Pants ";
-            ButtonInStockHelmets.Text = CountStock("tbHelmets") + " Helmets";
-            ButtonInStockBoots.Text = CountStock("tbBoots") + " Boots";
+            ButtonInStockJackets.Text = $"{CountStock("jackets")} Coats"; ;
+            ButtonInStockPants.Text = $"{CountStock("pants")} Pants";
+            ButtonInStockHelmets.Text = $"{CountStock("helmets")} Helmets";
+            ButtonInStockBoots.Text = $"{CountStock("boots")} Boots";
         }
 
         private void OpenDockedForm(string formType, string ItemType)
@@ -199,13 +246,13 @@ namespace InventoryManagmentSystem
             this.Dispose();
         }
 
-        private void dataGridViewDueIn10_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridViewBeforeDue_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) { return; }
             ClientPopUp(e, true);
         }
 
-        private void dataGridViewPast30_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridViewPastDue_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) { return; }
             ClientPopUp(e, false);
@@ -215,8 +262,8 @@ namespace InventoryManagmentSystem
         /// Pop up with client information when client's name is clicked on table.
         /// </summary>
         /// <param name="e">Event that was triggered.</param>
-        /// <param name="isDue10">Boolean representing which table was clicked.</param>
-        private void ClientPopUp(DataGridViewCellEventArgs e, bool isDue10)
+        /// <param name="isBeforeDue">Boolean representing which table was clicked.</param>
+        private void ClientPopUp(DataGridViewCellEventArgs e, bool isBeforeDue)
         {
             // Check if the clicked cell is in a row
             if (e.RowIndex < 0) { return; }
@@ -226,37 +273,38 @@ namespace InventoryManagmentSystem
 
             // Get the data from rentee at that row.
             DataGridViewRow row;
-            if (isDue10)
+            if (isBeforeDue)
             {
-                row = dataGridViewDueIn10.Rows[e.RowIndex];
+                row = dataGridViewBeforeDue.Rows[e.RowIndex];
             }
             else
             {
-                row = dataGridViewPast30.Rows[e.RowIndex];
+                row = dataGridViewPastDue.Rows[e.RowIndex];
             }
 
-
-            string rentee = row.Cells[2].Value.ToString();
+            string rentee = row.Cells["Rentee"].Value.ToString();
 
             // Check if there is at least one item with that name on the clints table.
-            string query = (
-                "SELECT COUNT(*) FROM tbClients " +
-                "WHERE Name ='" + rentee + "'");
-
-            cm = new SqlCommand(query, con);
-            con.Open();
-
-            // If there are no matches with that name, return.
-            if ((int)cm.ExecuteScalar() <= 0)
+            string query = $@"
+                SELECT COUNT(*) FROM tbClients   
+                WHERE Name ='{rentee}'
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
             {
-                con.Close();
-                return;
-            }
-            con.Close();
+                connection.Open();
+                command = new SqlCommand(query, connection);
 
-            // Show the details of the row in a new form or dialog
-            DialogBoxClient dialogBoxClient = new DialogBoxClient(rentee);
-            dialogBoxClient.ShowDialog();
+                // If there are no matches with that name, return.
+                if ((int)command.ExecuteScalar() > 0)
+                {
+                    // Show the details of the row in a new form or dialog
+                    DialogBoxClient dialogBoxClient = new DialogBoxClient(rentee);
+                    dialogBoxClient.ShowDialog();
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message);  }
+            finally { connection.Close(); }
         }
 
         private void buttonNewCustomer_Click(object sender, EventArgs e)
