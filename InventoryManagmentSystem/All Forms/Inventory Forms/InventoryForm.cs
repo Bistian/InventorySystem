@@ -157,7 +157,7 @@ namespace InventoryManagmentSystem
             {
                 int i = 0;
                 dataGridInv.Rows.Clear();
-                SqlCommand command = new SqlCommand(QueryItems(), connection);
+                SqlCommand command = new SqlCommand(QueryItems(searchBar.Text), connection);
                 connection.Open();
                 SqlDataReader dr = command.ExecuteReader();
                 
