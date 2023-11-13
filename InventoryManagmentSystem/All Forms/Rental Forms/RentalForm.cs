@@ -48,35 +48,35 @@ namespace InventoryManagmentSystem
             string sign = isRented ? ">=" : "<";
             if (ItemType == "Jacket")
             {
-                query = $@"SELECT ItemType='Jacket', tbClients.Name, DueDate, SerialNumber FROM tbJackets 
+                query = $@"SELECT ItemType='Jacket', tbClients.Name, tbClients.DriversLicenseNumber, DueDate, SerialNumber FROM tbJackets 
                 INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location 
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
                 ";
             }
             else if (ItemType == "Pants")
             {
-                query = $@"SELECT ItemType='Pants', tbClients.Name, DueDate, SerialNumber FROM tbPants 
+                query = $@"SELECT ItemType='Pants', tbClients.Name, tbClients.DriversLicenseNumber, DueDate, SerialNumber FROM tbPants 
                 INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location 
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
                 ";
             }
             else if (ItemType == "Boots")
             {
-                query = $@"SELECT ItemType='Boots', tbClients.Name, DueDate, SerialNumber FROM tbBoots 
+                query = $@"SELECT ItemType='Boots', tbClients.Name, tbClients.DriversLicenseNumber,  DueDate, SerialNumber FROM tbBoots 
                 INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location 
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
                 ";
             }
             else if (ItemType == "Helmet")
             {
-                query = $@"SELECT ItemType='Helmet', tbClients.Name, DueDate, SerialNumber FROM tbHelmets 
+                query = $@"SELECT ItemType='Helmet', tbClients.Name, tbClients.DriversLicenseNumber, DueDate, SerialNumber FROM tbHelmets 
                 INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location 
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
                 ";
             }
             else if (ItemType == "Mask")
             {
-                query = $@"SELECT ItemType='Mask', tbClients.Name, DueDate, SerialNumber FROM tbMasks 
+                query = $@"SELECT ItemType='Mask', tbClients.Name, tbClients.DriversLicenseNumber, DueDate, SerialNumber FROM tbMasks 
                 INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbMasks.Location 
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
                 ";
@@ -90,19 +90,19 @@ namespace InventoryManagmentSystem
             else if (ItemType == null)
             {
                 query = $@"
-                SELECT ItemType='Boots', tbClients.Name, DueDate, SerialNumber FROM tbBoots 
+                SELECT ItemType='Boots', tbClients.Name, tbClients.DriversLicenseNumber, DueDate, SerialNumber FROM tbBoots 
                 INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location 
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
 
-                UNION SELECT ItemType='Helmet', tbClients.Name, DueDate, SerialNumber FROM tbHelmets 
+                UNION SELECT ItemType='Helmet', tbClients.Name, tbClients.DriversLicenseNumber, DueDate, SerialNumber FROM tbHelmets 
                 INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location 
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
 
-                UNION SELECT ItemType='Jacket', tbClients.Name, DueDate, SerialNumber FROM tbJackets 
+                UNION SELECT ItemType='Jacket', tbClients.Name, tbClients.DriversLicenseNumber, DueDate, SerialNumber FROM tbJackets 
                 INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location 
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
 
-                UNION SELECT ItemType='Pants', tbClients.Name, DueDate, SerialNumber FROM tbPants 
+                UNION SELECT ItemType='Pants', tbClients.Name, tbClients.DriversLicenseNumber, DueDate, SerialNumber FROM tbPants 
                 INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location 
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
             ";
@@ -136,7 +136,8 @@ namespace InventoryManagmentSystem
                     grid.Rows.Add(i,
                         dr[0].ToString(),
                         dr[1].ToString(),
-                        dr[2],
+                        dr[2].ToString(),
+                        dr[3],
                         dr[3].ToString()
                     );
                 }
@@ -293,6 +294,48 @@ namespace InventoryManagmentSystem
             else if (cbItemType.SelectedIndex == 5)
             {
                 RefreshForm(null);
+            }
+        }
+
+        private void dataGridRented_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = dataGridRented.Rows[e.RowIndex];
+            string name = row.Cells["Rentee"].Value.ToString();
+            string licence = row.Cells["License"].Value.ToString();
+
+            var parentForm = this.ParentForm as MainForm;
+            NewRentalModuleForm Profile = new NewRentalModuleForm(null, name);
+            try
+            {
+                    Profile.LoadProfile(false, licence);
+                    parentForm.openChildForm(Profile);
+
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
+            }
+        }
+
+        private void dataGridPastDue_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = dataGridPastDue.Rows[e.RowIndex];
+            string name = row.Cells["dataGridViewTextBoxColumn2"].Value.ToString();
+            string licence = row.Cells["LicensePast"].Value.ToString();
+
+            var parentForm = this.ParentForm as MainForm;
+            NewRentalModuleForm Profile = new NewRentalModuleForm(null, name);
+            try
+            {
+                Profile.LoadProfile(false, licence);
+                parentForm.openChildForm(Profile);
+
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
             }
         }
     }
