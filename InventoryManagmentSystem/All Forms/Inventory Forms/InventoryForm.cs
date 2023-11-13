@@ -269,7 +269,6 @@ namespace InventoryManagmentSystem
                     }
                     else if (cbItemType.Text == "Boots")
                     {
-                        i++;
                         dataGridInv.Rows.Add(i,
                             reader[0].ToString(), reader[1].ToString(), reader[2].ToString(),
                             reader[3].ToString(), reader[4].ToString(), reader[5].ToString(),
@@ -278,7 +277,6 @@ namespace InventoryManagmentSystem
                     }
                     else // Pants && Jackets && Masks
                     {
-                        i++;
                         dataGridInv.Rows.Add(i,
                             reader[0].ToString(), reader[1].ToString(), reader[2].ToString(),
                             reader[3].ToString(), reader[4].ToString(), reader[5].ToString(),
