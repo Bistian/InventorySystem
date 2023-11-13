@@ -80,6 +80,14 @@ namespace InventoryManagmentSystem
             {
                 query = $"{initialQuery} AND Location='Fire-Tec'";
             }
+            else if (CheckNew.Checked)
+            {
+                query = $"{initialQuery} AND Condition = 'New' AND Location='Fire-Tec'";
+            }
+            else if (CheckUsed.Checked)
+            {
+                query = $"{initialQuery} AND Condition = 'Used' AND Location='Fire-Tec'";
+            }
             else
             {
                 query = $"{initialQuery} AND Condition != 'Retired' AND Location='Fire-Tec'";
@@ -441,14 +449,36 @@ namespace InventoryManagmentSystem
 
         private void checkRetired_Click(object sender, EventArgs e)
         {
-            checkAll.Checked = false;
             checkActive.Checked = false;
+            CheckUsed.Checked = false;
+            CheckNew.Checked = false;
+            checkAll.Checked = false;
             LoadInventory();
         }
 
         private void checkActive_Click(object sender, EventArgs e)
         {
             checkRetired.Checked = false;
+            CheckUsed.Checked = false;
+            CheckNew.Checked = false;
+            checkAll.Checked = false;
+            LoadInventory();
+        }
+
+        private void CheckNew_CheckedChanged(object sender, EventArgs e)
+        {
+            checkRetired.Checked = false;
+            CheckUsed.Checked = false;
+            checkActive.Checked = false;
+            checkAll.Checked = false;
+            LoadInventory();
+        }
+
+        private void CheckUsed_CheckedChanged(object sender, EventArgs e)
+        {
+            checkRetired.Checked = false;
+            CheckNew.Checked = false;
+            checkActive.Checked = false;
             checkAll.Checked = false;
             LoadInventory();
         }

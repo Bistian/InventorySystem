@@ -57,6 +57,8 @@
             this.checkAll = new System.Windows.Forms.CheckBox();
             this.checkRetired = new System.Windows.Forms.CheckBox();
             this.labelNewItem = new System.Windows.Forms.Label();
+            this.CheckNew = new System.Windows.Forms.CheckBox();
+            this.CheckUsed = new System.Windows.Forms.CheckBox();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.TopPanel.SuspendLayout();
@@ -312,6 +314,8 @@
             // TopPanel
             // 
             this.TopPanel.BackColor = System.Drawing.Color.Maroon;
+            this.TopPanel.Controls.Add(this.CheckUsed);
+            this.TopPanel.Controls.Add(this.CheckNew);
             this.TopPanel.Controls.Add(this.checkActive);
             this.TopPanel.Controls.Add(this.checkAll);
             this.TopPanel.Controls.Add(this.checkRetired);
@@ -384,6 +388,34 @@
             this.labelNewItem.Text = "New Item:";
             this.labelNewItem.Click += new System.EventHandler(this.labelNewItem_Click);
             // 
+            // CheckNew
+            // 
+            this.CheckNew.AutoSize = true;
+            this.CheckNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CheckNew.ForeColor = System.Drawing.SystemColors.Window;
+            this.CheckNew.Location = new System.Drawing.Point(686, -6);
+            this.CheckNew.Margin = new System.Windows.Forms.Padding(4);
+            this.CheckNew.Name = "CheckNew";
+            this.CheckNew.Size = new System.Drawing.Size(88, 33);
+            this.CheckNew.TabIndex = 24;
+            this.CheckNew.Text = "New";
+            this.CheckNew.UseVisualStyleBackColor = true;
+            this.CheckNew.CheckedChanged += new System.EventHandler(this.CheckNew_CheckedChanged);
+            // 
+            // CheckUsed
+            // 
+            this.CheckUsed.AutoSize = true;
+            this.CheckUsed.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CheckUsed.ForeColor = System.Drawing.SystemColors.Window;
+            this.CheckUsed.Location = new System.Drawing.Point(686, 16);
+            this.CheckUsed.Margin = new System.Windows.Forms.Padding(4);
+            this.CheckUsed.Name = "CheckUsed";
+            this.CheckUsed.Size = new System.Drawing.Size(96, 33);
+            this.CheckUsed.TabIndex = 25;
+            this.CheckUsed.Text = "Used";
+            this.CheckUsed.UseVisualStyleBackColor = true;
+            this.CheckUsed.CheckedChanged += new System.EventHandler(this.CheckUsed_CheckedChanged);
+            // 
             // UsersButton
             // 
             this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -445,5 +477,7 @@
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Delete;
         public System.Windows.Forms.ComboBox cbItemType;
+        private System.Windows.Forms.CheckBox CheckNew;
+        private System.Windows.Forms.CheckBox CheckUsed;
     }
 }
