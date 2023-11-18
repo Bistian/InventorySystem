@@ -117,11 +117,11 @@ namespace InventoryManagmentSystem
             // Loop through the table.
             while(true)
             {
-                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, cbItemType.Text);
+                //Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, cbItemType.Text);
                 // Add item id to null.
                 string query = $@"
                     UPDATE TOP(1) {table}
-                    SET ItemId = '{uuid}'
+                    SET ItemId = 'uuid'
                     OUTPUT 1 
                     WHERE ItemId IS NULL;
                 ";
@@ -133,13 +133,13 @@ namespace InventoryManagmentSystem
                     int rowsAffected = command.ExecuteNonQuery(); connection.Close();
                     if(rowsAffected < 1) 
                     { 
-                        HelperDatabaseCall.ItemDelete(connection, uuid);
+                        //HelperDatabaseCall.ItemDelete(connection, uuid);
                         break; 
                     }
                 }
                 catch (Exception ex)
                 {
-                    HelperDatabaseCall.ItemDelete(connection, uuid);
+                    //HelperDatabaseCall.ItemDelete(connection, uuid);
                     Console.WriteLine(ex.Message);
                     connection.Close();
                 }

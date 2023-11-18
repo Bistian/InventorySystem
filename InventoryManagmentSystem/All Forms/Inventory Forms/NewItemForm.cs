@@ -15,14 +15,13 @@ namespace InventoryManagmentSystem.Rental_Forms
 {
     public partial class NewItemForm : Form
     {
-        #region SQL_Variables
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
-        SqlCommand command;
-        #endregion SQL_Variables
 
         private bool isUpdate = false;
         int lastItemTypeIndex = -1;
+        private string tableName = "";
+        private string itemType = "";
 
         public NewItemForm(string itemType = "", bool isUpdate = false)
         {
@@ -31,166 +30,41 @@ namespace InventoryManagmentSystem.Rental_Forms
             this.isUpdate = isUpdate;
             if (isUpdate)
             {
-                LoadBrands();
+                HelperDatabaseCall.BrandsFillComboBox(connection, cbItemType.Text.ToLower(), cbBrand);
             }
             ManageFieldsAvailability();
-            loadItemTypes();
-        }
-
-        /// <summary>
-        /// Adds boots to boots table.
-        /// </summary>
-        /// <param name="uuid"></param>
-        /// <returns></returns>
-        private bool AddBoots(Guid uuid)
-        {
-            string query = HelperQuery.BootsInsert();
-            try
-            {
-                command = new SqlCommand(query, connection);
-                QueryStandardParameters(ref command, uuid);
-                command.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
-                command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                connection.Close();
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Adds a helmet to helmets table.
-        /// </summary>
-        /// <param name="uuid"></param>
-        /// <returns></returns>
-        private bool AddHelmet(Guid uuid)
-        {
-            string query = HelperQuery.HelmetInsert();
-            try
-            {
-                command = new SqlCommand(query, connection);
-                QueryStandardParameters(ref command, uuid);
-                command.Parameters.AddWithValue("@Color", comboBoxColor.Text);
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                connection.Close();
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Adds a jacket to jackets table.
-        /// </summary>
-        /// <param name="uuid"></param>
-        /// <returns></returns>
-        private bool AddJacket(Guid uuid)
-        {
-            string query = HelperQuery.JacketInsert();
-            try
-            {
-                command = new SqlCommand(query, connection);
-                QueryStandardParameters(ref command, uuid);
-                command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                connection.Close();
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                return false;
-            }
-        }
-
-        private bool AddMask(Guid uuid)
-        {
-            string query = HelperQuery.MaskInsert();
-            try
-            {
-                command = new SqlCommand(query, connection);
-                QueryStandardParameters(ref command, uuid);
-                command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                connection.Close();
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Add pants to pants table.
-        /// </summary>
-        /// <param name="uuid"></param>
-        /// <returns></returns>
-        private bool AddPants(Guid uuid)
-        {
-            string query = HelperQuery.PantsInsert();
-            try
-            {
-                command = new SqlCommand(query, connection);
-                QueryStandardParameters(ref command, uuid);
-                command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                connection.Close();
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Ad to paramets @ItemId, @SerialNumber, @Brand, @Condition, @AcquisitionDate, @ManufactureDate
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="uuid"></param>
-        private void QueryStandardParameters(ref SqlCommand command, Guid uuid)
-        {
-            command.Parameters.AddWithValue("@ItemId", uuid);
-            command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-            command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-            command.Parameters.AddWithValue("@Condition", comboBoxCondition.Text);
-            command.Parameters.AddWithValue("@AcquisitionDate", dtAcquisition.Value);
-            command.Parameters.AddWithValue("@ManufactureDate", dtManufacture.Value);
+            HelperDatabaseCall.ItemTypeLoadComboBox(connection, cbItemType);
+            GetTableName();
         }
 
         private bool SelectTableAndAddItem(Guid uuid)
         {
             bool wasAdded = false;
-            if (cbItemType.Text == "Boots") { wasAdded = AddBoots(uuid); }
-            else if (cbItemType.Text == "Helmet") { wasAdded = AddHelmet(uuid); }
-            else if (cbItemType.Text == "Mask") { wasAdded = AddMask(uuid); }
-            else if (cbItemType.Text == "Jacket") { wasAdded = AddJacket(uuid); }
-            else if (cbItemType.Text == "Pants") { wasAdded = AddPants(uuid); }
+            if (cbItemType.Text.ToLower() == "boots") 
+            {
+                wasAdded = HelperDatabaseCall.BootsInsert(connection, 
+                    uuid, cbBrand.Text, dtAcquisition.Text, dtManufacture.Text, cbSize.Text, cbMaterial.Text); 
+            }
+            else if (cbItemType.Text.ToLower() == "helmet") 
+            { 
+                wasAdded = HelperDatabaseCall.HelmetInsert(connection,
+                    uuid, cbBrand.Text, dtAcquisition.Text, dtManufacture.Text, cbColor.Text); 
+            }
+            else if (cbItemType.Text.ToLower() == "jacket") 
+            { 
+                wasAdded = HelperDatabaseCall.JacketInsert(connection,
+                    uuid, cbBrand.Text, dtAcquisition.Text, dtManufacture.Text, cbSize.Text); 
+            }
+            else if (cbItemType.Text.ToLower() == "mask") 
+            {
+                wasAdded = HelperDatabaseCall.MaskInsert(connection,
+                    uuid, cbBrand.Text, dtAcquisition.Text, dtManufacture.Text, cbSize.Text);
+            }
+            else if(cbItemType.Text.ToLower() == "pants")
+            {
+                wasAdded = HelperDatabaseCall.PantsInsert(connection,
+                    uuid, cbBrand.Text, dtAcquisition.Text, dtManufacture.Text, cbSize.Text);
+            }
             return wasAdded;
         }
 
@@ -205,14 +79,15 @@ namespace InventoryManagmentSystem.Rental_Forms
             string title = "Save Item";
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return false; }
 
-            string table = GetTableName();
-            if (table == "")
+            GetTableName();
+            if (tableName == "")
             {
                 Console.WriteLine("ERROR: Table not found.");
                 return false;
             }
 
-            if (CheckIfExists(table))
+            var item = HelperDatabaseCall.ItemFindBySerialNumber(connection, itemType, tbSerialNumber.Text);
+            if (item != null && item.Count > 0)
             {
                 message = "Item already exists, do you want to update it?";
                 title = "Update Item";
@@ -221,7 +96,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 return false;
             }
 
-            Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, cbItemType.Text);
+            Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, cbItemType.Text, tbSerialNumber.Text, cbCondition.Text, "Rent");
             if (uuid.Equals(Guid.Empty))
             {
                 Console.WriteLine("ERROR: UUID not found.");
@@ -241,114 +116,6 @@ namespace InventoryManagmentSystem.Rental_Forms
             return true;
         }
 
-        private bool UpdateBoots()
-        {
-            Guid uuid = GetUuidFromItem("tbBoots");
-            if (uuid.Equals(Guid.Empty)) { return false; }
-
-            string query = $"UPDATE tbBoots " +
-                $"SET SerialNumber = @SerialNumber, " +
-                $"Brand = @Brand, " +
-                $"Condition = @Condition," +
-                $"ManufactureDate = @ManufactureDate," +
-                $"Size = @Size, " +
-                $"Material = @Material " +
-                $"WHERE ItemId = '{uuid}';";
-
-            try
-            {
-                command = new SqlCommand(query, connection);
-                connection.Open();
-                command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-                command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                command.Parameters.AddWithValue("@Condition", comboBoxCondition.Text);
-                command.Parameters.AddWithValue("@ManufactureDate", dtManufacture.Value.Date);
-                command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                command.Parameters.AddWithValue("@Material", comboBoxMaterial.Text);
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                connection.Close();
-                Console.WriteLine(ex.Message);
-                return false;
-            }
-        }
-
-        private bool UpdateHelmet()
-        {
-            Guid uuid = GetUuidFromItem("tbHelmets");
-            if (uuid.Equals(Guid.Empty)) { return false; }
-
-            string query = $"UPDATE tbHelmets " +
-                $"SET SerialNumber = @SerialNumber, " +
-                $"Brand = @Brand, " +
-                $"Condition = @Condition," +
-                $"ManufactureDate = @ManufactureDate," +
-                $"Color = @Color " +
-                $"WHERE ItemId = '{uuid}';";
-
-            try
-            {
-                command = new SqlCommand(query, connection);
-                connection.Open();
-                command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-                command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                command.Parameters.AddWithValue("@Condition", comboBoxCondition.Text);
-                command.Parameters.AddWithValue("@ManufactureDate", dtManufacture.Value.Date);
-                command.Parameters.AddWithValue("@Color", comboBoxColor.Text);
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                connection.Close();
-                Console.WriteLine(ex.Message);
-                return false;
-            }
-        }
-
-        private bool UpdateJacketOrPantsOrMask()
-        {
-            string table = "tbJackets";
-            if (cbItemType.Text == "Pants") { table = "tbPants"; }
-            else if (cbItemType.Text == "Mask") { table = "tbMasks"; }
-
-            Guid uuid = GetUuidFromItem(table);
-            if (uuid.Equals(Guid.Empty)) { return false; }
-
-            string query = $"UPDATE {table} " +
-                $"SET SerialNumber = @SerialNumber, " +
-                $"Brand = @Brand, " +
-                $"Condition = @Condition," +
-                $"ManufactureDate = @ManufactureDate," +
-                $"Size = @Size " +
-                $"WHERE ItemId = '{uuid}';";
-
-            try
-            {
-                command = new SqlCommand(query, connection);
-                connection.Open();
-                command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-                command.Parameters.AddWithValue("@Brand", comboBoxBrand.Text);
-                command.Parameters.AddWithValue("@Condition", comboBoxCondition.Text);
-                command.Parameters.AddWithValue("@ManufactureDate", dtManufacture.Value.Date);
-                command.Parameters.AddWithValue("@Size", comboBoxSize.Text);
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                connection.Close();
-                Console.WriteLine(ex.Message);
-                return false;
-            }
-        }
-
         private bool UpdateItem()
         {
             if (!SaveSafetyChecks()) { return false; }
@@ -357,10 +124,49 @@ namespace InventoryManagmentSystem.Rental_Forms
             string title = "Update Item";
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return false; }
 
+            Guid uuid = HelperDatabaseCall.ItemGetIdBySerialNumber(connection, cbItemType.Text, tbSerialNumber.Text);
             bool isUpdated = false;
-            if (cbItemType.Text == "Boots") { isUpdated = UpdateBoots(); }
-            else if (cbItemType.Text == "Helmet") { isUpdated = UpdateHelmet(); }
-            else if (cbItemType.Text == "Jacket" || cbItemType.Text == "Pants" || cbItemType.Text == "Mask") { isUpdated = UpdateJacketOrPantsOrMask(); }
+            if (itemType == "boots") 
+            {
+                isUpdated = HelperDatabaseCall.BootsUpdate(connection,
+                    uuid,
+                    cbBrand.Text,
+                    cbSize.Text,
+                    cbMaterial.Text,
+                    dtManufacture.Value.Date.ToString());
+            }
+            else if (itemType == "helmet") 
+            {
+                isUpdated = HelperDatabaseCall.HelmetUpdate(connection, 
+                    uuid, 
+                    cbBrand.Text, 
+                    dtManufacture.Value.Date.ToString(), 
+                    cbColor.Text); 
+            }
+            else if (itemType == "jacket") 
+            {
+                isUpdate = HelperDatabaseCall.JacketUpdate(connection,
+                    uuid,
+                    cbBrand.Text,
+                    dtManufacture.Value.Date.ToString(),
+                    cbSize.Text);
+            }
+            else if (itemType == "mask")
+            {
+                isUpdate = HelperDatabaseCall.MaskUpdate(connection,
+                    uuid,
+                    cbBrand.Text,
+                    dtManufacture.Value.Date.ToString(),
+                    cbSize.Text);
+            }
+            else if (itemType == "pants")
+            {
+                isUpdate = HelperDatabaseCall.PantsUpdate(connection,
+                    uuid,
+                    cbBrand.Text,
+                    dtManufacture.Value.Date.ToString(),
+                    cbSize.Text);
+            }
 
             if (isUpdated)
             {
@@ -380,39 +186,42 @@ namespace InventoryManagmentSystem.Rental_Forms
         /// </summary>
         private void InitializeItemTypeSpecifics()
         {
-            labelTitle.Text = $"Add new {cbItemType.Text}";
-
             if (isUpdate)
             {
                 labelTitle.Text = $"Update {cbItemType.Text}";
             }
-
-            if (cbItemType.Text == "Pants" || cbItemType.Text == "Jacket")
+            else
             {
-                comboBoxSize.Enabled = true;
-                comboBoxMaterial.Enabled = false;
-                comboBoxColor.Enabled = false;
+                labelTitle.Text = $"Add new {cbItemType.Text}";
             }
 
-            else if (cbItemType.Text == "Boots")
+            string itemType = cbItemType.Text.ToLower();
+            if (itemType == "pants" || itemType == "jacket")
             {
-                comboBoxSize.Enabled = true;
-                comboBoxMaterial.Enabled = true;
-                comboBoxColor.Enabled = false;
+                cbSize.Enabled = true;
+                cbMaterial.Enabled = false;
+                cbColor.Enabled = false;
             }
 
-            else if (cbItemType.Text == "Helmet")
+            else if (itemType == "boots")
             {
-                comboBoxColor.Enabled = true;
-                comboBoxSize.Enabled = false;
-                comboBoxMaterial.Enabled = false;
+                cbSize.Enabled = true;
+                cbMaterial.Enabled = true;
+                cbColor.Enabled = false;
             }
 
-            else if (cbItemType.Text == "Mask")
+            else if (itemType == "helmet")
             {
-                comboBoxSize.Enabled = true;
-                comboBoxMaterial.Enabled = false;
-                comboBoxColor.Enabled = false;
+                cbColor.Enabled = true;
+                cbSize.Enabled = false;
+                cbMaterial.Enabled = false;
+            }
+
+            else if (itemType == "mask")
+            {
+                cbSize.Enabled = true;
+                cbMaterial.Enabled = false;
+                cbColor.Enabled = false;
             }
         }
 
@@ -426,23 +235,23 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (cbItemType.SelectedIndex == -1)
             {
                 labelTitle.Text = "Please select an item type";
-                txtBoxSerialNumber.Enabled = false;
+                tbSerialNumber.Enabled = false;
                 dtManufacture.Enabled = false;
-                comboBoxBrand.Enabled = false;
+                cbBrand.Enabled = false;
                 btnAddBrand.Enabled = false;
-                comboBoxMaterial.Enabled = false;
-                comboBoxSize.Enabled = false;
-                comboBoxCondition.Enabled = false;
-                comboBoxColor.Enabled = false;
+                cbMaterial.Enabled = false;
+                cbSize.Enabled = false;
+                cbCondition.Enabled = false;
+                cbColor.Enabled = false;
                 return;
             }
             if (lastItemTypeIndex == -1)
             {
-                txtBoxSerialNumber.Enabled = true;
+                tbSerialNumber.Enabled = true;
                 dtManufacture.Enabled = true;
-                comboBoxBrand.Enabled = true;
+                cbBrand.Enabled = true;
                 btnAddBrand.Enabled = true;
-                comboBoxCondition.Enabled = true;
+                cbCondition.Enabled = true;
             }
             lastItemTypeIndex = cbItemType.SelectedIndex;
             InitializeItemTypeSpecifics();
@@ -453,68 +262,22 @@ namespace InventoryManagmentSystem.Rental_Forms
         /// </summary>
         public void Clear()
         {
-            txtBoxSerialNumber.Clear();
-            comboBoxBrand.SelectedIndex = -1;
-            comboBoxCondition.SelectedIndex = -1;
-            comboBoxMaterial.SelectedIndex = -1;
-            comboBoxSize.SelectedIndex = -1;
-            comboBoxColor.SelectedIndex = -1;
+            tbSerialNumber.Clear();
+            cbBrand.SelectedIndex = -1;
+            cbCondition.SelectedIndex = -1;
+            cbMaterial.SelectedIndex = -1;
+            cbSize.SelectedIndex = -1;
+            cbColor.SelectedIndex = -1;
             dtManufacture.Value = DateTime.Today;
         }
 
-        /// <summary>
-        /// Add existing brands to brand selection.
-        /// </summary>
-        private void LoadBrands()
+        private void GetTableName()
         {
-            string query = $"SELECT Brand FROM tbBrands WHERE ItemType='{cbItemType.Text}'";
-            try
-            {
-                command = new SqlCommand(query, connection);
-                connection.Open();
-                SqlDataReader dataReader = command.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    comboBoxBrand.Items.Add(dataReader[0]);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
-        }
-
-        private void loadItemTypes()
-        {
-            string query = HelperQuery.ItemTypeLoad();
-            try
-            {
-                command = new SqlCommand(query, connection);
-                connection.Open();
-                SqlDataReader dataReader = command.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    cbItemType.Items.Add(dataReader[0]);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"{ex.Message}");
-            }
-            connection.Close();
-        }
-
-        private string GetTableName()
-        {
-            string table = "";
-            if (cbItemType.Text == "Boots") { table = "tbBoots"; }
-            else if (cbItemType.Text == "Helmet") { table = "tbHelmets"; }
-            else if (cbItemType.Text == "Jacket") { table = "tbJackets"; }
-            else if (cbItemType.Text == "Mask") { table = "tbMasks"; }
-            else if (cbItemType.Text == "Pants") { table = "tbPants"; }
-
-            return table;
+            if (cbItemType.Text.ToLower() == "boots") { tableName = "tbBoots"; itemType = "boots"; }
+            else if (cbItemType.Text.ToLower() == "helmet") { tableName = "tbHelmets"; itemType = "helmet"; }
+            else if (cbItemType.Text.ToLower() == "jacket") { tableName = "tbJackets"; itemType = "jacket"; }
+            else if (cbItemType.Text.ToLower() == "mask") { tableName = "tbMasks"; itemType = "mask"; }
+            else if (cbItemType.Text.ToLower() == "pants") { tableName = "tbPants"; itemType = "pants"; }
         }
 
         /// <summary>
@@ -524,18 +287,18 @@ namespace InventoryManagmentSystem.Rental_Forms
         private bool SaveSafetyChecks()
         {
             // Regardless of item type, all items must have these fields filled.
-            if (string.IsNullOrEmpty(txtBoxSerialNumber.Text) ||
-                string.IsNullOrEmpty(comboBoxBrand.Text) ||
-                string.IsNullOrEmpty(comboBoxCondition.Text) ||
+            if (string.IsNullOrEmpty(tbSerialNumber.Text) ||
+                string.IsNullOrEmpty(cbBrand.Text) ||
+                string.IsNullOrEmpty(cbCondition.Text) ||
                 string.IsNullOrEmpty(dtManufacture.Text))
             {
                 MessageBox.Show("Please fill the required fields");
                 return false;
             }
             // These fields vary depending on item type.
-            if ((comboBoxSize.Enabled && string.IsNullOrEmpty(comboBoxSize.Text)) ||
-                (comboBoxColor.Enabled && string.IsNullOrEmpty(comboBoxColor.Text)) ||
-                (comboBoxMaterial.Enabled && string.IsNullOrEmpty(comboBoxMaterial.Text)))
+            if ((cbSize.Enabled && string.IsNullOrEmpty(cbSize.Text)) ||
+                (cbColor.Enabled && string.IsNullOrEmpty(cbColor.Text)) ||
+                (cbMaterial.Enabled && string.IsNullOrEmpty(cbMaterial.Text)))
             {
                 MessageBox.Show("Please fill the required fields");
                 return false;
@@ -544,59 +307,42 @@ namespace InventoryManagmentSystem.Rental_Forms
             return true;
         }
 
-        private Guid GetUuidFromItem(string table)
+        private void LoadSizes()
         {
-            Guid uuid = Guid.Empty;
-            string query = $"SELECT ItemId FROM {table} WHERE SerialNumber = @SerialNumber";
-            try
+            string itemType = cbItemType.Text.ToLower();
+            cbSize.Items.Clear();
+            if (itemType == "boots")
             {
-                command = new SqlCommand(query, connection);
-                connection.Open();
-                command.Parameters.AddWithValue("@SerialNumber", txtBoxSerialNumber.Text);
-                uuid = (Guid)command.ExecuteScalar();
+                cbSize.Items.Add("5");
+                cbSize.Items.Add("5.5");
+                cbSize.Items.Add("6");
+                cbSize.Items.Add("6.5");
+                cbSize.Items.Add("7");
+                cbSize.Items.Add("7.5");
+                cbSize.Items.Add("8");
+                cbSize.Items.Add("8.5");
+                cbSize.Items.Add("9");
+                cbSize.Items.Add("10");
+                cbSize.Items.Add("10.5");
+                cbSize.Items.Add("11");
+                cbSize.Items.Add("11.5");
+                cbSize.Items.Add("12");
+                cbSize.Items.Add("12.5");
+                cbSize.Items.Add("13");
+                cbSize.Items.Add("13.5");
+                cbSize.Items.Add("14");
+                cbSize.Items.Add("14.5");
+                cbSize.Items.Add("15");
+                cbSize.Items.Add("15.5");
+                cbSize.Items.Add("16");
             }
-            catch (Exception ex)
+            else if (itemType == "pants" || itemType == "jacket" || itemType == "mask")
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                cbSize.Items.Add("S");
+                cbSize.Items.Add("M");
+                cbSize.Items.Add("L");
+                cbSize.Items.Add("XL");
             }
-            connection.Close();
-            return uuid;
-        }
-
-        /// <summary>
-        /// Check if an item already exists on one of the item types tables.
-        /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="SerialNumber"></param>
-        /// <returns></returns>
-        private bool CheckIfExists(string tableName)
-        {
-            string SerialNumber = txtBoxSerialNumber.Text;
-            bool Exists = false;
-
-            try
-            {
-                connection.Open();
-                command = new SqlCommand($"SELECT Count (*) FROM {tableName} WHERE SerialNumber = @SerialNumber", connection);
-                command.Parameters.AddWithValue("@SerialNumber", SerialNumber);
-                object result = command.ExecuteScalar();
-                if (result != null)
-                {
-                    int r = (int)result;
-                    Exists = r > 0 ? true : false;
-                }
-                else
-                {
-                    // Null is an error!! don't add plz
-                    Exists = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
-            return Exists;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -626,8 +372,8 @@ namespace InventoryManagmentSystem.Rental_Forms
             form.cbItemType.Text = cbItemType.Text;
             form.close = true;
             form.ShowDialog();
-            LoadBrands();
-            comboBoxBrand.SelectedIndex = comboBoxBrand.Items.Count - 1;
+            HelperDatabaseCall.BrandsFillComboBox(connection, cbItemType.Text.ToLower(), cbBrand);
+            cbBrand.SelectedIndex = cbBrand.Items.Count - 1;
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
@@ -637,44 +383,9 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void cbItemType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadBrands();
+            HelperDatabaseCall.BrandsFillComboBox(connection, cbItemType.Text.ToLower(), cbBrand);
             LoadSizes();
             ManageFieldsAvailability();
-        }
-
-        private void LoadSizes()
-        {
-            if (cbItemType.Text == "boots")
-            {
-                comboBoxSize.Items.Clear();
-                comboBoxSize.Items.Add("5");
-                comboBoxSize.Items.Add("5.5");
-                comboBoxSize.Items.Add("6");
-                comboBoxSize.Items.Add("6.5");
-                comboBoxSize.Items.Add("7");
-                comboBoxSize.Items.Add("7.5");
-                comboBoxSize.Items.Add("8");
-                comboBoxSize.Items.Add("8.5");
-                comboBoxSize.Items.Add("9");
-                comboBoxSize.Items.Add("10");
-                comboBoxSize.Items.Add("10.5");
-                comboBoxSize.Items.Add("11");
-                comboBoxSize.Items.Add("11.5");
-                comboBoxSize.Items.Add("12");
-                comboBoxSize.Items.Add("12.5");
-                comboBoxSize.Items.Add("13");
-                comboBoxSize.Items.Add("13.5");
-                comboBoxSize.Items.Add("14");
-                comboBoxSize.Items.Add("14.5");
-                comboBoxSize.Items.Add("15");
-                comboBoxSize.Items.Add("15.5");
-                comboBoxSize.Items.Add("16");
-            }
-            else
-            {
-                comboBoxSize.Items.Clear();
-            }
-
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)

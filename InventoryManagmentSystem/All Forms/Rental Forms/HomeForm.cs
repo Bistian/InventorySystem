@@ -25,10 +25,6 @@ namespace InventoryManagmentSystem
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         //Creating command
         SqlConnection connection = new SqlConnection(connectionString);
-        //Creating command
-        SqlCommand command = new SqlCommand();
-        //Creatinng Reader
-        SqlDataReader dr;
 
         //Used for counting rentals
         int total = 0;
@@ -44,7 +40,7 @@ namespace InventoryManagmentSystem
             {
                 connection.Open();
                 string query = HelperQuery.RentItems(itemType);
-                command = new SqlCommand(query, connection);
+                SqlCommand command = new SqlCommand(query, connection);
                 object result = command.ExecuteScalar();
                 if(result != null && result != DBNull.Value)
                 {
@@ -67,7 +63,7 @@ namespace InventoryManagmentSystem
             {
                 connection.Open();
                 string query = HelperQuery.StockCount(itemType);
-                command = new SqlCommand(query, connection);
+                SqlCommand command = new SqlCommand(query, connection);
                 object result = command.ExecuteScalar();
                 if (result != null && result != DBNull.Value)
                 {
@@ -170,7 +166,7 @@ namespace InventoryManagmentSystem
             try
             {
                 connection.Open();
-                command = new SqlCommand(query, connection);
+                SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
                 int i = 0;
                 while (reader.Read())
@@ -293,7 +289,7 @@ namespace InventoryManagmentSystem
             try
             {
                 connection.Open();
-                command = new SqlCommand(query, connection);
+                SqlCommand command = new SqlCommand(query, connection);
 
                 // If there are no matches with that name, return.
                 if ((int)command.ExecuteScalar() > 0)

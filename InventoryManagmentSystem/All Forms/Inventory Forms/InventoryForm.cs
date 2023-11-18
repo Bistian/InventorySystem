@@ -30,31 +30,32 @@ namespace InventoryManagmentSystem
 
         private string QueryItems(string searchTerm = "")
         {
-            if(cbItemType.Text == "Boots") { return QueryBoots(searchTerm); }
-            if(cbItemType.Text == "Helmet") { return QueryHelmets(searchTerm); }
-            if(cbItemType.Text == "Jacket" || cbItemType.Text == "Pants" || cbItemType.Text == "Mask") { return QueryStandardItems(searchTerm); }
-            return "";
+            if(cbItemType.Text.Length == 0) { return ""; }
+            return HelperQuery.ItemSelect(cbItemType.Text, searchTerm);
         }
 
-        private void SetItemType(string ItemType)
+        private void SetItemType(string itemType)
         {
-            if (ItemType == "Jacket")
+            if(itemType == null) { return; }
+            if(cbItemType.Items.Count == 0)  { return; }
+
+            if (itemType.ToLower() == "jacket")
             {
                 cbItemType.SelectedIndex = 0;
             }
-            else if (ItemType == "Pants")
+            else if (itemType.ToLower() == "pants")
             {
                 cbItemType.SelectedIndex = 1;
             }
-            else if (ItemType == "Boots")
+            else if (itemType.ToLower() == "boots")
             {
                 cbItemType.SelectedIndex = 2;
             }
-            else if (ItemType == "Helmet")
+            else if (itemType.ToLower() == "helmet")
             {
                 cbItemType.SelectedIndex = 3;
             }
-            else if (ItemType == "Mask")
+            else if (itemType.ToLower() == "mask")
             {
                 cbItemType.SelectedIndex = 4;
             }
@@ -64,12 +65,12 @@ namespace InventoryManagmentSystem
             }
         }
 
-            /// <summary>
-            /// Add retired condition to item queries.
-            /// </summary>
-            /// <param name="initialQuery">Initial part of the query.</param>
-            /// <returns>Complete query</returns>
-            private string QueryRetiredCondition(string initialQuery)
+        /// <summary>
+        /// Add retired condition to item queries.
+        /// </summary>
+        /// <param name="initialQuery">Initial part of the query.</param>
+        /// <returns>Complete query</returns>
+        private string QueryRetiredCondition(string initialQuery)
         {
             string query = "";
             if (checkRetired.Checked)
@@ -144,54 +145,77 @@ namespace InventoryManagmentSystem
         /// </summary>
         public void LoadInventory()
         {
-            dataGridInv.Columns["ManufactureDate"].DefaultCellStyle.Format = "d";
-            if (cbItemType.SelectedIndex != -1)
+            if (cbItemType.SelectedIndex == -1) { return; }
+            dataGridInv.Columns["column_acquisition_date"].DefaultCellStyle.Format = "d";
+            dataGridInv.Columns["column_manufacture_date"].DefaultCellStyle.Format = "d";
+            try
             {
                 int i = 0;
                 dataGridInv.Rows.Clear();
-                SqlCommand command = new SqlCommand(QueryItems(), connection);
                 connection.Open();
-                SqlDataReader dr = command.ExecuteReader();
-                
+                SqlCommand command = new SqlCommand(QueryItems(), connection);
+                SqlDataReader reader = command.ExecuteReader();
                 //Check which item was selected
-                if (cbItemType.Text == "Helmet")
+                if (cbItemType.Text == "helmet")
                 {
-                    while (dr.Read())
+                    while (reader.Read())
                     {
                         i++;
-                        dataGridInv.Rows.Add(i, 
-                            dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), 
-                            dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), 
-                            dr[6].ToString(),"N/A","N/A", dr[7].ToString()
+                        dataGridInv.Rows.Add(i,
+                            reader.GetOrdinal("Id"),
+                            reader.GetOrdinal("Brand"),
+                            reader.GetOrdinal("SerialNumer"),
+                            reader.GetOrdinal("Condition"),
+                            reader.GetOrdinal("AcquisitionDate"),
+                            reader.GetOrdinal("ManufactureDate"),
+                            reader.GetOrdinal("Location"),
+                            "Size", "Material",
+                            reader.GetOrdinal("Color")
                         );
                     }
                 }
-                else if(cbItemType.Text == "Boots")
+                else if (cbItemType.Text == "boots")
                 {
-                    while (dr.Read())
+                    while (reader.Read())
                     {
                         i++;
-                        dataGridInv.Rows.Add(i, 
-                            dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), 
-                            dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), 
-                            dr[6].ToString(), dr[7].ToString(), dr[8].ToString()
+                        dataGridInv.Rows.Add(i,
+                            reader.GetOrdinal("Id"),
+                            reader.GetOrdinal("Brand"),
+                            reader.GetOrdinal("SerialNumer"),
+                            reader.GetOrdinal("Condition"),
+                            reader.GetOrdinal("AcquisitionDate"),
+                            reader.GetOrdinal("ManufactureDate"),
+                            reader.GetOrdinal("Location"),
+                            reader.GetOrdinal("Size"),
+                            reader.GetOrdinal("Material"),
+                            "Color"
                         );
                     }
                 }
-                else if (cbItemType.Text == "Jacket" || cbItemType.Text == "Pants" || cbItemType.Text == "Mask")
+                else if (cbItemType.Text == "jacket" || cbItemType.Text == "pants" || cbItemType.Text == "mask")
                 {
-                    while (dr.Read())
+                    while (reader.Read())
                     {
                         i++;
-                        dataGridInv.Rows.Add(i, 
-                            dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), 
-                            dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), 
-                            dr[6].ToString(), dr[7].ToString());
+                        dataGridInv.Rows.Add(i,
+                            reader.GetOrdinal("Id"),
+                            reader.GetOrdinal("Brand"),
+                            reader.GetOrdinal("SerialNumer"),
+                            reader.GetOrdinal("Condition"),
+                            reader.GetOrdinal("AcquisitionDate"),
+                            reader.GetOrdinal("ManufactureDate"),
+                            reader.GetOrdinal("Location"),
+                            reader.GetOrdinal("Size"),
+                            "Material", "Color"
+                        );
                     }
                 }
-                dr.Close();
-                connection.Close();
+                reader.Close();
             }
+            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            
         }
 
         private void comboBoxItem_SelectedIndexChanged(object sender, EventArgs e)
@@ -204,23 +228,23 @@ namespace InventoryManagmentSystem
 
         private void ChangeVisibleColumns()
         {
-            if (cbItemType.Text == "Boots")
+            if (cbItemType.Text == "boots")
             {
-                dataGridInv.Columns["Color"].Visible = false;
-                dataGridInv.Columns["Size"].Visible = true;
-                dataGridInv.Columns["Material"].Visible = true;
+                dataGridInv.Columns["column_size"].Visible = true;
+                dataGridInv.Columns["column_material"].Visible = true;
+                dataGridInv.Columns["column_color"].Visible = false;
             }
-            else if (cbItemType.Text == "Helmet")
+            else if (cbItemType.Text == "helmet")
             {
-                dataGridInv.Columns["Color"].Visible = true;
-                dataGridInv.Columns["Size"].Visible = false;
-                dataGridInv.Columns["Material"].Visible = false;
+                dataGridInv.Columns["column_size"].Visible = false;
+                dataGridInv.Columns["column_material"].Visible = false;
+                dataGridInv.Columns["column_color"].Visible = true;
             }
-            else if (cbItemType.Text == "Jacket" || cbItemType.Text == "Pants" || cbItemType.Text == "Mask")
+            else if (cbItemType.Text == "jacket" || cbItemType.Text == "pants" || cbItemType.Text == "mask")
             {
-                dataGridInv.Columns["Color"].Visible = false;
-                dataGridInv.Columns["Size"].Visible = true;
-                dataGridInv.Columns["Material"].Visible = false;
+                dataGridInv.Columns["column_size"].Visible = true;
+                dataGridInv.Columns["column_material"].Visible = false;
+                dataGridInv.Columns["column_color"].Visible = false;
             }
         }
 
@@ -338,12 +362,12 @@ namespace InventoryManagmentSystem
         {
             NewItemForm itemForm = new NewItemForm(cbItemType.Text, true);
             itemForm.cbItemType.Text = "Boots";
-            itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
-            itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
-            itemForm.comboBoxCondition.Text =                 GetCellValueAsString(e, "Condition");
+            itemForm.tbSerialNumber.Text =              GetCellValueAsString(e, "Serial");
+            itemForm.cbBrand.Text =                   GetCellValueAsString(e, "Brand");
+            itemForm.cbCondition.Text =                 GetCellValueAsString(e, "Condition");
             itemForm.dtManufacture.Text =   GetCellValueAsString(e, "ManufactureDate");
-            itemForm.comboBoxSize.Text =                    GetCellValueAsString(e, "Size");
-            itemForm.comboBoxMaterial.Text =                GetCellValueAsString(e, "Material");
+            itemForm.cbSize.Text =                    GetCellValueAsString(e, "Size");
+            itemForm.cbMaterial.Text =                GetCellValueAsString(e, "Material");
             itemForm.SaveButton.Enabled = true;
             itemForm.ShowDialog();
             itemForm.Close();
@@ -353,12 +377,12 @@ namespace InventoryManagmentSystem
         {
             NewItemForm itemForm = new NewItemForm(cbItemType.Text, true);
             itemForm.cbItemType.Text = "Helmet";
-            itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
-            itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
-            itemForm.comboBoxCondition.Text =                 GetCellValueAsString(e, "Condition");
+            itemForm.tbSerialNumber.Text =              GetCellValueAsString(e, "Serial");
+            itemForm.cbBrand.Text =                   GetCellValueAsString(e, "Brand");
+            itemForm.cbCondition.Text =                 GetCellValueAsString(e, "Condition");
             itemForm.dtManufacture.Text =   GetCellValueAsString(e, "ManufactureDate");
-            itemForm.comboBoxSize.Text =                    GetCellValueAsString(e, "Size");
-            itemForm.comboBoxColor.Text =                   GetCellValueAsString(e, "Color");
+            itemForm.cbSize.Text =                    GetCellValueAsString(e, "Size");
+            itemForm.cbColor.Text =                   GetCellValueAsString(e, "Color");
             itemForm.SaveButton.Enabled = true;
             itemForm.ShowDialog();
             itemForm.Close();
@@ -382,11 +406,11 @@ namespace InventoryManagmentSystem
                 itemForm.cbItemType.Text = "Pants";
             }
 
-            itemForm.txtBoxSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
-            itemForm.comboBoxBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
-            itemForm.comboBoxCondition.Text = dataGridInv.Rows[e.RowIndex].Cells["Condition"].Value.ToString();
+            itemForm.tbSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+            itemForm.cbBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["Brand"].Value.ToString();
+            itemForm.cbCondition.Text = dataGridInv.Rows[e.RowIndex].Cells["Condition"].Value.ToString();
             itemForm.dtManufacture.Text = dataGridInv.Rows[e.RowIndex].Cells["ManufactureDate"].Value.ToString();
-            itemForm.comboBoxSize.Text = dataGridInv.Rows[e.RowIndex].Cells["Size"].Value.ToString();
+            itemForm.cbSize.Text = dataGridInv.Rows[e.RowIndex].Cells["Size"].Value.ToString();
             itemForm.SaveButton.Enabled = true;
             itemForm.ShowDialog();
             itemForm.Close();

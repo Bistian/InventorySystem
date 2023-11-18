@@ -38,17 +38,17 @@
             this.labelManufactureDate = new System.Windows.Forms.Label();
             this.dtManufacture = new System.Windows.Forms.DateTimePicker();
             this.labelCondition = new System.Windows.Forms.Label();
-            this.comboBoxCondition = new System.Windows.Forms.ComboBox();
+            this.cbCondition = new System.Windows.Forms.ComboBox();
             this.labelMaterial = new System.Windows.Forms.Label();
-            this.comboBoxMaterial = new System.Windows.Forms.ComboBox();
+            this.cbMaterial = new System.Windows.Forms.ComboBox();
             this.lableBrand = new System.Windows.Forms.Label();
-            this.comboBoxBrand = new System.Windows.Forms.ComboBox();
+            this.cbBrand = new System.Windows.Forms.ComboBox();
             this.labelSize = new System.Windows.Forms.Label();
-            this.comboBoxSize = new System.Windows.Forms.ComboBox();
-            this.txtBoxSerialNumber = new System.Windows.Forms.TextBox();
+            this.cbSize = new System.Windows.Forms.ComboBox();
+            this.tbSerialNumber = new System.Windows.Forms.TextBox();
             this.lableSerialNumber = new System.Windows.Forms.Label();
             this.labelColor = new System.Windows.Forms.Label();
-            this.comboBoxColor = new System.Windows.Forms.ComboBox();
+            this.cbColor = new System.Windows.Forms.ComboBox();
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.labelItemType = new System.Windows.Forms.Label();
             this.labelAcquisition = new System.Windows.Forms.Label();
@@ -122,91 +122,91 @@
             resources.ApplyResources(this.labelCondition, "labelCondition");
             this.labelCondition.Name = "labelCondition";
             // 
-            // comboBoxCondition
+            // cbCondition
             // 
-            this.comboBoxCondition.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxCondition.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBoxCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.comboBoxCondition, "comboBoxCondition");
-            this.comboBoxCondition.FormattingEnabled = true;
-            this.comboBoxCondition.Items.AddRange(new object[] {
-            resources.GetString("comboBoxCondition.Items"),
-            resources.GetString("comboBoxCondition.Items1"),
-            resources.GetString("comboBoxCondition.Items2")});
-            this.comboBoxCondition.Name = "comboBoxCondition";
+            this.cbCondition.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbCondition.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cbCondition, "cbCondition");
+            this.cbCondition.FormattingEnabled = true;
+            this.cbCondition.Items.AddRange(new object[] {
+            resources.GetString("cbCondition.Items"),
+            resources.GetString("cbCondition.Items1"),
+            resources.GetString("cbCondition.Items2")});
+            this.cbCondition.Name = "cbCondition";
             // 
             // labelMaterial
             // 
             resources.ApplyResources(this.labelMaterial, "labelMaterial");
             this.labelMaterial.Name = "labelMaterial";
             // 
-            // comboBoxMaterial
+            // cbMaterial
             // 
-            this.comboBoxMaterial.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxMaterial.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBoxMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.comboBoxMaterial, "comboBoxMaterial");
-            this.comboBoxMaterial.FormattingEnabled = true;
-            this.comboBoxMaterial.Items.AddRange(new object[] {
-            resources.GetString("comboBoxMaterial.Items"),
-            resources.GetString("comboBoxMaterial.Items1")});
-            this.comboBoxMaterial.Name = "comboBoxMaterial";
+            this.cbMaterial.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbMaterial.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cbMaterial, "cbMaterial");
+            this.cbMaterial.FormattingEnabled = true;
+            this.cbMaterial.Items.AddRange(new object[] {
+            resources.GetString("cbMaterial.Items"),
+            resources.GetString("cbMaterial.Items1")});
+            this.cbMaterial.Name = "cbMaterial";
             // 
             // lableBrand
             // 
             resources.ApplyResources(this.lableBrand, "lableBrand");
             this.lableBrand.Name = "lableBrand";
             // 
-            // comboBoxBrand
+            // cbBrand
             // 
-            this.comboBoxBrand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxBrand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBoxBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.comboBoxBrand, "comboBoxBrand");
-            this.comboBoxBrand.FormattingEnabled = true;
-            this.comboBoxBrand.Name = "comboBoxBrand";
+            this.cbBrand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbBrand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cbBrand, "cbBrand");
+            this.cbBrand.FormattingEnabled = true;
+            this.cbBrand.Name = "cbBrand";
             // 
             // labelSize
             // 
             resources.ApplyResources(this.labelSize, "labelSize");
             this.labelSize.Name = "labelSize";
             // 
-            // comboBoxSize
+            // cbSize
             // 
-            this.comboBoxSize.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxSize.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            resources.ApplyResources(this.comboBoxSize, "comboBoxSize");
-            this.comboBoxSize.FormattingEnabled = true;
-            this.comboBoxSize.Items.AddRange(new object[] {
-            resources.GetString("comboBoxSize.Items"),
-            resources.GetString("comboBoxSize.Items1"),
-            resources.GetString("comboBoxSize.Items2"),
-            resources.GetString("comboBoxSize.Items3"),
-            resources.GetString("comboBoxSize.Items4"),
-            resources.GetString("comboBoxSize.Items5"),
-            resources.GetString("comboBoxSize.Items6"),
-            resources.GetString("comboBoxSize.Items7"),
-            resources.GetString("comboBoxSize.Items8"),
-            resources.GetString("comboBoxSize.Items9"),
-            resources.GetString("comboBoxSize.Items10"),
-            resources.GetString("comboBoxSize.Items11"),
-            resources.GetString("comboBoxSize.Items12"),
-            resources.GetString("comboBoxSize.Items13"),
-            resources.GetString("comboBoxSize.Items14"),
-            resources.GetString("comboBoxSize.Items15"),
-            resources.GetString("comboBoxSize.Items16"),
-            resources.GetString("comboBoxSize.Items17"),
-            resources.GetString("comboBoxSize.Items18"),
-            resources.GetString("comboBoxSize.Items19"),
-            resources.GetString("comboBoxSize.Items20"),
-            resources.GetString("comboBoxSize.Items21"),
-            resources.GetString("comboBoxSize.Items22")});
-            this.comboBoxSize.Name = "comboBoxSize";
+            this.cbSize.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbSize.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            resources.ApplyResources(this.cbSize, "cbSize");
+            this.cbSize.FormattingEnabled = true;
+            this.cbSize.Items.AddRange(new object[] {
+            resources.GetString("cbSize.Items"),
+            resources.GetString("cbSize.Items1"),
+            resources.GetString("cbSize.Items2"),
+            resources.GetString("cbSize.Items3"),
+            resources.GetString("cbSize.Items4"),
+            resources.GetString("cbSize.Items5"),
+            resources.GetString("cbSize.Items6"),
+            resources.GetString("cbSize.Items7"),
+            resources.GetString("cbSize.Items8"),
+            resources.GetString("cbSize.Items9"),
+            resources.GetString("cbSize.Items10"),
+            resources.GetString("cbSize.Items11"),
+            resources.GetString("cbSize.Items12"),
+            resources.GetString("cbSize.Items13"),
+            resources.GetString("cbSize.Items14"),
+            resources.GetString("cbSize.Items15"),
+            resources.GetString("cbSize.Items16"),
+            resources.GetString("cbSize.Items17"),
+            resources.GetString("cbSize.Items18"),
+            resources.GetString("cbSize.Items19"),
+            resources.GetString("cbSize.Items20"),
+            resources.GetString("cbSize.Items21"),
+            resources.GetString("cbSize.Items22")});
+            this.cbSize.Name = "cbSize";
             // 
-            // txtBoxSerialNumber
+            // tbSerialNumber
             // 
-            resources.ApplyResources(this.txtBoxSerialNumber, "txtBoxSerialNumber");
-            this.txtBoxSerialNumber.Name = "txtBoxSerialNumber";
+            resources.ApplyResources(this.tbSerialNumber, "tbSerialNumber");
+            this.tbSerialNumber.Name = "tbSerialNumber";
             // 
             // lableSerialNumber
             // 
@@ -218,17 +218,17 @@
             resources.ApplyResources(this.labelColor, "labelColor");
             this.labelColor.Name = "labelColor";
             // 
-            // comboBoxColor
+            // cbColor
             // 
-            this.comboBoxColor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxColor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBoxColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.comboBoxColor, "comboBoxColor");
-            this.comboBoxColor.FormattingEnabled = true;
-            this.comboBoxColor.Items.AddRange(new object[] {
-            resources.GetString("comboBoxColor.Items"),
-            resources.GetString("comboBoxColor.Items1")});
-            this.comboBoxColor.Name = "comboBoxColor";
+            this.cbColor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbColor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cbColor, "cbColor");
+            this.cbColor.FormattingEnabled = true;
+            this.cbColor.Items.AddRange(new object[] {
+            resources.GetString("cbColor.Items"),
+            resources.GetString("cbColor.Items1")});
+            this.cbColor.Name = "cbColor";
             // 
             // cbItemType
             // 
@@ -266,21 +266,21 @@
             this.Controls.Add(this.labelItemType);
             this.Controls.Add(this.cbItemType);
             this.Controls.Add(this.labelColor);
-            this.Controls.Add(this.comboBoxColor);
+            this.Controls.Add(this.cbColor);
             this.Controls.Add(this.btnAddBrand);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.ClearButton);
-            this.Controls.Add(this.comboBoxMaterial);
+            this.Controls.Add(this.cbMaterial);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.lableSerialNumber);
             this.Controls.Add(this.labelManufactureDate);
-            this.Controls.Add(this.txtBoxSerialNumber);
+            this.Controls.Add(this.tbSerialNumber);
             this.Controls.Add(this.dtManufacture);
-            this.Controls.Add(this.comboBoxSize);
+            this.Controls.Add(this.cbSize);
             this.Controls.Add(this.labelCondition);
             this.Controls.Add(this.labelSize);
-            this.Controls.Add(this.comboBoxCondition);
-            this.Controls.Add(this.comboBoxBrand);
+            this.Controls.Add(this.cbCondition);
+            this.Controls.Add(this.cbBrand);
             this.Controls.Add(this.labelMaterial);
             this.Controls.Add(this.lableBrand);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -304,17 +304,17 @@
         private System.Windows.Forms.Label labelManufactureDate;
         public System.Windows.Forms.DateTimePicker dtManufacture;
         private System.Windows.Forms.Label labelCondition;
-        public System.Windows.Forms.ComboBox comboBoxCondition;
+        public System.Windows.Forms.ComboBox cbCondition;
         private System.Windows.Forms.Label labelMaterial;
-        public System.Windows.Forms.ComboBox comboBoxMaterial;
+        public System.Windows.Forms.ComboBox cbMaterial;
         private System.Windows.Forms.Label lableBrand;
-        public System.Windows.Forms.ComboBox comboBoxBrand;
+        public System.Windows.Forms.ComboBox cbBrand;
         private System.Windows.Forms.Label labelSize;
-        public System.Windows.Forms.ComboBox comboBoxSize;
-        public System.Windows.Forms.TextBox txtBoxSerialNumber;
+        public System.Windows.Forms.ComboBox cbSize;
+        public System.Windows.Forms.TextBox tbSerialNumber;
         private System.Windows.Forms.Label lableSerialNumber;
         private System.Windows.Forms.Label labelColor;
-        public System.Windows.Forms.ComboBox comboBoxColor;
+        public System.Windows.Forms.ComboBox cbColor;
         public System.Windows.Forms.ComboBox cbItemType;
         private System.Windows.Forms.Label labelItemType;
         private CustomButton ButtonClose;

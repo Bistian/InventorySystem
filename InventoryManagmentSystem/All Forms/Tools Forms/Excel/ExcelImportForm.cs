@@ -13,36 +13,24 @@ using Microsoft.Office.Interop.Excel;
 
 namespace InventoryManagmentSystem
 {
-    /*TODO: (Manual) Delete columns if changing selected table.*/
     public partial class ExcelImportForm : Form
     {
-        #region SQL_Variables
-        // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        //Creating command
         SqlConnection connection = new SqlConnection(connectionString);
-        //Creating command
-        SqlCommand command = new SqlCommand();
-        //Creatinng Reader
-        SqlDataReader dataReader;
-        #endregion SQL_Variables
 
-        #region Excel_Variables
         Excel.Application excelApp = null;
         Excel.Workbook workbook = null;
         Excel.Worksheet worksheet = null;
-        #endregion Excel_Variables
-
-        string tableColumnSerial = "";
-
 
         List<System.Windows.Forms.TextBox> listTextBox = new List<System.Windows.Forms.TextBox>();
         List<string> listTableColumns = new List<string>();
         List<string> listExcelColumns = new List<string>();
-        string excelFileName = "";
+
         int headerRow = -1;
         int selectedWorksheet = 1;
         int rows = 0;
+        string tableColumnSerial = "";
+        string excelFileName = "";
 
         public ExcelImportForm()
         {
@@ -56,34 +44,10 @@ namespace InventoryManagmentSystem
             CloseBackgroundExcel();
             connection.Close();
         }
+
         private void ExcelImport_Load(object sender, EventArgs e)
         {
 
-            // ========== Manual Import Area ==========
-            // Keep it disabled until a proper Excel file has been selected.
-            comboBoxTbSelect.Enabled = false;
-            comboBoxTbSelect.Items.Add("Pants");
-            comboBoxTbSelect.Items.Add("Jackets");
-        }
-
-        /// <summary>
-        /// Import Excel file manually.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnExcel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// Import Excel file using standard Excel documents.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnStandard_Click(object sender, EventArgs e)
-        {
-            ImportExcel();
         }
 
         /// <summary>
@@ -102,47 +66,41 @@ namespace InventoryManagmentSystem
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+
+            if (openFileDialog.ShowDialog() == DialogResult.Cancel)
             {
-                excelFileName = openFileDialog.FileName;
-                OpenExcelFile(excelFileName);
-                SubscribeToPromptForm();
-
-                // If user cancels the dialog for import, this IF handles it without errors.
-                if(worksheet == null) 
-                {
-                    ClearExcelVar();
-                    return; 
-                }
-
-                // For using the import with a standar Excel document, header needs to be 2.
-                headerRow = 2;
-                FindExcelColumnNames();
-                string tableName = FindTableName();
-
-                // Could not find a table matching the item type.
-                if(tableName == "")
-                {
-                    ClearExcelVar();
-                    return;
-                }
-                FindNamesOfColumnsOnTable(tableName);
-                UpdateDatabaseStandard(tableName);
+                return;
             }
-        }
 
-        /// <summary>
-        /// Starts a new Excel app. This is needed to open an Excel file.
-        /// </summary>
-        /// <param name="excelFileName"></param>
-        private void OpenExcelFile(string excelFileName)
-        {
-            // Create a new Excel Application object
+            excelFileName = openFileDialog.FileName;
+
+            // Create a new Excel application object and open the selected workbook.
             excelApp = new Excel.Application();
             excelApp.Visible = false;
-
-            // Open the selected workbook
             workbook = excelApp.Workbooks.Open(excelFileName);
+
+            SubscribeToPromptForm();
+
+            // If user cancels the dialog for import, this IF handles it without errors.
+            if(worksheet == null) 
+            {
+                ClearExcelVar();
+                return; 
+            }
+
+            // For using the import with a standar Excel document, header needs to be 2.
+            headerRow = 2;
+            FindExcelColumnNames();
+            string tableName = FindTableName();
+
+            // Could not find a table matching the item type.
+            if(tableName == "")
+            {
+                ClearExcelVar();
+                return;
+            }
+            FindNamesOfColumnsOnTable(tableName);
+            UpdateDatabase(tableName);
         }
 
         /// <summary>
@@ -204,6 +162,10 @@ namespace InventoryManagmentSystem
             else if (trimed == "Boots")
             {
                 table = "tbBoots";
+            } 
+            else if(trimed == "Mask")
+            {
+                table = "tbMasks";
             }
             
             return table;
@@ -216,21 +178,24 @@ namespace InventoryManagmentSystem
         private void FindNamesOfColumnsOnTable(string tableName)
         {
             // Find the names of all columns on the database table.
-            string query = "SELECT COLUMN_NAME " +
-                "FROM INFORMATION_SCHEMA.COLUMNS " +
-                "WHERE TABLE_NAME = '" + tableName + "'" +
-                "ORDER BY ORDINAL_POSITION";
-
-            command = new SqlCommand(query, connection);
-            connection.Open();
-            dataReader = command.ExecuteReader();
-            while (dataReader.Read())
+            string query = $@"
+                SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS 
+                WHERE TABLE_NAME = '{tableName}' 
+                ORDER BY ORDINAL_POSITION";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
             {
-                listTableColumns.Add(dataReader.GetString(0));
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    listTableColumns.Add(dataReader.GetString(0));
+                }
+                tableColumnSerial = listTableColumns[3];
             }
-            connection.Close();
-
-            tableColumnSerial = listTableColumns[3];
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
         }
 
         /// <summary>
@@ -262,15 +227,33 @@ namespace InventoryManagmentSystem
                     }
                 }
 
-                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, row[0].ToString());
-                string query = $"INSERT INTO {table} " +
-                    $"(ItemId, Brand, SerialNumber, Location, Condition, ManufactureDate, DueDate, Size) " +
-                    $"VALUES ('{uuid}','{row[1]}','{row[2]}','{row[7]}','{row[5]}','{row[4]}',@date,'{row[3]}')";
+                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, 
+                    row[0].ToString(), row[2].ToString(), row[5].ToString(), "Rent");
 
-                try
+                if (uuid == Guid.Empty) { return; }
+
+                DateTime today = new DateTime();
+                bool isInserted = false;
+                if(isPants)
+                {
+                    isInserted = HelperDatabaseCall.PantsInsert(connection, uuid,
+                        row[1].ToString(), today.ToString(), row[4].ToString(), row[3].ToString());
+                }
+
+                if(!isInserted)
+                {
+                    HelperDatabaseCall.ItemDelete(connection, uuid);
+                    return;
+                }
+
+               /* string query = $"INSERT INTO {table} " +
+                    $"(ItemId, Brand, SerialNumber, Location, Condition, ManufactureDate, DueDate, Size) " +
+                    $"VALUES ('{uuid}','{row[1]}','{row[2]}','{row[7]}','{row[5]}','{row[4]}',@date,'{row[3]}')";*/
+                
+                /*try
                 {
                     connection.Open();
-                    command = new SqlCommand(query, connection);
+                    SqlCommand command = new SqlCommand(query, connection);
 
                     SqlParameter parameter = new SqlParameter("@date", SqlDbType.Date);
                     if (row[6] == null)
@@ -295,7 +278,7 @@ namespace InventoryManagmentSystem
                     #endif
                     // If I cannot connect the item, I need to delete it.
                     HelperDatabaseCall.ItemDelete(connection, uuid);
-                }
+                }*/
             }
         }
 
@@ -321,7 +304,7 @@ namespace InventoryManagmentSystem
                         row[8] = "Fire-Tec";
                     }
                 }
-                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, row[0].ToString());
+                //Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, row[0].ToString());
                 string query = $"INSERT INTO {table} " +
                     "(ItemId, Brand, SerialNumber, Location, Condition, ManufactureDate, DueDate, Size, [Material]) " +
                     "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @Condition, @ManufactureDate, @DueDate, @Size, @Material)";
@@ -329,9 +312,9 @@ namespace InventoryManagmentSystem
                 try
                 {
                     connection.Open();
-                    command = new SqlCommand(query, connection);
+                    SqlCommand command = new SqlCommand(query, connection);
 
-                    command.Parameters.AddWithValue("@ItemId", uuid);
+                    //command.Parameters.AddWithValue("@ItemId", uuid);
                     command.Parameters.AddWithValue("@Brand", row[1]);
                     command.Parameters.AddWithValue("@SerialNumber", row[2]);
                     command.Parameters.AddWithValue("@Location", row[8]);
@@ -352,7 +335,7 @@ namespace InventoryManagmentSystem
                     Console.WriteLine(ex.ToString());
                     #endif
                     // If I cannot connect the item, I need to delete it.
-                    HelperDatabaseCall.ItemDelete(connection, uuid);
+                    //HelperDatabaseCall.ItemDelete(connection, uuid);
                 }
             }
         }
@@ -380,7 +363,7 @@ namespace InventoryManagmentSystem
                     }
                 }
 
-                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, row[0].ToString());
+                //Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, row[0].ToString());
                 string query = $"INSERT INTO {table} " +
                     "(ItemId, Brand, SerialNumber, Location, Condition, ManufactureDate, DueDate, Color) " +
                     "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @Condition, @ManufactureDate, @DueDate, @Color)";
@@ -388,9 +371,9 @@ namespace InventoryManagmentSystem
                 try
                 {
                     connection.Open();
-                    command = new SqlCommand(query, connection);
+                    SqlCommand command = new SqlCommand(query, connection);
 
-                    command.Parameters.AddWithValue("@ItemId", uuid);
+                    //command.Parameters.AddWithValue("@ItemId", uuid);
                     command.Parameters.AddWithValue("@Brand", row[1]);
                     command.Parameters.AddWithValue("@SerialNumber", row[2]);
                     command.Parameters.AddWithValue("@Location", row[7]);
@@ -410,7 +393,7 @@ namespace InventoryManagmentSystem
                     Console.WriteLine(ex.ToString());
                     #endif
                     // If I cannot connect the item, I need to delete it.
-                    HelperDatabaseCall.ItemDelete(connection, uuid);
+                    //HelperDatabaseCall.ItemDelete(connection, uuid);
                 }
             }
         }
@@ -419,7 +402,7 @@ namespace InventoryManagmentSystem
         /// Using standar Excel files, update the database.
         /// </summary>
         /// <param name="tableName"></param>
-        private void UpdateDatabaseStandard(string tableName)
+        private void UpdateDatabase(string tableName)
         {
 
             List<object[]> rows = new List<object[]>();
@@ -499,22 +482,28 @@ namespace InventoryManagmentSystem
         private bool CheckDuplicateSerialNumber(string serial, string table)
         {
             bool result = false;
-            string query = "SELECT CASE\r\n" +
-                "WHEN EXISTS (SELECT 1 FROM " + table + " " +
-                "WHERE " + tableColumnSerial + " = '" + serial + "')\r\n " +
-                "THEN CAST(1 AS BIT)\r\n " +
-                "ELSE CAST(0 AS BIT)\r\n" +
-                "END";
-
-            command = new SqlCommand(query, connection);
-            connection.Open();
-            dataReader = command.ExecuteReader();
-            if (dataReader.HasRows)
+            string query = $@"
+                SELECT CASE
+                WHEN EXISTS (
+                    SELECT 1 FROM {table} 
+                    WHERE {tableColumnSerial} = '{serial}')
+                THEN CAST(1 AS BIT) 
+                ELSE CAST(0 AS BIT) 
+                END";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
             {
-                dataReader.Read();
-                result = dataReader.GetBoolean(0);
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader dataReader = command.ExecuteReader();
+                if (dataReader.HasRows)
+                {
+                    dataReader.Read();
+                    result = dataReader.GetBoolean(0);
+                }
             }
-            connection.Close();
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
             return result;
         }
 
@@ -543,171 +532,6 @@ namespace InventoryManagmentSystem
                 }
             }
         }
-
-        #region Manula Import
-
-        /* Discover if column name exists and if it does, what is its index.
-         * columnName: Name of the column you want to find.
-         * headerRow: Row where the name of the column can be found.
-         * return: Index of the column, or -1 if column was not found, -2 if headerRow or selectedWorksheet are invalid.
-         */
-        private int FindColumn(string columnName)
-        {
-            if (worksheet == null || workbook == null) { return -2; }
-
-            // Find the column by name
-            Excel.Range columnRange = worksheet.Rows[headerRow].Find(columnName, Type.Missing,
-                    Excel.XlFindLookIn.xlValues, Excel.XlLookAt.xlWhole, Excel.XlSearchOrder.xlByRows,
-                    Excel.XlSearchDirection.xlNext, false, Type.Missing, Type.Missing);
-
-            if(columnRange == null)
-            {
-                Console.WriteLine($"Column '{columnName}' not found.");
-                workbook.Close();
-                return -1;
-            }
-
-            workbook.Close();
-            return columnRange.Column;
-        }
-
-        private void ExtractColumnInfo(int columnIndex)
-        {
-            if(selectedWorksheet < 0 || headerRow < 1) { return; }
-
-            // Open the selected workbook
-            workbook = excelApp.Workbooks.Open(excelFileName);
-
-            // Get the selected worksheet
-            worksheet = workbook.Sheets[selectedWorksheet];
-            worksheet.Select();
-
-            for (int row = headerRow + 1; row <= worksheet.UsedRange.Rows.Count; row++)
-            {
-                string value;
-                try
-                {
-                    var v = (worksheet.Cells[row, columnIndex] as Excel.Range).Value;
-                    if (v == null) { break; }
-
-                    value = v.ToString();
-                    Console.WriteLine($"Cell({row}, {columnIndex}): {value}");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    break;
-                }
-            }
-            workbook.Close();
-        }
-
-        // Select which table is going to be used.
-        private void comboBoxTbSelect_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FindExcelColumnNames();
-
-            switch(comboBoxTbSelect.SelectedItem.ToString())
-            {
-                case "Pants":
-                    //ImportPantsManual();
-                    UpdateDatabaseStandard("tbPants");
-                    break;
-
-                case "Jackets":
-
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        private void ImportPantsManual()
-        {
-            // Get the name of each column in the table.
-            string query = ("SELECT COLUMN_NAME " +
-                "FROM INFORMATION_SCHEMA.COLUMNS " +
-                "WHERE TABLE_NAME = 'tbPants'");
-
-            MakeColumnsManualMethod(query);
-
-        }
-
-        // Make columns from Excel and Database to be filled by the user.
-        private void MakeColumnsManualMethod(string query)
-        {
-            List<System.Windows.Forms.TextBox> list = new List<System.Windows.Forms.TextBox>();
-
-            command = new SqlCommand(query, connection);
-            connection.Open();
-            dataReader = command.ExecuteReader();
-
-            // Screen positions.
-            int boxWidth = 100;
-            int boxHeight = 20;
-            int boxSpacing = 10;
-            System.Drawing.Point databaseColumnPos = new System.Drawing.Point(150, 20);
-            System.Drawing.Point excelColumnPos = new System.Drawing.Point(150 + boxWidth + boxSpacing, 20);
-
-            // Add Label on top of database columns.
-            System.Windows.Forms.Label databse = new System.Windows.Forms.Label();
-            databse.Text = "Database";
-            databse.Location = databaseColumnPos;
-            databse.ForeColor = Color.White;
-            this.Controls.Add(databse);
-
-            // Add Label on top of Excel columns.
-            System.Windows.Forms.Label excel = new System.Windows.Forms.Label();
-            excel.Text = "Excel Table";
-            excel.Location = excelColumnPos;
-            excel.ForeColor = Color.White;
-            this.Controls.Add(excel);
-
-            rows = 0;
-            while (dataReader.Read())
-            {
-                // Calculate the location of the next Text Box.
-                databaseColumnPos = new System.Drawing.Point(
-                    databaseColumnPos.X,
-                    databaseColumnPos.Y + boxHeight);
-
-                // Calculate the location of the next combo box Fill.
-                excelColumnPos = new System.Drawing.Point(
-                    databaseColumnPos.X + boxWidth + boxSpacing,
-                    databaseColumnPos.Y);
-
-                // Make text box with info from the database.
-                System.Windows.Forms.TextBox textBox = new System.Windows.Forms.TextBox();
-                textBox.ReadOnly = true;
-                textBox.Name = "tb" + rows;
-                textBox.Text = dataReader[0].ToString();
-                textBox.Size = new Size(boxWidth, boxHeight);
-                textBox.Location = databaseColumnPos;
-                this.Controls.Add(textBox);
-
-                // Make combo box with info from Excel.
-                ComboBox comboBox = new ComboBox();
-                comboBox.Name = "cb" + rows;
-                comboBox.Location = excelColumnPos;
-                comboBox.Size = new Size(boxWidth, boxHeight);
-                for (int i = 0; i < listExcelColumns.Count; ++i)
-                {
-                    comboBox.Items.Add(listExcelColumns[i]);
-                }
-                this.Controls.Add(comboBox);
-                ++rows;
-            }
-            listTextBox.Clear();
-            listTextBox = list;
-
-            dataReader.Close();
-            connection.Close();
-        }
-
-        #endregion Manual Import
-
-        #region Helper
 
         /// <summary>
         /// Convert a value from Excel into the appropriate data type to fit the database column.
@@ -762,7 +586,6 @@ namespace InventoryManagmentSystem
             listTableColumns.Clear();
             headerRow = -1;
             selectedWorksheet = -1;
-            comboBoxTbSelect.Enabled = false;
         }
 
         /// <summary>
@@ -788,7 +611,16 @@ namespace InventoryManagmentSystem
             }
         }
 
-        #endregion Helper
+        /// <summary>
+        /// Import Excel file using standard Excel documents.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            ImportExcel();
+        }
+
 
     }
 }
