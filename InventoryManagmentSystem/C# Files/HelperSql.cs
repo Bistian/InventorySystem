@@ -22,6 +22,64 @@ namespace InventoryManagmentSystem
         }
     }
 
+    public class Item
+    {
+        public Guid Id { get; set; }
+        public string ItemType { get; set; }
+        public string DueDate { get; set; }
+        public string SerialNumber { get; set; }
+        public string Condition { get; set; }
+        public string Location { get; set; }
+        public string BusinessModel { get; set; }
+        public object Specifications { get; set; }
+    }
+
+    public class Boots
+    {
+        public Guid ItemId { get; set; }
+        public string Brand { get; set; }
+        public string AcquisitionDate { get; set; }
+        public string ManufactureDate { get; set; }
+        public string Size { get; set; }
+        public string Material { get; set; }
+    }
+
+    public class Helmet
+    {
+        public Guid ItemId { get; set; }
+        public string Brand { get; set; }
+        public string AcquisitionDate { get; set; }
+        public string ManufactureDate { get; set; }
+        public string Color { get; set; }
+    }
+
+    public class Jacket
+    {
+        public Guid ItemId { get; set; }
+        public string Brand { get; set; }
+        public string AcquisitionDate { get; set; }
+        public string ManufactureDate { get; set; }
+        public string Size { get; set; }
+    }
+
+    public class Mask
+    {
+        public Guid ItemId { get; set; }
+        public string Brand { get; set; }
+        public string AcquisitionDate { get; set; }
+        public string ManufactureDate { get; set; }
+        public string Size { get; set; }
+    }
+
+    public class Pants
+    {
+        public Guid ItemId { get; set; }
+        public string Brand { get; set; }
+        public string AcquisitionDate { get; set; }
+        public string ManufactureDate { get; set; }
+        public string Size { get; set; }
+    }
+
     public class HelperQuery
     {
         public static string ClientLateItems()
@@ -34,50 +92,6 @@ namespace InventoryManagmentSystem
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
-        }
-
-        public static string ItemFindBySerialNumber(string itemType, string serialNumber)
-        {
-            return $"SELECT COUNT (*) FROM tbItems WHERE ItemType = '{itemType}' AND SerialNumber = '{serialNumber}'";
-        }
-
-        /// <summary>
-        /// VALUES(@ItemType)
-        /// </summary>
-        /// <returns></returns>
-        public static string ItemInsert()
-        {
-            string query = @"
-                INSERT INTO tbItems(ItemType) 
-                VALUES(@ItemType)
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            return query;
-        }
-
-        /// <summary>
-        /// VALUES(@ItemType)
-        /// Catch uuid with Guid uuid = (Guid)command.ExecuteScalar()
-        /// </summary>
-        /// <returns></returns>
-        public static string ItemInsertAndReturnUuid()
-        {
-            string query = $@"
-                INSERT INTO tbItems(ItemType) 
-                OUTPUT inserted.Id 
-                VALUES(@ItemType)
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            return query;
-        }
-
-        /// <summary>
-        /// Value @Id
-        /// </summary>
-        /// <returns></returns>
-        public static string ItemDelete()
-        {
-            return "DELETE FROM tbItems WHERE Id=@Id";
         }
 
         /// <summary>
@@ -258,20 +272,6 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// VALUES(@ItemId,@SerialNumber,@Brand,@Condition,@Size,@ManufactureDate, @AcquisitionDate)
-        /// </summary>
-        /// <returns></returns>
-        public static string JacketInsert()
-        {
-            string query = $@"
-                INSERT INTO tbJackets({ItemStandardColumns()},Size) 
-                VALUES({ItemStandardValues()},@Size)
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            return query;
-        }
-
-        /// <summary>
         /// Get count of how many items are rented.
         /// </summary>
         /// <param name="itemType">Optional: Specify what item type you want to count.</param>
@@ -366,8 +366,43 @@ namespace InventoryManagmentSystem
             return false;
         }
 
+        public static List<Item> BootsFindAll(SqlConnection connection)
+        {
+            string query = @"SELECT * FROM tbItems JOIN tbBoots ON Id=ItemId";
+            var items = new List<Item>();
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Item item = new Item();
+                    item.Id = (Guid)reader[reader.GetOrdinal("Id")];
+                    item.ItemType = reader[reader.GetOrdinal("ItemType")].ToString();
+                    item.DueDate = reader[reader.GetOrdinal("DueDate")].ToString();
+                    item.SerialNumber = reader[reader.GetOrdinal("SerialNumber")].ToString();
+                    item.Condition = reader[reader.GetOrdinal("Condition")].ToString();
+                    item.Location = reader[reader.GetOrdinal("Location")].ToString();
+                    item.BusinessModel = reader[reader.GetOrdinal("BusinessModel")].ToString();
+                    Boots boots = new Boots();
+                    boots.ItemId = item.Id;
+                    boots.Brand = reader[reader.GetOrdinal("Brand")].ToString();
+                    boots.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
+                    boots.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
+                    boots.Size = reader[reader.GetOrdinal("Size")].ToString();
+                    boots.Material = reader[reader.GetOrdinal("Material")].ToString();
+                    item.Specifications = boots;
+                    items.Add(item);
+                }
+            }
+            catch(Exception ex) { Console.WriteLine (ex.Message); }
+            finally { connection.Close(); }
+            return items;
+        }
+
         /// <summary>
-        /// Updates an entry of boots, all parameters not to be updated should be empty string "".
+        /// Updates an entry of helmet, all parameters not to be updated should be empty string "".
         /// </summary>
         /// <returns>Bool was successfull or not.</returns>
         public static bool BootsUpdate(SqlConnection connection, 
@@ -413,7 +448,7 @@ namespace InventoryManagmentSystem
             {
                 query += "ManufactureDate = @ManufactureDate";
             }
-            query += $" WHERE Id = {itemId}";
+            query += $" WHERE ItemId = '{itemId}'";
             try
             {
                 connection.Open();
@@ -516,6 +551,40 @@ namespace InventoryManagmentSystem
             return false;
         }
 
+        public static List<Item> HelmetFindAll(SqlConnection connection)
+        {
+            string query = @"SELECT * FROM tbItems JOIN tbHelmets ON Id=ItemId";
+            var items = new List<Item>();
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Item item = new Item();
+                    item.Id = (Guid)reader[reader.GetOrdinal("Id")];
+                    item.ItemType = reader[reader.GetOrdinal("ItemType")].ToString();
+                    item.DueDate = reader[reader.GetOrdinal("DueDate")].ToString();
+                    item.SerialNumber = reader[reader.GetOrdinal("SerialNumber")].ToString();
+                    item.Condition = reader[reader.GetOrdinal("Condition")].ToString();
+                    item.Location = reader[reader.GetOrdinal("Location")].ToString();
+                    item.BusinessModel = reader[reader.GetOrdinal("BusinessModel")].ToString();
+                    Helmet helmet = new Helmet();
+                    helmet.ItemId = item.Id;
+                    helmet.Brand = reader[reader.GetOrdinal("Brand")].ToString();
+                    helmet.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
+                    helmet.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
+                    helmet.Color = reader[reader.GetOrdinal("Color")].ToString();
+                    item.Specifications = helmet;
+                    items.Add(item);
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return items;
+        }
+
         public static bool HelmetUpdate(SqlConnection connection, Guid itemId, string brand, string manufacture, string color)
         {
             Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
@@ -549,7 +618,7 @@ namespace InventoryManagmentSystem
             {
                 query += "Color = @Color";
             }
-            query += $" WHERE Id = {itemId}";
+            query += $" WHERE ItemId = '{itemId}'";
             try
             {
                 connection.Open();
@@ -572,21 +641,52 @@ namespace InventoryManagmentSystem
         /// Deletes an item from item table.
         /// </summary>
         /// <param name="uuid"></param>
-        public static void ItemDelete(SqlConnection connection, Guid uuid)
+        public static bool ItemDelete(SqlConnection connection, Guid uuid)
         {
-            string query = HelperQuery.ItemDelete();
-            connection.Open();
+            string query = $"SELECT ItemType FROM tbItems WHERE Id='{uuid}'";
+            string itemType = "";
             try
             {
+                connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Id", uuid);
+                itemType = command.ExecuteReader().ToString();
+            }
+            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+
+            if(itemType == "") { return false; }
+            string table = HelperFunctions.MakeTableFromItemType(itemType);
+
+            query = $"DELETE FROM {table} WHERE ItemId=@ItemId";
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemId", uuid);
                 command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return false;
             }
-            connection.Close();
+            finally { connection.Close(); }
+
+            query = "DELETE FROM tbItems WHERE Id=@Id";
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", uuid);
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally { connection.Close(); }
         }
 
         public static Dictionary<string, object> ItemFindBySerialNumber(SqlConnection connection, string itemType, string serialNumber)
@@ -727,6 +827,40 @@ namespace InventoryManagmentSystem
             return false;
         }
 
+        public static List<Item> JacketFindAll(SqlConnection connection)
+        {
+            string query = @"SELECT * FROM tbItems JOIN tbJackets ON Id=ItemId";
+            var items = new List<Item>();
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Item item = new Item();
+                    item.Id = (Guid)reader[reader.GetOrdinal("Id")];
+                    item.ItemType = reader[reader.GetOrdinal("ItemType")].ToString();
+                    item.DueDate = reader[reader.GetOrdinal("DueDate")].ToString();
+                    item.SerialNumber = reader[reader.GetOrdinal("SerialNumber")].ToString();
+                    item.Condition = reader[reader.GetOrdinal("Condition")].ToString();
+                    item.Location = reader[reader.GetOrdinal("Location")].ToString();
+                    item.BusinessModel = reader[reader.GetOrdinal("BusinessModel")].ToString();
+                    Jacket jacket = new Jacket();
+                    jacket.ItemId = item.Id;
+                    jacket.Brand = reader[reader.GetOrdinal("Brand")].ToString();
+                    jacket.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
+                    jacket.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
+                    jacket.Size = reader[reader.GetOrdinal("Size")].ToString();
+                    item.Specifications = jacket;
+                    items.Add(item);
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return items;
+        }
+
         public static bool JacketUpdate(SqlConnection connection, Guid itemId, string brand, string manufacture, string size)
         {
             Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
@@ -760,7 +894,7 @@ namespace InventoryManagmentSystem
             {
                 query += "Size = @Size";
             }
-            query += $" WHERE Id = {itemId}";
+            query += $" WHERE ItemId = '{itemId}";
             try
             {
                 connection.Open();
@@ -804,6 +938,40 @@ namespace InventoryManagmentSystem
             return false;
         }
 
+        public static List<Item> MaskFindAll(SqlConnection connection)
+        {
+            string query = @"SELECT * FROM tbItems JOIN tbMasks ON Id=ItemId";
+            var items = new List<Item>();
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Item item = new Item();
+                    item.Id = (Guid)reader[reader.GetOrdinal("Id")];
+                    item.ItemType = reader[reader.GetOrdinal("ItemType")].ToString();
+                    item.DueDate = reader[reader.GetOrdinal("DueDate")].ToString();
+                    item.SerialNumber = reader[reader.GetOrdinal("SerialNumber")].ToString();
+                    item.Condition = reader[reader.GetOrdinal("Condition")].ToString();
+                    item.Location = reader[reader.GetOrdinal("Location")].ToString();
+                    item.BusinessModel = reader[reader.GetOrdinal("BusinessModel")].ToString();
+                    Mask mask = new Mask();
+                    mask.ItemId = item.Id;
+                    mask.Brand = reader[reader.GetOrdinal("Brand")].ToString();
+                    mask.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
+                    mask.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
+                    mask.Size = reader[reader.GetOrdinal("Size")].ToString();
+                    item.Specifications = mask;
+                    items.Add(item);
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return items;
+        }
+
         public static bool MaskUpdate(SqlConnection connection, Guid itemId, string brand, string manufacture, string size)
         {
             Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
@@ -837,7 +1005,7 @@ namespace InventoryManagmentSystem
             {
                 query += "Size = @Size";
             }
-            query += $" WHERE Id = {itemId}";
+            query += $" WHERE ItemId = '{itemId}'";
             try
             {
                 connection.Open();
@@ -881,6 +1049,40 @@ namespace InventoryManagmentSystem
             return false;
         }
 
+        public static List<Item> PantsFindAll(SqlConnection connection)
+        {
+            string query = @"SELECT * FROM tbItems JOIN tbPants ON Id=ItemId";
+            var items = new List<Item>();
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Item item = new Item();
+                    item.Id = (Guid)reader[reader.GetOrdinal("Id")];
+                    item.ItemType = reader[reader.GetOrdinal("ItemType")].ToString();
+                    item.DueDate = reader[reader.GetOrdinal("DueDate")].ToString();
+                    item.SerialNumber = reader[reader.GetOrdinal("SerialNumber")].ToString();
+                    item.Condition = reader[reader.GetOrdinal("Condition")].ToString();
+                    item.Location = reader[reader.GetOrdinal("Location")].ToString();
+                    item.BusinessModel = reader[reader.GetOrdinal("BusinessModel")].ToString();
+                    Pants pants = new Pants();
+                    pants.ItemId = item.Id;
+                    pants.Brand = reader[reader.GetOrdinal("Brand")].ToString();
+                    pants.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
+                    pants.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
+                    pants.Size = reader[reader.GetOrdinal("Size")].ToString();
+                    item.Specifications = pants;
+                    items.Add(item);
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return items;
+        }
+
         public static bool PantsUpdate(SqlConnection connection, Guid itemId, string brand, string manufacture, string size)
         {
             Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
@@ -914,7 +1116,7 @@ namespace InventoryManagmentSystem
             {
                 query += "Size = @Size";
             }
-            query += $" WHERE Id = {itemId}";
+            query += $" WHERE ItemId = '{itemId}'";
             try
             {
                 connection.Open();

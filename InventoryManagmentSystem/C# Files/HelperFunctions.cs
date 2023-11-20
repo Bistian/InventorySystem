@@ -8,6 +8,16 @@ namespace InventoryManagmentSystem
 {
     public class HelperFunctions
     {
+        /// <summary>
+        /// Check if substring exists within target string.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="substring"></param>
+        /// <returns>true if substring exists.</returns>
+        public static bool IsSubstring(string target, string substring)
+        {
+            return target.ToLower().IndexOf(substring.ToLower()) != -1;
+        }
 
         /// <summary>
         /// Add item types from database to a combobox.
@@ -32,6 +42,11 @@ namespace InventoryManagmentSystem
                 Console.Error.WriteLine(ex.ToString());
             }
             connection.Close();
+        }
+
+        public static string MakeTableFromItemType(string itemType)
+        {
+            return $"tb{char.ToUpper(itemType[0]) + itemType.Substring(1)}";
         }
 
         public static void OpenChildForm(Form childForm, ref Panel panel)
