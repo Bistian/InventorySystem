@@ -17,7 +17,7 @@ namespace InventoryManagmentSystem
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
 
-        public RentalHistoryForm(string itemType = null, string serial = null)
+        public RentalHistoryForm(string itemType = null, string ItemID = null)
         {
             InitializeComponent();
             dataGridItems.Columns["column_acquired"].DefaultCellStyle.Format = "d";
@@ -31,9 +31,9 @@ namespace InventoryManagmentSystem
             cbItemType.SelectedIndex = 0;
             HelperFunctions.LoadItemTypes(connection, ref cbItemType);
 
-            if (itemType != null && serial != null)
+            if (itemType != null && ItemID != null)
             {
-                InitWithSelectedItem(itemType, serial);
+                InitWithSelectedItem(itemType, ItemID);
             } 
             else
             {

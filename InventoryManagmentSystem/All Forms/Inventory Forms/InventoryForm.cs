@@ -310,28 +310,29 @@ namespace InventoryManagmentSystem
 
             string colName = dataGridInv.Columns[e.ColumnIndex].Name;
             string itemType = cbItemType.Text;
-            string serialNumber = dataGridInv.Rows[e.RowIndex].Cells["Serial"].Value.ToString();
+            string ItemIDString = dataGridInv.Rows[e.RowIndex].Cells["column_item_id"].Value.ToString();
+            Guid.TryParse(ItemIDString, out Guid ItemID);
             try
             {
                 if (colName == "Edit")
                 {
-                    if (itemType == "Jacket" || itemType == "Pants" || itemType == "Mask") { UpdateJacketOrPantsOrMasks(e,itemType); }
-                    else if (itemType == "Helmet") { UpdateHelmet(e); }
-                    else if (itemType == "Boots") { UpdateBoots(e); }
+                    if (itemType == "Jacket" || itemType == "Pants" || itemType == "Mask") { UpdateJacketOrPantsOrMasks(e,itemType, ItemID); }
+                    else if (itemType == "Helmet") { UpdateHelmet(e, ItemID); }
+                    else if (itemType == "Boots") { UpdateBoots(e, ItemID); }
                     LoadInventory();
                 }
                 else if (colName == "Delete")
                 {
-                    DeleteItem(serialNumber);
+                    DeleteItem(ItemID);
                     LoadInventory();
                 }
                 else
                 {
                     // Open History.
-                    RentalHistoryForm form = new RentalHistoryForm(itemType, serialNumber);
-                    var parentForm = this.ParentForm as MainForm;
-                    parentForm.openChildForm(form);
-                    this.Close();
+                    //RentalHistoryForm form = new RentalHistoryForm(itemType, ItemID);
+                    //var parentForm = this.ParentForm as MainForm;
+                    //parentForm.openChildForm(form);
+                    //this.Close();
                 }
             }
             catch (Exception ex)
@@ -340,9 +341,9 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void UpdateBoots(DataGridViewCellEventArgs e)
+        private void UpdateBoots(DataGridViewCellEventArgs e, Guid ItemId)
         {
-            NewItemForm itemForm = new NewItemForm(cbItemType.Text, true);
+            NewItemForm itemForm = new NewItemForm(cbItemType.Text, true, ItemId);
             itemForm.cbItemType.Text = "Boots";
             itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
             itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
@@ -355,9 +356,9 @@ namespace InventoryManagmentSystem
             itemForm.Close();
         }
 
-        private void UpdateHelmet(DataGridViewCellEventArgs e)
+        private void UpdateHelmet(DataGridViewCellEventArgs e, Guid ItemId)
         {
-            NewItemForm itemForm = new NewItemForm(cbItemType.Text, true);
+            NewItemForm itemForm = new NewItemForm(cbItemType.Text, true, ItemId);
             itemForm.cbItemType.Text = "Helmet";
             itemForm.txtBoxSerialNumber.Text =              GetCellValueAsString(e, "Serial");
             itemForm.comboBoxBrand.Text =                   GetCellValueAsString(e, "Brand");
@@ -370,9 +371,9 @@ namespace InventoryManagmentSystem
             itemForm.Close();
         }
 
-        private void UpdateJacketOrPantsOrMasks(DataGridViewCellEventArgs e,string ItemType)
+        private void UpdateJacketOrPantsOrMasks(DataGridViewCellEventArgs e,string ItemType, Guid ItemId)
         {
-            NewItemForm itemForm = new NewItemForm(cbItemType.Text, true);
+            NewItemForm itemForm = new NewItemForm(cbItemType.Text, true, ItemId);
 
 
             if (ItemType == "Mask")
@@ -398,15 +399,14 @@ namespace InventoryManagmentSystem
             itemForm.Close();
         }
         
-        private void DeleteItem(string serialNumber)
+        private void DeleteItem(Guid ItemID)
         {
             string message = "Are you sure you want to delete this item?";
             string title = "Delete Record";
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return; }
 
-            string query = $"SELECT ItemId FROM tbItems WHERE SerialNumber = '{serialNumber}'";
             // TODO: Do I really want to delete?
-            Guid uuid;
+ 
             
             string table = "tb" + cbItemType.Text;
 
@@ -417,7 +417,7 @@ namespace InventoryManagmentSystem
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand($"DELETE FROM {table} WHERE SerialNumber LIKE '{serialNumber}'", connection);
+                SqlCommand command = new SqlCommand($"DELETE FROM {table} WHERE ItemId LIKE '{ItemID}'", connection);
                 command.ExecuteNonQuery();
                 connection.Close();
                 MessageBox.Show("Item has been successfully deleted");

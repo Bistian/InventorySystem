@@ -20,11 +20,12 @@ namespace InventoryManagmentSystem.Rental_Forms
         SqlConnection connection = new SqlConnection(connectionString);
         SqlCommand command;
         #endregion SQL_Variables
+        Guid ItemId = Guid.Empty;
 
         private bool isUpdate = false;
         int lastItemTypeIndex = -1;
 
-        public NewItemForm(string itemType = "", bool isUpdate = false)
+        public NewItemForm(string itemType = "", bool isUpdate = false, Guid itemId = default)
         {
             InitializeComponent();
             this.cbItemType.Text = itemType.ToLower();
@@ -35,6 +36,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
             ManageFieldsAvailability();
             loadItemTypes();
+            ItemId = itemId;
         }
 
         /// <summary>
@@ -243,8 +245,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private bool UpdateBoots()
         {
-            Guid uuid = GetUuidFromItem("tbBoots");
-            if (uuid.Equals(Guid.Empty)) { return false; }
+            if (ItemId == Guid.Empty) { return false; }
 
             string query = $"UPDATE tbBoots " +
                 $"SET SerialNumber = @SerialNumber, " +
@@ -253,7 +254,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 $"ManufactureDate = @ManufactureDate," +
                 $"Size = @Size, " +
                 $"Material = @Material " +
-                $"WHERE ItemId = '{uuid}';";
+                $"WHERE ItemId = '{ItemId}';";
 
             try
             {
@@ -279,8 +280,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private bool UpdateHelmet()
         {
-            Guid uuid = GetUuidFromItem("tbHelmets");
-            if (uuid.Equals(Guid.Empty)) { return false; }
+            if (ItemId == Guid.Empty) { return false; }
 
             string query = $"UPDATE tbHelmets " +
                 $"SET SerialNumber = @SerialNumber, " +
@@ -288,7 +288,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 $"Condition = @Condition," +
                 $"ManufactureDate = @ManufactureDate," +
                 $"Color = @Color " +
-                $"WHERE ItemId = '{uuid}';";
+                $"WHERE ItemId = '{ItemId}';";
 
             try
             {
@@ -317,8 +317,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (cbItemType.Text == "Pants") { table = "tbPants"; }
             else if (cbItemType.Text == "Mask") { table = "tbMasks"; }
 
-            Guid uuid = GetUuidFromItem(table);
-            if (uuid.Equals(Guid.Empty)) { return false; }
+            if (ItemId == Guid.Empty) { return false; }
 
             string query = $"UPDATE {table} " +
                 $"SET SerialNumber = @SerialNumber, " +
@@ -326,7 +325,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 $"Condition = @Condition," +
                 $"ManufactureDate = @ManufactureDate," +
                 $"Size = @Size " +
-                $"WHERE ItemId = '{uuid}';";
+                $"WHERE ItemId = '{ItemId}';";
 
             try
             {

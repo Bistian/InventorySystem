@@ -82,11 +82,6 @@ namespace InventoryManagmentSystem
                 ";
             }
 
-
-
-
-
-
             else if (ItemType == null)
             {
                 query = $@"
