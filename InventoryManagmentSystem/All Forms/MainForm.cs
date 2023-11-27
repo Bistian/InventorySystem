@@ -21,7 +21,7 @@ namespace InventoryManagmentSystem
         private Form activeForm = null;
 
         //Track previous form
-       private Form previousForm = null;
+        private Form previousForm = null;
 
         //Initialize
         public MainForm(Form databaseCreation = null)
@@ -35,11 +35,6 @@ namespace InventoryManagmentSystem
                 //Gage likes minors
                 databaseCreation.Dispose();
             }
-        }
-
-        public void SetPrevForm(Form curr)
-        {
-            previousForm = curr;
         }
 
         public void openChildForm(Form childForm)
@@ -56,7 +51,6 @@ namespace InventoryManagmentSystem
             MainPanel.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-
         }
 
         private void UsersButton_Click(object sender, EventArgs e)

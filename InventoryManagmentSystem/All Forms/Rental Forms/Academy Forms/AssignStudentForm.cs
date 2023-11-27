@@ -17,14 +17,14 @@ namespace InventoryManagmentSystem.Academy
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
         Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
-        Dictionary<Guid, string> classMap;
+        List<Dictionary<string, string>> classList;
         AcademyForm parent = null;
 
         public AssignStudentForm(AcademyForm parent)
         {
             InitializeComponent();
             academyMap = HelperDatabaseCall.AcademyListNames(connection);
-            classMap = new Dictionary<Guid, string>();
+            classList = new List<Dictionary<string, string>>();
             foreach (var value in academyMap.Values)
             {
                 cbAcademy.Items.Add(value);
@@ -46,11 +46,11 @@ namespace InventoryManagmentSystem.Academy
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
             Guid Id = Guid.Empty;
-            foreach (var item in classMap)
+            foreach (var item in classList)
             {
-                if (item.Value == cbClasses.Text)
+                if (item["Name"] == cbClasses.Text)
                 {
-                    Id = item.Key;
+                    Id = Guid.Parse(item["Id"]);
                     break;
                 }
             }
@@ -98,12 +98,12 @@ namespace InventoryManagmentSystem.Academy
                 return;
             }
 
-            classMap.Clear();
-            classMap = HelperDatabaseCall.ClassListNames(connection, academyId);
+            classList.Clear();
+            classList = HelperDatabaseCall.ClassListByAcademy(connection, academyId);
             cbClasses.Items.Clear();
-            foreach (var value in classMap.Values)
+            foreach (var item in classList)
             {
-                cbClasses.Items.Add(value);
+                cbClasses.Items.Add(item["Name"]);
             }
 
             if (cbClasses.Items.Count > 0)

@@ -31,7 +31,7 @@ namespace InventoryManagmentSystem
             InitializeComponent();
             checkActive.Checked = true;
             LoadInventory();
-            HelperFunctions.LoadItemTypes(connection, ref cbItemType);
+            HelperDatabaseCall.ItemTypeLoadComboBox(connection, cbItemType);
             InitializeItems();
             SetItemType(ItemType);
         }
@@ -72,7 +72,6 @@ namespace InventoryManagmentSystem
         /// </summary>
         /// <param name="initialQuery">Initial part of the query.</param>
         /// <returns>Complete query</returns>
-
         private void InitializeItems()
         {
             bootsList = HelperDatabaseCall.BootsFindAll(connection);
@@ -289,6 +288,7 @@ namespace InventoryManagmentSystem
         {
             if (e.RowIndex < 0) { return; }
 
+            var row = dataGridInv.Rows[e.RowIndex];
             string colName = dataGridInv.Columns[e.ColumnIndex].Name;
             string itemType = cbItemType.Text.ToLower();
             string serialNumber = dataGridInv.Rows[e.RowIndex].Cells["column_serial"].Value.ToString();
@@ -308,8 +308,8 @@ namespace InventoryManagmentSystem
                 }
                 else
                 {
-                    // Open History.
-                    RentalHistoryForm form = new RentalHistoryForm(itemType, serialNumber);
+                    var form = new RentalHistoryForm((Guid)row.Cells["column_item_id"].Value, Guid.Empty);
+                    //RentalHistoryForm form = new RentalHistoryForm(itemType, serialNumber);
                     var parentForm = this.ParentForm as MainForm;
                     parentForm.openChildForm(form);
                     this.Close();

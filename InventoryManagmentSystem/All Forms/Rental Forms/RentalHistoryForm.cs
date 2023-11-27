@@ -16,6 +16,7 @@ namespace InventoryManagmentSystem
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
+        List<History> historyList = new List<History>();
 
         public RentalHistoryForm(string itemType = null, string serial = null)
         {
@@ -29,8 +30,7 @@ namespace InventoryManagmentSystem
             // Add item types
             cbItemType.Items.Add("all");
             cbItemType.SelectedIndex = 0;
-            HelperFunctions.LoadItemTypes(connection, ref cbItemType);
-
+            HelperDatabaseCall.ItemTypeLoadComboBox(connection, cbItemType);
             if (itemType != null && serial != null)
             {
                 InitWithSelectedItem(itemType, serial);
@@ -38,6 +38,27 @@ namespace InventoryManagmentSystem
             else
             {
                 cbItemType.SelectedItem = "All";
+            }
+        }
+
+        public RentalHistoryForm(Guid itemId, Guid clientId)
+        {
+            historyList = HelperDatabaseCall.HistoryFindItem(connection, itemId, clientId);
+            if (historyList.Count == 0) { this.Close(); return; }
+            LoadDataGrid();
+        }
+
+        public void LoadDataGrid()
+        {
+            int count = 1;
+            foreach(History history in historyList)
+            {
+                var client = HelperDatabaseCall.ClientFindById(connection, history.ClientId);
+                dataGridHistory.Rows.Add(count++,
+                    history.ClientId,
+                    client["Name"],
+                    history.RentDate, 
+                    history.ReturnDate);
             }
         }
 

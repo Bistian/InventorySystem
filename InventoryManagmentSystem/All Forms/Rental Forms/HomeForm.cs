@@ -57,28 +57,6 @@ namespace InventoryManagmentSystem
 
         }
 
-        private int CountStock(string itemType)
-        {
-            try
-            {
-                connection.Open();
-                string query = HelperQuery.StockCount(itemType);
-                SqlCommand command = new SqlCommand(query, connection);
-                object result = command.ExecuteScalar();
-                if (result != null && result != DBNull.Value)
-                {
-                    return (int)result;
-                }
-                return 0;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return -1;
-            }
-            finally { connection.Close(); }
-        }
-
         private void InitTables()
         {
             string query = HelperQuery.RentItems();
@@ -196,10 +174,14 @@ namespace InventoryManagmentSystem
 
         private void PrintStock()
         {
-            ButtonInStockJackets.Text = $"{CountStock("jackets")} Coats"; ;
-            ButtonInStockPants.Text = $"{CountStock("pants")} Pants";
-            ButtonInStockHelmets.Text = $"{CountStock("helmets")} Helmets";
-            ButtonInStockBoots.Text = $"{CountStock("boots")} Boots";
+            var stock = HelperDatabaseCall.ItemStockCount(connection, "boots");
+            ButtonInStockBoots.Text = $"{stock} Boots";
+            stock = HelperDatabaseCall.ItemStockCount(connection, "helmet");
+            ButtonInStockHelmets.Text = $"{stock} Helmets";
+            stock = HelperDatabaseCall.ItemStockCount(connection, "jacket");
+            ButtonInStockJackets.Text = $"{stock} Coats";
+            stock = HelperDatabaseCall.ItemStockCount(connection, "pants");
+            ButtonInStockPants.Text = $"{stock} Pants";
         }
 
         private void OpenDockedForm(string formType, string ItemType)

@@ -87,7 +87,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
 
             var item = HelperDatabaseCall.ItemFindBySerialNumber(connection, itemType, tbSerialNumber.Text);
-            if (item != null && item.Count > 0)
+            if (item != null)
             {
                 message = "Item already exists, do you want to update it?";
                 title = "Update Item";
@@ -124,12 +124,12 @@ namespace InventoryManagmentSystem.Rental_Forms
             string title = "Update Item";
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return false; }
 
-            Guid uuid = HelperDatabaseCall.ItemGetIdBySerialNumber(connection, cbItemType.Text, tbSerialNumber.Text);
+            var item = HelperDatabaseCall.ItemFindBySerialNumber(connection, cbItemType.Text, tbSerialNumber.Text);
             bool isUpdated = false;
             if (itemType == "boots") 
             {
                 isUpdated = HelperDatabaseCall.BootsUpdate(connection,
-                    uuid,
+                    item.Id,
                     cbBrand.Text,
                     cbSize.Text,
                     cbMaterial.Text,
@@ -137,8 +137,8 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
             else if (itemType == "helmet") 
             {
-                isUpdated = HelperDatabaseCall.HelmetUpdate(connection, 
-                    uuid, 
+                isUpdated = HelperDatabaseCall.HelmetUpdate(connection,
+                    item.Id, 
                     cbBrand.Text, 
                     dtManufacture.Value.Date.ToString(), 
                     cbColor.Text); 
@@ -146,7 +146,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             else if (itemType == "jacket") 
             {
                 isUpdate = HelperDatabaseCall.JacketUpdate(connection,
-                    uuid,
+                    item.Id,
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
                     cbSize.Text);
@@ -154,7 +154,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             else if (itemType == "mask")
             {
                 isUpdate = HelperDatabaseCall.MaskUpdate(connection,
-                    uuid,
+                    item.Id,
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
                     cbSize.Text);
@@ -162,7 +162,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             else if (itemType == "pants")
             {
                 isUpdate = HelperDatabaseCall.PantsUpdate(connection,
-                    uuid,
+                    item.Id,
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
                     cbSize.Text);
@@ -171,7 +171,6 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (isUpdated)
             {
                 MessageBox.Show("Item has been successfully updated.");
-
                 return true;
             }
             else

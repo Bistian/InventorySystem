@@ -25,14 +25,14 @@ namespace InventoryManagmentSystem.Rental_Forms
         #endregion SQL_Variables
 
         Dictionary<string, Guid> academyList;
-        Dictionary<Guid, string> classList;
+        List<Dictionary<string, string>> classList;
         bool ExistingUser;
 
         public NewClientForm(string rentalType = null, string clientName = null)
         {
             InitializeComponent();
             PopulateAcademyList();
-            classList = new Dictionary<Guid, string>();
+            classList = new List<Dictionary<string, string>>();
             comboBoxRentalType.SelectedIndex = 0;
             if (clientName != null)
             {
@@ -44,7 +44,24 @@ namespace InventoryManagmentSystem.Rental_Forms
         public void AutoFillFields(string type, string clientName)
         {
             RentalTypeSelector(type);
+            var client = HelperDatabaseCall.ClientFindByName(connection, clientName);
+            if(client == null) { return; }
 
+            txtBoxCustomerName.Text = client["Name"];
+            txtBoxDriversLicense.Text = client["DriversLicenseNumber"];
+            txtBoxPhone.Text = client["Phone"];
+            txtBoxEmail.Text = client["Email"];
+            textBoxChest.Text = client["Chest"];
+            textBoxSleeve.Text = client["Sleeve"];
+            textBoxWaist.Text = client["Waist"];
+            textBoxInseam.Text = client["Inseam"];
+            textBoxHips.Text = client["Hips"];
+            textBoxWeight.Text = client["Weight"];
+            textBoxHeight.Text = client["Height"];
+            comboBoxAcademy.Text = client["Academy"];
+            cbRep.Text = client["FireTecRepresentative"];
+            cbClass.Text = client["IdClass"];
+/*
             string query = $@"
                 SELECT 
                     Name, DriversLicenseNumber, Phone, Email,
@@ -54,10 +71,10 @@ namespace InventoryManagmentSystem.Rental_Forms
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
-            command = new SqlCommand(query, connection);
-            connection.Open();
             try
             {
+                command = new SqlCommand(query, connection);
+                connection.Open();
                 object[] rows = new object[14]; ;
                 SqlDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
@@ -83,7 +100,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             {
                 Console.WriteLine(ex.Message);
             }
-            connection.Close();
+            connection.Close();*/
         }
 
         private bool CheckIfExists(string tableName, string SerialNumber)
@@ -306,12 +323,12 @@ namespace InventoryManagmentSystem.Rental_Forms
                     INSERT INTO tbClients(
                         Name, Phone, Email, Type, DriversLicenseNumber, Address,
                         Chest, Sleeve, Waist, Inseam, Hips, Height, Weight,
-                        FireTecRepresentative, Academy, IdClass
+                        FireTecRepresentative, Academy, IdClass, Status
                     )
                     VALUES(
                         @Name, @Phone, @Email, @Type, @DriversLicenseNumber, @Address, 
                         @Chest, @Sleeve, @Waist, @Inseam, @Hips, @Height, @Weight, 
-                        @FireTecRepresentative, @Academy,  @IdClass
+                        @FireTecRepresentative, @Academy,  @IdClass, @Status
                     )
                 ";
                 HelperFunctions.RemoveLineBreaksFromString(ref query);
@@ -319,9 +336,9 @@ namespace InventoryManagmentSystem.Rental_Forms
                 Guid classId = Guid.Empty;
                 foreach(var item in classList)
                 {
-                    if(item.Value == cbClass.Text)
+                    if (item["Name"] == cbClass.Text)
                     {
-                        classId = item.Key;
+                        classId = Guid.Parse(item["Id"]);
                         break;
                     }
                 }
@@ -352,17 +369,20 @@ namespace InventoryManagmentSystem.Rental_Forms
                     command.Parameters.AddWithValue("@Height", textBoxHeight.Text);
                     command.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
                     command.Parameters.AddWithValue("@IdClass", classId);
-                    connection.Open();
+                    command.Parameters.AddWithValue("@Status", "Test");
+                    string message = "Info has been successfully saved";
                     try
                     {
+                        connection.Open();
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception ex)
+                    catch (Exception ex) 
                     {
-                        Console.WriteLine(ex.ToString());
+                        Console.WriteLine(ex.Message);
+                        message = "Something went wrong.";
                     }
-                    connection.Close();
-                    MessageBox.Show("Info has been successfully saved");
+                    finally { connection.Close(); }
+                    MessageBox.Show(message);
                     Clear();
 
                     //hiding input panels
@@ -542,24 +562,18 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void comboBoxAcademy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBoxAcademy.SelectedIndex == -1)
-            {
-                return;
-            }
+            if(comboBoxAcademy.SelectedIndex == -1) { return; }
+
             string name = comboBoxAcademy.Text;
-            if(classList != null)
-            {
-                classList.Clear();
-            }
+            if(classList != null) { classList.Clear(); }
             cbClass.Items.Clear();
-            classList = HelperDatabaseCall.ClassListNames(connection, academyList[name]);
-            if(classList == null)
-            {
-                return;
-            }
+
+            classList = HelperDatabaseCall.ClassListByAcademy(connection, academyList[name]);
+            if(classList == null) { return; }
+
             foreach(var item in classList)
             {
-                cbClass.Items.Add(item.Value);
+                cbClass.Items.Add(item["Name"]);
             }
         }
     }

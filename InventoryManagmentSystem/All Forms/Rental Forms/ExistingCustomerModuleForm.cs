@@ -14,20 +14,12 @@ namespace InventoryManagmentSystem
 {
     public partial class ExistingCustomerModuleForm : Form
     {
-        #region SQL_Variables
-        //Database Path
-        // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        //Creating command
-        SqlConnection con = new SqlConnection(connectionString);
-        //Creating command
-        SqlCommand cm = new SqlCommand();
-        //Creatinng Reader
-        SqlDataReader dr;
-        #endregion SQL_Variables
+        SqlConnection connection = new SqlConnection(connectionString);
 
         public bool isReturn = false;
         string clientType = "Individuals";
+
         public ExistingCustomerModuleForm()
         {
             InitializeComponent();
@@ -43,27 +35,27 @@ namespace InventoryManagmentSystem
             DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.No) { return true; }
 
-            string query = "DELETE FROM tbClients WHERE name=@name";
+            string query = "DELETE FROM tbClients WHERE Name=@Name";
             string name = dataGridUsers.Rows[e.RowIndex].Cells[0].Value.ToString();
             try
             {
-                cm = new SqlCommand(query, con);
-                cm.Parameters.AddWithValue("@name", name);
-                con.Open();
-                cm.ExecuteNonQuery();
+                var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Name", name);
+                connection.Open();
+                command.ExecuteNonQuery();
                 LoadClients();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            con.Close();
+            connection.Close();
 
             LoadClients();
             return true;
         }
 
-        private void UpdateItem(string clientName, string licence)
+        private void UpdateItem(string clientName, string clientId)
         {
             NewRentalModuleForm form = new NewRentalModuleForm(cbClientType.Text, clientName);
             var parentForm = this.ParentForm as MainForm;
@@ -74,7 +66,7 @@ namespace InventoryManagmentSystem
                 {
                     isNotIndividual = false;
                 }
-                form.UpdateProfile(isNotIndividual, licence);
+                form.UpdateProfile(isNotIndividual, clientId);
                 parentForm.openChildForm(form);
             }
             catch (Exception ex)
@@ -90,13 +82,12 @@ namespace InventoryManagmentSystem
             if (e.RowIndex < 0) { return; }
             DataGridViewRow row = dataGridUsers.Rows[e.RowIndex];
             string column = dataGridUsers.Columns[e.ColumnIndex].Name;
-            if (e.RowIndex < 0) { return; }
 
             string clientName = row.Cells["column_name"].Value.ToString();
-            string licence = row.Cells["column_id"].Value.ToString();
+            string clientId = row.Cells["column_id"].Value.ToString();
             if (column == "column_update")
             {
-                UpdateItem(clientName, licence);
+                UpdateItem(clientName, clientId);
                 return;
             }
             if (DeleteItem(e)) { return; }
@@ -113,15 +104,15 @@ namespace InventoryManagmentSystem
             {
                 if (cbClientType.Text == "Individuals")
                 {
-                    Profile.LoadProfile(false, licence);
+                    Profile.LoadProfile(false, clientId);
                 }
                 else if(cbClientType.Text == "Departments")
                 {
-                    Profile.LoadProfile(true, licence);
+                    Profile.LoadProfile(true, clientId);
                 }
                 else if(cbClientType.Text == "Academies")
                 {
-                    Profile.LoadProfile(true, licence);
+                    Profile.LoadProfile(true, clientId);
                 }
                 parentForm.openChildForm(Profile);
 
@@ -133,23 +124,23 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void customButton1_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Exit Module?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                this.Dispose();
-            }
-        }
-
         private void LoadClients()
         {
+            var clients = HelperDatabaseCall.ClientFindByType(connection, clientType);
+            if(clients == null) { return; }
+
             dataGridUsers.Rows.Clear();
-            cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE Type = @ClientType", con);
-            cm.Parameters.AddWithValue("@ClientType", clientType);
-            con.Open();
+            foreach (var client in clients)
+            {
+                AddClientToGrid(client);
+            }
+            
+           /* command = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE Type = @ClientType", connection);
+            command.Parameters.AddWithValue("@ClientType", clientType);
+            connection.Open();
             try
             {
-                dr = cm.ExecuteReader();
+                dr = command.ExecuteReader();
                 while (dr.Read())
                 {
                     dataGridUsers.Rows.Add(dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
@@ -157,7 +148,7 @@ namespace InventoryManagmentSystem
             }
             catch(Exception ex) { Console.WriteLine(ex.Message); }
             dr.Close();
-            con.Close();
+            connection.Close();*/
         }
 
         private void searchBar_TextChanged(object sender, EventArgs e)
@@ -165,13 +156,20 @@ namespace InventoryManagmentSystem
             string searchTerm = searchBar.Text;
             if (string.IsNullOrEmpty(searchTerm)) { LoadClients(); }
 
-            //SQL
-            int i = 0;
             dataGridUsers.Rows.Clear();
-            cm = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE (Name LIKE '%" + searchTerm + "%' OR Academy LIKE '%" + searchTerm + "%') AND Type = @ClientType", con);
-            cm.Parameters.AddWithValue("@ClientType", clientType);
-            con.Open();
-            dr = cm.ExecuteReader();
+            var clients = HelperDatabaseCall.ClientFindBySearchBar(connection, searchTerm);
+            if (clients == null) { return; }
+
+            dataGridUsers.Rows.Clear();
+            foreach (var client in clients)
+            {
+                AddClientToGrid(client);
+            }
+/*
+            command = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE (Name LIKE '%" + searchTerm + "%' OR Academy LIKE '%" + searchTerm + "%') AND Type = @ClientType", connection);
+            command.Parameters.AddWithValue("@ClientType", clientType);
+            connection.Open();
+            dr = command.ExecuteReader();
 
             while (dr.Read())
             {
@@ -179,35 +177,18 @@ namespace InventoryManagmentSystem
             }
 
             dr.Close();
-            con.Close();
+            connection.Close();*/
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void AddClientToGrid(Dictionary<string,string> client)
         {
-            if(cbClientType.SelectedIndex == 0) 
-            {
-                clientType = "Individuals";
-                dataGridUsers.Columns[0].HeaderText = "Name";
-                dataGridUsers.Columns[3].HeaderText = "Academy";
-            }
-            else if(cbClientType.SelectedIndex == 1)
-            {
-                clientType = "Departments";
-                dataGridUsers.Columns[0].HeaderText = "Point Of Contact";
-                dataGridUsers.Columns[3].HeaderText = "Department";
-            }
-            else if (cbClientType.SelectedIndex == 2)
-            {
-                clientType = "Academies";
-                dataGridUsers.Columns[0].HeaderText = "Point Of Contact";
-                dataGridUsers.Columns[3].HeaderText = "Academy";
-            }
-            LoadClients();
-        }
-
-        private void dataGridUsers_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            dataGridUsers.Rows.Add(
+                client["Name"],
+                client["Phone"],
+                client["Email"],
+                client["Academy"],
+                client["Address"],
+                client["Id"]);
         }
     }
 }

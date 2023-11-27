@@ -19,31 +19,6 @@ namespace InventoryManagmentSystem
             return target.ToLower().IndexOf(substring.ToLower()) != -1;
         }
 
-        /// <summary>
-        /// Add item types from database to a combobox.
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="comboBox"></param>
-        public static void LoadItemTypes(SqlConnection connection, ref ComboBox comboBox)
-        {
-            string query = HelperQuery.ItemTypeLoad();
-            try
-            {
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    comboBox.Items.Add(reader[0]);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine(ex.ToString());
-            }
-            connection.Close();
-        }
-
         public static string MakeTableFromItemType(string itemType)
         {
             return $"tb{char.ToUpper(itemType[0]) + itemType.Substring(1)}";
@@ -136,6 +111,5 @@ namespace InventoryManagmentSystem
 
             return true;
         }
-
     }
 }

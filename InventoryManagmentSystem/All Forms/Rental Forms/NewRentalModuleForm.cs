@@ -18,24 +18,14 @@ namespace InventoryManagmentSystem
 {
     public partial class NewRentalModuleForm : Form
     {
-        #region SQL_Variables
         // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         //Creating command
         SqlConnection connection = new SqlConnection(connectionString);
-        //Creating command
-        SqlCommand command = new SqlCommand();
-        //Creatinng Reader
-        SqlDataReader dr;
 
         //Used for query
         Guid ItemIdClient = Guid.Empty;
         Guid ItemIdInventory = Guid.Empty;
-
-        //Used for counting rentals
-        int total = 0;
-
-        #endregion SQL_Variables
 
         public bool ExistingUser = false;
         public string currentUser = "";
@@ -61,281 +51,181 @@ namespace InventoryManagmentSystem
             {
                 panelButtons.Visible = false;
                 NewClientForm clientForm = new NewClientForm(rentalType, clientName);
-                HelperFunctions.LoadItemTypes(connection, ref comboBoxItemType);
+                HelperDatabaseCall.ItemTypeLoadComboBox(connection, comboBoxItemType);
                 HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
             }
-        }
-
-        private string QueryClient()
-        {
-            //return ("SELECT Type, DueDate, SerialNumber FROM tbBoots WHERE Location='Client1'");
-            return ("SELECT 'Pants', DueDate,Brand,SerialNumber,Size,ManufactureDate,ItemId FROM tbPants " +
-                "WHERE Location='" + license + "' " +
-                "UNION SELECT 'Boots',DueDate,Brand,SerialNumber,Size,ManufactureDate,ItemId FROM tbBoots " +
-                "WHERE Location='" + license + "' " +
-                "UNION SELECT 'Helmet',DueDate,Brand,SerialNumber,'NA',ManufactureDate,ItemId FROM tbHelmets " +
-                "WHERE Location='" + license + "' " +
-                "UNION SELECT 'Jacket',DueDate,Brand,SerialNumber,Size,ManufactureDate,ItemId FROM tbJackets " +
-                "WHERE Location='" + license + "' " +
-                 "UNION SELECT 'Mask',DueDate,Brand,SerialNumber,Size,ManufactureDate,ItemId FROM tbMasks " +
-                "WHERE Location='" + license + "' " +
-                "ORDER BY DueDate");
         }
 
         private void LoadClient()
         {
             // Change the styling for the date column.
-            dataGridViewClient.Columns["DDate"].DefaultCellStyle.Format = "d";
-            dataGridViewClient.Columns["ClientMFD"].DefaultCellStyle.Format = "d";
+            dataGridViewClient.Columns["column_due_date"].DefaultCellStyle.Format = "d";
+            dataGridViewClient.Columns["column_manufacture_date"].DefaultCellStyle.Format = "d";
+
+            var items = HelperDatabaseCall.ItemFindByClientId(connection, ClientId);
+            if (items != null) { return; }
 
             dataGridViewClient.Rows.Clear();
-            command = new SqlCommand(QueryClient(), connection);
-            connection.Open();
-            try
+            foreach ( var item in items )
             {
-                dr = command.ExecuteReader();
-
-                while (dr.Read())
+                string brand = "";
+                string size = "";
+                string manufacture = "";
+                if(item.ItemType == "boots") 
                 {
-                    dataGridViewClient.Rows.Add(
-                        dr[0].ToString(),
-                        dr[1],
-                        dr[2].ToString(),
-                        dr[3].ToString(),
-                        dr[4].ToString(),
-                        dr[5],
-                        dr[6]
-                    );
+                    var boots = (Boots)item.Specifications;
+                    brand = boots.Brand;
+                    size = boots.Size;
+                    manufacture = boots.ManufactureDate;
                 }
-            }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                else if(item.ItemType == "helmet") 
+                {
+                    var helmet = (Helmet)item.Specifications;
+                    brand = helmet.Brand;
+                    manufacture = helmet.ManufactureDate;
+                }
+                else if (item.ItemType == "jacket")
+                {
+                    var jacket = (Jacket)item.Specifications;
+                    brand = jacket.Brand;
+                    size = jacket.Size;
+                    manufacture = jacket.ManufactureDate;
+                }
+                else if (item.ItemType == "mask")
+                {
+                    var mask = (Mask)item.Specifications;
+                    brand = mask.Brand;
+                    size = mask.Size;
+                    manufacture = mask.ManufactureDate;
+                }
+                else if (item.ItemType == "pants")
+                {
+                    var pants = (Pants)item.Specifications;
+                    brand = pants.Brand;
+                    size = pants.Size;
+                    manufacture = pants.ManufactureDate;
+                }
 
-            dr.Close();
-            connection.Close();
-        }
-
-        /// <summary>
-        /// Load item types on combo box to select type.
-        /// </summary>
-
-        private string QueryItems()
-        {
-            string CurrTable = "";
-            string FinalColumn = "";
-            string Sizes = "";
-
-            if (comboBoxItemType.Text == "helmet")
-            {
-                FinalColumn = ", Color";
-                CurrTable = "tbHelmets";
+                dataGridViewClient.Rows.Add(
+                    item.ItemType, item.DueDate, brand, item.SerialNumber, size, manufacture, item.Id);
             }
-            else if (comboBoxItemType.Text == "jacket")
-            {
-                Sizes = " Size,";
-                CurrTable = "tbJackets";
-            }
-            else if (comboBoxItemType.Text == "pants")
-            {
-                Sizes = " Size,";
-                CurrTable = "tbPants";
-            }
-            else if (comboBoxItemType.Text == "boots")
-            {
-                FinalColumn = ", Material";
-                Sizes = " Size,";
-                CurrTable = "tbBoots";
-            }
-            else if (comboBoxItemType.Text == "mask")
-            {
-                Sizes = " Size,";
-                CurrTable = "tbMasks";
-            }
-
-            if(CurrTable == "") 
-            {
-                Console.Error.WriteLine("ERROR: No table was set for query.");
-                return ""; 
-            }
-
-            string searchTerm = textBoxSearchBar.Text;
-            string query = $@"
-                    SELECT ItemId,Brand,SerialNumber,{Sizes} ManufactureDate,Condition {FinalColumn}
-                    FROM {CurrTable}
-                    WHERE Location='Fire-Tec' AND 
-                        SerialNumber LIKE '%{searchTerm}%' AND
-                        Condition != 'Retired'
-                ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-
-            return query;
         }
 
         private void LoadInventory()
         {
             dataGridInv.Columns["ManufactureDate"].DefaultCellStyle.Format = "d";
-            int i = 0;
             dataGridInv.Rows.Clear();
-            command = new SqlCommand(QueryItems(), connection);
-            connection.Open();
+            var items = HelperDatabaseCall.ItemFindBySearchBar(connection, textBoxSearchBar.Text);
+            if(items == null ) { return; }
 
-            try
+            int i = 1;
+            foreach(var item in items )
             {
-                dr = command.ExecuteReader();
+                string brand = "";
+                string size = "";
+                string manufacture = "";
+                string material = "";
+                if (item.ItemType == "boots")
+                {
+                    var boots = (Boots)item.Specifications;
+                    brand = boots.Brand;
+                    size = boots.Size;
+                    manufacture = boots.ManufactureDate;
+                    material = boots.Material;
+                }
+                else if (item.ItemType == "helmet")
+                {
+                    var helmet = (Helmet)item.Specifications;
+                    brand = helmet.Brand;
+                    manufacture = helmet.ManufactureDate;
+                }
+                else if (item.ItemType == "jacket")
+                {
+                    var jacket = (Jacket)item.Specifications;
+                    brand = jacket.Brand;
+                    size = jacket.Size;
+                    manufacture = jacket.ManufactureDate;
+                }
+                else if (item.ItemType == "mask")
+                {
+                    var mask = (Mask)item.Specifications;
+                    brand = mask.Brand;
+                    size = mask.Size;
+                    manufacture = mask.ManufactureDate;
+                }
+                else if (item.ItemType == "pants")
+                {
+                    var pants = (Pants)item.Specifications;
+                    brand = pants.Brand;
+                    size = pants.Size;
+                    manufacture = pants.ManufactureDate;
+                }
 
-                if (comboBoxItemType.SelectedIndex == 0)
-                {
-                    while (dr.Read())
-                    {
-                        i++;
-                        dataGridInv.Rows.Add(dr[1].ToString(), dr[2].ToString(), "NA", dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[0]);
-                    }
-                }
-                else if (comboBoxItemType.SelectedIndex == 1 || comboBoxItemType.SelectedIndex == 2 || comboBoxItemType.SelectedIndex == 4)
-                {
-                    while (dr.Read())
-                    {
-                        i++;
-                        dataGridInv.Rows.Add(dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), "N/A", dr[0]);
-                    }
-                }
-                else if (comboBoxItemType.SelectedIndex == 3)
-                {
-                    while (dr.Read())
-                    {
-                        i++;
-                        dataGridInv.Rows.Add(dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5], dr[6], dr[0]);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            dr.Close();
-            connection.Close();
-        }
-
-        private void GetClassName()
-        {
-            string query = $@"
-                    SELECT Name FROM tbClasses WHERE Id = '{ClassId}'
-                    ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            try
-            {
-                command = new SqlCommand(query, connection);
-                connection.Open();
-                dr = command.ExecuteReader();
-                while (dr.Read())
-                {
-                    labelClientClass.Text = dr[0].ToString();
-                }
-                dr.Close();
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                dr.Close();
-                connection.Close();
+                dataGridInv.Rows.Add(i++,
+                    brand, item.SerialNumber, size, manufacture, item.Condition, material, item.Id
+                );
             }
         }
 
-        public void LoadProfile(bool isDepartment, String ClientDrivers)
+        public void LoadProfile(bool isDepartment, string clientId)
         {
+            var client = HelperDatabaseCall.ClientFindById(connection, Guid.Parse(clientId));
+            if(client == null) 
+            {
+                Console.WriteLine("Client not found.");
+                return; 
+            }
+
             if (!isDepartment)
             {
-                string query = @"
-                    SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address,
-                    Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,Notes,Id,IdClass
-                    FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber
-                ";
-                HelperFunctions.RemoveLineBreaksFromString(ref query);
-                try
+                labelProfileName.Text = client["Name"];
+                labelClientPhone.Text = client["Phone"];
+                labelClientEmail.Text = client["Email"];
+                lableRentalInfo.Text = client["Academy"];
+                labelClientDrivers.Text = client["DriversLicenseNumber"];
+                labelClientAddress.Text = client["Address"];
+                labelClientChest.Text = client["Chest"];
+                labelClientSleeve.Text = client["Sleeve"];
+                labelClientWaist.Text = client["Waist"];
+                labelClientInseam.Text = client["Inseam"];
+                labelClientHips.Text = client["Hips"];
+                labelClientHeight.Text = client["Height"];
+                labelClientWeight.Text = client["Weight"];
+                textBoxNotes.Text = client["Notes"];
+                ClientId = Guid.Parse(client["Id"]);
+                ClassId = Guid.Parse(client["IdClass"]);
+                license = labelClientDrivers.Text;
+
+                var dict = HelperDatabaseCall.ClassFindByClassId(connection, ClassId);
+                if(dict != null)
                 {
-                    drivers = ClientDrivers;
-                    command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@DriversLicenseNumber", ClientDrivers);
-                    connection.Open();
-                    dr = command.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        labelProfileName.Text = dr[0].ToString();
-                        labelClientPhone.Text = dr[1].ToString();
-                        labelClientEmail.Text = dr[2].ToString();
-                        lableRentalInfo.Text = dr[3].ToString();
-                        labelClientDrivers.Text = dr[4].ToString();
-                        labelClientAddress.Text = dr[5].ToString();
-                        labelClientChest.Text = dr[6].ToString();
-                        labelClientSleeve.Text = dr[7].ToString();
-                        labelClientWaist.Text = dr[8].ToString();
-                        labelClientInseam.Text = dr[9].ToString();
-                        labelClientHips.Text = dr[10].ToString();
-                        labelClientHeight.Text = dr[11].ToString();
-                        labelClientWeight.Text = dr[12].ToString();
-                        textBoxNotes.Text = dr[13].ToString();
-                        ClientId = (Guid)dr[14];
-                        if (dr[15] != DBNull.Value)
-                        {
-                          ClassId = (Guid)dr[15];
-                        }
-                    }
-                    dr.Close();
-                    connection.Close();
-                    license = labelClientDrivers.Text;
+                    labelClientClass.Text = dict["Name"];
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    dr.Close();
-                    connection.Close();
-                }
-                GetClassName();
             }
             else if (isDepartment)
             {
-                try
-                {
+                labelProfileName.Text = client["Name"];
+                labelClientPhone.Text = client["Phone"];
+                labelClientEmail.Text = client["Email"];
 
-                    command = new SqlCommand("SELECT Name,Phone,Email,Academy,DriversLicenseNumber,Address," +
-                           "Chest,Sleeve,Waist,Inseam,Hips,Height,Weight,Notes,Id " +
-                           "FROM tbClients WHERE DriversLicenseNumber = @DriversLicenseNumber", connection);
-                    command.Parameters.AddWithValue("@DriversLicenseNumber", ClientDrivers);
-                    connection.Open();
-                    dr = command.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        labelProfileName.Text = dr[4].ToString();
-                        labelClientPhone.Text = dr[1].ToString();
-                        labelClientEmail.Text = dr[2].ToString();
+                //point of contact
+                labelProfileDrivers.Text = "Point of contact:";
+                labelClientDrivers.Text = client["DriversLicenseNumber"];
+                labelClientAddress.Text = client["Address"];
+                textBoxNotes.Text = client["Notes"];
+                ClientId = Guid.Parse(client["Id"]);
 
-                        //point of contact
-                        labelProfileDrivers.Text = "Point of contact:";
-                        labelClientDrivers.Text = dr[0].ToString();
-                        labelClientAddress.Text = dr[5].ToString();
-                        textBoxNotes.Text = dr[13].ToString();
-                        ClientId = (Guid)dr[14];
-                    }
-                    dr.Close();
-                    connection.Close();
-                    flowLayoutPanelProfile.Visible = true;
-                    panelProfileRentalInfo.Visible = false;
-                    panelProfileMeasurments.Visible = false;
-                    license = labelProfileName.Text;
-
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    dr.Close();
-                    connection.Close();
-                }
+                flowLayoutPanelProfile.Visible = true;
+                panelProfileRentalInfo.Visible = false;
+                panelProfileMeasurments.Visible = false;
+                license = labelProfileName.Text;
             }
+
             flowLayoutPanelProfile.Visible = true;
             flowLayoutPanelProfile.AutoScroll = false;
             splitContainerInventories.Visible = true;
             panelRentals.Visible = true;
+
             LoadClient();
             panelButtons.Dock = DockStyle.Top;
             flowLayoutPanelProfile.Dock = DockStyle.Bottom;
@@ -346,18 +236,10 @@ namespace InventoryManagmentSystem
             ExistingUser = true;
             if (isDepartment)
             {
-                try
-                {
-                    flowLayoutPanelProfile.Visible = true;
-                    panelProfileRentalInfo.Visible = false;
-                    panelProfileMeasurments.Visible = false;
-                    license = labelProfileName.Text;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    connection.Close();
-                }
+                flowLayoutPanelProfile.Visible = true;
+                panelProfileRentalInfo.Visible = false;
+                panelProfileMeasurments.Visible = false;
+                license = labelProfileName.Text;
             }
             flowLayoutPanelProfile.Visible = false;
             flowLayoutPanelProfile.AutoScroll = false;
@@ -388,23 +270,18 @@ namespace InventoryManagmentSystem
             textBoxNotes.ReadOnly = true;
             buttonSaveNotes.Enabled = false;
 
-
-            command = new SqlCommand("UPDATE tbClients SET Notes = @Notes " +
-                   "WHERE DriversLicenseNumber = @DriversLicenseNumber", connection);
+            string query = "UPDATE tbClients SET Notes = @Notes WHERE DriversLicenseNumber = @DriversLicenseNumber";
+            var command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@Notes", textBoxNotes.Text);
             command.Parameters.AddWithValue("@DriversLicenseNumber", license);
-
-            connection.Open();
             try
             {
+                connection.Open();
                 command.ExecuteNonQuery();
+                MessageBox.Show("Note has been successfully saved");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            connection.Close();
-            MessageBox.Show("Note has been successfully saved");
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
         }
 
         private void dataGridViewClient_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -414,133 +291,17 @@ namespace InventoryManagmentSystem
             ReturnOrReplacecs ModForm = new ReturnOrReplacecs(this);
             ModForm.ShowDialog();
 
+            DataGridViewRow row = dataGridViewClient.Rows[e.RowIndex];
             if (ReturnReplace == 1)
             {
-                string SelectedSerial = "";
-                // Helmet
-                if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Helmet")
+                Guid itemId = (Guid)row.Cells["ItemId"].Value;
+                bool isUpdated = HelperDatabaseCall.ItemUpdate(connection, itemId, "Fire-Tec");
+                if(isUpdated)
                 {
-                    try
-                    {
-                        comboBoxItemType.SelectedIndex = 0;
-                        SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
-                        command = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", "Fire-Tec");
-                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        command.Parameters.AddWithValue("@serial", SelectedSerial);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        UpdateHistory((Guid)dataGridViewClient.Rows[e.RowIndex].Cells["ItemId"].Value, ClientId);
-                        MessageBox.Show("Item Returned");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        connection.Close();
-                        return;
-                    }
-                }
-
-                // Jacket
-                else if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Jacket")
-                {
-                    try
-                    {
-                        comboBoxItemType.SelectedIndex = 1;
-                        SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
-                        command = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", "Fire-Tec");
-                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        command.Parameters.AddWithValue("@serial", SelectedSerial);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        UpdateHistory((Guid)dataGridViewClient.Rows[e.RowIndex].Cells["ItemId"].Value, ClientId);
-                        MessageBox.Show("Item Returned");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridClient_CellContentClick(): {ex.Message}");
-                        connection.Close();
-                        return;
-                    }
-                }
-
-                // Pants
-                else if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Pants")
-                {
-                    try
-                    {
-                        comboBoxItemType.SelectedIndex = 2;
-                        SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
-                        command = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", "Fire-Tec");
-                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        command.Parameters.AddWithValue("@serial", SelectedSerial);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        UpdateHistory((Guid)dataGridViewClient.Rows[e.RowIndex].Cells["ItemId"].Value, ClientId);
-                        MessageBox.Show("Item Returned");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        connection.Close();
-                        return;
-                    }
-                }
-
-                //Boots
-                else if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Boots")
-                {
-                    try
-                    {
-                        comboBoxItemType.SelectedIndex = 3;
-                        SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
-                        command = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", "Fire-Tec");
-                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        command.Parameters.AddWithValue("@serial", SelectedSerial);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        UpdateHistory((Guid)dataGridViewClient.Rows[e.RowIndex].Cells["ItemId"].Value, ClientId);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        connection.Close();
-                        return;
-                    }
+                    HelperDatabaseCall.HistoryUpdate(connection, itemId, ClientId);
                     MessageBox.Show("Item Returned");
                 }
-
-                // Masks
-                else if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Mask")
-                {
-                    try
-                    {
-                        comboBoxItemType.SelectedIndex = 1;
-                        SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
-                        command = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", "Fire-Tec");
-                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        command.Parameters.AddWithValue("@serial", SelectedSerial);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        UpdateHistory((Guid)dataGridViewClient.Rows[e.RowIndex].Cells["ItemId"].Value, ClientId);
-                        MessageBox.Show("Item Returned");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        connection.Close();
-                        return;
-                    }
-                }
+                else { MessageBox.Show("Failed to return the item."); }
                 LoadClient();
                 LoadInventory();
             }
@@ -548,105 +309,38 @@ namespace InventoryManagmentSystem
             else if (ReturnReplace == 2)
             {
                 //lock the item type that is shown when a replacment is being done to match the item type of the item being replaced
-                SetItemType(e);
+                string itemType = row.Cells["Item"].Value.ToString().ToLower();
+                SetItemType(itemType);
 
                 dataGridViewClient.Enabled = false;
 
-                dueDate = dataGridViewClient.Rows[e.RowIndex].Cells["DDate"].Value.ToString();
-                String SelectedSerial = dataGridViewClient.Rows[e.RowIndex].Cells["SerialNum"].Value.ToString();
-                ItemIdClient = (Guid)dataGridViewClient.Rows[e.RowIndex].Cells["ItemId"].Value;
+                dueDate = row.Cells["DDate"].Value.ToString();
+                string SelectedSerial = row.Cells["SerialNum"].Value.ToString();
+                ItemIdClient = (Guid)row.Cells["ItemId"].Value;
                 labelOldItem.Text = SelectedSerial;
-                labelTypeOfItem.Text = dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString();
+                labelTypeOfItem.Text = row.Cells["Item"].Value.ToString();
 
             }
         }
 
-        private void SetItemType(DataGridViewCellEventArgs e)
+        private void SetItemType(string itemType)
         {
-            if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Helmet")
+            if (itemType == "helmet")
             {
                 comboBoxItemType.SelectedIndex = 0;
             }
-            if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Jacket")
+            if (itemType == "jacket")
             {
                 comboBoxItemType.SelectedIndex = 1;
             }
-            if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Pants")
+            if (itemType == "pants")
             {
                 comboBoxItemType.SelectedIndex = 2;
             }
-            if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Boots")
+            if (itemType == "boots")
             {
                 comboBoxItemType.SelectedIndex = 3;
             }
-        }
-
-        private void UpdateBoots(DataGridViewRow row)
-        {
-            string SelectedSerial = row.Cells["Serial"].Value.ToString();
-            command = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-            command.Parameters.AddWithValue("@location", license);
-            command.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-            command.Parameters.AddWithValue("@serial", SelectedSerial);
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
-        }
-
-        private void UpdateHelmet(DataGridViewRow row)
-        {
-            if(comboBoxItemType.Text.ToLower() != "helmet") { return; }
-
-            string SelectedSerial = row.Cells["Serial"].Value.ToString();
-            command = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-            command.Parameters.AddWithValue("@location", license);
-            command.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-            command.Parameters.AddWithValue("@serial", SelectedSerial);
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();            
-        }
-
-        private void UpdateJacket(DataGridViewRow row)
-        {
-            if (comboBoxItemType.Text.ToLower() != "jacket") { return; }
-
-            string SelectedSerial = row.Cells["Serial"].Value.ToString();
-            command = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-            command.Parameters.AddWithValue("@location", license);
-            command.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-            command.Parameters.AddWithValue("@serial", SelectedSerial);
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
-        }
-
-        private void UpdateMask(DataGridViewRow row)
-        {
-            if (comboBoxItemType.Text.ToLower() != "mask") { return; }
-
-            string SelectedSerial = row.Cells["Serial"].Value.ToString();
-            command = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-            command.Parameters.AddWithValue("@location", license);
-            command.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-            command.Parameters.AddWithValue("@serial", SelectedSerial);
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
-        }
-
-        private void UpdatePants(DataGridViewRow row)
-        {
-            if (comboBoxItemType.Text.ToLower() != "pants") { return; }
-
-            string SelectedSerial = row.Cells["Serial"].Value.ToString();
-            command = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-            command.Parameters.AddWithValue("@location", license);
-            command.Parameters.AddWithValue("@DueDate", DatepickerDue.Value);
-            command.Parameters.AddWithValue("@serial", SelectedSerial);
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
         }
 
         private void dataGridInv_CellClick_1(object sender, DataGridViewCellEventArgs e)
@@ -666,30 +360,15 @@ namespace InventoryManagmentSystem
                     return;
                 }
                 
-                var value = row.Cells["ItemIdInv"].Value;
-                if (value == null) { return; }
-
-                try
+                Guid itemId = (Guid)row.Cells["ItemIdInv"].Value;
+                bool isUpdated = HelperDatabaseCall.ItemUpdate(connection, itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
+                if(!isUpdated) 
                 {
-                    UpdateBoots(row);
-                    UpdateHelmet(row);
-                    UpdateJacket(row);
-                    UpdateMask(row);
-                    UpdatePants(row);
-                    bool historyDone = InsertHistory((Guid)value, ClientId);
-                    if (!historyDone)
-                    {
-                        Console.Error.WriteLine("History failed.");
-                    }
-                    MessageBox.Show("Rental has been successfully completed");
+                    MessageBox.Show("Failed to update item.");
+                    return; 
                 }
-                catch(Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    connection.Close();
-                    return;
-                }
-                
+                isUpdated = HelperDatabaseCall.HistoryInsert(connection, itemId, ClientId);
+                MessageBox.Show("Rental has been successfully completed");
                 LoadClient();
                 LoadInventory();
                 
@@ -700,239 +379,17 @@ namespace InventoryManagmentSystem
                 labelReplacmentItem.Text = ReplacmentSerial;
                 ItemIdInventory = (Guid)row.Cells["ItemIdInv"].Value;
 
+                HelperDatabaseCall.ItemUpdate(connection, ItemIdClient, "Fire-Tec");
+                HelperDatabaseCall.HistoryUpdate(connection, ItemIdClient, ClientId);
+                HelperDatabaseCall.ItemUpdate(connection, ItemIdInventory, ClientId.ToString(), dueDate);
+                HelperDatabaseCall.HistoryInsert(connection, ItemIdInventory, ClientId);
 
-                // Helmet
-                if (labelTypeOfItem.Text == "Helmet")
-                {
-                    try
-                    {
-                        comboBoxItemType.SelectedIndex = 0;
-                        //return item
-                        command = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", "Fire-Tec");
-                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        command.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        UpdateHistory(ItemIdClient, ClientId);
-
-                        //replace item
-                        command = new SqlCommand("UPDATE tbHelmets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", license);
-                        command.Parameters.AddWithValue("@DueDate", dueDate);
-                        command.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        InsertHistory(ItemIdInventory, ClientId);
-
-                        MessageBox.Show("Item Replaced");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        connection.Close();
-                        return;
-                    }
-                }
-
-                // Jacket
-                else if (labelTypeOfItem.Text == "Jacket")
-                {
-                    try
-                    {
-                        comboBoxItemType.SelectedIndex = 1;
-
-                        //return item
-                        command = new SqlCommand("UPDATE tbJackets SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", "Fire-Tec");
-                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        command.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        UpdateHistory(ItemIdClient, ClientId);
-
-                        //replace item
-                        command = new SqlCommand("UPDATE tbJackets SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", license);
-                        command.Parameters.AddWithValue("@DueDate", dueDate);
-                        command.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        InsertHistory(ItemIdInventory, ClientId);
-
-                        MessageBox.Show("Item Replaced");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        connection.Close();
-                        return;
-                    }
-                }
-
-                // Pants
-                else if (labelTypeOfItem.Text == "Pants")
-                {
-                    try
-                    {
-                        comboBoxItemType.SelectedIndex = 2;
-
-                        //return item
-                        command = new SqlCommand("UPDATE tbPants SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", "Fire-Tec");
-                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        command.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        UpdateHistory(ItemIdClient, ClientId);
-
-                        //replace item
-                        command = new SqlCommand("UPDATE tbPants SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", license);
-                        command.Parameters.AddWithValue("@DueDate", dueDate);
-                        command.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        InsertHistory(ItemIdInventory, ClientId);
-                        MessageBox.Show("Item Replaced");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        connection.Close();
-                        return;
-                    }
-                }
-
-                else if (labelTypeOfItem.Text == "Boots")
-                {
-                    try
-                    {
-                        comboBoxItemType.SelectedIndex = 3;
-
-                        //return item
-                        command = new SqlCommand("UPDATE tbBoots SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", "Fire-Tec");
-                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        command.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        UpdateHistory(ItemIdClient, ClientId);
-
-                        //replace item
-                        command = new SqlCommand("UPDATE tbBoots SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", license);
-                        command.Parameters.AddWithValue("@DueDate", dueDate);
-                        command.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        InsertHistory(ItemIdInventory, ClientId);
-                        MessageBox.Show("Item Replaced");
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        connection.Close();
-                        return;
-                    }
-                }
-
-                // Maks
-                else if (labelTypeOfItem.Text == "Mask")
-                {
-                    try
-                    {
-                        comboBoxItemType.SelectedIndex = 2;
-
-                        //return item
-                        command = new SqlCommand("UPDATE tbMasks SET location = @location, DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", "Fire-Tec");
-                        command.Parameters.AddWithValue("@DueDate", DBNull.Value);
-                        command.Parameters.AddWithValue("@serial", labelOldItem.Text);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        UpdateHistory(ItemIdClient, ClientId);
-
-                        //replace item
-                        command = new SqlCommand("UPDATE tbMasks SET location = @location ,DueDate = @DueDate WHERE SerialNumber LIKE @serial", connection);
-                        command.Parameters.AddWithValue("@location", license);
-                        command.Parameters.AddWithValue("@DueDate", dueDate);
-                        command.Parameters.AddWithValue("@serial", labelReplacmentItem.Text);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        InsertHistory(ItemIdInventory, ClientId);
-                        MessageBox.Show("Item Replaced");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"ERROR SetSelectionModuleForm.cs --> dataGridInv_CellContentClick(): {ex.Message}");
-                        connection.Close();
-                        return;
-                    }
-                }
                 LoadClient();
                 LoadInventory();
                 ReturnReplace = 0;
                 comboBoxItemType.Enabled = true;
                 dataGridViewClient.Enabled = true;
 
-            }
-        }
-
-        private bool InsertHistory(Guid ItemId, Guid ClientId)
-        {
-            string query = HelperQuery.HistoryInsert();
-            try
-            {
-                command = new SqlCommand(query, connection);
-                connection.Open();
-                command.Parameters.AddWithValue("@ItemId", ItemId);
-                command.Parameters.AddWithValue("@ClientId", ClientId);
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                connection.Close();
-                Console.Write(ex.Message);
-                return false;
-            }
-        }
-
-        private bool UpdateHistory(Guid ItemId, Guid ClientId)
-        {
-            string query = HelperQuery.HistoryUpdate();
-            try
-            {
-                command = new SqlCommand(query, connection);
-                connection.Open();
-                command.Parameters.AddWithValue("@ItemId", ItemId);
-                command.Parameters.AddWithValue("@ClientId", ClientId);
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                connection.Close();
-                Console.Write(ex.Message);
-                return false;
             }
         }
 
@@ -966,17 +423,12 @@ namespace InventoryManagmentSystem
             HelperFunctions.OpenChildFormToPanel(panel2, AssignForm);
         }
 
-        private void dataGridViewClient_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
             flowLayoutPanelProfile.Visible = false;
             NewClientForm clientForm = new NewClientForm("Individual", labelProfileName.Text);
             clientForm.txtBoxDriversLicense.Enabled = false;
-            HelperFunctions.LoadItemTypes(connection, ref comboBoxItemType);
+            HelperDatabaseCall.ItemTypeLoadComboBox(connection, comboBoxItemType);
             HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
         }
     }
