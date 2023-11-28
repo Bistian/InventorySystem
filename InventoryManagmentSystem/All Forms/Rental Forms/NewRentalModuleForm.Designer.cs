@@ -98,7 +98,7 @@
             this.panelFireTecInv = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.labelItemType = new System.Windows.Forms.Label();
-            this.comboBoxItemType = new System.Windows.Forms.ComboBox();
+            this.cbItemType = new System.Windows.Forms.ComboBox();
             this.lableSearchBar = new System.Windows.Forms.Label();
             this.textBoxSearchBar = new System.Windows.Forms.TextBox();
             this.labelNewItem = new System.Windows.Forms.Label();
@@ -953,7 +953,7 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.labelItemType);
-            this.flowLayoutPanel1.Controls.Add(this.comboBoxItemType);
+            this.flowLayoutPanel1.Controls.Add(this.cbItemType);
             this.flowLayoutPanel1.Controls.Add(this.lableSearchBar);
             this.flowLayoutPanel1.Controls.Add(this.textBoxSearchBar);
             this.flowLayoutPanel1.Controls.Add(this.labelNewItem);
@@ -977,23 +977,23 @@
             this.labelItemType.TabIndex = 121;
             this.labelItemType.Text = "Type:";
             // 
-            // comboBoxItemType
+            // cbItemType
             // 
-            this.comboBoxItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxItemType.FormattingEnabled = true;
-            this.comboBoxItemType.Items.AddRange(new object[] {
+            this.cbItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbItemType.FormattingEnabled = true;
+            this.cbItemType.Items.AddRange(new object[] {
             "helmet",
             "jacket",
             "pants",
             "boots",
             "mask"});
-            this.comboBoxItemType.Location = new System.Drawing.Point(52, 2);
-            this.comboBoxItemType.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
-            this.comboBoxItemType.Name = "comboBoxItemType";
-            this.comboBoxItemType.Size = new System.Drawing.Size(62, 25);
-            this.comboBoxItemType.TabIndex = 120;
-            this.comboBoxItemType.SelectedIndexChanged += new System.EventHandler(this.comboBoxItemType_SelectedIndexChanged);
+            this.cbItemType.Location = new System.Drawing.Point(52, 2);
+            this.cbItemType.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
+            this.cbItemType.Name = "cbItemType";
+            this.cbItemType.Size = new System.Drawing.Size(62, 25);
+            this.cbItemType.TabIndex = 120;
+            this.cbItemType.SelectedIndexChanged += new System.EventHandler(this.comboBoxItemType_SelectedIndexChanged);
             // 
             // lableSearchBar
             // 
@@ -1353,7 +1353,7 @@
         private System.Windows.Forms.Label labelFireTecInv;
         private System.Windows.Forms.DataGridView dataGridInv;
         private System.Windows.Forms.Panel panelRentals;
-        public System.Windows.Forms.ComboBox comboBoxItemType;
+        public System.Windows.Forms.ComboBox cbItemType;
         private System.Windows.Forms.Label labelItemType;
         private System.Windows.Forms.TextBox textBoxSearchBar;
         private System.Windows.Forms.Label lableSearchBar;

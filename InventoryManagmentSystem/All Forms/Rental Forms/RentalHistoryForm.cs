@@ -82,22 +82,6 @@ namespace InventoryManagmentSystem
 
         private void LoadHistories()
         {
-            string query = HelperQuery.HistoryGeneralInformation();
-            SqlCommand command = new SqlCommand(query, connection);
-            connection.Open();
-            try
-            {
-                SqlDataReader dr = command.ExecuteReader();
-                while (dr.Read())
-                {
-                    dataGridItems.Rows.Add(dr[0], dr[1], dr[2], dr[3], dr[4], dr[5], dr[6]);
-                }
-
-            }catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
         }
 
         private void LoadItemHistory(int rowIndex = -1)
@@ -113,19 +97,13 @@ namespace InventoryManagmentSystem
 
             Guid itemId = (Guid)row.Cells["column_item_id"].Value;
 
-            string query = HelperQuery.HistoryClientAndDates(itemId);
-            SqlCommand command = new SqlCommand(query, connection);
-            connection.Open();
-            try
+            var list = HelperDatabaseCall.HistoryFindItem(connection, itemId, Guid.Empty);
+            if(list == null) { return; }
+
+            foreach(History history in list)
             {
-                SqlDataReader dr = command.ExecuteReader();
-                while (dr.Read())
-                {
-                    dataGridHistory.Rows.Add(dr[0], dr[1], dr[2], dr[3]);
-                }
+                dataGridHistory.Rows.Add(history.ItemId, history.ClientId, history.RentDate, history.ReturnDate);
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            connection.Close();
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

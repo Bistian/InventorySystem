@@ -1,181 +1,16 @@
-﻿using PdfSharp.Drawing;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Windows.Forms;
-using static InventoryManagmentSystem.Academy.AcademyForm;
 
 namespace InventoryManagmentSystem
 {
-    public class SqlVariables
-    {
-        public string query;
-        public SqlCommand command;
-        public SqlConnection connection;
-        public SqlVariables()
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-            connection = new SqlConnection(connectionString);
-        }
-    }
-
-    public class Item
-    {
-        public Guid Id { get; set; }
-        public string ItemType { get; set; }
-        public string DueDate { get; set; }
-        public string SerialNumber { get; set; }
-        public string Condition { get; set; }
-        public string Location { get; set; }
-        public string BusinessModel { get; set; }
-        public object Specifications { get; set; }
-    }
-
-    public class Boots
-    {
-        public Guid ItemId { get; set; }
-        public string Brand { get; set; }
-        public string AcquisitionDate { get; set; }
-        public string ManufactureDate { get; set; }
-        public string Size { get; set; }
-        public string Material { get; set; }
-    }
-
-    public class Helmet
-    {
-        public Guid ItemId { get; set; }
-        public string Brand { get; set; }
-        public string AcquisitionDate { get; set; }
-        public string ManufactureDate { get; set; }
-        public string Color { get; set; }
-    }
-
-    public class History
-    {
-        public int Id { get; set; }
-        public Guid ItemId { get; set; }
-        public Guid ClientId { get; set; }
-        public string RentDate { get; set; }
-        public string ReturnDate { get; set; }
-    }
-
-    public class Jacket
-    {
-        public Guid ItemId { get; set; }
-        public string Brand { get; set; }
-        public string AcquisitionDate { get; set; }
-        public string ManufactureDate { get; set; }
-        public string Size { get; set; }
-    }
-
-    public class Mask
-    {
-        public Guid ItemId { get; set; }
-        public string Brand { get; set; }
-        public string AcquisitionDate { get; set; }
-        public string ManufactureDate { get; set; }
-        public string Size { get; set; }
-    }
-
-    public class Pants
-    {
-        public Guid ItemId { get; set; }
-        public string Brand { get; set; }
-        public string AcquisitionDate { get; set; }
-        public string ManufactureDate { get; set; }
-        public string Size { get; set; }
-    }
-
     public class HelperQuery
     {
-        /// <summary>
-        /// </summary>
-        /// <returns>ItemId,SerialNumber,Brand,Condition,AcquisitionDate,ManufactureDate</returns>
-        public static string ItemStandardColumns()
-        {
-            return "ItemId,Brand,AcquisitionDate,ManufactureDate";
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <returns>@ItemId,@SerialNumber,@Brand,@Condition,@AcquisitionDate,@ManufactureDate</returns>
-        public static string ItemStandardValues()
-        {
-            return "@ItemId,@Brand,@AcquisitionDate,@ManufactureDate";
-        }
-
-        /// <summary>
-        /// Gets ClientId, Name, RentDate, ReturnDate
-        /// </summary>
-        /// <param name="itemId"></param>
-        /// <returns></returns>
-        public static string HistoryClientAndDates(Guid itemId)
-        {
-            string query = $@"
-                SELECT
-                    h.ClientId,
-                    c.Name,
-                    h.RentDate,
-                    h.ReturnDate
-                FROM
-                    tbHistories h
-                    JOIN tbClients c ON h.ClientId = c.Id
-                WHERE
-                    h.ItemId = '{itemId}'; 
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            return query;
-        }
-
-        /// <summary>
-        /// Get ItemId, ItemType, SerialNumber, Brand, ManufactureDate, Condition, LastRented.
-        /// Does not repeat ItemId.
-        /// </summary>
-        /// <returns></returns>
-        public static string HistoryGeneralInformation()
-        {
-            string query = @"
-                SELECT
-                    it.Id,
-                    it.ItemType,
-                    COALESCE(tb.SerialNumber, th.SerialNumber, tj.SerialNumber, tp.SerialNumber, tm.SerialNumber) AS SerialNumber,
-                    COALESCE(tb.Brand, th.Brand, tj.Brand, tp.Brand, tm.Brand) AS Brand,
-                    COALESCE(tb.Condition, th.Condition, tj.Condition, tp.Condition, tm.Condition) AS Condition,
-                    COALESCE(tb.ManufactureDate, th.ManufactureDate, tj.ManufactureDate, tp.ManufactureDate, tm.ManufactureDate) AS ManufactureDate,
-                    ih.LastRented
-                FROM
-                    (
-                        SELECT
-                            ih.ItemId,
-                            MAX(ih.RentDate) AS LastRented
-                        FROM
-                            tbHistories ih
-                        GROUP BY
-                            ih.ItemId
-                    ) AS ih
-                    JOIN tbItems it ON ih.ItemId = it.Id
-                    JOIN (
-                        SELECT
-                            ItemId,
-                            MAX(RentDate) AS LastRented
-                        FROM
-                            tbHistories
-                        GROUP BY
-                            ItemId
-                    ) AS ih2 ON ih.ItemId = ih2.ItemId AND ih.LastRented = ih2.LastRented
-                    LEFT JOIN tbBoots tb ON it.ItemType = 'boots' AND tb.ItemId = it.Id
-                    LEFT JOIN tbHelmets th ON it.ItemType = 'helmet' AND th.ItemId = it.Id
-                    LEFT JOIN tbJackets tj ON it.ItemType = 'jacket' AND tj.ItemId = it.Id
-                    LEFT JOIN tbPants tp ON it.ItemType = 'pants' AND tp.ItemId = it.Id
-                    LEFT JOIN tbMasks tm ON it.ItemType = 'mask' AND tm.ItemId = it.Id;
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            return query;
-        }
-
+        
+       
         /// <summary>
         /// Get count of how many items are rented.
         /// </summary>
@@ -231,12 +66,13 @@ namespace InventoryManagmentSystem
 
         public static Boots BootsFindByItemId(SqlConnection connection, Guid itemId) 
         {
-            string query = $"SELECT * FROM tbBoots WHERE ItemId='{itemId}'";
+            string query = $"SELECT * FROM tbBoots WHERE ItemId=@ItemId";
             Boots boots = new Boots();
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -292,15 +128,15 @@ namespace InventoryManagmentSystem
             Guid itemId, string brand, string acquisition, string manufacture, string size, string material)
         {
             string query = $@"
-                INSERT INTO tbBoots({HelperQuery.ItemStandardColumns()},Material,Size) 
-                VALUES({HelperQuery.ItemStandardValues()},@Material,@Size)
+                INSERT INTO tbBoots({ItemStandardColumns()},Material,Size) 
+                VALUES({ItemStandardValues()},@Material,@Size)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", itemId);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.Parameters.AddWithValue("@Brand", brand);
                 command.Parameters.AddWithValue("@AcquisitionDate", acquisition);
                 command.Parameters.AddWithValue("@ManufactureDate", manufacture);
@@ -361,7 +197,7 @@ namespace InventoryManagmentSystem
             {
                 query += "ManufactureDate = @ManufactureDate";
             }
-            query += $" WHERE ItemId = '{itemId}'";
+            query += $" WHERE ItemId = @ItemId";
             try
             {
                 connection.Open();
@@ -370,6 +206,7 @@ namespace InventoryManagmentSystem
                 if (fieldsToUpdate.ContainsKey("size")) { command.Parameters.AddWithValue("@Size", size); }
                 if (fieldsToUpdate.ContainsKey("material")) { command.Parameters.AddWithValue("@Material", material); }
                 if (fieldsToUpdate.ContainsKey("manufacture")) { command.Parameters.AddWithValue("@ManufactureDate", manufacture); }
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
                 return true;
             }
@@ -383,12 +220,13 @@ namespace InventoryManagmentSystem
         public static void BrandsFillComboBox(SqlConnection connection, string itemType, ComboBox box)
         {
             box.Items.Clear();
-            string query = $"SELECT Brand FROM tbBrands WHERE ItemType='{itemType}'";
+            string query = $"SELECT Brand FROM tbBrands WHERE ItemType=@ItemType";
             try
             {
-                connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader dataReader = command.ExecuteReader();
+                connection.Open();
+                command.Parameters.AddWithValue("@ItemType", itemType);
                 while (dataReader.Read())
                 {
                     box.Items.Add(dataReader[0]);
@@ -538,11 +376,12 @@ namespace InventoryManagmentSystem
 
         public static Dictionary<string, string> ClientFindByDriversLicense(SqlConnection connection, string license)
         {
-            string query = $"SELECT * FROM tbClients WHERE DriversLicenseNumber='{license}'";
+            string query = $"SELECT * FROM tbClients WHERE DriversLicenseNumber=@License";
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@License", license);
                 SqlDataReader reader = command.ExecuteReader();
                 return ClientFillWithReader(reader);
             }
@@ -570,12 +409,12 @@ namespace InventoryManagmentSystem
         public static List<Dictionary<string, string>> ClientFindBySearchBar(SqlConnection connection, string searchTerm)
         {
             var clients = new List<Dictionary<string, string>>();
-            string query = "SELECT * FROM tbClients WHERE (Name LIKE %@searchTerm% OR Academy LIKE %@searchTerm%) AND Type = @ClientType";
+            string query = "SELECT * FROM tbClients WHERE (Name LIKE %@searchTerm% OR Academy LIKE @searchTerm) AND Type = @ClientType";
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@searchTerm", searchTerm);
+                command.Parameters.AddWithValue("@searchTerm", $"%{searchTerm}%");
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -596,7 +435,7 @@ namespace InventoryManagmentSystem
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Id", clientId);
+                command.Parameters.AddWithValue("@Id", clientId.ToString());
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -632,12 +471,13 @@ namespace InventoryManagmentSystem
 
         public static Helmet HelmetFindByItemId(SqlConnection connection, Guid itemId)
         {
-            string query = $"SELECT * FROM tbHelmets WHERE ItemId='{itemId}'";
+            string query = $"SELECT * FROM tbHelmets WHERE ItemId=@ItemId";
             Helmet helmet = new Helmet();
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -691,15 +531,15 @@ namespace InventoryManagmentSystem
             Guid itemId, string brand, string acquisition, string manufacture, string color)
         {
             string query = $@"
-                INSERT INTO tbHelmets({HelperQuery.ItemStandardColumns()},Color) 
-                VALUES({HelperQuery.ItemStandardValues()},@Color)
+                INSERT INTO tbHelmets({ItemStandardColumns()},Color) 
+                VALUES({ItemStandardValues()},@Color)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", itemId);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.Parameters.AddWithValue("@Brand", brand);
                 command.Parameters.AddWithValue("@AcquisitionDate", acquisition);
                 command.Parameters.AddWithValue("@ManufactureDate", manufacture);
@@ -745,7 +585,7 @@ namespace InventoryManagmentSystem
             {
                 query += "Color = @Color";
             }
-            query += $" WHERE ItemId = '{itemId}'";
+            query += $" WHERE ItemId = @ItemId";
             try
             {
                 connection.Open();
@@ -753,6 +593,7 @@ namespace InventoryManagmentSystem
                 if (fieldsToUpdate.ContainsKey("brand")) { command.Parameters.AddWithValue("@Brand", brand); }
                 if (fieldsToUpdate.ContainsKey("manufacture")) { command.Parameters.AddWithValue("@ManufactureDate", manufacture); }
                 if (fieldsToUpdate.ContainsKey("size")) { command.Parameters.AddWithValue("@Color", color); }
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
                 return true;
             }
@@ -770,12 +611,13 @@ namespace InventoryManagmentSystem
         /// <param name="uuid"></param>
         public static bool ItemDelete(SqlConnection connection, Guid uuid)
         {
-            string query = $"SELECT ItemType FROM tbItems WHERE Id='{uuid}'";
+            string query = $"SELECT ItemType FROM tbItems WHERE Id=@Id";
             string itemType = "";
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", uuid.ToString());
                 itemType = command.ExecuteReader().ToString();
             }
             catch(Exception ex) { Console.WriteLine(ex.Message); }
@@ -816,67 +658,11 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
-        public static List<Item> ItemFindByClientId(SqlConnection connection, Guid clientId)
+        private static List<Item> ItemFindBy(SqlConnection connection, SqlCommand command)
         {
             var items = new List<Item>();
-            string query = $"SELECT * FROM tbItems WHERE Location=@Location";
             try
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Location", clientId);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    var item = new Item();
-                    item.Id = (Guid)reader[reader.GetOrdinal("Id")];
-                    item.ItemType = reader[reader.GetOrdinal("ItemType")].ToString();
-                    item.DueDate = reader[reader.GetOrdinal("DueDate")].ToString();
-                    item.SerialNumber = reader[reader.GetOrdinal("SerialNumber")].ToString();
-                    item.Condition = reader[reader.GetOrdinal("Condition")].ToString();
-                    item.Location = reader[reader.GetOrdinal("Location")].ToString();
-                    item.BusinessModel = reader[reader.GetOrdinal("BusinessModel")].ToString();
-                    items.Add(item);
-                }
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close(); }
-
-            foreach (var item in items)
-            {
-                if(item.ItemType == "boots")
-                {
-                    item.Specifications = BootsFindByItemId(connection, item.Id);
-                }
-                else if(item.ItemType == "helmet")
-                {
-                    item.Specifications = HelmetFindByItemId(connection, item.Id);
-                }
-                else if (item.ItemType == "jacket")
-                {
-                    item.Specifications = JacketFindByItemId(connection, item.Id);
-                }
-                else if (item.ItemType == "mask")
-                {
-                    item.Specifications = MaskFindByItemId(connection, item.Id);
-                }
-                else if (item.ItemType == "pants")
-                {
-                    item.Specifications = PantsFindByItemId(connection, item.Id);
-                }
-            }
-
-            return items;
-        }
-
-        public static List<Item> ItemFindBySearchBar(SqlConnection connection, string searchTerm)
-        {
-            var items = new List<Item>();
-            string query = $"SELECT * FROM tbItems WHERE Location='Fire-Tec' AND SerialNumber LIKE %@Search% AND Conditon != 'Retired'";
-            try
-            {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Search", searchTerm);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
@@ -919,56 +705,52 @@ namespace InventoryManagmentSystem
                 }
             }
 
-            return items.Count > 0 ? items : null;
+            return items;
+        }
+
+        public static List<Item> ItemFindByClientId(SqlConnection connection, Guid clientId)
+        {
+            string query = $"SELECT * FROM tbItems WHERE Location=@Location";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@Location", clientId.ToString());
+            return ItemFindBy(connection, command);
+        }
+
+        public static List<Item> ItemFindByDueDate(SqlConnection connection, string dueDate, string itemType = null)
+        {
+            string query = "SELECT * FROM tbItems WHERE DueDate=@DueDate";
+            if (itemType != null)
+            {
+                query = $"{query} AND ItemType=@ItemType";
+            }
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@DueDate", dueDate);
+            if (itemType != null)
+            {
+                command.Parameters.AddWithValue("@ItemType", itemType);
+            }
+            return ItemFindBy(connection, command);
+        }
+
+        public static List<Item> ItemFindBySearchBar(SqlConnection connection, string searchTerm)
+        {
+            var items = new List<Item>();
+            string query = "SELECT * FROM tbItems WHERE Location = 'Fire-Tec' AND SerialNumber LIKE @Search AND Condition != 'Retired'";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@Search", $"%{searchTerm}%");
+            return ItemFindBy(connection , command);
         }
 
         public static Item ItemFindBySerialNumber(SqlConnection connection, string itemType, string serialNumber)
         {
             // I am using item type just in case the serial numbers match between different items types.
-            string query = $"SELECT * FROM tbItems WHERE ItemType = '{itemType}' AND SerialNumber = '{serialNumber}'";
-            var item = new Item();
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-                object obj = new object();
-                while (reader.Read())
-                {
-                    item.Id = (Guid)reader[reader.GetOrdinal("Id")];
-                    item.ItemType = reader[reader.GetOrdinal("ItemType")].ToString();
-                    item.DueDate = reader[reader.GetOrdinal("DueDate")].ToString();
-                    item.SerialNumber = reader[reader.GetOrdinal("SerialNumber")].ToString();
-                    item.Condition = reader[reader.GetOrdinal("Condition")].ToString();
-                    item.Location = reader[reader.GetOrdinal("Location")].ToString();
-                    item.BusinessModel = reader[reader.GetOrdinal("BusinessModel")].ToString();
-                }
-            }
-            catch(Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close(); }
-
-            if (item.ItemType == "boots")
-            {
-                item.Specifications = BootsFindByItemId(connection, item.Id);
-            }
-            else if (item.ItemType == "helmet")
-            {
-                item.Specifications = HelmetFindByItemId(connection, item.Id);
-            }
-            else if (item.ItemType == "jacket")
-            {
-                item.Specifications = JacketFindByItemId(connection, item.Id);
-            }
-            else if (item.ItemType == "mask")
-            {
-                item.Specifications = MaskFindByItemId(connection, item.Id);
-            }
-            else if (item.ItemType == "pants")
-            {
-                item.Specifications = PantsFindByItemId(connection, item.Id);
-            }
-
-            return item;
+            string query = $"SELECT * FROM tbItems WHERE ItemType = @ItemType AND SerialNumber = @Serial";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ItemType", itemType);
+            command.Parameters.AddWithValue("@Serial", serialNumber);
+            var item = ItemFindBy(connection , command);
+            if(item.Count > 0) { return item[0]; }
+            return null;
         }
 
         /// <summary>
@@ -1002,6 +784,44 @@ namespace InventoryManagmentSystem
             }
             finally { connection.Close(); }
             return uuid;
+        }
+
+        public static uint ItemRentCount(SqlConnection connection, string itemType = null)
+        {
+            string query = "SELECT COUNT(*) FROM tbItems WHERE Location != 'Fire-Tec' AND Location IS NOT NULL AND Condition != 'Retired'";
+            if (itemType != null)
+            {
+                itemType = itemType.ToLower();
+                query = $"{query} AND ItemType = @ItemType";
+            }
+            uint count = 0;
+            try
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                if(itemType != null)
+                {
+                    command.Parameters.AddWithValue("@ItemType", itemType.ToLower());
+                }
+                connection.Open();
+                var result = command.ExecuteScalar();
+                if (result != null && uint.TryParse(result.ToString(), out count))
+                {
+                    return count;
+                }
+            }
+            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return count;
+        }
+
+        private static string ItemStandardColumns()
+        {
+            return "ItemId,Brand,AcquisitionDate,ManufactureDate";
+        }
+
+        private static string ItemStandardValues()
+        {
+            return "@ItemId,@Brand,@AcquisitionDate,@ManufactureDate";
         }
 
         public static uint ItemStockCount(SqlConnection connection, string itemType = null)
@@ -1070,13 +890,13 @@ namespace InventoryManagmentSystem
 
         public static bool ItemUpdate(SqlConnection connection, Guid itemId, string location, string dueDate = null)
         {
-            string query = "UPDATE tbItems SET Location=@Location, DueDate=@DueDatem WHERE ItemId=@ItemId";
+            string query = "UPDATE tbItems SET Location=@Location, DueDate=@DueDate WHERE Id=@ItemId";
             try
             {
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Location", location);
                 command.Parameters.AddWithValue("@DueDate", dueDate);
-                command.Parameters.AddWithValue("@ItemId", itemId);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 connection.Open();
                 command.ExecuteNonQuery();
                 return true;
@@ -1097,17 +917,20 @@ namespace InventoryManagmentSystem
         public static List<History> HistoryFindItem(SqlConnection connection,  Guid itemId, Guid clietId)
         {
             string query;
+            Guid id = Guid.Empty;
             if(itemId == Guid.Empty)
             {
                 if(clietId == Guid.Empty) { return null; }
                 else 
                 { 
-                    query = $"SELECT * FROM tbHistories WHERE ClientId='{clietId}'"; 
+                    id = clietId;
+                    query = $"SELECT * FROM tbHistories WHERE ClientId=@Id"; 
                 }
             } 
             else 
             { 
-                query = $"SELECT * FROM tbHistories WHERE ItemId='{itemId}'"; 
+                id = itemId;
+                query = $"SELECT * FROM tbHistories WHERE ItemId=@Id'"; 
             }
 
             List<History> hList = new List<History>();
@@ -1115,6 +938,7 @@ namespace InventoryManagmentSystem
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", id.ToString());
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -1138,8 +962,8 @@ namespace InventoryManagmentSystem
             try
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", itemId);
-                command.Parameters.AddWithValue("@ClientId", clientId);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
+                command.Parameters.AddWithValue("@ClientId", clientId.ToString());
                 connection.Open();
                 command.ExecuteNonQuery();
                 return true;
@@ -1173,8 +997,8 @@ namespace InventoryManagmentSystem
             try
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", ItemId);
-                command.Parameters.AddWithValue("@ClientId", ClientId);
+                command.Parameters.AddWithValue("@ItemId", ItemId.ToString());
+                command.Parameters.AddWithValue("@ClientId", ClientId.ToString());
                 connection.Open();
                 command.ExecuteNonQuery();
                 return true;
@@ -1186,12 +1010,13 @@ namespace InventoryManagmentSystem
 
         public static Jacket JacketFindByItemId(SqlConnection connection, Guid itemId)
         {
-            string query = $"SELECT * FROM tbJackets WHERE ItemId='{itemId}'";
+            string query = $"SELECT * FROM tbJackets WHERE ItemId=@ItemId";
             Jacket jacket = new Jacket();
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -1245,15 +1070,15 @@ namespace InventoryManagmentSystem
            Guid itemId, string brand, string acquisition, string manufacture, string size)
         {
             string query = $@"
-                INSERT INTO tbJackets({HelperQuery.ItemStandardColumns()},Size) 
-                VALUES({HelperQuery.ItemStandardValues()},@Size)
+                INSERT INTO tbJackets({ItemStandardColumns()},Size) 
+                VALUES({ItemStandardValues()},@Size)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", itemId);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.Parameters.AddWithValue("@Brand", brand);
                 command.Parameters.AddWithValue("@AcquisitionDate", acquisition);
                 command.Parameters.AddWithValue("@ManufactureDate", manufacture);
@@ -1299,11 +1124,12 @@ namespace InventoryManagmentSystem
             {
                 query += "Size = @Size";
             }
-            query += $" WHERE ItemId = '{itemId}";
+            query += $" WHERE ItemId = @ItemId";
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 if (fieldsToUpdate.ContainsKey("brand")) { command.Parameters.AddWithValue("@Brand", brand); }
                 if (fieldsToUpdate.ContainsKey("manufacture")) { command.Parameters.AddWithValue("@ManufactureDate", manufacture); }
                 if (fieldsToUpdate.ContainsKey("size")) { command.Parameters.AddWithValue("@Size", size); }
@@ -1320,12 +1146,13 @@ namespace InventoryManagmentSystem
 
         public static Mask MaskFindByItemId(SqlConnection connection, Guid itemId)
         {
-            string query = $"SELECT * FROM tbMasks WHERE ItemId='{itemId}'";
+            string query = $"SELECT * FROM tbMasks WHERE ItemId=@ItemId";
             Mask mask = new Mask();
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -1379,15 +1206,15 @@ namespace InventoryManagmentSystem
            Guid itemId, string brand, string acquisition, string manufacture, string size)
         {
             string query = $@"
-                INSERT INTO tbMasks({HelperQuery.ItemStandardColumns()},Size) 
-                VALUES({HelperQuery.ItemStandardValues()},@Size)
+                INSERT INTO tbMasks({ItemStandardColumns()},Size) 
+                VALUES({ItemStandardValues()},@Size)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", itemId);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.Parameters.AddWithValue("@Brand", brand);
                 command.Parameters.AddWithValue("@AcquisitionDate", acquisition);
                 command.Parameters.AddWithValue("@ManufactureDate", manufacture);
@@ -1433,7 +1260,7 @@ namespace InventoryManagmentSystem
             {
                 query += "Size = @Size";
             }
-            query += $" WHERE ItemId = '{itemId}'";
+            query += $" WHERE ItemId = @ItemId";
             try
             {
                 connection.Open();
@@ -1441,6 +1268,7 @@ namespace InventoryManagmentSystem
                 if (fieldsToUpdate.ContainsKey("brand")) { command.Parameters.AddWithValue("@Brand", brand); }
                 if (fieldsToUpdate.ContainsKey("manufacture")) { command.Parameters.AddWithValue("@ManufactureDate", manufacture); }
                 if (fieldsToUpdate.ContainsKey("size")) { command.Parameters.AddWithValue("@Size", size); }
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
                 return true;
             }
@@ -1454,12 +1282,13 @@ namespace InventoryManagmentSystem
 
         public static Pants PantsFindByItemId(SqlConnection connection, Guid itemId)
         {
-            string query = $"SELECT * FROM tbMasks WHERE ItemId='{itemId}'";
+            string query = $"SELECT * FROM tbMasks WHERE ItemId=@ItemId";
             Pants pants = new Pants();
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -1513,15 +1342,15 @@ namespace InventoryManagmentSystem
             Guid itemId, string brand, string acquisition, string manufacture, string size)
         {
             string query = $@"
-                INSERT INTO tbPants({HelperQuery.ItemStandardColumns()},Size) 
-                VALUES({HelperQuery.ItemStandardValues()},@Size)
+                INSERT INTO tbPants({ItemStandardColumns()},Size) 
+                VALUES({ItemStandardValues()},@Size)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", itemId);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.Parameters.AddWithValue("@Brand", brand);
                 command.Parameters.AddWithValue("@AcquisitionDate", acquisition);
                 command.Parameters.AddWithValue("@ManufactureDate", manufacture);
@@ -1567,7 +1396,7 @@ namespace InventoryManagmentSystem
             {
                 query += "Size = @Size";
             }
-            query += $" WHERE ItemId = '{itemId}'";
+            query += $" WHERE ItemId = @ItemId";
             try
             {
                 connection.Open();
@@ -1575,6 +1404,7 @@ namespace InventoryManagmentSystem
                 if (fieldsToUpdate.ContainsKey("brand")) { command.Parameters.AddWithValue("@Brand", brand); }
                 if (fieldsToUpdate.ContainsKey("manufacture")) { command.Parameters.AddWithValue("@ManufactureDate", manufacture); }
                 if (fieldsToUpdate.ContainsKey("size")) { command.Parameters.AddWithValue("@Size", size); }
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
                 return true;
             }

@@ -1,26 +1,16 @@
 ﻿using InventoryManagmentSystem.Academy;
 using InventoryManagmentSystem.Rental_Forms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace InventoryManagmentSystem
 {
     public partial class NewRentalModuleForm : Form
     {
-        // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        //Creating command
         SqlConnection connection = new SqlConnection(connectionString);
 
         //Used for query
@@ -32,7 +22,7 @@ namespace InventoryManagmentSystem
         public string license = "";
         public int ReturnReplace = 0;
         string ReplacmentSerial = "";
-        String dueDate = "";
+        string dueDate = "";
         Guid ClientId = Guid.Empty;
         Guid ClassId = Guid.Empty;
         public string drivers;
@@ -51,7 +41,7 @@ namespace InventoryManagmentSystem
             {
                 panelButtons.Visible = false;
                 NewClientForm clientForm = new NewClientForm(rentalType, clientName);
-                HelperDatabaseCall.ItemTypeLoadComboBox(connection, comboBoxItemType);
+                HelperDatabaseCall.ItemTypeLoadComboBox(connection, cbItemType);
                 HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
             }
         }
@@ -63,7 +53,7 @@ namespace InventoryManagmentSystem
             dataGridViewClient.Columns["column_manufacture_date"].DefaultCellStyle.Format = "d";
 
             var items = HelperDatabaseCall.ItemFindByClientId(connection, ClientId);
-            if (items != null) { return; }
+            if (items == null) { return; }
 
             dataGridViewClient.Rows.Clear();
             foreach ( var item in items )
@@ -121,23 +111,25 @@ namespace InventoryManagmentSystem
             int i = 1;
             foreach(var item in items )
             {
+                if(item.ItemType != cbItemType.Text ) { continue; }
                 string brand = "";
                 string size = "";
                 string manufacture = "";
-                string material = "";
+                string materialOrColor = "";
                 if (item.ItemType == "boots")
                 {
                     var boots = (Boots)item.Specifications;
                     brand = boots.Brand;
                     size = boots.Size;
                     manufacture = boots.ManufactureDate;
-                    material = boots.Material;
+                    materialOrColor = boots.Material;
                 }
                 else if (item.ItemType == "helmet")
                 {
                     var helmet = (Helmet)item.Specifications;
                     brand = helmet.Brand;
                     manufacture = helmet.ManufactureDate;
+                    materialOrColor = helmet.Color;
                 }
                 else if (item.ItemType == "jacket")
                 {
@@ -161,8 +153,8 @@ namespace InventoryManagmentSystem
                     manufacture = pants.ManufactureDate;
                 }
 
-                dataGridInv.Rows.Add(i++,
-                    brand, item.SerialNumber, size, manufacture, item.Condition, material, item.Id
+                dataGridInv.Rows.Add(
+                    brand, item.SerialNumber, size, manufacture, item.Condition, materialOrColor, item.Id
                 );
             }
         }
@@ -231,7 +223,7 @@ namespace InventoryManagmentSystem
             flowLayoutPanelProfile.Dock = DockStyle.Bottom;
         }
 
-        public void UpdateProfile(bool isDepartment, String ClientDrivers)
+        public void UpdateProfile(bool isDepartment, string ClientDrivers)
         {
             ExistingUser = true;
             if (isDepartment)
@@ -327,19 +319,19 @@ namespace InventoryManagmentSystem
         {
             if (itemType == "helmet")
             {
-                comboBoxItemType.SelectedIndex = 0;
+                cbItemType.SelectedIndex = 0;
             }
             if (itemType == "jacket")
             {
-                comboBoxItemType.SelectedIndex = 1;
+                cbItemType.SelectedIndex = 1;
             }
             if (itemType == "pants")
             {
-                comboBoxItemType.SelectedIndex = 2;
+                cbItemType.SelectedIndex = 2;
             }
             if (itemType == "boots")
             {
-                comboBoxItemType.SelectedIndex = 3;
+                cbItemType.SelectedIndex = 3;
             }
         }
 
@@ -387,7 +379,7 @@ namespace InventoryManagmentSystem
                 LoadClient();
                 LoadInventory();
                 ReturnReplace = 0;
-                comboBoxItemType.Enabled = true;
+                cbItemType.Enabled = true;
                 dataGridViewClient.Enabled = true;
 
             }
@@ -428,7 +420,7 @@ namespace InventoryManagmentSystem
             flowLayoutPanelProfile.Visible = false;
             NewClientForm clientForm = new NewClientForm("Individual", labelProfileName.Text);
             clientForm.txtBoxDriversLicense.Enabled = false;
-            HelperDatabaseCall.ItemTypeLoadComboBox(connection, comboBoxItemType);
+            HelperDatabaseCall.ItemTypeLoadComboBox(connection, cbItemType);
             HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
         }
     }

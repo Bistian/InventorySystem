@@ -20,7 +20,6 @@ namespace InventoryManagmentSystem
             InitTables();
         }
 
-        #region SQL_Variables
         // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         //Creating command
@@ -29,33 +28,9 @@ namespace InventoryManagmentSystem
         //Used for counting rentals
         int total = 0;
 
-        #endregion SQL_Variables
 
         private Form activeForm = null;
         string firetec = "Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'";
-
-        private int CountRented(string itemType)
-        {
-            try
-            {
-                connection.Open();
-                string query = HelperQuery.RentItems(itemType);
-                SqlCommand command = new SqlCommand(query, connection);
-                object result = command.ExecuteScalar();
-                if(result != null && result != DBNull.Value)
-                {
-                    return (int)result;
-                }
-                return 0;
-            }
-            catch (Exception ex)
-            { 
-                Console.WriteLine(ex.Message);
-                return -1;
-            }
-            finally { connection.Close(); }
-
-        }
 
         private void InitTables()
         {
@@ -72,68 +47,6 @@ namespace InventoryManagmentSystem
             query += " AND DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             LoadTables(dataGridViewPastDue, query, "DueDate2");
-        }
-
-        private string QueryRentedItems()
-        {
-            string query = HelperQuery.RentItems();
-            query += $@"
-                AND DueDate IS NOT NULL AND CAST(DueDate AS DATE)
-                BETWEEN CAST(GETDATE() AS DATE) AND 
-                DATEADD(DAY, {dueDays}, CAST(GETDATE() AS DATE))
-            ";
-            /*string query = $@"
-                SELECT ItemType, Location, DueDate FROM tbItems 
-                JOIN tbBoots ON tbBoots.ItemId = tbItems.Id 
-                WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) 
-                    BETWEEN CAST(GETDATE() AS DATE) AND 
-                    DATEADD(DAY, {dueDays}, CAST(GETDATE() AS DATE)) 
-
-                UNION SELECT ItemType, Location, DueDate FROM tbItems 
-                JOIN tbHelmets ON tbHelmets.ItemId = tbItems.Id 
-                WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) 
-                    BETWEEN CAST(GETDATE() AS DATE) AND 
-                    DATEADD(DAY, {dueDays}, CAST(GETDATE() AS DATE))
-
-                UNION SELECT ItemType, Location, DueDate FROM tbItems 
-                JOIN tbJackets ON tbJackets.ItemId = tbItems.Id 
-                WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) 
-                    BETWEEN CAST(GETDATE() AS DATE) AND 
-                    DATEADD(DAY, {dueDays}, CAST(GETDATE() AS DATE))
-
-                UNION SELECT ItemType, Location, DueDate FROM tbItems 
-                JOIN tbPants ON tbPants.ItemId = tbItems.Id 
-                WHERE DueDate IS NOT NULL AND CAST(DueDate AS DATE) 
-                    BETWEEN CAST(GETDATE() AS DATE) AND 
-                    DATEADD(DAY, {dueDays}, CAST(GETDATE() AS DATE))
-            ";*/
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            return query;
-        }
-
-        private string QueryLateItems()
-        {
-            string query = HelperQuery.RentItems();
-            query += " AND DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0";
-            /*query = @"
-                SELECT ItemType, Location, DueDate FROM tbItems 
-                JOIN tbBoots ON tbBoots.ItemId = tbItems.Id 
-                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0
-
-                UNION SELECT ItemType, Location, DueDate FROM tbItems 
-                JOIN tbHelmets ON tbHelmets.ItemId = tbItems.Id 
-                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0
-
-                UNION SELECT ItemType, Location, DueDate FROM tbItems 
-                JOIN tbJackets ON tbJackets.ItemId = tbItems.Id 
-                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0 
-
-                UNION SELECT ItemType, Location, DueDate FROM tbItems 
-                JOIN tbPants ON tbPants.ItemId = tbItems.Id 
-                WHERE DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0
-            ";*/
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            return query;
         }
 
         private void LoadTables(DataGridView grid, string query, string columnName)
@@ -167,9 +80,12 @@ namespace InventoryManagmentSystem
 
         private void PrintRented()
         {
-            btnCoats.Text = $"{CountRented("jackets")} Coats";
-            btnPants.Text = $"{CountRented("pants")} Pants";
-            btnHelmets.Text = $"{CountRented("helmets")} Helmets";
+            uint rented = HelperDatabaseCall.ItemRentCount(connection, "jacket");
+            btnCoats.Text = $"{rented} Coats";
+            rented = HelperDatabaseCall.ItemRentCount(connection, "pants");
+            btnPants.Text = $"{rented} Pants";
+            rented = HelperDatabaseCall.ItemRentCount(connection, "helmet");
+            btnHelmets.Text = $"{rented} Helmets";
         }
 
         private void PrintStock()
