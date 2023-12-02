@@ -126,7 +126,7 @@ namespace InventoryManagmentSystem
 
         private void LoadClients()
         {
-            var clients = HelperDatabaseCall.ClientFindByType(connection, clientType);
+            var clients = HelperSql.ClientFindByType(connection, clientType);
             if(clients == null) { return; }
 
             dataGridUsers.Rows.Clear();
@@ -157,7 +157,7 @@ namespace InventoryManagmentSystem
             if (string.IsNullOrEmpty(searchTerm)) { LoadClients(); }
 
             dataGridUsers.Rows.Clear();
-            var clients = HelperDatabaseCall.ClientFindBySearchBar(connection, searchTerm);
+            var clients = HelperSql.ClientFindBySearchBar(connection, searchTerm);
             if (clients == null) { return; }
 
             dataGridUsers.Rows.Clear();

@@ -44,7 +44,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         public void AutoFillFields(string type, string clientName)
         {
             RentalTypeSelector(type);
-            var client = HelperDatabaseCall.ClientFindByName(connection, clientName);
+            var client = HelperSql.ClientFindByName(connection, clientName);
             if(client == null) { return; }
 
             txtBoxCustomerName.Text = client["Name"];
@@ -568,7 +568,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             if(classList != null) { classList.Clear(); }
             cbClass.Items.Clear();
 
-            classList = HelperDatabaseCall.ClassListByAcademy(connection, academyList[name]);
+            classList = HelperSql.ClassListByAcademy(connection, academyList[name]);
             if(classList == null) { return; }
 
             foreach(var item in classList)

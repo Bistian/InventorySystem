@@ -117,6 +117,8 @@
     <Compile Include="All Forms\Rental Forms\Academy Forms\CreateClassForm.Designer.cs">
       <DependentUpon>CreateClassForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="C# Files\CustomTypes.cs" />
+    <Compile Include="C# Files\HelperError.cs" />
     <Compile Include="Custom Item Classes\CustomButton.cs">
       <SubType>Component</SubType>
     </Compile>

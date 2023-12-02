@@ -67,7 +67,7 @@ namespace InventoryManagmentSystem
 
         private void LoadAcademies()
         {
-            academyMap = HelperDatabaseCall.AcademyListNames(connection);
+            academyMap = HelperSql.AcademyListNames(connection);
             foreach(var item in academyMap.Values)
             {
                 cbAcademy.Items.Add(item);

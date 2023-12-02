@@ -30,7 +30,7 @@ namespace InventoryManagmentSystem
             // Add item types
             cbItemType.Items.Add("all");
             cbItemType.SelectedIndex = 0;
-            HelperDatabaseCall.ItemTypeLoadComboBox(connection, cbItemType);
+            HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
             if (itemType != null && serial != null)
             {
                 InitWithSelectedItem(itemType, serial);
@@ -43,7 +43,7 @@ namespace InventoryManagmentSystem
 
         public RentalHistoryForm(Guid itemId, Guid clientId)
         {
-            historyList = HelperDatabaseCall.HistoryFindItem(connection, itemId, clientId);
+            historyList = HelperSql.HistoryFindItem(connection, itemId, clientId);
             if (historyList.Count == 0) { this.Close(); return; }
             LoadDataGrid();
         }
@@ -53,7 +53,7 @@ namespace InventoryManagmentSystem
             int count = 1;
             foreach(History history in historyList)
             {
-                var client = HelperDatabaseCall.ClientFindById(connection, history.ClientId);
+                var client = HelperSql.ClientFindById(connection, history.ClientId);
                 dataGridHistory.Rows.Add(count++,
                     history.ClientId,
                     client["Name"],
@@ -97,7 +97,7 @@ namespace InventoryManagmentSystem
 
             Guid itemId = (Guid)row.Cells["column_item_id"].Value;
 
-            var list = HelperDatabaseCall.HistoryFindItem(connection, itemId, Guid.Empty);
+            var list = HelperSql.HistoryFindItem(connection, itemId, Guid.Empty);
             if(list == null) { return; }
 
             foreach(History history in list)

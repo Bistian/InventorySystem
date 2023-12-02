@@ -28,13 +28,28 @@ namespace InventoryManagmentSystem
         //Used for counting rentals
         int total = 0;
 
-
         private Form activeForm = null;
         string firetec = "Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'";
 
+        private static string RentItems(string itemType = null)
+        {
+            string query = $@"
+                SELECT * FROM tbItems 
+                WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') AND 
+                    Location IS NOT NULL AND Condition NOT IN ('Retired')
+            ";
+            if (itemType != null)
+            {
+                itemType = itemType.ToLower();
+                query = $"{query} AND ItemType = '{itemType}'";
+            }
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return query;
+        }
+
         private void InitTables()
         {
-            string query = HelperQuery.RentItems();
+            string query = RentItems();
             query += $@"
                 AND DueDate IS NOT NULL AND CAST(DueDate AS DATE)
                 BETWEEN CAST(GETDATE() AS DATE) AND 
@@ -43,7 +58,7 @@ namespace InventoryManagmentSystem
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             LoadTables(dataGridViewBeforeDue, query, "Due");
 
-            query = HelperQuery.RentItems();
+            query = RentItems();
             query += " AND DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             LoadTables(dataGridViewPastDue, query, "DueDate2");
@@ -80,23 +95,23 @@ namespace InventoryManagmentSystem
 
         private void PrintRented()
         {
-            uint rented = HelperDatabaseCall.ItemRentCount(connection, "jacket");
+            uint rented = HelperSql.ItemRentCount(connection, "jacket");
             btnCoats.Text = $"{rented} Coats";
-            rented = HelperDatabaseCall.ItemRentCount(connection, "pants");
+            rented = HelperSql.ItemRentCount(connection, "pants");
             btnPants.Text = $"{rented} Pants";
-            rented = HelperDatabaseCall.ItemRentCount(connection, "helmet");
+            rented = HelperSql.ItemRentCount(connection, "helmet");
             btnHelmets.Text = $"{rented} Helmets";
         }
 
         private void PrintStock()
         {
-            var stock = HelperDatabaseCall.ItemStockCount(connection, "boots");
+            var stock = HelperSql.ItemStockCount(connection, "boots");
             ButtonInStockBoots.Text = $"{stock} Boots";
-            stock = HelperDatabaseCall.ItemStockCount(connection, "helmet");
+            stock = HelperSql.ItemStockCount(connection, "helmet");
             ButtonInStockHelmets.Text = $"{stock} Helmets";
-            stock = HelperDatabaseCall.ItemStockCount(connection, "jacket");
+            stock = HelperSql.ItemStockCount(connection, "jacket");
             ButtonInStockJackets.Text = $"{stock} Coats";
-            stock = HelperDatabaseCall.ItemStockCount(connection, "pants");
+            stock = HelperSql.ItemStockCount(connection, "pants");
             ButtonInStockPants.Text = $"{stock} Pants";
         }
 

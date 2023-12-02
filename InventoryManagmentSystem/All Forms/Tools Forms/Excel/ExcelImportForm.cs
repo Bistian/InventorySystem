@@ -227,7 +227,7 @@ namespace InventoryManagmentSystem
                     }
                 }
 
-                Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, 
+                Guid uuid = HelperSql.ItemInsertAndGetUuid(connection, 
                     row[0].ToString(), row[2].ToString(), row[5].ToString(), "Rent");
 
                 if (uuid == Guid.Empty) { return; }
@@ -236,13 +236,13 @@ namespace InventoryManagmentSystem
                 bool isInserted = false;
                 if(isPants)
                 {
-                    isInserted = HelperDatabaseCall.PantsInsert(connection, uuid,
+                    isInserted = HelperSql.PantsInsert(connection, uuid,
                         row[1].ToString(), today.ToString(), row[4].ToString(), row[3].ToString());
                 }
 
                 if(!isInserted)
                 {
-                    HelperDatabaseCall.ItemDelete(connection, uuid);
+                    HelperSql.ItemDelete(connection, uuid);
                     return;
                 }
 
@@ -277,7 +277,7 @@ namespace InventoryManagmentSystem
                         Console.WriteLine(ex.ToString());
                     #endif
                     // If I cannot connect the item, I need to delete it.
-                    HelperDatabaseCall.ItemDelete(connection, uuid);
+                    HelperSql.ItemDelete(connection, uuid);
                 }*/
             }
         }
@@ -304,7 +304,7 @@ namespace InventoryManagmentSystem
                         row[8] = "Fire-Tec";
                     }
                 }
-                //Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, row[0].ToString());
+                //Guid uuid = HelperSql.ItemInsertAndGetUuid(connection, row[0].ToString());
                 string query = $"INSERT INTO {table} " +
                     "(ItemId, Brand, SerialNumber, Location, Condition, ManufactureDate, DueDate, Size, [Material]) " +
                     "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @Condition, @ManufactureDate, @DueDate, @Size, @Material)";
@@ -335,7 +335,7 @@ namespace InventoryManagmentSystem
                     Console.WriteLine(ex.ToString());
                     #endif
                     // If I cannot connect the item, I need to delete it.
-                    //HelperDatabaseCall.ItemDelete(connection, uuid);
+                    //HelperSql.ItemDelete(connection, uuid);
                 }
             }
         }
@@ -363,7 +363,7 @@ namespace InventoryManagmentSystem
                     }
                 }
 
-                //Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, row[0].ToString());
+                //Guid uuid = HelperSql.ItemInsertAndGetUuid(connection, row[0].ToString());
                 string query = $"INSERT INTO {table} " +
                     "(ItemId, Brand, SerialNumber, Location, Condition, ManufactureDate, DueDate, Color) " +
                     "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @Condition, @ManufactureDate, @DueDate, @Color)";
@@ -393,7 +393,7 @@ namespace InventoryManagmentSystem
                     Console.WriteLine(ex.ToString());
                     #endif
                     // If I cannot connect the item, I need to delete it.
-                    //HelperDatabaseCall.ItemDelete(connection, uuid);
+                    //HelperSql.ItemDelete(connection, uuid);
                 }
             }
         }

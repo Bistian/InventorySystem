@@ -41,7 +41,7 @@ namespace InventoryManagmentSystem
             {
                 panelButtons.Visible = false;
                 NewClientForm clientForm = new NewClientForm(rentalType, clientName);
-                HelperDatabaseCall.ItemTypeLoadComboBox(connection, cbItemType);
+                HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
                 HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
             }
         }
@@ -52,7 +52,7 @@ namespace InventoryManagmentSystem
             dataGridViewClient.Columns["column_due_date"].DefaultCellStyle.Format = "d";
             dataGridViewClient.Columns["column_manufacture_date"].DefaultCellStyle.Format = "d";
 
-            var items = HelperDatabaseCall.ItemFindByClientId(connection, ClientId);
+            var items = HelperSql.ItemFindByClientId(connection, ClientId);
             if (items == null) { return; }
 
             dataGridViewClient.Rows.Clear();
@@ -105,7 +105,7 @@ namespace InventoryManagmentSystem
         {
             dataGridInv.Columns["ManufactureDate"].DefaultCellStyle.Format = "d";
             dataGridInv.Rows.Clear();
-            var items = HelperDatabaseCall.ItemFindBySearchBar(connection, textBoxSearchBar.Text);
+            var items = HelperSql.ItemFindBySearchBar(connection, textBoxSearchBar.Text);
             if(items == null ) { return; }
 
             int i = 1;
@@ -161,7 +161,7 @@ namespace InventoryManagmentSystem
 
         public void LoadProfile(bool isDepartment, string clientId)
         {
-            var client = HelperDatabaseCall.ClientFindById(connection, Guid.Parse(clientId));
+            var client = HelperSql.ClientFindById(connection, Guid.Parse(clientId));
             if(client == null) 
             {
                 Console.WriteLine("Client not found.");
@@ -188,7 +188,7 @@ namespace InventoryManagmentSystem
                 ClassId = Guid.Parse(client["IdClass"]);
                 license = labelClientDrivers.Text;
 
-                var dict = HelperDatabaseCall.ClassFindByClassId(connection, ClassId);
+                var dict = HelperSql.ClassFindByClassId(connection, ClassId);
                 if(dict != null)
                 {
                     labelClientClass.Text = dict["Name"];
@@ -287,10 +287,10 @@ namespace InventoryManagmentSystem
             if (ReturnReplace == 1)
             {
                 Guid itemId = (Guid)row.Cells["ItemId"].Value;
-                bool isUpdated = HelperDatabaseCall.ItemUpdate(connection, itemId, "Fire-Tec");
+                bool isUpdated = HelperSql.ItemUpdate(connection, itemId, "Fire-Tec");
                 if(isUpdated)
                 {
-                    HelperDatabaseCall.HistoryUpdate(connection, itemId, ClientId);
+                    HelperSql.HistoryUpdate(connection, itemId, ClientId);
                     MessageBox.Show("Item Returned");
                 }
                 else { MessageBox.Show("Failed to return the item."); }
@@ -353,13 +353,13 @@ namespace InventoryManagmentSystem
                 }
                 
                 Guid itemId = (Guid)row.Cells["ItemIdInv"].Value;
-                bool isUpdated = HelperDatabaseCall.ItemUpdate(connection, itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
+                bool isUpdated = HelperSql.ItemUpdate(connection, itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
                 if(!isUpdated) 
                 {
                     MessageBox.Show("Failed to update item.");
                     return; 
                 }
-                isUpdated = HelperDatabaseCall.HistoryInsert(connection, itemId, ClientId);
+                isUpdated = HelperSql.HistoryInsert(connection, itemId, ClientId);
                 MessageBox.Show("Rental has been successfully completed");
                 LoadClient();
                 LoadInventory();
@@ -371,10 +371,10 @@ namespace InventoryManagmentSystem
                 labelReplacmentItem.Text = ReplacmentSerial;
                 ItemIdInventory = (Guid)row.Cells["ItemIdInv"].Value;
 
-                HelperDatabaseCall.ItemUpdate(connection, ItemIdClient, "Fire-Tec");
-                HelperDatabaseCall.HistoryUpdate(connection, ItemIdClient, ClientId);
-                HelperDatabaseCall.ItemUpdate(connection, ItemIdInventory, ClientId.ToString(), dueDate);
-                HelperDatabaseCall.HistoryInsert(connection, ItemIdInventory, ClientId);
+                HelperSql.ItemUpdate(connection, ItemIdClient, "Fire-Tec");
+                HelperSql.HistoryUpdate(connection, ItemIdClient, ClientId);
+                HelperSql.ItemUpdate(connection, ItemIdInventory, ClientId.ToString(), dueDate);
+                HelperSql.HistoryInsert(connection, ItemIdInventory, ClientId);
 
                 LoadClient();
                 LoadInventory();
@@ -420,7 +420,7 @@ namespace InventoryManagmentSystem
             flowLayoutPanelProfile.Visible = false;
             NewClientForm clientForm = new NewClientForm("Individual", labelProfileName.Text);
             clientForm.txtBoxDriversLicense.Enabled = false;
-            HelperDatabaseCall.ItemTypeLoadComboBox(connection, cbItemType);
+            HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
             HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
         }
     }

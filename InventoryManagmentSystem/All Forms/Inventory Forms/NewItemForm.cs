@@ -22,10 +22,10 @@ namespace InventoryManagmentSystem.Rental_Forms
             this.isUpdate = isUpdate;
             if (isUpdate)
             {
-                HelperDatabaseCall.BrandsFillComboBox(connection, cbItemType.Text.ToLower(), cbBrand);
+                HelperSql.BrandsFillComboBox(connection, cbItemType.Text.ToLower(), cbBrand);
             }
             ManageFieldsAvailability();
-            HelperDatabaseCall.ItemTypeLoadComboBox(connection, cbItemType);
+            HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
             for (int i = 0; i < cbItemType.Items.Count; ++i)
             {
                 if (cbItemType.Items[i].ToString() == itemType)
@@ -42,27 +42,27 @@ namespace InventoryManagmentSystem.Rental_Forms
             bool wasAdded = false;
             if (cbItemType.Text.ToLower() == "boots") 
             {
-                wasAdded = HelperDatabaseCall.BootsInsert(connection, 
+                wasAdded = HelperSql.BootsInsert(connection, 
                     uuid, cbBrand.Text, dtAcquisition.Text, dtManufacture.Text, cbSize.Text, cbMaterial.Text); 
             }
             else if (cbItemType.Text.ToLower() == "helmet") 
             { 
-                wasAdded = HelperDatabaseCall.HelmetInsert(connection,
+                wasAdded = HelperSql.HelmetInsert(connection,
                     uuid, cbBrand.Text, dtAcquisition.Text, dtManufacture.Text, cbColor.Text); 
             }
             else if (cbItemType.Text.ToLower() == "jacket") 
             { 
-                wasAdded = HelperDatabaseCall.JacketInsert(connection,
+                wasAdded = HelperSql.JacketInsert(connection,
                     uuid, cbBrand.Text, dtAcquisition.Text, dtManufacture.Text, cbSize.Text); 
             }
             else if (cbItemType.Text.ToLower() == "mask") 
             {
-                wasAdded = HelperDatabaseCall.MaskInsert(connection,
+                wasAdded = HelperSql.MaskInsert(connection,
                     uuid, cbBrand.Text, dtAcquisition.Text, dtManufacture.Text, cbSize.Text);
             }
             else if(cbItemType.Text.ToLower() == "pants")
             {
-                wasAdded = HelperDatabaseCall.PantsInsert(connection,
+                wasAdded = HelperSql.PantsInsert(connection,
                     uuid, cbBrand.Text, dtAcquisition.Text, dtManufacture.Text, cbSize.Text);
             }
             return wasAdded;
@@ -86,7 +86,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 return false;
             }
 
-            var item = HelperDatabaseCall.ItemFindBySerialNumber(connection, itemType, tbSerialNumber.Text);
+            var item = HelperSql.ItemFindBySerialNumber(connection, itemType, tbSerialNumber.Text);
             if (item != null)
             {
                 message = "Item already exists, do you want to update it?";
@@ -96,7 +96,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 return false;
             }
 
-            Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, cbItemType.Text, tbSerialNumber.Text, cbCondition.Text, "Rent");
+            Guid uuid = HelperSql.ItemInsertAndGetUuid(connection, cbItemType.Text, tbSerialNumber.Text, cbCondition.Text, "Rent");
             if (uuid.Equals(Guid.Empty))
             {
                 Console.WriteLine("ERROR: UUID not found.");
@@ -107,7 +107,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (!wasAdded)
             {
                 // If item was not added to the specific table, delete from Items Table.
-                HelperDatabaseCall.ItemDelete(connection, uuid);
+                HelperSql.ItemDelete(connection, uuid);
                 MessageBox.Show("Could not save the item.");
                 return false;
             }
@@ -124,11 +124,11 @@ namespace InventoryManagmentSystem.Rental_Forms
             string title = "Update Item";
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return false; }
 
-            var item = HelperDatabaseCall.ItemFindBySerialNumber(connection, cbItemType.Text, tbSerialNumber.Text);
+            var item = HelperSql.ItemFindBySerialNumber(connection, cbItemType.Text, tbSerialNumber.Text);
             bool isUpdated = false;
             if (itemType == "boots") 
             {
-                isUpdated = HelperDatabaseCall.BootsUpdate(connection,
+                isUpdated = HelperSql.BootsUpdate(connection,
                     item.Id,
                     cbBrand.Text,
                     cbSize.Text,
@@ -137,7 +137,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
             else if (itemType == "helmet") 
             {
-                isUpdated = HelperDatabaseCall.HelmetUpdate(connection,
+                isUpdated = HelperSql.HelmetUpdate(connection,
                     item.Id, 
                     cbBrand.Text, 
                     dtManufacture.Value.Date.ToString(), 
@@ -145,7 +145,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
             else if (itemType == "jacket") 
             {
-                isUpdate = HelperDatabaseCall.JacketUpdate(connection,
+                isUpdate = HelperSql.JacketUpdate(connection,
                     item.Id,
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
@@ -153,7 +153,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
             else if (itemType == "mask")
             {
-                isUpdate = HelperDatabaseCall.MaskUpdate(connection,
+                isUpdate = HelperSql.MaskUpdate(connection,
                     item.Id,
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
@@ -161,7 +161,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
             else if (itemType == "pants")
             {
-                isUpdate = HelperDatabaseCall.PantsUpdate(connection,
+                isUpdate = HelperSql.PantsUpdate(connection,
                     item.Id,
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
@@ -372,7 +372,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             form.cbItemType.Text = cbItemType.Text;
             form.close = true;
             form.ShowDialog();
-            HelperDatabaseCall.BrandsFillComboBox(connection, cbItemType.Text.ToLower(), cbBrand);
+            HelperSql.BrandsFillComboBox(connection, cbItemType.Text.ToLower(), cbBrand);
             cbBrand.SelectedIndex = cbBrand.Items.Count - 1;
         }
 
@@ -383,7 +383,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void cbItemType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            HelperDatabaseCall.BrandsFillComboBox(connection, cbItemType.Text.ToLower(), cbBrand);
+            HelperSql.BrandsFillComboBox(connection, cbItemType.Text.ToLower(), cbBrand);
             LoadSizes();
             ManageFieldsAvailability();
         }

@@ -31,7 +31,7 @@ namespace InventoryManagmentSystem
             InitializeComponent();
             checkActive.Checked = true;
             LoadInventory();
-            HelperDatabaseCall.ItemTypeLoadComboBox(connection, cbItemType);
+            HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
             InitializeItems();
             SetItemType(ItemType);
         }
@@ -74,11 +74,11 @@ namespace InventoryManagmentSystem
         /// <returns>Complete query</returns>
         private void InitializeItems()
         {
-            bootsList = HelperDatabaseCall.BootsFindAll(connection);
-            helmetsList = HelperDatabaseCall.HelmetFindAll(connection);
-            jacketsList = HelperDatabaseCall.JacketFindAll(connection);
-            masksList = HelperDatabaseCall.MaskFindAll(connection);
-            pantsList = HelperDatabaseCall.PantsFindAll(connection);
+            bootsList = HelperSql.BootsFindAll(connection);
+            helmetsList = HelperSql.HelmetFindAll(connection);
+            jacketsList = HelperSql.JacketFindAll(connection);
+            masksList = HelperSql.MaskFindAll(connection);
+            pantsList = HelperSql.PantsFindAll(connection);
         }
 
         private void DisplayBoots()

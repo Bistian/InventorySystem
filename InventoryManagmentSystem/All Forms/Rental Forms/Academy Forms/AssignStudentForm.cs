@@ -23,7 +23,7 @@ namespace InventoryManagmentSystem.Academy
         public AssignStudentForm(AcademyForm parent)
         {
             InitializeComponent();
-            academyMap = HelperDatabaseCall.AcademyListNames(connection);
+            academyMap = HelperSql.AcademyListNames(connection);
             classList = new List<Dictionary<string, string>>();
             foreach (var value in academyMap.Values)
             {
@@ -99,7 +99,7 @@ namespace InventoryManagmentSystem.Academy
             }
 
             classList.Clear();
-            classList = HelperDatabaseCall.ClassListByAcademy(connection, academyId);
+            classList = HelperSql.ClassListByAcademy(connection, academyId);
             cbClasses.Items.Clear();
             foreach (var item in classList)
             {

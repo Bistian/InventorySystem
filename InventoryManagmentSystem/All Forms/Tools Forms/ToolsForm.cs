@@ -97,7 +97,7 @@ namespace InventoryManagmentSystem
 
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             SqlConnection connection = new SqlConnection(connectionString);
-            HelperDatabaseCall.ItemTypeLoadComboBox(connection, cbItemType);
+            HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
 #endif
         }
 
@@ -117,7 +117,7 @@ namespace InventoryManagmentSystem
             // Loop through the table.
             while(true)
             {
-                //Guid uuid = HelperDatabaseCall.ItemInsertAndGetUuid(connection, cbItemType.Text);
+                //Guid uuid = HelperSql.ItemInsertAndGetUuid(connection, cbItemType.Text);
                 // Add item id to null.
                 string query = $@"
                     UPDATE TOP(1) {table}
@@ -133,13 +133,13 @@ namespace InventoryManagmentSystem
                     int rowsAffected = command.ExecuteNonQuery(); connection.Close();
                     if(rowsAffected < 1) 
                     { 
-                        //HelperDatabaseCall.ItemDelete(connection, uuid);
+                        //HelperSql.ItemDelete(connection, uuid);
                         break; 
                     }
                 }
                 catch (Exception ex)
                 {
-                    //HelperDatabaseCall.ItemDelete(connection, uuid);
+                    //HelperSql.ItemDelete(connection, uuid);
                     Console.WriteLine(ex.Message);
                     connection.Close();
                 }

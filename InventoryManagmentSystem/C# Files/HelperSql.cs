@@ -7,34 +7,7 @@ using System.Windows.Forms;
 
 namespace InventoryManagmentSystem
 {
-    public class HelperQuery
-    {
-        
-       
-        /// <summary>
-        /// Get count of how many items are rented.
-        /// </summary>
-        /// <param name="itemType">Optional: Specify what item type you want to count.</param>
-        /// <returns></returns>
-        public static string RentItems(string itemType = null)
-        {
-            string query = $@"
-                SELECT * FROM tbItems 
-                WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') AND 
-                    Location IS NOT NULL AND Condition NOT IN ('Retired')
-            ";
-            if(itemType != null)
-            {
-                itemType = itemType.ToLower();
-                query = $"{query} AND ItemType = '{itemType}'";
-            }
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            return query;
-        }
-
-    }
-
-    public class HelperDatabaseCall
+    public class HelperSql
     {
         /// <summary>
         /// Returns a dictionary with academies id and name.

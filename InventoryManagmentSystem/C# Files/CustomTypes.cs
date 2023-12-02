@@ -2,18 +2,6 @@
 
 namespace InventoryManagmentSystem
 {
-    public class Item
-    {
-        public Guid Id { get; set; }
-        public string ItemType { get; set; }
-        public string DueDate { get; set; }
-        public string SerialNumber { get; set; }
-        public string Condition { get; set; }
-        public string Location { get; set; }
-        public string BusinessModel { get; set; }
-        public object Specifications { get; set; }
-    }
-
     public class Boots
     {
         public Guid ItemId { get; set; }
@@ -40,6 +28,18 @@ namespace InventoryManagmentSystem
         public Guid ClientId { get; set; }
         public string RentDate { get; set; }
         public string ReturnDate { get; set; }
+    }
+
+    public class Item
+    {
+        public Guid Id { get; set; }
+        public string ItemType { get; set; }
+        public string DueDate { get; set; }
+        public string SerialNumber { get; set; }
+        public string Condition { get; set; }
+        public string Location { get; set; }
+        public string BusinessModel { get; set; }
+        public object Specifications { get; set; }
     }
 
     public class Jacket
