@@ -60,7 +60,7 @@ namespace InventoryManagmentSystem.Academy
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        labelTitle.Text = $"{reader[0]} {reader[1]} student list";
+                        labelTitle.Text = $"{reader[0]} {reader[1]} Student List";
                     }
                 }
                 catch (Exception ex)

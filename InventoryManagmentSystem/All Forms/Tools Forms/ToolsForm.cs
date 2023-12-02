@@ -9,6 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.Windows.Forms.VisualStyles;
+using Microsoft.VisualBasic;
 
 namespace InventoryManagmentSystem
 {
@@ -16,7 +19,11 @@ namespace InventoryManagmentSystem
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
+        #region SQL_Variables
 
+        //Creating command
+        SqlCommand command = new SqlCommand();
+        #endregion SQL_Variables
         // Colors
         Color offColor = Color.Transparent;
         Color onColor = Color.DarkGoldenrod;
@@ -145,6 +152,36 @@ namespace InventoryManagmentSystem
                 }
             }
             Console.WriteLine("Gaje likes minors!");
+        }
+
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            string message = "Are you sure you want to update cereal?";
+            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (messageBox == DialogResult.No) { return; }
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.SerialNumber = tbBoots.SerialNumber " +
+                "FROM tbBoots " +
+                "WHERE tbItems.Id = tbBoots.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                MessageBox.Show("yummy");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            connection.Close();
         }
     }
 }
