@@ -134,21 +134,6 @@ namespace InventoryManagmentSystem
             {
                 AddClientToGrid(client);
             }
-            
-           /* command = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE Type = @ClientType", connection);
-            command.Parameters.AddWithValue("@ClientType", clientType);
-            connection.Open();
-            try
-            {
-                dr = command.ExecuteReader();
-                while (dr.Read())
-                {
-                    dataGridUsers.Rows.Add(dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
-                }
-            }
-            catch(Exception ex) { Console.WriteLine(ex.Message); }
-            dr.Close();
-            connection.Close();*/
         }
 
         private void searchBar_TextChanged(object sender, EventArgs e)
@@ -165,19 +150,6 @@ namespace InventoryManagmentSystem
             {
                 AddClientToGrid(client);
             }
-/*
-            command = new SqlCommand("SELECT Name, Phone, Email, Academy, Address,DriversLicenseNumber, FireTecRepresentative FROM tbClients WHERE (Name LIKE '%" + searchTerm + "%' OR Academy LIKE '%" + searchTerm + "%') AND Type = @ClientType", connection);
-            command.Parameters.AddWithValue("@ClientType", clientType);
-            connection.Open();
-            dr = command.ExecuteReader();
-
-            while (dr.Read())
-            {
-                dataGridUsers.Rows.Add(dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
-            }
-
-            dr.Close();
-            connection.Close();*/
         }
 
         private void AddClientToGrid(Dictionary<string,string> client)
