@@ -880,7 +880,7 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// Find history using item id or client id.
+        /// Find list using item id or client id.
         /// Use Guid.Empty on the id you don't want to search.
         /// </summary>
         /// <param name="connection"></param>
@@ -927,6 +927,77 @@ namespace InventoryManagmentSystem
             catch(Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return hList;
+        }
+
+        public static List<Dictionary<string,string>> HistoryNameAndType(SqlConnection connection, Guid itemId, Guid clietId)
+        {
+            string query = @"
+                SELECT h.Id, h.ItemId, h.ClientId, h.RentDate, h.ReturnDate, i.ItemType, c.Name
+                FROM tbHistories AS h
+                JOIN tbItems AS i ON h.itemId = i.Id
+                JOIN tbClients AS c ON h.ClientId = c.Id
+            ";
+            Guid uuid = Guid.Empty;
+            if(itemId != Guid.Empty)
+            {
+                uuid = itemId;
+                query = $"{query} WHERE h.ItemId = @uuid";
+            }
+            else if(clietId != Guid.Empty)
+            {
+                uuid = clietId;
+                query = $"{query} WHERE h.ClientId = @uuid";
+            }
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+
+            var list = new List<Dictionary<string, string>>();
+            try
+            {
+                var command = new SqlCommand(query, connection);
+                if(uuid != Guid.Empty)
+                {
+                    command.Parameters.AddWithValue("@uuid", uuid);
+                }
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while(reader.Read())
+                {
+                    var history = new Dictionary<string, string>();
+                    string key = "Id";
+                    string value = reader[reader.GetOrdinal(key)].ToString();
+                    history.Add(key, value);
+
+                    key = "ItemId";
+                    value = reader[reader.GetOrdinal(key)].ToString();
+                    history.Add(key, value);
+
+                    key = "ClientId";
+                    value = reader[reader.GetOrdinal(key)].ToString();
+                    history.Add(key, value);
+
+                    key = "RentDate";
+                    value = reader[reader.GetOrdinal(key)].ToString();
+                    history.Add(key, value);
+
+                    key = "ReturnDate";
+                    value = reader[reader.GetOrdinal(key)].ToString();
+                    history.Add(key, value);
+
+                    key = "ItemType";
+                    value = reader[reader.GetOrdinal(key)].ToString();
+                    history.Add(key, value);
+
+                    key = "Name";
+                    value = reader[reader.GetOrdinal(key)].ToString();
+                    history.Add(key, value);
+
+                    list.Add(history);
+                }
+
+            }
+            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return list;
         }
 
         public static bool HistoryInsert(SqlConnection connection, Guid itemId, Guid clientId)
