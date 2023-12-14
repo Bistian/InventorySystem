@@ -284,6 +284,94 @@ namespace InventoryManagmentSystem
             return null;
         }
 
+        /// <summary>
+        /// Fill a dictionary with client measurements.
+        /// </summary>
+        /// <param name="dict">Dictionary to add data to.</param>
+        private static void ClientFillDictionaryMeasurements(SqlDataReader reader, Dictionary<string, string> dict)
+        {
+            string key;
+            string value;
+
+            key = "Chest";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "Sleeve";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "Waist";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "Inseam";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "Hips";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "Height";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "Weight";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+        }
+
+        /// <summary>
+        /// Fill a dictionary with client data.
+        /// </summary>
+        /// <param name="dict">Dictionary to add data to.</param>
+        /// <param name="noIds">true if you don't want id added (to prevent conflicts).</param>
+        private static void ClientFillDictionaryProfile(SqlDataReader reader, Dictionary<string, string> dict, bool noIds = false)
+        {
+            string key;
+            string value;
+
+            if (!noIds)
+            {
+                key = "Id";
+                value = reader[reader.GetOrdinal(key)].ToString();
+                dict.Add(key, value);
+
+                key = "IdClass";
+                value = reader[reader.GetOrdinal(key)].ToString();
+                dict.Add(key, value);
+            }
+
+            key = "Name";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "Phone";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "Email";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "Academy";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "Type";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "Status";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "DriversLicenseNumber";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+        }
+
         private static Dictionary<string, string> ClientFillWithReader(SqlDataReader reader)
         {
             var client = new Dictionary<string, string>();
@@ -631,6 +719,48 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
+        /// <summary>
+        /// Fill a dictionary with item data.
+        /// </summary>
+        /// <param name="dict">Dictionary to add data to.</param>
+        /// <param name="noIds">true if you don't want id added (to prevent conflicts).</param>
+        private static void ItemFillDictionary(SqlDataReader reader, Dictionary<string, string> dict, bool noIds = false)
+        {
+            string key;
+            string value;
+
+            if(!noIds)
+            {
+                key = "Id";
+                value = reader[reader.GetOrdinal(key)].ToString();
+                dict.Add(key, value);
+            }
+
+            key = "ItemType";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "DueDate";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "SerialNumber";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "Condition";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "Location";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "BusinessModel";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+        }
+
         private static List<Item> ItemFindBy(SqlConnection connection, SqlCommand command)
         {
             var items = new List<Item>();
@@ -880,6 +1010,40 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
+        /// Fill dictionary with history data.
+        /// </summary>
+        /// <param name="dict">Dictionary to add data to.</param>
+        /// <param name="noIds">true if you don't want id added (to prevent conflicts).</param>
+        private static void HistoryFillDictionary(SqlDataReader reader, Dictionary<string,string> dict, bool noIds = false)
+        {
+            string key;
+            string value;
+
+            if (!noIds)
+            {
+                key = "Id";
+                value = reader[reader.GetOrdinal(key)].ToString();
+                dict.Add(key, value);
+
+                key = "ItemId";
+                value = reader[reader.GetOrdinal(key)].ToString();
+                dict.Add(key, value);
+
+                key = "ClientId";
+                value = reader[reader.GetOrdinal(key)].ToString();
+                dict.Add(key, value);
+            }
+
+            key = "RentDate";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+
+            key = "ReturnDate";
+            value = reader[reader.GetOrdinal(key)].ToString();
+            dict.Add(key, value);
+        }
+
+        /// <summary>
         /// Find list using item id or client id.
         /// Use Guid.Empty on the id you don't want to search.
         /// </summary>
@@ -887,7 +1051,7 @@ namespace InventoryManagmentSystem
         /// <param name="itemId"></param>
         /// <param name="clietId"></param>
         /// <returns>List of histories</returns>
-        public static List<History> HistoryFindItem(SqlConnection connection,  Guid itemId, Guid clietId)
+        public static List<History> HistoryFind(SqlConnection connection,  Guid itemId, Guid clietId)
         {
             string query;
             Guid id = Guid.Empty;
@@ -929,10 +1093,17 @@ namespace InventoryManagmentSystem
             return hList;
         }
 
-        public static List<Dictionary<string,string>> HistoryNameAndType(SqlConnection connection, Guid itemId, Guid clietId)
+        /// <summary>
+        /// Finds history of an item or rent history of a client.
+        /// </summary>
+        /// <remarks>Use Guid.Empty on either itemId or clientId.</remarks>
+        /// <returns>List of dictionary with columns from history, item, and client.</returns>
+        public static List<Dictionary<string,string>> HistoryFindFull(SqlConnection connection, Guid itemId, Guid clietId)
         {
             string query = @"
-                SELECT h.Id, h.ItemId, h.ClientId, h.RentDate, h.ReturnDate, i.ItemType, i.SerialNumber, c.Name
+                SELECT h.Id, h.ItemId, h.ClientId, h.RentDate, h.ReturnDate, 
+                    i.ItemType, i.DueDate, i.SerialNumber, i.Condition, i.Location, i.BusinessModel,
+                    c.Name, c.Phone, c.Email, c.Academy, c.Type, c.Status, c.DriversLicenseNumber
                 FROM tbHistories AS h
                 JOIN tbItems AS i ON h.itemId = i.Id
                 JOIN tbClients AS c ON h.ClientId = c.Id
@@ -963,37 +1134,10 @@ namespace InventoryManagmentSystem
                 while(reader.Read())
                 {
                     var history = new Dictionary<string, string>();
-                    string key = "Id";
-                    string value = reader[reader.GetOrdinal(key)].ToString();
-                    history.Add(key, value);
 
-                    key = "ItemId";
-                    value = reader[reader.GetOrdinal(key)].ToString();
-                    history.Add(key, value);
-
-                    key = "ClientId";
-                    value = reader[reader.GetOrdinal(key)].ToString();
-                    history.Add(key, value);
-
-                    key = "RentDate";
-                    value = reader[reader.GetOrdinal(key)].ToString();
-                    history.Add(key, value);
-
-                    key = "ReturnDate";
-                    value = reader[reader.GetOrdinal(key)].ToString();
-                    history.Add(key, value);
-
-                    key = "ItemType";
-                    value = reader[reader.GetOrdinal(key)].ToString();
-                    history.Add(key, value);
-
-                    key = "SerialNumber";
-                    value = reader[reader.GetOrdinal(key)].ToString();
-                    history.Add(key, value);
-
-                    key = "Name";
-                    value = reader[reader.GetOrdinal(key)].ToString();
-                    history.Add(key, value);
+                    HistoryFillDictionary(reader, history);
+                    ItemFillDictionary(reader, history, true);
+                    ClientFillDictionaryProfile(reader, history, true);
 
                     list.Add(history);
                 }

@@ -21,7 +21,7 @@ namespace InventoryManagmentSystem
         public RentalHistoryForm(Guid itemId, Guid clientId)
         {
             InitializeComponent();
-            historyList = HelperSql.HistoryNameAndType(connection, itemId, clientId);
+            historyList = HelperSql.HistoryFindFull(connection, itemId, clientId);
             if (historyList.Count == 0) { this.Close(); return; }
             LoadDataGrid();
         }
@@ -51,7 +51,7 @@ namespace InventoryManagmentSystem
             if (!choice) { return; }
 
             historyList.Clear();
-            historyList = HelperSql.HistoryNameAndType(connection, itemId, clientId);
+            historyList = HelperSql.HistoryFindFull(connection, itemId, clientId);
             LoadDataGrid();
         }
 
