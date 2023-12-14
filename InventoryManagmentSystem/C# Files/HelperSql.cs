@@ -932,7 +932,7 @@ namespace InventoryManagmentSystem
         public static List<Dictionary<string,string>> HistoryNameAndType(SqlConnection connection, Guid itemId, Guid clietId)
         {
             string query = @"
-                SELECT h.Id, h.ItemId, h.ClientId, h.RentDate, h.ReturnDate, i.ItemType, c.Name
+                SELECT h.Id, h.ItemId, h.ClientId, h.RentDate, h.ReturnDate, i.ItemType, i.SerialNumber, c.Name
                 FROM tbHistories AS h
                 JOIN tbItems AS i ON h.itemId = i.Id
                 JOIN tbClients AS c ON h.ClientId = c.Id
@@ -984,6 +984,10 @@ namespace InventoryManagmentSystem
                     history.Add(key, value);
 
                     key = "ItemType";
+                    value = reader[reader.GetOrdinal(key)].ToString();
+                    history.Add(key, value);
+
+                    key = "SerialNumber";
                     value = reader[reader.GetOrdinal(key)].ToString();
                     history.Add(key, value);
 

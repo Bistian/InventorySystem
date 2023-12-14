@@ -40,6 +40,7 @@
             this.column_item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_client_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_item_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_serial_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_rented = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_returned = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelTop.SuspendLayout();
@@ -126,6 +127,7 @@
             this.column_item_id,
             this.column_client_name,
             this.column_item_type,
+            this.column_serial_number,
             this.column_rented,
             this.column_returned});
             this.dataGridHistory.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -172,6 +174,12 @@
             this.column_item_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.column_item_type.HeaderText = "Item Type";
             this.column_item_type.Name = "column_item_type";
+            // 
+            // column_serial_number
+            // 
+            this.column_serial_number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_serial_number.HeaderText = "Serial Number";
+            this.column_serial_number.Name = "column_serial_number";
             // 
             // column_rented
             // 
@@ -222,6 +230,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn column_item_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_client_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_item_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_serial_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_rented;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_returned;
     }

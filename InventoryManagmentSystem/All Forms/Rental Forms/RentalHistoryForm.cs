@@ -37,6 +37,7 @@ namespace InventoryManagmentSystem
                     history["ItemId"], 
                     history["Name"],
                     history["ItemType"],
+                    history["SerialNumber"],
                     history["RentDate"],
                     history["ReturnDate"]);
             }
