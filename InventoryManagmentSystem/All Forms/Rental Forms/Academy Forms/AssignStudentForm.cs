@@ -69,7 +69,7 @@ namespace InventoryManagmentSystem.Academy
                 command.ExecuteNonQuery();
                 connection.Close();
 
-                parent.LoadProfile(false, parent.drivers);
+                parent.LoadProfile(parent.drivers);
                 this.Dispose();
 
                 return true;

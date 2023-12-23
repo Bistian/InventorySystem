@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InventoryManagmentSystem
@@ -16,15 +10,15 @@ namespace InventoryManagmentSystem
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
+        List<Dictionary<string, string>> clients = new List<Dictionary<string, string>>();
 
         public bool isReturn = false;
-        string clientType = "Individuals";
 
         public ExistingCustomerModuleForm()
         {
             InitializeComponent();
-            LoadClients();
-            cbClientType.SelectedIndex = 0;
+            clients = HelperSql.ClientFindAllProfiles(connection);
+            cbActive.Checked = true;
         }
 
         private bool DeleteItem(DataGridViewCellEventArgs e)
@@ -57,16 +51,11 @@ namespace InventoryManagmentSystem
 
         private void UpdateItem(string clientName, string clientId)
         {
-            NewRentalModuleForm form = new NewRentalModuleForm(cbClientType.Text, clientName);
+            NewRentalModuleForm form = new NewRentalModuleForm(null, clientName);
             var parentForm = this.ParentForm as MainForm;
-            bool isNotIndividual = true;
             try
             {
-                if (cbClientType.SelectedIndex == 0)
-                {
-                    isNotIndividual = false;
-                }
-                form.UpdateProfile(isNotIndividual, clientId);
+                form.UpdateProfile();
                 parentForm.openChildForm(form);
             }
             catch (Exception ex)
@@ -77,6 +66,38 @@ namespace InventoryManagmentSystem
             LoadClients();
         }
 
+        private void LoadClients()
+        {
+            if(clients.Count == 0) { return; }
+
+            uint count = 1;
+            dataGridUsers.Rows.Clear();
+            foreach (var client in clients)
+            {
+                bool isActive = Boolean.Parse(client["IsActive"]);
+                if((isActive == true && cbActive.Checked == true) || 
+                    (isActive == false && cbInactive.Checked == true))
+                {
+                    AddClientToGrid(client, count);
+                    ++count;
+                }
+            }
+        }
+
+        private void AddClientToGrid(Dictionary<string, string> client, uint count)
+        {
+            dataGridUsers.Rows.Add(
+                count,
+                client["Id"],
+                client["Name"],
+                client["Phone"],
+                client["Email"],
+                client["Academy"],
+                client["Address"],
+                client["DriversLicenseNumber"]);
+                
+        }
+
         private void dataGridUsers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) { return; }
@@ -85,6 +106,7 @@ namespace InventoryManagmentSystem
 
             string clientName = row.Cells["column_name"].Value.ToString();
             string clientId = row.Cells["column_id"].Value.ToString();
+            string clientLicense = row.Cells["column_drivers_license"].Value.ToString();
             if (column == "column_update")
             {
                 UpdateItem(clientName, clientId);
@@ -99,21 +121,10 @@ namespace InventoryManagmentSystem
             }
 
             var parentForm = this.ParentForm as MainForm;
-            NewRentalModuleForm Profile = new NewRentalModuleForm(null,clientName);
+            NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
             try
             {
-                if (cbClientType.Text == "Individuals")
-                {
-                    Profile.LoadProfile(false, clientId);
-                }
-                else if(cbClientType.Text == "Departments")
-                {
-                    Profile.LoadProfile(true, clientId);
-                }
-                else if(cbClientType.Text == "Academies")
-                {
-                    Profile.LoadProfile(true, clientId);
-                }
+                Profile.LoadProfile(clientLicense);
                 parentForm.openChildForm(Profile);
 
                 this.Dispose();
@@ -121,18 +132,6 @@ namespace InventoryManagmentSystem
             catch (Exception ex)
             {
                 Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
-            }
-        }
-
-        private void LoadClients()
-        {
-            var clients = HelperSql.ClientFindByType(connection, clientType);
-            if(clients == null) { return; }
-
-            dataGridUsers.Rows.Clear();
-            foreach (var client in clients)
-            {
-                AddClientToGrid(client);
             }
         }
 
@@ -145,22 +144,23 @@ namespace InventoryManagmentSystem
             var clients = HelperSql.ClientFindBySearchBar(connection, searchTerm);
             if (clients == null) { return; }
 
+            uint count = 1;
             dataGridUsers.Rows.Clear();
             foreach (var client in clients)
             {
-                AddClientToGrid(client);
+                AddClientToGrid(client, count);
+                ++count;
             }
         }
 
-        private void AddClientToGrid(Dictionary<string,string> client)
+        private void cbActive_CheckedChanged(object sender, EventArgs e)
         {
-            dataGridUsers.Rows.Add(
-                client["Name"],
-                client["Phone"],
-                client["Email"],
-                client["Academy"],
-                client["Address"],
-                client["Id"]);
+            LoadClients();
+        }
+
+        private void cbInactive_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadClients();
         }
     }
 }

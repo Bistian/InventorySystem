@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InventoryManagmentSystem.Rental_Forms
@@ -15,16 +11,10 @@ namespace InventoryManagmentSystem.Rental_Forms
     public partial class NewClientForm : Form
     {
 
-        #region SQL_Variables
-        // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        //Creating command
         SqlConnection connection = new SqlConnection(connectionString);
-        //Creating command
-        SqlCommand command = new SqlCommand();
-        #endregion SQL_Variables
-
-        Dictionary<string, Guid> academyList;
+       
+        List<Dictionary<string, string>> academyList;
         List<Dictionary<string, string>> classList;
         bool ExistingUser;
 
@@ -45,7 +35,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         {
             RentalTypeSelector(type);
             var client = HelperSql.ClientFindByName(connection, clientName);
-            if(client == null) { return; }
+            if(client.Count == 0) { return; }
 
             txtBoxCustomerName.Text = client["Name"];
             txtBoxDriversLicense.Text = client["DriversLicenseNumber"];
@@ -58,80 +48,9 @@ namespace InventoryManagmentSystem.Rental_Forms
             textBoxHips.Text = client["Hips"];
             textBoxWeight.Text = client["Weight"];
             textBoxHeight.Text = client["Height"];
-            comboBoxAcademy.Text = client["Academy"];
+            cbAcademy.Text = client["Academy"];
             cbRep.Text = client["FireTecRepresentative"];
             cbClass.Text = client["IdClass"];
-/*
-            string query = $@"
-                SELECT 
-                    Name, DriversLicenseNumber, Phone, Email,
-                    Chest, Sleeve, Waist, Inseam, Hips, Weight, Height,
-                    Academy, FireTecRepresentative, IdClass
-                FROM tbClients WHERE Name = '{clientName}'
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-
-            try
-            {
-                command = new SqlCommand(query, connection);
-                connection.Open();
-                object[] rows = new object[14]; ;
-                SqlDataReader dataReader = command.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    dataReader.GetValues(rows);
-                }
-                txtBoxCustomerName.Text = rows[0].ToString();
-                txtBoxDriversLicense.Text = rows[1].ToString();
-                txtBoxPhone.Text = rows[2].ToString();
-                txtBoxEmail.Text = rows[3].ToString();
-                textBoxChest.Text = rows[4].ToString();
-                textBoxSleeve.Text = rows[5].ToString();
-                textBoxWaist.Text = rows[6].ToString();
-                textBoxInseam.Text = rows[7].ToString();
-                textBoxHips.Text = rows[8].ToString();
-                textBoxWeight.Text = rows[9].ToString();
-                textBoxHeight.Text = rows[10].ToString();
-                comboBoxAcademy.Text = rows[11].ToString();
-                cbRep.Text = rows[12].ToString();
-                cbClass.Text = classList[(Guid)rows[13]];
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();*/
-        }
-
-        private bool CheckIfExists(string tableName, string SerialNumber)
-        {
-            try
-            {
-                bool Exists = false;
-                command = new SqlCommand($"Select Count (*) FROM {tableName} WHERE DriversLicenseNumber = @SerialNumber", connection);
-                command.Parameters.AddWithValue("@SerialNumber", SerialNumber);
-                connection.Open();
-                object result = command.ExecuteScalar();
-                if (result != null)
-                {
-                    int r = (int)result;
-                    Exists = r > 0 ? true : false;
-                }
-                else
-                {
-                    // Null is an error!! don't add plz
-                    Exists = true;
-                }
-                connection.Close();
-                return Exists;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"ERROR NewRentalModuleForm.cs --> CheckIfExists(): {ex.Message}");
-                connection.Close();
-                // If there was an error, pretend you found something just so you don't add it.
-                return true;
-            }
         }
 
         public void Clear()
@@ -152,12 +71,14 @@ namespace InventoryManagmentSystem.Rental_Forms
             textBoxWeight.Clear();
             textBoxZip.Clear();
             cbRep.SelectedIndex = -1;
-            comboBoxAcademy.SelectedIndex = -1;
+            cbAcademy.SelectedIndex = -1;
             cbClass.SelectedIndex = -1;
 
         }
 
-        private bool IsBoxEmpty()
+        /// <summary> Safety checks. </summary>
+        /// <returns> True if all important fields are filled. </returns>
+        private bool AllFieldsValid()
         {
             bool normalChecks = (
                 !string.IsNullOrEmpty(txtBoxStreet.Text) &&
@@ -192,24 +113,11 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void PopulateAcademyList()
         {
-            academyList = new Dictionary<string, Guid>();
-            string query = "SELECT Name, Id FROM tbAcademies";
-            command = new SqlCommand(query, connection);
-            connection.Open();
-            try
+            academyList = HelperSql.AcademyFindAll(connection);
+            foreach(var academy in academyList)
             {
-                SqlDataReader dr = command.ExecuteReader();
-                while (dr.Read())
-                {
-                    academyList.Add(dr[0].ToString(), (Guid)dr[1]);
-                    comboBoxAcademy.Items.Add(dr[0]);
-                }
+                cbAcademy.Items.Add(academy["Name"]);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
         }
 
         private void RentalTypeSelector(string type)
@@ -244,7 +152,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 textBoxWaist.Text = "";
                 textBoxWeight.Text = "";
                 textBoxHeight.Text = "";
-                comboBoxAcademy.SelectedIndex = -1;
+                cbAcademy.SelectedIndex = -1;
 
                 panelRentalInfo.Dock = DockStyle.Bottom;
 
@@ -267,7 +175,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 textBoxWaist.Text = "N/A";
                 textBoxWeight.Text = "N/A";
                 textBoxHeight.Text = "N/A";
-                comboBoxAcademy.SelectedIndex = 0;
+                cbAcademy.SelectedIndex = 0;
 
                 //show pannels
                 panelRentalInfo.Visible = true;
@@ -299,7 +207,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 textBoxWaist.Text = "N/A";
                 textBoxWeight.Text = "N/A";
                 textBoxHeight.Text = "N/A";
-                comboBoxAcademy.Text = "N/A";
+                cbAcademy.Text = "N/A";
 
                 //show pannels
                 panelRentalInfo.Visible = true;
@@ -315,96 +223,43 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private bool SaveClient()
         {
-            try
+            var client = new Dictionary<string, string>();
+            Guid classId = Guid.Empty;
+            foreach(var item in classList)
             {
-                string address = $"{txtBoxStreet.Text} {textBoxCity.Text} {textBoxState.Text} {textBoxZip.Text}";
-                bool exists = CheckIfExists("tbClients", txtBoxDriversLicense.Text);
-                string query = $@"
-                    INSERT INTO tbClients(
-                        Name, Phone, Email, Type, DriversLicenseNumber, Address,
-                        Chest, Sleeve, Waist, Inseam, Hips, Height, Weight,
-                        FireTecRepresentative, Academy, IdClass, Status
-                    )
-                    VALUES(
-                        @Name, @Phone, @Email, @Type, @DriversLicenseNumber, @Address, 
-                        @Chest, @Sleeve, @Waist, @Inseam, @Hips, @Height, @Weight, 
-                        @FireTecRepresentative, @Academy,  @IdClass, @Status
-                    )
-                ";
-                HelperFunctions.RemoveLineBreaksFromString(ref query);
-
-                Guid classId = Guid.Empty;
-                foreach(var item in classList)
+                if (item["Name"] == cbClass.Text)
                 {
-                    if (item["Name"] == cbClass.Text)
-                    {
-                        classId = Guid.Parse(item["Id"]);
-                        break;
-                    }
-                }
-
-                if (!exists)
-                {
-                    command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
-                    command.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
-                    command.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
-                    command.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
-                    command.Parameters.AddWithValue("@Type", comboBoxRentalType.Text);
-                    command.Parameters.AddWithValue("@Address", address);
-                    command.Parameters.AddWithValue("@FireTecRepresentative", cbRep.Text);
-                    if (comboBoxRentalType.SelectedIndex == 0)
-                    {
-                        command.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
-                    }
-                    else
-                    {
-                        command.Parameters.AddWithValue("@Academy", txtBoxDriversLicense.Text);
-                    }
-                    command.Parameters.AddWithValue("@Chest", textBoxChest.Text);
-                    command.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
-                    command.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
-                    command.Parameters.AddWithValue("@Inseam", textBoxInseam.Text);
-                    command.Parameters.AddWithValue("@Hips", textBoxHips.Text);
-                    command.Parameters.AddWithValue("@Height", textBoxHeight.Text);
-                    command.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
-                    command.Parameters.AddWithValue("@IdClass", classId);
-                    command.Parameters.AddWithValue("@Status", "Test");
-                    string message = "Info has been successfully saved";
-                    try
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                    }
-                    catch (Exception ex) 
-                    {
-                        Console.WriteLine(ex.Message);
-                        message = "Something went wrong.";
-                    }
-                    finally { connection.Close(); }
-                    MessageBox.Show(message);
-                    Clear();
-
-                    //hiding input panels
-                    panelFinalize.Visible = false;
-                    panelRentalInfo.Visible = false;
-                    panelMeasurments.Visible = false;
-                    panelAddress.Visible = false;
-                    panelContactInfo.Visible = false;
-
-                    return true;
-                }
-                else
-                {
-                    MessageBox.Show("License Number already in use");
-                    return false;
+                    classId = Guid.Parse(item["Id"]);
+                    break;
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
+            client["IdClass"] = classId == Guid.Empty ? null : classId.ToString();
+            client["Address"] = $"{txtBoxStreet.Text} {textBoxCity.Text} {textBoxState.Text} {textBoxZip.Text}";
+            client["Name"] = txtBoxCustomerName.Text;
+            client["Phone"] = txtBoxPhone.Text;
+            client["Email"] = txtBoxEmail.Text;
+            client["DriversLicenseNumber"] = txtBoxDriversLicense.Text;
+            client["FireTecRepresentative"] = cbRep.Text;
+            client["Academy"] = cbAcademy.Text;
+            client["Chest"] = textBoxChest.Text;
+            client["Sleeve"] = textBoxSleeve.Text;
+            client["Waist"] = textBoxWaist.Text;
+            client["Inseam"] = textBoxInseam.Text;
+            client["Hips"] = textBoxHips.Text;
+            client["Height"] = textBoxHeight.Text;
+            client["Weight"] = textBoxWeight.Text;
+
+            bool inserted = HelperSql.ClientInsert(connection, client);
+            if(inserted == false) { return false; }
+
+            //hiding input panels
+            panelFinalize.Visible = false;
+            panelRentalInfo.Visible = false;
+            panelMeasurments.Visible = false;
+            panelAddress.Visible = false;
+            panelContactInfo.Visible = false;
+
+            return true;
         }
 
         public void UpdateClient()
@@ -421,7 +276,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                     "WHERE DriversLicenseNumber LIKE @DriversLicenseNumber";
 
             string address = txtBoxStreet.Text + " " + textBoxCity.Text + " " + textBoxState.Text + " " + textBoxZip.Text;
-            command = new SqlCommand(query, connection);
+            var command = new SqlCommand(query, connection);
             try
             {
                 if (connection.State == ConnectionState.Open) { connection.Close(); }
@@ -431,7 +286,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 command.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
                 if (comboBoxRentalType.SelectedIndex == 0)
                 {
-                    command.Parameters.AddWithValue("@Academy", comboBoxAcademy.Text);
+                    command.Parameters.AddWithValue("@Academy", cbAcademy.Text);
                 }
                 else
                 {
@@ -460,53 +315,53 @@ namespace InventoryManagmentSystem.Rental_Forms
        
         private void ButtonContinue_Click(object sender, EventArgs e)
         {
-            NewRentalModuleForm DockedIn = this.Parent.Parent as NewRentalModuleForm;
-            if (IsBoxEmpty())
+            if (!AllFieldsValid())
             {
-                DockedIn.currentUser = txtBoxCustomerName.Text;
-                DockedIn.license = txtBoxDriversLicense.Text;
-                panelRentalType.Visible = false;
+                MessageBox.Show("Please fill the required fields");
+                return;
+            }
 
-                if (ExistingUser == false)
-                {
-                    if (SaveClient())
-                    {
-                        //individual
-                        if (comboBoxRentalType.SelectedIndex == 0)
-                        {
-                            DockedIn.LoadProfile(false, DockedIn.license);
-                        }
-                        //department
-                        else if (comboBoxRentalType.SelectedIndex == 1 || comboBoxRentalType.SelectedIndex == 2)
-                        {
-                            DockedIn.LoadProfile(true, DockedIn.license);
-                        }
-                    }
-                }
-                else
+            NewRentalModuleForm DockedIn = this.Parent.Parent as NewRentalModuleForm;
+            DockedIn.currentUser = txtBoxCustomerName.Text;
+            DockedIn.license = txtBoxDriversLicense.Text;
+            panelRentalType.Visible = false;
+
+            if (ExistingUser == false)
+            {
+                //TODO: Find this comboBoxRentalType
+                if (SaveClient())
                 {
                     //individual
                     if (comboBoxRentalType.SelectedIndex == 0)
                     {
-                        UpdateClient();
-                        DockedIn.LoadProfile(false, DockedIn.license);
+                        DockedIn.LoadProfile(DockedIn.license);
                     }
                     //department
                     else if (comboBoxRentalType.SelectedIndex == 1 || comboBoxRentalType.SelectedIndex == 2)
                     {
-                        UpdateClient();
-                        DockedIn.LoadProfile(true, DockedIn.license);
+                        DockedIn.LoadProfile(DockedIn.license);
                     }
-                    panelContactInfo.Visible = false;
-                    panelAddress.Visible = false;
-                    panelMeasurments.Visible = false;
-                    panelRentalInfo.Visible = false;
-                    DockedIn.ExistingUser = false;
                 }
             }
             else
             {
-                MessageBox.Show("Please fill the required fields");
+                //individual
+                if (comboBoxRentalType.SelectedIndex == 0)
+                {
+                    UpdateClient();
+                    DockedIn.LoadProfile(DockedIn.license);
+                }
+                //department
+                else if (comboBoxRentalType.SelectedIndex == 1 || comboBoxRentalType.SelectedIndex == 2)
+                {
+                    UpdateClient();
+                    DockedIn.LoadProfile(DockedIn.license);
+                }
+                panelContactInfo.Visible = false;
+                panelAddress.Visible = false;
+                panelMeasurments.Visible = false;
+                panelRentalInfo.Visible = false;
+                DockedIn.ExistingUser = false;
             }
         }
 
@@ -517,7 +372,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         
         private void comboBoxGender_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBoxGender.Text == "Male")
+            if(cbGender.Text == "Male")
             {
                 panelHips.Visible = false;
                 textBoxHips.Text = "N/A";
@@ -551,24 +406,26 @@ namespace InventoryManagmentSystem.Rental_Forms
             if(checkAcademy.Checked)
             {
                 panelAcademy.Visible = false;
-                comboBoxAcademy.Text = "N/A";
+                cbAcademy.Text = "N/A";
             }
             else
             {
                 panelAcademy.Visible = true;
-                comboBoxAcademy.Text = "";
+                cbAcademy.Text = "";
             }
         }
 
         private void comboBoxAcademy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBoxAcademy.SelectedIndex == -1) { return; }
+            int index = cbAcademy.SelectedIndex;
+            if (index == -1) { return; }
 
-            string name = comboBoxAcademy.Text;
+            string name = cbAcademy.Text;
             if(classList != null) { classList.Clear(); }
             cbClass.Items.Clear();
 
-            classList = HelperSql.ClassListByAcademy(connection, academyList[name]);
+            var academyId = Guid.Parse(academyList[index]["Id"]);
+            classList = HelperSql.ClassListByAcademy(connection, academyId);
             if(classList == null) { return; }
 
             foreach(var item in classList)

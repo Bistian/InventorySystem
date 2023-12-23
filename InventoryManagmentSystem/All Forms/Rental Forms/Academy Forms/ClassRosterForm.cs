@@ -117,7 +117,7 @@ namespace InventoryManagmentSystem.Academy
             NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
             try
             {
-                Profile.LoadProfile(false, licence);
+                Profile.LoadProfile(licence);
                 parentForm.openChildForm(Profile);
                 this.parent.Dispose();
             }

@@ -159,59 +159,46 @@ namespace InventoryManagmentSystem
             }
         }
 
-        public void LoadProfile(bool isDepartment, string clientId)
+        public void LoadProfile(string driverLicense)
         {
-            var client = HelperSql.ClientFindById(connection, Guid.Parse(clientId));
-            if(client == null) 
+            var client = HelperSql.ClientFindByDriversLicense(connection, driverLicense);
+            if(client.Count == 0) 
             {
                 Console.WriteLine("Client not found.");
                 return; 
             }
 
-            if (!isDepartment)
+            labelProfileName.Text = client["Name"];
+            labelClientPhone.Text = client["Phone"];
+            labelClientEmail.Text = client["Email"];
+            lableRentalInfo.Text = client["Academy"];
+            labelClientDrivers.Text = client["DriversLicenseNumber"];
+            labelClientAddress.Text = client["Address"];
+            labelClientChest.Text = client["Chest"];
+            labelClientSleeve.Text = client["Sleeve"];
+            labelClientWaist.Text = client["Waist"];
+            labelClientInseam.Text = client["Inseam"];
+            labelClientHips.Text = client["Hips"];
+            labelClientHeight.Text = client["Height"];
+            labelClientWeight.Text = client["Weight"];
+            textBoxNotes.Text = client["Notes"];
+            ClientId = Guid.Parse(client["Id"]);
+            ClassId = Guid.Parse(client["IdClass"]);
+            license = labelClientDrivers.Text;
+
+            var dict = HelperSql.ClassFindByClassId(connection, ClassId);
+            if(dict.Count > 0)
             {
-                labelProfileName.Text = client["Name"];
-                labelClientPhone.Text = client["Phone"];
-                labelClientEmail.Text = client["Email"];
-                lableRentalInfo.Text = client["Academy"];
-                labelClientDrivers.Text = client["DriversLicenseNumber"];
-                labelClientAddress.Text = client["Address"];
-                labelClientChest.Text = client["Chest"];
-                labelClientSleeve.Text = client["Sleeve"];
-                labelClientWaist.Text = client["Waist"];
-                labelClientInseam.Text = client["Inseam"];
-                labelClientHips.Text = client["Hips"];
-                labelClientHeight.Text = client["Height"];
-                labelClientWeight.Text = client["Weight"];
-                textBoxNotes.Text = client["Notes"];
-                ClientId = Guid.Parse(client["Id"]);
-                ClassId = Guid.Parse(client["IdClass"]);
-                license = labelClientDrivers.Text;
-
-                var dict = HelperSql.ClassFindByClassId(connection, ClassId);
-                if(dict != null)
-                {
-                    labelClientClass.Text = dict["Name"];
-                }
+                labelClientClass.Text = dict["Name"];
             }
-            else if (isDepartment)
-            {
-                labelProfileName.Text = client["Name"];
-                labelClientPhone.Text = client["Phone"];
-                labelClientEmail.Text = client["Email"];
 
-                //point of contact
-                labelProfileDrivers.Text = "Point of contact:";
-                labelClientDrivers.Text = client["DriversLicenseNumber"];
-                labelClientAddress.Text = client["Address"];
-                textBoxNotes.Text = client["Notes"];
-                ClientId = Guid.Parse(client["Id"]);
+            //point of contact
+            labelProfileDrivers.Text = "Point of contact:";
 
-                flowLayoutPanelProfile.Visible = true;
-                panelProfileRentalInfo.Visible = false;
-                panelProfileMeasurments.Visible = false;
-                license = labelProfileName.Text;
-            }
+            flowLayoutPanelProfile.Visible = true;
+            panelProfileRentalInfo.Visible = false;
+            panelProfileMeasurments.Visible = false;
+            license = labelProfileName.Text;
 
             flowLayoutPanelProfile.Visible = true;
             flowLayoutPanelProfile.AutoScroll = false;
@@ -223,16 +210,13 @@ namespace InventoryManagmentSystem
             flowLayoutPanelProfile.Dock = DockStyle.Bottom;
         }
 
-        public void UpdateProfile(bool isDepartment, string ClientDrivers)
+        public void UpdateProfile()
         {
             ExistingUser = true;
-            if (isDepartment)
-            {
-                flowLayoutPanelProfile.Visible = true;
-                panelProfileRentalInfo.Visible = false;
-                panelProfileMeasurments.Visible = false;
-                license = labelProfileName.Text;
-            }
+            flowLayoutPanelProfile.Visible = true;
+            panelProfileRentalInfo.Visible = false;
+            panelProfileMeasurments.Visible = false;
+            license = labelProfileName.Text;
             flowLayoutPanelProfile.Visible = false;
             flowLayoutPanelProfile.AutoScroll = false;
             splitContainerInventories.Visible = true;

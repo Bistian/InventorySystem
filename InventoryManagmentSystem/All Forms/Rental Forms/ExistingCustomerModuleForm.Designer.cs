@@ -30,20 +30,22 @@ namespace InventoryManagmentSystem
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExistingCustomerModuleForm));
             this.InventoryPanel = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cbClientType = new System.Windows.Forms.ComboBox();
+            this.cbInactive = new System.Windows.Forms.CheckBox();
+            this.cbActive = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.searchBar = new System.Windows.Forms.TextBox();
             this.dataGridUsers = new System.Windows.Forms.DataGridView();
+            this.column_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Academy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_drivers_license = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_update = new System.Windows.Forms.DataGridViewImageColumn();
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.InventoryPanel.SuspendLayout();
@@ -53,8 +55,8 @@ namespace InventoryManagmentSystem
             // InventoryPanel
             // 
             this.InventoryPanel.BackColor = System.Drawing.Color.Maroon;
-            this.InventoryPanel.Controls.Add(this.label2);
-            this.InventoryPanel.Controls.Add(this.cbClientType);
+            this.InventoryPanel.Controls.Add(this.cbInactive);
+            this.InventoryPanel.Controls.Add(this.cbActive);
             this.InventoryPanel.Controls.Add(this.label1);
             this.InventoryPanel.Controls.Add(this.searchBar);
             this.InventoryPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -64,36 +66,29 @@ namespace InventoryManagmentSystem
             this.InventoryPanel.Size = new System.Drawing.Size(750, 39);
             this.InventoryPanel.TabIndex = 24;
             // 
-            // label2
+            // cbInactive
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(238, 4);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 20);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "Client Type:";
-            this.label2.Visible = false;
+            this.cbInactive.AutoSize = true;
+            this.cbInactive.ForeColor = System.Drawing.SystemColors.Window;
+            this.cbInactive.Location = new System.Drawing.Point(270, 20);
+            this.cbInactive.Name = "cbInactive";
+            this.cbInactive.Size = new System.Drawing.Size(64, 17);
+            this.cbInactive.TabIndex = 21;
+            this.cbInactive.Text = "Inactive";
+            this.cbInactive.UseVisualStyleBackColor = true;
+            this.cbInactive.CheckedChanged += new System.EventHandler(this.cbInactive_CheckedChanged);
             // 
-            // cbClientType
+            // cbActive
             // 
-            this.cbClientType.AllowDrop = true;
-            this.cbClientType.DisplayMember = "Individual";
-            this.cbClientType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbClientType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbClientType.FormattingEnabled = true;
-            this.cbClientType.Items.AddRange(new object[] {
-            "Individuals",
-            "Departments",
-            "Academies"});
-            this.cbClientType.Location = new System.Drawing.Point(320, 3);
-            this.cbClientType.Margin = new System.Windows.Forms.Padding(2);
-            this.cbClientType.Name = "cbClientType";
-            this.cbClientType.Size = new System.Drawing.Size(92, 23);
-            this.cbClientType.TabIndex = 27;
-            this.cbClientType.Visible = false;
+            this.cbActive.AutoSize = true;
+            this.cbActive.ForeColor = System.Drawing.SystemColors.Window;
+            this.cbActive.Location = new System.Drawing.Point(270, 3);
+            this.cbActive.Name = "cbActive";
+            this.cbActive.Size = new System.Drawing.Size(56, 17);
+            this.cbActive.TabIndex = 20;
+            this.cbActive.Text = "Active";
+            this.cbActive.UseVisualStyleBackColor = true;
+            this.cbActive.CheckedChanged += new System.EventHandler(this.cbActive_CheckedChanged);
             // 
             // label1
             // 
@@ -124,23 +119,25 @@ namespace InventoryManagmentSystem
             this.dataGridUsers.AllowUserToResizeRows = false;
             this.dataGridUsers.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridUsers.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridUsers.ColumnHeadersHeight = 30;
             this.dataGridUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.column_count,
+            this.column_id,
             this.column_name,
             this.Phone,
             this.Email,
             this.Academy,
             this.Address,
-            this.column_id,
+            this.column_drivers_license,
             this.column_update,
             this.Delete});
             this.dataGridUsers.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -157,6 +154,21 @@ namespace InventoryManagmentSystem
             this.dataGridUsers.Size = new System.Drawing.Size(750, 494);
             this.dataGridUsers.TabIndex = 26;
             this.dataGridUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridUsers_CellClick);
+            // 
+            // column_count
+            // 
+            this.column_count.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_count.FillWeight = 30F;
+            this.column_count.HeaderText = "#";
+            this.column_count.Name = "column_count";
+            // 
+            // column_id
+            // 
+            this.column_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_id.HeaderText = "Id";
+            this.column_id.MinimumWidth = 6;
+            this.column_id.Name = "column_id";
+            this.column_id.Visible = false;
             // 
             // column_name
             // 
@@ -195,13 +207,11 @@ namespace InventoryManagmentSystem
             this.Address.MinimumWidth = 6;
             this.Address.Name = "Address";
             // 
-            // column_id
+            // column_drivers_license
             // 
-            this.column_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_id.HeaderText = "ID";
-            this.column_id.MinimumWidth = 6;
-            this.column_id.Name = "column_id";
-            this.column_id.Visible = false;
+            this.column_drivers_license.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_drivers_license.HeaderText = "Driver License";
+            this.column_drivers_license.Name = "column_drivers_license";
             // 
             // column_update
             // 
@@ -246,14 +256,16 @@ namespace InventoryManagmentSystem
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox searchBar;
         private System.Windows.Forms.DataGridView dataGridUsers;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbClientType;
+        private System.Windows.Forms.CheckBox cbInactive;
+        private System.Windows.Forms.CheckBox cbActive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_count;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.DataGridViewTextBoxColumn Academy;
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_drivers_license;
         private System.Windows.Forms.DataGridViewImageColumn column_update;
         private System.Windows.Forms.DataGridViewImageColumn Delete;
     }

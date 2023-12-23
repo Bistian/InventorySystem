@@ -3,12 +3,61 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Net;
+using System.Reflection;
+using System.Security.Cryptography;
 using System.Windows.Forms;
+using static InventoryManagmentSystem.Academy.AcademyForm;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace InventoryManagmentSystem
 {
     public class HelperSql
     {
+        public static void AcademyFillComboBox(SqlCommand command, ComboBox box)
+        {
+            
+        }
+
+        private static void AcademyFillDictionary(SqlDataReader reader, Dictionary<string, string> dict, string[] columns)
+        {
+            string value;
+            int index;
+            foreach(string col in columns)
+            {
+                index = reader.GetOrdinal(col);
+                value = reader[index].ToString();
+                dict.Add(col, value);
+            }
+        }
+
+        public static List<Dictionary<string, string>> AcademyFindAll(SqlConnection connection)
+        {
+            var list = new List<Dictionary<string, string>>();
+            string query = "SELECT * FROM tbAcademies";
+            string[] columns = { "Id", "Name", "ContactName", "Email", "Phone", "Street", "City", "State", "Zip" };
+            try
+            {
+                var command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    var academy = new Dictionary<string, string>();
+                    AcademyFillDictionary(reader, academy, columns);
+                }
+            }
+            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return list;
+        }
+
+        private static void AddParameterFromDictionary(SqlCommand command, Dictionary<string, string> dict, string key)
+        {
+            string value = dict.TryGetValue(key, out value) ? value : null;
+            command.Parameters.AddWithValue($"@{key}", value);
+        }
+
         /// <summary>
         /// Returns a dictionary with academies id and name.
         /// </summary>
@@ -39,7 +88,7 @@ namespace InventoryManagmentSystem
 
         public static Boots BootsFindByItemId(SqlConnection connection, Guid itemId) 
         {
-            string query = $"SELECT * FROM tbBoots WHERE ItemId=@ItemId";
+            string query = $"SELECT TOP 1 * FROM tbBoots WHERE ItemId=@ItemId";
             Boots boots = new Boots();
             try
             {
@@ -266,7 +315,7 @@ namespace InventoryManagmentSystem
 
         public static Dictionary<string, string> ClassFindByClassId(SqlConnection connection, Guid classId)
         {
-            string query = "SELECT * FROM tbClasses WHERE Id=@Id";
+            string query = "SELECT TOP 1 * FROM tbClasses WHERE Id=@Id";
             try
             {
                 SqlCommand command = new SqlCommand(query, connection);
@@ -292,33 +341,41 @@ namespace InventoryManagmentSystem
         {
             string key;
             string value;
+            int index;
 
             key = "Chest";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
 
             key = "Sleeve";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
 
             key = "Waist";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
 
             key = "Inseam";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
 
             key = "Hips";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
 
             key = "Height";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
 
             key = "Weight";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
         }
 
@@ -331,140 +388,152 @@ namespace InventoryManagmentSystem
         {
             string key;
             string value;
+            int index;
 
             if (!noIds)
             {
                 key = "Id";
-                value = reader[reader.GetOrdinal(key)].ToString();
+                index = reader.GetOrdinal(key);
+                value = reader[index].ToString();
                 dict.Add(key, value);
 
                 key = "IdClass";
-                value = reader[reader.GetOrdinal(key)].ToString();
+                index = reader.GetOrdinal(key);
+                value = reader[index].ToString();
                 dict.Add(key, value);
             }
 
             key = "Name";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
 
             key = "Phone";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
 
             key = "Email";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
 
             key = "Academy";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
 
-            key = "Type";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            key = "Address";
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
 
-            key = "Status";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            key = "IsActive";
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
 
             key = "DriversLicenseNumber";
-            value = reader[reader.GetOrdinal(key)].ToString();
+            index = reader.GetOrdinal(key);
+            value = reader[index].ToString();
             dict.Add(key, value);
         }
 
         private static Dictionary<string, string> ClientFillWithReader(SqlDataReader reader)
         {
             var client = new Dictionary<string, string>();
-            string key = "Id";
-            string value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "IdClass";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Name";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Phone";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Email";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Academy";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Type";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Status";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "DriversLicenseNumber";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Address";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Chest";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Sleeve";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Waist";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Inseam";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Hips";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Height";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "Weight";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
+            ClientFillDictionaryProfile(reader, client);
+            ClientFillDictionaryMeasurements(reader, client);
+
+            string key;
+            string value;
             key = "Notes";
             value = reader[reader.GetOrdinal(key)].ToString();
             client.Add(key, value);
             key = "FireTecRepresentative";
             value = reader[reader.GetOrdinal(key)].ToString();
             client.Add(key, value);
-            return client.Count > 0 ? client : null;
+            return client;
+        }
+
+        public static List<Dictionary<string, string>> ClientFindAll(SqlConnection connection)
+        {
+            string query = "SELECT * FROM tbClients";
+            var list = new List<Dictionary<string, string>>();
+            try 
+            {
+                var command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while(reader.Read())
+                {
+                    var client = ClientFillWithReader(reader);
+                    list.Add(client);
+                }
+            }
+            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return list;
+        }
+
+        public static List<Dictionary<string, string>> ClientFindAllProfiles(SqlConnection connection)
+        {
+            string query = "SELECT Id, IdClass, Name, Phone, Email, Academy, IsActive, DriversLicenseNumber, Address FROM tbClients";
+            var list = new List<Dictionary<string, string>>();
+            try
+            {
+                var command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    var client = new Dictionary<string, string>();
+                    ClientFillDictionaryProfile(reader, client);
+                    list.Add(client);
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return list;
         }
 
         public static Dictionary<string, string> ClientFindByDriversLicense(SqlConnection connection, string license)
         {
-            string query = $"SELECT * FROM tbClients WHERE DriversLicenseNumber=@License";
+            var client = new Dictionary<string, string>();
+            string query = $"SELECT TOP 1 * FROM tbClients WHERE DriversLicenseNumber=@License";
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@License", license);
                 SqlDataReader reader = command.ExecuteReader();
-                return ClientFillWithReader(reader);
+                while (reader.Read())
+                {
+                    client = ClientFillWithReader(reader);
+                }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return null;
+            return client;
         }
 
         public static Dictionary<string, string> ClientFindByName(SqlConnection connection, string name)
         {
             string query = $"SELECT * FROM tbClients WHERE Name=@Name";
+            var client = new Dictionary<string, string>();
             try
             {
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Name", name);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                return ClientFillWithReader(reader);
+                while (reader.Read())
+                {
+                    client = ClientFillWithReader(reader);
+                }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return null;
+            return client;
         }
 
         public static List<Dictionary<string, string>> ClientFindBySearchBar(SqlConnection connection, string searchTerm)
@@ -491,7 +560,8 @@ namespace InventoryManagmentSystem
 
         public static Dictionary<string, string> ClientFindById(SqlConnection connection, Guid clientId)
         {
-            string query = $"SELECT * FROM tbClients WHERE Id=@Id";
+            string query = $"SELECT TOP 1 * FROM tbClients WHERE Id=@Id";
+            var client = new Dictionary<string, string>();
             try
             {
                 connection.Open();
@@ -500,39 +570,97 @@ namespace InventoryManagmentSystem
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    return ClientFillWithReader(reader);
+                    client =  ClientFillWithReader(reader);
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return null;
+            return client;
         }
 
-        public static List<Dictionary<string, string>> ClientFindByType(SqlConnection connection, string clientType)
+        public static Dictionary<string,string> ClientFindMeasurements(SqlConnection connection, Guid clientId)
         {
-            var clients = new List<Dictionary<string, string>>();
-            string query = "SELECT * FROM tbClients WHERE Type=@Type";
+            string query = "SELECT TOP 1 * FROM tbClients WHERE Id=@Id";
+            var dict = new Dictionary<string, string>();
             try
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Type", clientType);
+                var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", clientId.ToString());
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+                while(reader.Read())
                 {
-                    var client = ClientFillWithReader(reader);
-                    if(client != null) { clients.Add(client); }
+                    ClientFillDictionaryMeasurements(reader, dict);
                 }
-                return clients.Count > 0 ? clients : null;
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch(Exception ex) { Console.WriteLine(ex.Message); } 
             finally { connection.Close(); }
-            return null;
+            return dict;
+        }
+
+        public static bool ClientInsert(SqlConnection connection, Dictionary<string, string> client)
+        {
+            var exists = ClientFindByDriversLicense(connection, client["DriversLicenseNumber"]);
+            if(exists.Count > 0)
+            {
+                MessageBox.Show("Client already exists.");
+                return false;
+            }
+
+            string query = $@"
+                INSERT INTO tbClients(
+                    Name, Phone, Email, DriversLicenseNumber, Address,
+                    Chest, Sleeve, Waist, Inseam, Hips, Height, Weight,
+                    FireTecRepresentative, Academy, IdClass, IsActive
+                )
+                VALUES(
+                    @Name, @Phone, @Email, @DriversLicenseNumber, @Address, 
+                    @Chest, @Sleeve, @Waist, @Inseam, @Hips, @Height, @Weight, 
+                    @FireTecRepresentative, @Academy,  @IdClass, @IsActive
+                )
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+
+            try
+            {
+                var command = new SqlCommand(query, connection);
+
+                AddParameterFromDictionary(command, client, "IdClass");
+                AddParameterFromDictionary(command, client, "Name");
+                AddParameterFromDictionary(command, client, "Phone");
+                AddParameterFromDictionary(command, client, "Email");
+                AddParameterFromDictionary(command, client, "DriversLicenseNumber");
+                AddParameterFromDictionary(command, client, "Address");
+                AddParameterFromDictionary(command, client, "Academy");
+                AddParameterFromDictionary(command, client, "Chest");
+                AddParameterFromDictionary(command, client, "Sleeve");
+                AddParameterFromDictionary(command, client, "Waist");
+                AddParameterFromDictionary(command, client, "Inseam");
+                AddParameterFromDictionary(command, client, "Hips");
+                AddParameterFromDictionary(command, client, "Height");
+                AddParameterFromDictionary(command, client, "Weight");
+                AddParameterFromDictionary(command, client, "FireTecRepresentative");
+
+                string value = client.TryGetValue("IsActive", out value) ? value : "True";
+                command.Parameters.AddWithValue("@IsActive", value);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+
+                return true;
+            }
+            catch(Exception ex) 
+            { 
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Failed to insert client.");
+                return false;
+            }
+            finally { connection.Close(); }
         }
 
         public static Helmet HelmetFindByItemId(SqlConnection connection, Guid itemId)
         {
-            string query = $"SELECT * FROM tbHelmets WHERE ItemId=@ItemId";
+            string query = $"SELECT TOP 1 * FROM tbHelmets WHERE ItemId=@ItemId";
             Helmet helmet = new Helmet();
             try
             {
@@ -1044,56 +1172,6 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// Find list using item id or client id.
-        /// Use Guid.Empty on the id you don't want to search.
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="itemId"></param>
-        /// <param name="clietId"></param>
-        /// <returns>List of histories</returns>
-        public static List<History> HistoryFind(SqlConnection connection,  Guid itemId, Guid clietId)
-        {
-            string query;
-            Guid id = Guid.Empty;
-            if(itemId == Guid.Empty)
-            {
-                if(clietId == Guid.Empty) { return null; }
-                else 
-                { 
-                    id = clietId;
-                    query = $"SELECT * FROM tbHistories WHERE ClientId=@Id"; 
-                }
-            } 
-            else 
-            { 
-                id = itemId;
-                query = $"SELECT * FROM tbHistories WHERE ItemId=@Id'"; 
-            }
-
-            List<History> hList = new List<History>();
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Id", id.ToString());
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    History h = new History();
-                    h.Id = (int)reader[1];
-                    h.ItemId = (Guid)reader[1];
-                    h.ClientId = (Guid)reader[2];
-                    h.RentDate = reader[3].ToString();
-                    h.ReturnDate = reader[4].ToString();
-                    hList.Add(h);
-                }
-            }
-            catch(Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close(); }
-            return hList;
-        }
-
-        /// <summary>
         /// Finds history of an item or rent history of a client.
         /// </summary>
         /// <remarks>Use Guid.Empty on either itemId or clientId.</remarks>
@@ -1202,7 +1280,7 @@ namespace InventoryManagmentSystem
 
         public static Jacket JacketFindByItemId(SqlConnection connection, Guid itemId)
         {
-            string query = $"SELECT * FROM tbJackets WHERE ItemId=@ItemId";
+            string query = $"SELECT TOP 1 * FROM tbJackets WHERE ItemId=@ItemId";
             Jacket jacket = new Jacket();
             try
             {
@@ -1338,7 +1416,7 @@ namespace InventoryManagmentSystem
 
         public static Mask MaskFindByItemId(SqlConnection connection, Guid itemId)
         {
-            string query = $"SELECT * FROM tbMasks WHERE ItemId=@ItemId";
+            string query = $"SELECT TOP 1 * FROM tbMasks WHERE ItemId=@ItemId";
             Mask mask = new Mask();
             try
             {
@@ -1474,7 +1552,7 @@ namespace InventoryManagmentSystem
 
         public static Pants PantsFindByItemId(SqlConnection connection, Guid itemId)
         {
-            string query = $"SELECT * FROM tbMasks WHERE ItemId=@ItemId";
+            string query = $"SELECT TOP 1 * FROM tbMasks WHERE ItemId=@ItemId";
             Pants pants = new Pants();
             try
             {
