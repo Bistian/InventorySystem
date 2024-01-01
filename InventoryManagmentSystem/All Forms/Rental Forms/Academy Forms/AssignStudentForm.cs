@@ -16,15 +16,15 @@ namespace InventoryManagmentSystem.Academy
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
-        Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
-        List<Dictionary<string, string>> classList;
+        Dictionary<string, string> academyMap = new Dictionary<string, string>();
+        List<Item> classList;
         AcademyForm parent = null;
 
         public AssignStudentForm(AcademyForm parent)
         {
             InitializeComponent();
             academyMap = HelperSql.AcademyListNames(connection);
-            classList = new List<Dictionary<string, string>>();
+            classList = new List<Item>();
             foreach (var value in academyMap.Values)
             {
                 cbAcademy.Items.Add(value);
@@ -45,16 +45,16 @@ namespace InventoryManagmentSystem.Academy
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
-            Guid Id = Guid.Empty;
+            string Id = string.Empty;
             foreach (var item in classList)
             {
-                if (item["Name"] == cbClasses.Text)
+                if (item.GetColumnValue("Name") == cbClasses.Text)
                 {
-                    Id = Guid.Parse(item["Id"]);
+                    Id = item.GetColumnValue("Id");
                     break;
                 }
             }
-            if (Id == Guid.Empty)
+            if (Id == string.Empty)
             {
                 return false;
             }
@@ -84,7 +84,7 @@ namespace InventoryManagmentSystem.Academy
 
         private void cbAcademy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Guid academyId = Guid.Empty;
+            string academyId = "";
             foreach (var key in academyMap.Keys)
             {
                 if (academyMap[key] == cbAcademy.Text)
@@ -93,7 +93,7 @@ namespace InventoryManagmentSystem.Academy
                 }
             }
 
-            if (academyId == Guid.Empty)
+            if (academyId == "")
             {
                 return;
             }
@@ -103,7 +103,7 @@ namespace InventoryManagmentSystem.Academy
             cbClasses.Items.Clear();
             foreach (var item in classList)
             {
-                cbClasses.Items.Add(item["Name"]);
+                cbClasses.Items.Add(item.GetColumnValue("Name"));
             }
 
             if (cbClasses.Items.Count > 0)

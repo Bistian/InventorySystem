@@ -18,7 +18,7 @@ namespace InventoryManagmentSystem
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
-        Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
+        Dictionary<string, string> academyMap = new Dictionary<string, string>();
 
         private bool isUpdate = false;
         AcademyForm parent;
@@ -78,7 +78,7 @@ namespace InventoryManagmentSystem
         /// Check if item already exists on the table.
         /// </summary>
         /// <returns>1 = exists | 0 = dosn't exist | -1 = error. </returns>
-        private int ItemAlreadyExists(Guid academyId)
+        private int ItemAlreadyExists(string academyId)
         {
             string query = @"
                 SELECT * 
@@ -115,7 +115,7 @@ namespace InventoryManagmentSystem
         {
 
             // Get the uuid from the selected academy.
-            Guid academyId = Guid.Empty;
+            string academyId = "";
             foreach(var item in academyMap)
             {
                 if(item.Value == cbAcademy.Text)

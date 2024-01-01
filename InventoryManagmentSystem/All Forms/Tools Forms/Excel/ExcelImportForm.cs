@@ -227,10 +227,10 @@ namespace InventoryManagmentSystem
                     }
                 }
 
-                Guid uuid = HelperSql.ItemInsertAndGetUuid(connection, 
+                var uuid = HelperSql.ItemInsertAndGetUuid(connection, 
                     row[0].ToString(), row[2].ToString(), row[5].ToString(), "Rent");
 
-                if (uuid == Guid.Empty) { return; }
+                if (uuid == "") { return; }
 
                 DateTime today = new DateTime();
                 bool isInserted = false;

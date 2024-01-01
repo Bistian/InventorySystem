@@ -37,7 +37,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             GetTableName();
         }
 
-        private bool SelectTableAndAddItem(Guid uuid)
+        private bool SelectTableAndAddItem(string uuid)
         {
             bool wasAdded = false;
             if (cbItemType.Text.ToLower() == "boots") 
@@ -96,8 +96,8 @@ namespace InventoryManagmentSystem.Rental_Forms
                 return false;
             }
 
-            Guid uuid = HelperSql.ItemInsertAndGetUuid(connection, cbItemType.Text, tbSerialNumber.Text, cbCondition.Text, "Rent");
-            if (uuid.Equals(Guid.Empty))
+            string uuid = HelperSql.ItemInsertAndGetUuid(connection, cbItemType.Text, tbSerialNumber.Text, cbCondition.Text, "Rent");
+            if (uuid == "")
             {
                 Console.WriteLine("ERROR: UUID not found.");
                 return false;
@@ -129,7 +129,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (itemType == "boots") 
             {
                 isUpdated = HelperSql.BootsUpdate(connection,
-                    item.Id,
+                    item.GetColumnValue("Id"),
                     cbBrand.Text,
                     cbSize.Text,
                     cbMaterial.Text,
@@ -138,7 +138,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             else if (itemType == "helmet") 
             {
                 isUpdated = HelperSql.HelmetUpdate(connection,
-                    item.Id, 
+                    item.GetColumnValue("Id"),
                     cbBrand.Text, 
                     dtManufacture.Value.Date.ToString(), 
                     cbColor.Text); 
@@ -146,7 +146,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             else if (itemType == "jacket") 
             {
                 isUpdate = HelperSql.JacketUpdate(connection,
-                    item.Id,
+                    item.GetColumnValue("Id"),
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
                     cbSize.Text);
@@ -154,7 +154,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             else if (itemType == "mask")
             {
                 isUpdate = HelperSql.MaskUpdate(connection,
-                    item.Id,
+                    item.GetColumnValue("Id"),
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
                     cbSize.Text);
@@ -162,7 +162,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             else if (itemType == "pants")
             {
                 isUpdate = HelperSql.PantsUpdate(connection,
-                    item.Id,
+                    item.GetColumnValue("Id"),
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
                     cbSize.Text);

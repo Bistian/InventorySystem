@@ -20,19 +20,16 @@ namespace InventoryManagmentSystem
 
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
-        private List<Item> bootsList = new List<Item>();
-        private List<Item> helmetsList = new List<Item>();
-        private List<Item> jacketsList = new List<Item>();
-        private List<Item> masksList = new List<Item>();
-        private List<Item> pantsList = new List<Item>();
+
+        private List<Item> itemList = new List<Item>();
 
         public InventoryForm(string ItemType)
         {
             InitializeComponent();
             checkActive.Checked = true;
-            LoadInventory();
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
-            InitializeItems();
+            itemList = HelperSql.ItemFindAllWithSpecifications(connection);
+            DisplayItems();
             SetItemType(ItemType);
         }
 
@@ -41,211 +38,86 @@ namespace InventoryManagmentSystem
             if(itemType == null) { return; }
             if(cbItemType.Items.Count == 0)  { return; }
 
-            if (itemType.ToLower() == "jacket")
-            {
-                cbItemType.SelectedIndex = 0;
-            }
-            else if (itemType.ToLower() == "pants")
-            {
-                cbItemType.SelectedIndex = 1;
-            }
-            else if (itemType.ToLower() == "boots")
-            {
-                cbItemType.SelectedIndex = 2;
-            }
-            else if (itemType.ToLower() == "helmet")
-            {
-                cbItemType.SelectedIndex = 3;
-            }
-            else if (itemType.ToLower() == "mask")
-            {
-                cbItemType.SelectedIndex = 4;
-            }
-            else
-            {
-                cbItemType.SelectedIndex = 0;
-            }
+            int index = cbItemType.Items.IndexOf(itemType);
+            if(index == -1) { return; }
+
+            cbItemType.SelectedIndex = index;
         }
 
-        /// <summary>
-        /// Add retired condition to item queries.
-        /// </summary>
-        /// <param name="initialQuery">Initial part of the query.</param>
-        /// <returns>Complete query</returns>
-        private void InitializeItems()
+        private void DisplayItems()
         {
-            bootsList = HelperSql.BootsFindAll(connection);
-            helmetsList = HelperSql.HelmetFindAll(connection);
-            jacketsList = HelperSql.JacketFindAll(connection);
-            masksList = HelperSql.MaskFindAll(connection);
-            pantsList = HelperSql.PantsFindAll(connection);
-        }
-
-        private void DisplayBoots()
-        {
-            int count = 0;
-            foreach (Item item in bootsList)
-            {
-                if (checkActive.Checked && item.Condition == "Retired") { continue; }
-                if (checkRetired.Checked && item.Condition != "Retired") { continue; }
-                count++;
-                var boots = (Boots)item.Specifications;
-                if(searchBar.Text.Length > 0)
-                {
-                    string like = searchBar.Text;
-                    if (boots.Size == like) { }
-                    else if (HelperFunctions.IsSubstring(item.SerialNumber, like)) { }
-                    else if (HelperFunctions.IsSubstring(boots.Brand, like)) { }
-                    else { continue; }
-                }
-                dataGridInv.Rows.Add(count,
-                    item.Id,
-                    boots.Brand,
-                    item.SerialNumber,
-                    item.Condition,
-                    boots.AcquisitionDate,
-                    boots.ManufactureDate,
-                    item.Location,
-                    boots.Size,
-                    boots.Material, "Color");
-            }
-        }
-
-        private void DisplayHelmets()
-        {
-            int count = 0;
-            foreach (Item item in helmetsList)
-            {
-                if (checkActive.Checked && item.Condition == "Retired") { continue; }
-                if (checkRetired.Checked && item.Condition != "Retired") { continue; }
-                count++;
-                var helmet = (Helmet)item.Specifications;
-                if (searchBar.Text.Length > 0)
-                {
-                    string like = searchBar.Text;
-                    if (HelperFunctions.IsSubstring(item.SerialNumber, like)) { }
-                    else if (HelperFunctions.IsSubstring(helmet.Brand, like)) { }
-                    else { continue; }
-                }
-                dataGridInv.Rows.Add(count,
-                    item.Id,
-                    helmet.Brand,
-                    item.SerialNumber,
-                    item.Condition,
-                    helmet.AcquisitionDate,
-                    helmet.ManufactureDate,
-                    item.Location,
-                    "Size", "Material",
-                    helmet.Color);
-            }
-        }
-
-        private void DisplayJackets()
-        {
-            int count = 0;
-            foreach (Item item in jacketsList)
-            {
-                if (checkActive.Checked && item.Condition == "Retired") { continue; }
-                if (checkRetired.Checked && item.Condition != "Retired") { continue; }
-                count++;
-                var jacket = (Jacket)item.Specifications;
-                if (searchBar.Text.Length > 0)
-                {
-                    string like = searchBar.Text;
-                    if (jacket.Size == like) { }
-                    else if (HelperFunctions.IsSubstring(item.SerialNumber, like)) { }
-                    else if (HelperFunctions.IsSubstring(jacket.Brand, like)) { }
-                    else { continue; }
-                }
-                dataGridInv.Rows.Add(count,
-                    item.Id,
-                    jacket.Brand,
-                    item.SerialNumber,
-                    item.Condition,
-                    jacket.AcquisitionDate,
-                    jacket.ManufactureDate,
-                    item.Location,
-                    jacket.Size,
-                    "Size", "Color");
-            }
-        }
-
-        private void DisplayMasks()
-        {
-            int count = 0;
-            foreach (Item item in masksList)
-            {
-                if (checkActive.Checked && item.Condition == "Retired") { continue; }
-                if (checkRetired.Checked && item.Condition != "Retired") { continue; }
-                count++;
-                var mask = (Mask)item.Specifications;
-                if (searchBar.Text.Length > 0)
-                {
-                    string like = searchBar.Text;
-                    if (mask.Size == like) { }
-                    else if (HelperFunctions.IsSubstring(item.SerialNumber, like)) { }
-                    else if (HelperFunctions.IsSubstring(mask.Brand, like)) { }
-                    else { continue; }
-                }
-                dataGridInv.Rows.Add(count,
-                    item.Id,
-                    mask.Brand,
-                    item.SerialNumber,
-                    item.Condition,
-                    mask.AcquisitionDate,
-                    mask.ManufactureDate,
-                    item.Location,
-                    mask.Size,
-                    "Size", "Color");
-            }
-        }
-
-        private void DisplayPants()
-        {
-            int count = 0;
-            foreach (Item item in pantsList)
-            {
-                if (checkActive.Checked && item.Condition == "Retired") { continue; }
-                if (checkRetired.Checked && item.Condition != "Retired") { continue; }
-                count++;
-                var pants = (Pants)item.Specifications;
-                if (searchBar.Text.Length > 0)
-                {
-                    string like = searchBar.Text;
-                    if (pants.Size == like) { }
-                    else if (HelperFunctions.IsSubstring(item.SerialNumber, like)) { }
-                    else if (HelperFunctions.IsSubstring(pants.Brand, like)) { }
-                    else { continue; }
-                }
-                dataGridInv.Rows.Add(count,
-                    item.Id,
-                    pants.Brand,
-                    item.SerialNumber,
-                    item.Condition,
-                    pants.AcquisitionDate,
-                    pants.ManufactureDate,
-                    item.Location,
-                    pants.Size,
-                    "Size", "Color");
-            }
-        }
-
-        /// <summary>
-        /// loads different tables
-        /// </summary>
-        public void LoadInventory()
-        {
-            if (cbItemType.SelectedIndex == -1) { return; }
             dataGridInv.Rows.Clear();
-            dataGridInv.Columns["column_acquisition_date"].DefaultCellStyle.Format = "d";
-            dataGridInv.Columns["column_manufacture_date"].DefaultCellStyle.Format = "d";
+            int count = 1;
+            foreach(Item item in itemList)
+            {
+                string condition = item.GetColumnValue("Condition");
+                if (checkActive.Checked && condition == "Retired") { continue; }
+                if (checkRetired.Checked && condition != "Retired") { continue; }
 
-            string itemType = cbItemType.Text.ToLower();
-            if (itemType == "boots") { DisplayBoots(); }
-            else if (itemType == "helmet") { DisplayHelmets(); }
-            else if (itemType == "jacket") { DisplayJackets(); }
-            else if (itemType == "mask") { DisplayMasks(); }
-            else if(itemType == "pants") { DisplayPants(); }
+                string type = item.GetColumnValue("ItemType");
+                if(type != cbItemType.Text) { continue; }
+
+                bool isSearchBarMatching = SearchBarIsMatching(item);
+                if(!isSearchBarMatching) { continue; }
+
+                AddItemToGrid(item, count);
+                count++;
+            }
+        }
+
+        private bool SearchBarIsMatching(Item item)
+        {
+            if(searchBar.Text.Length == 0) { return true; }
+            string like = searchBar.Text;
+            string serial = item.GetColumnValue("SerialNumber");
+            string brand = item.GetColumnValue("Brand");
+
+            if (HelperFunctions.IsSubstring(serial, like)) { return true; }
+            if (HelperFunctions.IsSubstring(brand, like)) { return true; }
+
+            string type = item.GetColumnValue("ItemType");
+            if (type == "boots")
+            {
+                string size = item.GetColumnValue("Size");
+                return size == like ? true : false;
+            }
+            else if (type == "helmet")
+            {
+                string color = item.GetColumnValue("Color");
+                return color == like ? true : false;
+            }
+            else if (type == "jacket")
+            {
+                string size = item.GetColumnValue("Size");
+                return size == like ? true : false;
+            }
+            else if (type == "mask")
+            {
+                string size = item.GetColumnValue("Size");
+                return size == like ? true : false;
+            }
+            else if (type == "pants")
+            {
+                string size = item.GetColumnValue("Size");
+                return size == like ? true : false;
+            }
+            return false;
+        }
+
+        private void AddItemToGrid(Item item, int count)
+        {
+
+            dataGridInv.Rows.Add(count,
+               item.GetColumnValue("Id"),
+               item.GetColumnValue("Brand"),
+               item.GetColumnValue("SerialNumber"),
+               item.GetColumnValue("Condition"),
+               item.GetColumnValue("AcquisitionDate"),
+               item.GetColumnValue("ManufactureDate"),
+               item.GetColumnValue("Location"),
+               item.GetColumnValue("Size"),
+               item.GetColumnValue("Material"),
+               item.GetColumnValue("Color"));
         }
 
         private void comboBoxItem_SelectedIndexChanged(object sender, EventArgs e)
@@ -253,7 +125,7 @@ namespace InventoryManagmentSystem
             // Reset search bar.
             searchBar.Text = "";
             ChangeVisibleColumns();
-            LoadInventory();
+            DisplayItems();
         }
 
         private void ChangeVisibleColumns()
@@ -281,7 +153,7 @@ namespace InventoryManagmentSystem
         private void searchBar_TextChanged(object sender, EventArgs e)
         {
             if (cbItemType.SelectedIndex < 0) { return; }
-            LoadInventory();
+            DisplayItems();
         }
 
         private void dataGridInv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -299,7 +171,7 @@ namespace InventoryManagmentSystem
                     if (itemType == "boots") { UpdateBoots(e); }
                     else if (itemType == "helmet") { UpdateHelmet(e); }
                     else if (itemType == "jacket" || itemType == "pants" || itemType == "mask") { UpdateJacketOrPantsOrMasks(e); }
-                    LoadInventory();
+                    DisplayItems();
                 }
                 else if (colName == "column_delete")
                 {
@@ -308,11 +180,15 @@ namespace InventoryManagmentSystem
                 }
                 else
                 {
-                    var form = new RentalHistoryForm((Guid)row.Cells["column_item_id"].Value, Guid.Empty);
-                    //RentalHistoryForm form = new RentalHistoryForm(itemType, serialNumber);
-                    var parentForm = this.ParentForm as MainForm;
-                    parentForm.openChildForm(form);
-                    this.Close();
+                    string itemId = row.Cells["column_item_id"].Value.ToString();
+                    var form = new RentalHistoryForm(itemId, string.Empty);
+
+                    if(form.IsDisposed) { MessageBox.Show("No history found"); }
+                    else
+                    {
+                        var parentForm = this.ParentForm as MainForm;
+                        parentForm.openChildForm(form);
+                    } 
                 }
             }
             catch (Exception ex)
@@ -410,28 +286,28 @@ namespace InventoryManagmentSystem
         {
             checkRetired.Checked = false;
             checkActive.Checked = false;
-            LoadInventory();
+            DisplayItems();
         }
 
         private void checkRetired_Click(object sender, EventArgs e)
         {
             checkAll.Checked = false;
             checkActive.Checked = false;
-            LoadInventory();
+            DisplayItems();
         }
 
         private void checkActive_Click(object sender, EventArgs e)
         {
             checkRetired.Checked = false;
             checkAll.Checked = false;
-            LoadInventory();
+            DisplayItems();
         }
 
         private void UsersButton_Click_1(object sender, EventArgs e)
         {
             NewItemForm ModForm = new NewItemForm();
             ModForm.ShowDialog();
-            LoadInventory();
+            DisplayItems();
         }
     }
 }

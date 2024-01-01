@@ -16,16 +16,8 @@ namespace InventoryManagmentSystem
 {
     public partial class RentalForm : Form
     {
-        #region SQL_Variables
-        // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        //Creating command
-        SqlConnection con = new SqlConnection(connectionString);
-        //Creating command
-        SqlCommand cm = new SqlCommand();
-        //Creatinng Reader
-        SqlDataReader dr;
-        #endregion SQL_Variables
+        SqlConnection connection = new SqlConnection(connectionString);
 
         //Makes date red if it is less than this number.
         int daysForWarning = 14;
@@ -123,11 +115,11 @@ namespace InventoryManagmentSystem
             grid.Columns[columnName].DefaultCellStyle.Format = "d";
 
             grid.Rows.Clear();
-            cm = new SqlCommand(query, con);
-            con.Open();
+            var command = new SqlCommand(query, connection);
+            connection.Open();
             try
             {
-                dr = cm.ExecuteReader();
+                var dr = command.ExecuteReader();
 
                 int i = 0;
                 while (dr.Read())
@@ -147,7 +139,7 @@ namespace InventoryManagmentSystem
             {
                 Console.WriteLine(ex.Message);
             }
-            con.Close();
+            connection.Close();
         }
 
         // Check if rented due date is getting closer and turns date red.
@@ -205,16 +197,16 @@ namespace InventoryManagmentSystem
                 "SELECT COUNT(*) FROM tbClients " +
                 "WHERE Name ='" + rentee + "'");
 
-            cm = new SqlCommand(query, con);
-            con.Open();
+            var command = new SqlCommand(query, connection);
+            connection.Open();
 
             // If there are no matches with that name, return.
-            if ((int)cm.ExecuteScalar() <= 0)
+            if ((int)command.ExecuteScalar() <= 0)
             {
-                con.Close();
+                connection.Close();
                 return;
             }
-            con.Close();
+            connection.Close();
 
             // Show the details of the row in a new form or dialog
             DialogBoxClient dialogBoxClient = new DialogBoxClient(rentee);
@@ -294,6 +286,12 @@ namespace InventoryManagmentSystem
             {
                 RefreshForm(null);
             }
+        }
+
+        private void labelSearch_TextChanged(object sender, EventArgs e)
+        {
+            if(searchBar.Text.Length < 1) { return; }
+
         }
     }
 }

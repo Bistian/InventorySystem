@@ -16,9 +16,9 @@ namespace InventoryManagmentSystem
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
-        List<Dictionary<string, string>> historyList;
+        List<Item> historyList;
 
-        public RentalHistoryForm(Guid itemId, Guid clientId)
+        public RentalHistoryForm(string itemId, string clientId)
         {
             InitializeComponent();
             historyList = HelperSql.HistoryFindFull(connection, itemId, clientId);
@@ -32,20 +32,20 @@ namespace InventoryManagmentSystem
             foreach(var history in historyList)
             {
                 dataGridHistory.Rows.Add(
-                    history["Id"],
-                    history["ClientId"],
-                    history["ItemId"], 
-                    history["Name"],
-                    history["ItemType"],
-                    history["SerialNumber"],
-                    history["RentDate"],
-                    history["ReturnDate"]);
+                    history.GetColumnValue("Id"),
+                    history.GetColumnValue("ClientId"),
+                    history.GetColumnValue("ItemId"), 
+                    history.GetColumnValue("Name"),
+                    history.GetColumnValue("ItemType"),
+                    history.GetColumnValue("SerialNumber"),
+                    history.GetColumnValue("RentDate"),
+                    history.GetColumnValue("ReturnDate"));
             }
         }
 
-        private void clickSearch(string message, Guid itemId, Guid clientId)
+        private void clickSearch(string message, string itemId, string clientId)
         {
-            if(itemId == Guid.Empty && clientId == Guid.Empty) { return; }
+            if(itemId == string.Empty && clientId == string.Empty) { return; }
 
             bool choice = HelperFunctions.YesNoMessageBox(message, "Search History");
             if (!choice) { return; }
@@ -70,16 +70,16 @@ namespace InventoryManagmentSystem
             
             if(column == "column_client_name")
             {
-                Guid clientId = Guid.Parse(row.Cells["column_client_id"].Value.ToString());
+                string clientId = row.Cells["column_client_id"].Value.ToString();
                 string message = "Do you want to search for this client's rental history?";
-                clickSearch(message, Guid.Empty, clientId);
+                clickSearch(message, string.Empty, clientId);
             }
 
             else if (column == "column_item_type")
             {
-                Guid itemId = Guid.Parse(row.Cells["column_item_id"].Value.ToString());
+                string itemId = row.Cells["column_item_id"].Value.ToString();
                 string message = "Do you want to search for this item's rental history?";
-                clickSearch(message, itemId, Guid.Empty);
+                clickSearch(message, itemId, string.Empty);
             }
         }
     }

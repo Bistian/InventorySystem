@@ -10,7 +10,7 @@ namespace InventoryManagmentSystem
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
-        List<Dictionary<string, string>> clients = new List<Dictionary<string, string>>();
+        List<Item> clients = new List<Item>();
 
         public bool isReturn = false;
 
@@ -74,7 +74,7 @@ namespace InventoryManagmentSystem
             dataGridUsers.Rows.Clear();
             foreach (var client in clients)
             {
-                bool isActive = Boolean.Parse(client["IsActive"]);
+                bool isActive = Boolean.Parse(client.GetColumnValue("IsActive"));
                 if((isActive == true && cbActive.Checked == true) || 
                     (isActive == false && cbInactive.Checked == true))
                 {
@@ -84,17 +84,17 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void AddClientToGrid(Dictionary<string, string> client, uint count)
+        private void AddClientToGrid(Item client, uint count)
         {
             dataGridUsers.Rows.Add(
                 count,
-                client["Id"],
-                client["Name"],
-                client["Phone"],
-                client["Email"],
-                client["Academy"],
-                client["Address"],
-                client["DriversLicenseNumber"]);
+                client.GetColumnValue("Id"),
+                client.GetColumnValue("Name"),
+                client.GetColumnValue("Phone"),
+                client.GetColumnValue("Email"),
+                client.GetColumnValue("Academy"),
+                client.GetColumnValue("Address"),
+                client.GetColumnValue("DriversLicenseNumber"));
                 
         }
 

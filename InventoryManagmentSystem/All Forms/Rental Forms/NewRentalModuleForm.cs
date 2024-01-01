@@ -14,8 +14,8 @@ namespace InventoryManagmentSystem
         SqlConnection connection = new SqlConnection(connectionString);
 
         //Used for query
-        Guid ItemIdClient = Guid.Empty;
-        Guid ItemIdInventory = Guid.Empty;
+        string ItemIdClient = string.Empty;
+        string ItemIdInventory = string.Empty;
 
         public bool ExistingUser = false;
         public string currentUser = "";
@@ -23,8 +23,8 @@ namespace InventoryManagmentSystem
         public int ReturnReplace = 0;
         string ReplacmentSerial = "";
         string dueDate = "";
-        Guid ClientId = Guid.Empty;
-        Guid ClassId = Guid.Empty;
+        string ClientId = string.Empty;
+        string ClassId = string.Empty;
         public string drivers;
 
 
@@ -58,46 +58,14 @@ namespace InventoryManagmentSystem
             dataGridViewClient.Rows.Clear();
             foreach ( var item in items )
             {
-                string brand = "";
-                string size = "";
-                string manufacture = "";
-                if(item.ItemType == "boots") 
-                {
-                    var boots = (Boots)item.Specifications;
-                    brand = boots.Brand;
-                    size = boots.Size;
-                    manufacture = boots.ManufactureDate;
-                }
-                else if(item.ItemType == "helmet") 
-                {
-                    var helmet = (Helmet)item.Specifications;
-                    brand = helmet.Brand;
-                    manufacture = helmet.ManufactureDate;
-                }
-                else if (item.ItemType == "jacket")
-                {
-                    var jacket = (Jacket)item.Specifications;
-                    brand = jacket.Brand;
-                    size = jacket.Size;
-                    manufacture = jacket.ManufactureDate;
-                }
-                else if (item.ItemType == "mask")
-                {
-                    var mask = (Mask)item.Specifications;
-                    brand = mask.Brand;
-                    size = mask.Size;
-                    manufacture = mask.ManufactureDate;
-                }
-                else if (item.ItemType == "pants")
-                {
-                    var pants = (Pants)item.Specifications;
-                    brand = pants.Brand;
-                    size = pants.Size;
-                    manufacture = pants.ManufactureDate;
-                }
-
                 dataGridViewClient.Rows.Add(
-                    item.ItemType, item.DueDate, brand, item.SerialNumber, size, manufacture, item.Id);
+                    item.GetColumnValue("ItemType"),
+                    item.GetColumnValue("DueDate"),
+                    item.GetColumnValue("Brand"),
+                    item.GetColumnValue("SerialNumber"),
+                    item.GetColumnValue("Size"),
+                    item.GetColumnValue("ManufactureDate"),
+                    item.GetColumnValue("Id"));
             }
         }
 
@@ -108,88 +76,57 @@ namespace InventoryManagmentSystem
             var items = HelperSql.ItemFindBySearchBar(connection, textBoxSearchBar.Text);
             if(items == null ) { return; }
 
-            int i = 1;
             foreach(var item in items )
             {
-                if(item.ItemType != cbItemType.Text ) { continue; }
-                string brand = "";
-                string size = "";
-                string manufacture = "";
-                string materialOrColor = "";
-                if (item.ItemType == "boots")
-                {
-                    var boots = (Boots)item.Specifications;
-                    brand = boots.Brand;
-                    size = boots.Size;
-                    manufacture = boots.ManufactureDate;
-                    materialOrColor = boots.Material;
-                }
-                else if (item.ItemType == "helmet")
-                {
-                    var helmet = (Helmet)item.Specifications;
-                    brand = helmet.Brand;
-                    manufacture = helmet.ManufactureDate;
-                    materialOrColor = helmet.Color;
-                }
-                else if (item.ItemType == "jacket")
-                {
-                    var jacket = (Jacket)item.Specifications;
-                    brand = jacket.Brand;
-                    size = jacket.Size;
-                    manufacture = jacket.ManufactureDate;
-                }
-                else if (item.ItemType == "mask")
-                {
-                    var mask = (Mask)item.Specifications;
-                    brand = mask.Brand;
-                    size = mask.Size;
-                    manufacture = mask.ManufactureDate;
-                }
-                else if (item.ItemType == "pants")
-                {
-                    var pants = (Pants)item.Specifications;
-                    brand = pants.Brand;
-                    size = pants.Size;
-                    manufacture = pants.ManufactureDate;
-                }
+                if(item.GetColumnValue("ItemType") != cbItemType.Text ) { continue; }
 
+                string materialOrColor = item.GetColumnValue("Material");
+                if( materialOrColor == "" )
+                {
+                    materialOrColor = item.GetColumnValue("Color");
+                }
                 dataGridInv.Rows.Add(
-                    brand, item.SerialNumber, size, manufacture, item.Condition, materialOrColor, item.Id
-                );
+                   item.GetColumnValue("Brand"),
+                   item.GetColumnValue("SerialNumber"),
+                   item.GetColumnValue("Size"),
+                   item.GetColumnValue("ManufactureDate"),
+                   item.GetColumnValue("Condition"),
+                   materialOrColor,
+                   item.GetColumnValue("Id"));
             }
         }
 
         public void LoadProfile(string driverLicense)
         {
             var client = HelperSql.ClientFindByDriversLicense(connection, driverLicense);
-            if(client.Count == 0) 
+            if(client.Count() == 0) 
             {
                 Console.WriteLine("Client not found.");
                 return; 
             }
 
-            labelProfileName.Text = client["Name"];
-            labelClientPhone.Text = client["Phone"];
-            labelClientEmail.Text = client["Email"];
-            lableRentalInfo.Text = client["Academy"];
-            labelClientDrivers.Text = client["DriversLicenseNumber"];
-            labelClientAddress.Text = client["Address"];
-            labelClientChest.Text = client["Chest"];
-            labelClientSleeve.Text = client["Sleeve"];
-            labelClientWaist.Text = client["Waist"];
-            labelClientInseam.Text = client["Inseam"];
-            labelClientHips.Text = client["Hips"];
-            labelClientHeight.Text = client["Height"];
-            labelClientWeight.Text = client["Weight"];
-            textBoxNotes.Text = client["Notes"];
-            ClientId = Guid.Parse(client["Id"]);
-            ClassId = Guid.Parse(client["IdClass"]);
+            labelProfileName.Text = client.GetColumnValue("Name");
+            labelClientPhone.Text = client.GetColumnValue("Phone");
+            labelClientEmail.Text = client.GetColumnValue("Email");
+            lableRentalInfo.Text = client.GetColumnValue("Academy");
+            labelClientDrivers.Text = client.GetColumnValue("DriversLicenseNumber");
+            labelClientAddress.Text = client.GetColumnValue("Address");
+            labelClientChest.Text = client.GetColumnValue("Chest");
+            labelClientSleeve.Text = client.GetColumnValue("Sleeve");
+            labelClientWaist.Text = client.GetColumnValue("Waist");
+            labelClientInseam.Text = client.GetColumnValue("Inseam");
+            labelClientHips.Text = client.GetColumnValue("Hips");
+            labelClientHeight.Text = client.GetColumnValue("Height");
+            labelClientWeight.Text = client.GetColumnValue("Weight");
+            textBoxNotes.Text = client.GetColumnValue("Notes");
+            ClientId = client.GetColumnValue("Id");
+            ClassId = client.GetColumnValue("IdClass");
             license = labelClientDrivers.Text;
 
-            var dict = HelperSql.ClassFindByClassId(connection, ClassId);
-            if(dict.Count > 0)
+            var item = HelperSql.ClassFindByClassId(connection, ClassId);
+            if(item.Count() > 0)
             {
-                labelClientClass.Text = dict["Name"];
+                labelClientClass.Text = item.GetColumnValue("Name");
             }
 
             //point of contact
@@ -270,7 +207,7 @@ namespace InventoryManagmentSystem
             DataGridViewRow row = dataGridViewClient.Rows[e.RowIndex];
             if (ReturnReplace == 1)
             {
-                Guid itemId = (Guid)row.Cells["ItemId"].Value;
+                string itemId = row.Cells["ItemId"].Value.ToString();
                 bool isUpdated = HelperSql.ItemUpdate(connection, itemId, "Fire-Tec");
                 if(isUpdated)
                 {
@@ -292,7 +229,7 @@ namespace InventoryManagmentSystem
 
                 dueDate = row.Cells["DDate"].Value.ToString();
                 string SelectedSerial = row.Cells["SerialNum"].Value.ToString();
-                ItemIdClient = (Guid)row.Cells["ItemId"].Value;
+                ItemIdClient = row.Cells["ItemId"].Value.ToString();
                 labelOldItem.Text = SelectedSerial;
                 labelTypeOfItem.Text = row.Cells["Item"].Value.ToString();
 
@@ -336,7 +273,7 @@ namespace InventoryManagmentSystem
                     return;
                 }
                 
-                Guid itemId = (Guid)row.Cells["ItemIdInv"].Value;
+                string itemId = row.Cells["ItemIdInv"].Value.ToString();
                 bool isUpdated = HelperSql.ItemUpdate(connection, itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
                 if(!isUpdated) 
                 {
@@ -353,7 +290,7 @@ namespace InventoryManagmentSystem
             {
                 ReplacmentSerial = row.Cells["Serial"].Value.ToString();
                 labelReplacmentItem.Text = ReplacmentSerial;
-                ItemIdInventory = (Guid)row.Cells["ItemIdInv"].Value;
+                ItemIdInventory = row.Cells["ItemIdInv"].Value.ToString();
 
                 HelperSql.ItemUpdate(connection, ItemIdClient, "Fire-Tec");
                 HelperSql.HistoryUpdate(connection, ItemIdClient, ClientId);

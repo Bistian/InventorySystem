@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Net;
 using System.Reflection;
@@ -14,26 +15,20 @@ namespace InventoryManagmentSystem
 {
     public class HelperSql
     {
+        private static  string[] columnsClient = { 
+            "Id", "IdClass", "Name", "Phone", "Email", "Academy", "IsActive", "DriversLicenseNumber", "Address", 
+            "Chest", "Sleeve", "Waist", "Inseam", "Hips", "Height", "Weight",
+            "Notes", "FireTecRepresentative" 
+        };
+
         public static void AcademyFillComboBox(SqlCommand command, ComboBox box)
         {
             
         }
 
-        private static void AcademyFillDictionary(SqlDataReader reader, Dictionary<string, string> dict, string[] columns)
+        public static List<Item> AcademyFindAll(SqlConnection connection)
         {
-            string value;
-            int index;
-            foreach(string col in columns)
-            {
-                index = reader.GetOrdinal(col);
-                value = reader[index].ToString();
-                dict.Add(col, value);
-            }
-        }
-
-        public static List<Dictionary<string, string>> AcademyFindAll(SqlConnection connection)
-        {
-            var list = new List<Dictionary<string, string>>();
+            var list = new List<Item>();
             string query = "SELECT * FROM tbAcademies";
             string[] columns = { "Id", "Name", "ContactName", "Email", "Phone", "Street", "City", "State", "Zip" };
             try
@@ -43,8 +38,8 @@ namespace InventoryManagmentSystem
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    var academy = new Dictionary<string, string>();
-                    AcademyFillDictionary(reader, academy, columns);
+                    var item = new Item();
+                    item.AddByReaderAndColumnArray(reader, columns);
                 }
             }
             catch(Exception ex) { Console.WriteLine(ex.Message); }
@@ -58,14 +53,10 @@ namespace InventoryManagmentSystem
             command.Parameters.AddWithValue($"@{key}", value);
         }
 
-        /// <summary>
-        /// Returns a dictionary with academies id and name.
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <returns></returns>
-        public static Dictionary<Guid, string> AcademyListNames(SqlConnection connection)
+        /// <summary>Returns a dictionary with academies id and name.</summary>
+        public static Dictionary<string, string> AcademyListNames(SqlConnection connection)
         {
-            Dictionary<Guid, string> map = new Dictionary<Guid, string>();
+            var map = new Dictionary<string, string>();
             string query = "SELECT Id, Name FROM tbAcademies";
             SqlCommand command = new SqlCommand(query, connection);
             try
@@ -75,7 +66,7 @@ namespace InventoryManagmentSystem
                 while (reader.Read())
                 {
                     // Create a map with the uuid as a key and the name as a value.
-                    map.Add((Guid)reader[0], reader[1].ToString());
+                    map.Add(reader[0].ToString(), reader[1].ToString());
                 }
             }
             catch (Exception ex)
@@ -86,29 +77,29 @@ namespace InventoryManagmentSystem
             return map;
         }
 
-        public static Boots BootsFindByItemId(SqlConnection connection, Guid itemId) 
+        public static Item BootsFindByItemId(SqlConnection connection, string itemId) 
         {
             string query = $"SELECT TOP 1 * FROM tbBoots WHERE ItemId=@ItemId";
-            Boots boots = new Boots();
+            var item = new Item();
             try
             {
-                connection.Open();
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
+                command.Parameters.AddWithValue("@ItemId", itemId);
+                string[] columns = { "Brand", "AcquisitionDate", "ManufactureDate", "Size", "Material" };
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    boots.ItemId = itemId;
-                    boots.Brand = reader[reader.GetOrdinal("Brand")].ToString();
-                    boots.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
-                    boots.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
-                    boots.Size = reader[reader.GetOrdinal("Size")].ToString();
-                    boots.Material = reader[reader.GetOrdinal("Material")].ToString();
+                    item.AddColumn("Id", itemId);
+                    item.AddByReaderAndColumnArray(reader, columns);
                 }
             }
             catch(Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return boots;
+            return item;
         }
 
         public static List<Item> BootsFindAll(SqlConnection connection)
@@ -120,24 +111,14 @@ namespace InventoryManagmentSystem
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
+                string[] columns = {
+                    "Id","ItemType","DueDate","SerialNumber","Condition","Location", "BusinessModel",
+                    "Brand","AcquisitionDate","ManufactureDate","Size","Material"
+                };
                 while (reader.Read())
                 {
                     Item item = new Item();
-                    item.Id = (Guid)reader[reader.GetOrdinal("Id")];
-                    item.ItemType = reader[reader.GetOrdinal("ItemType")].ToString();
-                    item.DueDate = reader[reader.GetOrdinal("DueDate")].ToString();
-                    item.SerialNumber = reader[reader.GetOrdinal("SerialNumber")].ToString();
-                    item.Condition = reader[reader.GetOrdinal("Condition")].ToString();
-                    item.Location = reader[reader.GetOrdinal("Location")].ToString();
-                    item.BusinessModel = reader[reader.GetOrdinal("BusinessModel")].ToString();
-                    Boots boots = new Boots();
-                    boots.ItemId = item.Id;
-                    boots.Brand = reader[reader.GetOrdinal("Brand")].ToString();
-                    boots.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
-                    boots.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
-                    boots.Size = reader[reader.GetOrdinal("Size")].ToString();
-                    boots.Material = reader[reader.GetOrdinal("Material")].ToString();
-                    item.Specifications = boots;
+                    item.AddByReaderAndColumnArray(reader, columns);
                     items.Add(item);
                 }
             }
@@ -147,7 +128,7 @@ namespace InventoryManagmentSystem
         }
 
         public static bool BootsInsert(SqlConnection connection, 
-            Guid itemId, string brand, string acquisition, string manufacture, string size, string material)
+            string itemId, string brand, string acquisition, string manufacture, string size, string material)
         {
             string query = $@"
                 INSERT INTO tbBoots({ItemStandardColumns()},Material,Size) 
@@ -177,7 +158,7 @@ namespace InventoryManagmentSystem
         /// </summary>
         /// <returns>Bool was successfull or not.</returns>
         public static bool BootsUpdate(SqlConnection connection, 
-            Guid itemId, string brand, string size, string material, string manufacture)
+            string itemId, string brand, string size, string material, string manufacture)
         {
             Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
             if(!string.IsNullOrEmpty(brand))
@@ -258,42 +239,10 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
-        private static Dictionary<string, string> ClassFillWithReader(SqlDataReader reader)
+        public static List<Item> ClassListByAcademy(SqlConnection connection, string AcademyId)
         {
-            var dict = new Dictionary<string, string>();
-
-            string key = "Id";
-            string value = reader[reader.GetOrdinal(key)].ToString();
-            dict.Add(key, value);
-
-            key = "AcademyId";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            dict.Add(key, value);
-
-            key = "Name";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            dict.Add(key, value);
-
-            key = "StartDate";
-            DateTime startDate = reader.GetDateTime(reader.GetOrdinal(key));
-            value = $"{startDate.Month}/{startDate.Day}/{startDate.Year}";
-            dict.Add(key, value);
-
-            key = "EndDate";
-            DateTime endDate = reader.GetDateTime(reader.GetOrdinal(key));
-            value = $"{endDate.Month}/{endDate.Day}/{endDate.Year}";
-            dict.Add(key, value);
-
-            key = "IsFinished";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            dict.Add(key, value);
-
-            return dict.Count > 0 ? dict : null;
-        }
-
-        public static List<Dictionary<string, string>> ClassListByAcademy(SqlConnection connection, Guid AcademyId)
-        {
-            var list = new List<Dictionary<string, string>>();
+            var list = new List<Item>();
+            string[] columns = { "Id", "AcademyId", "Name", "StartDate", "EndDate", "IsFinished"};
             string query = $"SELECT * FROM tbClasses WHERE AcademyId = @AcademyId";
             try
             {
@@ -304,18 +253,20 @@ namespace InventoryManagmentSystem
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    var c = ClassFillWithReader(reader);
-                    if(c != null) { list.Add(c); }
+                    var item = new Item();
+                    item.AddByReaderAndColumnArray(reader, columns);
+                    list.Add(item);
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return list.Count > 0 ? list : null;
+            return list;
         }
 
-        public static Dictionary<string, string> ClassFindByClassId(SqlConnection connection, Guid classId)
+        public static Item ClassFindByClassId(SqlConnection connection, string classId)
         {
             string query = "SELECT TOP 1 * FROM tbClasses WHERE Id=@Id";
+            string[] columns = { "Id", "Name", "StartDate", "EndDate", "IsFinished" };
             try
             {
                 SqlCommand command = new SqlCommand(query, connection);
@@ -324,8 +275,11 @@ namespace InventoryManagmentSystem
                 SqlDataReader reader = command.ExecuteReader();
                 while(reader.Read())
                 {
-                    var c = ClassFillWithReader(reader);
-                    if(c != null) { return c; }
+                    var item = new Item(reader, columns);
+                    if(item.Count() > 0)
+                    {
+                        return item;
+                    }
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -333,141 +287,18 @@ namespace InventoryManagmentSystem
             return null;
         }
 
-        /// <summary>
-        /// Fill a dictionary with client measurements.
-        /// </summary>
-        /// <param name="dict">Dictionary to add data to.</param>
-        private static void ClientFillDictionaryMeasurements(SqlDataReader reader, Dictionary<string, string> dict)
-        {
-            string key;
-            string value;
-            int index;
-
-            key = "Chest";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-
-            key = "Sleeve";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-
-            key = "Waist";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-
-            key = "Inseam";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-
-            key = "Hips";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-
-            key = "Height";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-
-            key = "Weight";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-        }
-
-        /// <summary>
-        /// Fill a dictionary with client data.
-        /// </summary>
-        /// <param name="dict">Dictionary to add data to.</param>
-        /// <param name="noIds">true if you don't want id added (to prevent conflicts).</param>
-        private static void ClientFillDictionaryProfile(SqlDataReader reader, Dictionary<string, string> dict, bool noIds = false)
-        {
-            string key;
-            string value;
-            int index;
-
-            if (!noIds)
-            {
-                key = "Id";
-                index = reader.GetOrdinal(key);
-                value = reader[index].ToString();
-                dict.Add(key, value);
-
-                key = "IdClass";
-                index = reader.GetOrdinal(key);
-                value = reader[index].ToString();
-                dict.Add(key, value);
-            }
-
-            key = "Name";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-
-            key = "Phone";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-
-            key = "Email";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-
-            key = "Academy";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-
-            key = "Address";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-
-            key = "IsActive";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-
-            key = "DriversLicenseNumber";
-            index = reader.GetOrdinal(key);
-            value = reader[index].ToString();
-            dict.Add(key, value);
-        }
-
-        private static Dictionary<string, string> ClientFillWithReader(SqlDataReader reader)
-        {
-            var client = new Dictionary<string, string>();
-            ClientFillDictionaryProfile(reader, client);
-            ClientFillDictionaryMeasurements(reader, client);
-
-            string key;
-            string value;
-            key = "Notes";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            key = "FireTecRepresentative";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            client.Add(key, value);
-            return client;
-        }
-
-        public static List<Dictionary<string, string>> ClientFindAll(SqlConnection connection)
+        public static List<Item> ClientFindAll(SqlConnection connection)
         {
             string query = "SELECT * FROM tbClients";
-            var list = new List<Dictionary<string, string>>();
+            var list = new List<Item>();
             try 
             {
+                connection.Open();
                 var command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
                 while(reader.Read())
                 {
-                    var client = ClientFillWithReader(reader);
-                    list.Add(client);
+                    list.Add(new Item(reader, columnsClient));
                 }
             }
             catch(Exception ex) { Console.WriteLine(ex.Message); }
@@ -475,10 +306,10 @@ namespace InventoryManagmentSystem
             return list;
         }
 
-        public static List<Dictionary<string, string>> ClientFindAllProfiles(SqlConnection connection)
+        public static List<Item> ClientFindAllProfiles(SqlConnection connection)
         {
             string query = "SELECT Id, IdClass, Name, Phone, Email, Academy, IsActive, DriversLicenseNumber, Address FROM tbClients";
-            var list = new List<Dictionary<string, string>>();
+            var list = new List<Item>();
             try
             {
                 var command = new SqlCommand(query, connection);
@@ -486,9 +317,9 @@ namespace InventoryManagmentSystem
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    var client = new Dictionary<string, string>();
-                    ClientFillDictionaryProfile(reader, client);
-                    list.Add(client);
+                    var item = new Item();
+                    item.AddByReaderAndColumnArray(reader, columnsClient);
+                    list.Add(item);
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -496,9 +327,9 @@ namespace InventoryManagmentSystem
             return list;
         }
 
-        public static Dictionary<string, string> ClientFindByDriversLicense(SqlConnection connection, string license)
+        public static Item ClientFindByDriversLicense(SqlConnection connection, string license)
         {
-            var client = new Dictionary<string, string>();
+            var item = new Item();
             string query = $"SELECT TOP 1 * FROM tbClients WHERE DriversLicenseNumber=@License";
             try
             {
@@ -508,18 +339,18 @@ namespace InventoryManagmentSystem
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    client = ClientFillWithReader(reader);
+                    item.AddByReaderAndColumnArray(reader, columnsClient);
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return client;
+            return item;
         }
 
-        public static Dictionary<string, string> ClientFindByName(SqlConnection connection, string name)
+        public static Item ClientFindByName(SqlConnection connection, string name)
         {
             string query = $"SELECT * FROM tbClients WHERE Name=@Name";
-            var client = new Dictionary<string, string>();
+            var item = new Item();
             try
             {
                 SqlCommand command = new SqlCommand(query, connection);
@@ -528,17 +359,17 @@ namespace InventoryManagmentSystem
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    client = ClientFillWithReader(reader);
+                    item.AddByReaderAndColumnArray(reader, columnsClient);
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return client;
+            return item;
         }
 
-        public static List<Dictionary<string, string>> ClientFindBySearchBar(SqlConnection connection, string searchTerm)
+        public static List<Item> ClientFindBySearchBar(SqlConnection connection, string searchTerm)
         {
-            var clients = new List<Dictionary<string, string>>();
+            var clients = new List<Item>();
             string query = "SELECT * FROM tbClients WHERE (Name LIKE %@searchTerm% OR Academy LIKE @searchTerm) AND Type = @ClientType";
             try
             {
@@ -548,8 +379,9 @@ namespace InventoryManagmentSystem
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    var client = ClientFillWithReader(reader);
-                    if(client != null) { clients.Add(client); }
+                    var item = new Item();
+                    item.AddByReaderAndColumnArray(reader, columnsClient);
+                    clients.Add(item);
                 }
                 return clients.Count > 0 ? clients : null;
             }
@@ -558,10 +390,10 @@ namespace InventoryManagmentSystem
             return null;
         }
 
-        public static Dictionary<string, string> ClientFindById(SqlConnection connection, Guid clientId)
+        public static Item ClientFindById(SqlConnection connection, string clientId)
         {
             string query = $"SELECT TOP 1 * FROM tbClients WHERE Id=@Id";
-            var client = new Dictionary<string, string>();
+            var item = new Item();
             try
             {
                 connection.Open();
@@ -570,18 +402,18 @@ namespace InventoryManagmentSystem
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    client =  ClientFillWithReader(reader);
+                    item.AddByReaderAndColumnArray(reader, columnsClient);
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return client;
+            return item;
         }
 
-        public static Dictionary<string,string> ClientFindMeasurements(SqlConnection connection, Guid clientId)
+        public static Item ClientFindMeasurements(SqlConnection connection, string clientId)
         {
             string query = "SELECT TOP 1 * FROM tbClients WHERE Id=@Id";
-            var dict = new Dictionary<string, string>();
+            var item = new Item();
             try
             {
                 var command = new SqlCommand(query, connection);
@@ -590,18 +422,18 @@ namespace InventoryManagmentSystem
                 SqlDataReader reader = command.ExecuteReader();
                 while(reader.Read())
                 {
-                    ClientFillDictionaryMeasurements(reader, dict);
+                    item.AddByReaderAndColumnArray(reader, columnsClient);
                 }
             }
             catch(Exception ex) { Console.WriteLine(ex.Message); } 
             finally { connection.Close(); }
-            return dict;
+            return item;
         }
 
         public static bool ClientInsert(SqlConnection connection, Dictionary<string, string> client)
         {
             var exists = ClientFindByDriversLicense(connection, client["DriversLicenseNumber"]);
-            if(exists.Count > 0)
+            if(exists.Count() > 0)
             {
                 MessageBox.Show("Client already exists.");
                 return false;
@@ -658,28 +490,28 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
-        public static Helmet HelmetFindByItemId(SqlConnection connection, Guid itemId)
+        public static Item HelmetFindByItemId(SqlConnection connection, string itemId)
         {
             string query = $"SELECT TOP 1 * FROM tbHelmets WHERE ItemId=@ItemId";
-            Helmet helmet = new Helmet();
+            var item = new Item();
             try
             {
-                connection.Open();
+                if(connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 SqlDataReader reader = command.ExecuteReader();
+                string[] columns = { "Brand", "AcquisitionDate", "ManufactureDate", "Color" };
                 while (reader.Read())
                 {
-                    helmet.ItemId = itemId;
-                    helmet.Brand = reader[reader.GetOrdinal("Brand")].ToString();
-                    helmet.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
-                    helmet.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
-                    helmet.Color = reader[reader.GetOrdinal("Color")].ToString();
+                    item.AddByReaderAndColumnArray(reader, columns);
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return helmet;
+            return item;
         }
 
         public static List<Item> HelmetFindAll(SqlConnection connection)
@@ -691,23 +523,14 @@ namespace InventoryManagmentSystem
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
+                string[] columns = { 
+                    "Id", "ItemType", "DueDate", "SerialNumber", "Condition", "Location", "BusinessModel", 
+                    "Brand", "AcquisitionDate", "ManufactureDate","Color"
+                };
                 while (reader.Read())
                 {
                     Item item = new Item();
-                    item.Id = (Guid)reader[reader.GetOrdinal("Id")];
-                    item.ItemType = reader[reader.GetOrdinal("ItemType")].ToString();
-                    item.DueDate = reader[reader.GetOrdinal("DueDate")].ToString();
-                    item.SerialNumber = reader[reader.GetOrdinal("SerialNumber")].ToString();
-                    item.Condition = reader[reader.GetOrdinal("Condition")].ToString();
-                    item.Location = reader[reader.GetOrdinal("Location")].ToString();
-                    item.BusinessModel = reader[reader.GetOrdinal("BusinessModel")].ToString();
-                    Helmet helmet = new Helmet();
-                    helmet.ItemId = item.Id;
-                    helmet.Brand = reader[reader.GetOrdinal("Brand")].ToString();
-                    helmet.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
-                    helmet.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
-                    helmet.Color = reader[reader.GetOrdinal("Color")].ToString();
-                    item.Specifications = helmet;
+                    item.AddByReaderAndColumnArray(reader, columns);
                     items.Add(item);
                 }
             }
@@ -717,7 +540,7 @@ namespace InventoryManagmentSystem
         }
 
         public static bool HelmetInsert(SqlConnection connection,
-            Guid itemId, string brand, string acquisition, string manufacture, string color)
+            string itemId, string brand, string acquisition, string manufacture, string color)
         {
             string query = $@"
                 INSERT INTO tbHelmets({ItemStandardColumns()},Color) 
@@ -741,9 +564,9 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static bool HelmetUpdate(SqlConnection connection, Guid itemId, string brand, string manufacture, string color)
+        public static bool HelmetUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string color)
         {
-            Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
+            var fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
             {
                 fieldsToUpdate.Add("brand", brand);
@@ -798,7 +621,7 @@ namespace InventoryManagmentSystem
         /// Deletes an item from item table.
         /// </summary>
         /// <param name="uuid"></param>
-        public static bool ItemDelete(SqlConnection connection, Guid uuid)
+        public static bool ItemDelete(SqlConnection connection, string uuid)
         {
             string query = $"SELECT ItemType FROM tbItems WHERE Id=@Id";
             string itemType = "";
@@ -847,46 +670,88 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
-        /// <summary>
-        /// Fill a dictionary with item data.
-        /// </summary>
-        /// <param name="dict">Dictionary to add data to.</param>
-        /// <param name="noIds">true if you don't want id added (to prevent conflicts).</param>
-        private static void ItemFillDictionary(SqlDataReader reader, Dictionary<string, string> dict, bool noIds = false)
+        public static List<Item> ItemFindAll(SqlConnection connection)
         {
-            string key;
-            string value;
-
-            if(!noIds)
+            var list = new List<Item>();
+            string query = "SELECT * FROM tbItems";
+            string[] columns = { "Id", "ItemType", "DueDate", "SerialNumber", "Condition", "Location", "BusinessModel" };
+            try
             {
-                key = "Id";
-                value = reader[reader.GetOrdinal(key)].ToString();
-                dict.Add(key, value);
+                connection.Open();
+                var command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Item item = new Item();
+                    item.AddByReaderAndColumnArray(reader, columns);
+                    list.Add(item);
+                }
             }
+            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return list;
+        }
 
-            key = "ItemType";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            dict.Add(key, value);
-
-            key = "DueDate";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            dict.Add(key, value);
-
-            key = "SerialNumber";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            dict.Add(key, value);
-
-            key = "Condition";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            dict.Add(key, value);
-
-            key = "Location";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            dict.Add(key, value);
-
-            key = "BusinessModel";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            dict.Add(key, value);
+        public static List<Item> ItemFindAllWithSpecifications(SqlConnection connection)
+        {
+            var list = new List<Item>();
+            string query = @"
+                SELECT i.*, 
+                    COALESCE(b.Brand, h.Brand, j.Brand, m.Brand, p.Brand) AS Brand,
+                    COALESCE(b.AcquisitionDate, h.AcquisitionDate, j.AcquisitionDate, m.AcquisitionDate, p.AcquisitionDate) AS AcquisitionDate,
+                    COALESCE(b.ManufactureDate, h.ManufactureDate, j.ManufactureDate, m.ManufactureDate, p.ManufactureDate) AS ManufactureDate,
+                    COALESCE(b.Size, j.Size, m.Size, p.Size, '') AS Size,
+                    COALESCE(b.Material, '') AS Material,
+                    COALESCE(h.Color, '') AS Color
+                FROM tbItems as i 
+                LEFT JOIN tbBoots as b ON i.Id = b.ItemId
+                LEFT JOIN tbHelmets as h ON i.Id = h.ItemId
+                LEFT JOIN tbJackets as j ON i.Id = j.ItemId
+                LEFT JOIN tbMasks as m ON i.Id = m.ItemId
+                LEFT JOIN tbPants as p ON i.Id = p.ItemId
+            ";
+            string[] columns = { 
+                "Id", "ItemType", "DueDate", "SerialNumber", "Condition", "Location", "BusinessModel", 
+                "Brand", "AcquisitionDate", "ManufactureDate" 
+            };
+            try
+            {
+                connection.Open();
+                var command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    var item = new Item();
+                    item.AddByReaderAndColumnArray(reader, columns);
+                    string type = item.GetColumnValue("ItemType");
+                    string id = item.GetColumnValue("Id");
+                    if(type == "boots")
+                    {
+                        string[] col = { "Size", "Material" };
+                        item.AddByReaderAndColumnArray(reader, col);
+                    } 
+                    else if(type == "helmet")
+                    {
+                        item.AddByReaderAndColumn(reader, "Color");
+                    }
+                    else if (type == "jacket")
+                    {
+                        item.AddByReaderAndColumn(reader, "Size");
+                    }
+                    else if (type == "mask")
+                    {
+                        item.AddByReaderAndColumn(reader, "Size");
+                    }
+                    else if (type == "pants")
+                    {
+                        item.AddByReaderAndColumn(reader, "Size");
+                    }
+                    list.Add(item);
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return list;
         }
 
         private static List<Item> ItemFindBy(SqlConnection connection, SqlCommand command)
@@ -896,16 +761,14 @@ namespace InventoryManagmentSystem
             {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
+                string[] keys = {"Id", "ItemType", "DueDate", "SerialNumber", "Condition", "Location", "BusinessModel" };
                 while (reader.Read())
                 {
                     var item = new Item();
-                    item.Id = (Guid)reader[reader.GetOrdinal("Id")];
-                    item.ItemType = reader[reader.GetOrdinal("ItemType")].ToString();
-                    item.DueDate = reader[reader.GetOrdinal("DueDate")].ToString();
-                    item.SerialNumber = reader[reader.GetOrdinal("SerialNumber")].ToString();
-                    item.Condition = reader[reader.GetOrdinal("Condition")].ToString();
-                    item.Location = reader[reader.GetOrdinal("Location")].ToString();
-                    item.BusinessModel = reader[reader.GetOrdinal("BusinessModel")].ToString();
+                    foreach(string key in keys)
+                    {
+                        item.AddByReaderAndColumnArray(reader, keys);
+                    }
                     items.Add(item);
                 }
             }
@@ -914,32 +777,37 @@ namespace InventoryManagmentSystem
 
             foreach (var item in items)
             {
-                if (item.ItemType == "boots")
+                var type = item.GetColumnValue("ItemType");
+                var id = item.GetColumnValue("Id");
+                var specifics = new Item();
+                if (type == "boots")
                 {
-                    item.Specifications = BootsFindByItemId(connection, item.Id);
+                    specifics = BootsFindByItemId(connection, id);
                 }
-                else if (item.ItemType == "helmet")
+                else if (type == "helmet")
                 {
-                    item.Specifications = HelmetFindByItemId(connection, item.Id);
+                    specifics = HelmetFindByItemId(connection, id);
+                    
                 }
-                else if (item.ItemType == "jacket")
+                else if (type == "jacket")
                 {
-                    item.Specifications = JacketFindByItemId(connection, item.Id);
+                    specifics = JacketFindByItemId(connection, id);
                 }
-                else if (item.ItemType == "mask")
+                else if (type == "mask")
                 {
-                    item.Specifications = MaskFindByItemId(connection, item.Id);
+                    specifics = MaskFindByItemId(connection, id);
                 }
-                else if (item.ItemType == "pants")
+                else if (type == "pants")
                 {
-                    item.Specifications = PantsFindByItemId(connection, item.Id);
+                    specifics = PantsFindByItemId(connection, id);
                 }
+                item.CopyEntriesFromItem(specifics);
             }
 
             return items;
         }
 
-        public static List<Item> ItemFindByClientId(SqlConnection connection, Guid clientId)
+        public static List<Item> ItemFindByClientId(SqlConnection connection, string clientId)
         {
             string query = $"SELECT * FROM tbItems WHERE Location=@Location";
             SqlCommand command = new SqlCommand(query, connection);
@@ -974,7 +842,7 @@ namespace InventoryManagmentSystem
 
         public static Item ItemFindBySerialNumber(SqlConnection connection, string itemType, string serialNumber)
         {
-            // I am using item type just in case the serial numbers match between different items types.
+            // I am using item type just in case the serial numbers match between different list types.
             string query = $"SELECT * FROM tbItems WHERE ItemType = @ItemType AND SerialNumber = @Serial";
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@ItemType", itemType);
@@ -988,7 +856,7 @@ namespace InventoryManagmentSystem
         /// Add an item to Items table.
         /// </summary>
         /// <returns>Created item's uuid or empty if it failed.</returns>
-        public static Guid ItemInsertAndGetUuid(SqlConnection connection, string itemType, string serialNumber, string condition, string businessModel)
+        public static string ItemInsertAndGetUuid(SqlConnection connection, string itemType, string serialNumber, string condition, string businessModel)
         {
             string query = @"
                 INSERT INTO tbItems (ItemType, SerialNumber, Condition, BusinessModel)
@@ -997,7 +865,7 @@ namespace InventoryManagmentSystem
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
-            Guid uuid = Guid.Empty;
+            string uuid = "";
             try
             {
                 connection.Open();
@@ -1006,7 +874,7 @@ namespace InventoryManagmentSystem
                 command.Parameters.AddWithValue("@SerialNumber", serialNumber);
                 command.Parameters.AddWithValue("@Condition", condition);
                 command.Parameters.AddWithValue("@BusinessModel", businessModel);
-                uuid = (Guid)command.ExecuteScalar();
+                uuid = command.ExecuteScalar().ToString();
             }
             catch (Exception ex)
             {
@@ -1119,7 +987,7 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
-        public static bool ItemUpdate(SqlConnection connection, Guid itemId, string location, string dueDate = null)
+        public static bool ItemUpdate(SqlConnection connection, string itemId, string location, string dueDate = null)
         {
             string query = "UPDATE tbItems SET Location=@Location, DueDate=@DueDate WHERE Id=@ItemId";
             try
@@ -1137,73 +1005,40 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        /// <summary>
-        /// Fill dictionary with history data.
-        /// </summary>
-        /// <param name="dict">Dictionary to add data to.</param>
-        /// <param name="noIds">true if you don't want id added (to prevent conflicts).</param>
-        private static void HistoryFillDictionary(SqlDataReader reader, Dictionary<string,string> dict, bool noIds = false)
-        {
-            string key;
-            string value;
-
-            if (!noIds)
-            {
-                key = "Id";
-                value = reader[reader.GetOrdinal(key)].ToString();
-                dict.Add(key, value);
-
-                key = "ItemId";
-                value = reader[reader.GetOrdinal(key)].ToString();
-                dict.Add(key, value);
-
-                key = "ClientId";
-                value = reader[reader.GetOrdinal(key)].ToString();
-                dict.Add(key, value);
-            }
-
-            key = "RentDate";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            dict.Add(key, value);
-
-            key = "ReturnDate";
-            value = reader[reader.GetOrdinal(key)].ToString();
-            dict.Add(key, value);
-        }
-
-        /// <summary>
-        /// Finds history of an item or rent history of a client.
-        /// </summary>
-        /// <remarks>Use Guid.Empty on either itemId or clientId.</remarks>
-        /// <returns>List of dictionary with columns from history, item, and client.</returns>
-        public static List<Dictionary<string,string>> HistoryFindFull(SqlConnection connection, Guid itemId, Guid clietId)
+        /// <summary> Finds history of an item or rent history of a item.</summary>
+        public static List<Item> HistoryFindFull(SqlConnection connection, string itemId, string clietId)
         {
             string query = @"
                 SELECT h.Id, h.ItemId, h.ClientId, h.RentDate, h.ReturnDate, 
                     i.ItemType, i.DueDate, i.SerialNumber, i.Condition, i.Location, i.BusinessModel,
-                    c.Name, c.Phone, c.Email, c.Academy, c.Type, c.Status, c.DriversLicenseNumber
+                    c.Name, c.Phone, c.Email, c.Academy, c.DriversLicenseNumber
                 FROM tbHistories AS h
                 JOIN tbItems AS i ON h.itemId = i.Id
                 JOIN tbClients AS c ON h.ClientId = c.Id
             ";
-            Guid uuid = Guid.Empty;
-            if(itemId != Guid.Empty)
+            string uuid = "";
+            if(itemId != "")
             {
                 uuid = itemId;
                 query = $"{query} WHERE h.ItemId = @uuid";
             }
-            else if(clietId != Guid.Empty)
+            else if(clietId != "")
             {
                 uuid = clietId;
                 query = $"{query} WHERE h.ClientId = @uuid";
             }
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
-            var list = new List<Dictionary<string, string>>();
+            var list = new List<Item>();
+            string[] columns = {  
+                    "Id", "ItemId", "ClientId", "RentDate", "ReturnDate",
+                    "ItemType", "DueDate", "SerialNumber", "Condition", "Location", "BusinessModel",
+                    "Name", "Phone", "Email", "Academy", "DriversLicenseNumber"
+            };
             try
             {
                 var command = new SqlCommand(query, connection);
-                if(uuid != Guid.Empty)
+                if(uuid != "")
                 {
                     command.Parameters.AddWithValue("@uuid", uuid);
                 }
@@ -1211,22 +1046,17 @@ namespace InventoryManagmentSystem
                 SqlDataReader reader = command.ExecuteReader();
                 while(reader.Read())
                 {
-                    var history = new Dictionary<string, string>();
-
-                    HistoryFillDictionary(reader, history);
-                    ItemFillDictionary(reader, history, true);
-                    ClientFillDictionaryProfile(reader, history, true);
-
-                    list.Add(history);
+                    var item = new Item();
+                    item.AddByReaderAndColumnArray(reader, columns);
+                    list.Add(item);
                 }
-
             }
             catch(Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return list;
         }
 
-        public static bool HistoryInsert(SqlConnection connection, Guid itemId, Guid clientId)
+        public static bool HistoryInsert(SqlConnection connection, string itemId, string clientId)
         {
             string query = "INSERT INTO tbHistories(ItemId, ClientId, RentDate) VALUES(@ItemId, @ClientId, GETDATE())";
             try
@@ -1243,7 +1073,7 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static bool HistoryUpdate(SqlConnection connection, Guid ItemId, Guid ClientId)
+        public static bool HistoryUpdate(SqlConnection connection, string ItemId, string ClientId)
         {
             string query = @"
                 UPDATE h1
@@ -1278,34 +1108,39 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static Jacket JacketFindByItemId(SqlConnection connection, Guid itemId)
+        public static Item JacketFindByItemId(SqlConnection connection, string itemId)
         {
             string query = $"SELECT TOP 1 * FROM tbJackets WHERE ItemId=@ItemId";
-            Jacket jacket = new Jacket();
+            Item item = new Item();
+            string[] columns = { "Brand", "AcquisitionDate", "ManufactureDate", "Size" };
             try
             {
-                connection.Open();
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    jacket.ItemId = itemId;
-                    jacket.Brand = reader[reader.GetOrdinal("Brand")].ToString();
-                    jacket.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
-                    jacket.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
-                    jacket.Size = reader[reader.GetOrdinal("Size")].ToString();
+                    item.AddColumn("Id", itemId);
+                    item.AddByReaderAndColumnArray(reader, columns);
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return jacket;
+            return item;
         }
 
         public static List<Item> JacketFindAll(SqlConnection connection)
         {
             string query = @"SELECT * FROM tbItems JOIN tbJackets ON Id=ItemId";
-            var items = new List<Item>();
+            var list = new List<Item>();
+            string[] columns = { 
+                "Id", "ItemType", "DueDate", "SerialNumber", "Condition", "Location", "BusinessModel",
+                "Brand","AcquisitionDate","ManufactureDate","Size" 
+            };
             try
             {
                 connection.Open();
@@ -1313,31 +1148,18 @@ namespace InventoryManagmentSystem
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    Item item = new Item();
-                    item.Id = (Guid)reader[reader.GetOrdinal("Id")];
-                    item.ItemType = reader[reader.GetOrdinal("ItemType")].ToString();
-                    item.DueDate = reader[reader.GetOrdinal("DueDate")].ToString();
-                    item.SerialNumber = reader[reader.GetOrdinal("SerialNumber")].ToString();
-                    item.Condition = reader[reader.GetOrdinal("Condition")].ToString();
-                    item.Location = reader[reader.GetOrdinal("Location")].ToString();
-                    item.BusinessModel = reader[reader.GetOrdinal("BusinessModel")].ToString();
-                    Jacket jacket = new Jacket();
-                    jacket.ItemId = item.Id;
-                    jacket.Brand = reader[reader.GetOrdinal("Brand")].ToString();
-                    jacket.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
-                    jacket.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
-                    jacket.Size = reader[reader.GetOrdinal("Size")].ToString();
-                    item.Specifications = jacket;
-                    items.Add(item);
+                    var item = new Item();
+                    item.AddByReaderAndColumnArray(reader, columns);
+                    list.Add(item);
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return items;
+            return list;
         }
 
         public static bool JacketInsert(SqlConnection connection,
-           Guid itemId, string brand, string acquisition, string manufacture, string size)
+           string itemId, string brand, string acquisition, string manufacture, string size)
         {
             string query = $@"
                 INSERT INTO tbJackets({ItemStandardColumns()},Size) 
@@ -1361,9 +1183,9 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static bool JacketUpdate(SqlConnection connection, Guid itemId, string brand, string manufacture, string size)
+        public static bool JacketUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string size)
         {
-            Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
+            var fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
             {
                 fieldsToUpdate.Add("brand", brand);
@@ -1414,28 +1236,29 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
-        public static Mask MaskFindByItemId(SqlConnection connection, Guid itemId)
+        public static Item MaskFindByItemId(SqlConnection connection, string itemId)
         {
             string query = $"SELECT TOP 1 * FROM tbMasks WHERE ItemId=@ItemId";
-            Mask mask = new Mask();
+            string[] columns = { "Brand", "AcquisitionDate", "ManufactureDate", "Size" };
+            var item = new Item();
             try
             {
-                connection.Open();
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    mask.ItemId = itemId;
-                    mask.Brand = reader[reader.GetOrdinal("Brand")].ToString();
-                    mask.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
-                    mask.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
-                    mask.Size = reader[reader.GetOrdinal("Size")].ToString();
+                    item.AddColumn("Id", itemId);
+                    item.AddByReaderAndColumnArray(reader, columns);
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return mask;
+            return item;
         }
 
         public static List<Item> MaskFindAll(SqlConnection connection)
@@ -1445,25 +1268,15 @@ namespace InventoryManagmentSystem
             try
             {
                 connection.Open();
+                string[] columns = { 
+                    "Id", "ItemType", "DueDate", "SerialNumber", "Condition", "Location", "BusinessModel", 
+                    "Brand", "AcquisitionDate", "ManufactureDate","Size"};
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     Item item = new Item();
-                    item.Id = (Guid)reader[reader.GetOrdinal("Id")];
-                    item.ItemType = reader[reader.GetOrdinal("ItemType")].ToString();
-                    item.DueDate = reader[reader.GetOrdinal("DueDate")].ToString();
-                    item.SerialNumber = reader[reader.GetOrdinal("SerialNumber")].ToString();
-                    item.Condition = reader[reader.GetOrdinal("Condition")].ToString();
-                    item.Location = reader[reader.GetOrdinal("Location")].ToString();
-                    item.BusinessModel = reader[reader.GetOrdinal("BusinessModel")].ToString();
-                    Mask mask = new Mask();
-                    mask.ItemId = item.Id;
-                    mask.Brand = reader[reader.GetOrdinal("Brand")].ToString();
-                    mask.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
-                    mask.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
-                    mask.Size = reader[reader.GetOrdinal("Size")].ToString();
-                    item.Specifications = mask;
+                    item.AddByReaderAndColumnArray(reader, columns);
                     items.Add(item);
                 }
             }
@@ -1473,7 +1286,7 @@ namespace InventoryManagmentSystem
         }
 
         public static bool MaskInsert(SqlConnection connection,
-           Guid itemId, string brand, string acquisition, string manufacture, string size)
+           string itemId, string brand, string acquisition, string manufacture, string size)
         {
             string query = $@"
                 INSERT INTO tbMasks({ItemStandardColumns()},Size) 
@@ -1497,9 +1310,9 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static bool MaskUpdate(SqlConnection connection, Guid itemId, string brand, string manufacture, string size)
+        public static bool MaskUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string size)
         {
-            Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
+            var fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
             {
                 fieldsToUpdate.Add("brand", brand);
@@ -1550,28 +1363,29 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
-        public static Pants PantsFindByItemId(SqlConnection connection, Guid itemId)
+        public static Item PantsFindByItemId(SqlConnection connection, string itemId)
         {
             string query = $"SELECT TOP 1 * FROM tbMasks WHERE ItemId=@ItemId";
-            Pants pants = new Pants();
+            string[] columns = { "Brand", "AcquisitionDate", "ManufactureDate", "Size" };
+            var item = new Item();
             try
             {
-                connection.Open();
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    pants.ItemId = itemId;
-                    pants.Brand = reader[reader.GetOrdinal("Brand")].ToString();
-                    pants.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
-                    pants.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
-                    pants.Size = reader[reader.GetOrdinal("Size")].ToString();
+                    item.AddColumn("Id", itemId);
+                    item.AddByReaderAndColumnArray(reader, columns);
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return pants;
+            return item;
         }
 
         public static List<Item> PantsFindAll(SqlConnection connection)
@@ -1581,25 +1395,15 @@ namespace InventoryManagmentSystem
             try
             {
                 connection.Open();
+                string[] columns = {
+                    "Id", "ItemType", "DueDate", "SerialNumber", "Condition", "Location", "BusinessModel",
+                    "Brand", "AcquisitionDate", "ManufactureDate","Size"};
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     Item item = new Item();
-                    item.Id = (Guid)reader[reader.GetOrdinal("Id")];
-                    item.ItemType = reader[reader.GetOrdinal("ItemType")].ToString();
-                    item.DueDate = reader[reader.GetOrdinal("DueDate")].ToString();
-                    item.SerialNumber = reader[reader.GetOrdinal("SerialNumber")].ToString();
-                    item.Condition = reader[reader.GetOrdinal("Condition")].ToString();
-                    item.Location = reader[reader.GetOrdinal("Location")].ToString();
-                    item.BusinessModel = reader[reader.GetOrdinal("BusinessModel")].ToString();
-                    Pants pants = new Pants();
-                    pants.ItemId = item.Id;
-                    pants.Brand = reader[reader.GetOrdinal("Brand")].ToString();
-                    pants.AcquisitionDate = reader[reader.GetOrdinal("AcquisitionDate")].ToString();
-                    pants.ManufactureDate = reader[reader.GetOrdinal("ManufactureDate")].ToString();
-                    pants.Size = reader[reader.GetOrdinal("Size")].ToString();
-                    item.Specifications = pants;
+                    item.AddByReaderAndColumnArray(reader, columns);
                     items.Add(item);
                 }
             }
@@ -1609,7 +1413,7 @@ namespace InventoryManagmentSystem
         }
 
         public static bool PantsInsert(SqlConnection connection,
-            Guid itemId, string brand, string acquisition, string manufacture, string size)
+            string itemId, string brand, string acquisition, string manufacture, string size)
         {
             string query = $@"
                 INSERT INTO tbPants({ItemStandardColumns()},Size) 
@@ -1633,9 +1437,9 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static bool PantsUpdate(SqlConnection connection, Guid itemId, string brand, string manufacture, string size)
+        public static bool PantsUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string size)
         {
-            Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
+            var fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
             {
                 fieldsToUpdate.Add("brand", brand);

@@ -14,15 +14,15 @@ namespace InventoryManagmentSystem.Rental_Forms
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
        
-        List<Dictionary<string, string>> academyList;
-        List<Dictionary<string, string>> classList;
+        List<Item> academyList;
+        List<Item> classList;
         bool ExistingUser;
 
         public NewClientForm(string rentalType = null, string clientName = null)
         {
             InitializeComponent();
             PopulateAcademyList();
-            classList = new List<Dictionary<string, string>>();
+            classList = new List<Item>();
             comboBoxRentalType.SelectedIndex = 0;
             if (clientName != null)
             {
@@ -35,22 +35,22 @@ namespace InventoryManagmentSystem.Rental_Forms
         {
             RentalTypeSelector(type);
             var client = HelperSql.ClientFindByName(connection, clientName);
-            if(client.Count == 0) { return; }
+            if(client.Count() == 0) { return; }
 
-            txtBoxCustomerName.Text = client["Name"];
-            txtBoxDriversLicense.Text = client["DriversLicenseNumber"];
-            txtBoxPhone.Text = client["Phone"];
-            txtBoxEmail.Text = client["Email"];
-            textBoxChest.Text = client["Chest"];
-            textBoxSleeve.Text = client["Sleeve"];
-            textBoxWaist.Text = client["Waist"];
-            textBoxInseam.Text = client["Inseam"];
-            textBoxHips.Text = client["Hips"];
-            textBoxWeight.Text = client["Weight"];
-            textBoxHeight.Text = client["Height"];
-            cbAcademy.Text = client["Academy"];
-            cbRep.Text = client["FireTecRepresentative"];
-            cbClass.Text = client["IdClass"];
+            txtBoxCustomerName.Text = client.GetColumnValue("Name");
+            txtBoxDriversLicense.Text = client.GetColumnValue("DriversLicenseNumber");
+            txtBoxPhone.Text = client.GetColumnValue("Phone");
+            txtBoxEmail.Text = client.GetColumnValue("Email");
+            textBoxChest.Text = client.GetColumnValue("Chest");
+            textBoxSleeve.Text = client.GetColumnValue("Sleeve");
+            textBoxWaist.Text = client.GetColumnValue("Waist");
+            textBoxInseam.Text = client.GetColumnValue("Inseam");
+            textBoxHips.Text = client.GetColumnValue("Hips");
+            textBoxWeight.Text = client.GetColumnValue("Weight");
+            textBoxHeight.Text = client.GetColumnValue("Height");
+            cbAcademy.Text = client.GetColumnValue("Academy");
+            cbRep.Text = client.GetColumnValue("FireTecRepresentative");
+            cbClass.Text = client.GetColumnValue("IdClass");
         }
 
         public void Clear()
@@ -116,7 +116,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             academyList = HelperSql.AcademyFindAll(connection);
             foreach(var academy in academyList)
             {
-                cbAcademy.Items.Add(academy["Name"]);
+                cbAcademy.Items.Add(academy.GetColumnValue("Name"));
             }
         }
 
@@ -224,16 +224,16 @@ namespace InventoryManagmentSystem.Rental_Forms
         private bool SaveClient()
         {
             var client = new Dictionary<string, string>();
-            Guid classId = Guid.Empty;
+            string classId = string.Empty;
             foreach(var item in classList)
             {
-                if (item["Name"] == cbClass.Text)
+                if (item.GetColumnValue("Name") == cbClass.Text)
                 {
-                    classId = Guid.Parse(item["Id"]);
+                    classId = item.GetColumnValue("Id");
                     break;
                 }
             }
-            client["IdClass"] = classId == Guid.Empty ? null : classId.ToString();
+            client["IdClass"] = classId == string.Empty ? null : classId.ToString();
             client["Address"] = $"{txtBoxStreet.Text} {textBoxCity.Text} {textBoxState.Text} {textBoxZip.Text}";
             client["Name"] = txtBoxCustomerName.Text;
             client["Phone"] = txtBoxPhone.Text;
@@ -424,13 +424,13 @@ namespace InventoryManagmentSystem.Rental_Forms
             if(classList != null) { classList.Clear(); }
             cbClass.Items.Clear();
 
-            var academyId = Guid.Parse(academyList[index]["Id"]);
+            var academyId = academyList[index].GetColumnValue("Id");
             classList = HelperSql.ClassListByAcademy(connection, academyId);
             if(classList == null) { return; }
 
             foreach(var item in classList)
             {
-                cbClass.Items.Add(item["Name"]);
+                cbClass.Items.Add(item.GetColumnValue("Name"));
             }
         }
     }
