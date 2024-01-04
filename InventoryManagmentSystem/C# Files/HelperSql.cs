@@ -40,6 +40,7 @@ namespace InventoryManagmentSystem
                 {
                     var item = new Item();
                     item.AddByReaderAndColumnArray(reader, columns);
+                    list.Add(item);
                 }
             }
             catch(Exception ex) { Console.WriteLine(ex.Message); }

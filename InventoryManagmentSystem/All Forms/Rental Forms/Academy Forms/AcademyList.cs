@@ -20,38 +20,39 @@ namespace InventoryManagmentSystem.Academy
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
         AcademyForm parent;
+        List<Item> academyList;
 
         public AcademyList(AcademyForm parent)
         {
             InitializeComponent();
             this.parent = parent;
+            academyList = HelperSql.AcademyFindAll(connection);
             LoadAcademies();
         }
 
         private void LoadAcademies()
         {
             dataGridAcademies.Rows.Clear();
-
-            string query = "SELECT * FROM tbAcademies";
-            try
+            int count = 1;
+            foreach(var item in academyList)
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                int i = 1;
-                while (reader.Read())
-                {
-                    dataGridAcademies.Rows.Add(
-                        i++, reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6], reader[7]
-                    );
-                }
+                AddRow(item, count++);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
+        }
 
+        private void AddRow(Item item, int count)
+        {
+            dataGridAcademies.Rows.Add(count,
+                item.GetColumnValue("Id"),
+                item.GetColumnValue("Name"),
+                item.GetColumnValue("ContactName"),
+                item.GetColumnValue("Email"),
+                item.GetColumnValue("Phone"),
+                item.GetColumnValue("Street"),
+                item.GetColumnValue("City"),
+                item.GetColumnValue("State"),
+                item.GetColumnValue("Zip")
+            );
         }
 
         private void UpdateAcademy(DataGridViewRow row)
@@ -73,22 +74,20 @@ namespace InventoryManagmentSystem.Academy
         private void searchBar_TextChanged(object sender, EventArgs e)
         {
             string searchTerm = searchBar.Text;
-            if (string.IsNullOrEmpty(searchTerm)) { LoadAcademies(); }
-
-            // SQL
-            int i = 0;
-            dataGridAcademies.Rows.Clear();
-            SqlCommand command = new SqlCommand($"SELECT Id, Name, Email, Phone, Street, City, State, Zip FROM tbAcademies WHERE Name LIKE '%{searchTerm}%'", connection);
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                i++;
-                dataGridAcademies.Rows.Add(i, reader[0], reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString());
+            if (string.IsNullOrEmpty(searchTerm)) 
+            { 
+                LoadAcademies();
+                return;
             }
-            reader.Close();
-            connection.Close();
+
+            int count = 1;
+            foreach(var item in academyList)
+            {
+                if(item.GetColumnValue("Name") == $"%{searchTerm}%")
+                {
+                    AddRow(item, count++);
+                }
+            }
         }
 
         private void dataGridAcademies_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -96,9 +95,9 @@ namespace InventoryManagmentSystem.Academy
             if (e.RowIndex < 0) { return; }
             DataGridViewRow row = dataGridAcademies.Rows[e.RowIndex];
             string column = dataGridAcademies.Columns[e.ColumnIndex].Name;
-            Guid AcademyId = (Guid)row.Cells["column_id"].Value;
+            string AcademyId = row.Cells["column_id"].Value.ToString();
 
-            parent.AcademyId = AcademyId;
+            parent.AcademyId = Guid.Parse(AcademyId);
 
             if (column == "column_update")
             {
@@ -180,8 +179,6 @@ namespace InventoryManagmentSystem.Academy
                 positionY += lineHeight + ExtraLineSpace;
 
             }
-        }
-
-       
+        }       
     }
 }
