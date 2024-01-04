@@ -15,7 +15,8 @@ namespace InventoryManagmentSystem
 {
     public class HelperSql
     {
-        private static  string[] columnsClient = { 
+        private static  string[] columnsClient = 
+        { 
             "Id", "IdClass", "Name", "Phone", "Email", "Academy", "IsActive", "DriversLicenseNumber", "Address", 
             "Chest", "Sleeve", "Waist", "Inseam", "Hips", "Height", "Weight",
             "Notes", "FireTecRepresentative" 
@@ -196,7 +197,7 @@ namespace InventoryManagmentSystem
                 query += "Material = @Material";
                 if (--count > 0) { query += ", "; }
             }
-            if (fieldsToUpdate.ContainsKey("material"))
+            if (fieldsToUpdate.ContainsKey("manufacture"))
             {
                 query += "ManufactureDate = @ManufactureDate";
             }
@@ -430,6 +431,95 @@ namespace InventoryManagmentSystem
             return item;
         }
 
+        public static bool ClientUpdateInfo(SqlConnection connection,
+            string Id, string name, string phone, string email, string academy, string isActive, string drivers, string address)
+        {
+            Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
+            if (!string.IsNullOrEmpty(name))
+            {
+                fieldsToUpdate.Add("name", name);
+            }
+            if (!string.IsNullOrEmpty(phone))
+            {
+                fieldsToUpdate.Add("phone", phone);
+            }
+            if (!string.IsNullOrEmpty(email))
+            {
+                fieldsToUpdate.Add("email", email);
+            }
+            if (!string.IsNullOrEmpty(academy))
+            {
+                fieldsToUpdate.Add("academy", academy);
+            }
+            if (!string.IsNullOrEmpty(isActive))
+            {
+                fieldsToUpdate.Add("isActive", isActive);
+            }
+            if (!string.IsNullOrEmpty(drivers))
+            {
+                fieldsToUpdate.Add("drivers", drivers);
+            }
+            if (!string.IsNullOrEmpty(address))
+            {
+                fieldsToUpdate.Add("address", address);
+            }
+            int count = fieldsToUpdate.Count;
+            if (count == 0) { return false; }
+
+            string query = $"UPDATE tbClients SET ";
+            if (fieldsToUpdate.ContainsKey("name"))
+            {
+                query += "Name = @Name";
+                if (--count > 0) { query += ", "; }
+            }
+            if (fieldsToUpdate.ContainsKey("phone"))
+            {
+                query += "Phone = @Phone";
+                if (--count > 0) { query += ", "; }
+            }
+            if (fieldsToUpdate.ContainsKey("email"))
+            {
+                query += "Email = @Email";
+            }
+            if (fieldsToUpdate.ContainsKey("academy"))
+            {
+                query += "Academy = @Academy";
+            }
+            if (fieldsToUpdate.ContainsKey("isActive"))
+            {
+                query += "IsActive = @IsActive";
+            }
+            if (fieldsToUpdate.ContainsKey("drivers"))
+            {
+                query += "DriversLicenseNumber = @DriversLicenseNumber";
+            }
+            if (fieldsToUpdate.ContainsKey("address"))
+            {
+                query += "Address = @Address";
+            }
+            query += $" WHERE Id = @Id";
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                if (fieldsToUpdate.ContainsKey("name")) { command.Parameters.AddWithValue("@Name", name); }
+                if (fieldsToUpdate.ContainsKey("phone")) { command.Parameters.AddWithValue("@Phone", phone); }
+                if (fieldsToUpdate.ContainsKey("email")) { command.Parameters.AddWithValue("@Email", email); }
+                if (fieldsToUpdate.ContainsKey("academy")) { command.Parameters.AddWithValue("@Academy", academy); }
+                if (fieldsToUpdate.ContainsKey("isActive")) { command.Parameters.AddWithValue("@IsActive", isActive); }
+                if (fieldsToUpdate.ContainsKey("drivers")) { command.Parameters.AddWithValue("@DriversLicenseNumber", drivers); }
+                if (fieldsToUpdate.ContainsKey("address")) { command.Parameters.AddWithValue("@Address", address); }
+                command.Parameters.AddWithValue("@Id", Id);
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally { connection.Close(); }
+        }
         public static bool ClientInsert(SqlConnection connection, Dictionary<string, string> client)
         {
             var exists = ClientFindByDriversLicense(connection, client["DriversLicenseNumber"]);
@@ -490,6 +580,96 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
+        public static bool ClientUpdateMeasurments(SqlConnection connection,
+            string Id, string chest, string sleeve, string waist, string inseam, string hips, string height, string weight)
+        {
+            Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
+            if (!string.IsNullOrEmpty(chest))
+            {
+                fieldsToUpdate.Add("chest", chest);
+            }
+            if (!string.IsNullOrEmpty(sleeve))
+            {
+                fieldsToUpdate.Add("sleeve", sleeve);
+            }
+            if (!string.IsNullOrEmpty(waist))
+            {
+                fieldsToUpdate.Add("waist", waist);
+            }
+            if (!string.IsNullOrEmpty(inseam))
+            {
+                fieldsToUpdate.Add("inseam", inseam);
+            }
+            if (!string.IsNullOrEmpty(hips))
+            {
+                fieldsToUpdate.Add("hips", hips);
+            }
+            if (!string.IsNullOrEmpty(height))
+            {
+                fieldsToUpdate.Add("height", height);
+            }
+            if (!string.IsNullOrEmpty(weight))
+            {
+                fieldsToUpdate.Add("weight", weight);
+            }
+            int count = fieldsToUpdate.Count;
+            if (count == 0) { return false; }
+
+            string query = $"UPDATE tbClients SET ";
+            if (fieldsToUpdate.ContainsKey("chest"))
+            {
+                query += "Chest = @Chest";
+                if (--count > 0) { query += ", "; }
+            }
+            if (fieldsToUpdate.ContainsKey("sleeve"))
+            {
+                query += "Sleeve = @Sleeve";
+                if (--count > 0) { query += ", "; }
+            }
+            if (fieldsToUpdate.ContainsKey("waist"))
+            {
+                query += "Waist = @Waist";
+                if (--count > 0) { query += ", "; }
+            }
+            if (fieldsToUpdate.ContainsKey("inseam"))
+            {
+                query += "Inseam = @Inseam";
+            }
+            if (fieldsToUpdate.ContainsKey("hips"))
+            {
+                query += "Hips = @Hips";
+            }
+            if (fieldsToUpdate.ContainsKey("height"))
+            {
+                query += "Height = @Height";
+            }
+            if (fieldsToUpdate.ContainsKey("weight"))
+            {
+                query += "Weight = @Weight";
+            }
+            query += $" WHERE Id = @Id";
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                if (fieldsToUpdate.ContainsKey("chest")) { command.Parameters.AddWithValue("@Chest", chest); }
+                if (fieldsToUpdate.ContainsKey("sleeve")) { command.Parameters.AddWithValue("@Sleeve", sleeve); }
+                if (fieldsToUpdate.ContainsKey("waist")) { command.Parameters.AddWithValue("@Waist", waist); }
+                if (fieldsToUpdate.ContainsKey("inseam")) { command.Parameters.AddWithValue("@Inseam", inseam); }
+                if (fieldsToUpdate.ContainsKey("hips")) { command.Parameters.AddWithValue("@Hips", hips); }
+                if (fieldsToUpdate.ContainsKey("height")) { command.Parameters.AddWithValue("@Height", height); }
+                if (fieldsToUpdate.ContainsKey("weight")) { command.Parameters.AddWithValue("@Weight", weight); }
+                command.Parameters.AddWithValue("@Id", Id);
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally { connection.Close(); }
+        }
         public static Item HelmetFindByItemId(SqlConnection connection, string itemId)
         {
             string query = $"SELECT TOP 1 * FROM tbHelmets WHERE ItemId=@ItemId";
@@ -588,7 +768,7 @@ namespace InventoryManagmentSystem
                 query += "Brand = @Brand";
                 if (--count > 0) { query += ", "; }
             }
-            if (fieldsToUpdate.ContainsKey("material"))
+            if (fieldsToUpdate.ContainsKey("manufacture"))
             {
                 query += "ManufactureDate = @ManufactureDate";
                 if (--count > 0) { query += ", "; }
@@ -1207,7 +1387,7 @@ namespace InventoryManagmentSystem
                 query += "Brand = @Brand";
                 if (--count > 0) { query += ", "; }
             }
-            if (fieldsToUpdate.ContainsKey("material"))
+            if (fieldsToUpdate.ContainsKey("manufacture"))
             {
                 query += "ManufactureDate = @ManufactureDate";
                 if (--count > 0) { query += ", "; }
@@ -1334,7 +1514,7 @@ namespace InventoryManagmentSystem
                 query += "Brand = @Brand";
                 if (--count > 0) { query += ", "; }
             }
-            if (fieldsToUpdate.ContainsKey("material"))
+            if (fieldsToUpdate.ContainsKey("manufacture"))
             {
                 query += "ManufactureDate = @ManufactureDate";
                 if (--count > 0) { query += ", "; }
@@ -1461,7 +1641,7 @@ namespace InventoryManagmentSystem
                 query += "Brand = @Brand";
                 if (--count > 0) { query += ", "; }
             }
-            if (fieldsToUpdate.ContainsKey("material"))
+            if (fieldsToUpdate.ContainsKey("manufacture"))
             {
                 query += "ManufactureDate = @ManufactureDate";
                 if (--count > 0) { query += ", "; }

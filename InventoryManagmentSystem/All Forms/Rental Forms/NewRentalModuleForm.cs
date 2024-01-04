@@ -13,7 +13,7 @@ namespace InventoryManagmentSystem
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
 
-        //Used for query
+        //Used for query                                                this is a secret to see if frey will ever notice it but i doubt it since he is kind of an idiot lol that guy is the leader of the club and will never figure out a riddle as difficult as this one so i basically bodied him into reading an entire long line probably at like 150% zoom cause he cant even see lol get fucked......je
         string ItemIdClient = string.Empty;
         string ItemIdInventory = string.Empty;
 
@@ -205,6 +205,7 @@ namespace InventoryManagmentSystem
             ModForm.ShowDialog();
 
             DataGridViewRow row = dataGridViewClient.Rows[e.RowIndex];
+            //Return Item
             if (ReturnReplace == 1)
             {
                 string itemId = row.Cells["ItemId"].Value.ToString();
@@ -218,7 +219,7 @@ namespace InventoryManagmentSystem
                 LoadClient();
                 LoadInventory();
             }
-
+            //Replace Item
             else if (ReturnReplace == 2)
             {
                 //lock the item type that is shown when a replacment is being done to match the item type of the item being replaced

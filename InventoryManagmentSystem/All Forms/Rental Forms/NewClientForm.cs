@@ -407,11 +407,13 @@ namespace InventoryManagmentSystem.Rental_Forms
             {
                 panelAcademy.Visible = false;
                 cbAcademy.Text = "N/A";
+                cbClass.Text = "N/A";
             }
             else
             {
                 panelAcademy.Visible = true;
                 cbAcademy.Text = "";
+                cbClass.Text = "";
             }
         }
 
