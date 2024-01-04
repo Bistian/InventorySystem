@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AcademyList));
             this.panelTop = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
@@ -36,9 +36,11 @@
             this.labelSearch = new System.Windows.Forms.Label();
             this.searchBar = new System.Windows.Forms.TextBox();
             this.dataGridAcademies = new System.Windows.Forms.DataGridView();
+            this.panelBot = new System.Windows.Forms.Panel();
             this.column_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_contact_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_street = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,7 +48,6 @@
             this.column_state = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_zip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_update = new System.Windows.Forms.DataGridViewImageColumn();
-            this.panelBot = new System.Windows.Forms.Panel();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAcademies)).BeginInit();
             this.panelBot.SuspendLayout();
@@ -118,19 +119,20 @@
             this.dataGridAcademies.AllowUserToResizeRows = false;
             this.dataGridAcademies.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridAcademies.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.MenuHighlight;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridAcademies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.MenuHighlight;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridAcademies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridAcademies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridAcademies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.column_number,
             this.column_id,
             this.column_name,
+            this.column_contact_name,
             this.column_email,
             this.column_phone,
             this.column_street,
@@ -152,6 +154,15 @@
             this.dataGridAcademies.Size = new System.Drawing.Size(600, 339);
             this.dataGridAcademies.TabIndex = 26;
             this.dataGridAcademies.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridAcademies_CellClick);
+            // 
+            // panelBot
+            // 
+            this.panelBot.Controls.Add(this.dataGridAcademies);
+            this.panelBot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelBot.Location = new System.Drawing.Point(0, 27);
+            this.panelBot.Name = "panelBot";
+            this.panelBot.Size = new System.Drawing.Size(600, 339);
+            this.panelBot.TabIndex = 27;
             // 
             // column_number
             // 
@@ -178,6 +189,13 @@
             this.column_name.MinimumWidth = 6;
             this.column_name.Name = "column_name";
             this.column_name.ReadOnly = true;
+            // 
+            // column_contact_name
+            // 
+            this.column_contact_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_contact_name.HeaderText = "Contact Name";
+            this.column_contact_name.Name = "column_contact_name";
+            this.column_contact_name.ReadOnly = true;
             // 
             // column_email
             // 
@@ -241,15 +259,6 @@
             this.column_update.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.column_update.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // panelBot
-            // 
-            this.panelBot.Controls.Add(this.dataGridAcademies);
-            this.panelBot.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBot.Location = new System.Drawing.Point(0, 27);
-            this.panelBot.Name = "panelBot";
-            this.panelBot.Size = new System.Drawing.Size(600, 339);
-            this.panelBot.TabIndex = 27;
-            // 
             // AcademyList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,9 +284,15 @@
 
         private System.Windows.Forms.Panel panelTop;
         public System.Windows.Forms.DataGridView dataGridAcademies;
+        private System.Windows.Forms.Label labelSearch;
+        private System.Windows.Forms.TextBox searchBar;
+        private System.Windows.Forms.Panel panelBot;
+        private System.Windows.Forms.Label labelAcademyName;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_contact_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_email;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_phone;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_street;
@@ -285,10 +300,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn column_state;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_zip;
         private System.Windows.Forms.DataGridViewImageColumn column_update;
-        private System.Windows.Forms.Label labelSearch;
-        private System.Windows.Forms.TextBox searchBar;
-        private System.Windows.Forms.Panel panelBot;
-        private System.Windows.Forms.Label labelAcademyName;
-        private System.Windows.Forms.Button btnSave;
     }
 }
