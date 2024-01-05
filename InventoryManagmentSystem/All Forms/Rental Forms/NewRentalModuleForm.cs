@@ -13,7 +13,7 @@ namespace InventoryManagmentSystem
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
 
-        //Used for query                                                this is a secret to see if frey will ever notice it but i doubt it since he is kind of an idiot lol that guy is the leader of the club and will never figure out a riddle as difficult as this one so i basically bodied him into reading an entire long line probably at like 150% zoom cause he cant even see lol get fucked......je
+        //Used for query this is a secret to see if frey will ever notice it but i doubt it since he is kind of an idiot lol that guy is the leader of the club and will never figure out a riddle as difficult as this one so i basically bodied him into reading an entire long line probably at like 150% zoom cause he cant even see lol get fucked......je
         string ItemIdClient = string.Empty;
         string ItemIdInventory = string.Empty;
 
@@ -124,7 +124,7 @@ namespace InventoryManagmentSystem
             license = labelClientDrivers.Text;
 
             var item = HelperSql.ClassFindByClassId(connection, ClassId);
-            if(item.Count() > 0)
+            if(item != null )
             {
                 labelClientClass.Text = item.GetColumnValue("Name");
             }
