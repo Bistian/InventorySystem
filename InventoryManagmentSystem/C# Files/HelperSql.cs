@@ -927,6 +927,7 @@ namespace InventoryManagmentSystem
                     {
                         item.AddByReaderAndColumn(reader, "Size");
                     }
+                    else { continue; }
                     list.Add(item);
                 }
             }

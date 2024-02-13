@@ -57,9 +57,19 @@
             this.checkAll = new System.Windows.Forms.CheckBox();
             this.checkRetired = new System.Windows.Forms.CheckBox();
             this.labelNewItem = new System.Windows.Forms.Label();
+            this.scOuter = new System.Windows.Forms.SplitContainer();
+            this.scInner = new System.Windows.Forms.SplitContainer();
+            this.btnToggleFilter = new System.Windows.Forms.Button();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.TopPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scOuter)).BeginInit();
+            this.scOuter.Panel1.SuspendLayout();
+            this.scOuter.Panel2.SuspendLayout();
+            this.scOuter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scInner)).BeginInit();
+            this.scInner.Panel2.SuspendLayout();
+            this.scInner.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,7 +78,7 @@
             this.ItemLable.AutoSize = true;
             this.ItemLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ItemLable.ForeColor = System.Drawing.SystemColors.Control;
-            this.ItemLable.Location = new System.Drawing.Point(2, 13);
+            this.ItemLable.Location = new System.Drawing.Point(2, 15);
             this.ItemLable.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.ItemLable.Name = "ItemLable";
             this.ItemLable.Size = new System.Drawing.Size(124, 26);
@@ -83,10 +93,10 @@
             this.cbItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbItemType.FormattingEnabled = true;
             this.cbItemType.IntegralHeight = false;
-            this.cbItemType.Location = new System.Drawing.Point(98, 9);
+            this.cbItemType.Location = new System.Drawing.Point(114, 10);
             this.cbItemType.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.cbItemType.Name = "cbItemType";
-            this.cbItemType.Size = new System.Drawing.Size(89, 38);
+            this.cbItemType.Size = new System.Drawing.Size(103, 38);
             this.cbItemType.TabIndex = 1;
             this.cbItemType.SelectedIndexChanged += new System.EventHandler(this.comboBoxItem_SelectedIndexChanged);
             // 
@@ -97,7 +107,7 @@
             this.dataGridInv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue;
@@ -120,8 +130,8 @@
             this.column_delete});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -129,13 +139,13 @@
             this.dataGridInv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridInv.EnableHeadersVisualStyles = false;
             this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridInv.Location = new System.Drawing.Point(0, 45);
+            this.dataGridInv.Location = new System.Drawing.Point(0, 0);
             this.dataGridInv.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridInv.Name = "dataGridInv";
             this.dataGridInv.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.MidnightBlue;
@@ -147,7 +157,7 @@
             this.dataGridInv.RowTemplate.Height = 40;
             this.dataGridInv.RowTemplate.ReadOnly = true;
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridInv.Size = new System.Drawing.Size(883, 408);
+            this.dataGridInv.Size = new System.Drawing.Size(683, 471);
             this.dataGridInv.TabIndex = 1;
             this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellClick);
             // 
@@ -272,7 +282,7 @@
             this.labelSearch.AutoSize = true;
             this.labelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSearch.Location = new System.Drawing.Point(193, 13);
+            this.labelSearch.Location = new System.Drawing.Point(225, 15);
             this.labelSearch.Margin = new System.Windows.Forms.Padding(0);
             this.labelSearch.Name = "labelSearch";
             this.labelSearch.Size = new System.Drawing.Size(94, 26);
@@ -282,9 +292,10 @@
             // searchBar
             // 
             this.searchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBar.Location = new System.Drawing.Point(268, 7);
+            this.searchBar.Location = new System.Drawing.Point(313, 8);
+            this.searchBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(157, 37);
+            this.searchBar.Size = new System.Drawing.Size(182, 37);
             this.searchBar.TabIndex = 18;
             this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
             // 
@@ -322,7 +333,7 @@
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
             this.TopPanel.Margin = new System.Windows.Forms.Padding(2);
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(883, 45);
+            this.TopPanel.Size = new System.Drawing.Size(1030, 52);
             this.TopPanel.TabIndex = 20;
             // 
             // checkActive
@@ -330,7 +341,8 @@
             this.checkActive.AutoSize = true;
             this.checkActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkActive.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkActive.Location = new System.Drawing.Point(430, -5);
+            this.checkActive.Location = new System.Drawing.Point(502, -6);
+            this.checkActive.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.checkActive.Name = "checkActive";
             this.checkActive.Size = new System.Drawing.Size(86, 28);
             this.checkActive.TabIndex = 23;
@@ -343,7 +355,8 @@
             this.checkAll.AutoSize = true;
             this.checkAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkAll.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkAll.Location = new System.Drawing.Point(430, 28);
+            this.checkAll.Location = new System.Drawing.Point(502, 32);
+            this.checkAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.checkAll.Name = "checkAll";
             this.checkAll.Size = new System.Drawing.Size(53, 28);
             this.checkAll.TabIndex = 22;
@@ -356,7 +369,8 @@
             this.checkRetired.AutoSize = true;
             this.checkRetired.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkRetired.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkRetired.Location = new System.Drawing.Point(430, 11);
+            this.checkRetired.Location = new System.Drawing.Point(502, 13);
+            this.checkRetired.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.checkRetired.Name = "checkRetired";
             this.checkRetired.Size = new System.Drawing.Size(96, 28);
             this.checkRetired.TabIndex = 21;
@@ -370,12 +384,54 @@
             this.labelNewItem.AutoSize = true;
             this.labelNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNewItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelNewItem.Location = new System.Drawing.Point(741, 14);
+            this.labelNewItem.Location = new System.Drawing.Point(864, 16);
             this.labelNewItem.Margin = new System.Windows.Forms.Padding(0);
             this.labelNewItem.Name = "labelNewItem";
             this.labelNewItem.Size = new System.Drawing.Size(120, 26);
             this.labelNewItem.TabIndex = 20;
             this.labelNewItem.Text = "New Item:";
+            // 
+            // scOuter
+            // 
+            this.scOuter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scOuter.Location = new System.Drawing.Point(0, 52);
+            this.scOuter.Name = "scOuter";
+            // 
+            // scOuter.Panel1
+            // 
+            this.scOuter.Panel1.Controls.Add(this.scInner);
+            // 
+            // scOuter.Panel2
+            // 
+            this.scOuter.Panel2.Controls.Add(this.dataGridInv);
+            this.scOuter.Size = new System.Drawing.Size(1030, 471);
+            this.scOuter.SplitterDistance = 343;
+            this.scOuter.TabIndex = 21;
+            // 
+            // scInner
+            // 
+            this.scInner.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scInner.Location = new System.Drawing.Point(0, 0);
+            this.scInner.Name = "scInner";
+            // 
+            // scInner.Panel2
+            // 
+            this.scInner.Panel2.Controls.Add(this.btnToggleFilter);
+            this.scInner.Size = new System.Drawing.Size(343, 471);
+            this.scInner.SplitterDistance = 114;
+            this.scInner.TabIndex = 0;
+            // 
+            // btnToggleFilter
+            // 
+            this.btnToggleFilter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnToggleFilter.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.btnToggleFilter.Location = new System.Drawing.Point(0, 0);
+            this.btnToggleFilter.Name = "btnToggleFilter";
+            this.btnToggleFilter.Size = new System.Drawing.Size(225, 471);
+            this.btnToggleFilter.TabIndex = 0;
+            this.btnToggleFilter.Text = "Toggle Filter";
+            this.btnToggleFilter.UseVisualStyleBackColor = true;
+            this.btnToggleFilter.Click += new System.EventHandler(this.btnToggleFilter_Click);
             // 
             // UsersButton
             // 
@@ -383,10 +439,10 @@
             this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
             this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
             this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
-            this.UsersButton.Location = new System.Drawing.Point(829, 5);
+            this.UsersButton.Location = new System.Drawing.Point(967, 6);
             this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 0, 2, 2);
             this.UsersButton.Name = "UsersButton";
-            this.UsersButton.Size = new System.Drawing.Size(54, 37);
+            this.UsersButton.Size = new System.Drawing.Size(63, 43);
             this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.UsersButton.TabIndex = 17;
             this.UsersButton.TabStop = false;
@@ -394,11 +450,14 @@
             // 
             // InventoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(883, 453);
-            this.Controls.Add(this.dataGridInv);
+            this.BackColor = System.Drawing.Color.Maroon;
+            this.ClientSize = new System.Drawing.Size(1030, 523);
+            this.Controls.Add(this.scOuter);
             this.Controls.Add(this.TopPanel);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.ForeColor = System.Drawing.SystemColors.Window;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "InventoryForm";
@@ -406,6 +465,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();
             this.TopPanel.ResumeLayout(false);
             this.TopPanel.PerformLayout();
+            this.scOuter.Panel1.ResumeLayout(false);
+            this.scOuter.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scOuter)).EndInit();
+            this.scOuter.ResumeLayout(false);
+            this.scInner.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scInner)).EndInit();
+            this.scInner.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             this.ResumeLayout(false);
 
@@ -438,5 +504,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn column_color;
         private System.Windows.Forms.DataGridViewImageColumn column_edit;
         private System.Windows.Forms.DataGridViewImageColumn column_delete;
+        private System.Windows.Forms.SplitContainer scOuter;
+        private System.Windows.Forms.SplitContainer scInner;
+        private System.Windows.Forms.Button btnToggleFilter;
     }
 }

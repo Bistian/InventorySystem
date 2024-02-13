@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
 using InventoryManagmentSystem.Rental_Forms;
-using Microsoft.VisualBasic.Devices;
-using System.Net.Sockets;
+using InventoryManagmentSystem.All_Forms;
 
 namespace InventoryManagmentSystem
 {
@@ -22,6 +16,11 @@ namespace InventoryManagmentSystem
         SqlConnection connection = new SqlConnection(connectionString);
 
         private List<Item> itemList = new List<Item>();
+        private List<string[]> filterList = new List<string[]>();
+
+        private Panel panelFilter;
+        private Button btnFilter2;
+        private FilterForm filterForm;
 
         public InventoryForm(string ItemType)
         {
@@ -31,15 +30,17 @@ namespace InventoryManagmentSystem
             itemList = HelperSql.ItemFindAllWithSpecifications(connection);
             DisplayItems();
             SetItemType(ItemType);
+            InitContainerOuter();
+            InitContainereInner();
         }
 
         private void SetItemType(string itemType)
         {
-            if(itemType == null) { return; }
-            if(cbItemType.Items.Count == 0)  { return; }
+            if (itemType == null) { return; }
+            if (cbItemType.Items.Count == 0) { return; }
 
             int index = cbItemType.Items.IndexOf(itemType);
-            if(index == -1) { return; }
+            if (index == -1) { return; }
 
             cbItemType.SelectedIndex = index;
         }
@@ -48,21 +49,68 @@ namespace InventoryManagmentSystem
         {
             dataGridInv.Rows.Clear();
             int count = 1;
-            foreach(Item item in itemList)
+            foreach (Item item in itemList)
             {
                 string condition = item.GetColumnValue("Condition");
                 if (checkActive.Checked && condition == "Retired") { continue; }
                 if (checkRetired.Checked && condition != "Retired") { continue; }
 
                 string type = item.GetColumnValue("ItemType");
-                if(type != cbItemType.Text) { continue; }
+                if (type != cbItemType.Text) { continue; }
 
                 bool isSearchBarMatching = SearchBarIsMatching(item);
-                if(!isSearchBarMatching) { continue; }
+                if (!isSearchBarMatching) { continue; }
+
+                if (filterList.Count > 0)
+                {
+                    bool notValid = false;
+                    foreach(var filter in filterList)
+                    {
+                        string filterName = filter[0];
+                        string filterValue = filter[1];
+                        string columnValue = item.GetColumnValue(filterName);
+                        if(columnValue == string.Empty) { continue; }
+
+                        if (!HelperFunctions.IsSubstring(columnValue, filterValue))
+                        {
+                            notValid = true;
+                            break;
+                        }
+                    }
+                    if(notValid) { continue; }
+                }
 
                 AddItemToGrid(item, count);
                 count++;
             }
+        }
+
+        private void InitContainereInner()
+        {
+            int innerWidth = this.scInner.Width;
+            //this.scInner.SplitterDistance = (int) (innerWidth * 0.9);
+            btnToggleFilter.Text = "<";
+
+            // Show selected items.
+            var list = new List<string>() { "SerialNumber", "Condition", "Location" };
+            Action<List<string[]>> callback = (filters) =>
+            {
+                filterList.Clear();
+                filterList = filters;
+                DisplayItems();
+            };
+
+            filterForm = new FilterForm(this, list, callback);
+            filterForm.TopLevel = false;
+            this.scInner.Panel1.Controls.Add(filterForm);
+            filterForm.Dock = DockStyle.Fill;
+            filterForm.Show();
+            ToggleFilter();
+        }
+
+        private void InitContainerOuter()
+        {
+            this.scOuter.SplitterDistance = (int)(Width * 0.3);
         }
 
         private bool SearchBarIsMatching(Item item)
@@ -282,6 +330,37 @@ namespace InventoryManagmentSystem
             return dataGridInv.Rows[e.RowIndex].Cells[cellName].Value.ToString();
         }
 
+        private void ToggleFilter()
+        {
+            if (btnToggleFilter.Text == ">")
+            {
+                filterForm.Visible = true;
+                scOuter.SplitterDistance = (int)(Width * 0.3);
+                scInner.SplitterDistance = (int)(scInner.Width * 1.15);
+                btnToggleFilter.Text = "<";
+            }
+            else
+            {
+                filterForm.Visible = false;
+                // Calculate the desired splitter distance
+                int minInnerWidth = scOuter.Panel1MinSize + scInner.Panel1MinSize + scInner.SplitterWidth;
+
+                // Ensure the splitter distance is within the valid range
+                int maxSplitterDistance = scInner.Width - scInner.Panel2MinSize;
+                int minSplitterDistance = scInner.Panel1MinSize;
+
+                // Clamp the desired splitter distance within the valid range
+                int validSplitterDistance = Math.Max(minSplitterDistance, Math.Min(minInnerWidth, maxSplitterDistance));
+
+                // Set the splitter distance
+                scInner.SplitterDistance = validSplitterDistance;
+
+                // Clamp outer no inner min
+                scOuter.SplitterDistance = (int)(minInnerWidth * 1.15);
+                btnToggleFilter.Text = ">";
+            }
+        }
+
         private void checkAll_Click(object sender, EventArgs e)
         {
             checkRetired.Checked = false;
@@ -308,6 +387,24 @@ namespace InventoryManagmentSystem
             NewItemForm ModForm = new NewItemForm();
             ModForm.ShowDialog();
             DisplayItems();
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            var names = new List<string> {"Active", "Inactive", "Brand", "Size","Condition"};
+            var filterForm = new FilterForm(this, names, checkedItems =>
+            {
+                foreach(var item in checkedItems)
+                {
+                    filterList.Add(item);
+                }
+            });
+            filterForm.Show();
+        }
+
+        private void btnToggleFilter_Click(object sender, EventArgs e)
+        {
+            ToggleFilter();
         }
     }
 }
