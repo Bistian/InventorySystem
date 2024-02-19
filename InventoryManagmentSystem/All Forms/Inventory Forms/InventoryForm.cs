@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
@@ -16,10 +15,8 @@ namespace InventoryManagmentSystem
         SqlConnection connection = new SqlConnection(connectionString);
 
         private List<Item> itemList = new List<Item>();
+        /// <summary> Key/Value pair list. Key = column name </summary>
         private List<string[]> filterList = new List<string[]>();
-
-        private Panel panelFilter;
-        private Button btnFilter2;
         private FilterForm filterForm;
 
         public InventoryForm(string ItemType)
@@ -51,9 +48,12 @@ namespace InventoryManagmentSystem
             int count = 1;
             foreach (Item item in itemList)
             {
-                string condition = item.GetColumnValue("Condition");
-                if (checkActive.Checked && condition == "Retired") { continue; }
-                if (checkRetired.Checked && condition != "Retired") { continue; }
+                if(!checkActive.Checked || !checkRetired.Checked)
+                {
+                    string condition = item.GetColumnValue("Condition");
+                    if (checkActive.Checked && condition == "Retired") { continue; }
+                    if (checkRetired.Checked && condition != "Retired") { continue; }
+                }
 
                 string type = item.GetColumnValue("ItemType");
                 if (type != cbItemType.Text) { continue; }
@@ -66,6 +66,7 @@ namespace InventoryManagmentSystem
                     bool notValid = false;
                     foreach(var filter in filterList)
                     {
+                        // Check if column to filter exists and if value at least partially matches.
                         string filterName = filter[0];
                         string filterValue = filter[1];
                         string columnValue = item.GetColumnValue(filterName);
@@ -361,24 +362,13 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void checkAll_Click(object sender, EventArgs e)
-        {
-            checkRetired.Checked = false;
-            checkActive.Checked = false;
-            DisplayItems();
-        }
-
         private void checkRetired_Click(object sender, EventArgs e)
         {
-            checkAll.Checked = false;
-            checkActive.Checked = false;
             DisplayItems();
         }
 
         private void checkActive_Click(object sender, EventArgs e)
         {
-            checkRetired.Checked = false;
-            checkAll.Checked = false;
             DisplayItems();
         }
 

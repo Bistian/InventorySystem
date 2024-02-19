@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryForm));
             this.ItemLable = new System.Windows.Forms.Label();
             this.cbItemType = new System.Windows.Forms.ComboBox();
@@ -54,15 +54,15 @@
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.checkActive = new System.Windows.Forms.CheckBox();
-            this.checkAll = new System.Windows.Forms.CheckBox();
             this.checkRetired = new System.Windows.Forms.CheckBox();
             this.labelNewItem = new System.Windows.Forms.Label();
+            this.UsersButton = new InventoryManagmentSystem.CustomButton();
             this.scOuter = new System.Windows.Forms.SplitContainer();
             this.scInner = new System.Windows.Forms.SplitContainer();
             this.btnToggleFilter = new System.Windows.Forms.Button();
-            this.UsersButton = new InventoryManagmentSystem.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.TopPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scOuter)).BeginInit();
             this.scOuter.Panel1.SuspendLayout();
             this.scOuter.Panel2.SuspendLayout();
@@ -70,7 +70,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.scInner)).BeginInit();
             this.scInner.Panel2.SuspendLayout();
             this.scInner.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             this.SuspendLayout();
             // 
             // ItemLable
@@ -93,7 +92,7 @@
             this.cbItemType.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbItemType.FormattingEnabled = true;
             this.cbItemType.IntegralHeight = false;
-            this.cbItemType.Location = new System.Drawing.Point(114, 10);
+            this.cbItemType.Location = new System.Drawing.Point(126, 8);
             this.cbItemType.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.cbItemType.Name = "cbItemType";
             this.cbItemType.Size = new System.Drawing.Size(103, 38);
@@ -105,14 +104,14 @@
             this.dataGridInv.AllowUserToAddRows = false;
             this.dataGridInv.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridInv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridInv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridInv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridInv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridInv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Num,
@@ -128,14 +127,14 @@
             this.column_color,
             this.column_edit,
             this.column_delete});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridInv.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridInv.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridInv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridInv.EnableHeadersVisualStyles = false;
             this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -143,17 +142,18 @@
             this.dataGridInv.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridInv.Name = "dataGridInv";
             this.dataGridInv.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridInv.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridInv.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridInv.RowHeadersVisible = false;
             this.dataGridInv.RowHeadersWidth = 51;
             this.dataGridInv.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridInv.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.WindowText;
             this.dataGridInv.RowTemplate.Height = 40;
             this.dataGridInv.RowTemplate.ReadOnly = true;
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -282,7 +282,7 @@
             this.labelSearch.AutoSize = true;
             this.labelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSearch.Location = new System.Drawing.Point(225, 15);
+            this.labelSearch.Location = new System.Drawing.Point(229, 14);
             this.labelSearch.Margin = new System.Windows.Forms.Padding(0);
             this.labelSearch.Name = "labelSearch";
             this.labelSearch.Size = new System.Drawing.Size(94, 26);
@@ -292,7 +292,7 @@
             // searchBar
             // 
             this.searchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBar.Location = new System.Drawing.Point(313, 8);
+            this.searchBar.Location = new System.Drawing.Point(327, 6);
             this.searchBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.searchBar.Name = "searchBar";
             this.searchBar.Size = new System.Drawing.Size(182, 37);
@@ -321,7 +321,6 @@
             // 
             this.TopPanel.BackColor = System.Drawing.Color.Maroon;
             this.TopPanel.Controls.Add(this.checkActive);
-            this.TopPanel.Controls.Add(this.checkAll);
             this.TopPanel.Controls.Add(this.checkRetired);
             this.TopPanel.Controls.Add(this.labelNewItem);
             this.TopPanel.Controls.Add(this.UsersButton);
@@ -341,7 +340,7 @@
             this.checkActive.AutoSize = true;
             this.checkActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkActive.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkActive.Location = new System.Drawing.Point(502, -6);
+            this.checkActive.Location = new System.Drawing.Point(517, 12);
             this.checkActive.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.checkActive.Name = "checkActive";
             this.checkActive.Size = new System.Drawing.Size(86, 28);
@@ -350,26 +349,12 @@
             this.checkActive.UseVisualStyleBackColor = true;
             this.checkActive.Click += new System.EventHandler(this.checkActive_Click);
             // 
-            // checkAll
-            // 
-            this.checkAll.AutoSize = true;
-            this.checkAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkAll.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkAll.Location = new System.Drawing.Point(502, 32);
-            this.checkAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.checkAll.Name = "checkAll";
-            this.checkAll.Size = new System.Drawing.Size(53, 28);
-            this.checkAll.TabIndex = 22;
-            this.checkAll.Text = "All";
-            this.checkAll.UseVisualStyleBackColor = true;
-            this.checkAll.Click += new System.EventHandler(this.checkAll_Click);
-            // 
             // checkRetired
             // 
             this.checkRetired.AutoSize = true;
             this.checkRetired.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkRetired.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkRetired.Location = new System.Drawing.Point(502, 13);
+            this.checkRetired.Location = new System.Drawing.Point(611, 12);
             this.checkRetired.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.checkRetired.Name = "checkRetired";
             this.checkRetired.Size = new System.Drawing.Size(96, 28);
@@ -384,12 +369,27 @@
             this.labelNewItem.AutoSize = true;
             this.labelNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNewItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelNewItem.Location = new System.Drawing.Point(864, 16);
+            this.labelNewItem.Location = new System.Drawing.Point(847, 15);
             this.labelNewItem.Margin = new System.Windows.Forms.Padding(0);
             this.labelNewItem.Name = "labelNewItem";
             this.labelNewItem.Size = new System.Drawing.Size(120, 26);
             this.labelNewItem.TabIndex = 20;
             this.labelNewItem.Text = "New Item:";
+            // 
+            // UsersButton
+            // 
+            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
+            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
+            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
+            this.UsersButton.Location = new System.Drawing.Point(967, 6);
+            this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 0, 2, 2);
+            this.UsersButton.Name = "UsersButton";
+            this.UsersButton.Size = new System.Drawing.Size(63, 43);
+            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.UsersButton.TabIndex = 17;
+            this.UsersButton.TabStop = false;
+            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click_1);
             // 
             // scOuter
             // 
@@ -433,21 +433,6 @@
             this.btnToggleFilter.UseVisualStyleBackColor = true;
             this.btnToggleFilter.Click += new System.EventHandler(this.btnToggleFilter_Click);
             // 
-            // UsersButton
-            // 
-            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
-            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
-            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
-            this.UsersButton.Location = new System.Drawing.Point(967, 6);
-            this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 0, 2, 2);
-            this.UsersButton.Name = "UsersButton";
-            this.UsersButton.Size = new System.Drawing.Size(63, 43);
-            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.UsersButton.TabIndex = 17;
-            this.UsersButton.TabStop = false;
-            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click_1);
-            // 
             // InventoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -465,6 +450,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();
             this.TopPanel.ResumeLayout(false);
             this.TopPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             this.scOuter.Panel1.ResumeLayout(false);
             this.scOuter.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scOuter)).EndInit();
@@ -472,7 +458,6 @@
             this.scInner.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scInner)).EndInit();
             this.scInner.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -488,7 +473,6 @@
         private System.Windows.Forms.Panel TopPanel;
         private System.Windows.Forms.Label labelNewItem;
         private System.Windows.Forms.CheckBox checkRetired;
-        private System.Windows.Forms.CheckBox checkAll;
         private System.Windows.Forms.CheckBox checkActive;
         public System.Windows.Forms.ComboBox cbItemType;
         private System.Windows.Forms.DataGridViewTextBoxColumn Num;

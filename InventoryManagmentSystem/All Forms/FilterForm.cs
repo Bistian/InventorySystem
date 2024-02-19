@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InventoryManagmentSystem.All_Forms
@@ -30,7 +26,7 @@ namespace InventoryManagmentSystem.All_Forms
             callbackFunction = callback;
             nameList = columnNames;
 
-            // Create and add checkboxes dynamically
+            // Create and add checkboxes dynamically.
             int Y = 0;
             foreach (var name in columnNames)
             {
@@ -51,7 +47,7 @@ namespace InventoryManagmentSystem.All_Forms
                 Y += Font.Height * 2;
             }
 
-            // Set up an event handler for the OK button
+            // Set up an event handler for the OK button.
             Button btnOk = new Button();
             btnOk.Name = "btnOk";
             btnOk.Text = "OK";
@@ -62,7 +58,7 @@ namespace InventoryManagmentSystem.All_Forms
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            // Collect checked checkboxes and return to the parent form
+            // Collect imput values and return to the parent form.
             List<string[]> values = new List<string[]>();
             foreach (Control control in this.Controls)
             {
@@ -77,7 +73,7 @@ namespace InventoryManagmentSystem.All_Forms
                 }
             }
 
-            // Invoke the callback function with the checked items
+            // Invoke the callback function with the checked items.
             callbackFunction?.Invoke(values);
         }
     }
