@@ -112,6 +112,7 @@ namespace InventoryManagmentSystem
                 panelRentals.BackColor = offColor;
                 panelUsers.BackColor = offColor;
                 panelTools.BackColor = offColor;
+                panelSettings.BackColor = offColor;
 
                 // Pick one tab and set it to the clicked color.
                 if (tab == "Home") { panelHome.BackColor = onColor; }
