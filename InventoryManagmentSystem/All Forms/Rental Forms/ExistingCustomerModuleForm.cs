@@ -26,6 +26,15 @@ namespace InventoryManagmentSystem
             if (e.ColumnIndex != 7) { return false; }
 
             string message = "Do you want to delete this Client?";
+
+            string id = dataGridUsers.Rows[e.RowIndex].Cells[1].Value.ToString();
+            var rentedItems = HelperSql.ItemFindByClientId(connection, id);
+            if(rentedItems.Count > 0)
+            {
+                message = "Client did not return all items, cannot be deleted";
+                MessageBox.Show(message, "Can't delete", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.No) { return true; }
 
