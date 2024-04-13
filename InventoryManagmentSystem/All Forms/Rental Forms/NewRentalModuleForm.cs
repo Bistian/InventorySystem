@@ -342,6 +342,7 @@ namespace InventoryManagmentSystem
             flowLayoutPanelProfile.Visible = false;
             NewClientForm clientForm = new NewClientForm("Individual", labelProfileName.Text);
             clientForm.txtBoxDriversLicense.Enabled = false;
+            cbItemType.Items.Clear();
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
             HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
         }
