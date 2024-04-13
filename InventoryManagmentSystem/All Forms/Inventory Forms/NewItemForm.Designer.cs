@@ -129,10 +129,6 @@
             this.cbCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cbCondition, "cbCondition");
             this.cbCondition.FormattingEnabled = true;
-            this.cbCondition.Items.AddRange(new object[] {
-            resources.GetString("cbCondition.Items"),
-            resources.GetString("cbCondition.Items1"),
-            resources.GetString("cbCondition.Items2")});
             this.cbCondition.Name = "cbCondition";
             // 
             // labelMaterial

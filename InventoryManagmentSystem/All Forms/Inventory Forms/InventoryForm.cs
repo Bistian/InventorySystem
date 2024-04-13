@@ -246,17 +246,25 @@ namespace InventoryManagmentSystem
             }
         }
 
+        private Item UpdateCreateItem(DataGridViewCellEventArgs e)
+        {
+            var item = new Item();
+            item.AddColumn("ItemType", cbItemType.Text);
+            item.AddColumn("SerialNumber", GetCellValueAsString(e, "column_serial"));
+            item.AddColumn("Brand", GetCellValueAsString(e, "column_brand"));
+            item.AddColumn("Condition", GetCellValueAsString(e, "column_condition"));
+            item.AddColumn("ManufactureDate", GetCellValueAsString(e, "column_manufacture_date"));
+            item.AddColumn("AcquisitionDate", GetCellValueAsString(e, "column_acquisition_date"));
+            item.AddColumn("Size", GetCellValueAsString(e, "column_size"));
+            item.AddColumn("Color", GetCellValueAsString(e, "column_color"));
+            item.AddColumn("Material", GetCellValueAsString(e, "column_material"));
+            return item;
+        }
+
         private void UpdateBoots(DataGridViewCellEventArgs e)
         {
-            NewItemForm itemForm = new NewItemForm(cbItemType.Text.ToLower(), true);
-            itemForm.cbItemType.Text = cbItemType.Text.ToLower();
-            itemForm.tbSerialNumber.Text = GetCellValueAsString(e, "column_serial");
-            itemForm.tbSerialNumber.Enabled = false;
-            itemForm.cbBrand.Text = GetCellValueAsString(e, "column_brand");
-            itemForm.cbCondition.Text = GetCellValueAsString(e, "column_condition");
-            itemForm.dtManufacture.Text = GetCellValueAsString(e, "column_manufacture_date");
-            itemForm.cbSize.Text = GetCellValueAsString(e, "column_size");
-            itemForm.cbMaterial.Text = GetCellValueAsString(e, "column_material");
+            var item = UpdateCreateItem(e);
+            NewItemForm itemForm = new NewItemForm(item);
             itemForm.SaveButton.Enabled = true;
             itemForm.ShowDialog();
             itemForm.Close();
@@ -264,15 +272,9 @@ namespace InventoryManagmentSystem
 
         private void UpdateHelmet(DataGridViewCellEventArgs e)
         {
-            NewItemForm itemForm = new NewItemForm(cbItemType.Text, true);
-            itemForm.cbItemType.Text = cbItemType.Text.ToLower();
-            itemForm.tbSerialNumber.Text = GetCellValueAsString(e, "column_serial");
-            itemForm.tbSerialNumber.Enabled = false;
-            itemForm.cbBrand.Text = GetCellValueAsString(e, "column_brand");
-            itemForm.cbCondition.Text = GetCellValueAsString(e, "column_condition");
-            itemForm.dtManufacture.Text = GetCellValueAsString(e, "column_manufacture_date");
-            itemForm.cbSize.Text = GetCellValueAsString(e, "column_size");
-            itemForm.cbColor.Text = GetCellValueAsString(e, "column_color");
+
+            var item = UpdateCreateItem(e);
+            NewItemForm itemForm = new NewItemForm(item);
             itemForm.SaveButton.Enabled = true;
             itemForm.ShowDialog();
             itemForm.Close();
@@ -280,15 +282,8 @@ namespace InventoryManagmentSystem
 
         private void UpdateJacketOrPantsOrMasks(DataGridViewCellEventArgs e)
         {
-            NewItemForm itemForm = new NewItemForm(cbItemType.Text, true);
-
-            itemForm.cbItemType.Text = cbItemType.Text.ToLower();
-            itemForm.tbSerialNumber.Text = dataGridInv.Rows[e.RowIndex].Cells["column_serial"].Value.ToString();
-            itemForm.tbSerialNumber.Enabled = false;
-            itemForm.cbBrand.Text = dataGridInv.Rows[e.RowIndex].Cells["column_brand"].Value.ToString();
-            itemForm.cbCondition.Text = dataGridInv.Rows[e.RowIndex].Cells["column_condition"].Value.ToString();
-            itemForm.dtManufacture.Text = dataGridInv.Rows[e.RowIndex].Cells["column_manufacture_date"].Value.ToString();
-            itemForm.cbSize.Text = dataGridInv.Rows[e.RowIndex].Cells["column_size"].Value.ToString();
+            var item = UpdateCreateItem(e);
+            NewItemForm itemForm = new NewItemForm(item);
             itemForm.SaveButton.Enabled = true;
             itemForm.ShowDialog();
             itemForm.Close();

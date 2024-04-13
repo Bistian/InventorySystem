@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -15,26 +17,143 @@ namespace InventoryManagmentSystem.Rental_Forms
         private string tableName = "";
         private string itemType = "";
 
-        public NewItemForm(string itemType = "", bool isUpdate = false)
+        public NewItemForm()
         {
             InitializeComponent();
-            this.itemType = itemType;
-            this.isUpdate = isUpdate;
-            if (isUpdate)
-            {
-                HelperSql.BrandsFillComboBox(connection, cbItemType.Text.ToLower(), cbBrand);
-            }
+            isUpdate = false;
+
+            cbCondition.Items.Add("New");
+            cbCondition.Items.Add("Retired");
+            cbCondition.Items.Add("Used");
+
             ManageFieldsAvailability();
-            HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
-            for (int i = 0; i < cbItemType.Items.Count; ++i)
+            GetTableName();
+        }
+
+        public NewItemForm(string itemType)
+        {
+            InitializeComponent();
+
+            isUpdate = false;
+            this.itemType = itemType;
+
+            cbCondition.Items.Add("New");
+            cbCondition.Items.Add("Retired");
+            cbCondition.Items.Add("Used");
+
+            ManageFieldsAvailability();
+            InitializeItemType();
+            GetTableName();
+        }
+
+        // Init Update
+        public NewItemForm(Item item)
+        {
+            InitializeComponent();
+
+            isUpdate = true;
+            itemType = item.GetColumnValue("ItemType");
+
+            cbCondition.SelectedIndex = -1;
+            
+            cbCondition.Text = item.GetColumnValue("Condition");
+            cbCondition.Items.Add("Retired");
+            cbCondition.Items.Add("Used");
+
+            HelperSql.BrandsFillComboBox(connection, cbItemType.Text.ToLower(), cbBrand);
+            ManageFieldsAvailability();
+            InitializeItemType();
+            GetTableName();
+            ExtractItemToForm(item);
+        }
+
+        private void ExtractItemToForm(Item item)
+        {
+            // Extract condition
+            cbCondition.SelectedIndex = -1;
+            string element = item.GetColumnValue("Condition");
+            if(element.Length != 0)
             {
-                if (cbItemType.Items[i].ToString() == itemType)
+                if (element == "New")
                 {
-                    cbItemType.SelectedIndex = i;
+                    cbCondition.Items.Add(element);
+                    cbCondition.SelectedIndex = cbCondition.Items.Count - 1;
+                }
+                else
+                {
+                    for (int i = 0; i < cbCondition.Items.Count; ++i)
+                    {
+                        if (cbCondition.Items[i].ToString() == item.GetColumnValue("Condition"))
+                        {
+                            cbCondition.SelectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // Extract serial number
+            tbSerialNumber.Text = item.GetColumnValue("SerialNumber");
+
+            // Extract brand
+            cbBrand.SelectedIndex = -1;
+            element = item.GetColumnValue("Brand");
+            if (element.Length != 0)
+            {
+                for (int i = 0; i < cbBrand.Items.Count; ++i)
+                {
+                    if (cbBrand.Items[i].ToString() == element)
+                    {
+                        cbBrand.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            // Extract size
+            cbSize.SelectedIndex = -1;
+            element = item.GetColumnValue("Size");
+            for (int i = 0; i < cbSize.Items.Count; ++i)
+            {
+                if (cbSize.Items[i].ToString() == element)
+                {
+                    cbSize.SelectedIndex = i;
                     break;
                 }
             }
-            GetTableName();
+
+            // Extract color
+            cbColor.SelectedIndex = -1;
+            element = item.GetColumnValue("Color");
+            for (int i = 0; i < cbColor.Items.Count; ++i)
+            {
+                if (cbColor.Items[i].ToString() == element)
+                {
+                    cbColor.SelectedIndex = i;
+                    break;
+                }
+            }
+
+            // Extract material
+            cbMaterial.SelectedIndex = -1;
+            element = item.GetColumnValue("Material");
+            for (int i = 0; i < cbMaterial.Items.Count; ++i)
+            {
+                if (cbMaterial.Items[i].ToString() == element)
+                {
+                    cbMaterial.SelectedIndex = i;
+                    break;
+                }
+            }
+
+            // Extract acquisition date
+            DateTime selectedDate;
+            DateTime.TryParse(item.GetColumnValue("AcquisitionDate"), out selectedDate);
+            dtAcquisition.Value = selectedDate;
+
+            // Extract manufacture date
+            DateTime.TryParse(item.GetColumnValue("ManufactureDate"), out selectedDate);
+            dtManufacture.Value = selectedDate;
         }
 
         private bool SelectTableAndAddItem(string uuid)
@@ -222,6 +341,19 @@ namespace InventoryManagmentSystem.Rental_Forms
                 cbSize.Enabled = true;
                 cbMaterial.Enabled = false;
                 cbColor.Enabled = false;
+            }
+        }
+
+        private void InitializeItemType()
+        {
+            HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
+            for (int i = 0; i < cbItemType.Items.Count; ++i)
+            {
+                if (cbItemType.Items[i].ToString() == itemType)
+                {
+                    cbItemType.SelectedIndex = i;
+                    break;
+                }
             }
         }
 

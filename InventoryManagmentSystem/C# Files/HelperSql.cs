@@ -228,10 +228,10 @@ namespace InventoryManagmentSystem
             string query = $"SELECT Brand FROM tbBrands WHERE ItemType=@ItemType";
             try
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader dataReader = command.ExecuteReader();
                 connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ItemType", itemType);
+                SqlDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
                     box.Items.Add(dataReader[0]);

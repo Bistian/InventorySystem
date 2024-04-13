@@ -59,7 +59,7 @@ namespace InventoryManagmentSystem.Academy
         {
             dataGridAcademies.Visible = false;
             AcademyForm.Academy academy = new AcademyForm.Academy();
-            academy.uuid = (Guid)row.Cells["column_id"].Value;
+            academy.uuid = new Guid(row.Cells["column_id"].Value.ToString());
             academy.name = row.Cells["column_name"].Value.ToString();
             academy.email = row.Cells["column_email"].Value.ToString();
             academy.phone = row.Cells["column_phone"].Value.ToString();
