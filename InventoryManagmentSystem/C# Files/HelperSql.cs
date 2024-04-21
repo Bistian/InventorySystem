@@ -241,6 +241,74 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
+        public static List<Item> BrandsFindAll(SqlConnection connection)
+        {
+            var list = new List<Item>();
+            string query = "SELECT * FROM tbBrands";
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Item item = new Item();
+                    item.AddColumn("Id", reader[0].ToString());
+                    item.AddColumn("ItemType", reader[1].ToString());
+                    item.AddColumn("Brand", reader[2].ToString());
+                    list.Add(item);
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+
+            return list;
+        }
+
+        public static void BrandsInsert(SqlConnection connection, string itemType, string brand)
+        {
+            // Is it duplicated?
+            string query = "SELECT TOP 1 Id FROM tbBrands WHERE ItemType = @ItemType AND Brand = @Brand";
+            int id = -1;
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemType", itemType);
+                command.Parameters.AddWithValue("Brand", brand);
+                SqlDataReader reader = command.ExecuteReader();
+                while(reader.Read())
+                {
+                    id = int.Parse(reader[0].ToString());
+                }
+            }
+            catch (Exception ex) 
+            { 
+                Console.WriteLine(ex.Message);
+                return;
+            }
+            finally { connection.Close(); }
+
+            if(id != -1) 
+            {
+                string message = "Cannot add duplicated brand";
+                DialogResult result = MessageBox.Show(message, "Duplicated Item", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            query = "INSERT INTO tbBrands (ItemType, Brand) VALUES (@ItemType, @Brand)";
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemType", itemType);
+                command.Parameters.AddWithValue("@Brand", brand);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+        }
+
         public static List<Item> ClassListByAcademy(SqlConnection connection, string AcademyId)
         {
             var list = new List<Item>();

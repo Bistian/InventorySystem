@@ -24,11 +24,17 @@ namespace InventoryManagmentSystem
             InitializeComponent();
             checkActive.Checked = true;
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
-            itemList = HelperSql.ItemFindAllWithSpecifications(connection);
+            InitItems();
             DisplayItems();
             SetItemType(ItemType);
             InitContainerOuter();
             InitContainereInner();
+        }
+
+        private void InitItems()
+        {
+            itemList.Clear();
+            itemList = HelperSql.ItemFindAllWithSpecifications(connection);
         }
 
         private void SetItemType(string itemType)
@@ -268,6 +274,7 @@ namespace InventoryManagmentSystem
             itemForm.SaveButton.Enabled = true;
             itemForm.ShowDialog();
             itemForm.Close();
+            InitItems();
         }
 
         private void UpdateHelmet(DataGridViewCellEventArgs e)
@@ -278,6 +285,7 @@ namespace InventoryManagmentSystem
             itemForm.SaveButton.Enabled = true;
             itemForm.ShowDialog();
             itemForm.Close();
+            InitItems();
         }
 
         private void UpdateJacketOrPantsOrMasks(DataGridViewCellEventArgs e)
@@ -287,6 +295,7 @@ namespace InventoryManagmentSystem
             itemForm.SaveButton.Enabled = true;
             itemForm.ShowDialog();
             itemForm.Close();
+            InitItems();
         }
         
         private void DeleteItem(string serialNumber)
