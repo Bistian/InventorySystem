@@ -24,6 +24,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             PopulateAcademyList();
             classList = new List<Item>();
             comboBoxRentalType.SelectedIndex = 0;
+            maskPhone.Mask = "000-000-0000";
             if (clientName != null)
             {
                 ExistingUser = true;
@@ -39,7 +40,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
             txtBoxCustomerName.Text = client.GetColumnValue("Name");
             txtBoxDriversLicense.Text = client.GetColumnValue("DriversLicenseNumber");
-            txtBoxPhone.Text = client.GetColumnValue("Phone");
+            maskPhone.Text = client.GetColumnValue("Phone");
             txtBoxEmail.Text = client.GetColumnValue("Email");
             textBoxChest.Text = client.GetColumnValue("Chest");
             textBoxSleeve.Text = client.GetColumnValue("Sleeve");
@@ -56,7 +57,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         public void Clear()
         {
             txtBoxCustomerName.Clear();
-            txtBoxPhone.Clear();
+            maskPhone.Clear();
             txtBoxEmail.Clear();
             txtBoxStreet.Clear();
             txtBoxDriversLicense.Clear();
@@ -87,7 +88,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 !string.IsNullOrEmpty(txtBoxCustomerName.Text) &&
                 !string.IsNullOrEmpty(txtBoxDriversLicense.Text) &&
                 !string.IsNullOrEmpty(txtBoxEmail.Text) &&
-                !string.IsNullOrEmpty(txtBoxPhone.Text) &&
+                !string.IsNullOrEmpty(maskPhone.Text) &&
                 !string.IsNullOrEmpty(cbRep.Text) &&
                 !string.IsNullOrEmpty(textBoxCity.Text)
             );
@@ -236,7 +237,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             client["IdClass"] = classId == string.Empty ? null : classId.ToString();
             client["Address"] = $"{txtBoxStreet.Text} {textBoxCity.Text} {textBoxState.Text} {textBoxZip.Text}";
             client["Name"] = txtBoxCustomerName.Text;
-            client["Phone"] = txtBoxPhone.Text;
+            client["Phone"] = maskPhone.Text;
             client["Email"] = txtBoxEmail.Text;
             client["DriversLicenseNumber"] = txtBoxDriversLicense.Text;
             client["FireTecRepresentative"] = cbRep.Text;
@@ -282,7 +283,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 if (connection.State == ConnectionState.Open) { connection.Close(); }
                 connection.Open();
                 command.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
-                command.Parameters.AddWithValue("@Phone", txtBoxPhone.Text);
+                command.Parameters.AddWithValue("@Phone", maskPhone.Text);
                 command.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
                 if (comboBoxRentalType.SelectedIndex == 0)
                 {
