@@ -83,7 +83,7 @@ namespace InventoryManagmentSystem.Academy
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
-                int index = 1;
+                int index = 0;
                 while (reader.Read())
                 {
                     ++index;
