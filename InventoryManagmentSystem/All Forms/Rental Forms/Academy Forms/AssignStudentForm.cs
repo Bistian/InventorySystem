@@ -38,6 +38,8 @@ namespace InventoryManagmentSystem.Academy
         private bool UpdateClient()
         {
             NewRentalModuleForm parent = this.Parent.Parent as NewRentalModuleForm;
+
+            // TODO: Move SQL out of this file.
             string query = @"
                 UPDATE tbClients
                 SET IdClass=@IdClass, Academy=@Academy

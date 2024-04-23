@@ -269,6 +269,9 @@ namespace InventoryManagmentSystem.Rental_Forms
             DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (messageBox == DialogResult.No) { return; }
 
+            // TODO: Move SQL out of this file.
+            //bool updated = HelperSql.ClientUpdateInfo();
+
             string query = "UPDATE tbClients " +
                     "SET Name = @Name,Phone = @Phone,Email = " +
                     "@Email,Academy = @Academy,DriversLicenseNumber = @DriversLicenseNumber," +

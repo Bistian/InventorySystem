@@ -29,6 +29,47 @@ namespace InventoryManagmentSystem
             RefreshForm(ItemType);
         }
 
+
+        private void DisplayPastDue()
+        {
+            string query = $@"
+                SELECT c.Id, Name, DueDate 
+                FROM tbItems AS i 
+                JOIN tbClients AS c ON c.Id = i.Location
+                WHERE DueDate < CONVERT(DATE, GETDATE())
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int i = 0;
+                while (reader.Read())
+                {
+                    dataGridPastDue.Rows.Add(++i, reader[0], reader[1], reader[2]);
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private string QuerySwitch(string itemType, string sign)
+        {
+            string query = $@"
+                SELECT ItemType='boots', c.Name, DueDate, SerialNumber FROM tb{itemType} AS t
+                INNER JOIN tbClients AS c ON (c.DriversLicenseNumber = t.Location OR c.Id = t.Location)
+                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE())
+            ";
+            return query;
+        }
+
         /// <summary>
         /// Query for rented and post due grids.
         /// </summary>
@@ -38,67 +79,40 @@ namespace InventoryManagmentSystem
         {
             string query = "";
             string sign = isRented ? ">=" : "<";
-            if (ItemType == "Jacket")
-            {
-                query = $@"SELECT ItemType='Jacket', tbClients.Name, DueDate, SerialNumber FROM tbJackets 
-                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location 
-                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
-                ";
-            }
-            else if (ItemType == "Pants")
-            {
-                query = $@"SELECT ItemType='Pants', tbClients.Name, DueDate, SerialNumber FROM tbPants 
-                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location 
-                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
-                ";
-            }
-            else if (ItemType == "Boots")
-            {
-                query = $@"SELECT ItemType='Boots', tbClients.Name, DueDate, SerialNumber FROM tbBoots 
-                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location 
-                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
-                ";
-            }
-            else if (ItemType == "Helmet")
-            {
-                query = $@"SELECT ItemType='Helmet', tbClients.Name, DueDate, SerialNumber FROM tbHelmets 
-                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location 
-                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
-                ";
-            }
-            else if (ItemType == "Mask")
-            {
-                query = $@"SELECT ItemType='Mask', tbClients.Name, DueDate, SerialNumber FROM tbMasks 
-                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbMasks.Location 
-                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
-                ";
-            }
-
-
-
-
-
-
-            else if (ItemType == null)
+   
+            if (ItemType == null)
             {
                 query = $@"
                 SELECT ItemType='Boots', tbClients.Name, DueDate, SerialNumber FROM tbBoots 
-                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location 
+                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location OR tbClients.Id = tbBoots.Location
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
 
                 UNION SELECT ItemType='Helmet', tbClients.Name, DueDate, SerialNumber FROM tbHelmets 
-                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location 
+                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location OR tbClients.Id = tbHelmets.Location
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
 
                 UNION SELECT ItemType='Jacket', tbClients.Name, DueDate, SerialNumber FROM tbJackets 
-                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location 
+                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location OR tbClients.Id = tbJackets.Location
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
 
                 UNION SELECT ItemType='Pants', tbClients.Name, DueDate, SerialNumber FROM tbPants 
-                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location 
+                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location OR tbClients.Id = tbPants.Location
                 WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
             ";
             }
+            else if (ItemType.ToLower() == "boots")
+            {
+                query = $@"
+                    SELECT ItemType='boots', tbClients.Name, tbClients.DriversLicenseNumber, DueDate, SerialNumber FROM tbBoots 
+                    INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location OR tbClients.Id = tbBoots.Location
+                    WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
+                    ";
+            }
+            else
+            {
+                query += QuerySwitch(ItemType, sign);
+            }
+
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
         }
@@ -113,9 +127,11 @@ namespace InventoryManagmentSystem
         {
             // Change the styling for the date column.
             grid.Columns[columnName].DefaultCellStyle.Format = "d";
-
             grid.Rows.Clear();
-            var command = new SqlCommand(query, connection);
+
+            DisplayPastDue();
+
+            /*var command = new SqlCommand(query, connection);
             connection.Open();
             try
             {
@@ -139,7 +155,7 @@ namespace InventoryManagmentSystem
             {
                 Console.WriteLine(ex.Message);
             }
-            connection.Close();
+            connection.Close();*/
         }
 
         // Check if rented due date is getting closer and turns date red.

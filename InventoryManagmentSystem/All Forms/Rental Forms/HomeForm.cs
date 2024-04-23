@@ -29,7 +29,6 @@ namespace InventoryManagmentSystem
         int total = 0;
 
         private Form activeForm = null;
-        string firetec = "Location='FIRETEC' OR Location='Fire-Tec' OR Location='FIRE TEC'";
 
         private static string RentItems(string itemType = null)
         {
@@ -46,6 +45,8 @@ namespace InventoryManagmentSystem
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
         }
+
+
 
         private void InitTables()
         {
@@ -67,7 +68,7 @@ namespace InventoryManagmentSystem
         private void LoadTables(DataGridView grid, string query, string columnName)
         {
             // Change the styling for the date column.
-            grid.Columns[columnName].DefaultCellStyle.Format = "d";
+            HelperFunctions.DataGridHideTime(grid, columnName);
             grid.Rows.Clear();
             try
             {

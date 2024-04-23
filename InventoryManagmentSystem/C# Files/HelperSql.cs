@@ -500,6 +500,66 @@ namespace InventoryManagmentSystem
             return item;
         }
 
+        public static bool ClientInsert(SqlConnection connection, Dictionary<string, string> client)
+        {
+            var exists = ClientFindByDriversLicense(connection, client["DriversLicenseNumber"]);
+            if(exists.Count() > 0)
+            {
+                MessageBox.Show("Client already exists.");
+                return false;
+            }
+
+            string query = $@"
+                INSERT INTO tbClients(
+                    Name, Phone, Email, DriversLicenseNumber, Address,
+                    Chest, Sleeve, Waist, Inseam, Hips, Height, Weight,
+                    FireTecRepresentative, Academy, IdClass, IsActive
+                )
+                VALUES(
+                    @Name, @Phone, @Email, @DriversLicenseNumber, @Address, 
+                    @Chest, @Sleeve, @Waist, @Inseam, @Hips, @Height, @Weight, 
+                    @FireTecRepresentative, @Academy,  @IdClass, @IsActive
+                )
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+
+            try
+            {
+                var command = new SqlCommand(query, connection);
+
+                AddParameterFromDictionary(command, client, "IdClass");
+                AddParameterFromDictionary(command, client, "Name");
+                AddParameterFromDictionary(command, client, "Phone");
+                AddParameterFromDictionary(command, client, "Email");
+                AddParameterFromDictionary(command, client, "DriversLicenseNumber");
+                AddParameterFromDictionary(command, client, "Address");
+                AddParameterFromDictionary(command, client, "Academy");
+                AddParameterFromDictionary(command, client, "Chest");
+                AddParameterFromDictionary(command, client, "Sleeve");
+                AddParameterFromDictionary(command, client, "Waist");
+                AddParameterFromDictionary(command, client, "Inseam");
+                AddParameterFromDictionary(command, client, "Hips");
+                AddParameterFromDictionary(command, client, "Height");
+                AddParameterFromDictionary(command, client, "Weight");
+                AddParameterFromDictionary(command, client, "FireTecRepresentative");
+
+                string value = client.TryGetValue("IsActive", out value) ? value : "True";
+                command.Parameters.AddWithValue("@IsActive", value);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+
+                return true;
+            }
+            catch(Exception ex) 
+            { 
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Failed to insert client.");
+                return false;
+            }
+            finally { connection.Close(); }
+        }
+
         public static bool ClientUpdateInfo(SqlConnection connection,
             string Id, string name, string phone, string email, string academy, string isActive, string drivers, string address)
         {
@@ -585,65 +645,6 @@ namespace InventoryManagmentSystem
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
-            }
-            finally { connection.Close(); }
-        }
-        public static bool ClientInsert(SqlConnection connection, Dictionary<string, string> client)
-        {
-            var exists = ClientFindByDriversLicense(connection, client["DriversLicenseNumber"]);
-            if(exists.Count() > 0)
-            {
-                MessageBox.Show("Client already exists.");
-                return false;
-            }
-
-            string query = $@"
-                INSERT INTO tbClients(
-                    Name, Phone, Email, DriversLicenseNumber, Address,
-                    Chest, Sleeve, Waist, Inseam, Hips, Height, Weight,
-                    FireTecRepresentative, Academy, IdClass, IsActive
-                )
-                VALUES(
-                    @Name, @Phone, @Email, @DriversLicenseNumber, @Address, 
-                    @Chest, @Sleeve, @Waist, @Inseam, @Hips, @Height, @Weight, 
-                    @FireTecRepresentative, @Academy,  @IdClass, @IsActive
-                )
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-
-            try
-            {
-                var command = new SqlCommand(query, connection);
-
-                AddParameterFromDictionary(command, client, "IdClass");
-                AddParameterFromDictionary(command, client, "Name");
-                AddParameterFromDictionary(command, client, "Phone");
-                AddParameterFromDictionary(command, client, "Email");
-                AddParameterFromDictionary(command, client, "DriversLicenseNumber");
-                AddParameterFromDictionary(command, client, "Address");
-                AddParameterFromDictionary(command, client, "Academy");
-                AddParameterFromDictionary(command, client, "Chest");
-                AddParameterFromDictionary(command, client, "Sleeve");
-                AddParameterFromDictionary(command, client, "Waist");
-                AddParameterFromDictionary(command, client, "Inseam");
-                AddParameterFromDictionary(command, client, "Hips");
-                AddParameterFromDictionary(command, client, "Height");
-                AddParameterFromDictionary(command, client, "Weight");
-                AddParameterFromDictionary(command, client, "FireTecRepresentative");
-
-                string value = client.TryGetValue("IsActive", out value) ? value : "True";
-                command.Parameters.AddWithValue("@IsActive", value);
-
-                connection.Open();
-                command.ExecuteNonQuery();
-
-                return true;
-            }
-            catch(Exception ex) 
-            { 
-                Console.WriteLine(ex.Message);
-                MessageBox.Show("Failed to insert client.");
                 return false;
             }
             finally { connection.Close(); }
@@ -739,6 +740,7 @@ namespace InventoryManagmentSystem
             }
             finally { connection.Close(); }
         }
+
         public static Item HelmetFindByItemId(SqlConnection connection, string itemId)
         {
             string query = $"SELECT TOP 1 * FROM tbHelmets WHERE ItemId=@ItemId";

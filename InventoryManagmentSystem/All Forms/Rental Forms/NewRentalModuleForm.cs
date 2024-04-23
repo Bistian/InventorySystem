@@ -25,7 +25,7 @@ namespace InventoryManagmentSystem
         string dueDate = "";
         string ClientId = string.Empty;
         string ClassId = string.Empty;
-        public string drivers;
+        public string drivers = string.Empty;
 
 
         public NewRentalModuleForm(string rentalType = null, string clientName = null)
@@ -53,6 +53,10 @@ namespace InventoryManagmentSystem
             dataGridViewClient.Columns["column_manufacture_date"].DefaultCellStyle.Format = "d";
 
             var items = HelperSql.ItemFindByClientId(connection, ClientId);
+            if(items.Count == 0)
+            {
+                items = HelperSql.ItemFindByClientId(connection, drivers);
+            }
             if (items == null) { return; }
 
             dataGridViewClient.Rows.Clear();
@@ -96,9 +100,12 @@ namespace InventoryManagmentSystem
             }
         }
 
-        public void LoadProfile(string driverLicense)
+        public void LoadProfile(string clientId)
         {
-            var client = HelperSql.ClientFindByDriversLicense(connection, driverLicense);
+            var client = HelperSql.ClientFindById(connection, clientId);
+            if( client.IsEmpty() ) { 
+                client = HelperSql.ClientFindByDriversLicense(connection, clientId);
+            }
             if(client.Count() == 0) 
             {
                 Console.WriteLine("Client not found.");
@@ -121,6 +128,7 @@ namespace InventoryManagmentSystem
             textBoxNotes.Text = client.GetColumnValue("Notes");
             ClientId = client.GetColumnValue("Id");
             ClassId = client.GetColumnValue("IdClass");
+            drivers = client.GetColumnValue("DriversLicenseNumber");
             license = labelClientDrivers.Text;
 
             var item = HelperSql.ClassFindByClassId(connection, ClassId);
@@ -129,7 +137,6 @@ namespace InventoryManagmentSystem
                 labelClientClass.Text = item.GetColumnValue("Name");
             }
 
-            //point of contact
             labelProfileDrivers.Text = "Point of contact:";
 
             flowLayoutPanelProfile.Visible = true;

@@ -46,7 +46,7 @@
             this.Due = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewPastDue = new System.Windows.Forms.DataGridView();
             this.nums = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Product2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rentee2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DueDate2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnRented = new System.Windows.Forms.Button();
@@ -262,7 +262,7 @@
             this.dataGridViewPastDue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPastDue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nums,
-            this.Product2,
+            this.column_id,
             this.Rentee2,
             this.DueDate2});
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -295,13 +295,12 @@
             this.nums.Name = "nums";
             this.nums.ReadOnly = true;
             // 
-            // Product2
+            // column_id
             // 
-            this.Product2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Product2.HeaderText = "Product";
-            this.Product2.MinimumWidth = 6;
-            this.Product2.Name = "Product2";
-            this.Product2.ReadOnly = true;
+            this.column_id.HeaderText = "Id";
+            this.column_id.Name = "column_id";
+            this.column_id.ReadOnly = true;
+            this.column_id.Visible = false;
             // 
             // Rentee2
             // 
@@ -565,10 +564,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Product;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rentee;
         private System.Windows.Forms.DataGridViewTextBoxColumn Due;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nums;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Product2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rentee2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DueDate2;
         private System.Windows.Forms.Button btnRented;
         private System.Windows.Forms.Button btnStock;
         private System.Windows.Forms.Button btnHelmets;
@@ -578,5 +573,9 @@
         private System.Windows.Forms.Button ButtonInStockHelmets;
         private System.Windows.Forms.Button ButtonInStockPants;
         private System.Windows.Forms.Button ButtonInStockJackets;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nums;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rentee2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DueDate2;
     }
 }

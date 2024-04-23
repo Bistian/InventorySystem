@@ -19,6 +19,10 @@ namespace InventoryManagmentSystem
             return target.ToLower().IndexOf(substring.ToLower()) != -1;
         }
 
+        public static void DataGridHideTime(DataGridView grid, string columnName)
+        {
+            grid.Columns[columnName].DefaultCellStyle.Format = "d";
+        }
         public static string MakeTableFromItemType(string itemType)
         {
             return $"tb{char.ToUpper(itemType[0]) + itemType.Substring(1)}";
