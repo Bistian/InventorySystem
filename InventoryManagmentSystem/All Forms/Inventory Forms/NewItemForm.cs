@@ -27,6 +27,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             cbCondition.Items.Add("Used");
 
             ManageFieldsAvailability();
+            InitializeItemType();
             GetTableName();
         }
 

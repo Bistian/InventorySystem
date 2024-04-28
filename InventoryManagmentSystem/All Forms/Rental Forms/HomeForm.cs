@@ -183,7 +183,26 @@ namespace InventoryManagmentSystem
         private void dataGridViewBeforeDue_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) { return; }
-            ClientPopUp(e, true);
+            DataGridViewRow row = dataGridViewBeforeDue.Rows[e.RowIndex];
+            string column = dataGridViewBeforeDue.Columns[e.ColumnIndex].Name;
+
+            string clientName = row.Cells["column_rentee"].Value.ToString();
+            string clientId = row.Cells["column_id"].Value.ToString();
+
+
+            var parentForm = this.ParentForm as MainForm;
+            NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
+            try
+            {
+                Profile.LoadProfile(clientId);
+                parentForm.openChildForm(Profile);
+
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
+            }
         }
 
         private void dataGridViewPastDue_CellClick(object sender, DataGridViewCellEventArgs e)

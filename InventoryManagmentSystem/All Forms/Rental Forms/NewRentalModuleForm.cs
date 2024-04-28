@@ -215,7 +215,7 @@ namespace InventoryManagmentSystem
             //Return Item
             if (ReturnReplace == 1)
             {
-                string itemId = row.Cells["ItemId"].Value.ToString();
+                string itemId = row.Cells["column_item_id"].Value.ToString();
                 bool isUpdated = HelperSql.ItemUpdate(connection, itemId, "Fire-Tec");
                 if(isUpdated)
                 {
@@ -236,10 +236,10 @@ namespace InventoryManagmentSystem
                 dataGridViewClient.Enabled = false;
 
                 dueDate = row.Cells["DDate"].Value.ToString();
-                string SelectedSerial = row.Cells["SerialNum"].Value.ToString();
-                ItemIdClient = row.Cells["ItemId"].Value.ToString();
+                string SelectedSerial = row.Cells["column_serial_number"].Value.ToString();
+                ItemIdClient = row.Cells["column_item_id"].Value.ToString();
                 labelOldItem.Text = SelectedSerial;
-                labelTypeOfItem.Text = row.Cells["Item"].Value.ToString();
+                labelTypeOfItem.Text = row.Cells["column_item_type"].Value.ToString();
 
             }
         }
