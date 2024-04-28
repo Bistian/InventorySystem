@@ -21,7 +21,18 @@ namespace InventoryManagmentSystem
 
         public static void DataGridHideTime(DataGridView grid, string columnName)
         {
-            grid.Columns[columnName].DefaultCellStyle.Format = "d";
+            try
+            {
+                foreach (DataGridViewRow row in grid.Rows)
+                {
+                    if (DateTime.TryParse(row.Cells[columnName].Value.ToString(), out DateTime dateValue))
+                    {
+                        row.Cells[columnName].Value = dateValue;
+                    }
+                }
+                grid.Columns[columnName].DefaultCellStyle.Format = "d";
+            }
+            catch(Exception ex) { Console.WriteLine(ex.Message); }
         }
         public static string MakeTableFromItemType(string itemType)
         {

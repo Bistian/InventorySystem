@@ -30,39 +30,62 @@ namespace InventoryManagmentSystem
 
         private Form activeForm = null;
 
-        private static string RentItems(string itemType = null)
+        private string QueryForPastDue()
         {
             string query = $@"
-                SELECT * FROM tbItems 
-                WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') AND 
-                    Location IS NOT NULL AND Condition NOT IN ('Retired')
+                SELECT c.Id, c.Name, i.DueDate AS LateDueDate, i.ItemCount
+                FROM tbClients AS c
+                JOIN (
+                    SELECT Location, DueDate, COUNT(*) AS ItemCount
+                    FROM tbItems AS i_inner
+                    WHERE i_inner.Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
+                      AND i_inner.Condition NOT IN ('Retired') 
+                      AND i_inner.DueDate IS NOT NULL 
+                      AND i_inner.DueDate = (
+                          SELECT MAX(DueDate)
+                          FROM tbItems
+                          WHERE Location = i_inner.Location
+                            AND DueDate < GETDATE()
+                      )
+                    GROUP BY Location, DueDate
+                ) AS i ON c.Id = i.Location;
             ";
-            if (itemType != null)
-            {
-                itemType = itemType.ToLower();
-                query = $"{query} AND ItemType = '{itemType}'";
-            }
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
         }
 
-
+        private string QueryForRented()
+        {
+            string query = $@"
+                SELECT c.Id, c.Name, i.DueDate AS ClosestDueDate, i.ItemCount
+                FROM tbClients AS c
+                JOIN (
+                    SELECT Location, DueDate, COUNT(*) AS ItemCount
+                    FROM tbItems AS i_inner
+                    WHERE i_inner.Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
+                      AND i_inner.Condition NOT IN ('Retired') 
+                      AND i_inner.DueDate IS NOT NULL 
+                      AND i_inner.DueDate = (
+                          SELECT TOP 1 DueDate
+                          FROM tbItems
+                          WHERE Location = i_inner.Location
+                            AND DueDate <= GETDATE()
+                          ORDER BY ABS(DATEDIFF(day, DueDate, GETDATE()))
+                      )
+                    GROUP BY Location, DueDate
+                ) AS i ON c.Id = i.Location
+                    OR c.DriversLicenseNumber = i.Location;
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return query;
+        }
 
         private void InitTables()
         {
-            string query = RentItems();
-            query += $@"
-                AND DueDate IS NOT NULL AND CAST(DueDate AS DATE)
-                BETWEEN CAST(GETDATE() AS DATE) AND 
-                DATEADD(DAY, {dueDays}, CAST(GETDATE() AS DATE))
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            LoadTables(dataGridViewBeforeDue, query, "Due");
-
-            query = RentItems();
-            query += " AND DueDate IS NOT NULL AND DATEDIFF(day, DueDate, GETDATE()) > 0";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            LoadTables(dataGridViewPastDue, query, "DueDate2");
+            LoadTables(dataGridViewBeforeDue, QueryForRented(), "column_due");
+            LoadTables(dataGridViewPastDue, QueryForPastDue(), "column_due2");
+            HelperFunctions.DataGridHideTime(dataGridViewBeforeDue, "column_due");
+            HelperFunctions.DataGridHideTime(dataGridViewPastDue, "column_due2");
         }
 
         private void LoadTables(DataGridView grid, string query, string columnName)
@@ -82,7 +105,8 @@ namespace InventoryManagmentSystem
                     grid.Rows.Add(i,
                         reader[0].ToString(),
                         reader[1].ToString(),
-                        reader[2]
+                        reader[2].ToString(),
+                        reader[3].ToString()
                         );
                 }
                 reader.Close();
@@ -192,7 +216,16 @@ namespace InventoryManagmentSystem
                 row = dataGridViewPastDue.Rows[e.RowIndex];
             }
 
-            string rentee = row.Cells["Rentee"].Value.ToString();
+            string rentee = string.Empty;
+            try
+            {
+                rentee = row.Cells["column_rentee"].Value.ToString();
+            }
+            catch
+            {
+                rentee = row.Cells["column_rentee2"].Value.ToString();
+            }
+
 
             // Check if there is at least one item with that name on the clints table.
             string query = $@"

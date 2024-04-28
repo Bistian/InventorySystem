@@ -50,7 +50,50 @@ namespace InventoryManagmentSystem
                     dataGridPastDue.Rows.Add(++i, reader[0], reader[1], reader[2]);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private void DisplayRented(bool isPastDue)
+        {
+            string query = string.Empty;
+            if(isPastDue)
+            {
+                query = $@"
+                    SELECT  c.Id, Name, DueDate, COUNT(*) AS RentCount
+                    FROM tbItems AS i 
+                    JOIN tbClients AS c ON c.Id = i.Location
+                    WHERE DueDate < CONVERT(DATE, GETDATE())
+                ";
+            }
+            else
+            {
+                query = $@"
+                    SELECT c.Id, Name, DueDate, COUNT(*) AS RentCount,
+                    FROM tbItems AS i 
+                    JOIN tbClients AS c ON c.Id = i.Location
+                    WHERE DueDate >= CONVERT(DATE, GETDATE())
+                ";
+            }
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int i = 0;
+                while (reader.Read())
+                {
+                    dataGridPastDue.Rows.Add(++i, reader[0], reader[1], reader[2]);
+                }
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
@@ -71,7 +114,7 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// Query for rented and post due grids.
+        /// QueryForRented for rented and post due grids.
         /// </summary>
         /// <param name="isRented">true for rented, false for past due</param>
         /// <returns></returns>
@@ -129,7 +172,8 @@ namespace InventoryManagmentSystem
             grid.Columns[columnName].DefaultCellStyle.Format = "d";
             grid.Rows.Clear();
 
-            DisplayPastDue();
+            DisplayRented(false);
+            DisplayRented(true);
 
             /*var command = new SqlCommand(query, connection);
             connection.Open();

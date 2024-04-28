@@ -40,15 +40,7 @@
             this.PastDue = new System.Windows.Forms.Label();
             this.PanelTitles = new System.Windows.Forms.Panel();
             this.dataGridViewBeforeDue = new System.Windows.Forms.DataGridView();
-            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Product = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rentee = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Due = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewPastDue = new System.Windows.Forms.DataGridView();
-            this.nums = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rentee2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DueDate2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnRented = new System.Windows.Forms.Button();
             this.btnStock = new System.Windows.Forms.Button();
             this.splitContainerItems = new System.Windows.Forms.SplitContainer();
@@ -59,6 +51,16 @@
             this.ButtonInStockHelmets = new System.Windows.Forms.Button();
             this.ButtonInStockPants = new System.Windows.Forms.Button();
             this.ButtonInStockJackets = new System.Windows.Forms.Button();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_rentee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_due = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nums = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_id2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_rentee2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_due2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_count2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerRentalOptions)).BeginInit();
             this.splitContainerRentalOptions.Panel1.SuspendLayout();
             this.splitContainerRentalOptions.Panel2.SuspendLayout();
@@ -184,9 +186,10 @@
             this.dataGridViewBeforeDue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewBeforeDue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.num,
-            this.Product,
-            this.Rentee,
-            this.Due});
+            this.column_id,
+            this.column_rentee,
+            this.column_due,
+            this.column_count});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -215,39 +218,6 @@
             this.dataGridViewBeforeDue.TabIndex = 9;
             this.dataGridViewBeforeDue.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBeforeDue_CellClick);
             // 
-            // num
-            // 
-            this.num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.num.FillWeight = 45F;
-            this.num.HeaderText = "#";
-            this.num.MinimumWidth = 6;
-            this.num.Name = "num";
-            this.num.ReadOnly = true;
-            // 
-            // Product
-            // 
-            this.Product.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Product.HeaderText = "Product";
-            this.Product.MinimumWidth = 6;
-            this.Product.Name = "Product";
-            this.Product.ReadOnly = true;
-            // 
-            // Rentee
-            // 
-            this.Rentee.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Rentee.HeaderText = "Rentee";
-            this.Rentee.MinimumWidth = 6;
-            this.Rentee.Name = "Rentee";
-            this.Rentee.ReadOnly = true;
-            // 
-            // Due
-            // 
-            this.Due.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Due.HeaderText = "Due";
-            this.Due.MinimumWidth = 6;
-            this.Due.Name = "Due";
-            this.Due.ReadOnly = true;
-            // 
             // dataGridViewPastDue
             // 
             this.dataGridViewPastDue.AllowUserToAddRows = false;
@@ -262,9 +232,10 @@
             this.dataGridViewPastDue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPastDue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nums,
-            this.column_id,
-            this.Rentee2,
-            this.DueDate2});
+            this.column_id2,
+            this.column_rentee2,
+            this.column_due2,
+            this.column_count2});
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -285,38 +256,6 @@
             this.dataGridViewPastDue.Size = new System.Drawing.Size(226, 484);
             this.dataGridViewPastDue.TabIndex = 10;
             this.dataGridViewPastDue.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPastDue_CellClick);
-            // 
-            // nums
-            // 
-            this.nums.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nums.FillWeight = 45F;
-            this.nums.HeaderText = "#";
-            this.nums.MinimumWidth = 6;
-            this.nums.Name = "nums";
-            this.nums.ReadOnly = true;
-            // 
-            // column_id
-            // 
-            this.column_id.HeaderText = "Id";
-            this.column_id.Name = "column_id";
-            this.column_id.ReadOnly = true;
-            this.column_id.Visible = false;
-            // 
-            // Rentee2
-            // 
-            this.Rentee2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Rentee2.HeaderText = "Rentee";
-            this.Rentee2.MinimumWidth = 6;
-            this.Rentee2.Name = "Rentee2";
-            this.Rentee2.ReadOnly = true;
-            // 
-            // DueDate2
-            // 
-            this.DueDate2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DueDate2.HeaderText = "Due";
-            this.DueDate2.MinimumWidth = 6;
-            this.DueDate2.Name = "DueDate2";
-            this.DueDate2.ReadOnly = true;
             // 
             // btnRented
             // 
@@ -519,6 +458,90 @@
             this.ButtonInStockJackets.UseVisualStyleBackColor = false;
             this.ButtonInStockJackets.Click += new System.EventHandler(this.ButtonInStockJackets_Click);
             // 
+            // num
+            // 
+            this.num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.num.FillWeight = 40F;
+            this.num.HeaderText = "#";
+            this.num.MinimumWidth = 6;
+            this.num.Name = "num";
+            this.num.ReadOnly = true;
+            // 
+            // column_id
+            // 
+            this.column_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_id.HeaderText = "Id";
+            this.column_id.MinimumWidth = 6;
+            this.column_id.Name = "column_id";
+            this.column_id.ReadOnly = true;
+            this.column_id.Visible = false;
+            // 
+            // column_rentee
+            // 
+            this.column_rentee.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_rentee.HeaderText = "Rentee";
+            this.column_rentee.MinimumWidth = 6;
+            this.column_rentee.Name = "column_rentee";
+            this.column_rentee.ReadOnly = true;
+            // 
+            // column_due
+            // 
+            this.column_due.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_due.FillWeight = 80F;
+            this.column_due.HeaderText = "Due";
+            this.column_due.MinimumWidth = 6;
+            this.column_due.Name = "column_due";
+            this.column_due.ReadOnly = true;
+            // 
+            // column_count
+            // 
+            this.column_count.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_count.FillWeight = 30F;
+            this.column_count.HeaderText = "Count";
+            this.column_count.Name = "column_count";
+            this.column_count.ReadOnly = true;
+            // 
+            // nums
+            // 
+            this.nums.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nums.FillWeight = 40F;
+            this.nums.HeaderText = "#";
+            this.nums.MinimumWidth = 6;
+            this.nums.Name = "nums";
+            this.nums.ReadOnly = true;
+            // 
+            // column_id2
+            // 
+            this.column_id2.HeaderText = "Id";
+            this.column_id2.Name = "column_id2";
+            this.column_id2.ReadOnly = true;
+            this.column_id2.Visible = false;
+            // 
+            // column_rentee2
+            // 
+            this.column_rentee2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_rentee2.HeaderText = "Rentee";
+            this.column_rentee2.MinimumWidth = 6;
+            this.column_rentee2.Name = "column_rentee2";
+            this.column_rentee2.ReadOnly = true;
+            // 
+            // column_due2
+            // 
+            this.column_due2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_due2.FillWeight = 80F;
+            this.column_due2.HeaderText = "Due";
+            this.column_due2.MinimumWidth = 6;
+            this.column_due2.Name = "column_due2";
+            this.column_due2.ReadOnly = true;
+            // 
+            // column_count2
+            // 
+            this.column_count2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_count2.FillWeight = 30F;
+            this.column_count2.HeaderText = "Count";
+            this.column_count2.Name = "column_count2";
+            this.column_count2.ReadOnly = true;
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -560,10 +583,6 @@
         private System.Windows.Forms.SplitContainer splitContainerItems;
         private System.Windows.Forms.Button buttonNewCustomer;
         private System.Windows.Forms.Button buttonActiveRental;
-        private System.Windows.Forms.DataGridViewTextBoxColumn num;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Product;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rentee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Due;
         private System.Windows.Forms.Button btnRented;
         private System.Windows.Forms.Button btnStock;
         private System.Windows.Forms.Button btnHelmets;
@@ -573,9 +592,15 @@
         private System.Windows.Forms.Button ButtonInStockHelmets;
         private System.Windows.Forms.Button ButtonInStockPants;
         private System.Windows.Forms.Button ButtonInStockJackets;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nums;
+        private System.Windows.Forms.DataGridViewTextBoxColumn num;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rentee2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DueDate2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_rentee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_due;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_count;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nums;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_id2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_rentee2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_due2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_count2;
     }
 }

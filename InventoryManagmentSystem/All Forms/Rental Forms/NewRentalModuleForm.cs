@@ -13,19 +13,19 @@ namespace InventoryManagmentSystem
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
 
-        //Used for query this is a secret to see if frey will ever notice it but i doubt it since he is kind of an idiot lol that guy is the leader of the club and will never figure out a riddle as difficult as this one so i basically bodied him into reading an entire long line probably at like 150% zoom cause he cant even see lol get fucked......je (Frey: I noticed)
-        string ItemIdClient = string.Empty;
-        string ItemIdInventory = string.Empty;
+        private string ItemIdClient = string.Empty;
+        private string ItemIdInventory = string.Empty;
 
+        private string ReplacmentSerial = "";
+        private string dueDate = "";
+        private string ClientId = string.Empty;
+        private string ClassId = string.Empty;
+
+        public int ReturnReplace = 0;
+        public string license = "";
+        public string drivers = string.Empty;
         public bool ExistingUser = false;
         public string currentUser = "";
-        public string license = "";
-        public int ReturnReplace = 0;
-        string ReplacmentSerial = "";
-        string dueDate = "";
-        string ClientId = string.Empty;
-        string ClassId = string.Empty;
-        public string drivers = string.Empty;
 
 
         public NewRentalModuleForm(string rentalType = null, string clientName = null)
