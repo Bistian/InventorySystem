@@ -282,7 +282,6 @@ C:\Users\sebas\OneDrive\Desktop\Work\InventorySystem\InventoryManagmentSystem\ob
 C:\Users\sebas\OneDrive\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.WorkOrderModuleForm.resources
 C:\Users\sebas\OneDrive\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.GenerateResource.cache
 C:\Users\sebas\OneDrive\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.CoreCompileInputs.cache
-C:\Users\sebas\OneDrive\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.CopyComplete
 C:\Users\sebas\OneDrive\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.exe
 C:\Users\sebas\OneDrive\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.pdb
 C:\Code\Projects\InventorySystem\InventoryManagmentSystem\bin\Debug\InventoryManagmentSystem.exe.config
@@ -394,3 +393,5 @@ C:\Users\sebas\OneDrive\Desktop\Code\InventorySystem\InventoryManagmentSystem\bi
 C:\Users\sebas\OneDrive\Desktop\Code\InventorySystem\InventoryManagmentSystem\bin\Debug\de\PdfSharp.resources.dll
 C:\Users\sebas\OneDrive\Desktop\Code\InventorySystem\InventoryManagmentSystem\bin\Debug\de\PdfSharp.Charting.resources.dll
 C:\Users\sebas\OneDrive\Desktop\Code\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.CopyComplete
+C:\Users\sebas\OneDrive\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.All_Forms.FilterForm.resources
+C:\Users\sebas\OneDrive\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\Inventor.6444D061.Up2Date

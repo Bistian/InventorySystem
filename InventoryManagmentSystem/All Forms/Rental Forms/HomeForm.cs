@@ -180,7 +180,7 @@ namespace InventoryManagmentSystem
             this.Dispose();
         }
 
-        private void dataGridViewBeforeDue_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void LoadProfile(DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) { return; }
             DataGridViewRow row = dataGridViewBeforeDue.Rows[e.RowIndex];
@@ -205,10 +205,14 @@ namespace InventoryManagmentSystem
             }
         }
 
+        private void dataGridViewBeforeDue_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            LoadProfile(e);
+        }
+
         private void dataGridViewPastDue_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) { return; }
-            ClientPopUp(e, false);
+            LoadProfile(e);
         }
 
         /// <summary>

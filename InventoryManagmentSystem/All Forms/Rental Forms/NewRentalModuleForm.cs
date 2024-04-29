@@ -230,17 +230,16 @@ namespace InventoryManagmentSystem
             else if (ReturnReplace == 2)
             {
                 //lock the item type that is shown when a replacment is being done to match the item type of the item being replaced
-                string itemType = row.Cells["Item"].Value.ToString().ToLower();
+                string itemType = row.Cells["column_item_type"].Value.ToString().ToLower();
                 SetItemType(itemType);
 
                 dataGridViewClient.Enabled = false;
 
-                dueDate = row.Cells["DDate"].Value.ToString();
+                dueDate = row.Cells["column_due_date"].Value.ToString();
                 string SelectedSerial = row.Cells["column_serial_number"].Value.ToString();
                 ItemIdClient = row.Cells["column_item_id"].Value.ToString();
                 labelOldItem.Text = SelectedSerial;
                 labelTypeOfItem.Text = row.Cells["column_item_type"].Value.ToString();
-
             }
         }
 
@@ -310,6 +309,7 @@ namespace InventoryManagmentSystem
                 ReturnReplace = 0;
                 cbItemType.Enabled = true;
                 dataGridViewClient.Enabled = true;
+                MessageBox.Show("Item Replaced!");
 
             }
         }
