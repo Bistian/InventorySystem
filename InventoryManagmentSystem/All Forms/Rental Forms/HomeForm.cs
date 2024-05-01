@@ -52,10 +52,12 @@ namespace InventoryManagmentSystem
         private string QueryForRented()
         {
             string query = $@"
-                SELECT c.Id, c.Name, DATEADD(day, i.ClosestDueDateDiff, GETDATE()) AS ClosestDueDate, i.ItemCount
+                -- DATEADD(day, i.ClosestDueDateDiff, GETDATE())
+                SELECT c.Id, c.Name, DATEADD(day, i.ClosestDueDateDiff, GETDATE()) AS DueDate, i.ItemCount
                 FROM tbClients AS c
                 JOIN (
-                    SELECT Location, MIN(DATEDIFF(day, DueDate, GETDATE())) AS ClosestDueDateDiff, COUNT(*) AS ItemCount
+                    -- MIN(DATEDIFF(day, DueDate, GETDATE()))
+                    SELECT Location, ClosestDueDate, COUNT(*) AS ItemCount
                     FROM tbItems AS i_inner
                     WHERE i_inner.Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
                       AND i_inner.Condition NOT IN ('Retired') 
@@ -65,6 +67,30 @@ namespace InventoryManagmentSystem
                 ) AS i ON c.Id = i.Location
                 WHERE c.DriversLicenseNumber = i.Location
                 OR c.Id = i.Location;
+            ";
+
+            query = $@"
+                SELECT c.Id, c.Name, i.DueDate AS ClosestDueDate, ic.ItemCount AS ItemCountPerLocation
+                FROM tbClients AS c
+                JOIN (
+                    SELECT Location, DueDate,
+                           ROW_NUMBER() OVER (PARTITION BY Location ORDER BY ABS(DATEDIFF(DAY, GETDATE(), DueDate))) AS RowNum
+                    FROM tbItems
+                    WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
+                      AND Condition NOT IN ('Retired') 
+                      AND DueDate IS NOT NULL 
+                      AND DueDate BETWEEN GETDATE() AND DATEADD(DAY, 10, GETDATE())
+                ) AS i ON c.Id = i.Location
+                JOIN (
+                    SELECT Location, COUNT(*) AS ItemCount
+                    FROM tbItems
+                    WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
+                      AND Condition NOT IN ('Retired') 
+                      AND DueDate IS NOT NULL 
+                      AND DueDate BETWEEN GETDATE() AND DATEADD(DAY, 10, GETDATE())
+                    GROUP BY Location
+                ) AS ic ON c.Id = ic.Location
+                WHERE i.RowNum = 1;
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
