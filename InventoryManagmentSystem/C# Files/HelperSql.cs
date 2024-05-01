@@ -527,8 +527,9 @@ namespace InventoryManagmentSystem
             try
             {
                 var command = new SqlCommand(query, connection);
-
+                         
                 AddParameterFromDictionary(command, client, "IdClass");
+
                 AddParameterFromDictionary(command, client, "Name");
                 AddParameterFromDictionary(command, client, "Phone");
                 AddParameterFromDictionary(command, client, "Email");
