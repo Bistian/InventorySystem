@@ -528,8 +528,6 @@ namespace InventoryManagmentSystem
             {
                 var command = new SqlCommand(query, connection);
                          
-                AddParameterFromDictionary(command, client, "IdClass");
-
                 AddParameterFromDictionary(command, client, "Name");
                 AddParameterFromDictionary(command, client, "Phone");
                 AddParameterFromDictionary(command, client, "Email");
@@ -545,8 +543,17 @@ namespace InventoryManagmentSystem
                 AddParameterFromDictionary(command, client, "Weight");
                 AddParameterFromDictionary(command, client, "FireTecRepresentative");
 
-                string value = client.TryGetValue("IsActive", out value) ? value : "True";
-                command.Parameters.AddWithValue("@IsActive", value);
+                client.TryGetValue("IdClass", out string classValue);
+                if(classValue == null)
+                {
+                    command.Parameters.AddWithValue("@IdClass", Guid.Empty);
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("@IdClass", Guid.Parse(classValue));
+                }
+
+                command.Parameters.AddWithValue("@IsActive", false);
 
                 connection.Open();
                 command.ExecuteNonQuery();
