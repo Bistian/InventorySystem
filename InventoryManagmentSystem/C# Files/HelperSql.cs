@@ -1634,7 +1634,7 @@ namespace InventoryManagmentSystem
 
         public static Item PantsFindByItemId(SqlConnection connection, string itemId)
         {
-            string query = $"SELECT TOP 1 * FROM tbMasks WHERE ItemId=@ItemId";
+            string query = $"SELECT TOP 1 * FROM tbPants WHERE ItemId=@ItemId";
             string[] columns = { "Brand", "AcquisitionDate", "ManufactureDate", "Size" };
             var item = new Item();
             try
