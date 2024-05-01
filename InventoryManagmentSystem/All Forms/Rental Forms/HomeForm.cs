@@ -36,18 +36,13 @@ namespace InventoryManagmentSystem
                 SELECT c.Id, c.Name, i.DueDate AS LateDueDate, i.ItemCount
                 FROM tbClients AS c
                 JOIN (
-                    SELECT Location, DueDate, COUNT(*) AS ItemCount
+                    SELECT Location, MIN(DueDate) AS DueDate, COUNT(*) AS ItemCount
                     FROM tbItems AS i_inner
                     WHERE i_inner.Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
                       AND i_inner.Condition NOT IN ('Retired') 
                       AND i_inner.DueDate IS NOT NULL 
-                      AND i_inner.DueDate = (
-                          SELECT MAX(DueDate)
-                          FROM tbItems
-                          WHERE Location = i_inner.Location
-                            AND DueDate < GETDATE()
-                      )
-                    GROUP BY Location, DueDate
+                      AND i_inner.DueDate < GETDATE()
+                    GROUP BY Location
                 ) AS i ON c.Id = i.Location;
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
@@ -57,24 +52,19 @@ namespace InventoryManagmentSystem
         private string QueryForRented()
         {
             string query = $@"
-                SELECT c.Id, c.Name, i.DueDate AS ClosestDueDate, i.ItemCount
+                SELECT c.Id, c.Name, DATEADD(day, i.ClosestDueDateDiff, GETDATE()) AS ClosestDueDate, i.ItemCount
                 FROM tbClients AS c
                 JOIN (
-                    SELECT Location, DueDate, COUNT(*) AS ItemCount
+                    SELECT Location, MIN(DATEDIFF(day, DueDate, GETDATE())) AS ClosestDueDateDiff, COUNT(*) AS ItemCount
                     FROM tbItems AS i_inner
                     WHERE i_inner.Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
                       AND i_inner.Condition NOT IN ('Retired') 
                       AND i_inner.DueDate IS NOT NULL 
-                      AND i_inner.DueDate = (
-                          SELECT TOP 1 DueDate
-                          FROM tbItems
-                          WHERE Location = i_inner.Location
-                            AND DueDate <= GETDATE()
-                          ORDER BY ABS(DATEDIFF(day, DueDate, GETDATE()))
-                      )
-                    GROUP BY Location, DueDate
+                      AND i_inner.DueDate BETWEEN GETDATE() AND DATEADD(DAY, CAST('{dueDays}' AS INT), GETDATE())
+                    GROUP BY Location
                 ) AS i ON c.Id = i.Location
-                    OR c.DriversLicenseNumber = i.Location;
+                WHERE c.DriversLicenseNumber = i.Location
+                OR c.Id = i.Location;
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
