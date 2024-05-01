@@ -170,7 +170,7 @@ namespace InventoryManagmentSystem
             this.Dispose();
         }
 
-        private void LoadProfile(DataGridViewCellEventArgs e)
+        private void dataGridViewBeforeDue_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) { return; }
             DataGridViewRow row = dataGridViewBeforeDue.Rows[e.RowIndex];
@@ -195,14 +195,29 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void dataGridViewBeforeDue_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            LoadProfile(e);
-        }
-
         private void dataGridViewPastDue_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            LoadProfile(e);
+            if (e.RowIndex < 0) { return; }
+            DataGridViewRow row = dataGridViewPastDue.Rows[e.RowIndex];
+            string column = dataGridViewPastDue.Columns[e.ColumnIndex].Name;
+
+            string clientName = row.Cells["column_rentee2"].Value.ToString();
+            string clientId = row.Cells["column_id2"].Value.ToString();
+
+
+            var parentForm = this.ParentForm as MainForm;
+            NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
+            try
+            {
+                Profile.LoadProfile(clientId);
+                parentForm.openChildForm(Profile);
+
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
+            }
         }
 
         /// <summary>
