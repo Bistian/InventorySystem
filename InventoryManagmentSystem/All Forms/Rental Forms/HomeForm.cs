@@ -228,64 +228,6 @@ namespace InventoryManagmentSystem
             }
         }
 
-        /// <summary>
-        /// Pop up with client information when client's name is clicked on table.
-        /// </summary>
-        /// <param name="e">Event that was triggered.</param>
-        /// <param name="isBeforeDue">Boolean representing which table was clicked.</param>
-        private void ClientPopUp(DataGridViewCellEventArgs e, bool isBeforeDue)
-        {
-            // Check if the clicked cell is in a row
-            if (e.RowIndex < 0) { return; }
-
-            // Column 2 is the only one this function should operate on.
-            if (e.ColumnIndex != 2) { return; }
-
-            // Get the data from rentee at that row.
-            DataGridViewRow row;
-            if (isBeforeDue)
-            {
-                row = dataGridViewBeforeDue.Rows[e.RowIndex];
-            }
-            else
-            {
-                row = dataGridViewPastDue.Rows[e.RowIndex];
-            }
-
-            string rentee = string.Empty;
-            try
-            {
-                rentee = row.Cells["column_rentee"].Value.ToString();
-            }
-            catch
-            {
-                rentee = row.Cells["column_rentee2"].Value.ToString();
-            }
-
-
-            // Check if there is at least one item with that name on the clints table.
-            string query = $@"
-                SELECT COUNT(*) FROM tbClients   
-                WHERE Name ='{rentee}'
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-
-                // If there are no matches with that name, return.
-                if ((int)command.ExecuteScalar() > 0)
-                {
-                    // Show the details of the row in a new form or dialog
-                    DialogBoxClient dialogBoxClient = new DialogBoxClient(rentee);
-                    dialogBoxClient.ShowDialog();
-                }
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message);  }
-            finally { connection.Close(); }
-        }
-
         private void buttonNewCustomer_Click(object sender, EventArgs e)
         {
             OpenDockedForm("NewRentalModuleForm", null);
