@@ -223,5 +223,29 @@ namespace InventoryManagmentSystem
 
         }
 
+        private void dataGridPastDue_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) { return; }
+            DataGridViewRow row = dataGridPastDue.Rows[e.RowIndex];
+            string column = dataGridPastDue.Columns[e.ColumnIndex].Name;
+
+            string clientName = row.Cells["column_past_due_rentee"].Value.ToString();
+            string clientId = row.Cells["column_past_due_id"].Value.ToString();
+
+
+            var parentForm = this.ParentForm as MainForm;
+            NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
+            try
+            {
+                Profile.LoadProfile(clientId);
+                parentForm.openChildForm(Profile);
+
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
+            }
+        }
     }
 }

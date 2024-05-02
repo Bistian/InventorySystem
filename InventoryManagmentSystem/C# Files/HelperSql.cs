@@ -569,6 +569,11 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
+        public static void ClientUpdateActivity(bool isActive)
+        {
+         //change client activity to true or false;
+        }
+
         public static bool ClientUpdateInfo(SqlConnection connection,
             string Id, string name, string phone, string email, string academy, string isActive, string drivers, string address)
         {

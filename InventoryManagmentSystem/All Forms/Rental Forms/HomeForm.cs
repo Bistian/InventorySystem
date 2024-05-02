@@ -18,6 +18,7 @@ namespace InventoryManagmentSystem
             dueDays = SettingsData.Instance.dueDaysFromToday;
             labelDueDate.Text = $"Due Within {dueDays} Days";
             InitTables();
+            InitPastDueCount();
         }
 
         // Get the current connection string
@@ -51,7 +52,7 @@ namespace InventoryManagmentSystem
 
         private string QueryForRented()
         {
-           string query = $@"
+            string query = $@"
                 SELECT c.Id, c.Name, i.DueDate AS ClosestDueDate, ic.ItemCount AS ItemCountPerLocation
                 FROM tbClients AS c
                 JOIN (
@@ -109,7 +110,7 @@ namespace InventoryManagmentSystem
                 }
                 reader.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -124,6 +125,18 @@ namespace InventoryManagmentSystem
             btnPants.Text = $"{rented} Pants";
             rented = HelperSql.ItemRentCount(connection, "helmet");
             btnHelmets.Text = $"{rented} Helmets";
+        }
+
+        public void InitPastDueCount()
+        {
+            if (dataGridViewPastDue.Rows.Count > 1)
+            {
+                BtnPastDue.Text = dataGridViewPastDue.RowCount + " Clients Past Due!";
+            }
+            else if (dataGridViewPastDue.Rows.Count == 1)
+            {
+                BtnPastDue.Text = dataGridViewPastDue.RowCount + " Client Past Due!";
+            }
         }
 
         private void PrintStock()
@@ -240,7 +253,27 @@ namespace InventoryManagmentSystem
             parentForm.ColorTabSwitch("ActiveRentals", false);
         }
 
-        private void btnStock_Click(object sender, EventArgs e)
+        private void btnRented_Click_1(object sender, EventArgs e)
+        {
+            OpenDockedForm("RentalForm", null);
+        }
+
+        private void btnCoats_Click_1(object sender, EventArgs e)
+        {
+            OpenDockedForm("RentalForm", "Jacket");
+        }
+
+        private void btnPants_Click_1(object sender, EventArgs e)
+        {
+            OpenDockedForm("RentalForm", "Pants");
+        }
+
+        private void btnHelmets_Click_1(object sender, EventArgs e)
+        {
+            OpenDockedForm("RentalForm", "Helmet");
+        }
+
+        private void btnStock_Click_1(object sender, EventArgs e)
         {
             OpenDockedForm("InventoryForm", "Jacket");
         }
@@ -250,39 +283,24 @@ namespace InventoryManagmentSystem
             OpenDockedForm("InventoryForm", "Jacket");
         }
 
-        private void ButtonInStockPants_Click(object sender, EventArgs e)
+        private void ButtonInStockPants_Click_1(object sender, EventArgs e)
         {
             OpenDockedForm("InventoryForm", "Pants");
         }
 
-        private void ButtonInStockHelmets_Click(object sender, EventArgs e)
+        private void ButtonInStockHelmets_Click_1(object sender, EventArgs e)
         {
             OpenDockedForm("InventoryForm", "Helmet");
         }
 
-        private void ButtonInStockBoots_Click(object sender, EventArgs e)
+        private void ButtonInStockBoots_Click_1(object sender, EventArgs e)
         {
             OpenDockedForm("InventoryForm", "Boots");
         }
 
-        private void btnRented_Click(object sender, EventArgs e)
+        private void BtnPastDue_Click(object sender, EventArgs e)
         {
             OpenDockedForm("RentalForm", null);
-        }
-
-        private void btnCoats_Click(object sender, EventArgs e)
-        {
-            OpenDockedForm("RentalForm", "Jacket");
-        }
-
-        private void btnPants_Click(object sender, EventArgs e)
-        {
-            OpenDockedForm("RentalForm", "Pants");
-        }
-
-        private void btnHelmets_Click(object sender, EventArgs e)
-        {
-            OpenDockedForm("RentalForm", "Helmet");
         }
     }
 }

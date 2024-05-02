@@ -241,6 +241,11 @@ namespace InventoryManagmentSystem
                 labelOldItem.Text = SelectedSerial;
                 labelTypeOfItem.Text = row.Cells["column_item_type"].Value.ToString();
             }
+            //update client activity
+            if (dataGridInv.RowCount != 0)
+            {
+                //update client activity call
+            }
         }
 
         private void SetItemType(string itemType)

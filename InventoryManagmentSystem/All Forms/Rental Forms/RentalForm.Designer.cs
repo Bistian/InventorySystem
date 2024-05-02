@@ -35,6 +35,11 @@
             this.searchBar = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridRented = new System.Windows.Forms.DataGridView();
+            this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_rented_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_rented_rentee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_rented_due_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_rented_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridPastDue = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_past_due_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,11 +48,6 @@
             this.column_past_due_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rented = new System.Windows.Forms.Label();
             this.PastDue = new System.Windows.Forms.Label();
-            this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_rented_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_rented_rentee = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_rented_due_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_rented_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelTop.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRented)).BeginInit();
@@ -148,6 +148,48 @@
             this.dataGridRented.Size = new System.Drawing.Size(681, 579);
             this.dataGridRented.TabIndex = 2;
             // 
+            // Num
+            // 
+            this.Num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Num.FillWeight = 30F;
+            this.Num.HeaderText = "#";
+            this.Num.MinimumWidth = 6;
+            this.Num.Name = "Num";
+            this.Num.ReadOnly = true;
+            // 
+            // column_rented_id
+            // 
+            this.column_rented_id.HeaderText = "Id";
+            this.column_rented_id.MinimumWidth = 6;
+            this.column_rented_id.Name = "column_rented_id";
+            this.column_rented_id.ReadOnly = true;
+            this.column_rented_id.Visible = false;
+            this.column_rented_id.Width = 125;
+            // 
+            // column_rented_rentee
+            // 
+            this.column_rented_rentee.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_rented_rentee.HeaderText = "Rentee";
+            this.column_rented_rentee.MinimumWidth = 6;
+            this.column_rented_rentee.Name = "column_rented_rentee";
+            this.column_rented_rentee.ReadOnly = true;
+            // 
+            // column_rented_due_date
+            // 
+            this.column_rented_due_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_rented_due_date.HeaderText = "Due Date";
+            this.column_rented_due_date.MinimumWidth = 6;
+            this.column_rented_due_date.Name = "column_rented_due_date";
+            this.column_rented_due_date.ReadOnly = true;
+            // 
+            // column_rented_count
+            // 
+            this.column_rented_count.HeaderText = "Count";
+            this.column_rented_count.MinimumWidth = 6;
+            this.column_rented_count.Name = "column_rented_count";
+            this.column_rented_count.ReadOnly = true;
+            this.column_rented_count.Width = 125;
+            // 
             // dataGridPastDue
             // 
             this.dataGridPastDue.AllowUserToAddRows = false;
@@ -183,6 +225,7 @@
             this.dataGridPastDue.RowTemplate.Height = 40;
             this.dataGridPastDue.Size = new System.Drawing.Size(682, 579);
             this.dataGridPastDue.TabIndex = 3;
+            this.dataGridPastDue.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPastDue_CellClick_1);
             // 
             // Id
             // 
@@ -252,48 +295,6 @@
             this.PastDue.Size = new System.Drawing.Size(138, 32);
             this.PastDue.TabIndex = 5;
             this.PastDue.Text = "Past Due";
-            // 
-            // Num
-            // 
-            this.Num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Num.FillWeight = 30F;
-            this.Num.HeaderText = "#";
-            this.Num.MinimumWidth = 6;
-            this.Num.Name = "Num";
-            this.Num.ReadOnly = true;
-            // 
-            // column_rented_id
-            // 
-            this.column_rented_id.HeaderText = "Id";
-            this.column_rented_id.MinimumWidth = 6;
-            this.column_rented_id.Name = "column_rented_id";
-            this.column_rented_id.ReadOnly = true;
-            this.column_rented_id.Visible = false;
-            this.column_rented_id.Width = 125;
-            // 
-            // column_rented_rentee
-            // 
-            this.column_rented_rentee.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_rented_rentee.HeaderText = "Rentee";
-            this.column_rented_rentee.MinimumWidth = 6;
-            this.column_rented_rentee.Name = "column_rented_rentee";
-            this.column_rented_rentee.ReadOnly = true;
-            // 
-            // column_rented_due_date
-            // 
-            this.column_rented_due_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_rented_due_date.HeaderText = "Due Date";
-            this.column_rented_due_date.MinimumWidth = 6;
-            this.column_rented_due_date.Name = "column_rented_due_date";
-            this.column_rented_due_date.ReadOnly = true;
-            // 
-            // column_rented_count
-            // 
-            this.column_rented_count.HeaderText = "Count";
-            this.column_rented_count.MinimumWidth = 6;
-            this.column_rented_count.Name = "column_rented_count";
-            this.column_rented_count.ReadOnly = true;
-            this.column_rented_count.Width = 125;
             // 
             // RentalForm
             // 
