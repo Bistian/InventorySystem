@@ -24,6 +24,7 @@ namespace InventoryManagmentSystem
         int daysForWarning = 14;
         int setSelection = 0;
 
+        string SearchTerm = "";
         public RentalForm(string ItemType)
         {
             InitializeComponent();
@@ -213,13 +214,50 @@ namespace InventoryManagmentSystem
 
         private void RefreshForm(string ItemType)
         {
-                LoadTables(dataGridRented, QueryForRented(), "column_rented_due_date");
-                LoadTables(dataGridPastDue, QueryForPastDue(), "column_past_due_due_date");
+            LoadTables(dataGridRented, QueryForRented(), "column_rented_due_date");
+            LoadTables(dataGridPastDue, QueryForPastDue(), "column_past_due_due_date");
         }
 
         private void labelSearch_TextChanged(object sender, EventArgs e)
         {
-            if (searchBar.Text.Length < 1) { return; }
+            if (searchBar.Text.Length < 1)
+            {
+                foreach (DataGridViewRow row in dataGridPastDue.Rows)
+                {
+                    row.Visible = true;
+                }
+                return;
+            }
+
+            SearchTerm = searchBar.Text;
+
+            foreach (DataGridViewRow row in dataGridPastDue.Rows)
+            {
+                // Convert cell value to lowercase for case-insensitive comparison
+                string cellValue = row.Cells["column_past_due_rentee"].Value?.ToString().ToLower();
+                if (cellValue != null && cellValue.IndexOf(SearchTerm, StringComparison.OrdinalIgnoreCase) < 0)
+                {
+                    row.Visible = false;
+                }
+                else
+                {
+                    row.Visible = true;
+                }
+            }
+            foreach (DataGridViewRow row in dataGridRented.Rows)
+            {
+                // Convert cell value to lowercase for case-insensitive comparison
+                string cellValue = row.Cells["column_rented_rentee"].Value?.ToString().ToLower();
+                if (cellValue != null && cellValue.IndexOf(SearchTerm, StringComparison.OrdinalIgnoreCase) < 0)
+                {
+                    row.Visible = false;
+                }
+                else
+                {
+                    row.Visible = true;
+                }
+            }
+
 
         }
 
