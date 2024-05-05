@@ -440,7 +440,15 @@ namespace InventoryManagmentSystem
         public static List<Item> ClientFindBySearchBar(SqlConnection connection, string searchTerm)
         {
             var clients = new List<Item>();
-            string query = "SELECT * FROM tbClients WHERE (Name LIKE %@searchTerm% OR Academy LIKE @searchTerm) AND Type = @ClientType";
+            string query = $@"
+                SELECT * 
+                FROM tbClients 
+                WHERE (
+                    Name LIKE @searchTerm
+                    OR Academy LIKE @searchTerm
+                ) 
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
                 connection.Open();
