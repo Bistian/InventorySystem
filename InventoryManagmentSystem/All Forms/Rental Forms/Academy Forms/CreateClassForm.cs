@@ -35,7 +35,7 @@ namespace InventoryManagmentSystem
             InitializeComponent();
             LoadAcademies();
 
-            
+            this.parent = parent;
             editingClass = classToEdit;
             InitUpdate();
         }
