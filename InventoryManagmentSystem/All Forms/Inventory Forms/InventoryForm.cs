@@ -99,7 +99,7 @@ namespace InventoryManagmentSystem
             btnToggleFilter.Text = "<";
 
             // Show selected items.
-            var list = new List<string>() { "SerialNumber", "Condition", "Location" };
+            var list = new List<string>() { "SerialNumber", "Condition", "Location", "Size", "Color", "Material" };
             Action<List<string[]>> callback = (filters) =>
             {
                 filterList.Clear();

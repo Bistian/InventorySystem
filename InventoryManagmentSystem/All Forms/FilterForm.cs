@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryManagmentSystem.C__Files;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace InventoryManagmentSystem.All_Forms
             nameList = columnNames;
 
             // Create and add checkboxes dynamically.
-            int Y = 0;
+            int Y = 10;
             foreach (var name in columnNames)
             {
                 var label = new Label();
@@ -42,18 +43,56 @@ namespace InventoryManagmentSystem.All_Forms
                 var box = new TextBox();
                 box.Name = $"box_{name}";
                 fieldList.Add(box);
+                box.KeyDown += TextBox_KeyDown;
                 box.Location = new Point(X + 10, Y);
                 Controls.Add(box);
                 Y += Font.Height * 2;
             }
 
-            // Set up an event handler for the OK button.
+            float scale = 1.5f;
+
+            // Event handler for the OK button.
             Button btnOk = new Button();
             btnOk.Name = "btnOk";
             btnOk.Text = "OK";
             btnOk.Location = new Point(10, Y);
+            HelperButton.ScaleFont(btnOk, scale);
+            HelperButton.ScaleSize(btnOk, scale, scale);
             btnOk.Click += btnOk_Click;
             Controls.Add(btnOk);
+            Y += btnOk.Height;
+
+            // Event handler for Clear button
+            Button btnClear = new Button();
+            btnClear.Name = "btnClear";
+            btnClear.Text = "Clear";
+            btnClear.Location = new Point(10, Y);
+            HelperButton.ScaleFont(btnClear, scale);
+            HelperButton.ScaleSize(btnClear, scale, scale);
+            btnClear.Click += btnClear_Click;
+            Controls.Add(btnClear);
+            Y += btnOk.Height;
+
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                TextBox textBox = sender as TextBox;
+                if (textBox != null)
+                {
+                    textBox.Clear();
+                }
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            foreach(var field in fieldList)
+            {
+                field.Clear();
+            }
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -75,6 +114,6 @@ namespace InventoryManagmentSystem.All_Forms
 
             // Invoke the callback function with the checked items.
             callbackFunction?.Invoke(values);
-        }
+        }       
     }
 }
