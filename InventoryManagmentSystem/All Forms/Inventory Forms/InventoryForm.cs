@@ -24,11 +24,12 @@ namespace InventoryManagmentSystem
             InitializeComponent();
             checkActive.Checked = true;
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
+            string[] columns = { "column_acquisition_date", "column_manufacture_date" };
+            HelperFunctions.DataGridFormatDate(dataGridInv, columns);
             InitItems();
             DisplayItems();
             SetItemType(ItemType);
-            InitContainerOuter();
-            InitContainereInner();
+            InitSearcContainer();
         }
 
         private void InitItems()
@@ -87,13 +88,25 @@ namespace InventoryManagmentSystem
                     if(notValid) { continue; }
                 }
 
-                AddItemToGrid(item, count);
+                dataGridInv.Rows.Add(count,
+                   item.GetColumnValue("Id"),
+                   item.GetColumnValue("Brand"),
+                   item.GetColumnValue("SerialNumber"),
+                   item.GetColumnValue("Condition"),
+                   item.GetColumnValue("AcquisitionDate"),
+                   item.GetColumnValue("ManufactureDate"),
+                   item.GetColumnValue("Location"),
+                   item.GetColumnValue("Size"),
+                   item.GetColumnValue("Material"),
+                   item.GetColumnValue("Color"));
                 count++;
             }
         }
 
-        private void InitContainereInner()
+        private void InitSearcContainer()
         {
+            this.scOuter.SplitterDistance = (int)(Width * 0.3);
+
             int innerWidth = this.scInner.Width;
             //this.scInner.SplitterDistance = (int) (innerWidth * 0.9);
             btnToggleFilter.Text = "<";
@@ -113,11 +126,6 @@ namespace InventoryManagmentSystem
             filterForm.Dock = DockStyle.Fill;
             filterForm.Show();
             ToggleFilter();
-        }
-
-        private void InitContainerOuter()
-        {
-            this.scOuter.SplitterDistance = (int)(Width * 0.3);
         }
 
         private bool SearchBarIsMatching(Item item)
@@ -157,22 +165,6 @@ namespace InventoryManagmentSystem
                 return size == like ? true : false;
             }
             return false;
-        }
-
-        private void AddItemToGrid(Item item, int count)
-        {
-
-            dataGridInv.Rows.Add(count,
-               item.GetColumnValue("Id"),
-               item.GetColumnValue("Brand"),
-               item.GetColumnValue("SerialNumber"),
-               item.GetColumnValue("Condition"),
-               item.GetColumnValue("AcquisitionDate"),
-               item.GetColumnValue("ManufactureDate"),
-               item.GetColumnValue("Location"),
-               item.GetColumnValue("Size"),
-               item.GetColumnValue("Material"),
-               item.GetColumnValue("Color"));
         }
 
         private void comboBoxItem_SelectedIndexChanged(object sender, EventArgs e)
