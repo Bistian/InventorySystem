@@ -15,16 +15,16 @@ namespace InventoryManagmentSystem
 {
     public class HelperSql
     {
-        private static  string[] columnsClient = 
-        { 
-            "Id", "IdClass", "Name", "Phone", "Email", "Academy", "IsActive", "DriversLicenseNumber", "Address", 
+        private static string[] columnsClient =
+        {
+            "Id", "IdClass", "Name", "Phone", "Email", "Academy", "IsActive", "DriversLicenseNumber", "Address",
             "Chest", "Sleeve", "Waist", "Inseam", "Hips", "Height", "Weight",
-            "Notes", "FireTecRepresentative" 
+            "Notes", "FireTecRepresentative"
         };
 
         public static void AcademyFillComboBox(SqlCommand command, ComboBox box)
         {
-            
+
         }
 
         public static List<Item> AcademyFindAll(SqlConnection connection)
@@ -44,7 +44,7 @@ namespace InventoryManagmentSystem
                     list.Add(item);
                 }
             }
-            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return list;
         }
@@ -79,7 +79,7 @@ namespace InventoryManagmentSystem
             return map;
         }
 
-        public static Item BootsFindByItemId(SqlConnection connection, string itemId) 
+        public static Item BootsFindByItemId(SqlConnection connection, string itemId)
         {
             string query = $"SELECT TOP 1 * FROM tbBoots WHERE ItemId=@ItemId";
             var item = new Item();
@@ -99,7 +99,7 @@ namespace InventoryManagmentSystem
                     item.AddByReaderAndColumnArray(reader, columns);
                 }
             }
-            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return item;
         }
@@ -129,7 +129,7 @@ namespace InventoryManagmentSystem
             return items;
         }
 
-        public static bool BootsInsert(SqlConnection connection, 
+        public static bool BootsInsert(SqlConnection connection,
             string itemId, string brand, string acquisition, string manufacture, string size, string material)
         {
             string query = $@"
@@ -150,7 +150,7 @@ namespace InventoryManagmentSystem
                 command.ExecuteNonQuery();
                 return true;
             }
-            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return false;
         }
@@ -159,11 +159,11 @@ namespace InventoryManagmentSystem
         /// Updates an entry of pants, all parameters not to be updated should be empty string "".
         /// </summary>
         /// <returns>Bool was successfull or not.</returns>
-        public static bool BootsUpdate(SqlConnection connection, 
+        public static bool BootsUpdate(SqlConnection connection,
             string itemId, string brand, string size, string material, string manufacture)
         {
             Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
-            if(!string.IsNullOrEmpty(brand))
+            if (!string.IsNullOrEmpty(brand))
             {
                 fieldsToUpdate.Add("brand", brand);
             }
@@ -180,13 +180,13 @@ namespace InventoryManagmentSystem
                 fieldsToUpdate.Add("manufacture", manufacture);
             }
             int count = fieldsToUpdate.Count;
-            if(count == 0) { return false; }
+            if (count == 0) { return false; }
 
             string query = $"UPDATE tbBoots SET ";
-            if(fieldsToUpdate.ContainsKey("brand"))
+            if (fieldsToUpdate.ContainsKey("brand"))
             {
                 query += "Brand = @Brand";
-                if(--count > 0) { query += ", "; }
+                if (--count > 0) { query += ", "; }
             }
             if (fieldsToUpdate.ContainsKey("size"))
             {
@@ -215,7 +215,7 @@ namespace InventoryManagmentSystem
                 command.ExecuteNonQuery();
                 return true;
             }
-            catch(Exception ex) { 
+            catch (Exception ex) {
                 Console.WriteLine(ex.Message);
                 return false;
             }
@@ -237,7 +237,7 @@ namespace InventoryManagmentSystem
                     box.Items.Add(dataReader[0]);
                 }
             }
-            catch (Exception ex) {Console.WriteLine(ex.Message);}
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
         }
 
@@ -277,19 +277,19 @@ namespace InventoryManagmentSystem
                 command.Parameters.AddWithValue("@ItemType", itemType);
                 command.Parameters.AddWithValue("Brand", brand);
                 SqlDataReader reader = command.ExecuteReader();
-                while(reader.Read())
+                while (reader.Read())
                 {
                     id = int.Parse(reader[0].ToString());
                 }
             }
-            catch (Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
                 return;
             }
             finally { connection.Close(); }
 
-            if(id != -1) 
+            if (id != -1)
             {
                 string message = "Cannot add duplicated brand";
                 DialogResult result = MessageBox.Show(message, "Duplicated Item", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -312,7 +312,7 @@ namespace InventoryManagmentSystem
         public static List<Item> ClassListByAcademy(SqlConnection connection, string AcademyId)
         {
             var list = new List<Item>();
-            string[] columns = { "Id", "AcademyId", "Name", "StartDate", "EndDate", "IsFinished"};
+            string[] columns = { "Id", "AcademyId", "Name", "StartDate", "EndDate", "IsFinished" };
             string query = $"SELECT * FROM tbClasses WHERE AcademyId = @AcademyId";
             try
             {
@@ -343,10 +343,10 @@ namespace InventoryManagmentSystem
                 command.Parameters.AddWithValue("@Id", classId.ToString());
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                while(reader.Read())
+                while (reader.Read())
                 {
                     var item = new Item(reader, columns);
-                    if(item.Count() > 0)
+                    if (item.Count() > 0)
                     {
                         return item;
                     }
@@ -361,17 +361,17 @@ namespace InventoryManagmentSystem
         {
             string query = "SELECT * FROM tbClients";
             var list = new List<Item>();
-            try 
+            try
             {
                 connection.Open();
                 var command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
-                while(reader.Read())
+                while (reader.Read())
                 {
                     list.Add(new Item(reader, columnsClient));
                 }
             }
-            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return list;
         }
@@ -498,12 +498,12 @@ namespace InventoryManagmentSystem
                 command.Parameters.AddWithValue("@Id", clientId.ToString());
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                while(reader.Read())
+                while (reader.Read())
                 {
                     item.AddByReaderAndColumnArray(reader, columnsClient);
                 }
             }
-            catch(Exception ex) { Console.WriteLine(ex.Message); } 
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return item;
         }
@@ -511,7 +511,7 @@ namespace InventoryManagmentSystem
         public static bool ClientInsert(SqlConnection connection, Dictionary<string, string> client)
         {
             var exists = ClientFindByDriversLicense(connection, client["DriversLicenseNumber"]);
-            if(exists.Count() > 0)
+            if (exists.Count() > 0)
             {
                 MessageBox.Show("Client already exists.");
                 return false;
@@ -559,13 +559,35 @@ namespace InventoryManagmentSystem
 
                 return true;
             }
-            catch(Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
                 MessageBox.Show("Failed to insert client.");
                 return false;
             }
             finally { connection.Close(); }
+        }
+
+        public static bool ClientUpdateActivity(SqlConnection connection, string clientId, bool isActive)
+        {
+            string query = $@"
+                UPDATE tbClients 
+                SET IsActive = @Active
+                WHERE Id = @Id
+            ";
+
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("IsActive", isActive);
+                command.Parameters.AddWithValue("Id", clientId);
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return false;
         }
 
         public static bool ClientUpdateInfo(SqlConnection connection,
