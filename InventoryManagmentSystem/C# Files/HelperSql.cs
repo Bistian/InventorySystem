@@ -569,9 +569,9 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
-        public static void ClientUpdateActivity(bool isActive)
+        public static void ClientUpdateActivity(SqlConnection connection, bool isActive)
         {
-         //change client activity to true or false;
+         //TODO change client activity to true or false;
         }
 
         public static bool ClientUpdateInfo(SqlConnection connection,
@@ -1263,6 +1263,32 @@ namespace InventoryManagmentSystem
             else
             {
                 query = "UPDATE tbItems SET Location=@Location, DueDate=@DueDate WHERE Id=@ItemId";
+            }
+            try
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Location", location);
+                if (dueDate != null) { command.Parameters.AddWithValue("@DueDate", dueDate); }
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
+                connection.Open();
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return false;
+        }
+
+        public static bool ItemUpdateBoots(SqlConnection connection, string itemId, string location, string dueDate = null)
+        {
+            string query;
+            if (dueDate == null)
+            {
+                query = "UPDATE tbItems SET Location=@Location, DueDate=null WHERE Id=@ItemId";
+            }
+            else
+            {
+                query = "UPDATE tbItems SET Location=@Location, DueDate=null WHERE Id=@ItemId";
             }
             try
             {

@@ -1,5 +1,6 @@
 ﻿using InventoryManagmentSystem.Academy;
 using InventoryManagmentSystem.Rental_Forms;
+using Microsoft.VisualBasic.Devices;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -27,11 +28,10 @@ namespace InventoryManagmentSystem
         public bool ExistingUser = false;
         public string currentUser = "";
 
-
         public NewRentalModuleForm(string rentalType = null, string clientName = null)
         {
             InitializeComponent();
-     
+
 
             if (clientName != null)
             {
@@ -53,14 +53,14 @@ namespace InventoryManagmentSystem
             dataGridViewClient.Columns["column_manufacture_date"].DefaultCellStyle.Format = "d";
 
             var items = HelperSql.ItemFindByClientId(connection, ClientId);
-            if(items.Count == 0)
+            if (items.Count == 0)
             {
                 items = HelperSql.ItemFindByClientId(connection, drivers);
             }
             if (items == null) { return; }
 
             dataGridViewClient.Rows.Clear();
-            foreach ( var item in items )
+            foreach (var item in items)
             {
                 dataGridViewClient.Rows.Add(
                     item.GetColumnValue("ItemType"),
@@ -78,14 +78,14 @@ namespace InventoryManagmentSystem
             dataGridInv.Columns["ManufactureDate"].DefaultCellStyle.Format = "d";
             dataGridInv.Rows.Clear();
             var items = HelperSql.ItemFindBySearchBar(connection, textBoxSearchBar.Text);
-            if(items == null ) { return; }
+            if (items == null) { return; }
 
-            foreach(var item in items )
+            foreach (var item in items)
             {
-                if(item.GetColumnValue("ItemType") != cbItemType.Text ) { continue; }
+                if (item.GetColumnValue("ItemType") != cbItemType.Text) { continue; }
 
                 string materialOrColor = item.GetColumnValue("Material");
-                if( materialOrColor == "" )
+                if (materialOrColor == "")
                 {
                     materialOrColor = item.GetColumnValue("Color");
                 }
@@ -103,13 +103,14 @@ namespace InventoryManagmentSystem
         public void LoadProfile(string clientId)
         {
             var client = HelperSql.ClientFindById(connection, clientId);
-            if( client.IsEmpty() ) { 
+            if (client.IsEmpty())
+            {
                 client = HelperSql.ClientFindByDriversLicense(connection, clientId);
             }
-            if(client.Count() == 0) 
+            if (client.Count() == 0)
             {
                 Console.WriteLine("Client not found.");
-                return; 
+                return;
             }
 
             labelProfileName.Text = client.GetColumnValue("Name");
@@ -132,7 +133,7 @@ namespace InventoryManagmentSystem
             license = labelClientDrivers.Text;
 
             var item = HelperSql.ClassFindByClassId(connection, ClassId);
-            if(item != null )
+            if (item != null)
             {
                 labelClientClass.Text = item.GetColumnValue("Name");
             }
@@ -217,7 +218,7 @@ namespace InventoryManagmentSystem
             {
                 string itemId = row.Cells["column_item_id"].Value.ToString();
                 bool isUpdated = HelperSql.ItemUpdate(connection, itemId, "Fire-Tec");
-                if(isUpdated)
+                if (isUpdated)
                 {
                     HelperSql.HistoryUpdate(connection, itemId, ClientId);
                     MessageBox.Show("Item Returned");
@@ -244,7 +245,7 @@ namespace InventoryManagmentSystem
             //update client activity
             if (dataGridInv.RowCount != 0)
             {
-                //update client activity call
+                //TODO update client activity call
             }
         }
 
@@ -275,28 +276,36 @@ namespace InventoryManagmentSystem
             DataGridViewRow row = dataGridInv.Rows[e.RowIndex];
             if (ReturnReplace == 1 || ReturnReplace == 0)
             {
-                string message = "Are you sure you want to rent this item to " + labelProfileName.Text;
+                string message = "Are you sure you want to assign this item to " + labelProfileName.Text;
                 if (!HelperFunctions.YesNoMessageBox(message, "Rent")) { return; }
 
 
-                if (DateTime.Today == DatepickerDue.Value.Date)
+                if (DateTime.Today == DatepickerDue.Value.Date && cbItemType.Text != "boots")
                 {
                     MessageBox.Show("Please select a due date");
                     return;
                 }
-                
+                bool isUpdated = false;
                 string itemId = row.Cells["ItemIdInv"].Value.ToString();
-                bool isUpdated = HelperSql.ItemUpdate(connection, itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
-                if(!isUpdated) 
+                if (cbItemType.Text == "boots")
+                {
+                    isUpdated = HelperSql.ItemUpdateBoots(connection, itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
+                }
+                else
+                {
+                    isUpdated = HelperSql.ItemUpdate(connection, itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
+                }
+                if (!isUpdated)
                 {
                     MessageBox.Show("Failed to update item.");
-                    return; 
+                    return;
                 }
                 isUpdated = HelperSql.HistoryInsert(connection, itemId, ClientId);
-                MessageBox.Show("Rental has been successfully completed");
+                MessageBox.Show("assignment has been successfully completed");
+                //TODO  update client activity to active here
                 LoadClient();
                 LoadInventory();
-                
+
             }
             else if (ReturnReplace == 2)
             {
@@ -343,7 +352,7 @@ namespace InventoryManagmentSystem
 
         private void btnClass_Click(object sender, EventArgs e)
         {
-            flowLayoutPanelProfile.Visible = false ;
+            flowLayoutPanelProfile.Visible = false;
 
             AssignStudentForm AssignForm = new AssignStudentForm(null);
             HelperFunctions.OpenChildFormToPanel(panel2, AssignForm);
