@@ -386,6 +386,10 @@ namespace InventoryManagmentSystem.Rental_Forms
                 btnAddBrand.Enabled = true;
                 cbCondition.Enabled = true;
             }
+            if(cbItemType.Text == "jacket" || cbItemType.Text == "pants")
+            {
+                cbSize.Items.Clear();
+            }
             lastItemTypeIndex = cbItemType.SelectedIndex;
             InitializeItemTypeSpecifics();
         }
