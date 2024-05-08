@@ -140,11 +140,13 @@ namespace InventoryManagmentSystem
 
             labelProfileDrivers.Text = "Point of contact:";
 
-            flowLayoutPanelProfile.Visible = true;
             panelProfileRentalInfo.Visible = false;
             panelProfileMeasurments.Visible = false;
+            flowLayoutPanelProfile.Visible = true;
             license = labelProfileName.Text;
 
+            panelButtons.Visible = true;
+            panelButtons.AutoScroll = false;
             flowLayoutPanelProfile.Visible = true;
             flowLayoutPanelProfile.AutoScroll = false;
             splitContainerInventories.Visible = true;
