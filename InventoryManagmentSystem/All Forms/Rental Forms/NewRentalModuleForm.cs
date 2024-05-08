@@ -243,10 +243,7 @@ namespace InventoryManagmentSystem
                 labelTypeOfItem.Text = row.Cells["column_item_type"].Value.ToString();
             }
             //update client activity
-            if (dataGridInv.RowCount != 0)
-            {
-                //TODO update client activity call
-            }
+            RefreshClientActivity();
         }
 
         private void SetItemType(string itemType)
@@ -302,10 +299,9 @@ namespace InventoryManagmentSystem
                 }
                 isUpdated = HelperSql.HistoryInsert(connection, itemId, ClientId);
                 MessageBox.Show("assignment has been successfully completed");
-                //TODO  update client activity to active here
                 LoadClient();
                 LoadInventory();
-
+                RefreshClientActivity();
             }
             else if (ReturnReplace == 2)
             {
@@ -366,6 +362,21 @@ namespace InventoryManagmentSystem
             cbItemType.Items.Clear();
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
             HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
+        }
+
+        private void RefreshClientActivity()
+        {
+            foreach (DataGridViewRow row in dataGridViewClient.Rows)
+            {
+                if (row.Cells["column_item_type"].Value != null && row.Cells["column_item_type"].Value.ToString() != "boots")
+                {
+                    // Client Has items other than boots
+                    HelperSql.ClientUpdateActivity(connection, ClientId, true);
+                    return;
+                }
+            }
+            // Client has boots or nohting
+            HelperSql.ClientUpdateActivity(connection, ClientId, false);
         }
     }
 }

@@ -569,11 +569,26 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
-        public static void ClientUpdateActivity(SqlConnection connection, bool isActive)
+        public static bool ClientUpdateActivity(SqlConnection connection,string clientId, bool isActive)
         {
-         //TODO change client activity to true or false;
+            string query = $@"
+                UPDATE tbClients 
+                SET IsActive = @IsActive
+                WHERE Id = @Id
+            ";
 
-            //also frey if you happen to be a stupid idiot baby just die instead
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@IsActive", isActive);
+                command.Parameters.AddWithValue("@Id", clientId);
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return false;
         }
 
         public static bool ClientUpdateInfo(SqlConnection connection,
