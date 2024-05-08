@@ -572,6 +572,8 @@ namespace InventoryManagmentSystem
         public static void ClientUpdateActivity(SqlConnection connection, bool isActive)
         {
          //TODO change client activity to true or false;
+
+            //also frey if you happen to be a stupid idiot baby just die instead
         }
 
         public static bool ClientUpdateInfo(SqlConnection connection,
