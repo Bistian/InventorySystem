@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace InventoryManagmentSystem.All_Forms
 {
-    public partial class FilterForm : Form
+    public partial class FilterForm : BaseForm
     {
         List<TextBox> fieldList = new List<TextBox>();
         Action<List<string[]>> callbackFunction;
@@ -34,19 +34,19 @@ namespace InventoryManagmentSystem.All_Forms
                 var label = new Label();
                 label.Name = $"label_{name}";
                 label.Text = name;
-                label.Font = Font;
                 label.ForeColor = ForeColor;
-                int X = label.Width;
                 label.Location = new Point(10, Y);
                 Controls.Add(label);
 
                 var box = new TextBox();
+                box.Width = parent.Width / 2;
                 box.Name = $"box_{name}";
                 fieldList.Add(box);
                 box.KeyDown += TextBox_KeyDown;
+                int X = label.Width;
                 box.Location = new Point(X + 10, Y);
                 Controls.Add(box);
-                Y += Font.Height * 2;
+                Y += box.Height;
             }
 
             float scale = 1.5f;

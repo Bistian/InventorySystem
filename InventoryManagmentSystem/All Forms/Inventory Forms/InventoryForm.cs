@@ -8,7 +8,7 @@ using InventoryManagmentSystem.All_Forms;
 
 namespace InventoryManagmentSystem
 {
-    public partial class InventoryForm : Form
+    public partial class InventoryForm : BaseForm
     {
 
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
@@ -29,7 +29,7 @@ namespace InventoryManagmentSystem
             InitItems();
             DisplayItems();
             SetItemType(ItemType);
-            InitSearcContainer();
+            InitSearchContainer();
         }
 
         private void InitItems()
@@ -103,12 +103,11 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void InitSearcContainer()
+        private void InitSearchContainer()
         {
             this.scOuter.SplitterDistance = (int)(Width * 0.3);
 
             int innerWidth = this.scInner.Width;
-            //this.scInner.SplitterDistance = (int) (innerWidth * 0.9);
             btnToggleFilter.Text = "<";
 
             // Show selected items.

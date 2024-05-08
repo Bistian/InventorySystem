@@ -37,7 +37,7 @@ namespace InventoryManagmentSystem
 
         private void ChangeControlFontSize(Control control, float newSize)
         {
-            control.Font = new System.Drawing.Font(control.Font.FontFamily, newSize, control.Font.Style);
+            control.Font = new Font(control.Font.FontFamily, newSize, control.Font.Style);
             foreach (Control childControl in control.Controls)
             {
                 ChangeControlFontSize(childControl, newSize);

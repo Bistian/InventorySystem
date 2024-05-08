@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryManagmentSystem.All_Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -14,7 +15,7 @@ using System.Windows.Forms;
 
 namespace InventoryManagmentSystem
 {
-    public partial class RentalForm : Form
+    public partial class RentalForm : BaseForm
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
@@ -26,17 +27,22 @@ namespace InventoryManagmentSystem
         public RentalForm(string ItemType)
         {
             InitializeComponent();
+            string[] columns = { "DDate" };
+            HelperFunctions.DataGridFormatDate(dataGridPastDue, columns);
+            columns[0] = "DueDate";
+            HelperFunctions.DataGridFormatDate(dataGridRented, columns);
             RefreshForm(ItemType);
         }
 
 
-        private void DisplayPastDue()
+        private void DisplayRents(bool isGreater)
         {
+            string sign =  isGreater ? ">" : "<";
             string query = $@"
                 SELECT c.Id, Name, DueDate 
                 FROM tbItems AS i 
                 JOIN tbClients AS c ON c.Id = i.Location
-                WHERE DueDate < CONVERT(DATE, GETDATE())
+                WHERE DueDate {sign} CONVERT(DATE, GETDATE())
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
@@ -47,7 +53,14 @@ namespace InventoryManagmentSystem
                 int i = 0;
                 while (reader.Read())
                 {
-                    dataGridPastDue.Rows.Add(++i, reader[0], reader[1], reader[2]);
+                    if(isGreater)
+                    {
+                        dataGridRented.Rows.Add(++i, reader[0], reader[1], reader[2]);
+                    }
+                    else
+                    {
+                        dataGridPastDue.Rows.Add(++i, reader[0], reader[1], reader[2]);
+                    }
                 }
             }
             catch(Exception ex)
@@ -129,33 +142,8 @@ namespace InventoryManagmentSystem
             grid.Columns[columnName].DefaultCellStyle.Format = "d";
             grid.Rows.Clear();
 
-            DisplayPastDue();
-
-            /*var command = new SqlCommand(query, connection);
-            connection.Open();
-            try
-            {
-                var dr = command.ExecuteReader();
-
-                int i = 0;
-                while (dr.Read())
-                {
-                    ++i;
-                    grid.Rows.Add(i,
-                        dr[0].ToString(),
-                        dr[1].ToString(),
-                        dr[2],
-                        dr[3].ToString()
-                    );
-                }
-
-                dr.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();*/
+            DisplayRents(true);
+            DisplayRents(false);
         }
 
         // Check if rented due date is getting closer and turns date red.
