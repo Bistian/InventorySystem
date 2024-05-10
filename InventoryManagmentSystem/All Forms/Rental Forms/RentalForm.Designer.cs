@@ -147,6 +147,7 @@
             this.dataGridRented.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridRented.Size = new System.Drawing.Size(681, 579);
             this.dataGridRented.TabIndex = 2;
+            this.dataGridRented.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRented_CellClick_1);
             // 
             // Num
             // 

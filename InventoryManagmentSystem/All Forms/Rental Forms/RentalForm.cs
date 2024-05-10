@@ -63,7 +63,6 @@ namespace InventoryManagmentSystem
                     WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
                       AND Condition NOT IN ('Retired') 
                       AND DueDate IS NOT NULL 
-                      AND DueDate BETWEEN GETDATE() AND DATEADD(DAY, 10, GETDATE())
                 ) AS i ON c.Id = i.Location
                 JOIN (
                     SELECT Location, COUNT(*) AS ItemCount
@@ -71,7 +70,7 @@ namespace InventoryManagmentSystem
                     WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
                       AND Condition NOT IN ('Retired') 
                       AND DueDate IS NOT NULL 
-                      AND WHERE DueDate > GETDATE()
+                      AND DueDate > GETDATE()
                     GROUP BY Location
                 ) AS ic ON c.Id = ic.Location
                 WHERE i.RowNum = 1;
@@ -226,6 +225,10 @@ namespace InventoryManagmentSystem
                 {
                     row.Visible = true;
                 }
+                foreach (DataGridViewRow rowRented in dataGridRented.Rows)
+                {
+                    rowRented.Visible = true;
+                }
                 return;
             }
 
@@ -269,6 +272,31 @@ namespace InventoryManagmentSystem
 
             string clientName = row.Cells["column_past_due_rentee"].Value.ToString();
             string clientId = row.Cells["column_past_due_id"].Value.ToString();
+
+
+            var parentForm = this.ParentForm as MainForm;
+            NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
+            try
+            {
+                Profile.LoadProfile(clientId);
+                parentForm.openChildForm(Profile);
+
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
+            }
+        }
+
+        private void dataGridRented_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) { return; }
+            DataGridViewRow row = dataGridRented.Rows[e.RowIndex];
+            string column = dataGridRented.Columns[e.ColumnIndex].Name;
+
+            string clientName = row.Cells["column_rented_rentee"].Value.ToString();
+            string clientId = row.Cells["column_rented_id"].Value.ToString();
 
 
             var parentForm = this.ParentForm as MainForm;

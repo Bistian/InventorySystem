@@ -3,24 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\all forms\\rental forms\\newclientform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\rental forms\\newclientform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\all forms\\rental forms\\rentalform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\rental forms\\rentalform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\all forms\\rental forms\\newrentalmoduleform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\rental forms\\newrentalmoduleform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\all forms\\rental forms\\homeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\rental forms\\homeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\all forms\\rental forms\\newrentalmoduleform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\rental forms\\newrentalmoduleform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\all forms\\rental forms\\rentalform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\rental forms\\rentalform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\all forms\\rental forms\\newclientform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\rental forms\\newclientform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\c# files\\helpersql.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\c# files\\helpersql.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\all forms\\rental forms\\homeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\rental forms\\homeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,66 +38,53 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "NewRentalModuleForm.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\NewRentalModuleForm.cs",
-              "RelativeDocumentMoniker": "InventoryManagmentSystem\\All Forms\\Rental Forms\\NewRentalModuleForm.cs",
-              "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\NewRentalModuleForm.cs [Design]",
-              "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\Rental Forms\\NewRentalModuleForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T20:46:58.871Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "NewRentalModuleForm.cs",
-              "DocumentMoniker": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\NewRentalModuleForm.cs",
-              "RelativeDocumentMoniker": "InventoryManagmentSystem\\All Forms\\Rental Forms\\NewRentalModuleForm.cs",
-              "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\NewRentalModuleForm.cs",
-              "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\Rental Forms\\NewRentalModuleForm.cs",
-              "ViewState": "AQIAAIEAAAAAAAAAAAAIwJQAAAAsAAAA",
+              "Title": "HomeForm.cs",
+              "DocumentMoniker": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\HomeForm.cs",
+              "RelativeDocumentMoniker": "InventoryManagmentSystem\\All Forms\\Rental Forms\\HomeForm.cs",
+              "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\HomeForm.cs",
+              "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\Rental Forms\\HomeForm.cs",
+              "ViewState": "AQIAAI0AAAAAAAAAAAAkwDQAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T20:43:51.307Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "NewClientForm.cs",
-              "DocumentMoniker": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\NewClientForm.cs",
-              "RelativeDocumentMoniker": "InventoryManagmentSystem\\All Forms\\Rental Forms\\NewClientForm.cs",
-              "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\NewClientForm.cs",
-              "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\Rental Forms\\NewClientForm.cs",
-              "ViewState": "AQIAAEEBAAAAAAAAAAD4v1MBAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T20:43:11.135Z",
+              "WhenOpened": "2024-05-10T18:12:24.629Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "NewClientForm.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\NewClientForm.cs",
-              "RelativeDocumentMoniker": "InventoryManagmentSystem\\All Forms\\Rental Forms\\NewClientForm.cs",
-              "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\NewClientForm.cs [Design]",
-              "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\Rental Forms\\NewClientForm.cs [Design]",
+              "Title": "HomeForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\HomeForm.cs",
+              "RelativeDocumentMoniker": "InventoryManagmentSystem\\All Forms\\Rental Forms\\HomeForm.cs",
+              "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\HomeForm.cs [Design]",
+              "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\Rental Forms\\HomeForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T20:43:03.125Z",
+              "WhenOpened": "2024-05-10T18:12:19.233Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "HelperSql.cs",
-              "DocumentMoniker": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\C# Files\\HelperSql.cs",
-              "RelativeDocumentMoniker": "InventoryManagmentSystem\\C# Files\\HelperSql.cs",
-              "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\C# Files\\HelperSql.cs",
-              "RelativeToolTip": "InventoryManagmentSystem\\C# Files\\HelperSql.cs",
-              "ViewState": "AQIAANgAAAAAAAAAAAAwwPcBAAAnAAAA",
+              "DocumentIndex": 0,
+              "Title": "RentalForm.cs",
+              "DocumentMoniker": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\RentalForm.cs",
+              "RelativeDocumentMoniker": "InventoryManagmentSystem\\All Forms\\Rental Forms\\RentalForm.cs",
+              "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\RentalForm.cs",
+              "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\Rental Forms\\RentalForm.cs",
+              "ViewState": "AQIAANQAAAAAAAAAAAAqwOMAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T18:53:07.653Z",
+              "WhenOpened": "2024-05-10T18:10:49.259Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RentalForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\RentalForm.cs",
+              "RelativeDocumentMoniker": "InventoryManagmentSystem\\All Forms\\Rental Forms\\RentalForm.cs",
+              "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\RentalForm.cs [Design]",
+              "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\Rental Forms\\RentalForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-10T18:10:47.66Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }
