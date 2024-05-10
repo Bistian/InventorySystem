@@ -29,7 +29,7 @@ namespace InventoryManagmentSystem
 
             string id = dataGridUsers.Rows[e.RowIndex].Cells[1].Value.ToString();
             var rentedItems = HelperSql.ItemFindByClientId(connection, id);
-            if(rentedItems.Count > 0)
+            if (rentedItems.Count > 0)
             {
                 message = "Client did not return all items, cannot be deleted";
                 MessageBox.Show(message, "Can't delete", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -77,19 +77,26 @@ namespace InventoryManagmentSystem
 
         private void LoadClients()
         {
-            if(clients.Count == 0) { return; }
+            if (clients.Count == 0) { return; }
 
             uint count = 1;
             dataGridUsers.Rows.Clear();
             foreach (var client in clients)
             {
                 bool isActive = Boolean.Parse(client.GetColumnValue("IsActive"));
-                if((isActive == true && cbActive.Checked == true) || 
-                    (isActive == false && cbInactive.Checked == true))
+                if (cbActive.Checked && cbInactive.Checked)
                 {
                     AddClientToGrid(client, count);
-                    ++count;
                 }
+                else if (cbActive.Checked && isActive)
+                {
+                    AddClientToGrid(client, count);
+                }
+                else if (cbInactive.Checked && !isActive)
+                {
+                    AddClientToGrid(client, count);
+                }
+                ++count;
             }
         }
 
@@ -104,7 +111,7 @@ namespace InventoryManagmentSystem
                 client.GetColumnValue("Academy"),
                 client.GetColumnValue("Address"),
                 client.GetColumnValue("DriversLicenseNumber"));
-                
+
         }
 
         private void dataGridUsers_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -146,11 +153,17 @@ namespace InventoryManagmentSystem
 
         private void searchBar_TextChanged(object sender, EventArgs e)
         {
+            if (searchBar.Text.Length < 1)
+            {
+                LoadClients();
+                return;
+            }
             string searchTerm = searchBar.Text;
             if (string.IsNullOrEmpty(searchTerm)) { LoadClients(); }
-
+            var clients = new List<Item>();
             dataGridUsers.Rows.Clear();
-            var clients = HelperSql.ClientFindBySearchBar(connection, searchTerm);
+
+            clients = HelperSql.ClientFindBySearchBar(connection, searchTerm, cbActive.Checked, cbInactive.Checked);
             if (clients == null) { return; }
 
             uint count = 1;
