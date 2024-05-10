@@ -438,10 +438,51 @@ namespace InventoryManagmentSystem
             return item;
         }
 
-        public static List<Item> ClientFindBySearchBar(SqlConnection connection, string searchTerm)
+        public static List<Item> ClientFindBySearchBar(SqlConnection connection, string searchTerm, bool isActive, bool isInactive)
         {
             var clients = new List<Item>();
-            string query = "SELECT * FROM tbClients WHERE (Name LIKE %@searchTerm% OR Academy LIKE @searchTerm) AND Type = @ClientType";
+            string query = "";
+
+            if (isActive && isInactive)
+            {
+                query = $@"
+                SELECT * 
+                FROM tbClients 
+                WHERE 
+                (
+                    Name LIKE @searchTerm
+                    OR Academy LIKE @searchTerm
+                ) 
+            ";
+            }
+            else if (isActive)
+            {
+                query = $@"
+                SELECT * 
+                FROM tbClients 
+                WHERE
+                (
+                    Name LIKE @searchTerm
+                    AND IsActive = 'true'
+                    OR Academy LIKE @searchTerm
+                ) 
+            ";
+            }
+            else if (isInactive)
+            {
+                query = $@"
+                SELECT * 
+                FROM tbClients 
+                WHERE 
+                (
+                    Name LIKE @searchTerm
+                    AND IsActive = 'false'
+                    OR Academy LIKE @searchTerm
+                ) 
+            ";
+            }
+
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
                 connection.Open();

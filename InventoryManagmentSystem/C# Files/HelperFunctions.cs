@@ -19,6 +19,28 @@ namespace InventoryManagmentSystem
             return target.ToLower().IndexOf(substring.ToLower()) != -1;
         }
 
+        public static void DataGridFormatDate(DataGridView grid, string[] columns)
+        {
+            foreach(string col in columns)
+            {
+                grid.Columns[col].ValueType = typeof(DateTime);
+            }
+
+            grid.CellFormatting += (sender, e) =>
+            {
+                // Check if the cell value is of type DateTime
+                if (grid.Columns[e.ColumnIndex].ValueType == typeof(DateTime))
+                {
+                    // Check if the cell value can be converted to a DateTime
+                    if (e.Value != null && e.Value != DBNull.Value && DateTime.TryParse(e.Value.ToString(), out DateTime dateValue))
+                    {
+                        e.Value = dateValue.ToString("MM/dd/yyyy");
+                        e.FormattingApplied = true;
+                    }
+                }
+            };
+        }
+
         public static void DataGridHideTime(DataGridView grid, string columnName)
         {
             try
@@ -34,6 +56,7 @@ namespace InventoryManagmentSystem
             }
             catch(Exception ex) { Console.WriteLine(ex.Message); }
         }
+
         public static string MakeTableFromItemType(string itemType)
         {
             return $"tb{char.ToUpper(itemType[0]) + itemType.Substring(1)}";

@@ -74,6 +74,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="All Forms\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="All Forms\FilterForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +126,7 @@
       <DependentUpon>CreateClassForm.cs</DependentUpon>
     </Compile>
     <Compile Include="C# Files\CustomTypes.cs" />
+    <Compile Include="C# Files\HelperButton.cs" />
     <Compile Include="C# Files\HelperError.cs" />
     <Compile Include="Custom Item Classes\CustomButton.cs">
       <SubType>Component</SubType>
