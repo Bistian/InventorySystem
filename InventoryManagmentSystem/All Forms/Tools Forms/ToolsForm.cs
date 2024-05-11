@@ -110,11 +110,11 @@ namespace InventoryManagmentSystem
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            if(cbItemType.SelectedIndex < 0) { return; }
-            if(!HelperFunctions.YesNoMessageBox("Do you want to add this Item?", "Add Item")) { return; }
+            if (cbItemType.SelectedIndex < 0) { return; }
+            if (!HelperFunctions.YesNoMessageBox("Do you want to add this Item?", "Add Item")) { return; }
 
             string table = "";
-            if(cbItemType.Text == "boots") { table = "tbBoots"; }
+            if (cbItemType.Text == "boots") { table = "tbBoots"; }
             else if (cbItemType.Text == "helmet") { table = "tbHelmets"; }
             else if (cbItemType.Text == "jacket") { table = "tbJackets"; }
             else if (cbItemType.Text == "mask") { table = "tbMasks"; }
@@ -122,7 +122,7 @@ namespace InventoryManagmentSystem
             else { return; }
 
             // Loop through the table.
-            while(true)
+            while (true)
             {
                 //Guid uuid = HelperSql.ItemInsertAndGetUuid(connection, cbItemType.Text);
                 // Add item id to null.
@@ -138,10 +138,10 @@ namespace InventoryManagmentSystem
                     SqlCommand command = new SqlCommand(query, connection);
                     connection.Open();
                     int rowsAffected = command.ExecuteNonQuery(); connection.Close();
-                    if(rowsAffected < 1) 
-                    { 
+                    if (rowsAffected < 1)
+                    {
                         //HelperSql.ItemDelete(connection, uuid);
-                        break; 
+                        break;
                     }
                 }
                 catch (Exception ex)
@@ -154,12 +154,11 @@ namespace InventoryManagmentSystem
             Console.WriteLine("Gaje likes minors!");
         }
 
-
-        private void button1_Click_1(object sender, EventArgs e)
+        private bool CopyPantsSerial()
         {
             string message = "Are you sure you want to update cereal?";
             DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return; }
+            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.SerialNumber = tbBoots.SerialNumber " +
@@ -176,12 +175,139 @@ namespace InventoryManagmentSystem
 
                 command.ExecuteNonQuery();
                 MessageBox.Show("yummy");
+                connection.Close();
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
             }
-            connection.Close();
+        }
+
+        private bool CopyPantsCondition()
+        {
+            string message = "Are you sure you want to update cereal?";
+            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (messageBox == DialogResult.No) { return false; }
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Condition = tbBoots.Condition " +
+                "FROM tbBoots " +
+                "WHERE tbItems.Id = tbBoots.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                MessageBox.Show("yummy");
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyPantsDueDate()
+        {
+            string message = "Are you sure you want to update cereal?";
+            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (messageBox == DialogResult.No) { return false; }
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.DueDate = tbBoots.DueDate " +
+                "FROM tbBoots " +
+                "WHERE tbItems.Id = tbBoots.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                MessageBox.Show("yummy");
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyPantsLocation()
+        {
+            string message = "Are you sure you want to update cereal?";
+            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (messageBox == DialogResult.No) { return false; }
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Location = tbBoots.Location " +
+                "FROM tbBoots " +
+                "WHERE tbItems.Id = tbBoots.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                MessageBox.Show("yummy");
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyPants()
+        {
+            bool next = CopyPantsSerial();
+            if (next)
+            {
+                next = CopyPantsCondition();
+            }
+            if (next)
+            {
+                next = CopyPantsDueDate();
+            }
+            if (next)
+            {
+                next = CopyPantsLocation();
+            }
+            return next;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            bool next = CopyPants();
+            if (next)
+            {
+                //copy jackets
+            }
+
         }
     }
 }
