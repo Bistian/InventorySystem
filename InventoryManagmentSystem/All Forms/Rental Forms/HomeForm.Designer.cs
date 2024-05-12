@@ -91,7 +91,7 @@
             // 
             this.splitContainerRentalOptions.Panel2.Controls.Add(this.buttonActiveRental);
             this.splitContainerRentalOptions.Size = new System.Drawing.Size(724, 139);
-            this.splitContainerRentalOptions.SplitterDistance = 342;
+            this.splitContainerRentalOptions.SplitterDistance = 341;
             this.splitContainerRentalOptions.SplitterWidth = 16;
             this.splitContainerRentalOptions.TabIndex = 17;
             // 
@@ -108,7 +108,7 @@
             this.buttonNewCustomer.Location = new System.Drawing.Point(0, 0);
             this.buttonNewCustomer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonNewCustomer.Name = "buttonNewCustomer";
-            this.buttonNewCustomer.Size = new System.Drawing.Size(342, 139);
+            this.buttonNewCustomer.Size = new System.Drawing.Size(341, 139);
             this.buttonNewCustomer.TabIndex = 18;
             this.buttonNewCustomer.Text = "New Customer";
             this.buttonNewCustomer.UseVisualStyleBackColor = false;
@@ -127,7 +127,7 @@
             this.buttonActiveRental.Location = new System.Drawing.Point(0, 0);
             this.buttonActiveRental.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonActiveRental.Name = "buttonActiveRental";
-            this.buttonActiveRental.Size = new System.Drawing.Size(366, 139);
+            this.buttonActiveRental.Size = new System.Drawing.Size(367, 139);
             this.buttonActiveRental.TabIndex = 19;
             this.buttonActiveRental.Text = "Existing Customer";
             this.buttonActiveRental.UseVisualStyleBackColor = false;

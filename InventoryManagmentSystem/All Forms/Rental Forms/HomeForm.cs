@@ -137,6 +137,10 @@ namespace InventoryManagmentSystem
             {
                 BtnPastDue.Text = dataGridViewPastDue.RowCount + " Client Past Due!";
             }
+            else if(dataGridViewPastDue.Rows.Count == 0)
+            {
+                BtnPastDue.Text =  "No Clients Past Due!";
+            }
         }
 
         private void PrintStock()
