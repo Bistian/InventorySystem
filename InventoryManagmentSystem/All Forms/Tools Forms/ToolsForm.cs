@@ -847,6 +847,33 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateLocation()
+        {
+            string query = "UPDATE tbItems " +
+               "SET Location = C.Id " +
+               "FROM tbItems AS I " +
+               "INNER JOIN tbClients AS C " +
+               "ON I.Location = C.DriversLicenseNumber";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
                 MessageBox.Show("yummy");
                 connection.Close();
                 return true;
@@ -858,6 +885,7 @@ namespace InventoryManagmentSystem
                 return false;
             }
         }
+
         private void button1_Click_1(object sender, EventArgs e)
         {
             bool next = CopyBoots();
@@ -865,25 +893,29 @@ namespace InventoryManagmentSystem
             {
                 next = CopyJackets();
             }
-            if(next)
+            if (next)
             {
                 next = CopyPants();
             }
-            if(next)
+            if (next)
             {
                 next = CopyMasks();
             }
-            if(next)
+            if (next)
             {
                 next = CopyHelmet();
             }
-            if(next)
+            if (next)
             {
                 ClearInvalidEntries();
             }
-            if(next)
+            if (next)
             {
                 SetActivity();
+            }
+            if (next)
+            {
+                UpdateLocation();
             }
         }
     }
