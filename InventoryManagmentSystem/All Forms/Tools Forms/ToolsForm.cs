@@ -174,7 +174,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -188,9 +187,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyBootsCondition()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.Condition = tbBoots.Condition " +
@@ -206,7 +202,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -220,9 +215,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyBootsDueDate()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.DueDate = tbBoots.DueDate " +
@@ -238,7 +230,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -252,9 +243,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyBootsLocation()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.Location = tbBoots.Location " +
@@ -270,7 +258,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -302,9 +289,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyJacketsSerial()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.SerialNumber = tbJackets.SerialNumber " +
@@ -320,7 +304,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -334,9 +317,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyJacketsCondition()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.Condition = tbJackets.Condition " +
@@ -352,7 +332,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -366,9 +345,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyJacketsDueDate()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.DueDate = tbJackets.DueDate " +
@@ -384,7 +360,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -398,9 +373,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyJacketsLocation()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.Location = tbJackets.Location " +
@@ -416,7 +388,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -448,9 +419,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyPantsSerial()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.SerialNumber = tbPants.SerialNumber " +
@@ -466,7 +434,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -480,9 +447,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyPantsCondition()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.Condition = tbPants.Condition " +
@@ -498,7 +462,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -512,9 +475,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyPantsDueDate()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.DueDate = tbPants.DueDate " +
@@ -530,7 +490,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -544,9 +503,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyPantsLocation()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.Location = tbPants.Location " +
@@ -562,7 +518,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -594,9 +549,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyMasksSerial()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.SerialNumber = tbMasks.SerialNumber " +
@@ -612,7 +564,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -626,9 +577,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyMasksCondition()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.Condition = tbMasks.Condition " +
@@ -644,7 +592,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -658,9 +605,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyMasksDueDate()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.DueDate = tbMasks.DueDate " +
@@ -676,7 +620,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -690,9 +633,6 @@ namespace InventoryManagmentSystem
 
         private bool CopyMasksLocation()
         {
-            string message = "Are you sure you want to update cereal?";
-            DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.Location = tbMasks.Location " +
@@ -708,7 +648,6 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
                 connection.Close();
                 return true;
             }
@@ -737,6 +676,188 @@ namespace InventoryManagmentSystem
             }
             return next;
         }
+
+        private bool CopyHelmetSerial()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.SerialNumber = tbHelmets.SerialNumber " +
+                "FROM tbHelmets " +
+                "WHERE tbItems.Id = tbHelmets.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyHelmetCondition()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Condition = tbHelmets.Condition " +
+                "FROM tbHelmets " +
+                "WHERE tbItems.Id = tbHelmets.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyHelmetDueDate()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.DueDate = tbHelmets.DueDate " +
+                "FROM tbHelmets " +
+                "WHERE tbItems.Id = tbHelmets.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyHelmetLocation()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Location = tbHelmets.Location " +
+                "FROM tbHelmets " +
+                "WHERE tbItems.Id = tbHelmets.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyHelmet()
+        {
+            bool next = CopyHelmetSerial();
+            if (next)
+            {
+                next = CopyHelmetCondition();
+            }
+            if (next)
+            {
+                next = CopyHelmetDueDate();
+            }
+            if (next)
+            {
+                next = CopyHelmetLocation();
+            }
+            return next;
+        }
+
+        private bool ClearInvalidEntries()
+        {
+
+            string query = "Delete FROM tbItems " +
+                "WHERE  SerialNumber = '1'";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool SetActivity()
+        {
+            string query = "UPDATE tbClients " +
+                           "SET isActive = 1 " +
+                           "WHERE isActive IS NULL";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                MessageBox.Show("yummy");
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
         private void button1_Click_1(object sender, EventArgs e)
         {
             bool next = CopyBoots();
@@ -751,6 +872,18 @@ namespace InventoryManagmentSystem
             if(next)
             {
                 next = CopyMasks();
+            }
+            if(next)
+            {
+                next = CopyHelmet();
+            }
+            if(next)
+            {
+                ClearInvalidEntries();
+            }
+            if(next)
+            {
+                SetActivity();
             }
         }
     }

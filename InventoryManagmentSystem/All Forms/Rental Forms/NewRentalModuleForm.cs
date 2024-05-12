@@ -340,7 +340,17 @@ namespace InventoryManagmentSystem
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
+            panelProfileRentalInfo.Visible = false;
+            panelProfileMeasurments.Visible = false;
             flowLayoutPanelProfile.Visible = true;
+            license = labelProfileName.Text;
+
+            panelButtons.Visible = true;
+            panelButtons.AutoScroll = false;
+            flowLayoutPanelProfile.Visible = true;
+            flowLayoutPanelProfile.AutoScroll = false;
+            splitContainerInventories.Visible = true;
+            panelRentals.Visible = true;
             AssignStudentForm dockedForm = panel2.Controls.OfType<AssignStudentForm>().FirstOrDefault();
             if (dockedForm != null)
             {
