@@ -45,7 +45,7 @@ namespace InventoryManagmentSystem
                       AND i_inner.DueDate IS NOT NULL 
                       AND i_inner.DueDate < GETDATE()
                     GROUP BY Location
-                ) AS i ON c.Id = i.Location;
+                ) AS i ON CAST(c.Id AS NVARCHAR(MAX)) = i.Location;
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
@@ -63,7 +63,7 @@ namespace InventoryManagmentSystem
                     WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
                       AND Condition NOT IN ('Retired') 
                       AND DueDate IS NOT NULL 
-                ) AS i ON c.Id = i.Location
+                ) AS i ON CAST(c.Id AS NVARCHAR(MAX)) = i.Location
                 JOIN (
                     SELECT Location, COUNT(*) AS ItemCount
                     FROM tbItems
@@ -72,7 +72,7 @@ namespace InventoryManagmentSystem
                       AND DueDate IS NOT NULL 
                       AND DueDate > GETDATE()
                     GROUP BY Location
-                ) AS ic ON c.Id = ic.Location
+                ) AS ic ON CAST(c.Id AS NVARCHAR(MAX)) = ic.Location
                 WHERE i.RowNum = 1;
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);

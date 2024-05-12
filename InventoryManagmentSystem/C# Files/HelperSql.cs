@@ -568,7 +568,7 @@ namespace InventoryManagmentSystem
             try
             {
                 var command = new SqlCommand(query, connection);
-                         
+
                 AddParameterFromDictionary(command, client, "Name");
                 AddParameterFromDictionary(command, client, "Phone");
                 AddParameterFromDictionary(command, client, "Email");
@@ -585,7 +585,7 @@ namespace InventoryManagmentSystem
                 AddParameterFromDictionary(command, client, "FireTecRepresentative");
 
                 client.TryGetValue("IdClass", out string classValue);
-                if(classValue == null)
+                if (classValue == null)
                 {
                     command.Parameters.AddWithValue("@IdClass", Guid.Empty);
                 }
@@ -610,7 +610,35 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
-        public static bool ClientUpdateActivity(SqlConnection connection,string clientId, bool isActive)
+        public static void ClientLoadToDataGrid(SqlConnection connection, DataGridView grid)
+        {
+            string query = "SELECT Id, Name, Phone, Email, Academy, DriversLicenseNumber, Address FROM tbClients";
+            try
+            {
+                var command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(
+                        ++index,
+                        reader[0],
+                        reader[1],
+                        reader[2],
+                        reader[3],
+                        reader[4],
+                        reader[5],
+                        reader[6]
+                                   );
+
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+        }
+
+        public static bool ClientUpdateActivity(SqlConnection connection, string clientId, bool isActive)
         {
             string query = $@"
                 UPDATE tbClients 

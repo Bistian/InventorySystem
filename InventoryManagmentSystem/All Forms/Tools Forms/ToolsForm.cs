@@ -811,7 +811,7 @@ namespace InventoryManagmentSystem
         {
 
             string query = "Delete FROM tbItems " +
-                "WHERE  SerialNumber = '1'";
+                "WHERE  SerialNumber IS NULL";
 
 
             command = new SqlCommand(query, connection);
@@ -874,7 +874,177 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateAcqsitionDatesJacket()
+        {
+            string query = "UPDATE tbJackets " +
+                           "SET AcquisitionDate = GETDATE() " +
+                           "WHERE AcquisitionDate IS NULL";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateAcqsitionDatesPants()
+        {
+            string query = "UPDATE tbPants " +
+                           "SET AcquisitionDate = GETDATE() " +
+                           "WHERE AcquisitionDate IS NULL";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateAcqsitionDatesHelmet()
+        {
+            string query = "UPDATE tbHelmets " +
+                           "SET AcquisitionDate = GETDATE() " +
+                           "WHERE AcquisitionDate IS NULL";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateAcqsitionDatesBoots()
+        {
+            string query = "UPDATE tbBoots " +
+                           "SET AcquisitionDate = GETDATE() " +
+                           "WHERE AcquisitionDate IS NULL";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateAcqsitionDatesMask()
+        {
+            string query = "UPDATE tbMasks " +
+                           "SET AcquisitionDate = GETDATE() " +
+                           "WHERE AcquisitionDate IS NULL";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateAllAcquisitions()
+        {
+            bool next = UpdateAcqsitionDatesBoots();
+            if(next)
+            {
+             UpdateAcqsitionDatesPants();
+            }
+            if(next)
+            {
+                UpdateAcqsitionDatesJacket();
+            }
+            if (next)
+            {
+                UpdateAcqsitionDatesMask();
+            }
+            if (next)
+            {
+                UpdateAcqsitionDatesHelmet();
+            }
+            return next;
+        }
+
+        private bool Lowerify()
+        {
+            string query = "UPDATE tbItems " +
+                            " SET ItemType = LOWER(ItemType); ";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
                 connection.Close();
                 return true;
             }
@@ -911,11 +1081,19 @@ namespace InventoryManagmentSystem
             }
             if (next)
             {
-                SetActivity();
+                next = SetActivity();
             }
             if (next)
             {
-                UpdateLocation();
+                next = UpdateLocation();
+            }
+            if (next)
+            {
+                next = UpdateAcqsitionDatesJacket();
+            }
+            if(next)
+            {
+                Lowerify();
             }
         }
     }

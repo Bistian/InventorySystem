@@ -17,7 +17,7 @@ namespace InventoryManagmentSystem
         public ExistingCustomerModuleForm()
         {
             InitializeComponent();
-            clients = HelperSql.ClientFindAllProfiles(connection);
+            HelperSql.ClientLoadToDataGrid(connection, dataGridUsers);
             cbActive.Checked = true;
         }
 

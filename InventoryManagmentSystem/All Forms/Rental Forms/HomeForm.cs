@@ -44,7 +44,7 @@ namespace InventoryManagmentSystem
                       AND i_inner.DueDate IS NOT NULL 
                       AND i_inner.DueDate < GETDATE()
                     GROUP BY Location
-                ) AS i ON c.Id = i.Location;
+                ) AS i ON CAST(c.Id AS NVARCHAR(50)) = i.Location;
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             return query;
@@ -63,7 +63,7 @@ namespace InventoryManagmentSystem
                       AND Condition NOT IN ('Retired') 
                       AND DueDate IS NOT NULL 
                       AND DueDate BETWEEN GETDATE() AND DATEADD(DAY, 10, GETDATE())
-                ) AS i ON c.Id = i.Location
+                ) AS i ON  c.Id = i.Location
                 JOIN (
                     SELECT Location, COUNT(*) AS ItemCount
                     FROM tbItems
