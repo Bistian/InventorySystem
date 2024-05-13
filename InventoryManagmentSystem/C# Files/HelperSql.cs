@@ -629,7 +629,7 @@ namespace InventoryManagmentSystem
                         reader[3],
                         reader[4],
                         reader[6],
-                        reader[6]
+                        reader[5]
                                    );
 
                 }

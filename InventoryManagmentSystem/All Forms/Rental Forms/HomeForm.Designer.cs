@@ -79,8 +79,8 @@
             // 
             this.splitContainerRentalOptions.BackColor = System.Drawing.Color.Black;
             this.splitContainerRentalOptions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitContainerRentalOptions.Location = new System.Drawing.Point(452, 830);
-            this.splitContainerRentalOptions.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.splitContainerRentalOptions.Location = new System.Drawing.Point(301, 531);
+            this.splitContainerRentalOptions.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.splitContainerRentalOptions.Name = "splitContainerRentalOptions";
             // 
             // splitContainerRentalOptions.Panel1
@@ -90,9 +90,9 @@
             // splitContainerRentalOptions.Panel2
             // 
             this.splitContainerRentalOptions.Panel2.Controls.Add(this.buttonActiveRental);
-            this.splitContainerRentalOptions.Size = new System.Drawing.Size(724, 139);
-            this.splitContainerRentalOptions.SplitterDistance = 341;
-            this.splitContainerRentalOptions.SplitterWidth = 16;
+            this.splitContainerRentalOptions.Size = new System.Drawing.Size(483, 89);
+            this.splitContainerRentalOptions.SplitterDistance = 227;
+            this.splitContainerRentalOptions.SplitterWidth = 11;
             this.splitContainerRentalOptions.TabIndex = 17;
             // 
             // buttonNewCustomer
@@ -106,9 +106,9 @@
             this.buttonNewCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonNewCustomer.ForeColor = System.Drawing.Color.Transparent;
             this.buttonNewCustomer.Location = new System.Drawing.Point(0, 0);
-            this.buttonNewCustomer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.buttonNewCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonNewCustomer.Name = "buttonNewCustomer";
-            this.buttonNewCustomer.Size = new System.Drawing.Size(341, 139);
+            this.buttonNewCustomer.Size = new System.Drawing.Size(227, 89);
             this.buttonNewCustomer.TabIndex = 18;
             this.buttonNewCustomer.Text = "New Customer";
             this.buttonNewCustomer.UseVisualStyleBackColor = false;
@@ -125,9 +125,9 @@
             this.buttonActiveRental.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonActiveRental.ForeColor = System.Drawing.Color.Transparent;
             this.buttonActiveRental.Location = new System.Drawing.Point(0, 0);
-            this.buttonActiveRental.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.buttonActiveRental.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonActiveRental.Name = "buttonActiveRental";
-            this.buttonActiveRental.Size = new System.Drawing.Size(367, 139);
+            this.buttonActiveRental.Size = new System.Drawing.Size(245, 89);
             this.buttonActiveRental.TabIndex = 19;
             this.buttonActiveRental.Text = "Existing Customer";
             this.buttonActiveRental.UseVisualStyleBackColor = false;
@@ -140,10 +140,10 @@
             this.labelDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDueDate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.labelDueDate.Location = new System.Drawing.Point(0, 0);
-            this.labelDueDate.Margin = new System.Windows.Forms.Padding(44, 16, 0, 0);
+            this.labelDueDate.Margin = new System.Windows.Forms.Padding(29, 10, 0, 0);
             this.labelDueDate.Name = "labelDueDate";
-            this.labelDueDate.Padding = new System.Windows.Forms.Padding(52, 0, 0, 0);
-            this.labelDueDate.Size = new System.Drawing.Size(440, 42);
+            this.labelDueDate.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
+            this.labelDueDate.Size = new System.Drawing.Size(287, 29);
             this.labelDueDate.TabIndex = 1;
             this.labelDueDate.Text = "Due Withinn 10 Days";
             // 
@@ -153,11 +153,11 @@
             this.PastDue.Dock = System.Windows.Forms.DockStyle.Right;
             this.PastDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PastDue.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.PastDue.Location = new System.Drawing.Point(1312, 0);
-            this.PastDue.Margin = new System.Windows.Forms.Padding(0, 16, 0, 0);
+            this.PastDue.Location = new System.Drawing.Point(876, 0);
+            this.PastDue.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.PastDue.Name = "PastDue";
-            this.PastDue.Padding = new System.Windows.Forms.Padding(0, 0, 136, 0);
-            this.PastDue.Size = new System.Drawing.Size(316, 42);
+            this.PastDue.Padding = new System.Windows.Forms.Padding(0, 0, 91, 0);
+            this.PastDue.Size = new System.Drawing.Size(209, 29);
             this.PastDue.TabIndex = 2;
             this.PastDue.Text = "Past Due";
             // 
@@ -168,9 +168,9 @@
             this.PanelTitles.Controls.Add(this.labelDueDate);
             this.PanelTitles.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelTitles.Location = new System.Drawing.Point(0, 0);
-            this.PanelTitles.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.PanelTitles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PanelTitles.Name = "PanelTitles";
-            this.PanelTitles.Size = new System.Drawing.Size(1628, 39);
+            this.PanelTitles.Size = new System.Drawing.Size(1085, 25);
             this.PanelTitles.TabIndex = 2;
             // 
             // dataGridViewBeforeDue
@@ -200,8 +200,8 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewBeforeDue.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewBeforeDue.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dataGridViewBeforeDue.Location = new System.Drawing.Point(0, 39);
-            this.dataGridViewBeforeDue.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dataGridViewBeforeDue.Location = new System.Drawing.Point(0, 25);
+            this.dataGridViewBeforeDue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridViewBeforeDue.Name = "dataGridViewBeforeDue";
             this.dataGridViewBeforeDue.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -215,7 +215,7 @@
             this.dataGridViewBeforeDue.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewBeforeDue.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dataGridViewBeforeDue.RowTemplate.Height = 40;
-            this.dataGridViewBeforeDue.Size = new System.Drawing.Size(452, 930);
+            this.dataGridViewBeforeDue.Size = new System.Drawing.Size(301, 595);
             this.dataGridViewBeforeDue.TabIndex = 9;
             this.dataGridViewBeforeDue.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBeforeDue_CellClick);
             // 
@@ -290,15 +290,15 @@
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewPastDue.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewPastDue.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dataGridViewPastDue.Location = new System.Drawing.Point(1176, 39);
-            this.dataGridViewPastDue.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dataGridViewPastDue.Location = new System.Drawing.Point(784, 25);
+            this.dataGridViewPastDue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridViewPastDue.Name = "dataGridViewPastDue";
             this.dataGridViewPastDue.ReadOnly = true;
             this.dataGridViewPastDue.RowHeadersVisible = false;
             this.dataGridViewPastDue.RowHeadersWidth = 51;
             this.dataGridViewPastDue.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewPastDue.RowTemplate.Height = 40;
-            this.dataGridViewPastDue.Size = new System.Drawing.Size(452, 930);
+            this.dataGridViewPastDue.Size = new System.Drawing.Size(301, 595);
             this.dataGridViewPastDue.TabIndex = 10;
             this.dataGridViewPastDue.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPastDue_CellClick);
             // 
@@ -356,10 +356,10 @@
             this.BtnPastDue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnPastDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnPastDue.ForeColor = System.Drawing.Color.Red;
-            this.BtnPastDue.Location = new System.Drawing.Point(452, 39);
-            this.BtnPastDue.Margin = new System.Windows.Forms.Padding(480, 0, 0, 0);
+            this.BtnPastDue.Location = new System.Drawing.Point(301, 25);
+            this.BtnPastDue.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.BtnPastDue.Name = "BtnPastDue";
-            this.BtnPastDue.Size = new System.Drawing.Size(724, 156);
+            this.BtnPastDue.Size = new System.Drawing.Size(483, 100);
             this.BtnPastDue.TabIndex = 18;
             this.BtnPastDue.Text = "Past Due!";
             this.BtnPastDue.UseVisualStyleBackColor = false;
@@ -370,8 +370,8 @@
             this.splitContainerItems.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.splitContainerItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainerItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerItems.Location = new System.Drawing.Point(452, 195);
-            this.splitContainerItems.Margin = new System.Windows.Forms.Padding(20, 22, 20, 22);
+            this.splitContainerItems.Location = new System.Drawing.Point(301, 125);
+            this.splitContainerItems.Margin = new System.Windows.Forms.Padding(13, 14, 13, 14);
             this.splitContainerItems.Name = "splitContainerItems";
             // 
             // splitContainerItems.Panel1
@@ -390,9 +390,9 @@
             this.splitContainerItems.Panel2.Controls.Add(this.ButtonInStockPants);
             this.splitContainerItems.Panel2.Controls.Add(this.ButtonInStockJackets);
             this.splitContainerItems.Panel2.Controls.Add(this.btnStock);
-            this.splitContainerItems.Size = new System.Drawing.Size(724, 635);
-            this.splitContainerItems.SplitterDistance = 328;
-            this.splitContainerItems.SplitterWidth = 16;
+            this.splitContainerItems.Size = new System.Drawing.Size(483, 406);
+            this.splitContainerItems.SplitterDistance = 218;
+            this.splitContainerItems.SplitterWidth = 11;
             this.splitContainerItems.TabIndex = 19;
             // 
             // btnHelmets
@@ -405,10 +405,10 @@
             this.btnHelmets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHelmets.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHelmets.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnHelmets.Location = new System.Drawing.Point(0, 334);
-            this.btnHelmets.Margin = new System.Windows.Forms.Padding(480, 0, 0, 0);
+            this.btnHelmets.Location = new System.Drawing.Point(0, 214);
+            this.btnHelmets.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.btnHelmets.Name = "btnHelmets";
-            this.btnHelmets.Size = new System.Drawing.Size(324, 89);
+            this.btnHelmets.Size = new System.Drawing.Size(214, 57);
             this.btnHelmets.TabIndex = 5;
             this.btnHelmets.Text = "Helmets";
             this.btnHelmets.UseVisualStyleBackColor = false;
@@ -424,10 +424,10 @@
             this.btnPants.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPants.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPants.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnPants.Location = new System.Drawing.Point(0, 245);
-            this.btnPants.Margin = new System.Windows.Forms.Padding(480, 0, 0, 0);
+            this.btnPants.Location = new System.Drawing.Point(0, 157);
+            this.btnPants.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.btnPants.Name = "btnPants";
-            this.btnPants.Size = new System.Drawing.Size(324, 89);
+            this.btnPants.Size = new System.Drawing.Size(214, 57);
             this.btnPants.TabIndex = 4;
             this.btnPants.Text = "Pants";
             this.btnPants.UseVisualStyleBackColor = false;
@@ -443,10 +443,10 @@
             this.btnCoats.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCoats.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCoats.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCoats.Location = new System.Drawing.Point(0, 156);
-            this.btnCoats.Margin = new System.Windows.Forms.Padding(480, 0, 0, 0);
+            this.btnCoats.Location = new System.Drawing.Point(0, 100);
+            this.btnCoats.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.btnCoats.Name = "btnCoats";
-            this.btnCoats.Size = new System.Drawing.Size(324, 89);
+            this.btnCoats.Size = new System.Drawing.Size(214, 57);
             this.btnCoats.TabIndex = 3;
             this.btnCoats.Text = "Jackets";
             this.btnCoats.UseVisualStyleBackColor = false;
@@ -463,9 +463,9 @@
             this.btnRented.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRented.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnRented.Location = new System.Drawing.Point(0, 0);
-            this.btnRented.Margin = new System.Windows.Forms.Padding(480, 0, 0, 0);
+            this.btnRented.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.btnRented.Name = "btnRented";
-            this.btnRented.Size = new System.Drawing.Size(324, 156);
+            this.btnRented.Size = new System.Drawing.Size(214, 100);
             this.btnRented.TabIndex = 2;
             this.btnRented.Text = "Rented";
             this.btnRented.UseVisualStyleBackColor = false;
@@ -481,10 +481,10 @@
             this.ButtonInStockBoots.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonInStockBoots.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonInStockBoots.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ButtonInStockBoots.Location = new System.Drawing.Point(0, 423);
-            this.ButtonInStockBoots.Margin = new System.Windows.Forms.Padding(15000, 0, 0, 0);
+            this.ButtonInStockBoots.Location = new System.Drawing.Point(0, 271);
+            this.ButtonInStockBoots.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.ButtonInStockBoots.Name = "ButtonInStockBoots";
-            this.ButtonInStockBoots.Size = new System.Drawing.Size(376, 89);
+            this.ButtonInStockBoots.Size = new System.Drawing.Size(250, 57);
             this.ButtonInStockBoots.TabIndex = 22;
             this.ButtonInStockBoots.Text = "Boots";
             this.ButtonInStockBoots.UseVisualStyleBackColor = false;
@@ -500,10 +500,10 @@
             this.ButtonInStockHelmets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonInStockHelmets.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonInStockHelmets.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ButtonInStockHelmets.Location = new System.Drawing.Point(0, 334);
-            this.ButtonInStockHelmets.Margin = new System.Windows.Forms.Padding(15000, 0, 0, 0);
+            this.ButtonInStockHelmets.Location = new System.Drawing.Point(0, 214);
+            this.ButtonInStockHelmets.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.ButtonInStockHelmets.Name = "ButtonInStockHelmets";
-            this.ButtonInStockHelmets.Size = new System.Drawing.Size(376, 89);
+            this.ButtonInStockHelmets.Size = new System.Drawing.Size(250, 57);
             this.ButtonInStockHelmets.TabIndex = 21;
             this.ButtonInStockHelmets.Text = "Helmets";
             this.ButtonInStockHelmets.UseVisualStyleBackColor = false;
@@ -519,10 +519,10 @@
             this.ButtonInStockPants.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonInStockPants.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonInStockPants.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ButtonInStockPants.Location = new System.Drawing.Point(0, 245);
-            this.ButtonInStockPants.Margin = new System.Windows.Forms.Padding(15000, 0, 0, 0);
+            this.ButtonInStockPants.Location = new System.Drawing.Point(0, 157);
+            this.ButtonInStockPants.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.ButtonInStockPants.Name = "ButtonInStockPants";
-            this.ButtonInStockPants.Size = new System.Drawing.Size(376, 89);
+            this.ButtonInStockPants.Size = new System.Drawing.Size(250, 57);
             this.ButtonInStockPants.TabIndex = 20;
             this.ButtonInStockPants.Text = "Pants";
             this.ButtonInStockPants.UseVisualStyleBackColor = false;
@@ -538,10 +538,10 @@
             this.ButtonInStockJackets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonInStockJackets.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonInStockJackets.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ButtonInStockJackets.Location = new System.Drawing.Point(0, 156);
-            this.ButtonInStockJackets.Margin = new System.Windows.Forms.Padding(15000, 0, 0, 0);
+            this.ButtonInStockJackets.Location = new System.Drawing.Point(0, 100);
+            this.ButtonInStockJackets.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.ButtonInStockJackets.Name = "ButtonInStockJackets";
-            this.ButtonInStockJackets.Size = new System.Drawing.Size(376, 89);
+            this.ButtonInStockJackets.Size = new System.Drawing.Size(250, 57);
             this.ButtonInStockJackets.TabIndex = 19;
             this.ButtonInStockJackets.Text = "Jackets";
             this.ButtonInStockJackets.UseVisualStyleBackColor = false;
@@ -558,9 +558,9 @@
             this.btnStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStock.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnStock.Location = new System.Drawing.Point(0, 0);
-            this.btnStock.Margin = new System.Windows.Forms.Padding(15000, 0, 0, 0);
+            this.btnStock.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.btnStock.Name = "btnStock";
-            this.btnStock.Size = new System.Drawing.Size(376, 156);
+            this.btnStock.Size = new System.Drawing.Size(250, 100);
             this.btnStock.TabIndex = 2;
             this.btnStock.Text = "Stock";
             this.btnStock.UseVisualStyleBackColor = false;
@@ -568,9 +568,9 @@
             // 
             // HomeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1628, 969);
+            this.ClientSize = new System.Drawing.Size(1085, 620);
             this.Controls.Add(this.splitContainerItems);
             this.Controls.Add(this.BtnPastDue);
             this.Controls.Add(this.splitContainerRentalOptions);
@@ -578,7 +578,7 @@
             this.Controls.Add(this.dataGridViewBeforeDue);
             this.Controls.Add(this.PanelTitles);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "HomeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HomeForm";
