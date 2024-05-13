@@ -1089,7 +1089,7 @@ namespace InventoryManagmentSystem
             }
             if (next)
             {
-                next = UpdateAcqsitionDatesJacket();
+                next = UpdateAllAcquisitions();
             }
             if(next)
             {
