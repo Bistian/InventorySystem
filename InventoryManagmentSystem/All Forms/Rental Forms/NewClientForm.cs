@@ -39,7 +39,6 @@ namespace InventoryManagmentSystem.Rental_Forms
             if(client.Count() == 0) { return; }
 
             txtBoxCustomerName.Text = client.GetColumnValue("Name");
-            txtBoxDriversLicense.Text = client.GetColumnValue("DriversLicenseNumber");
             maskPhone.Text = client.GetColumnValue("Phone");
             txtBoxEmail.Text = client.GetColumnValue("Email");
             textBoxChest.Text = client.GetColumnValue("Chest");
@@ -436,6 +435,15 @@ namespace InventoryManagmentSystem.Rental_Forms
             foreach(var item in classList)
             {
                 cbClass.Items.Add(item.GetColumnValue("Name"));
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                panelLicence.Visible = false;
+                txtBoxDriversLicense.Text = "N/A";
             }
         }
     }

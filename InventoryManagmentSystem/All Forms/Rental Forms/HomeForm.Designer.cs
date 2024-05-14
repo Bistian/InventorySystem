@@ -391,7 +391,7 @@
             this.splitContainerItems.Panel2.Controls.Add(this.ButtonInStockJackets);
             this.splitContainerItems.Panel2.Controls.Add(this.btnStock);
             this.splitContainerItems.Size = new System.Drawing.Size(483, 406);
-            this.splitContainerItems.SplitterDistance = 218;
+            this.splitContainerItems.SplitterDistance = 217;
             this.splitContainerItems.SplitterWidth = 11;
             this.splitContainerItems.TabIndex = 19;
             // 
@@ -408,7 +408,7 @@
             this.btnHelmets.Location = new System.Drawing.Point(0, 214);
             this.btnHelmets.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.btnHelmets.Name = "btnHelmets";
-            this.btnHelmets.Size = new System.Drawing.Size(214, 57);
+            this.btnHelmets.Size = new System.Drawing.Size(213, 57);
             this.btnHelmets.TabIndex = 5;
             this.btnHelmets.Text = "Helmets";
             this.btnHelmets.UseVisualStyleBackColor = false;
@@ -427,7 +427,7 @@
             this.btnPants.Location = new System.Drawing.Point(0, 157);
             this.btnPants.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.btnPants.Name = "btnPants";
-            this.btnPants.Size = new System.Drawing.Size(214, 57);
+            this.btnPants.Size = new System.Drawing.Size(213, 57);
             this.btnPants.TabIndex = 4;
             this.btnPants.Text = "Pants";
             this.btnPants.UseVisualStyleBackColor = false;
@@ -446,7 +446,7 @@
             this.btnCoats.Location = new System.Drawing.Point(0, 100);
             this.btnCoats.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.btnCoats.Name = "btnCoats";
-            this.btnCoats.Size = new System.Drawing.Size(214, 57);
+            this.btnCoats.Size = new System.Drawing.Size(213, 57);
             this.btnCoats.TabIndex = 3;
             this.btnCoats.Text = "Jackets";
             this.btnCoats.UseVisualStyleBackColor = false;
@@ -465,7 +465,7 @@
             this.btnRented.Location = new System.Drawing.Point(0, 0);
             this.btnRented.Margin = new System.Windows.Forms.Padding(320, 0, 0, 0);
             this.btnRented.Name = "btnRented";
-            this.btnRented.Size = new System.Drawing.Size(214, 100);
+            this.btnRented.Size = new System.Drawing.Size(213, 100);
             this.btnRented.TabIndex = 2;
             this.btnRented.Text = "Rented";
             this.btnRented.UseVisualStyleBackColor = false;
@@ -484,7 +484,7 @@
             this.ButtonInStockBoots.Location = new System.Drawing.Point(0, 271);
             this.ButtonInStockBoots.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.ButtonInStockBoots.Name = "ButtonInStockBoots";
-            this.ButtonInStockBoots.Size = new System.Drawing.Size(250, 57);
+            this.ButtonInStockBoots.Size = new System.Drawing.Size(251, 57);
             this.ButtonInStockBoots.TabIndex = 22;
             this.ButtonInStockBoots.Text = "Boots";
             this.ButtonInStockBoots.UseVisualStyleBackColor = false;
@@ -503,7 +503,7 @@
             this.ButtonInStockHelmets.Location = new System.Drawing.Point(0, 214);
             this.ButtonInStockHelmets.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.ButtonInStockHelmets.Name = "ButtonInStockHelmets";
-            this.ButtonInStockHelmets.Size = new System.Drawing.Size(250, 57);
+            this.ButtonInStockHelmets.Size = new System.Drawing.Size(251, 57);
             this.ButtonInStockHelmets.TabIndex = 21;
             this.ButtonInStockHelmets.Text = "Helmets";
             this.ButtonInStockHelmets.UseVisualStyleBackColor = false;
@@ -522,7 +522,7 @@
             this.ButtonInStockPants.Location = new System.Drawing.Point(0, 157);
             this.ButtonInStockPants.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.ButtonInStockPants.Name = "ButtonInStockPants";
-            this.ButtonInStockPants.Size = new System.Drawing.Size(250, 57);
+            this.ButtonInStockPants.Size = new System.Drawing.Size(251, 57);
             this.ButtonInStockPants.TabIndex = 20;
             this.ButtonInStockPants.Text = "Pants";
             this.ButtonInStockPants.UseVisualStyleBackColor = false;
@@ -541,7 +541,7 @@
             this.ButtonInStockJackets.Location = new System.Drawing.Point(0, 100);
             this.ButtonInStockJackets.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.ButtonInStockJackets.Name = "ButtonInStockJackets";
-            this.ButtonInStockJackets.Size = new System.Drawing.Size(250, 57);
+            this.ButtonInStockJackets.Size = new System.Drawing.Size(251, 57);
             this.ButtonInStockJackets.TabIndex = 19;
             this.ButtonInStockJackets.Text = "Jackets";
             this.ButtonInStockJackets.UseVisualStyleBackColor = false;
@@ -560,7 +560,7 @@
             this.btnStock.Location = new System.Drawing.Point(0, 0);
             this.btnStock.Margin = new System.Windows.Forms.Padding(10000, 0, 0, 0);
             this.btnStock.Name = "btnStock";
-            this.btnStock.Size = new System.Drawing.Size(250, 100);
+            this.btnStock.Size = new System.Drawing.Size(251, 100);
             this.btnStock.TabIndex = 2;
             this.btnStock.Text = "Stock";
             this.btnStock.UseVisualStyleBackColor = false;

@@ -138,7 +138,7 @@ namespace InventoryManagmentSystem
                 labelClientClass.Text = item.GetColumnValue("Name");
             }
 
-            labelProfileDrivers.Text = "Point of contact:";
+            labelProfileDrivers.Text = "License Number:";
 
             panelProfileRentalInfo.Visible = true;
             panelProfileMeasurments.Visible = true;
@@ -340,8 +340,10 @@ namespace InventoryManagmentSystem
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
-            panelProfileRentalInfo.Visible = false;
-            panelProfileMeasurments.Visible = false;
+            labelProfileDrivers.Text = "License Number:";
+
+            panelProfileRentalInfo.Visible = true;
+            panelProfileMeasurments.Visible = true;
             flowLayoutPanelProfile.Visible = true;
             license = labelProfileName.Text;
 

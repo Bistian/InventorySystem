@@ -545,11 +545,11 @@ namespace InventoryManagmentSystem
         public static bool ClientInsert(SqlConnection connection, Dictionary<string, string> client)
         {
             var exists = ClientFindByDriversLicense(connection, client["DriversLicenseNumber"]);
-            if (exists.Count() > 0)
-            {
-                MessageBox.Show("Client already exists.");
-                return false;
-            }
+            //if (exists.Count() > 0)
+            //{
+            //    MessageBox.Show("Client already exists.");
+            //    return false;
+            //}
 
             string query = $@"
                 INSERT INTO tbClients(
