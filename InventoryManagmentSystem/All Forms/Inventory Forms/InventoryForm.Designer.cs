@@ -35,6 +35,18 @@
             this.ItemLable = new System.Windows.Forms.Label();
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.dataGridInv = new System.Windows.Forms.DataGridView();
+            this.labelSearch = new System.Windows.Forms.Label();
+            this.searchBar = new System.Windows.Forms.TextBox();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.TopPanel = new System.Windows.Forms.Panel();
+            this.CheckRented = new System.Windows.Forms.CheckBox();
+            this.checkActive = new System.Windows.Forms.CheckBox();
+            this.checkRetired = new System.Windows.Forms.CheckBox();
+            this.UsersButton = new InventoryManagmentSystem.CustomButton();
+            this.scOuter = new System.Windows.Forms.SplitContainer();
+            this.scInner = new System.Windows.Forms.SplitContainer();
+            this.btnToggleFilter = new System.Windows.Forms.Button();
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,18 +60,6 @@
             this.column_color = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.column_delete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.labelSearch = new System.Windows.Forms.Label();
-            this.searchBar = new System.Windows.Forms.TextBox();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.TopPanel = new System.Windows.Forms.Panel();
-            this.checkActive = new System.Windows.Forms.CheckBox();
-            this.checkRetired = new System.Windows.Forms.CheckBox();
-            this.labelNewItem = new System.Windows.Forms.Label();
-            this.UsersButton = new InventoryManagmentSystem.CustomButton();
-            this.scOuter = new System.Windows.Forms.SplitContainer();
-            this.scInner = new System.Windows.Forms.SplitContainer();
-            this.btnToggleFilter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.TopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
@@ -80,7 +80,7 @@
             this.ItemLable.Location = new System.Drawing.Point(2, 15);
             this.ItemLable.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.ItemLable.Name = "ItemLable";
-            this.ItemLable.Size = new System.Drawing.Size(238, 52);
+            this.ItemLable.Size = new System.Drawing.Size(156, 32);
             this.ItemLable.TabIndex = 0;
             this.ItemLable.Text = "Item Type:";
             // 
@@ -95,7 +95,7 @@
             this.cbItemType.Location = new System.Drawing.Point(126, 8);
             this.cbItemType.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.cbItemType.Name = "cbItemType";
-            this.cbItemType.Size = new System.Drawing.Size(103, 69);
+            this.cbItemType.Size = new System.Drawing.Size(103, 46);
             this.cbItemType.TabIndex = 1;
             this.cbItemType.SelectedIndexChanged += new System.EventHandler(this.comboBoxItem_SelectedIndexChanged);
             // 
@@ -139,7 +139,7 @@
             this.dataGridInv.EnableHeadersVisualStyles = false;
             this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridInv.Location = new System.Drawing.Point(0, 0);
-            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridInv.Margin = new System.Windows.Forms.Padding(1);
             this.dataGridInv.Name = "dataGridInv";
             this.dataGridInv.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -157,9 +157,171 @@
             this.dataGridInv.RowTemplate.Height = 40;
             this.dataGridInv.RowTemplate.ReadOnly = true;
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridInv.Size = new System.Drawing.Size(910, 754);
+            this.dataGridInv.Size = new System.Drawing.Size(910, 728);
             this.dataGridInv.TabIndex = 1;
             this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellClick);
+            // 
+            // labelSearch
+            // 
+            this.labelSearch.AutoSize = true;
+            this.labelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelSearch.Location = new System.Drawing.Point(229, 14);
+            this.labelSearch.Margin = new System.Windows.Forms.Padding(0);
+            this.labelSearch.Name = "labelSearch";
+            this.labelSearch.Size = new System.Drawing.Size(119, 32);
+            this.labelSearch.TabIndex = 19;
+            this.labelSearch.Text = "Search:";
+            // 
+            // searchBar
+            // 
+            this.searchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBar.Location = new System.Drawing.Point(327, 6);
+            this.searchBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.searchBar.Name = "searchBar";
+            this.searchBar.Size = new System.Drawing.Size(182, 45);
+            this.searchBar.TabIndex = 18;
+            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.MinimumWidth = 6;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewImageColumn1.Width = 125;
+            // 
+            // dataGridViewImageColumn2
+            // 
+            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewImageColumn2.HeaderText = "";
+            this.dataGridViewImageColumn2.MinimumWidth = 6;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            this.dataGridViewImageColumn2.ReadOnly = true;
+            this.dataGridViewImageColumn2.Width = 125;
+            // 
+            // TopPanel
+            // 
+            this.TopPanel.BackColor = System.Drawing.Color.Maroon;
+            this.TopPanel.Controls.Add(this.CheckRented);
+            this.TopPanel.Controls.Add(this.checkActive);
+            this.TopPanel.Controls.Add(this.checkRetired);
+            this.TopPanel.Controls.Add(this.UsersButton);
+            this.TopPanel.Controls.Add(this.labelSearch);
+            this.TopPanel.Controls.Add(this.ItemLable);
+            this.TopPanel.Controls.Add(this.searchBar);
+            this.TopPanel.Controls.Add(this.cbItemType);
+            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TopPanel.Location = new System.Drawing.Point(0, 0);
+            this.TopPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.TopPanel.Name = "TopPanel";
+            this.TopPanel.Size = new System.Drawing.Size(1370, 78);
+            this.TopPanel.TabIndex = 20;
+            // 
+            // CheckRented
+            // 
+            this.CheckRented.AutoSize = true;
+            this.CheckRented.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CheckRented.ForeColor = System.Drawing.SystemColors.Window;
+            this.CheckRented.Location = new System.Drawing.Point(517, 21);
+            this.CheckRented.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.CheckRented.Name = "CheckRented";
+            this.CheckRented.Size = new System.Drawing.Size(119, 33);
+            this.CheckRented.TabIndex = 24;
+            this.CheckRented.Text = "Rented";
+            this.CheckRented.UseVisualStyleBackColor = true;
+            this.CheckRented.CheckedChanged += new System.EventHandler(this.RentedCheck_CheckedChanged);
+            // 
+            // checkActive
+            // 
+            this.checkActive.AutoSize = true;
+            this.checkActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkActive.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkActive.Location = new System.Drawing.Point(517, 0);
+            this.checkActive.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.checkActive.Name = "checkActive";
+            this.checkActive.Size = new System.Drawing.Size(105, 33);
+            this.checkActive.TabIndex = 23;
+            this.checkActive.Text = "Active";
+            this.checkActive.UseVisualStyleBackColor = true;
+            this.checkActive.Click += new System.EventHandler(this.checkActive_Click);
+            // 
+            // checkRetired
+            // 
+            this.checkRetired.AutoSize = true;
+            this.checkRetired.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkRetired.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkRetired.Location = new System.Drawing.Point(517, 45);
+            this.checkRetired.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.checkRetired.Name = "checkRetired";
+            this.checkRetired.Size = new System.Drawing.Size(121, 33);
+            this.checkRetired.TabIndex = 21;
+            this.checkRetired.Text = "Retired";
+            this.checkRetired.UseVisualStyleBackColor = true;
+            this.checkRetired.Click += new System.EventHandler(this.checkRetired_Click);
+            // 
+            // UsersButton
+            // 
+            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
+            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
+            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
+            this.UsersButton.Location = new System.Drawing.Point(1307, 6);
+            this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 0, 2, 2);
+            this.UsersButton.Name = "UsersButton";
+            this.UsersButton.Size = new System.Drawing.Size(63, 43);
+            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.UsersButton.TabIndex = 17;
+            this.UsersButton.TabStop = false;
+            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click_1);
+            // 
+            // scOuter
+            // 
+            this.scOuter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scOuter.Location = new System.Drawing.Point(0, 78);
+            this.scOuter.Name = "scOuter";
+            // 
+            // scOuter.Panel1
+            // 
+            this.scOuter.Panel1.Controls.Add(this.scInner);
+            // 
+            // scOuter.Panel2
+            // 
+            this.scOuter.Panel2.Controls.Add(this.dataGridInv);
+            this.scOuter.Size = new System.Drawing.Size(1370, 728);
+            this.scOuter.SplitterDistance = 456;
+            this.scOuter.TabIndex = 21;
+            // 
+            // scInner
+            // 
+            this.scInner.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scInner.Location = new System.Drawing.Point(0, 0);
+            this.scInner.Margin = new System.Windows.Forms.Padding(1);
+            this.scInner.Name = "scInner";
+            // 
+            // scInner.Panel2
+            // 
+            this.scInner.Panel2.Controls.Add(this.btnToggleFilter);
+            this.scInner.Size = new System.Drawing.Size(456, 728);
+            this.scInner.SplitterDistance = 151;
+            this.scInner.SplitterWidth = 2;
+            this.scInner.TabIndex = 0;
+            // 
+            // btnToggleFilter
+            // 
+            this.btnToggleFilter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnToggleFilter.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.btnToggleFilter.Location = new System.Drawing.Point(0, 0);
+            this.btnToggleFilter.Margin = new System.Windows.Forms.Padding(1);
+            this.btnToggleFilter.Name = "btnToggleFilter";
+            this.btnToggleFilter.Size = new System.Drawing.Size(303, 728);
+            this.btnToggleFilter.TabIndex = 0;
+            this.btnToggleFilter.Text = "Toggle Filter";
+            this.btnToggleFilter.UseVisualStyleBackColor = true;
+            this.btnToggleFilter.Click += new System.EventHandler(this.btnToggleFilter_Click);
             // 
             // Num
             // 
@@ -277,167 +439,9 @@
             this.column_delete.Name = "column_delete";
             this.column_delete.ReadOnly = true;
             // 
-            // labelSearch
-            // 
-            this.labelSearch.AutoSize = true;
-            this.labelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSearch.Location = new System.Drawing.Point(229, 14);
-            this.labelSearch.Margin = new System.Windows.Forms.Padding(0);
-            this.labelSearch.Name = "labelSearch";
-            this.labelSearch.Size = new System.Drawing.Size(179, 52);
-            this.labelSearch.TabIndex = 19;
-            this.labelSearch.Text = "Search:";
-            // 
-            // searchBar
-            // 
-            this.searchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBar.Location = new System.Drawing.Point(327, 6);
-            this.searchBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(182, 67);
-            this.searchBar.TabIndex = 18;
-            this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewImageColumn1.HeaderText = "";
-            this.dataGridViewImageColumn1.MinimumWidth = 6;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewImageColumn1.Width = 200;
-            // 
-            // dataGridViewImageColumn2
-            // 
-            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewImageColumn2.HeaderText = "";
-            this.dataGridViewImageColumn2.MinimumWidth = 6;
-            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            this.dataGridViewImageColumn2.ReadOnly = true;
-            this.dataGridViewImageColumn2.Width = 200;
-            // 
-            // TopPanel
-            // 
-            this.TopPanel.BackColor = System.Drawing.Color.Maroon;
-            this.TopPanel.Controls.Add(this.checkActive);
-            this.TopPanel.Controls.Add(this.checkRetired);
-            this.TopPanel.Controls.Add(this.labelNewItem);
-            this.TopPanel.Controls.Add(this.UsersButton);
-            this.TopPanel.Controls.Add(this.labelSearch);
-            this.TopPanel.Controls.Add(this.ItemLable);
-            this.TopPanel.Controls.Add(this.searchBar);
-            this.TopPanel.Controls.Add(this.cbItemType);
-            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopPanel.Location = new System.Drawing.Point(0, 0);
-            this.TopPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(1370, 52);
-            this.TopPanel.TabIndex = 20;
-            // 
-            // checkActive
-            // 
-            this.checkActive.AutoSize = true;
-            this.checkActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkActive.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkActive.Location = new System.Drawing.Point(517, 12);
-            this.checkActive.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.checkActive.Name = "checkActive";
-            this.checkActive.Size = new System.Drawing.Size(158, 46);
-            this.checkActive.TabIndex = 23;
-            this.checkActive.Text = "Active";
-            this.checkActive.UseVisualStyleBackColor = true;
-            this.checkActive.Click += new System.EventHandler(this.checkActive_Click);
-            // 
-            // checkRetired
-            // 
-            this.checkRetired.AutoSize = true;
-            this.checkRetired.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkRetired.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkRetired.Location = new System.Drawing.Point(611, 12);
-            this.checkRetired.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.checkRetired.Name = "checkRetired";
-            this.checkRetired.Size = new System.Drawing.Size(177, 46);
-            this.checkRetired.TabIndex = 21;
-            this.checkRetired.Text = "Retired";
-            this.checkRetired.UseVisualStyleBackColor = true;
-            this.checkRetired.Click += new System.EventHandler(this.checkRetired_Click);
-            // 
-            // labelNewItem
-            // 
-            this.labelNewItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelNewItem.AutoSize = true;
-            this.labelNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNewItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelNewItem.Location = new System.Drawing.Point(1187, 15);
-            this.labelNewItem.Margin = new System.Windows.Forms.Padding(0);
-            this.labelNewItem.Name = "labelNewItem";
-            this.labelNewItem.Size = new System.Drawing.Size(228, 52);
-            this.labelNewItem.TabIndex = 20;
-            this.labelNewItem.Text = "New Item:";
-            // 
-            // UsersButton
-            // 
-            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
-            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
-            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
-            this.UsersButton.Location = new System.Drawing.Point(1307, 6);
-            this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 0, 2, 2);
-            this.UsersButton.Name = "UsersButton";
-            this.UsersButton.Size = new System.Drawing.Size(63, 43);
-            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.UsersButton.TabIndex = 17;
-            this.UsersButton.TabStop = false;
-            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click_1);
-            // 
-            // scOuter
-            // 
-            this.scOuter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scOuter.Location = new System.Drawing.Point(0, 52);
-            this.scOuter.Name = "scOuter";
-            // 
-            // scOuter.Panel1
-            // 
-            this.scOuter.Panel1.Controls.Add(this.scInner);
-            // 
-            // scOuter.Panel2
-            // 
-            this.scOuter.Panel2.Controls.Add(this.dataGridInv);
-            this.scOuter.Size = new System.Drawing.Size(1370, 754);
-            this.scOuter.SplitterDistance = 456;
-            this.scOuter.TabIndex = 21;
-            // 
-            // scInner
-            // 
-            this.scInner.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scInner.Location = new System.Drawing.Point(0, 0);
-            this.scInner.Name = "scInner";
-            // 
-            // scInner.Panel2
-            // 
-            this.scInner.Panel2.Controls.Add(this.btnToggleFilter);
-            this.scInner.Size = new System.Drawing.Size(456, 754);
-            this.scInner.SplitterDistance = 151;
-            this.scInner.TabIndex = 0;
-            // 
-            // btnToggleFilter
-            // 
-            this.btnToggleFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnToggleFilter.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.btnToggleFilter.Location = new System.Drawing.Point(0, 0);
-            this.btnToggleFilter.Name = "btnToggleFilter";
-            this.btnToggleFilter.Size = new System.Drawing.Size(301, 754);
-            this.btnToggleFilter.TabIndex = 0;
-            this.btnToggleFilter.Text = "Toggle Filter";
-            this.btnToggleFilter.UseVisualStyleBackColor = true;
-            this.btnToggleFilter.Click += new System.EventHandler(this.btnToggleFilter_Click);
-            // 
             // InventoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(1370, 806);
@@ -473,10 +477,13 @@
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
         private System.Windows.Forms.Panel TopPanel;
-        private System.Windows.Forms.Label labelNewItem;
         private System.Windows.Forms.CheckBox checkRetired;
         private System.Windows.Forms.CheckBox checkActive;
         public System.Windows.Forms.ComboBox cbItemType;
+        private System.Windows.Forms.SplitContainer scOuter;
+        private System.Windows.Forms.SplitContainer scInner;
+        private System.Windows.Forms.Button btnToggleFilter;
+        private System.Windows.Forms.CheckBox CheckRented;
         private System.Windows.Forms.DataGridViewTextBoxColumn Num;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_item_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_brand;
@@ -490,8 +497,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn column_color;
         private System.Windows.Forms.DataGridViewImageColumn column_edit;
         private System.Windows.Forms.DataGridViewImageColumn column_delete;
-        private System.Windows.Forms.SplitContainer scOuter;
-        private System.Windows.Forms.SplitContainer scInner;
-        private System.Windows.Forms.Button btnToggleFilter;
     }
 }

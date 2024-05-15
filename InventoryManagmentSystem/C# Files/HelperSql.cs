@@ -160,7 +160,7 @@ namespace InventoryManagmentSystem
         /// </summary>
         /// <returns>Bool was successfull or not.</returns>
         public static bool BootsUpdate(SqlConnection connection,
-            string itemId, string brand, string size, string material, string manufacture)
+            string itemId, string brand, string size, string material,string condition, string manufacture)
         {
             Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
@@ -178,6 +178,10 @@ namespace InventoryManagmentSystem
             if (!string.IsNullOrEmpty(manufacture))
             {
                 fieldsToUpdate.Add("manufacture", manufacture);
+            }
+            if (!string.IsNullOrEmpty(condition))
+            {
+                fieldsToUpdate.Add("condition", condition);
             }
             int count = fieldsToUpdate.Count;
             if (count == 0) { return false; }
@@ -202,7 +206,7 @@ namespace InventoryManagmentSystem
             {
                 query += "ManufactureDate = @ManufactureDate";
             }
-            query += $" WHERE ItemId = @ItemId";
+            query += $" WHERE Cast(ItemId AS NVARCHAR(50)) = @ItemId";
             try
             {
                 connection.Open();
@@ -213,6 +217,16 @@ namespace InventoryManagmentSystem
                 if (fieldsToUpdate.ContainsKey("manufacture")) { command.Parameters.AddWithValue("@ManufactureDate", manufacture); }
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
+
+
+                 query = $"UPDATE tbItems SET Condition = @Condition " +
+                    $"WHERE Cast(Id AS NVARCHAR(50)) = @ItemId";
+
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Condition", condition); 
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
+                command.ExecuteNonQuery();
+
                 return true;
             }
             catch (Exception ex)
@@ -915,7 +929,7 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static bool HelmetUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string color)
+        public static bool HelmetUpdate(SqlConnection connection, string itemId, string brand, string manufacture,string condition, string color)
         {
             var fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
@@ -955,7 +969,15 @@ namespace InventoryManagmentSystem
                 SqlCommand command = new SqlCommand(query, connection);
                 if (fieldsToUpdate.ContainsKey("brand")) { command.Parameters.AddWithValue("@Brand", brand); }
                 if (fieldsToUpdate.ContainsKey("manufacture")) { command.Parameters.AddWithValue("@ManufactureDate", manufacture); }
-                if (fieldsToUpdate.ContainsKey("size")) { command.Parameters.AddWithValue("@Color", color); }
+                if (fieldsToUpdate.ContainsKey("color")) { command.Parameters.AddWithValue("@Color", color); }
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
+                command.ExecuteNonQuery();
+
+                query = $"UPDATE tbItems SET Condition = @Condition " +
+                   $"WHERE Cast(Id AS NVARCHAR(50)) = @ItemId";
+
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Condition", condition);
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
                 return true;
@@ -1569,7 +1591,7 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static bool JacketUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string size)
+        public static bool JacketUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string condition, string size)
         {
             var fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
@@ -1611,6 +1633,14 @@ namespace InventoryManagmentSystem
                 if (fieldsToUpdate.ContainsKey("brand")) { command.Parameters.AddWithValue("@Brand", brand); }
                 if (fieldsToUpdate.ContainsKey("manufacture")) { command.Parameters.AddWithValue("@ManufactureDate", manufacture); }
                 if (fieldsToUpdate.ContainsKey("size")) { command.Parameters.AddWithValue("@Size", size); }
+                command.ExecuteNonQuery();
+
+                query = $"UPDATE tbItems SET Condition = @Condition " +
+                   $"WHERE Cast(Id AS NVARCHAR(50)) = @ItemId";
+
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Condition", condition);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
                 return true;
             }
@@ -1696,7 +1726,7 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static bool MaskUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string size)
+        public static bool MaskUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string condition, string size)
         {
             var fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
@@ -1737,6 +1767,14 @@ namespace InventoryManagmentSystem
                 if (fieldsToUpdate.ContainsKey("brand")) { command.Parameters.AddWithValue("@Brand", brand); }
                 if (fieldsToUpdate.ContainsKey("manufacture")) { command.Parameters.AddWithValue("@ManufactureDate", manufacture); }
                 if (fieldsToUpdate.ContainsKey("size")) { command.Parameters.AddWithValue("@Size", size); }
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
+                command.ExecuteNonQuery();
+
+                query = $"UPDATE tbItems SET Condition = @Condition " +
+                  $"WHERE Cast(Id AS NVARCHAR(50)) = @ItemId";
+
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Condition", condition);
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
                 return true;
@@ -1823,7 +1861,7 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static bool PantsUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string size)
+        public static bool PantsUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string condition, string size)
         {
             var fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
@@ -1864,6 +1902,14 @@ namespace InventoryManagmentSystem
                 if (fieldsToUpdate.ContainsKey("brand")) { command.Parameters.AddWithValue("@Brand", brand); }
                 if (fieldsToUpdate.ContainsKey("manufacture")) { command.Parameters.AddWithValue("@ManufactureDate", manufacture); }
                 if (fieldsToUpdate.ContainsKey("size")) { command.Parameters.AddWithValue("@Size", size); }
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
+                command.ExecuteNonQuery();
+
+                query = $"UPDATE tbItems SET Condition = @Condition " +
+                  $"WHERE Cast(Id AS NVARCHAR(50)) = @ItemId";
+
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Condition", condition);
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
                 return true;

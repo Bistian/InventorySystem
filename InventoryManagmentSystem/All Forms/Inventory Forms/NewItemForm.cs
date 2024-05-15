@@ -252,7 +252,8 @@ namespace InventoryManagmentSystem.Rental_Forms
                     item.GetColumnValue("Id"),
                     cbBrand.Text,
                     cbSize.Text,
-                    cbMaterial.Text,
+                    cbMaterial.Text, 
+                    cbCondition.Text,
                     dtManufacture.Value.Date.ToString());
             }
             else if (itemType == "helmet") 
@@ -260,31 +261,35 @@ namespace InventoryManagmentSystem.Rental_Forms
                 isUpdated = HelperSql.HelmetUpdate(connection,
                     item.GetColumnValue("Id"),
                     cbBrand.Text, 
-                    dtManufacture.Value.Date.ToString(), 
+                    dtManufacture.Value.Date.ToString(),
+                    cbCondition.Text,
                     cbColor.Text); 
             }
             else if (itemType == "jacket") 
             {
-                isUpdate = HelperSql.JacketUpdate(connection,
+                isUpdated = HelperSql.JacketUpdate(connection,
                     item.GetColumnValue("Id"),
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
+                    cbCondition.Text,
                     cbSize.Text);
             }
             else if (itemType == "mask")
             {
-                isUpdate = HelperSql.MaskUpdate(connection,
+                isUpdated = HelperSql.MaskUpdate(connection,
                     item.GetColumnValue("Id"),
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
+                    cbCondition.Text,
                     cbSize.Text);
             }
             else if (itemType == "pants")
             {
-                isUpdate = HelperSql.PantsUpdate(connection,
+                isUpdated = HelperSql.PantsUpdate(connection,
                     item.GetColumnValue("Id"),
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
+                    cbCondition.Text,
                     cbSize.Text);
             }
 
@@ -363,9 +368,10 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (isUpdate)
             {
                 cbItemType.Enabled = false;
+                tbSerialNumber.Enabled = false;
             }
 
-            if (cbItemType.SelectedIndex == -1)
+            else if (cbItemType.SelectedIndex == -1)
             {
                 labelTitle.Text = "Please select an item type";
                 tbSerialNumber.Enabled = false;
@@ -378,7 +384,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 cbColor.Enabled = false;
                 return;
             }
-            if (lastItemTypeIndex == -1)
+            else if (lastItemTypeIndex == -1)
             {
                 tbSerialNumber.Enabled = true;
                 dtManufacture.Enabled = true;

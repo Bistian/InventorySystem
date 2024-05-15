@@ -55,12 +55,15 @@ namespace InventoryManagmentSystem
             int count = 1;
             foreach (Item item in itemList)
             {
-                if(!checkActive.Checked || !checkRetired.Checked)
-                {
                     string condition = item.GetColumnValue("Condition");
-                    if (checkActive.Checked && condition == "Retired") { continue; }
-                    if (checkRetired.Checked && condition != "Retired") { continue; }
+                    string location = item.GetColumnValue("Location");
+                if(checkActive.Checked)
+                {
+                    if (location != "Fire-Tec" ||  condition == "Retired") { continue; }
                 }
+                    if (checkRetired.Checked && condition != "Retired") { continue; }
+                    if (CheckRented.Checked && location == "Fire-Tec") { continue; }
+                
 
                 string type = item.GetColumnValue("ItemType");
                 if (type != cbItemType.Text) { continue; }
@@ -210,6 +213,7 @@ namespace InventoryManagmentSystem
             var row = dataGridInv.Rows[e.RowIndex];
             string colName = dataGridInv.Columns[e.ColumnIndex].Name;
             string itemType = cbItemType.Text.ToLower();
+            string ClientId = dataGridInv.Rows[e.RowIndex].Cells["column_location"].Value.ToString();
             string serialNumber = dataGridInv.Rows[e.RowIndex].Cells["column_serial"].Value.ToString();
             try
             {
@@ -227,15 +231,34 @@ namespace InventoryManagmentSystem
                 }
                 else
                 {
-                    string itemId = row.Cells["column_item_id"].Value.ToString();
-                    var form = new RentalHistoryForm(itemId, string.Empty);
+                    if(ClientId == "Fire-Tec")
+                    {
+                        string itemId = row.Cells["column_item_id"].Value.ToString();
+                        var form = new RentalHistoryForm(itemId, string.Empty);
 
-                    if(form.IsDisposed) { MessageBox.Show("No history found"); }
+                        if(form.IsDisposed) { MessageBox.Show("No history found"); }
+                        else
+                        {
+                            var parentForm = this.ParentForm as MainForm;
+                            parentForm.openChildForm(form);
+                        }
+                    }
                     else
                     {
                         var parentForm = this.ParentForm as MainForm;
-                        parentForm.openChildForm(form);
-                    } 
+                        NewRentalModuleForm Profile = new NewRentalModuleForm(null, "");
+                        try
+                        {
+                            Profile.LoadProfile(ClientId);
+                            parentForm.openChildForm(Profile);
+
+                            this.Dispose();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -360,11 +383,21 @@ namespace InventoryManagmentSystem
 
         private void checkRetired_Click(object sender, EventArgs e)
         {
+            if(checkRetired.Checked)
+            {
+                CheckRented.Checked = false;
+                checkActive.Checked = false;
+            }
             DisplayItems();
         }
 
         private void checkActive_Click(object sender, EventArgs e)
         {
+            if(checkActive.Checked)
+            {
+                checkRetired.Checked = false;
+                CheckRented.Checked = false;
+            }     
             DisplayItems();
         }
 
@@ -391,6 +424,17 @@ namespace InventoryManagmentSystem
         private void btnToggleFilter_Click(object sender, EventArgs e)
         {
             ToggleFilter();
+        }
+
+        private void RentedCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if(CheckRented.Checked)
+            {
+                checkActive.Checked = false;
+                checkRetired.Checked = false;
+
+            }
+                DisplayItems();
         }
     }
 }
