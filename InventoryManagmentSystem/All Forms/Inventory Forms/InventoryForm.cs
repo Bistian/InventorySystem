@@ -405,6 +405,7 @@ namespace InventoryManagmentSystem
         {
             NewItemForm ModForm = new NewItemForm();
             ModForm.ShowDialog();
+            InitItems();
             DisplayItems();
         }
 
