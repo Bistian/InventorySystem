@@ -140,7 +140,7 @@ namespace InventoryManagmentSystem
             NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
             try
             {
-                Profile.LoadProfile(clientLicense);
+                Profile.LoadProfile(clientLicense,clientName);
                 parentForm.openChildForm(Profile);
 
                 this.Dispose();

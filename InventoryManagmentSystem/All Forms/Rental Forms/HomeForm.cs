@@ -209,7 +209,7 @@ namespace InventoryManagmentSystem
             NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
             try
             {
-                Profile.LoadProfile(clientId);
+                Profile.LoadProfile(clientId,clientName);
                 parentForm.openChildForm(Profile);
 
                 this.Dispose();
@@ -234,7 +234,7 @@ namespace InventoryManagmentSystem
             NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
             try
             {
-                Profile.LoadProfile(clientId);
+                Profile.LoadProfile(clientId, clientName);
                 parentForm.openChildForm(Profile);
 
                 this.Dispose();

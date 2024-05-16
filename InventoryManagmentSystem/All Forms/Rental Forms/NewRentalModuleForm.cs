@@ -100,12 +100,12 @@ namespace InventoryManagmentSystem
             }
         }
 
-        public void LoadProfile(string clientId)
+        public void LoadProfile(string clientId, string Name)
         {
             var client = HelperSql.ClientFindById(connection, clientId);
             if (client.IsEmpty())
             {
-                client = HelperSql.ClientFindByDriversLicense(connection, clientId);
+                client = HelperSql.ClientFindByDriversLicense(connection, clientId, Name);
             }
             if (client.Count() == 0)
             {

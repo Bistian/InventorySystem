@@ -412,15 +412,16 @@ namespace InventoryManagmentSystem
             return list;
         }
 
-        public static Item ClientFindByDriversLicense(SqlConnection connection, string license)
+        public static Item ClientFindByDriversLicense(SqlConnection connection, string license, string Name)
         {
             var item = new Item();
-            string query = $"SELECT TOP 1 * FROM tbClients WHERE DriversLicenseNumber=@License";
+            string query = $"SELECT TOP 1 * FROM tbClients WHERE DriversLicenseNumber=@License AND Name=@Name";
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@License", license);
+                command.Parameters.AddWithValue("@Name", Name);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -558,12 +559,12 @@ namespace InventoryManagmentSystem
 
         public static bool ClientInsert(SqlConnection connection, Dictionary<string, string> client)
         {
-            var exists = ClientFindByDriversLicense(connection, client["DriversLicenseNumber"]);
-            //if (exists.Count() > 0)
-            //{
-            //    MessageBox.Show("Client already exists.");
-            //    return false;
-            //}
+            //var exists = ClientFindByDriversLicense(connection, client["DriversLicenseNumber"]);
+            ////if (exists.Count() > 0)
+            ////{
+            ////    MessageBox.Show("Client already exists.");
+            ////    return false;
+            ////}
 
             string query = $@"
                 INSERT INTO tbClients(

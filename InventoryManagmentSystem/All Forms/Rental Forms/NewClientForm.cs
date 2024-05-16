@@ -252,6 +252,8 @@ namespace InventoryManagmentSystem.Rental_Forms
             bool inserted = HelperSql.ClientInsert(connection, client);
             if(inserted == false) { return false; }
 
+           
+
             //hiding input panels
             panelFinalize.Visible = false;
             panelRentalInfo.Visible = false;
@@ -336,12 +338,12 @@ namespace InventoryManagmentSystem.Rental_Forms
                     //individual
                     if (comboBoxRentalType.SelectedIndex == 0)
                     {
-                        DockedIn.LoadProfile(DockedIn.license);
+                        DockedIn.LoadProfile(DockedIn.license, txtBoxCustomerName.Text);
                     }
                     //department
                     else if (comboBoxRentalType.SelectedIndex == 1 || comboBoxRentalType.SelectedIndex == 2)
                     {
-                        DockedIn.LoadProfile(DockedIn.license);
+                        DockedIn.LoadProfile(DockedIn.license, txtBoxCustomerName.Text);
                     }
                 }
             }
@@ -351,13 +353,13 @@ namespace InventoryManagmentSystem.Rental_Forms
                 if (comboBoxRentalType.SelectedIndex == 0)
                 {
                     UpdateClient();
-                    DockedIn.LoadProfile(DockedIn.license);
+                    DockedIn.LoadProfile(DockedIn.license, txtBoxCustomerName.Text);
                 }
                 //department
                 else if (comboBoxRentalType.SelectedIndex == 1 || comboBoxRentalType.SelectedIndex == 2)
                 {
                     UpdateClient();
-                    DockedIn.LoadProfile(DockedIn.license);
+                    DockedIn.LoadProfile(DockedIn.license, txtBoxCustomerName.Text);
                 }
                 panelContactInfo.Visible = false;
                 panelAddress.Visible = false;
@@ -431,10 +433,23 @@ namespace InventoryManagmentSystem.Rental_Forms
             var academyId = academyList[index].GetColumnValue("Id");
             classList = HelperSql.ClassListByAcademy(connection, academyId);
             if(classList == null) { return; }
-
+            string currClass;
             foreach(var item in classList)
             {
-                cbClass.Items.Add(item.GetColumnValue("Name"));
+                string startDate = item.GetColumnValue("StartDate");
+                string endDate = item.GetColumnValue("EndDate");
+                var StartDateFinal = DateTime.Parse(startDate);
+                var startyear = StartDateFinal.Year;
+                var startmonth = StartDateFinal.Month;
+                var startday = StartDateFinal.Day;
+
+                var EndDateFinal = DateTime.Parse(endDate);
+                var endyear = EndDateFinal.Year;
+                var endmonth = EndDateFinal.Month;
+                var endday = EndDateFinal.Day;
+
+                currClass = item.GetColumnValue("Name") + $" {startmonth}/{startday}/{startyear} - {endmonth}/{endday}/{endyear}";
+                cbClass.Items.Add(currClass);
             }
         }
 
