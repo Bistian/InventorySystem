@@ -197,6 +197,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
             string message = "Are you sure you want to save this Item?";
             string title = "Save Item";
+            string noSpaceSerial = tbSerialNumber.Text.Replace(" ", string.Empty);
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return false; }
 
             GetTableName();
@@ -206,7 +207,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 return false;
             }
 
-            var item = HelperSql.ItemFindBySerialNumber(connection, itemType, tbSerialNumber.Text);
+            var item = HelperSql.ItemFindBySerialNumber(connection, itemType, noSpaceSerial.ToUpper());
             if (item != null)
             {
                 message = "Item already exists, do you want to update it?";
@@ -215,8 +216,8 @@ namespace InventoryManagmentSystem.Rental_Forms
                 UpdateItem();
                 return false;
             }
-
-            string uuid = HelperSql.ItemInsertAndGetUuid(connection, cbItemType.Text, tbSerialNumber.Text, cbCondition.Text, "Rent");
+       
+            string uuid = HelperSql.ItemInsertAndGetUuid(connection, cbItemType.Text, noSpaceSerial.ToUpper(), cbCondition.Text, "Rent"); ;
             if (uuid == "")
             {
                 Console.WriteLine("ERROR: UUID not found.");
@@ -243,8 +244,8 @@ namespace InventoryManagmentSystem.Rental_Forms
             string message = "Are you sure you want to update this Item?";
             string title = "Update Item";
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return false; }
-
-            var item = HelperSql.ItemFindBySerialNumber(connection, cbItemType.Text, tbSerialNumber.Text);
+            string noSpaceSerial = tbSerialNumber.Text.Replace(" ", string.Empty);
+            var item = HelperSql.ItemFindBySerialNumber(connection, cbItemType.Text, noSpaceSerial.ToUpper());
             bool isUpdated = false;
             if (itemType == "boots") 
             {
