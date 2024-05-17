@@ -222,12 +222,14 @@ namespace InventoryManagmentSystem
                     if (itemType == "boots") { UpdateBoots(e); }
                     else if (itemType == "helmet") { UpdateHelmet(e); }
                     else if (itemType == "jacket" || itemType == "pants" || itemType == "mask") { UpdateJacketOrPantsOrMasks(e); }
+                    InitItems();
                     DisplayItems();
                 }
                 else if (colName == "column_delete")
                 {
-                    /*DeleteItem(serialNumber);
-                    LoadInventory();*/
+                    DeleteItem(serialNumber);
+                    InitItems();
+                    DisplayItems();
                 }
                 else
                 {
@@ -323,16 +325,17 @@ namespace InventoryManagmentSystem
             // TODO: Do I really want to delete?
             Guid uuid;
             
-            string table = "tb" + cbItemType.Text;
+            string table = "tb" + CapitalizeFirstLetter(cbItemType.Text);
 
-            if(cbItemType.Text == "Jacket" || cbItemType.Text == "Helmet" || cbItemType.Text == "Mask")
+            if(cbItemType.Text == "jacket" || cbItemType.Text == "helmet" || cbItemType.Text == "mask")
             {
                 table += "s";
             }
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand($"DELETE FROM {table} WHERE SerialNumber LIKE '{serialNumber}'", connection);
+                SqlCommand command = new SqlCommand($"UPDATE tbItems SET Condition = @Condition WHERE SerialNumber LIKE '{serialNumber}'", connection);
+                command.Parameters.AddWithValue("@Condition", "Retired");
                 command.ExecuteNonQuery();
                 connection.Close();
                 MessageBox.Show("Item has been successfully deleted");
@@ -343,6 +346,16 @@ namespace InventoryManagmentSystem
                 Console.WriteLine(ex.Message);
                 MessageBox.Show("Failed to delete the item.");
             }
+        }
+
+        static string CapitalizeFirstLetter(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return str;
+            }
+
+            return char.ToUpper(str[0]) + str.Substring(1);
         }
 
         private string GetCellValueAsString(DataGridViewCellEventArgs e, string cellName)
