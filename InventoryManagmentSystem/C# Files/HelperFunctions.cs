@@ -43,9 +43,48 @@ namespace InventoryManagmentSystem
 
         public static void DataGridHideTime(DataGridView grid, string columnName)
         {
-            grid.Columns[columnName].DefaultCellStyle.Format = "d";
+            try
+            {
+                foreach (DataGridViewRow row in grid.Rows)
+                {
+                    if (DateTime.TryParse(row.Cells[columnName].Value.ToString(), out DateTime dateValue))
+                    {
+                        row.Cells[columnName].Value = dateValue;
+                    }
+                }
+                grid.Columns[columnName].DefaultCellStyle.Format = "d";
+            }
+            catch(Exception ex) { Console.WriteLine(ex.Message); }
         }
 
+        public static string DateCrop(string date, string format = null)
+        {
+            var d = DateTime.Parse(date);
+            string Y = d.Year.ToString();
+            string M = d.Month.ToString();
+            string D = d.Day.ToString();
+            if(format == "YYYY/MM/DD")
+            {
+                return $"{Y}/{M}/{D}";
+            }
+            if (format == "YYYY-MM-DD")
+            {
+                return $"{Y}-{M}-{D}";
+            }
+            if (format == "DD/MM/YYYY")
+            {
+                return $"{D}/{M}/{Y}";
+            }
+            if (format == "DD-MM-YYYY")
+            {
+                return $"{D}-{M}-{Y}";
+            }
+            if (format == "MM-DD-YYYY")
+            {
+                return $"{M}-{D}-{Y}";
+            }
+            return $"{M}/{D}/{Y}";
+        }
         public static string MakeTableFromItemType(string itemType)
         {
             return $"tb{char.ToUpper(itemType[0]) + itemType.Substring(1)}";
