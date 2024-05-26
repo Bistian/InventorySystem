@@ -110,11 +110,11 @@ namespace InventoryManagmentSystem
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            if(cbItemType.SelectedIndex < 0) { return; }
-            if(!HelperFunctions.YesNoMessageBox("Do you want to add this Item?", "Add Item")) { return; }
+            if (cbItemType.SelectedIndex < 0) { return; }
+            if (!HelperFunctions.YesNoMessageBox("Do you want to add this Item?", "Add Item")) { return; }
 
             string table = "";
-            if(cbItemType.Text == "boots") { table = "tbBoots"; }
+            if (cbItemType.Text == "boots") { table = "tbBoots"; }
             else if (cbItemType.Text == "helmet") { table = "tbHelmets"; }
             else if (cbItemType.Text == "jacket") { table = "tbJackets"; }
             else if (cbItemType.Text == "mask") { table = "tbMasks"; }
@@ -122,7 +122,7 @@ namespace InventoryManagmentSystem
             else { return; }
 
             // Loop through the table.
-            while(true)
+            while (true)
             {
                 //Guid uuid = HelperSql.ItemInsertAndGetUuid(connection, cbItemType.Text);
                 // Add item id to null.
@@ -138,10 +138,10 @@ namespace InventoryManagmentSystem
                     SqlCommand command = new SqlCommand(query, connection);
                     connection.Open();
                     int rowsAffected = command.ExecuteNonQuery(); connection.Close();
-                    if(rowsAffected < 1) 
-                    { 
+                    if (rowsAffected < 1)
+                    {
                         //HelperSql.ItemDelete(connection, uuid);
-                        break; 
+                        break;
                     }
                 }
                 catch (Exception ex)
@@ -154,12 +154,11 @@ namespace InventoryManagmentSystem
             Console.WriteLine("Gaje likes minors!");
         }
 
-
-        private void button1_Click_1(object sender, EventArgs e)
+        private bool CopyBootsSerial()
         {
             string message = "Are you sure you want to update cereal?";
             DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (messageBox == DialogResult.No) { return; }
+            if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
                 "SET tbItems.SerialNumber = tbBoots.SerialNumber " +
@@ -175,13 +174,927 @@ namespace InventoryManagmentSystem
 
 
                 command.ExecuteNonQuery();
-                MessageBox.Show("yummy");
+                connection.Close();
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
             }
-            connection.Close();
+        }
+
+        private bool CopyBootsCondition()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Condition = tbBoots.Condition " +
+                "FROM tbBoots " +
+                "WHERE tbItems.Id = tbBoots.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyBootsDueDate()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.DueDate = tbBoots.DueDate " +
+                "FROM tbBoots " +
+                "WHERE tbItems.Id = tbBoots.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyBootsLocation()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Location = tbBoots.Location " +
+                "FROM tbBoots " +
+                "WHERE tbItems.Id = tbBoots.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyBoots()
+        {
+            bool next = CopyBootsSerial();
+            if (next)
+            {
+                next = CopyBootsCondition();
+            }
+            if (next)
+            {
+                next = CopyBootsDueDate();
+            }
+            if (next)
+            {
+                next = CopyBootsLocation();
+            }
+            return next;
+        }
+
+        private bool CopyJacketsSerial()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.SerialNumber = tbJackets.SerialNumber " +
+                "FROM tbJackets " +
+                "WHERE tbItems.Id = tbJackets.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyJacketsCondition()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Condition = tbJackets.Condition " +
+                "FROM tbJackets " +
+                "WHERE tbItems.Id = tbJackets.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyJacketsDueDate()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.DueDate = tbJackets.DueDate " +
+                "FROM tbJackets " +
+                "WHERE tbItems.Id = tbJackets.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyJacketsLocation()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Location = tbJackets.Location " +
+                "FROM tbJackets " +
+                "WHERE tbItems.Id = tbJackets.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyJackets()
+        {
+            bool next = CopyJacketsSerial();
+            if (next)
+            {
+                next = CopyJacketsCondition();
+            }
+            if (next)
+            {
+                next = CopyJacketsDueDate();
+            }
+            if (next)
+            {
+                next = CopyJacketsLocation();
+            }
+            return next;
+        }
+
+        private bool CopyPantsSerial()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.SerialNumber = tbPants.SerialNumber " +
+                "FROM tbPants " +
+                "WHERE tbItems.Id = tbPants.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyPantsCondition()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Condition = tbPants.Condition " +
+                "FROM tbPants " +
+                "WHERE tbItems.Id = tbPants.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyPantsDueDate()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.DueDate = tbPants.DueDate " +
+                "FROM tbPants " +
+                "WHERE tbItems.Id = tbPants.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyPantsLocation()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Location = tbPants.Location " +
+                "FROM tbPants " +
+                "WHERE tbItems.Id = tbPants.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyPants()
+        {
+            bool next = CopyPantsSerial();
+            if (next)
+            {
+                next = CopyPantsCondition();
+            }
+            if (next)
+            {
+                next = CopyPantsDueDate();
+            }
+            if (next)
+            {
+                next = CopyPantsLocation();
+            }
+            return next;
+        }
+
+        private bool CopyMasksSerial()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.SerialNumber = tbMasks.SerialNumber " +
+                "FROM tbMasks " +
+                "WHERE tbItems.Id = tbMasks.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyMasksCondition()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Condition = tbMasks.Condition " +
+                "FROM tbMasks " +
+                "WHERE tbItems.Id = tbMasks.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyMasksDueDate()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.DueDate = tbMasks.DueDate " +
+                "FROM tbMasks " +
+                "WHERE tbItems.Id = tbMasks.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyMasksLocation()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Location = tbMasks.Location " +
+                "FROM tbMasks " +
+                "WHERE tbItems.Id = tbMasks.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyMasks()
+        {
+            bool next = CopyMasksSerial();
+            if (next)
+            {
+                next = CopyMasksCondition();
+            }
+            if (next)
+            {
+                next = CopyMasksDueDate();
+            }
+            if (next)
+            {
+                next = CopyMasksLocation();
+            }
+            return next;
+        }
+
+        private bool CopyHelmetSerial()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.SerialNumber = tbHelmets.SerialNumber " +
+                "FROM tbHelmets " +
+                "WHERE tbItems.Id = tbHelmets.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyHelmetCondition()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Condition = tbHelmets.Condition " +
+                "FROM tbHelmets " +
+                "WHERE tbItems.Id = tbHelmets.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyHelmetDueDate()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.DueDate = tbHelmets.DueDate " +
+                "FROM tbHelmets " +
+                "WHERE tbItems.Id = tbHelmets.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyHelmetLocation()
+        {
+
+            string query = "UPDATE tbItems " +
+                "SET tbItems.Location = tbHelmets.Location " +
+                "FROM tbHelmets " +
+                "WHERE tbItems.Id = tbHelmets.itemId ";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool CopyHelmet()
+        {
+            bool next = CopyHelmetSerial();
+            if (next)
+            {
+                next = CopyHelmetCondition();
+            }
+            if (next)
+            {
+                next = CopyHelmetDueDate();
+            }
+            if (next)
+            {
+                next = CopyHelmetLocation();
+            }
+            return next;
+        }
+
+        private bool ClearInvalidEntries()
+        {
+
+            string query = "Delete FROM tbItems " +
+                "WHERE  SerialNumber IS NULL";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool SetActivity()
+        {
+            string query = "UPDATE tbClients " +
+                           "SET isActive = 1 " +
+                           "WHERE isActive IS NULL";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateLocation()
+        {
+            string query = "UPDATE tbItems " +
+               "SET Location = C.Id " +
+               "FROM tbItems AS I " +
+               "INNER JOIN tbClients AS C " +
+               "ON I.Location = C.DriversLicenseNumber";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateAcqsitionDatesJacket()
+        {
+            string query = "UPDATE tbJackets " +
+                           "SET AcquisitionDate = GETDATE() " +
+                           "WHERE AcquisitionDate IS NULL";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateAcqsitionDatesPants()
+        {
+            string query = "UPDATE tbPants " +
+                           "SET AcquisitionDate = GETDATE() " +
+                           "WHERE AcquisitionDate IS NULL";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateAcqsitionDatesHelmet()
+        {
+            string query = "UPDATE tbHelmets " +
+                           "SET AcquisitionDate = GETDATE() " +
+                           "WHERE AcquisitionDate IS NULL";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateAcqsitionDatesBoots()
+        {
+            string query = "UPDATE tbBoots " +
+                           "SET AcquisitionDate = GETDATE() " +
+                           "WHERE AcquisitionDate IS NULL";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateAcqsitionDatesMask()
+        {
+            string query = "UPDATE tbMasks " +
+                           "SET AcquisitionDate = GETDATE() " +
+                           "WHERE AcquisitionDate IS NULL";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private bool UpdateAllAcquisitions()
+        {
+            bool next = UpdateAcqsitionDatesBoots();
+            if(next)
+            {
+             UpdateAcqsitionDatesPants();
+            }
+            if(next)
+            {
+                UpdateAcqsitionDatesJacket();
+            }
+            if (next)
+            {
+                UpdateAcqsitionDatesMask();
+            }
+            if (next)
+            {
+                UpdateAcqsitionDatesHelmet();
+            }
+            return next;
+        }
+
+        private bool Lowerify()
+        {
+            string query = "UPDATE tbItems " +
+                            " SET ItemType = LOWER(ItemType); ";
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            bool next = CopyBoots();
+            if (next)
+            {
+                next = CopyJackets();
+            }
+            if (next)
+            {
+                next = CopyPants();
+            }
+            if (next)
+            {
+                next = CopyMasks();
+            }
+            if (next)
+            {
+                next = CopyHelmet();
+            }
+            if (next)
+            {
+                ClearInvalidEntries();
+            }
+            if (next)
+            {
+                next = SetActivity();
+            }
+            if (next)
+            {
+                next = UpdateLocation();
+            }
+            if (next)
+            {
+                next = UpdateAcqsitionDatesJacket();
+            }
+            if(next)
+            {
+                Lowerify();
+            }
         }
     }
 }

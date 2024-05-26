@@ -259,7 +259,6 @@ namespace InventoryManagmentSystem.Rental_Forms
             panelMeasurments.Visible = false;
             panelAddress.Visible = false;
             panelContactInfo.Visible = false;
-
             return true;
         }
 

@@ -10,6 +10,7 @@
 /.vs/InventoryManagmentSystem/v17/.suo
 /.vs/InventorySystem/v17/.wsuo
 /.vs/VSWorkspaceState.json
+/.vs/InventoryManagmentSystem.csproj.dtbcache.json
 /InventoryManagmentSystem/obj/Debug/DesignTimeResolveAssemblyReferences.cache
 /InventoryManagmentSystem/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 /InventoryManagmentSystem/obj/Debug/InventoryManagmentSystem.csproj.AssemblyReference.cache
@@ -22,3 +23,4 @@
 /InventoryManagmentSystem/bin/Debug/InventoryManagmentSystem.pdb
 /UpgradeLog.htm
 /.vs/InventoryManagmentSystem/v17/HierarchyCache.v1.txt
+/InventoryManagmentSystem/bin

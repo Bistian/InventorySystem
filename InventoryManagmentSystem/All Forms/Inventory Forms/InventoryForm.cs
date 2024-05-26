@@ -171,6 +171,7 @@ namespace InventoryManagmentSystem
             // Reset search bar.
             searchBar.Text = "";
             ChangeVisibleColumns();
+            InitItems();
             DisplayItems();
         }
 

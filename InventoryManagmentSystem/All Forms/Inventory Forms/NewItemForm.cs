@@ -27,6 +27,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             cbCondition.Items.Add("Used");
 
             ManageFieldsAvailability();
+            InitializeItemType();
             GetTableName();
         }
 
@@ -384,6 +385,10 @@ namespace InventoryManagmentSystem.Rental_Forms
                 cbBrand.Enabled = true;
                 btnAddBrand.Enabled = true;
                 cbCondition.Enabled = true;
+            }
+            if(cbItemType.Text == "jacket" || cbItemType.Text == "pants")
+            {
+                cbSize.Items.Clear();
             }
             lastItemTypeIndex = cbItemType.SelectedIndex;
             InitializeItemTypeSpecifics();

@@ -214,7 +214,11 @@ namespace InventoryManagmentSystem
             }
             else
             {
-                if (AddAcademy()) { this.Close(); }
+                if (AddAcademy()) 
+                {
+                    HelperFunctions.OpenChildFormToPanel(parent.panelDocker, new AcademyList(parent));
+                    this.Close(); 
+                }
             }
         }
 

@@ -1,4 +1,4 @@
-﻿using InventoryManagmentSystem.All_Forms;
+﻿using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace InventoryManagmentSystem
 {
-    public partial class RentalForm : BaseForm
+    public partial class RentalForm : Form
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
@@ -24,53 +24,67 @@ namespace InventoryManagmentSystem
         int daysForWarning = 14;
         int setSelection = 0;
 
+        string SearchTerm = "";
         public RentalForm(string ItemType)
         {
             InitializeComponent();
-            string[] columns = { "DDate" };
-            HelperFunctions.DataGridFormatDate(dataGridPastDue, columns);
-            columns[0] = "DueDate";
-            HelperFunctions.DataGridFormatDate(dataGridRented, columns);
             RefreshForm(ItemType);
+            InitTables();
         }
 
-
-        private void DisplayRents(bool isGreater)
+        private string QueryForPastDue()
         {
-            string sign =  isGreater ? ">" : "<";
             string query = $@"
-                SELECT c.Id, Name, DueDate 
-                FROM tbItems AS i 
-                JOIN tbClients AS c ON c.Id = i.Location
-                WHERE DueDate {sign} CONVERT(DATE, GETDATE())
+                SELECT c.Id, c.Name, i.DueDate AS LateDueDate, i.ItemCount
+                FROM tbClients AS c
+                JOIN (
+                    SELECT Location, MIN(DueDate) AS DueDate, COUNT(*) AS ItemCount
+                    FROM tbItems AS i_inner
+                    WHERE i_inner.Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
+                      AND i_inner.Condition NOT IN ('Retired') 
+                      AND i_inner.DueDate IS NOT NULL 
+                      AND i_inner.DueDate < GETDATE()
+                    GROUP BY Location
+                ) AS i ON CAST(c.Id AS NVARCHAR(MAX)) = i.Location;
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-                int i = 0;
-                while (reader.Read())
-                {
-                    if(isGreater)
-                    {
-                        dataGridRented.Rows.Add(++i, reader[0], reader[1], reader[2]);
-                    }
-                    else
-                    {
-                        dataGridPastDue.Rows.Add(++i, reader[0], reader[1], reader[2]);
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            finally
-            {
-                connection.Close();
-            }
+            return query;
+        }
+
+        private string QueryForRented()
+        {
+            string query = $@"
+                SELECT c.Id, c.Name, i.DueDate AS ClosestDueDate, ic.ItemCount AS ItemCountPerLocation
+                FROM tbClients AS c
+                JOIN (
+                    SELECT Location, DueDate,
+                           ROW_NUMBER() OVER (PARTITION BY Location ORDER BY ABS(DATEDIFF(DAY, GETDATE(), DueDate))) AS RowNum
+                    FROM tbItems
+                    WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
+                      AND Condition NOT IN ('Retired') 
+                      AND DueDate IS NOT NULL 
+                ) AS i ON CAST(c.Id AS NVARCHAR(MAX)) = i.Location
+                JOIN (
+                    SELECT Location, COUNT(*) AS ItemCount
+                    FROM tbItems
+                    WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
+                      AND Condition NOT IN ('Retired') 
+                      AND DueDate IS NOT NULL 
+                      AND DueDate > GETDATE()
+                    GROUP BY Location
+                ) AS ic ON CAST(c.Id AS NVARCHAR(MAX)) = ic.Location
+                WHERE i.RowNum = 1;
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            return query;
+        }
+
+        private void InitTables()
+        {
+            LoadTables(dataGridRented, QueryForRented(), "column_rented_due_date");
+            LoadTables(dataGridPastDue, QueryForPastDue(), "column_past_due_due_date");
+            HelperFunctions.DataGridHideTime(dataGridRented, "column_rented_due_date");
+            HelperFunctions.DataGridHideTime(dataGridPastDue, "column_past_due_due_date");
         }
 
         private string QuerySwitch(string itemType, string sign)
@@ -84,53 +98,6 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// Query for rented and post due grids.
-        /// </summary>
-        /// <param name="isRented">true for rented, false for past due</param>
-        /// <returns></returns>
-        private string Query(bool isRented, string ItemType)
-        {
-            string query = "";
-            string sign = isRented ? ">=" : "<";
-   
-            if (ItemType == null)
-            {
-                query = $@"
-                SELECT ItemType='Boots', tbClients.Name, DueDate, SerialNumber FROM tbBoots 
-                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location OR tbClients.Id = tbBoots.Location
-                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
-
-                UNION SELECT ItemType='Helmet', tbClients.Name, DueDate, SerialNumber FROM tbHelmets 
-                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbHelmets.Location OR tbClients.Id = tbHelmets.Location
-                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
-
-                UNION SELECT ItemType='Jacket', tbClients.Name, DueDate, SerialNumber FROM tbJackets 
-                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbJackets.Location OR tbClients.Id = tbJackets.Location
-                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
-
-                UNION SELECT ItemType='Pants', tbClients.Name, DueDate, SerialNumber FROM tbPants 
-                INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbPants.Location OR tbClients.Id = tbPants.Location
-                WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
-            ";
-            }
-            else if (ItemType.ToLower() == "boots")
-            {
-                query = $@"
-                    SELECT ItemType='boots', tbClients.Name, tbClients.DriversLicenseNumber, DueDate, SerialNumber FROM tbBoots 
-                    INNER JOIN tbClients ON tbClients.DriversLicenseNumber = tbBoots.Location OR tbClients.Id = tbBoots.Location
-                    WHERE DueDate IS NOT NULL AND DueDate {sign} CONVERT(DATE, GETDATE()) 
-                    ";
-            }
-            else
-            {
-                query += QuerySwitch(ItemType, sign);
-            }
-
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            return query;
-        }
-
-        /// <summary>
         /// Render the tables.
         /// </summary>
         /// <param name="grid">Which table you are going to render.</param>
@@ -139,11 +106,31 @@ namespace InventoryManagmentSystem
         private void LoadTables(DataGridView grid, string query, string columnName)
         {
             // Change the styling for the date column.
-            grid.Columns[columnName].DefaultCellStyle.Format = "d";
+            HelperFunctions.DataGridHideTime(grid, columnName);
             grid.Rows.Clear();
-
-            DisplayRents(true);
-            DisplayRents(false);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int i = 0;
+                while (reader.Read())
+                {
+                    ++i;
+                    grid.Rows.Add(i,
+                        reader[0].ToString(),
+                        reader[1].ToString(),
+                        reader[2].ToString(),
+                        reader[3].ToString()
+                        );
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally { connection.Close(); }
         }
 
         // Check if rented due date is getting closer and turns date red.
@@ -226,76 +213,105 @@ namespace InventoryManagmentSystem
 
         private void RefreshForm(string ItemType)
         {
-            if (ItemType == null)
-            {
-                cbItemType.SelectedIndex = 5;
-                LoadTables(dataGridRented, Query(true, null), "DueDate");
-                LoadTables(dataGridPastDue, Query(false, null), "DDate");
-            }
-            else if (ItemType == "Jacket")
-            {
-                cbItemType.SelectedIndex = 0;
-                LoadTables(dataGridRented, Query(true, "Jacket"), "DueDate");
-                LoadTables(dataGridPastDue, Query(false, "Jacket"), "DDate");
-            }
-            else if (ItemType == "Pants")
-            {
-                cbItemType.SelectedIndex = 1;
-                LoadTables(dataGridRented, Query(true, "Pants"), "DueDate");
-                LoadTables(dataGridPastDue, Query(false, "Pants"), "DDate");
-            }
-            else if (ItemType == "Boots")
-            {
-                cbItemType.SelectedIndex = 2;
-                LoadTables(dataGridRented, Query(true, "Boots"), "DueDate");
-                LoadTables(dataGridPastDue, Query(false, "Boots"), "DDate");
-            }
-            else if (ItemType == "Helmet")
-            {
-                cbItemType.SelectedIndex = 3;
-                LoadTables(dataGridRented, Query(true, "Helmet"), "DueDate");
-                LoadTables(dataGridPastDue, Query(false, "Helmet"), "DDate");
-            }
-            else if (ItemType == "Mask")
-            {
-                cbItemType.SelectedIndex = 4;
-                LoadTables(dataGridRented, Query(true, "Mask"), "DueDate");
-                LoadTables(dataGridPastDue, Query(false, "Mask"), "DDate");
-            }
-        }
-
-        private void cbItemType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(cbItemType.SelectedIndex == 0)
-            {
-                RefreshForm("Jacket");
-            }
-            else if (cbItemType.SelectedIndex == 1)
-            {
-                RefreshForm("Pants");
-            }
-            else if (cbItemType.SelectedIndex == 2)
-            {
-                RefreshForm("Boots");
-            }
-            else if (cbItemType.SelectedIndex == 3)
-            {
-                RefreshForm("Helmet");
-            }
-            else if (cbItemType.SelectedIndex == 4)
-            {
-                RefreshForm("Mask");
-            }
-            else if (cbItemType.SelectedIndex == 5)
-            {
-                RefreshForm(null);
-            }
+            LoadTables(dataGridRented, QueryForRented(), "column_rented_due_date");
+            LoadTables(dataGridPastDue, QueryForPastDue(), "column_past_due_due_date");
         }
 
         private void labelSearch_TextChanged(object sender, EventArgs e)
         {
-            if(searchBar.Text.Length < 1) { return; }
+            if (searchBar.Text.Length < 1)
+            {
+                foreach (DataGridViewRow row in dataGridPastDue.Rows)
+                {
+                    row.Visible = true;
+                }
+                foreach (DataGridViewRow rowRented in dataGridRented.Rows)
+                {
+                    rowRented.Visible = true;
+                }
+                return;
+            }
 
+            SearchTerm = searchBar.Text;
+
+            foreach (DataGridViewRow row in dataGridPastDue.Rows)
+            {
+                // Convert cell value to lowercase for case-insensitive comparison
+                string cellValue = row.Cells["column_past_due_rentee"].Value?.ToString().ToLower();
+                if (cellValue != null && cellValue.IndexOf(SearchTerm, StringComparison.OrdinalIgnoreCase) < 0)
+                {
+                    row.Visible = false;
+                }
+                else
+                {
+                    row.Visible = true;
+                }
+            }
+            foreach (DataGridViewRow row in dataGridRented.Rows)
+            {
+                // Convert cell value to lowercase for case-insensitive comparison
+                string cellValue = row.Cells["column_rented_rentee"].Value?.ToString().ToLower();
+                if (cellValue != null && cellValue.IndexOf(SearchTerm, StringComparison.OrdinalIgnoreCase) < 0)
+                {
+                    row.Visible = false;
+                }
+                else
+                {
+                    row.Visible = true;
+                }
+            }
+
+
+        }
+
+        private void dataGridPastDue_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) { return; }
+            DataGridViewRow row = dataGridPastDue.Rows[e.RowIndex];
+            string column = dataGridPastDue.Columns[e.ColumnIndex].Name;
+
+            string clientName = row.Cells["column_past_due_rentee"].Value.ToString();
+            string clientId = row.Cells["column_past_due_id"].Value.ToString();
+
+
+            var parentForm = this.ParentForm as MainForm;
+            NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
+            try
+            {
+                Profile.LoadProfile(clientId);
+                parentForm.openChildForm(Profile);
+
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
+            }
+        }
+
+        private void dataGridRented_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) { return; }
+            DataGridViewRow row = dataGridRented.Rows[e.RowIndex];
+            string column = dataGridRented.Columns[e.ColumnIndex].Name;
+
+            string clientName = row.Cells["column_rented_rentee"].Value.ToString();
+            string clientId = row.Cells["column_rented_id"].Value.ToString();
+
+
+            var parentForm = this.ParentForm as MainForm;
+            NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
+            try
+            {
+                Profile.LoadProfile(clientId);
+                parentForm.openChildForm(Profile);
+
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using InventoryManagmentSystem.Academy;
 using InventoryManagmentSystem.Rental_Forms;
+using Microsoft.VisualBasic.Devices;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -13,25 +14,24 @@ namespace InventoryManagmentSystem
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
 
-        //Used for query this is a secret to see if frey will ever notice it but i doubt it since he is kind of an idiot lol that guy is the leader of the club and will never figure out a riddle as difficult as this one so i basically bodied him into reading an entire long line probably at like 150% zoom cause he cant even see lol get fucked......je (Frey: I noticed)
-        string ItemIdClient = string.Empty;
-        string ItemIdInventory = string.Empty;
+        private string ItemIdClient = string.Empty;
+        private string ItemIdInventory = string.Empty;
 
+        private string ReplacmentSerial = "";
+        private string dueDate = "";
+        private string ClientId = string.Empty;
+        private string ClassId = string.Empty;
+
+        public int ReturnReplace = 0;
+        public string license = "";
+        public string drivers = string.Empty;
         public bool ExistingUser = false;
         public string currentUser = "";
-        public string license = "";
-        public int ReturnReplace = 0;
-        string ReplacmentSerial = "";
-        string dueDate = "";
-        string ClientId = string.Empty;
-        string ClassId = string.Empty;
-        public string drivers = string.Empty;
-
 
         public NewRentalModuleForm(string rentalType = null, string clientName = null)
         {
             InitializeComponent();
-     
+
 
             if (clientName != null)
             {
@@ -53,14 +53,14 @@ namespace InventoryManagmentSystem
             dataGridViewClient.Columns["column_manufacture_date"].DefaultCellStyle.Format = "d";
 
             var items = HelperSql.ItemFindByClientId(connection, ClientId);
-            if(items.Count == 0)
+            if (items.Count == 0)
             {
                 items = HelperSql.ItemFindByClientId(connection, drivers);
             }
             if (items == null) { return; }
 
             dataGridViewClient.Rows.Clear();
-            foreach ( var item in items )
+            foreach (var item in items)
             {
                 dataGridViewClient.Rows.Add(
                     item.GetColumnValue("ItemType"),
@@ -78,14 +78,14 @@ namespace InventoryManagmentSystem
             dataGridInv.Columns["ManufactureDate"].DefaultCellStyle.Format = "d";
             dataGridInv.Rows.Clear();
             var items = HelperSql.ItemFindBySearchBar(connection, textBoxSearchBar.Text);
-            if(items == null ) { return; }
+            if (items == null) { return; }
 
-            foreach(var item in items )
+            foreach (var item in items)
             {
-                if(item.GetColumnValue("ItemType") != cbItemType.Text ) { continue; }
+                if (item.GetColumnValue("ItemType") != cbItemType.Text) { continue; }
 
                 string materialOrColor = item.GetColumnValue("Material");
-                if( materialOrColor == "" )
+                if (materialOrColor == "")
                 {
                     materialOrColor = item.GetColumnValue("Color");
                 }
@@ -103,13 +103,14 @@ namespace InventoryManagmentSystem
         public void LoadProfile(string clientId)
         {
             var client = HelperSql.ClientFindById(connection, clientId);
-            if( client.IsEmpty() ) { 
+            if (client.IsEmpty())
+            {
                 client = HelperSql.ClientFindByDriversLicense(connection, clientId);
             }
-            if(client.Count() == 0) 
+            if (client.Count() == 0)
             {
                 Console.WriteLine("Client not found.");
-                return; 
+                return;
             }
 
             labelProfileName.Text = client.GetColumnValue("Name");
@@ -132,18 +133,20 @@ namespace InventoryManagmentSystem
             license = labelClientDrivers.Text;
 
             var item = HelperSql.ClassFindByClassId(connection, ClassId);
-            if(item != null )
+            if (item != null)
             {
                 labelClientClass.Text = item.GetColumnValue("Name");
             }
 
             labelProfileDrivers.Text = "Point of contact:";
 
-            flowLayoutPanelProfile.Visible = true;
             panelProfileRentalInfo.Visible = false;
             panelProfileMeasurments.Visible = false;
+            flowLayoutPanelProfile.Visible = true;
             license = labelProfileName.Text;
 
+            panelButtons.Visible = true;
+            panelButtons.AutoScroll = false;
             flowLayoutPanelProfile.Visible = true;
             flowLayoutPanelProfile.AutoScroll = false;
             splitContainerInventories.Visible = true;
@@ -215,9 +218,9 @@ namespace InventoryManagmentSystem
             //Return Item
             if (ReturnReplace == 1)
             {
-                string itemId = row.Cells["ItemId"].Value.ToString();
+                string itemId = row.Cells["column_item_id"].Value.ToString();
                 bool isUpdated = HelperSql.ItemUpdate(connection, itemId, "Fire-Tec");
-                if(isUpdated)
+                if (isUpdated)
                 {
                     HelperSql.HistoryUpdate(connection, itemId, ClientId);
                     MessageBox.Show("Item Returned");
@@ -230,18 +233,19 @@ namespace InventoryManagmentSystem
             else if (ReturnReplace == 2)
             {
                 //lock the item type that is shown when a replacment is being done to match the item type of the item being replaced
-                string itemType = row.Cells["Item"].Value.ToString().ToLower();
+                string itemType = row.Cells["column_item_type"].Value.ToString().ToLower();
                 SetItemType(itemType);
 
                 dataGridViewClient.Enabled = false;
 
-                dueDate = row.Cells["DDate"].Value.ToString();
-                string SelectedSerial = row.Cells["SerialNum"].Value.ToString();
-                ItemIdClient = row.Cells["ItemId"].Value.ToString();
+                dueDate = row.Cells["column_due_date"].Value.ToString();
+                string SelectedSerial = row.Cells["column_serial_number"].Value.ToString();
+                ItemIdClient = row.Cells["column_item_id"].Value.ToString();
                 labelOldItem.Text = SelectedSerial;
-                labelTypeOfItem.Text = row.Cells["Item"].Value.ToString();
-
+                labelTypeOfItem.Text = row.Cells["column_item_type"].Value.ToString();
             }
+            //update client activity
+            RefreshClientActivity();
         }
 
         private void SetItemType(string itemType)
@@ -271,28 +275,35 @@ namespace InventoryManagmentSystem
             DataGridViewRow row = dataGridInv.Rows[e.RowIndex];
             if (ReturnReplace == 1 || ReturnReplace == 0)
             {
-                string message = "Are you sure you want to rent this item to " + labelProfileName.Text;
+                string message = "Are you sure you want to assign this item to " + labelProfileName.Text;
                 if (!HelperFunctions.YesNoMessageBox(message, "Rent")) { return; }
 
 
-                if (DateTime.Today == DatepickerDue.Value.Date)
+                if (DateTime.Today == DatepickerDue.Value.Date && cbItemType.Text != "boots")
                 {
                     MessageBox.Show("Please select a due date");
                     return;
                 }
-                
+                bool isUpdated = false;
                 string itemId = row.Cells["ItemIdInv"].Value.ToString();
-                bool isUpdated = HelperSql.ItemUpdate(connection, itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
-                if(!isUpdated) 
+                if (cbItemType.Text == "boots")
+                {
+                    isUpdated = HelperSql.ItemUpdateBoots(connection, itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
+                }
+                else
+                {
+                    isUpdated = HelperSql.ItemUpdate(connection, itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
+                }
+                if (!isUpdated)
                 {
                     MessageBox.Show("Failed to update item.");
-                    return; 
+                    return;
                 }
                 isUpdated = HelperSql.HistoryInsert(connection, itemId, ClientId);
-                MessageBox.Show("Rental has been successfully completed");
+                MessageBox.Show("assignment has been successfully completed");
                 LoadClient();
                 LoadInventory();
-                
+                RefreshClientActivity();
             }
             else if (ReturnReplace == 2)
             {
@@ -310,6 +321,7 @@ namespace InventoryManagmentSystem
                 ReturnReplace = 0;
                 cbItemType.Enabled = true;
                 dataGridViewClient.Enabled = true;
+                MessageBox.Show("Item Replaced!");
 
             }
         }
@@ -328,7 +340,17 @@ namespace InventoryManagmentSystem
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
+            panelProfileRentalInfo.Visible = false;
+            panelProfileMeasurments.Visible = false;
             flowLayoutPanelProfile.Visible = true;
+            license = labelProfileName.Text;
+
+            panelButtons.Visible = true;
+            panelButtons.AutoScroll = false;
+            flowLayoutPanelProfile.Visible = true;
+            flowLayoutPanelProfile.AutoScroll = false;
+            splitContainerInventories.Visible = true;
+            panelRentals.Visible = true;
             AssignStudentForm dockedForm = panel2.Controls.OfType<AssignStudentForm>().FirstOrDefault();
             if (dockedForm != null)
             {
@@ -338,7 +360,7 @@ namespace InventoryManagmentSystem
 
         private void btnClass_Click(object sender, EventArgs e)
         {
-            flowLayoutPanelProfile.Visible = false ;
+            flowLayoutPanelProfile.Visible = false;
 
             AssignStudentForm AssignForm = new AssignStudentForm(null);
             HelperFunctions.OpenChildFormToPanel(panel2, AssignForm);
@@ -352,6 +374,21 @@ namespace InventoryManagmentSystem
             cbItemType.Items.Clear();
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
             HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
+        }
+
+        private void RefreshClientActivity()
+        {
+            foreach (DataGridViewRow row in dataGridViewClient.Rows)
+            {
+                if (row.Cells["column_item_type"].Value != null && row.Cells["column_item_type"].Value.ToString() != "boots")
+                {
+                    // Client Has items other than boots
+                    HelperSql.ClientUpdateActivity(connection, ClientId, true);
+                    return;
+                }
+            }
+            // Client has boots or nohting
+            HelperSql.ClientUpdateActivity(connection, ClientId, false);
         }
     }
 }
