@@ -100,12 +100,12 @@ namespace InventoryManagmentSystem
             }
         }
 
-        public void LoadProfile(string clientId)
+        public void LoadProfile(string clientId, string Name)
         {
             var client = HelperSql.ClientFindById(connection, clientId);
             if (client.IsEmpty())
             {
-                client = HelperSql.ClientFindByDriversLicense(connection, clientId);
+                client = HelperSql.ClientFindByDriversLicense(connection, clientId, Name);
             }
             if (client.Count() == 0)
             {
@@ -138,10 +138,10 @@ namespace InventoryManagmentSystem
                 labelClientClass.Text = item.GetColumnValue("Name");
             }
 
-            labelProfileDrivers.Text = "Point of contact:";
+            labelProfileDrivers.Text = "License Number:";
 
-            panelProfileRentalInfo.Visible = false;
-            panelProfileMeasurments.Visible = false;
+            panelProfileRentalInfo.Visible = true;
+            panelProfileMeasurments.Visible = true;
             flowLayoutPanelProfile.Visible = true;
             license = labelProfileName.Text;
 
@@ -340,8 +340,10 @@ namespace InventoryManagmentSystem
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
-            panelProfileRentalInfo.Visible = false;
-            panelProfileMeasurments.Visible = false;
+            labelProfileDrivers.Text = "License Number:";
+
+            panelProfileRentalInfo.Visible = true;
+            panelProfileMeasurments.Visible = true;
             flowLayoutPanelProfile.Visible = true;
             license = labelProfileName.Text;
 

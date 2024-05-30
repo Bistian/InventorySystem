@@ -20,8 +20,8 @@ namespace InventoryManagmentSystem
             dueDays = SettingsData.Instance.dueDaysFromToday;
             labelDueDate.Text = $"Due Within {dueDays} Days";
 
-            SetButtonDates();            
             InitTables();
+            SetButtonDates();
             InitPastDueCount();
         }
 
@@ -66,7 +66,7 @@ namespace InventoryManagmentSystem
                     WHERE Location NOT IN ('Fire-Tec', 'FIRE TEC', 'FIRETEC') 
                       AND Condition NOT IN ('Retired') 
                       AND DueDate IS NOT NULL 
-                      AND DueDate BETWEEN GETDATE() AND DATEADD(DAY, 10, GETDATE())
+                      AND DueDate BETWEEN GETDATE() AND DATEADD(DAY, ${dueDays}, GETDATE())
                 ) AS i ON  c.Id = i.Location
                 JOIN (
                     SELECT Location, COUNT(*) AS ItemCount
@@ -90,7 +90,7 @@ namespace InventoryManagmentSystem
             dateRented.ForeColor = btnRented.ForeColor;
             int X = (int)(btnRented.Width * 0.02);
             int Y = (int)(btnRented.Height * 0.8);
-            dateRented.Location = new System.Drawing.Point(X,Y);
+            dateRented.Location = new System.Drawing.Point(X, Y);
         }
 
         private void LastRentedDate()
@@ -113,30 +113,6 @@ namespace InventoryManagmentSystem
                     date = reader[0].ToString();
                 }
                 dateRented.Text = HelperFunctions.DateCrop(date);
-            }
-            catch (Exception ex) { Console.WriteLine(ex); }
-            finally { connection.Close(); }
-        }
-
-        private void LastAcquisitionDate()
-        {
-            string query = $@"
-                SELECT TOP 1 AcquisitionDate
-                FROM tbBoots
-                WHERE AcquisitionDate >= GETDATE()
-                ORDER BY Acquisition ASC;            
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-                string date = "";
-                while (reader.Read())
-                {
-                    date = reader[0].ToString();
-                }
             }
             catch (Exception ex) { Console.WriteLine(ex); }
             finally { connection.Close(); }
@@ -170,7 +146,7 @@ namespace InventoryManagmentSystem
                         reader[1].ToString(),
                         reader[2].ToString(),
                         reader[3].ToString()
-                    );
+                        );
                 }
                 reader.Close();
 
@@ -279,7 +255,7 @@ namespace InventoryManagmentSystem
             NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
             try
             {
-                Profile.LoadProfile(clientId);
+                Profile.LoadProfile(clientId, clientName);
                 parentForm.openChildForm(Profile);
 
                 this.Dispose();
@@ -294,17 +270,15 @@ namespace InventoryManagmentSystem
         {
             if (e.RowIndex < 0) { return; }
             DataGridViewRow row = dataGridViewPastDue.Rows[e.RowIndex];
-            string column = dataGridViewPastDue.Columns[e.ColumnIndex].Name;
 
             string clientName = row.Cells["column_rentee2"].Value.ToString();
             string clientId = row.Cells["column_id2"].Value.ToString();
-
 
             var parentForm = this.ParentForm as MainForm;
             NewRentalModuleForm Profile = new NewRentalModuleForm(null, clientName);
             try
             {
-                Profile.LoadProfile(clientId);
+                Profile.LoadProfile(clientId, clientName);
                 parentForm.openChildForm(Profile);
 
                 this.Dispose();
@@ -327,12 +301,7 @@ namespace InventoryManagmentSystem
             parentForm.ColorTabSwitch("ActiveRentals", false);
         }
 
-        private void btnRented_Click_1(object sender, EventArgs e)
-        {
-            OpenDockedForm("RentalForm", null);
-        }
-
-        private void btnCoats_Click_1(object sender, EventArgs e)
+        private void btnStock_Click(object sender, EventArgs e)
         {
             OpenDockedForm("RentalForm", "Jacket");
         }
@@ -342,44 +311,39 @@ namespace InventoryManagmentSystem
             OpenDockedForm("RentalForm", "Pants");
         }
 
-        private void btnHelmets_Click_1(object sender, EventArgs e)
+        private void ButtonInStockPants_Click(object sender, EventArgs e)
         {
             OpenDockedForm("RentalForm", "Helmet");
         }
 
-        private void btnStock_Click_1(object sender, EventArgs e)
+        private void ButtonInStockHelmets_Click(object sender, EventArgs e)
         {
             OpenDockedForm("InventoryForm", "Jacket");
         }
 
-        private void ButtonInStockJackets_Click(object sender, EventArgs e)
+        private void ButtonInStockBoots_Click(object sender, EventArgs e)
         {
             OpenDockedForm("InventoryForm", "Jacket");
         }
 
-        private void ButtonInStockPants_Click_1(object sender, EventArgs e)
-        {
-            OpenDockedForm("InventoryForm", "Pants");
-        }
-
-        private void ButtonInStockHelmets_Click_1(object sender, EventArgs e)
-        {
-            OpenDockedForm("InventoryForm", "Helmet");
-        }
-
-        private void ButtonInStockBoots_Click_1(object sender, EventArgs e)
-        {
-            OpenDockedForm("InventoryForm", "Boots");
-        }
-
-        private void BtnPastDue_Click(object sender, EventArgs e)
+        private void btnRented_Click(object sender, EventArgs e)
         {
             OpenDockedForm("RentalForm", null);
         }
 
-        private void btnRented_MouseEnter(object sender, EventArgs e)
+        private void btnCoats_Click(object sender, EventArgs e)
         {
-            dateRented.ForeColor = btnRented.ForeColor;
+            OpenDockedForm("RentalForm", "Jacket");
+        }
+
+        private void btnPants_Click(object sender, EventArgs e)
+        {
+            OpenDockedForm("RentalForm", "Pants");
+        }
+
+        private void btnHelmets_Click(object sender, EventArgs e)
+        {
+            OpenDockedForm("RentalForm", "Helmet");
         }
     }
 }
