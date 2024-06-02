@@ -36,7 +36,6 @@ namespace InventoryManagmentSystem.Academy
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
 
-        bool minimized = false;
         public AcademyForm()
         {
             InitializeComponent();

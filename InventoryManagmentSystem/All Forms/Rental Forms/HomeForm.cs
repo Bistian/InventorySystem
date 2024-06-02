@@ -30,9 +30,6 @@ namespace InventoryManagmentSystem
         //Creating command
         SqlConnection connection = new SqlConnection(connectionString);
 
-        //Used for counting rentals
-        int total = 0;
-
         private Form activeForm = null;
 
         private string QueryForPastDue()

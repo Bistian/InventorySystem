@@ -26,10 +26,6 @@ namespace InventoryManagmentSystem.Academy
         // Get the current connection string
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
-        //Creating command
-        SqlCommand cm = new SqlCommand();
-        //Creatinng Reader
-        SqlDataReader dr;
         #endregion SQL_Variables
 
         AcademyForm parent;

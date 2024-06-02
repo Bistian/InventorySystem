@@ -20,9 +20,6 @@ namespace InventoryManagmentSystem
         //to show subform in mainform
         private Form activeForm = null;
 
-        //Track previous form
-        private Form previousForm = null;
-
         //Initialize
         public MainForm(Form databaseCreation = null)
         {

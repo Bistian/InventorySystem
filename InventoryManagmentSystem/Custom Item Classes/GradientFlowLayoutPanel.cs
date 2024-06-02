@@ -13,7 +13,6 @@ namespace InventoryManagmentSystem
     {
         public Color StartColor { get; set; }
         public Color EndColor { get; set; }
-        bool doOnce = true;
         protected override void OnPaint(PaintEventArgs e)
         {
             try

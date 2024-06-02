@@ -55,14 +55,12 @@ namespace InventoryManagmentSystem
             int count = 1;
             foreach (Item item in itemList)
             {
-                    string condition = item.GetColumnValue("Condition");
-                    string location = item.GetColumnValue("Location");
-                if(checkActive.Checked)
-                {
-                    if (location != "Fire-Tec" ||  condition == "Retired") { continue; }
-                }
-                    if (checkRetired.Checked && condition != "Retired") { continue; }
-                    if (CheckRented.Checked && location == "Fire-Tec") { continue; }
+                string condition = item.GetColumnValue("Condition");
+                string location = item.GetColumnValue("Location");
+
+                if (checkActive.Checked && (location != "Fire-Tec" || condition == "Retired")) { continue; }
+                if (checkRetired.Checked && condition != "Retired") { continue; }
+                if (CheckRented.Checked && location == "Fire-Tec") { continue; }
                 
 
                 string type = item.GetColumnValue("ItemType");
