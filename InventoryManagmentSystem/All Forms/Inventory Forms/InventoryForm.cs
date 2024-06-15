@@ -53,20 +53,20 @@ namespace InventoryManagmentSystem
         {
             dataGridInv.Rows.Clear();
             int count = 1;
-            foreach (Item item in itemList)
+            //foreach (Item item in itemList)
+            for(int i = 0; i < itemList.Count; ++i)
             {
-                string condition = item.GetColumnValue("Condition");
-                string location = item.GetColumnValue("Location");
+                string condition = itemList[i].GetColumnValue("Condition");
+                string location = itemList[i].GetColumnValue("Location");
 
                 if (checkActive.Checked && (location != "Fire-Tec" || condition == "Retired")) { continue; }
                 if (checkRetired.Checked && condition != "Retired") { continue; }
                 if (CheckRented.Checked && location == "Fire-Tec") { continue; }
-                
 
-                string type = item.GetColumnValue("ItemType");
+                string type = itemList[i].GetColumnValue("ItemType");
                 if (type != cbItemType.Text) { continue; }
 
-                bool isSearchBarMatching = SearchBarIsMatching(item);
+                bool isSearchBarMatching = SearchBarIsMatching(itemList[i]);
                 if (!isSearchBarMatching) { continue; }
 
                 if (filterList.Count > 0)
@@ -77,7 +77,7 @@ namespace InventoryManagmentSystem
                         // Check if column to filter exists and if value at least partially matches.
                         string filterName = filter[0];
                         string filterValue = filter[1];
-                        string columnValue = item.GetColumnValue(filterName);
+                        string columnValue = itemList[i].GetColumnValue(filterName);
                         if(columnValue == string.Empty) { continue; }
 
                         if (!HelperFunctions.IsSubstring(columnValue, filterValue))
@@ -90,16 +90,16 @@ namespace InventoryManagmentSystem
                 }
 
                 dataGridInv.Rows.Add(count,
-                   item.GetColumnValue("Id"),
-                   item.GetColumnValue("Brand"),
-                   item.GetColumnValue("SerialNumber"),
-                   item.GetColumnValue("Condition"),
-                   item.GetColumnValue("AcquisitionDate"),
-                   item.GetColumnValue("ManufactureDate"),
-                   item.GetColumnValue("Location"),
-                   item.GetColumnValue("Size"),
-                   item.GetColumnValue("Material"),
-                   item.GetColumnValue("Color"));
+                   itemList[i].GetColumnValue("Id"),
+                   itemList[i].GetColumnValue("Brand"),
+                   itemList[i].GetColumnValue("SerialNumber"),
+                   itemList[i].GetColumnValue("Condition"),
+                   itemList[i].GetColumnValue("AcquisitionDate"),
+                   itemList[i].GetColumnValue("ManufactureDate"),
+                   itemList[i].GetColumnValue("Location"),
+                   itemList[i].GetColumnValue("Size"),
+                   itemList[i].GetColumnValue("Material"),
+                   itemList[i].GetColumnValue("Color"));
                 count++;
             }
         }

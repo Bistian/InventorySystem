@@ -1117,7 +1117,11 @@ namespace InventoryManagmentSystem
                     {
                         item.AddByReaderAndColumn(reader, "Color");
                     }
-                    else if (type == "jacket")
+                    else
+                    {
+                        item.AddByReaderAndColumn(reader, "Size");
+                    }
+                    /*else if (type == "jacket")
                     {
                         item.AddByReaderAndColumn(reader, "Size");
                     }
@@ -1129,7 +1133,7 @@ namespace InventoryManagmentSystem
                     {
                         item.AddByReaderAndColumn(reader, "Size");
                     }
-                    else { continue; }
+                    else { continue; }*/
                     list.Add(item);
                 }
             }
