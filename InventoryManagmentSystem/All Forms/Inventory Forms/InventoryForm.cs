@@ -5,6 +5,8 @@ using System.Data.SqlClient;
 using System.Configuration;
 using InventoryManagmentSystem.Rental_Forms;
 using InventoryManagmentSystem.All_Forms;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
 
 namespace InventoryManagmentSystem
 {
@@ -447,6 +449,85 @@ namespace InventoryManagmentSystem
 
             }
                 DisplayItems();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            HelperFunctions.PdfSaveDocument(WriteListToPdf);
+        }
+
+        private void WriteListToPdf(PdfDocument document)
+        {
+            /* Format 
+                Brand: Muffin
+                Serial: 123456
+                Condition: Used
+                Acquisition: 1934/01/01
+                Manufactured: 1478/12/31
+             */
+
+            // Add a new page to the PDF
+            PdfPage page = document.AddPage();
+            // Get the graphics object of the PDF page
+            XGraphics graphics = XGraphics.FromPdfPage(page);
+
+            const int startY = 50;
+            int positionY = startY;
+            int ExtraLineSpace = 10;
+
+            XFont fontTitle = new XFont("Arial", 16, XFontStyle.Bold);
+            double maxPageHeight = page.Height.Point;
+            int lineHeight = (int)fontTitle.Height;
+
+            // Title add caps and s to de end.
+            string title = char.ToUpper(cbItemType.Text[0]) + cbItemType.Text.Substring(1);
+            if (!title.EndsWith("s"))
+            {
+                title += "s";
+            }
+            HelperFunctions.PdfWriteLine(graphics, fontTitle, title, positionY);
+            positionY += lineHeight + ExtraLineSpace;
+
+            string text = "";
+            XFont font = new XFont("Arial", 12, XFontStyle.Regular);
+            foreach (DataGridViewRow row in dataGridInv.Rows)
+            {
+                if (!row.Visible)
+                {
+                    continue;
+                }
+                // Check if adding the next line exceeds the page height
+                if (positionY + (lineHeight * 5) > maxPageHeight)
+                {
+                    // Add a new page
+                    page = document.AddPage();
+                    graphics = XGraphics.FromPdfPage(page);
+                    positionY = startY;
+
+                    HelperFunctions.PdfWriteLine(graphics, fontTitle, title, positionY);
+                    positionY += lineHeight + ExtraLineSpace;
+                }
+
+                text = $"Brand: {row.Cells["column_brand"].Value}";
+                HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
+                positionY += lineHeight;
+
+                text = $"Serial: {row.Cells["column_serial"].Value}";
+                HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
+                positionY += lineHeight;
+
+                text = $"Condition: {row.Cells["column_condition"].Value}";
+                HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
+                positionY += lineHeight;
+
+                text = $"Acquisition Date: {row.Cells["column_acquisition_date"].Value}";
+                HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
+                positionY += lineHeight + ExtraLineSpace;
+
+                text = $"Manufacure Date: {row.Cells["column_manufacture_date"].Value}";
+                HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
+                positionY += lineHeight + ExtraLineSpace;
+            }
         }
     }
 }
