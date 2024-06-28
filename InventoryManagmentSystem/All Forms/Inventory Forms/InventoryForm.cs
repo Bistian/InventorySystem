@@ -59,10 +59,11 @@ namespace InventoryManagmentSystem
                     string location = item.GetColumnValue("Location");
                 if(checkActive.Checked)
                 {
-                    if (location != "Fire-Tec" ||  condition == "Retired") { continue; }
+                    if (location != "Fire-Tec" ||  condition == "Retired" || condition == "Deleted") { continue; }
                 }
                     if (checkRetired.Checked && condition != "Retired") { continue; }
-                    if (CheckRented.Checked && location == "Fire-Tec") { continue; }
+                if (CheckRented.Checked && condition == "Deleted") { continue; }
+                if (CheckRented.Checked && location == "Fire-Tec") { continue; }
                 
 
                 string type = item.GetColumnValue("ItemType");
@@ -335,7 +336,7 @@ namespace InventoryManagmentSystem
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand($"UPDATE tbItems SET Condition = @Condition WHERE SerialNumber LIKE '{serialNumber}'", connection);
-                command.Parameters.AddWithValue("@Condition", "Retired");
+                command.Parameters.AddWithValue("@Condition", "Deleted");
                 command.ExecuteNonQuery();
                 connection.Close();
                 MessageBox.Show("Item has been successfully deleted");
