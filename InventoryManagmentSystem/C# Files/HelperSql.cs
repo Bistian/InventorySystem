@@ -1074,9 +1074,8 @@ namespace InventoryManagmentSystem
             return list;
         }
 
-        public static List<Item> ItemFindAllWithSpecifications(SqlConnection connection)
+        public static void ItemFindAllWithSpecifications(SqlConnection connection, DataGridView grid)
         {
-            var list = new List<Item>();
             string query = @"
                 SELECT i.*, 
                     COALESCE(b.Brand, h.Brand, j.Brand, m.Brand, p.Brand) AS Brand,
@@ -1102,6 +1101,7 @@ namespace InventoryManagmentSystem
                 var command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
                 var item = new Item();
+                int count = 1;
                 while (reader.Read())
                 {
                     item.Clear();
@@ -1117,11 +1117,7 @@ namespace InventoryManagmentSystem
                     {
                         item.AddByReaderAndColumn(reader, "Color");
                     }
-                    else
-                    {
-                        item.AddByReaderAndColumn(reader, "Size");
-                    }
-                    /*else if (type == "jacket")
+                    else if (type == "jacket")
                     {
                         item.AddByReaderAndColumn(reader, "Size");
                     }
@@ -1133,13 +1129,24 @@ namespace InventoryManagmentSystem
                     {
                         item.AddByReaderAndColumn(reader, "Size");
                     }
-                    else { continue; }*/
-                    list.Add(item);
+                    else { continue; }
+                    grid.Rows.Add(count,
+                       item.GetColumnValue("Id"),
+                       type,
+                       item.GetColumnValue("Brand"),
+                       item.GetColumnValue("SerialNumber"),
+                       item.GetColumnValue("Condition"),
+                       item.GetColumnValue("AcquisitionDate"),
+                       item.GetColumnValue("ManufactureDate"),
+                       item.GetColumnValue("Location"),
+                       item.GetColumnValue("Size"),
+                       item.GetColumnValue("Material"),
+                       item.GetColumnValue("Color"));
+                    count++;
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
-            return list;
         }
 
         private static List<Item> ItemFindBy(SqlConnection connection, SqlCommand command)
