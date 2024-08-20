@@ -1157,10 +1157,9 @@ namespace InventoryManagmentSystem
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 string[] keys = { "Id", "ItemType", "DueDate", "SerialNumber", "Condition", "Location", "BusinessModel" };
-                var item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    var item = new Item();
                     foreach (string key in keys)
                     {
                         item.AddByReaderAndColumnArray(reader, keys);
@@ -1279,6 +1278,92 @@ namespace InventoryManagmentSystem
             }
             finally { connection.Close(); }
             return uuid;
+        }
+
+        public static bool ItemLoadDatagrid(SqlConnection connection, DataGridView grid, bool getAll = true)
+        {
+            string query = $@"
+                SELECT 
+                    i.Id, 
+                    i.ItemType,
+                    COALESCE(
+                        b.Brand, 
+                        h.Brand,
+                        j.Brand,
+                        m.Brand,
+                        p.Brand
+                    ),
+                    COALESCE(
+                        b.SerialNumber, 
+                        h.SerialNumber,
+                        j.SerialNumber,
+                        m.SerialNumber,
+                        p.SerialNumber
+                    ),
+                    COALESCE(b.Size, j.Size, p.Size, m.Size) AS size,
+                    COALESCE(
+                        b.ManufactureDate, 
+                        h.ManufactureDate,
+                        j.ManufactureDate,
+                        m.ManufactureDate,
+                        p.ManufactureDate
+                    ), 
+                    i.Condition, 
+                    i.Location,
+                    b.Material AS material, 
+                    h.Color AS color
+                FROM 
+                    tbItems AS i
+                LEFT JOIN 
+                    tbBoots AS b ON i.Id = b.ItemId
+                LEFT JOIN 
+                    tbHelmets AS h ON i.Id = h.ItemId
+                LEFT JOIN 
+                    tbJackets AS j ON i.Id = j.ItemId
+                LEFT JOIN 
+                    tbMasks AS m ON i.Id = m.ItemId
+                LEFT JOIN 
+                    tbPants AS p ON i.Id = p.ItemId;
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                var command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                int index = 0;
+                while (reader.Read())
+                {
+                    if(!getAll)
+                    {
+                        string condition = reader[6].ToString().ToLower();
+                        if(condition == "retired") { continue; }
+
+                        string location = reader[7].ToString().ToLower();
+                        if(location != "fire-tec") { continue; }
+                    }
+                    int row = grid.Rows.Add(
+                        ++index,
+                        reader[0].ToString(),
+                        reader[1].ToString(),
+                        reader[2].ToString(),
+                        reader[3].ToString(),
+                        reader[4].ToString(),
+                        reader[5].ToString(),
+                        reader[6].ToString(),
+                        reader[7].ToString(),
+                        reader[8].ToString()
+                    );
+                    grid.Rows[row].Visible = false;
+                }
+            }
+            catch (Exception ex) 
+            { 
+                Console.WriteLine(ex.Message); 
+                return false; 
+            }
+            finally { connection.Close(); }
+            return true;
         }
 
         public static uint ItemRentCount(SqlConnection connection, string itemType = null)

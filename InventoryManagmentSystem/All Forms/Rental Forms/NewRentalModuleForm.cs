@@ -44,6 +44,11 @@ namespace InventoryManagmentSystem
                 HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
                 HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
             }
+
+            HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
+
+            dataGridInv.Columns["column_mfd_inv"].DefaultCellStyle.Format = "d";
+            HelperSql.ItemLoadDatagrid(connection, dataGridInv, false);
         }
 
         private void LoadClient()
@@ -75,28 +80,68 @@ namespace InventoryManagmentSystem
 
         private void LoadInventory()
         {
-            dataGridInv.Columns["ManufactureDate"].DefaultCellStyle.Format = "d";
-            dataGridInv.Rows.Clear();
-            var items = HelperSql.ItemFindBySearchBar(connection, textBoxSearchBar.Text);
-            if (items == null) { return; }
+            string selection = cbItemType.SelectedItem.ToString().ToLower();
 
-            foreach (var item in items)
+            if (selection == "boots")
             {
-                if (item.GetColumnValue("ItemType") != cbItemType.Text) { continue; }
+                dataGridInv.Columns["column_material_inv"].Visible = true;
+                dataGridInv.Columns["column_color_inv"].Visible = false;
+                dataGridInv.Columns["column_size_inv"].Visible = true;
+            }
+            else if (selection == "helmets")
+            {
+                dataGridInv.Columns["column_material_inv"].Visible = false;
+                dataGridInv.Columns["column_color_inv"].Visible = true;
+                dataGridInv.Columns["column_size_inv"].Visible = true;
 
-                string materialOrColor = item.GetColumnValue("Material");
-                if (materialOrColor == "")
+            }
+            else
+            {
+                dataGridInv.Columns["column_material_inv"].Visible = false;
+                dataGridInv.Columns["column_color_inv"].Visible = false;
+                dataGridInv.Columns["column_size_inv"].Visible = true;
+            }
+
+            for(int i = 0; i < dataGridInv.Rows.Count; ++i)
+            {
+                var row = dataGridInv.Rows[i];
+                string type = row.Cells["column_type_inv"].Value.ToString().ToLower();
+                row.Visible = true;
+                if(selection == "boots")
                 {
-                    materialOrColor = item.GetColumnValue("Color");
+                    if(type != "boots")
+                    {
+                        row.Visible = false;
+                    }
                 }
-                dataGridInv.Rows.Add(
-                   item.GetColumnValue("Brand"),
-                   item.GetColumnValue("SerialNumber"),
-                   item.GetColumnValue("Size"),
-                   item.GetColumnValue("ManufactureDate"),
-                   item.GetColumnValue("Condition"),
-                   materialOrColor,
-                   item.GetColumnValue("Id"));
+                else if (selection == "helmet")
+                {
+                    if (type != "helmet")
+                    {
+                        row.Visible = false;
+                    }
+                }
+                else if (selection == "jacket")
+                {
+                    if (type != "jacket")
+                    {
+                        row.Visible = false;
+                    }
+                }
+                else if (selection == "mask")
+                {
+                    if (type != "mask")
+                    {
+                        row.Visible = false;
+                    }
+                }
+                else if (selection == "pants")
+                {
+                    if (type != "pants")
+                    {
+                        row.Visible = false;
+                    }
+                }
             }
         }
 
