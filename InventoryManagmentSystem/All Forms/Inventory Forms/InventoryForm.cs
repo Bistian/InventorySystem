@@ -7,6 +7,8 @@ using InventoryManagmentSystem.Rental_Forms;
 using InventoryManagmentSystem.All_Forms;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace InventoryManagmentSystem
 {
@@ -23,12 +25,11 @@ namespace InventoryManagmentSystem
         public InventoryForm(string ItemType)
         {
             InitializeComponent();
-            checkActive.Checked = true;
+            checkStock.Checked = true;
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
             string[] columns = { "column_acquisition_date", "column_manufacture_date" };
             HelperFunctions.DataGridFormatDate(dataGridInv, columns);
-            HelperSql.ItemFindAllWithSpecifications(connection, dataGridInv);
-            DisplayItems();
+            ConditionFilter("stock");
             SetItemType(ItemType);
             InitSearchContainer();
         }
@@ -43,102 +44,7 @@ namespace InventoryManagmentSystem
 
             cbItemType.SelectedIndex = index;
         }
-
-        /// <summary> Toggle visibility of rows </summary>
-        private void DisplayItems()
-        {
-            foreach(DataGridViewRow row in dataGridInv.Rows)
-            {
-                string condition = row.Cells["column_condition"].Value.ToString();
-                string location = row.Cells["column_location"].Value.ToString();
-                string type = row.Cells["column_item_type"].Value.ToString();
-                if (checkActive.Checked && (location != "Fire-Tec" || condition == "Retired"))
-                {
-                    row.Visible = false;
-                    continue;
-                }
-                if (checkRetired.Checked && condition != "Retired")
-                {
-                    row.Visible = false;
-                    continue;
-                }
-                if (CheckRented.Checked && location == "Fire-Tec")
-                {
-                    row.Visible = false;
-                    continue;
-                }
-
-                if(cbItemType.Text == "")
-                {
-                    row.Visible = true;
-                    continue;
-                }
-
-                if (type != cbItemType.Text)
-                {
-                    row.Visible = false;
-                    continue;
-                }
-
-                bool isSearchBarMatching = SearchBarIsMatching(row);
-                if (!isSearchBarMatching) 
-                {
-                    row.Visible = false;
-                    continue; 
-                }
-
-                if(FilterUseExtra(row))
-                {
-                    row.Visible = true;
-                }
-                else
-                {
-                    row.Visible = false;
-                }
-               
-            }
-        }
-
-        /// <summary> Use Exatra filters </summary>
-        private bool FilterUseExtra(DataGridViewRow row)
-        {
-            if (filterList.Count == 0) { return true; }
-
-            // Check if column to filter exists and if value at least partially matches.
-            foreach (var filter in filterList)
-            {
-                string filterName = filter[0].ToLower();
-                string filterValue = filter[1];
-                string columnName = "";
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    // Get the column name of the current cell
-                    string name = cell.OwningColumn.HeaderText;
-                    string[] splitName = name.Split('_');
-                    if(filterName == splitName[1] + splitName[2])
-                    {
-                        columnName = name;
-                        break;
-                    }
-                }
-
-                if(columnName == "")
-                {
-                    // Someone messed up the name of a column, type != item_type...
-                    return true;
-                }
-
-                string columnValue = row.Cells[columnName].Value.ToString();
-                if (columnValue == string.Empty) { continue; }
-
-                if (!HelperFunctions.IsSubstring(columnValue, filterValue))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
+      
         private void InitSearchContainer()
         {
             this.scOuter.SplitterDistance = (int)(Width * 0.3);
@@ -152,7 +58,7 @@ namespace InventoryManagmentSystem
             {
                 filterList.Clear();
                 filterList = filters;
-                DisplayItems();
+                //DisplayItems();
             };
 
             filterForm = new FilterForm(this, list, callback);
@@ -207,7 +113,7 @@ namespace InventoryManagmentSystem
             // Reset search bar.
             searchBar.Text = "";
             ChangeVisibleColumns();
-            DisplayItems();
+            //DisplayItems();
         }
 
         private void ChangeVisibleColumns()
@@ -235,7 +141,6 @@ namespace InventoryManagmentSystem
         private void searchBar_TextChanged(object sender, EventArgs e)
         {
             if (cbItemType.SelectedIndex < 0) { return; }
-            DisplayItems();
         }
 
         private void dataGridInv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -254,12 +159,12 @@ namespace InventoryManagmentSystem
                     if (itemType == "boots") { UpdateBoots(e); }
                     else if (itemType == "helmet") { UpdateHelmet(e); }
                     else if (itemType == "jacket" || itemType == "pants" || itemType == "mask") { UpdateJacketOrPantsOrMasks(e); }
-                    DisplayItems();
+                    //DisplayItems();
                 }
                 else if (colName == "column_delete")
                 {
                     DeleteItem(serialNumber);
-                    DisplayItems();
+                    //DisplayItems();
                 }
                 else
                 {
@@ -421,60 +326,83 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void checkRetired_Click(object sender, EventArgs e)
+        private void ConditionFilter(string filter)
         {
-            if(checkRetired.Checked)
+            dataGridInv.Rows.Clear();
+            string all = ("");
+            if (filter == "stock")
             {
-                CheckRented.Checked = false;
-                checkActive.Checked = false;
+                if(checkStock.Checked)
+                {
+                    string condition = "WHERE i.Condition != 'Retired' AND i.Location = 'Fire-Tec'";
+                    HelperSql.ItemLoadDatagrid(connection, dataGridInv, condition);
+                    checkRented.Checked = false;
+                    checkRetired.Checked = false;
+                }
+                else
+                {
+                    HelperSql.ItemLoadDatagrid(connection, dataGridInv, all);
+                }
             }
-            DisplayItems();
+            else if(filter == "rented")
+            {
+                if (checkRented.Checked)
+                {
+                    string condition = "WHERE i.Location != 'Fire-Tec'";
+                    HelperSql.ItemLoadDatagrid(connection, dataGridInv, condition);
+                    checkStock.Checked = false;
+                    checkRetired.Checked = false;
+                }
+                else
+                {
+                    HelperSql.ItemLoadDatagrid(connection, dataGridInv, all);
+                }
+            }
+            else if (filter == "retired")
+            {
+                if (checkRetired.Checked)
+                {
+                    HelperSql.ItemLoadDatagrid(connection, dataGridInv, "WHERE i.Condition = 'Retired'");
+                    checkStock.Checked = false;
+                    checkRented.Checked = false;
+                }
+                else
+                {
+                    HelperSql.ItemLoadDatagrid(connection, dataGridInv, all);
+                }
+            }
+            else
+            {
+                HelperSql.ItemLoadDatagrid(connection, dataGridInv, all);
+            }
         }
 
-        private void checkActive_Click(object sender, EventArgs e)
+        private void checkStock_Click(object sender, EventArgs e)
         {
-            if(checkActive.Checked)
-            {
-                checkRetired.Checked = false;
-                CheckRented.Checked = false;
-            }     
-            DisplayItems();
+            ConditionFilter("stock");
+        }
+
+        private void checkRented_Click(object sender, EventArgs e)
+        {
+            ConditionFilter("rented");
+        }
+
+
+        private void checkRetired_Click(object sender, EventArgs e)
+        {
+            ConditionFilter("retired");
         }
 
         private void UsersButton_Click_1(object sender, EventArgs e)
         {
             NewItemForm ModForm = new NewItemForm();
             ModForm.ShowDialog();
-            DisplayItems();
-        }
-
-        private void btnFilter_Click(object sender, EventArgs e)
-        {
-            var names = new List<string> {"Active", "Inactive", "Brand", "Size","Condition"};
-            var filterForm = new FilterForm(this, names, checkedItems =>
-            {
-                foreach(var item in checkedItems)
-                {
-                    filterList.Add(item);
-                }
-            });
-            filterForm.Show();
+            //DisplayItems();
         }
 
         private void btnToggleFilter_Click(object sender, EventArgs e)
         {
             ToggleFilter();
-        }
-
-        private void RentedCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            if(CheckRented.Checked)
-            {
-                checkActive.Checked = false;
-                checkRetired.Checked = false;
-
-            }
-            DisplayItems();
         }
 
         private void btnSave_Click(object sender, EventArgs e)

@@ -48,7 +48,7 @@ namespace InventoryManagmentSystem
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
 
             dataGridInv.Columns["column_mfd_inv"].DefaultCellStyle.Format = "d";
-            HelperSql.ItemLoadDatagrid(connection, dataGridInv, false);
+            HelperSql.ItemLoadDatagrid(connection, dataGridInv, "WHERE i.Condition = 'Active'");
         }
 
         private void LoadClient()

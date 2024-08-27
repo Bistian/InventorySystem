@@ -82,6 +82,7 @@
             this.labelReplacmentItem = new System.Windows.Forms.Label();
             this.labelOldItem = new System.Windows.Forms.Label();
             this.panelRentals = new System.Windows.Forms.Panel();
+            this.DatepickerDue = new InventoryManagmentSystem.CustomDateTimePicker();
             this.labelDueDate = new System.Windows.Forms.Label();
             this.splitContainerInventories = new System.Windows.Forms.SplitContainer();
             this.panelCustomerInv = new System.Windows.Forms.Panel();
@@ -101,17 +102,8 @@
             this.lableSearchBar = new System.Windows.Forms.Label();
             this.textBoxSearchBar = new System.Windows.Forms.TextBox();
             this.labelNewItem = new System.Windows.Forms.Label();
-            this.dataGridInv = new System.Windows.Forms.DataGridView();
-            this.labelFireTecInv = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panelButtons = new System.Windows.Forms.Panel();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnClass = new System.Windows.Forms.Button();
-            this.btnProfile = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.DatepickerDue = new InventoryManagmentSystem.CustomDateTimePicker();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
-            this.gradientFlowLayoutCustomerInfo = new InventoryManagmentSystem.GradientFlowLayoutPanel();
+            this.dataGridInv = new System.Windows.Forms.DataGridView();
             this.colunm_number_inv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_id_inv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_type_inv = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -123,6 +115,14 @@
             this.column_location_inv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_material_inv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_color_inv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.labelFireTecInv = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelButtons = new System.Windows.Forms.Panel();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnClass = new System.Windows.Forms.Button();
+            this.btnProfile = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.gradientFlowLayoutCustomerInfo = new InventoryManagmentSystem.GradientFlowLayoutPanel();
             this.flowLayoutPanelProfile.SuspendLayout();
             this.panelProfileContactInfo.SuspendLayout();
             this.panelProfileAddress.SuspendLayout();
@@ -139,11 +139,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).BeginInit();
             this.panelFireTecInv.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             this.panel2.SuspendLayout();
             this.panelButtons.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanelProfile
@@ -752,6 +752,17 @@
             this.panelRentals.TabIndex = 118;
             this.panelRentals.Visible = false;
             // 
+            // DatepickerDue
+            // 
+            this.DatepickerDue.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatepickerDue.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
+            this.DatepickerDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatepickerDue.Location = new System.Drawing.Point(2, 39);
+            this.DatepickerDue.Margin = new System.Windows.Forms.Padding(2);
+            this.DatepickerDue.Name = "DatepickerDue";
+            this.DatepickerDue.Size = new System.Drawing.Size(392, 41);
+            this.DatepickerDue.TabIndex = 40;
+            // 
             // labelDueDate
             // 
             this.labelDueDate.AutoSize = true;
@@ -1017,6 +1028,21 @@
             this.labelNewItem.TabIndex = 121;
             this.labelNewItem.Text = "Item:";
             // 
+            // UsersButton
+            // 
+            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
+            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
+            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
+            this.UsersButton.Location = new System.Drawing.Point(321, 2);
+            this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
+            this.UsersButton.Name = "UsersButton";
+            this.UsersButton.Size = new System.Drawing.Size(20, 21);
+            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.UsersButton.TabIndex = 120;
+            this.UsersButton.TabStop = false;
+            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click);
+            // 
             // dataGridInv
             // 
             this.dataGridInv.AllowUserToAddRows = false;
@@ -1075,6 +1101,93 @@
             this.dataGridInv.Size = new System.Drawing.Size(1015, 322);
             this.dataGridInv.TabIndex = 112;
             this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellClick_1);
+            // 
+            // colunm_number_inv
+            // 
+            this.colunm_number_inv.HeaderText = "#";
+            this.colunm_number_inv.Name = "colunm_number_inv";
+            this.colunm_number_inv.ReadOnly = true;
+            // 
+            // column_id_inv
+            // 
+            this.column_id_inv.HeaderText = "ItemIdInv";
+            this.column_id_inv.MinimumWidth = 8;
+            this.column_id_inv.Name = "column_id_inv";
+            this.column_id_inv.ReadOnly = true;
+            this.column_id_inv.Visible = false;
+            this.column_id_inv.Width = 150;
+            // 
+            // column_type_inv
+            // 
+            this.column_type_inv.HeaderText = "Type";
+            this.column_type_inv.Name = "column_type_inv";
+            this.column_type_inv.ReadOnly = true;
+            // 
+            // column_brand_inv
+            // 
+            this.column_brand_inv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_brand_inv.HeaderText = "Brand";
+            this.column_brand_inv.MinimumWidth = 6;
+            this.column_brand_inv.Name = "column_brand_inv";
+            this.column_brand_inv.ReadOnly = true;
+            // 
+            // column_serial_inv
+            // 
+            this.column_serial_inv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_serial_inv.FillWeight = 115F;
+            this.column_serial_inv.HeaderText = "Serial";
+            this.column_serial_inv.MinimumWidth = 6;
+            this.column_serial_inv.Name = "column_serial_inv";
+            this.column_serial_inv.ReadOnly = true;
+            // 
+            // column_size_inv
+            // 
+            this.column_size_inv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_size_inv.FillWeight = 80F;
+            this.column_size_inv.HeaderText = "Size";
+            this.column_size_inv.MinimumWidth = 6;
+            this.column_size_inv.Name = "column_size_inv";
+            this.column_size_inv.ReadOnly = true;
+            // 
+            // column_mfd_inv
+            // 
+            this.column_mfd_inv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_mfd_inv.FillWeight = 120F;
+            this.column_mfd_inv.HeaderText = "MFD";
+            this.column_mfd_inv.MinimumWidth = 6;
+            this.column_mfd_inv.Name = "column_mfd_inv";
+            this.column_mfd_inv.ReadOnly = true;
+            // 
+            // column_condition_inv
+            // 
+            this.column_condition_inv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_condition_inv.FillWeight = 75F;
+            this.column_condition_inv.HeaderText = "Condition";
+            this.column_condition_inv.MinimumWidth = 6;
+            this.column_condition_inv.Name = "column_condition_inv";
+            this.column_condition_inv.ReadOnly = true;
+            // 
+            // column_location_inv
+            // 
+            this.column_location_inv.HeaderText = "Location";
+            this.column_location_inv.Name = "column_location_inv";
+            this.column_location_inv.ReadOnly = true;
+            this.column_location_inv.Visible = false;
+            // 
+            // column_material_inv
+            // 
+            this.column_material_inv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_material_inv.FillWeight = 60F;
+            this.column_material_inv.HeaderText = "Material";
+            this.column_material_inv.MinimumWidth = 6;
+            this.column_material_inv.Name = "column_material_inv";
+            this.column_material_inv.ReadOnly = true;
+            // 
+            // column_color_inv
+            // 
+            this.column_color_inv.HeaderText = "Color";
+            this.column_color_inv.Name = "column_color_inv";
+            this.column_color_inv.ReadOnly = true;
             // 
             // labelFireTecInv
             // 
@@ -1165,32 +1278,6 @@
             this.panel3.Size = new System.Drawing.Size(1015, 677);
             this.panel3.TabIndex = 120;
             // 
-            // DatepickerDue
-            // 
-            this.DatepickerDue.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DatepickerDue.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
-            this.DatepickerDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DatepickerDue.Location = new System.Drawing.Point(2, 39);
-            this.DatepickerDue.Margin = new System.Windows.Forms.Padding(2);
-            this.DatepickerDue.Name = "DatepickerDue";
-            this.DatepickerDue.Size = new System.Drawing.Size(392, 41);
-            this.DatepickerDue.TabIndex = 40;
-            // 
-            // UsersButton
-            // 
-            this.UsersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
-            this.UsersButton.ImageHover = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageHover")));
-            this.UsersButton.ImageNormal = ((System.Drawing.Image)(resources.GetObject("UsersButton.ImageNormal")));
-            this.UsersButton.Location = new System.Drawing.Point(321, 2);
-            this.UsersButton.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
-            this.UsersButton.Name = "UsersButton";
-            this.UsersButton.Size = new System.Drawing.Size(20, 21);
-            this.UsersButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.UsersButton.TabIndex = 120;
-            this.UsersButton.TabStop = false;
-            this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click);
-            // 
             // gradientFlowLayoutCustomerInfo
             // 
             this.gradientFlowLayoutCustomerInfo.AutoScroll = true;
@@ -1204,93 +1291,6 @@
             this.gradientFlowLayoutCustomerInfo.Size = new System.Drawing.Size(4, 4);
             this.gradientFlowLayoutCustomerInfo.StartColor = System.Drawing.Color.Empty;
             this.gradientFlowLayoutCustomerInfo.TabIndex = 112;
-            // 
-            // colunm_number_inv
-            // 
-            this.colunm_number_inv.HeaderText = "#";
-            this.colunm_number_inv.Name = "colunm_number_inv";
-            this.colunm_number_inv.ReadOnly = true;
-            // 
-            // column_id_inv
-            // 
-            this.column_id_inv.HeaderText = "ItemIdInv";
-            this.column_id_inv.MinimumWidth = 8;
-            this.column_id_inv.Name = "column_id_inv";
-            this.column_id_inv.ReadOnly = true;
-            this.column_id_inv.Visible = false;
-            this.column_id_inv.Width = 150;
-            // 
-            // column_type_inv
-            // 
-            this.column_type_inv.HeaderText = "Type";
-            this.column_type_inv.Name = "column_type_inv";
-            this.column_type_inv.ReadOnly = true;
-            // 
-            // column_brand_inv
-            // 
-            this.column_brand_inv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_brand_inv.HeaderText = "Brand";
-            this.column_brand_inv.MinimumWidth = 6;
-            this.column_brand_inv.Name = "column_brand_inv";
-            this.column_brand_inv.ReadOnly = true;
-            // 
-            // column_serial_inv
-            // 
-            this.column_serial_inv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_serial_inv.FillWeight = 115F;
-            this.column_serial_inv.HeaderText = "Serial";
-            this.column_serial_inv.MinimumWidth = 6;
-            this.column_serial_inv.Name = "column_serial_inv";
-            this.column_serial_inv.ReadOnly = true;
-            // 
-            // column_size_inv
-            // 
-            this.column_size_inv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_size_inv.FillWeight = 80F;
-            this.column_size_inv.HeaderText = "Size";
-            this.column_size_inv.MinimumWidth = 6;
-            this.column_size_inv.Name = "column_size_inv";
-            this.column_size_inv.ReadOnly = true;
-            // 
-            // column_mfd_inv
-            // 
-            this.column_mfd_inv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_mfd_inv.FillWeight = 120F;
-            this.column_mfd_inv.HeaderText = "MFD";
-            this.column_mfd_inv.MinimumWidth = 6;
-            this.column_mfd_inv.Name = "column_mfd_inv";
-            this.column_mfd_inv.ReadOnly = true;
-            // 
-            // column_condition_inv
-            // 
-            this.column_condition_inv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_condition_inv.FillWeight = 75F;
-            this.column_condition_inv.HeaderText = "Condition";
-            this.column_condition_inv.MinimumWidth = 6;
-            this.column_condition_inv.Name = "column_condition_inv";
-            this.column_condition_inv.ReadOnly = true;
-            // 
-            // column_location_inv
-            // 
-            this.column_location_inv.HeaderText = "Location";
-            this.column_location_inv.Name = "column_location_inv";
-            this.column_location_inv.ReadOnly = true;
-            this.column_location_inv.Visible = false;
-            // 
-            // column_material_inv
-            // 
-            this.column_material_inv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_material_inv.FillWeight = 60F;
-            this.column_material_inv.HeaderText = "Material";
-            this.column_material_inv.MinimumWidth = 6;
-            this.column_material_inv.Name = "column_material_inv";
-            this.column_material_inv.ReadOnly = true;
-            // 
-            // column_color_inv
-            // 
-            this.column_color_inv.HeaderText = "Color";
-            this.column_color_inv.Name = "column_color_inv";
-            this.column_color_inv.ReadOnly = true;
             // 
             // NewRentalModuleForm
             // 
@@ -1332,11 +1332,11 @@
             this.panelFireTecInv.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panelButtons.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
             this.ResumeLayout(false);
 
         }

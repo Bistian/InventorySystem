@@ -1280,7 +1280,7 @@ namespace InventoryManagmentSystem
             return uuid;
         }
 
-        public static bool ItemLoadDatagrid(SqlConnection connection, DataGridView grid, bool getAll = true)
+        public static bool ItemLoadDatagrid(SqlConnection connection, DataGridView grid, string condition)
         {
             string query = $@"
                 SELECT 
@@ -1323,7 +1323,8 @@ namespace InventoryManagmentSystem
                 LEFT JOIN 
                     tbMasks AS m ON i.Id = m.ItemId
                 LEFT JOIN 
-                    tbPants AS p ON i.Id = p.ItemId;
+                    tbPants AS p ON i.Id = p.ItemId
+                {condition}
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
@@ -1334,14 +1335,6 @@ namespace InventoryManagmentSystem
                 int index = 0;
                 while (reader.Read())
                 {
-                    if(!getAll)
-                    {
-                        string condition = reader[6].ToString().ToLower();
-                        if(condition == "retired") { continue; }
-
-                        string location = reader[7].ToString().ToLower();
-                        if(location != "fire-tec") { continue; }
-                    }
                     int row = grid.Rows.Add(
                         ++index,
                         reader[0].ToString(),
@@ -1354,7 +1347,6 @@ namespace InventoryManagmentSystem
                         reader[7].ToString(),
                         reader[8].ToString()
                     );
-                    grid.Rows[row].Visible = false;
                 }
             }
             catch (Exception ex) 
