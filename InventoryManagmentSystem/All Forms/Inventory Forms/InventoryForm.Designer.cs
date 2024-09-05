@@ -50,16 +50,17 @@
             this.btnToggleFilter = new System.Windows.Forms.Button();
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_item_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_size = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_manufacture_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_color = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_condition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_manufacture_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_acquisition_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_location = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_color = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_item_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_client = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.column_delete = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
@@ -82,7 +83,7 @@
             this.ItemLable.Location = new System.Drawing.Point(2, 15);
             this.ItemLable.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.ItemLable.Name = "ItemLable";
-            this.ItemLable.Size = new System.Drawing.Size(124, 26);
+            this.ItemLable.Size = new System.Drawing.Size(156, 32);
             this.ItemLable.TabIndex = 0;
             this.ItemLable.Text = "Item Type:";
             // 
@@ -97,7 +98,7 @@
             this.cbItemType.Location = new System.Drawing.Point(126, 8);
             this.cbItemType.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.cbItemType.Name = "cbItemType";
-            this.cbItemType.Size = new System.Drawing.Size(103, 38);
+            this.cbItemType.Size = new System.Drawing.Size(103, 46);
             this.cbItemType.TabIndex = 1;
             this.cbItemType.SelectedIndexChanged += new System.EventHandler(this.comboBoxItem_SelectedIndexChanged);
             // 
@@ -118,16 +119,17 @@
             this.dataGridInv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Num,
             this.column_item_id,
-            this.column_item_type,
-            this.column_brand,
-            this.column_serial,
             this.column_size,
-            this.column_manufacture_date,
+            this.column_color,
+            this.column_material,
+            this.column_brand,
             this.column_condition,
+            this.column_serial,
+            this.column_manufacture_date,
             this.column_acquisition_date,
             this.column_location,
-            this.column_material,
-            this.column_color,
+            this.column_item_type,
+            this.column_client,
             this.column_edit,
             this.column_delete});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -172,7 +174,7 @@
             this.labelSearch.Location = new System.Drawing.Point(229, 14);
             this.labelSearch.Margin = new System.Windows.Forms.Padding(0);
             this.labelSearch.Name = "labelSearch";
-            this.labelSearch.Size = new System.Drawing.Size(94, 26);
+            this.labelSearch.Size = new System.Drawing.Size(119, 32);
             this.labelSearch.TabIndex = 19;
             this.labelSearch.Text = "Search:";
             // 
@@ -182,7 +184,7 @@
             this.searchBar.Location = new System.Drawing.Point(327, 6);
             this.searchBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(182, 37);
+            this.searchBar.Size = new System.Drawing.Size(182, 45);
             this.searchBar.TabIndex = 18;
             this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
             // 
@@ -195,6 +197,7 @@
             this.dataGridViewImageColumn1.ReadOnly = true;
             this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewImageColumn1.Width = 125;
             // 
             // dataGridViewImageColumn2
             // 
@@ -203,6 +206,7 @@
             this.dataGridViewImageColumn2.MinimumWidth = 6;
             this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
             this.dataGridViewImageColumn2.ReadOnly = true;
+            this.dataGridViewImageColumn2.Width = 125;
             // 
             // TopPanel
             // 
@@ -242,7 +246,7 @@
             this.checkRented.Location = new System.Drawing.Point(517, 21);
             this.checkRented.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.checkRented.Name = "checkRented";
-            this.checkRented.Size = new System.Drawing.Size(96, 28);
+            this.checkRented.Size = new System.Drawing.Size(119, 33);
             this.checkRented.TabIndex = 24;
             this.checkRented.Text = "Rented";
             this.checkRented.UseVisualStyleBackColor = true;
@@ -256,7 +260,7 @@
             this.checkStock.Location = new System.Drawing.Point(517, 0);
             this.checkStock.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.checkStock.Name = "checkStock";
-            this.checkStock.Size = new System.Drawing.Size(86, 28);
+            this.checkStock.Size = new System.Drawing.Size(105, 33);
             this.checkStock.TabIndex = 23;
             this.checkStock.Text = "Active";
             this.checkStock.UseVisualStyleBackColor = true;
@@ -270,7 +274,7 @@
             this.checkRetired.Location = new System.Drawing.Point(517, 45);
             this.checkRetired.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.checkRetired.Name = "checkRetired";
-            this.checkRetired.Size = new System.Drawing.Size(96, 28);
+            this.checkRetired.Size = new System.Drawing.Size(121, 33);
             this.checkRetired.TabIndex = 21;
             this.checkRetired.Text = "Retired";
             this.checkRetired.UseVisualStyleBackColor = true;
@@ -319,7 +323,7 @@
             this.scInner.Panel2.Controls.Add(this.btnToggleFilter);
             this.scInner.Size = new System.Drawing.Size(456, 728);
             this.scInner.SplitterDistance = 151;
-            this.scInner.SplitterWidth = 162;
+            this.scInner.SplitterWidth = 367;
             this.scInner.TabIndex = 0;
             // 
             // btnToggleFilter
@@ -329,7 +333,7 @@
             this.btnToggleFilter.Location = new System.Drawing.Point(0, 0);
             this.btnToggleFilter.Margin = new System.Windows.Forms.Padding(1);
             this.btnToggleFilter.Name = "btnToggleFilter";
-            this.btnToggleFilter.Size = new System.Drawing.Size(143, 728);
+            this.btnToggleFilter.Size = new System.Drawing.Size(25, 728);
             this.btnToggleFilter.TabIndex = 0;
             this.btnToggleFilter.Text = "Toggle Filter";
             this.btnToggleFilter.UseVisualStyleBackColor = true;
@@ -350,31 +354,7 @@
             this.column_item_id.MinimumWidth = 6;
             this.column_item_id.Name = "column_item_id";
             this.column_item_id.ReadOnly = true;
-            this.column_item_id.Visible = false;
             this.column_item_id.Width = 125;
-            // 
-            // column_item_type
-            // 
-            this.column_item_type.HeaderText = "Type";
-            this.column_item_type.Name = "column_item_type";
-            this.column_item_type.ReadOnly = true;
-            this.column_item_type.Visible = false;
-            // 
-            // column_brand
-            // 
-            this.column_brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_brand.HeaderText = "Brand";
-            this.column_brand.MinimumWidth = 6;
-            this.column_brand.Name = "column_brand";
-            this.column_brand.ReadOnly = true;
-            // 
-            // column_serial
-            // 
-            this.column_serial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_serial.HeaderText = "Serial #";
-            this.column_serial.MinimumWidth = 6;
-            this.column_serial.Name = "column_serial";
-            this.column_serial.ReadOnly = true;
             // 
             // column_size
             // 
@@ -385,13 +365,30 @@
             this.column_size.Name = "column_size";
             this.column_size.ReadOnly = true;
             // 
-            // column_manufacture_date
+            // column_color
             // 
-            this.column_manufacture_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_manufacture_date.HeaderText = "MFD";
-            this.column_manufacture_date.MinimumWidth = 6;
-            this.column_manufacture_date.Name = "column_manufacture_date";
-            this.column_manufacture_date.ReadOnly = true;
+            this.column_color.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_color.HeaderText = "Color";
+            this.column_color.MinimumWidth = 8;
+            this.column_color.Name = "column_color";
+            this.column_color.ReadOnly = true;
+            // 
+            // column_material
+            // 
+            this.column_material.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_material.FillWeight = 55F;
+            this.column_material.HeaderText = "Material";
+            this.column_material.MinimumWidth = 6;
+            this.column_material.Name = "column_material";
+            this.column_material.ReadOnly = true;
+            // 
+            // column_brand
+            // 
+            this.column_brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_brand.HeaderText = "Brand";
+            this.column_brand.MinimumWidth = 6;
+            this.column_brand.Name = "column_brand";
+            this.column_brand.ReadOnly = true;
             // 
             // column_condition
             // 
@@ -401,6 +398,22 @@
             this.column_condition.MinimumWidth = 6;
             this.column_condition.Name = "column_condition";
             this.column_condition.ReadOnly = true;
+            // 
+            // column_serial
+            // 
+            this.column_serial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_serial.HeaderText = "Serial #";
+            this.column_serial.MinimumWidth = 6;
+            this.column_serial.Name = "column_serial";
+            this.column_serial.ReadOnly = true;
+            // 
+            // column_manufacture_date
+            // 
+            this.column_manufacture_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_manufacture_date.HeaderText = "MFD";
+            this.column_manufacture_date.MinimumWidth = 6;
+            this.column_manufacture_date.Name = "column_manufacture_date";
+            this.column_manufacture_date.ReadOnly = true;
             // 
             // column_acquisition_date
             // 
@@ -418,22 +431,21 @@
             this.column_location.Name = "column_location";
             this.column_location.ReadOnly = true;
             // 
-            // column_material
+            // column_item_type
             // 
-            this.column_material.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_material.FillWeight = 55F;
-            this.column_material.HeaderText = "Material";
-            this.column_material.MinimumWidth = 6;
-            this.column_material.Name = "column_material";
-            this.column_material.ReadOnly = true;
+            this.column_item_type.HeaderText = "Type";
+            this.column_item_type.MinimumWidth = 6;
+            this.column_item_type.Name = "column_item_type";
+            this.column_item_type.ReadOnly = true;
+            this.column_item_type.Width = 125;
             // 
-            // column_color
+            // column_client
             // 
-            this.column_color.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_color.HeaderText = "Color";
-            this.column_color.MinimumWidth = 8;
-            this.column_color.Name = "column_color";
-            this.column_color.ReadOnly = true;
+            this.column_client.HeaderText = "Client";
+            this.column_client.MinimumWidth = 6;
+            this.column_client.Name = "column_client";
+            this.column_client.ReadOnly = true;
+            this.column_client.Width = 125;
             // 
             // column_edit
             // 
@@ -456,7 +468,7 @@
             // 
             // InventoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(1370, 806);
@@ -502,16 +514,17 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.DataGridViewTextBoxColumn Num;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_item_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_item_type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_brand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_size;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_manufacture_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_color;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_material;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_brand;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_condition;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_serial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_manufacture_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_acquisition_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_location;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_material;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_color;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_item_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_client;
         private System.Windows.Forms.DataGridViewImageColumn column_edit;
         private System.Windows.Forms.DataGridViewImageColumn column_delete;
     }

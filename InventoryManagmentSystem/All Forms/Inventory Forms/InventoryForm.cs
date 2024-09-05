@@ -29,7 +29,7 @@ namespace InventoryManagmentSystem
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
             string[] columns = { "column_acquisition_date", "column_manufacture_date" };
             HelperFunctions.DataGridFormatDate(dataGridInv, columns);
-            ConditionFilter("stock");
+            ConditionFilter();
             SetItemType(ItemType);
             InitSearchContainer();
         }
@@ -113,6 +113,7 @@ namespace InventoryManagmentSystem
             // Reset search bar.
             searchBar.Text = "";
             ChangeVisibleColumns();
+            ConditionFilter();
             //DisplayItems();
         }
 
@@ -326,18 +327,31 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void ConditionFilter(string filter)
+        private void ConditionFilter()
         {
+            string filter = "";
+
+            if (checkStock.Checked)
+            {
+                filter = "stock";
+            }
+            else if (checkRented.Checked)
+            {
+                filter = "rented";
+            }
+            else if (checkRetired.Checked)
+            {
+                filter = "retired";
+            }
+
             dataGridInv.Rows.Clear();
             string all = ("");
             if (filter == "stock")
             {
-                if(checkStock.Checked)
+                if (checkStock.Checked)
                 {
-                    string condition = "WHERE i.Condition != 'Retired' AND i.Location = 'Fire-Tec'";
+                    string condition = $"WHERE i.Condition != 'Retired' AND i.Location = 'Fire-Tec' AND i.ItemType = '{cbItemType.Text}'";
                     HelperSql.ItemLoadDatagrid(connection, dataGridInv, condition);
-                    checkRented.Checked = false;
-                    checkRetired.Checked = false;
                 }
                 else
                 {
@@ -348,10 +362,8 @@ namespace InventoryManagmentSystem
             {
                 if (checkRented.Checked)
                 {
-                    string condition = "WHERE i.Location != 'Fire-Tec'";
+                    string condition = $"WHERE i.Location != 'Fire-Tec' AND i.ItemType = '{cbItemType.Text}'";
                     HelperSql.ItemLoadDatagrid(connection, dataGridInv, condition);
-                    checkStock.Checked = false;
-                    checkRetired.Checked = false;
                 }
                 else
                 {
@@ -362,9 +374,7 @@ namespace InventoryManagmentSystem
             {
                 if (checkRetired.Checked)
                 {
-                    HelperSql.ItemLoadDatagrid(connection, dataGridInv, "WHERE i.Condition = 'Retired'");
-                    checkStock.Checked = false;
-                    checkRented.Checked = false;
+                    HelperSql.ItemLoadDatagrid(connection, dataGridInv, $"WHERE i.Condition = 'Retired' AND i.ItemType = '{cbItemType.Text}'");
                 }
                 else
                 {
@@ -379,18 +389,24 @@ namespace InventoryManagmentSystem
 
         private void checkStock_Click(object sender, EventArgs e)
         {
-            ConditionFilter("stock");
+            checkRented.Checked = false;
+            checkRetired.Checked = false;
+            ConditionFilter();
         }
 
         private void checkRented_Click(object sender, EventArgs e)
         {
-            ConditionFilter("rented");
+            checkStock.Checked = false;
+            checkRetired.Checked = false;
+            ConditionFilter();
         }
-
 
         private void checkRetired_Click(object sender, EventArgs e)
         {
-            ConditionFilter("retired");
+            checkStock.Checked = false;
+            checkRented.Checked = false;
+            ConditionFilter();
+
         }
 
         private void UsersButton_Click_1(object sender, EventArgs e)

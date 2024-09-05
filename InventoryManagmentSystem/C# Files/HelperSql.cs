@@ -1286,6 +1286,7 @@ namespace InventoryManagmentSystem
                 SELECT 
                     i.Id, 
                     i.ItemType,
+                    i.SerialNumber,
                     COALESCE(
                         b.Brand, 
                         h.Brand,
@@ -1293,14 +1294,14 @@ namespace InventoryManagmentSystem
                         m.Brand,
                         p.Brand
                     ),
-                    COALESCE(
-                        b.SerialNumber, 
-                        h.SerialNumber,
-                        j.SerialNumber,
-                        m.SerialNumber,
-                        p.SerialNumber
-                    ),
                     COALESCE(b.Size, j.Size, p.Size, m.Size) AS size,
+                    COALESCE(
+                        b.AcquisitionDate, 
+                        h.AcquisitionDate,
+                        j.AcquisitionDate,
+                        m.AcquisitionDate,
+                        p.AcquisitionDate
+                    ), 
                     COALESCE(
                         b.ManufactureDate, 
                         h.ManufactureDate,
@@ -1310,6 +1311,7 @@ namespace InventoryManagmentSystem
                     ), 
                     i.Condition, 
                     i.Location,
+                    c.Name,
                     b.Material AS material, 
                     h.Color AS color
                 FROM 
@@ -1324,6 +1326,8 @@ namespace InventoryManagmentSystem
                     tbMasks AS m ON i.Id = m.ItemId
                 LEFT JOIN 
                     tbPants AS p ON i.Id = p.ItemId
+                LEFT JOIN 
+                    tbClients AS c ON i.Location = CAST(c.Id AS VARCHAR(36))
                 {condition}
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
@@ -1337,15 +1341,31 @@ namespace InventoryManagmentSystem
                 {
                     int row = grid.Rows.Add(
                         ++index,
+                        //ID
                         reader[0].ToString(),
-                        reader[1].ToString(),
-                        reader[2].ToString(),
-                        reader[3].ToString(),
+                        //Size
                         reader[4].ToString(),
-                        reader[5].ToString(),
-                        reader[6].ToString(),
+                        //Material
+                        reader[10].ToString(),
+                        //Color
+                        reader[9].ToString(),
+                        //Brand
+                        reader[3].ToString(),
+                        //Condition
                         reader[7].ToString(),
-                        reader[8].ToString()
+                        //SerialNumber
+                        reader[2].ToString(),
+                        //Acquisition Date
+                        reader[6].ToString(),
+                        //Manufacture Date
+                        reader[5].ToString(),
+                        //Location
+                        reader[8].ToString(),
+                        //Item Type
+                        reader[1].ToString(),
+                        //ClientName
+                        reader[11].ToString()
+
                     );
                 }
             }
