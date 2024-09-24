@@ -13,7 +13,8 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
-       
+
+        public string clientId = string.Empty;
         List<Item> academyList;
         List<Item> classList;
         bool ExistingUser;
@@ -277,7 +278,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                     "@Email,Academy = @Academy,DriversLicenseNumber = @DriversLicenseNumber," +
                     "Address = @Address,FireTecRepresentative = @FireTecRepresentative, " +
                     "Chest=@Chest, Sleeve=@Sleeve, Waist=@Waist, Inseam=@Inseam, Hips=@Hips, Weight=@Weight, Height=@Height " +
-                    "WHERE DriversLicenseNumber LIKE @DriversLicenseNumber";
+                    $"WHERE Id LIKE @Id";
 
             string address = txtBoxStreet.Text + " " + textBoxCity.Text + " " + textBoxState.Text + " " + textBoxZip.Text;
             var command = new SqlCommand(query, connection);
@@ -306,6 +307,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 command.Parameters.AddWithValue("@Hips", textBoxHips.Text);
                 command.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
                 command.Parameters.AddWithValue("@Height", textBoxHeight.Text);
+                command.Parameters.AddWithValue("@Id", clientId);
 
                 command.ExecuteNonQuery();
                 MessageBox.Show("Client has been successfully updated.");

@@ -37,10 +37,9 @@ namespace InventoryManagmentSystem
                 var command = new SqlCommand(query, connection);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                var item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    var item = new Item();
                     item.AddByReaderAndColumnArray(reader, columns);
                     list.Add(item);
                 }
@@ -118,10 +117,9 @@ namespace InventoryManagmentSystem
                     "Id","ItemType","DueDate","SerialNumber","Condition","Location", "BusinessModel",
                     "Brand","AcquisitionDate","ManufactureDate","Size","Material"
                 };
-                Item item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    Item item = new Item();
                     item.AddByReaderAndColumnArray(reader, columns);
                     items.Add(item);
                 }
@@ -267,10 +265,9 @@ namespace InventoryManagmentSystem
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
-                Item item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    Item item = new Item();
                     item.AddColumn("Id", reader[0].ToString());
                     item.AddColumn("ItemType", reader[1].ToString());
                     item.AddColumn("Brand", reader[2].ToString());
@@ -339,10 +336,9 @@ namespace InventoryManagmentSystem
                 command.Parameters.AddWithValue("@AcademyId", AcademyId.ToString());
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                var item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    var item = new Item();
                     item.AddByReaderAndColumnArray(reader, columns);
                     list.Add(item);
                 }
@@ -404,10 +400,9 @@ namespace InventoryManagmentSystem
                 var command = new SqlCommand(query, connection);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                var item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    var item = new Item();
                     item.AddByReaderAndColumnArray(reader, columnsClient);
                     list.Add(item);
                 }
@@ -509,10 +504,9 @@ namespace InventoryManagmentSystem
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@searchTerm", $"%{searchTerm}%");
                 SqlDataReader reader = command.ExecuteReader();
-                var item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    var item = new Item();
                     item.AddByReaderAndColumnArray(reader, columnsClient);
                     clients.Add(item);
                 }
@@ -899,10 +893,9 @@ namespace InventoryManagmentSystem
                     "Id", "ItemType", "DueDate", "SerialNumber", "Condition", "Location", "BusinessModel",
                     "Brand", "AcquisitionDate", "ManufactureDate","Color"
                 };
-                Item item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    Item item = new Item();
                     item.AddByReaderAndColumnArray(reader, columns);
                     items.Add(item);
                 }
@@ -1061,10 +1054,9 @@ namespace InventoryManagmentSystem
                 connection.Open();
                 var command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
-                Item item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    Item item = new Item();
                     item.AddByReaderAndColumnArray(reader, columns);
                     list.Add(item);
                 }
@@ -1100,11 +1092,10 @@ namespace InventoryManagmentSystem
                 connection.Open();
                 var command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
-                var item = new Item();
                 int count = 1;
                 while (reader.Read())
                 {
-                    item.Clear();
+                    var item = new Item();
                     item.AddByReaderAndColumnArray(reader, columns);
                     string type = item.GetColumnValue("ItemType");
                     string id = item.GetColumnValue("Id");
@@ -1157,10 +1148,9 @@ namespace InventoryManagmentSystem
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 string[] keys = { "Id", "ItemType", "DueDate", "SerialNumber", "Condition", "Location", "BusinessModel" };
-                var item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    var item = new Item();
                     foreach (string key in keys)
                     {
                         item.AddByReaderAndColumnArray(reader, keys);
@@ -1474,10 +1464,9 @@ namespace InventoryManagmentSystem
                 }
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                var item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    var item = new Item();
                     item.AddByReaderAndColumnArray(reader, columns);
                     list.Add(item);
                 }
@@ -1577,10 +1566,9 @@ namespace InventoryManagmentSystem
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
-                var item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    var item = new Item();
                     item.AddByReaderAndColumnArray(reader, columns);
                     list.Add(item);
                 }
@@ -1713,10 +1701,9 @@ namespace InventoryManagmentSystem
                     "Brand", "AcquisitionDate", "ManufactureDate","Size"};
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
-                Item item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    Item item = new Item();
                     item.AddByReaderAndColumnArray(reader, columns);
                     items.Add(item);
                 }
@@ -1849,10 +1836,9 @@ namespace InventoryManagmentSystem
                     "Brand", "AcquisitionDate", "ManufactureDate","Size"};
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
-                Item item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    Item item = new Item();
                     item.AddByReaderAndColumnArray(reader, columns);
                     items.Add(item);
                 }

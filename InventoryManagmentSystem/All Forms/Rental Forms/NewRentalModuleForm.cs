@@ -19,7 +19,7 @@ namespace InventoryManagmentSystem
 
         private string ReplacmentSerial = "";
         private string dueDate = "";
-        private string ClientId = string.Empty;
+        public string ClientId = string.Empty;
         private string ClassId = string.Empty;
 
         public int ReturnReplace = 0;
@@ -372,6 +372,7 @@ namespace InventoryManagmentSystem
         {
             flowLayoutPanelProfile.Visible = false;
             NewClientForm clientForm = new NewClientForm("Individual", labelProfileName.Text);
+            clientForm.clientId = ClientId;
             clientForm.txtBoxDriversLicense.Enabled = false;
             cbItemType.Items.Clear();
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
