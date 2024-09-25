@@ -43,6 +43,7 @@ namespace InventoryManagmentSystem
             labelTitle.Text = "Update Academy";
             btnAdd.Text = "Update";
             tbAcademyName.Text = academy.name;
+            tbContactName.Text = academy.contactName;
             tbEmail.Text = academy.email;
             tbPhone.Text = academy.phone;
             tbStreet.Text = academy.street;
@@ -52,6 +53,9 @@ namespace InventoryManagmentSystem
 
             btnResetName.Visible = true;
             btnResetName.Enabled = true;
+
+            btnResetContactName.Visible = true;
+            btnResetContactName.Enabled = true;
 
             btnResetEmail.Visible = true;
             btnResetEmail.Enabled = true;
@@ -105,8 +109,8 @@ namespace InventoryManagmentSystem
         {
             string query = @"
                 INSERT INTO tbAcademies
-                (Name, Email, Phone, Street, City, State, Zip)
-                VALUES (@Name, @Email, @Phone, @Street, @City, @State, @Zip)
+                (Name, Email, Phone, Street, City, State, Zip, ContactName)
+                VALUES (@Name, @Email, @Phone, @Street, @City, @State, @Zip, @ContactName)
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
@@ -116,6 +120,7 @@ namespace InventoryManagmentSystem
             {
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Name", tbAcademyName.Text);
+                command.Parameters.AddWithValue("@ContactName", tbContactName.Text);
                 command.Parameters.AddWithValue("@Email", tbEmail.Text);
                 command.Parameters.AddWithValue("@Phone", tbPhone.Text);
                 command.Parameters.AddWithValue("@Street", tbStreet.Text);
@@ -173,7 +178,7 @@ namespace InventoryManagmentSystem
         {
             string query = @"
                 Update tbAcademies
-                SET Name = @Name, Email = @Email, Phone = @Phone, Street = @Street, City = @City, State = @State, Zip = @Zip
+                SET Name = @Name, Email = @Email, Phone = @Phone, Street = @Street, City = @City, State = @State, Zip = @Zip, ContactName = @ContactName
                 WHERE Id = @Id
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
@@ -182,6 +187,7 @@ namespace InventoryManagmentSystem
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Id", academy.uuid);
                 command.Parameters.AddWithValue("@Name", tbAcademyName.Text);
+                command.Parameters.AddWithValue("@ContactName", tbContactName.Text);
                 command.Parameters.AddWithValue("@Email", tbEmail.Text);
                 command.Parameters.AddWithValue("@Phone", tbPhone.Text);
                 command.Parameters.AddWithValue("@Street", tbStreet.Text);
@@ -257,6 +263,11 @@ namespace InventoryManagmentSystem
         {
             tbZip.Text = academy.zip;
             cbState.Text = academy.state;
+        }
+
+        private void btnResetContactName_Click(object sender, EventArgs e)
+        {
+            tbContactName.Text = academy.contactName;
         }
     }
 }

@@ -77,7 +77,6 @@ namespace InventoryManagmentSystem
 
         private void LoadClients()
         {
-            if (clients.Count == 0) { return; }
 
             uint count = 1;
             dataGridUsers.Rows.Clear();
@@ -177,12 +176,40 @@ namespace InventoryManagmentSystem
 
         private void cbActive_CheckedChanged(object sender, EventArgs e)
         {
-            LoadClients();
+            string searchTerm = searchBar.Text;
+            if (string.IsNullOrEmpty(searchTerm)) { LoadClients(); }
+            var clients = new List<Item>();
+            dataGridUsers.Rows.Clear();
+
+            clients = HelperSql.ClientFindBySearchBar(connection, searchTerm, cbActive.Checked, cbInactive.Checked);
+            if (clients == null) { return; }
+
+            uint count = 1;
+            dataGridUsers.Rows.Clear();
+            foreach (var client in clients)
+            {
+                AddClientToGrid(client, count);
+                ++count;
+            }
         }
 
         private void cbInactive_CheckedChanged(object sender, EventArgs e)
         {
-            LoadClients();
+            string searchTerm = searchBar.Text;
+            if (string.IsNullOrEmpty(searchTerm)) { LoadClients(); }
+            var clients = new List<Item>();
+            dataGridUsers.Rows.Clear();
+
+            clients = HelperSql.ClientFindBySearchBar(connection, searchTerm, cbActive.Checked, cbInactive.Checked);
+            if (clients == null) { return; }
+
+            uint count = 1;
+            dataGridUsers.Rows.Clear();
+            foreach (var client in clients)
+            {
+                AddClientToGrid(client, count);
+                ++count;
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ namespace InventoryManagmentSystem.Academy
         {
             public Guid uuid;
             public string name;
+            public string contactName;
             public string email;
             public string phone;
             public string street;
