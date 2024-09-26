@@ -37,12 +37,13 @@
             this.cbItemType = new System.Windows.Forms.ComboBox();
             this.tbUuid = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.BtnLocationUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnImport
             // 
             this.btnImport.Location = new System.Drawing.Point(16, 15);
-            this.btnImport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(4);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(100, 28);
             this.btnImport.TabIndex = 0;
@@ -53,7 +54,7 @@
             // btnDatabase
             // 
             this.btnDatabase.Location = new System.Drawing.Point(17, 52);
-            this.btnDatabase.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDatabase.Margin = new System.Windows.Forms.Padding(4);
             this.btnDatabase.Name = "btnDatabase";
             this.btnDatabase.Size = new System.Drawing.Size(100, 28);
             this.btnDatabase.TabIndex = 1;
@@ -64,7 +65,7 @@
             // panel1
             // 
             this.panel1.Location = new System.Drawing.Point(161, 15);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(889, 524);
             this.panel1.TabIndex = 2;
@@ -72,7 +73,7 @@
             // btnBrands
             // 
             this.btnBrands.Location = new System.Drawing.Point(17, 89);
-            this.btnBrands.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrands.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrands.Name = "btnBrands";
             this.btnBrands.Size = new System.Drawing.Size(100, 28);
             this.btnBrands.TabIndex = 3;
@@ -83,7 +84,7 @@
             // btnPrices
             // 
             this.btnPrices.Location = new System.Drawing.Point(16, 124);
-            this.btnPrices.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrices.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrices.Name = "btnPrices";
             this.btnPrices.Size = new System.Drawing.Size(100, 28);
             this.btnPrices.TabIndex = 4;
@@ -95,7 +96,7 @@
             // 
             this.btnAddItem.Enabled = false;
             this.btnAddItem.Location = new System.Drawing.Point(16, 420);
-            this.btnAddItem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddItem.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(100, 28);
             this.btnAddItem.TabIndex = 7;
@@ -112,7 +113,7 @@
             this.cbItemType.Items.AddRange(new object[] {
             "Detached UUID"});
             this.cbItemType.Location = new System.Drawing.Point(16, 386);
-            this.cbItemType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbItemType.Margin = new System.Windows.Forms.Padding(4);
             this.cbItemType.Name = "cbItemType";
             this.cbItemType.Size = new System.Drawing.Size(100, 24);
             this.cbItemType.TabIndex = 8;
@@ -122,7 +123,7 @@
             // 
             this.tbUuid.Enabled = false;
             this.tbUuid.Location = new System.Drawing.Point(17, 354);
-            this.tbUuid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbUuid.Margin = new System.Windows.Forms.Padding(4);
             this.tbUuid.Name = "tbUuid";
             this.tbUuid.Size = new System.Drawing.Size(99, 22);
             this.tbUuid.TabIndex = 9;
@@ -139,12 +140,24 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // BtnLocationUpdate
+            // 
+            this.BtnLocationUpdate.Location = new System.Drawing.Point(17, 291);
+            this.BtnLocationUpdate.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnLocationUpdate.Name = "BtnLocationUpdate";
+            this.BtnLocationUpdate.Size = new System.Drawing.Size(100, 28);
+            this.BtnLocationUpdate.TabIndex = 11;
+            this.BtnLocationUpdate.Text = "Item Location";
+            this.BtnLocationUpdate.UseVisualStyleBackColor = true;
+            this.BtnLocationUpdate.Click += new System.EventHandler(this.BtnLocationUpdate_Click);
+            // 
             // ToolsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.BtnLocationUpdate);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tbUuid);
             this.Controls.Add(this.cbItemType);
@@ -154,7 +167,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnDatabase);
             this.Controls.Add(this.btnImport);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ToolsForm";
             this.Text = "ToolsForm";
             this.ResumeLayout(false);
@@ -173,5 +186,6 @@
         private System.Windows.Forms.ComboBox cbItemType;
         private System.Windows.Forms.TextBox tbUuid;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnLocationUpdate;
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Windows.Forms.VisualStyles;
 using Microsoft.VisualBasic;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace InventoryManagmentSystem
 {
@@ -1095,6 +1096,41 @@ namespace InventoryManagmentSystem
             {
                 Lowerify();
             }
+        }
+
+        private bool UpdateItemLocation()
+        {
+            string message = "Are you sure you want to update Item Location?";
+            DialogResult messageBox = MessageBox.Show(message, "Update Item Location", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (messageBox == DialogResult.No) { return false; }
+
+            string query = "UPDATE tbItems " +
+                           "SET location = 'Fire-Tec' " +
+                           "WHERE CAST(location AS VARCHAR(36)) NOT IN (SELECT CAST(Id AS VARCHAR(36)) FROM tbClients)";
+
+
+            command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+
+
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        private void BtnLocationUpdate_Click(object sender, EventArgs e)
+        {
+            UpdateItemLocation();
         }
     }
 }
