@@ -13,6 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Windows.Forms.VisualStyles;
 using Microsoft.VisualBasic;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace InventoryManagmentSystem
 {
@@ -1105,8 +1106,9 @@ namespace InventoryManagmentSystem
             if (messageBox == DialogResult.No) { return false; }
 
             string query = "UPDATE tbItems " +
-                           "SET location = 'Fire-Tec' " +
-                           "WHERE CAST(location AS VARCHAR(36)) NOT IN (SELECT CAST(Id AS VARCHAR(36)) FROM tbClients)";
+                           "SET location = 'Fire-Tec'" +
+                           "WHERE CAST(location AS VARCHAR(36)) NOT IN(SELECT CAST(Id AS VARCHAR(36)) FROM tbClients)" +
+                           "AND CAST(location AS VARCHAR(36)) NOT IN(SELECT CAST(DriversLicenseNumber AS VARCHAR(36)) FROM tbClients)";
 
 
             command = new SqlCommand(query, connection);
