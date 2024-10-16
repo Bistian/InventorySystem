@@ -254,6 +254,10 @@ namespace InventoryManagmentSystem
                     if (itemType == "boots") { UpdateBoots(e); }
                     else if (itemType == "helmet") { UpdateHelmet(e); }
                     else if (itemType == "jacket" || itemType == "pants" || itemType == "mask") { UpdateJacketOrPantsOrMasks(e); }
+
+                    dataGridInv.Rows.Clear();
+                    HelperSql.ItemFindAllWithSpecifications(connection, dataGridInv);
+                    searchBar.Text = dataGridInv.Rows[e.RowIndex].Cells["column_serial"].Value.ToString();
                     DisplayItems();
                 }
                 else if (colName == "column_delete")
