@@ -20,7 +20,7 @@ namespace InventoryManagmentSystem
 
         /// <summary> Key/Value pair list. Key = column name </summary>
         private List<string[]> filterList = new List<string[]>();
-        private FilterForm filterForm;
+        private SearchForm searchForm;
 
         public InventoryForm(string ItemType)
         {
@@ -47,7 +47,6 @@ namespace InventoryManagmentSystem
       
         private void InitSearchContainer()
         {
-            this.scOuter.SplitterDistance = (int)(Width * 0.3);
 
             int innerWidth = this.scInner.Width;
             btnToggleFilter.Text = "<";
@@ -58,18 +57,19 @@ namespace InventoryManagmentSystem
             {
                 filterList.Clear();
                 filterList = filters;
-                //DisplayItems();
             };
 
-            filterForm = new FilterForm(this, list, callback);
-            filterForm.TopLevel = false;
-            this.scInner.Panel1.Controls.Add(filterForm);
-            filterForm.Dock = DockStyle.Fill;
-            filterForm.Show();
+            searchForm = new SearchForm(dataGridInv);
+            searchForm.TopLevel = false;
+            this.scInner.Panel1.Controls.Add(searchForm);
+            searchForm.Dock = DockStyle.Fill;
+            searchForm.AutoScroll = true;
             ToggleFilter();
+            searchForm.Show();
+            searchForm.Visible = false;
         }
 
-        private bool SearchBarIsMatching(DataGridViewRow row)
+        /*private bool SearchBarIsMatching(DataGridViewRow row)
         {
             if(searchBar.Text.Length == 0) { return true; }
             string like = searchBar.Text;
@@ -106,12 +106,12 @@ namespace InventoryManagmentSystem
                 return size == like ? true : false;
             }
             return false;
-        }
+        }*/
 
         private void comboBoxItem_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Reset search bar.
-            searchBar.Text = "";
+            //searchBar.Text = "";
             ChangeVisibleColumns();
             ConditionFilter();
             //DisplayItems();
@@ -141,7 +141,10 @@ namespace InventoryManagmentSystem
 
         private void searchBar_TextChanged(object sender, EventArgs e)
         {
-            if (cbItemType.SelectedIndex < 0) { return; }
+            if (cbItemType.SelectedIndex < 0) 
+            {
+                ConditionFilter();
+            }
         }
 
         private void dataGridInv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -300,14 +303,14 @@ namespace InventoryManagmentSystem
         {
             if (btnToggleFilter.Text == ">")
             {
-                filterForm.Visible = true;
-                scOuter.SplitterDistance = (int)(Width * 0.3);
+                searchForm.Visible = true;
+                scOuter.SplitterDistance = (int)(searchForm.panel_item_type.Width * 1.3);
                 scInner.SplitterDistance = (int)(scInner.Width * 1.15);
                 btnToggleFilter.Text = "<";
             }
             else
             {
-                filterForm.Visible = false;
+                searchForm.Visible = false;
                 // Calculate the desired splitter distance
                 int minInnerWidth = scOuter.Panel1MinSize + scInner.Panel1MinSize + scInner.SplitterWidth;
 
@@ -413,7 +416,6 @@ namespace InventoryManagmentSystem
         {
             NewItemForm ModForm = new NewItemForm();
             ModForm.ShowDialog();
-            //DisplayItems();
         }
 
         private void btnToggleFilter_Click(object sender, EventArgs e)
