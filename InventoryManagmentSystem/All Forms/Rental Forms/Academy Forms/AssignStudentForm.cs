@@ -4,6 +4,8 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using static InventoryManagmentSystem.Academy.AcademyForm;
+using static System.Net.Mime.MediaTypeNames;
+using System.Text.RegularExpressions;
 
 namespace InventoryManagmentSystem.Academy
 {
@@ -52,9 +54,10 @@ namespace InventoryManagmentSystem.Academy
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
             string Id = string.Empty;
+            string ClassName = Regex.Replace(cbClasses.Text, @"\s\d{1,2}/\d{1,2}/\d{4}\s-\s\d{1,2}/\d{1,2}/\d{4}$", "");
             foreach (var item in classList)
             {
-                if (item.GetColumnValue("Name") == cbClasses.Text)
+                if (item.GetColumnValue("Name") == ClassName)
                 {
                     Id = item.GetColumnValue("Id");
                     break;
@@ -77,7 +80,7 @@ namespace InventoryManagmentSystem.Academy
 
                 parent.LoadProfile(parent.drivers,parent.currentUser);
                 this.Dispose();
-
+                MessageBox.Show("IAcademy Successfully Updated!.");
                 return true;
             }
             catch (Exception ex)
@@ -136,6 +139,7 @@ namespace InventoryManagmentSystem.Academy
                 Console.WriteLine(ex.Message);
                 return;
             }
+            
         }
     }
 }

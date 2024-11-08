@@ -340,8 +340,10 @@ namespace InventoryManagmentSystem
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
+            LoadClient();
+            HideAllDockedControlsInPanel(panel2);
             labelProfileDrivers.Text = "License Number:";
-
+            
             panelProfileRentalInfo.Visible = true;
             panelProfileMeasurments.Visible = true;
             flowLayoutPanelProfile.Visible = true;
@@ -354,9 +356,21 @@ namespace InventoryManagmentSystem
             splitContainerInventories.Visible = true;
             panelRentals.Visible = true;
             AssignStudentForm dockedForm = panel2.Controls.OfType<AssignStudentForm>().FirstOrDefault();
+          
             if (dockedForm != null)
             {
                 dockedForm.Dispose();
+            }
+        }
+
+        private void HideAllDockedControlsInPanel(Panel panel)
+        {
+            foreach (Control control in panel.Controls)
+            {
+                if (control.Dock != DockStyle.None)  // Check if control is docked
+                {
+                    control.Visible = false;  // Set visibility to false
+                }
             }
         }
 
