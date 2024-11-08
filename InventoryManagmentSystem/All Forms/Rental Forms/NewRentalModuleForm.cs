@@ -340,7 +340,6 @@ namespace InventoryManagmentSystem
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
-            LoadClient();
             HideAllDockedControlsInPanel(panel2);
             labelProfileDrivers.Text = "License Number:";
             
@@ -356,7 +355,8 @@ namespace InventoryManagmentSystem
             splitContainerInventories.Visible = true;
             panelRentals.Visible = true;
             AssignStudentForm dockedForm = panel2.Controls.OfType<AssignStudentForm>().FirstOrDefault();
-          
+
+            LoadProfile(ClientId, labelProfileName.Text);
             if (dockedForm != null)
             {
                 dockedForm.Dispose();
@@ -406,6 +406,11 @@ namespace InventoryManagmentSystem
             }
             // Client has boots or nohting
             HelperSql.ClientUpdateActivity(connection, ClientId, false);
+        }
+
+        private void labelProfileName_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

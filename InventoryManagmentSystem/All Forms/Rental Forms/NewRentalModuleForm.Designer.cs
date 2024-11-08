@@ -929,6 +929,7 @@
             this.labelProfileName.Size = new System.Drawing.Size(261, 38);
             this.labelProfileName.TabIndex = 111;
             this.labelProfileName.Text = "Jairo Rodriguez";
+            this.labelProfileName.Click += new System.EventHandler(this.labelProfileName_Click);
             // 
             // panelFireTecInv
             // 
