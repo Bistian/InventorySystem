@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace InventoryManagmentSystem.All_Forms
 {
@@ -23,9 +24,27 @@ namespace InventoryManagmentSystem.All_Forms
         {
             InitializeComponent();
             HelperSql.ItemTypeLoadComboBox(connection, cb_item_type);
+
+            panel_serial_number.Visible = false;
+            panel_size.Visible = false;
+            panel_size_masks.Visible = false;
+            panel_material.Visible = false;
+            panel_condition.Visible = false;
+            panel_color.Visible = false;
+            panel_brand.Visible = false;
+            panel_check_box.Visible = false;
+            btn_search.Visible = false;
+
             string[] conditions = { "New", "Used", "Retired" };
             cb_condition.Items.AddRange(conditions);
+            string[] materials = { "Rubber", "Lether" };
+            cb_material.Items.AddRange(materials);
+            string[] colors = { "Yellow", "Black" };
+            cb_color.Items.AddRange(colors);
+            string[] sizes = { "SM", "MD", "LG" };
+            cb_size_masks.Items.AddRange(sizes);
             this.grid = grid;
+            tb_size.KeyPress += new KeyPressEventHandler(TbSizeKeyPress);
         }
 
         private void ChangeVisibleColumns()
@@ -50,123 +69,628 @@ namespace InventoryManagmentSystem.All_Forms
             }
         }
 
-        private string SearchWithSerial()
+        private void SearchBoots()
         {
-            string query = string.Empty;
-            bool where = false;
-            if(cb_item_type.Text == "boots")
-            {
-                query = "SELECT * FROM tbBoots";
-                if(tb_serial_number.Text.Length > 0 || cb_condition.SelectedIndex != -1)
-                {
-                    if(tb_serial_number.Text.Length > 0 && cb_condition.SelectedIndex != -1)
-                    {
-                        query += $"JOIN tbItems ON (";
-                    }
-
-                }
-                if(cb_brand.Text.Length > 0)
-                {
-                    where = true;
-                    query += $" WHERE BRAND LIKE {cb_brand.Text}";
-                }
-
-                if(tb_size.Text.Length >= 0)
-                {
-                    if(where)
-                    {
-                        query += $" AND SIZE LIKE {tb_size.Text}";
-                    }
-                    else
-                    {
-                        where = true;
-                        query = $" WHERE SIZE Like {tb_size.Text}";
-                    }
-                }
-            }
-            else if(cb_item_type.Text == "helmet")
-            {
-
-            }
-            return query;
-        }
-
-        private string SearchBoots()
-        {
-            string query = $@"
+            // Removed client name due to table error
+            // JOIN tbClients AS c ON i.Location = c.Id
+            string query = @"
                 SELECT 
-                    b.Brand, b.ManufactureDate, b.Size, b.Material, b.ItemId, b.AcquisitionDate, 
-                    i.ItemType, i.SerialNumber, i.Condition, i.Location, 
-                    c.Name 
+                    b.ItemId, b.Size, b.Material, b.Brand, 
+                    i.Condition, i.SerialNumber, b.ManufactureDate, 
+                    b.AcquisitionDate, i.Location, i.ItemType
                 FROM tbBoots AS b 
-                JOIN tbItems AS i ON b.ItemId = i.Id 
-                JOIN tbClients AS c ON i.Location = c.Id";
+                JOIN tbItems AS i ON b.ItemId = i.Id";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
+            
+            bool and = false;
             if(tb_serial_number.Text.Length > 0)
             {
-                query = $" JOIN tbItems AS i ON SerialNumber LIKE '{tb_serial_number.Text}'";
-                if(cb_condition.SelectedIndex != -1)
-                {
-                    query += $" AND Condition = '{cb_condition.Text}'";
-                }
-            }
-            if(cb_brand.SelectedIndex == -1 && tb_size.Text.Length == 0 && cb_material.SelectedIndex == -1)
-            {
-                return query;
+                and = true;
+                query += " WHERE i.SerialNumber LIKE @SerialNumber";
             }
 
-            query += " WHERE";
             if(cb_brand.SelectedIndex != -1)
             {
-                query += $" Brand = '{cb_brand.Text}'";
+                if(and)
+                {
+                    query += $" AND b.Brand = '{cb_brand.Text}'";
+                }
+                else
+                {
+                    and = true;
+                    query += $" WHERE b.Brand = '{cb_brand.Text}'";
+                }
             }
 
             if(tb_size.Text.Length > 0)
             {
-                if(cb_brand.SelectedIndex != -1)
+                if(and)
                 {
-                    query += " AND";
+                    query += " AND b.Size = @Size";
                 }
-                query += $" Size = '{tb_size.Text}'";
+                else
+                {
+                    and = true;
+                    query += " WHERE b.Size = @Size";
+                }
             }
 
             if(cb_material.SelectedIndex != -1)
             {
-                if (cb_brand.SelectedIndex != -1 || tb_size.Text.Length > 0)
+                if (and)
                 {
-                    query += " AND";
+                    query += $" AND Material = '{cb_material.Text}'";
                 }
-                query += $" Material = '{cb_material.Text}'";
+                else
+                {
+                    and = true;
+                    query += $" WHERE Material = '{cb_material.Text}'";
+                }
             }
-            return query;
+
+            if (cb_condition.SelectedIndex != -1)
+            {
+                if (and)
+                {
+                    query += $" AND i.Condition = '{cb_condition.Text}'";
+                }
+                else
+                {
+                    and = true;
+                    query += $" WHERE i.Condition = '{cb_condition.Text}'";
+                }
+                
+            }
+            // Search for rented or in stock
+            if (check_in_stock.Checked && !check_rented.Checked)
+            {
+                if (and)
+                {
+                    query += " AND i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                }
+                else
+                {
+                    query += " WHERE i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                }
+            }
+            else if (check_rented.Checked && !check_in_stock.Checked)
+            {
+                if (and)
+                {
+                    query += " AND i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                }
+                else
+                {
+                    query += " WHERE i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                }
+            }
+
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                if (tb_serial_number.Text.Length > 0)
+                {
+                    command.Parameters.AddWithValue("@SerialNumber", $"%{tb_serial_number.Text}%");
+                }
+                if (tb_size.Text.Length > 0)
+                {
+                    command.Parameters.AddWithValue("@Size", tb_size.Text);
+                }
+                SqlDataReader reader = command.ExecuteReader();
+                grid.Rows.Clear();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(++index,
+                        reader[0], // Item ID
+                        reader[1], // Size
+                        "Color",
+                        reader[2], // Material
+                        reader[3], // Brand
+                        reader[4], // Condition
+                        reader[5], // Serial Number
+                        reader[6], // MFD
+                        reader[7], // Acqusition
+                        reader[8], // Location
+                        reader[9] // Type
+                        // reader[11] // Client
+                    );
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            finally { connection.Close(); }
         }
 
-        private string SearchHelmets()
+        private void SearchHelmets()
         {
-            string query = "";
-            return query;
+            // Removed client name due to table error
+            // JOIN tbClients AS c ON i.Location = c.Id
+            string query = @"
+                SELECT 
+                    h.ItemId, h.Color, h.Brand, 
+                    i.Condition, i.SerialNumber, h.ManufactureDate, 
+                    h.AcquisitionDate, i.Location, i.ItemType
+                FROM tbHelmets AS h 
+                JOIN tbItems AS i ON h.ItemId = i.Id ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+
+            bool and = false;
+            if (tb_serial_number.Text.Length > 0)
+            {
+                and = true;
+                query += " WHERE i.SerialNumber LIKE @SerialNumber";
+            }
+
+            if (cb_brand.SelectedIndex != -1)
+            {
+                if(and)
+                {
+                    query += $" AND h.Brand = '{cb_brand.Text}'";
+                }
+                else
+                {
+                    and = true;
+                    query += $" WHERE h.Brand = '{cb_brand.Text}'";
+                }
+            }
+
+            if (cb_color.SelectedIndex != -1)
+            {
+                if (and)
+                {
+                    query += $" AND h.Color = '{cb_color.Text}'";
+                }
+                else
+                {
+                    and = true;
+                    query += $" WHERE h.Color = '{cb_color.Text}'";
+                }
+            }
+
+            if (cb_condition.SelectedIndex != -1)
+            {
+                if (and)
+                {
+                    query += $" AND i.Condition = '{cb_condition.Text}'";
+                }
+                else
+                {
+                    and = true;
+                    query += $" WHERE i.Condition = '{cb_condition.Text}'";
+                }
+
+            }
+            // Search for rented or in stock
+            if (check_in_stock.Checked && !check_rented.Checked)
+            {
+                if (and)
+                {
+                    query += " AND i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                }
+                else
+                {
+                    query += " WHERE i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                }
+            }
+            else if (check_rented.Checked && !check_in_stock.Checked)
+            {
+                if (and)
+                {
+                    query += " AND i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                }
+                else
+                {
+                    query += " WHERE i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                }
+            }
+
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                if (tb_serial_number.Text.Length > 0)
+                {
+                    command.Parameters.AddWithValue("@SerialNumber", $"%{tb_serial_number.Text}%");
+                }
+                SqlDataReader reader = command.ExecuteReader();
+                grid.Rows.Clear();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(++index,
+                        reader[0], // Item ID
+                        "Size",
+                        reader[1], // Color
+                        "Material",
+                        reader[2], // Brand
+                        reader[3], // Condition
+                        reader[4], // Serial Number
+                        reader[5], // MFD
+                        reader[6], // Acqusition
+                        reader[7], // Location
+                        reader[8] // Type
+                        // reader[11] // Client
+                    );
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            finally { connection.Close(); }
         }
 
-        private string SearchJackets()
+        private void SearchJackets()
         {
-            string query = "";
-            return query;
+            // Removed client name due to table error
+            // JOIN tbClients AS c ON i.Location = c.Id
+            string query = @"
+                SELECT 
+                    j.ItemId, j.Size, j.Brand, 
+                    i.Condition, i.SerialNumber, j.ManufactureDate, 
+                    j.AcquisitionDate, i.Location, i.ItemType
+                FROM tbJackets AS j 
+                JOIN tbItems AS i ON j.ItemId = i.Id ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+
+            bool and = false;
+            if (tb_serial_number.Text.Length > 0)
+            {
+                and = true;
+                query += " WHERE i.SerialNumber LIKE @SerialNumber";
+            }
+
+            if (cb_brand.SelectedIndex != -1)
+            {
+                and = true;
+                query += $" WHERE j.Brand = '{cb_brand.Text}'";
+            }
+
+            if (tb_size.Text.Length > 0)
+            {
+                if (and)
+                {
+                    query += $" AND j.Size LIKE @Size";
+                }
+                else
+                {
+                    and = true;
+                    query += $" WHERE j.Size LIKE @Size";
+                }
+            }
+
+            if (cb_condition.SelectedIndex != -1)
+            {
+                if (and)
+                {
+                    query += $" AND i.Condition = '{cb_condition.Text}'";
+                }
+                else
+                {
+                    and = true;
+                    query += $" WHERE i.Condition = '{cb_condition.Text}'";
+                }
+
+            }
+            // Search for rented or in stock
+            if (check_in_stock.Checked && !check_rented.Checked)
+            {
+                if (and)
+                {
+                    query += " AND i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                }
+                else
+                {
+                    query += " WHERE i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                }
+            }
+            else if (check_rented.Checked && !check_in_stock.Checked)
+            {
+                if (and)
+                {
+                    query += " AND i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                }
+                else
+                {
+                    query += " WHERE i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                }
+            }
+
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                if (tb_serial_number.Text.Length > 0)
+                {
+                    command.Parameters.AddWithValue("@SerialNumber", $"%{tb_serial_number.Text}%");
+                }
+                if (tb_size.Text.Length > 0)
+                {
+                    command.Parameters.AddWithValue("@Size", $"{tb_size.Text}%");
+                }
+                SqlDataReader reader = command.ExecuteReader();
+                grid.Rows.Clear();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(++index,
+                        reader[0], // Item ID
+                        reader[1], // Size
+                        "Color",
+                        "Material",
+                        reader[2], // Brand
+                        reader[3], // Condition
+                        reader[4], // Serial Number
+                        reader[5], // MFD
+                        reader[6], // Acqusition
+                        reader[7], // Location
+                        reader[8] // Type
+                                  // reader[11] // Client
+                    );
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            finally { connection.Close(); }
         }
 
-        private string SearchMasks()
+        private void SearchMasks()
         {
-            string query = "";
-            return query;
+            // Removed client name due to table error
+            // JOIN tbClients AS c ON i.Location = c.Id
+            string query = @"
+                SELECT 
+                    m.ItemId, m.Size, m.Brand, 
+                    i.Condition, i.SerialNumber, m.ManufactureDate, 
+                    m.AcquisitionDate, i.Location, i.ItemType
+                FROM tbMasks AS m 
+                JOIN tbItems AS i ON m.ItemId = i.Id ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+
+            bool and = false;
+            if (tb_serial_number.Text.Length > 0)
+            {
+                and = true;
+                query += " WHERE i.SerialNumber LIKE @SerialNumber";
+            }
+
+            if (cb_brand.SelectedIndex != -1)
+            {
+                and = true;
+                query += $" WHERE m.Brand = '{cb_brand.Text}'";
+            }
+
+            if (cb_size_masks.SelectedIndex != -1)
+            {
+                if (and)
+                {
+                    query += $" AND m.Size LIKE @Size";
+                }
+                else
+                {
+                    and = true;
+                    query += $" WHERE m.Size LIKE @Size";
+                }
+            }
+
+            if (cb_condition.SelectedIndex != -1)
+            {
+                if (and)
+                {
+                    query += $" AND i.Condition = '{cb_condition.Text}'";
+                }
+                else
+                {
+                    and = true;
+                    query += $" WHERE i.Condition = '{cb_condition.Text}'";
+                }
+
+            }
+            // Search for rented or in stock
+            if (check_in_stock.Checked && !check_rented.Checked)
+            {
+                if (and)
+                {
+                    query += " AND i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                }
+                else
+                {
+                    query += " WHERE i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                }
+            }
+            else if (check_rented.Checked && !check_in_stock.Checked)
+            {
+                if (and)
+                {
+                    query += " AND i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                }
+                else
+                {
+                    query += " WHERE i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                }
+            }
+
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                if (tb_serial_number.Text.Length > 0)
+                {
+                    command.Parameters.AddWithValue("@SerialNumber", $"%{tb_serial_number.Text}%");
+                }
+                if (cb_size_masks.SelectedIndex != -1)
+                {
+                    command.Parameters.AddWithValue("@Size", $"{cb_size_masks.Text}%");
+                }
+                SqlDataReader reader = command.ExecuteReader();
+                grid.Rows.Clear();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(++index,
+                        reader[0], // Item ID
+                        reader[1], // Size
+                        "Color",
+                        "Material",
+                        reader[2], // Brand
+                        reader[3], // Condition
+                        reader[4], // Serial Number
+                        reader[5], // MFD
+                        reader[6], // Acqusition
+                        reader[7], // Location
+                        reader[8] // Type
+                                  // reader[11] // Client
+                    );
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            finally { connection.Close(); }
         }
 
-        private string SearchPants()
+        private void SearchPants()
         {
-            string query = "";
-            return query;
+            // Removed client name due to table error
+            // JOIN tbClients AS c ON i.Location = c.Id
+            string query = @"
+                SELECT 
+                    p.ItemId, p.Size, p.Brand, 
+                    i.Condition, i.SerialNumber, p.ManufactureDate, 
+                    p.AcquisitionDate, i.Location, i.ItemType
+                FROM tbPants AS p 
+                JOIN tbItems AS i ON p.ItemId = i.Id ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+
+            bool and = false;
+            if (tb_serial_number.Text.Length > 0)
+            {
+                and = true;
+                query += " WHERE i.SerialNumber LIKE @SerialNumber";
+            }
+
+            if (cb_brand.SelectedIndex != -1)
+            {
+                and = true;
+                query += $" WHERE p.Brand = '{cb_brand.Text}'";
+            }
+
+            if (tb_size.Text.Length > 0)
+            {
+                if (and)
+                {
+                    query += $" AND p.Size LIKE @Size";
+                }
+                else
+                {
+                    and = true;
+                    query += $" WHERE p.Size LIKE @Size";
+                }
+            }
+
+            if (cb_condition.SelectedIndex != -1)
+            {
+                if (and)
+                {
+                    query += $" AND i.Condition = '{cb_condition.Text}'";
+                }
+                else
+                {
+                    and = true;
+                    query += $" WHERE i.Condition = '{cb_condition.Text}'";
+                }
+
+            }
+            // Search for rented or in stock
+            if (check_in_stock.Checked && !check_rented.Checked)
+            {
+                if (and)
+                {
+                    query += " AND i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                }
+                else
+                {
+                    query += " WHERE i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                }
+            }
+            else if (check_rented.Checked && !check_in_stock.Checked)
+            {
+                if (and)
+                {
+                    query += " AND i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                }
+                else
+                {
+                    query += " WHERE i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                }
+            }
+
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                if (tb_serial_number.Text.Length > 0)
+                {
+                    command.Parameters.AddWithValue("@SerialNumber", $"%{tb_serial_number.Text}%");
+                }
+                if (tb_size.Text.Length > 0)
+                {
+                    command.Parameters.AddWithValue("@Size", $"{tb_size.Text}%");
+                }
+                SqlDataReader reader = command.ExecuteReader();
+                grid.Rows.Clear();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(++index,
+                        reader[0], // Item ID
+                        reader[1], // Size
+                        "Color",
+                        "Material",
+                        reader[2], // Brand
+                        reader[3], // Condition
+                        reader[4], // Serial Number
+                        reader[5], // MFD
+                        reader[6], // Acqusition
+                        reader[7], // Location
+                        reader[8] // Type
+                                  // reader[11] // Client
+                    );
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            finally { connection.Close(); }
+        }
+
+        private void TbSizeKeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow control keys such as backspace
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // Allow only one decimal point
+            if (e.KeyChar == '.' && (sender as System.Windows.Forms.TextBox).Text.Contains("."))
+            {
+                e.Handled = true;
+            }
+
+            if (cb_item_type.Text == "jacket" && e.KeyChar == '.')
+            {
+                if ((sender as System.Windows.Forms.TextBox).Text.Contains("X"))
+                {
+                    e.Handled = true;
+                }
+                e.KeyChar = 'X';
+            }
         }
 
         private void cb_item_type_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(panel_serial_number.Visible == false)
+            {
+                panel_serial_number.Visible = true;
+                panel_brand.Visible = true;
+                panel_condition.Visible = true;
+                panel_check_box.Visible = true;
+                btn_search.Visible = true;
+            }
             string type = cb_item_type.Text;
             ChangeVisibleColumns();
             HelperSql.BrandsFillComboBox(connection, type, cb_brand);
@@ -175,30 +699,35 @@ namespace InventoryManagmentSystem.All_Forms
                 panel_color.Visible = false;
                 panel_material.Visible = true;
                 panel_size.Visible = true;
+                panel_size_masks.Visible = false;
             }
             else if(type == "helmet")
             {
                 panel_color.Visible = true;
                 panel_material.Visible = false;
                 panel_size.Visible = false;
+                panel_size_masks.Visible = false;
             }
             else if(type == "jacket")
             {
                 panel_color.Visible = false;
                 panel_material.Visible = false;
                 panel_size.Visible = true;
+                panel_size_masks.Visible = false;
             }
             else if(type == "mask")
             {
                 panel_color.Visible = false;
                 panel_material.Visible = false;
                 panel_size.Visible = false;
+                panel_size_masks.Visible = true;
             }
             else if(type == "pants")
             {
                 panel_color.Visible = false;
                 panel_material.Visible = false;
                 panel_size.Visible = true;
+                panel_size_masks.Visible = false;
             }
         }
 
@@ -207,63 +736,66 @@ namespace InventoryManagmentSystem.All_Forms
             if(cb_item_type.SelectedIndex == -1) { return; }
 
             string itemType = cb_item_type.Text;
-            string query = string.Empty;
             if(itemType == "boots")
             {
-                query = SearchBoots();
+                SearchBoots();
             }
             else if (itemType == "helmet")
             {
-                query = SearchHelmets();
+                SearchHelmets();
             }
             else if (itemType == "jacket")
             {
-                query = SearchJackets();
+                SearchJackets();
             }
             else if (itemType == "mask")
             {
-                query = SearchMasks();
+                SearchMasks();
             }
             else if (itemType == "pants")
             {
-                query = SearchPants();
+                SearchPants();
             }
             else
             {
                 Console.WriteLine("ERROR: Item type selection is not working");
                 return;
             }
+        }
 
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-                grid.Rows.Clear();
-                int index = 0;
-                while (reader.Read())
-                {
-                    if(itemType == "boots")
-                    {
-                        grid.Rows.Add( ++index, 
-                            reader[4], // Item ID
-                            reader[2], // Size
-                            "Color",
-                            reader[3], // Material
-                            reader[0], // Brand
-                            reader[10], // Condition
-                            reader[9], // Serial Number
-                            reader[1], // MFD
-                            reader[5], // Acqusition
-                            reader[11], // Location
-                            reader[7], // Type
-                            reader[11] // Client
-                        );
-                    }
-                }
-            }
-            catch(Exception ex) { Console.WriteLine(ex.ToString());}
-            finally { connection.Close();  }
+        private void btn_clear_serial_Click(object sender, EventArgs e)
+        {
+            tb_serial_number.Text = string.Empty;
+        }
+
+        private void btn_clear_brand_Click(object sender, EventArgs e)
+        {
+            cb_brand.SelectedIndex = -1;
+        }
+
+        private void btn_clear_condition_Click(object sender, EventArgs e)
+        {
+            cb_condition.SelectedIndex = -1;
+        }
+
+        private void btn_clear_size_Click(object sender, EventArgs e)
+        {
+            tb_size.Text = string.Empty;
+        }
+
+        private void btn_clear_color_Click(object sender, EventArgs e)
+        {
+            cb_color.SelectedIndex = -1;
+        }
+
+        private void btn_clear_material_Click(object sender, EventArgs e)
+        {
+            cb_material.SelectedIndex = -1;
+        }
+
+        private void btn_clear_size_pants_Click(object sender, EventArgs e)
+        {
+            cb_size_masks.SelectedIndex = -1;
         }
     }
 }
