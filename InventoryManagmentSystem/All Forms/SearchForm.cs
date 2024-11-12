@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -18,9 +19,9 @@ namespace InventoryManagmentSystem.All_Forms
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
-
+        Form Parent;
         DataGridView grid;
-        public SearchForm(DataGridView grid)
+        public SearchForm(DataGridView grid, Form parent)
         {
             InitializeComponent();
             HelperSql.ItemTypeLoadComboBox(connection, cb_item_type);
@@ -45,6 +46,7 @@ namespace InventoryManagmentSystem.All_Forms
             cb_size_masks.Items.AddRange(sizes);
             this.grid = grid;
             tb_size.KeyPress += new KeyPressEventHandler(TbSizeKeyPress);
+            Parent = parent;
         }
 
         private void ChangeVisibleColumns()
@@ -81,17 +83,17 @@ namespace InventoryManagmentSystem.All_Forms
                 FROM tbBoots AS b 
                 JOIN tbItems AS i ON b.ItemId = i.Id";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
-            
+
             bool and = false;
-            if(tb_serial_number.Text.Length > 0)
+            if (tb_serial_number.Text.Length > 0)
             {
                 and = true;
                 query += " WHERE i.SerialNumber LIKE @SerialNumber";
             }
 
-            if(cb_brand.SelectedIndex != -1)
+            if (cb_brand.SelectedIndex != -1)
             {
-                if(and)
+                if (and)
                 {
                     query += $" AND b.Brand = '{cb_brand.Text}'";
                 }
@@ -102,9 +104,9 @@ namespace InventoryManagmentSystem.All_Forms
                 }
             }
 
-            if(tb_size.Text.Length > 0)
+            if (tb_size.Text.Length > 0)
             {
-                if(and)
+                if (and)
                 {
                     query += " AND b.Size = @Size";
                 }
@@ -115,7 +117,7 @@ namespace InventoryManagmentSystem.All_Forms
                 }
             }
 
-            if(cb_material.SelectedIndex != -1)
+            if (cb_material.SelectedIndex != -1)
             {
                 if (and)
                 {
@@ -139,14 +141,14 @@ namespace InventoryManagmentSystem.All_Forms
                     and = true;
                     query += $" WHERE i.Condition = '{cb_condition.Text}'";
                 }
-                
+
             }
             // Search for rented or in stock
             if (check_in_stock.Checked && !check_rented.Checked)
             {
                 if (and)
                 {
-                    query += " AND i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec')";
                 }
                 else
                 {
@@ -157,7 +159,7 @@ namespace InventoryManagmentSystem.All_Forms
             {
                 if (and)
                 {
-                    query += " AND i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec')";
                 }
                 else
                 {
@@ -194,7 +196,7 @@ namespace InventoryManagmentSystem.All_Forms
                         reader[7], // Acqusition
                         reader[8], // Location
                         reader[9] // Type
-                        // reader[11] // Client
+                                  // reader[11] // Client
                     );
                 }
             }
@@ -224,7 +226,7 @@ namespace InventoryManagmentSystem.All_Forms
 
             if (cb_brand.SelectedIndex != -1)
             {
-                if(and)
+                if (and)
                 {
                     query += $" AND h.Brand = '{cb_brand.Text}'";
                 }
@@ -266,7 +268,7 @@ namespace InventoryManagmentSystem.All_Forms
             {
                 if (and)
                 {
-                    query += " AND i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec')";
                 }
                 else
                 {
@@ -277,7 +279,7 @@ namespace InventoryManagmentSystem.All_Forms
             {
                 if (and)
                 {
-                    query += " AND i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec')";
                 }
                 else
                 {
@@ -310,7 +312,7 @@ namespace InventoryManagmentSystem.All_Forms
                         reader[6], // Acqusition
                         reader[7], // Location
                         reader[8] // Type
-                        // reader[11] // Client
+                                  // reader[11] // Client
                     );
                 }
             }
@@ -340,8 +342,15 @@ namespace InventoryManagmentSystem.All_Forms
 
             if (cb_brand.SelectedIndex != -1)
             {
-                and = true;
-                query += $" WHERE j.Brand = '{cb_brand.Text}'";
+                if (and)
+                {
+                    query += $" AND j.Brand = '{cb_brand.Text}'";
+                }
+                else
+                {
+                    query += $" WHERE j.Brand = '{cb_brand.Text}'";
+                    and = true;
+                }
             }
 
             if (tb_size.Text.Length > 0)
@@ -375,7 +384,7 @@ namespace InventoryManagmentSystem.All_Forms
             {
                 if (and)
                 {
-                    query += " AND i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec')";
                 }
                 else
                 {
@@ -386,7 +395,7 @@ namespace InventoryManagmentSystem.All_Forms
             {
                 if (and)
                 {
-                    query += " AND i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec')";
                 }
                 else
                 {
@@ -453,8 +462,15 @@ namespace InventoryManagmentSystem.All_Forms
 
             if (cb_brand.SelectedIndex != -1)
             {
-                and = true;
-                query += $" WHERE m.Brand = '{cb_brand.Text}'";
+                if (and)
+                {
+                    query += $" AND m.Brand = '{cb_brand.Text}'";
+                }
+                else
+                {
+                    and = true;
+                    query += $" WHERE m.Brand = '{cb_brand.Text}'";
+                }
             }
 
             if (cb_size_masks.SelectedIndex != -1)
@@ -488,7 +504,7 @@ namespace InventoryManagmentSystem.All_Forms
             {
                 if (and)
                 {
-                    query += " AND i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec')";
                 }
                 else
                 {
@@ -499,7 +515,7 @@ namespace InventoryManagmentSystem.All_Forms
             {
                 if (and)
                 {
-                    query += " AND i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec')";
                 }
                 else
                 {
@@ -566,8 +582,16 @@ namespace InventoryManagmentSystem.All_Forms
 
             if (cb_brand.SelectedIndex != -1)
             {
-                and = true;
-                query += $" WHERE p.Brand = '{cb_brand.Text}'";
+
+                if(and)
+                {
+                    query += $" AND p.Brand = '{cb_brand.Text}'";
+                }
+                else
+                {
+                    and = true;
+                    query += $" WHERE p.Brand = '{cb_brand.Text}'";
+                }
             }
 
             if (tb_size.Text.Length > 0)
@@ -601,7 +625,7 @@ namespace InventoryManagmentSystem.All_Forms
             {
                 if (and)
                 {
-                    query += " AND i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec')";
                 }
                 else
                 {
@@ -612,7 +636,7 @@ namespace InventoryManagmentSystem.All_Forms
             {
                 if (and)
                 {
-                    query += " AND i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec')";
                 }
                 else
                 {
@@ -659,31 +683,48 @@ namespace InventoryManagmentSystem.All_Forms
 
         private void TbSizeKeyPress(object sender, KeyPressEventArgs e)
         {
-            // Allow control keys such as backspace
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            if (cb_item_type.Text == "jacket" || cb_item_type.Text == "pants")
             {
-                e.Handled = true;
-            }
-
-            // Allow only one decimal point
-            if (e.KeyChar == '.' && (sender as System.Windows.Forms.TextBox).Text.Contains("."))
-            {
-                e.Handled = true;
-            }
-
-            if (cb_item_type.Text == "jacket" && e.KeyChar == '.')
-            {
-                if ((sender as System.Windows.Forms.TextBox).Text.Contains("X"))
+                // Allow control keys such as backspace
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != 'x')
                 {
                     e.Handled = true;
                 }
-                e.KeyChar = 'X';
+
+                // Allow only one decimal point
+                if (e.KeyChar == 'x' && (sender as System.Windows.Forms.TextBox).Text.Contains("x"))
+                {
+                    e.Handled = true;
+                }
+
+                if ((cb_item_type.Text == "jacket" || cb_item_type.Text == "pants") && e.KeyChar == 'x')
+                {
+                    if ((sender as System.Windows.Forms.TextBox).Text.Contains("X"))
+                    {
+                        e.Handled = true;
+                    }
+                    e.KeyChar = 'X';
+                }
+            }
+            else if (cb_item_type.Text == "boots")
+            {
+                // Allow control keys such as backspace
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+                {
+                    e.Handled = true;
+                }
+
+                // Allow only one decimal point
+                if (e.KeyChar == '.' && (sender as System.Windows.Forms.TextBox).Text.Contains("."))
+                {
+                    e.Handled = true;
+                }
             }
         }
 
         private void cb_item_type_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(panel_serial_number.Visible == false)
+            if (panel_serial_number.Visible == false)
             {
                 panel_serial_number.Visible = true;
                 panel_brand.Visible = true;
@@ -694,49 +735,51 @@ namespace InventoryManagmentSystem.All_Forms
             string type = cb_item_type.Text;
             ChangeVisibleColumns();
             HelperSql.BrandsFillComboBox(connection, type, cb_brand);
-            if(type == "boots")
+            if (type == "boots")
             {
                 panel_color.Visible = false;
                 panel_material.Visible = true;
                 panel_size.Visible = true;
                 panel_size_masks.Visible = false;
             }
-            else if(type == "helmet")
+            else if (type == "helmet")
             {
                 panel_color.Visible = true;
                 panel_material.Visible = false;
                 panel_size.Visible = false;
                 panel_size_masks.Visible = false;
             }
-            else if(type == "jacket")
+            else if (type == "jacket")
             {
                 panel_color.Visible = false;
                 panel_material.Visible = false;
                 panel_size.Visible = true;
                 panel_size_masks.Visible = false;
             }
-            else if(type == "mask")
+            else if (type == "mask")
             {
                 panel_color.Visible = false;
                 panel_material.Visible = false;
                 panel_size.Visible = false;
                 panel_size_masks.Visible = true;
             }
-            else if(type == "pants")
+            else if (type == "pants")
             {
                 panel_color.Visible = false;
                 panel_material.Visible = false;
                 panel_size.Visible = true;
                 panel_size_masks.Visible = false;
             }
+            InventoryForm Parent = this.Parent as InventoryForm;
+            Parent.ItemTypeGlobal = type;
         }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            if(cb_item_type.SelectedIndex == -1) { return; }
+            if (cb_item_type.SelectedIndex == -1) { return; }
 
             string itemType = cb_item_type.Text;
-            if(itemType == "boots")
+            if (itemType == "boots")
             {
                 SearchBoots();
             }
@@ -796,6 +839,11 @@ namespace InventoryManagmentSystem.All_Forms
         private void btn_clear_size_pants_Click(object sender, EventArgs e)
         {
             cb_size_masks.SelectedIndex = -1;
+        }
+
+        private void SearchForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

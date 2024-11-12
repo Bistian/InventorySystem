@@ -3,19 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\c# files\\helpersql.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\c# files\\helpersql.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\inventorymanagmentsystem\\all forms\\searchform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\searchform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\inventorymanagmentsystem\\all forms\\inventory forms\\inventoryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\inventory forms\\inventoryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\inventorymanagmentsystem\\all forms\\searchform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\searchform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\inventorymanagmentsystem\\all forms\\inventory forms\\inventoryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\all forms\\inventory forms\\inventoryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\inventory forms\\inventoryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_SEBAS_ONEDRIVE_DESKTOP_WORK_DATABASES_DATA1.MDF/True/SqlTable/dbo.tbItems.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\all forms\\inventory forms\\inventoryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\inventory forms\\inventoryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -25,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -37,38 +38,40 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "dbo.tbItems [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_SEBAS_ONEDRIVE_DESKTOP_WORK_DATABASES_DATA1.MDF/True/SqlTable/dbo.tbItems.sql",
-              "ToolTip": "dbo.tbItems [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-09-05T19:22:41.949Z",
+              "DocumentIndex": 1,
+              "Title": "SearchForm.cs",
+              "DocumentMoniker": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\SearchForm.cs",
+              "RelativeDocumentMoniker": "InventoryManagmentSystem\\All Forms\\SearchForm.cs",
+              "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\SearchForm.cs",
+              "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\SearchForm.cs",
+              "ViewState": "AgIAADECAAAAAAAAAAAwwNQCAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-12T18:56:09.7Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "SearchForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\SearchForm.cs",
+              "RelativeDocumentMoniker": "InventoryManagmentSystem\\All Forms\\SearchForm.cs",
+              "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\SearchForm.cs [Design]",
+              "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\SearchForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-12T18:56:06.839Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "InventoryForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Inventory Forms\\InventoryForm.cs",
               "RelativeDocumentMoniker": "InventoryManagmentSystem\\All Forms\\Inventory Forms\\InventoryForm.cs",
               "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Inventory Forms\\InventoryForm.cs [Design]",
               "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\Inventory Forms\\InventoryForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-05T18:36:04.455Z",
+              "WhenOpened": "2024-11-12T20:18:21.372Z",
               "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HelperSql.cs",
-              "DocumentMoniker": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\C# Files\\HelperSql.cs",
-              "RelativeDocumentMoniker": "InventoryManagmentSystem\\C# Files\\HelperSql.cs",
-              "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\C# Files\\HelperSql.cs",
-              "RelativeToolTip": "InventoryManagmentSystem\\C# Files\\HelperSql.cs",
-              "ViewState": "AgIAABQFAAAAAAAAAAAAAB0FAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T16:22:57.423Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -78,7 +81,7 @@
               "RelativeDocumentMoniker": "InventoryManagmentSystem\\All Forms\\Inventory Forms\\InventoryForm.cs",
               "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Inventory Forms\\InventoryForm.cs",
               "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\Inventory Forms\\InventoryForm.cs",
-              "ViewState": "AgIAAJ4AAAAAAAAAAAAowL0AAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAAAoBAAAAAAAAAAAUwCQBAABjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-17T16:11:14.736Z",
               "EditorCaption": ""
