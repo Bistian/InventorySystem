@@ -517,7 +517,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             form.close = true;
             form.ShowDialog();
             HelperSql.BrandsFillComboBox(connection, cbItemType.Text.ToLower(), cbBrand);
-            cbBrand.SelectedIndex = cbBrand.Items.Count - 1;
+            cbBrand.SelectedIndex = - 1;
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
