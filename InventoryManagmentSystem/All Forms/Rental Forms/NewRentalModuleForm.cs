@@ -80,6 +80,12 @@ namespace InventoryManagmentSystem
 
         private void LoadInventory()
         {
+            dataGridInv.Rows.Clear();
+            if (cbItemType.SelectedIndex < 0)
+            {
+                return;
+            }
+
             string selection = cbItemType.SelectedItem.ToString().ToLower();
 
             if (selection == "boots")
@@ -88,7 +94,7 @@ namespace InventoryManagmentSystem
                 dataGridInv.Columns["column_color_inv"].Visible = false;
                 dataGridInv.Columns["column_size_inv"].Visible = true;
             }
-            else if (selection == "helmets")
+            else if (selection == "helmet")
             {
                 dataGridInv.Columns["column_material_inv"].Visible = false;
                 dataGridInv.Columns["column_color_inv"].Visible = true;
@@ -102,46 +108,25 @@ namespace InventoryManagmentSystem
                 dataGridInv.Columns["column_size_inv"].Visible = true;
             }
 
-            for(int i = 0; i < dataGridInv.Rows.Count; ++i)
+            if(selection == "boots")
             {
-                var row = dataGridInv.Rows[i];
-                string type = row.Cells["column_type_inv"].Value.ToString().ToLower();
-                row.Visible = true;
-                if(selection == "boots")
-                {
-                    if(type != "boots")
-                    {
-                        row.Visible = false;
-                    }
-                }
-                else if (selection == "helmet")
-                {
-                    if (type != "helmet")
-                    {
-                        row.Visible = false;
-                    }
-                }
-                else if (selection == "jacket")
-                {
-                    if (type != "jacket")
-                    {
-                        row.Visible = false;
-                    }
-                }
-                else if (selection == "mask")
-                {
-                    if (type != "mask")
-                    {
-                        row.Visible = false;
-                    }
-                }
-                else if (selection == "pants")
-                {
-                    if (type != "pants")
-                    {
-                        row.Visible = false;
-                    }
-                }
+                HelperSql.BootsFindAllInStock(connection, dataGridInv);
+            }
+            else if (selection == "helmet")
+            {
+                HelperSql.HelmetFindAllInStock(connection, dataGridInv);
+            }
+            else if (selection == "jacket")
+            {
+                HelperSql.JacketFindAllInStock(connection, dataGridInv);
+            }
+            else if (selection == "mask")
+            {
+                HelperSql.MaskFindAllInStock(connection, dataGridInv);
+            }
+            else if (selection == "pants")
+            {
+                HelperSql.PantsFindAllInStock(connection, dataGridInv);
             }
         }
 
@@ -216,81 +201,19 @@ namespace InventoryManagmentSystem
             LoadClient();
         }
 
-        private void comboBoxItemType_SelectedIndexChanged(object sender, EventArgs e)
+        private void RefreshClientActivity()
         {
-            LoadInventory();
-        }
-
-        private void textBoxSearchBar_TextChanged(object sender, EventArgs e)
-        {
-            LoadInventory();
-        }
-
-        private void buttonEditNotes_Click(object sender, EventArgs e)
-        {
-            textBoxNotes.ReadOnly = false;
-            buttonSaveNotes.Enabled = true;
-            textBoxNotes.Focus();
-        }
-
-        private void buttonSaveNotes_Click(object sender, EventArgs e)
-        {
-            textBoxNotes.ReadOnly = true;
-            buttonSaveNotes.Enabled = false;
-
-            string query = "UPDATE tbClients SET Notes = @Notes WHERE DriversLicenseNumber = @DriversLicenseNumber";
-            var command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@Notes", textBoxNotes.Text);
-            command.Parameters.AddWithValue("@DriversLicenseNumber", license);
-            try
+            foreach (DataGridViewRow row in dataGridViewClient.Rows)
             {
-                connection.Open();
-                command.ExecuteNonQuery();
-                MessageBox.Show("Note has been successfully saved");
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close(); }
-        }
-
-        private void dataGridViewClient_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) { return; };
-
-            ReturnOrReplacecs ModForm = new ReturnOrReplacecs(this);
-            ModForm.ShowDialog();
-
-            DataGridViewRow row = dataGridViewClient.Rows[e.RowIndex];
-            //Return Item
-            if (ReturnReplace == 1)
-            {
-                string itemId = row.Cells["column_item_id"].Value.ToString();
-                bool isUpdated = HelperSql.ItemUpdate(connection, itemId, "Fire-Tec");
-                if (isUpdated)
+                if (row.Cells["column_item_type"].Value != null && row.Cells["column_item_type"].Value.ToString() != "boots")
                 {
-                    HelperSql.HistoryUpdate(connection, itemId, ClientId);
-                    MessageBox.Show("Item Returned");
+                    // Client Has items other than boots
+                    HelperSql.ClientUpdateActivity(connection, ClientId, true);
+                    return;
                 }
-                else { MessageBox.Show("Failed to return the item."); }
-                LoadClient();
-                LoadInventory();
             }
-            //Replace Item
-            else if (ReturnReplace == 2)
-            {
-                //lock the item type that is shown when a replacment is being done to match the item type of the item being replaced
-                string itemType = row.Cells["column_item_type"].Value.ToString().ToLower();
-                SetItemType(itemType);
-
-                dataGridViewClient.Enabled = false;
-
-                dueDate = row.Cells["column_due_date"].Value.ToString();
-                string SelectedSerial = row.Cells["column_serial_number"].Value.ToString();
-                ItemIdClient = row.Cells["column_item_id"].Value.ToString();
-                labelOldItem.Text = SelectedSerial;
-                labelTypeOfItem.Text = row.Cells["column_item_type"].Value.ToString();
-            }
-            //update client activity
-            RefreshClientActivity();
+            // Client has boots or nohting
+            HelperSql.ClientUpdateActivity(connection, ClientId, false);
         }
 
         private void SetItemType(string itemType)
@@ -311,6 +234,18 @@ namespace InventoryManagmentSystem
             {
                 cbItemType.SelectedIndex = 3;
             }
+        }
+
+        private void UsersButton_Click(object sender, EventArgs e)
+        {
+            NewItemForm ModForm = new NewItemForm();
+            ModForm.ShowDialog();
+            LoadInventory();
+        }
+
+        private void NewRentalModuleForm_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void dataGridInv_CellClick_1(object sender, DataGridViewCellEventArgs e)
@@ -371,16 +306,81 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void UsersButton_Click(object sender, EventArgs e)
+        private void dataGridViewClient_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            NewItemForm ModForm = new NewItemForm();
+            if (e.RowIndex < 0) { return; };
+
+            ReturnOrReplacecs ModForm = new ReturnOrReplacecs(this);
             ModForm.ShowDialog();
+
+            DataGridViewRow row = dataGridViewClient.Rows[e.RowIndex];
+            //Return Item
+            if (ReturnReplace == 1)
+            {
+                string itemId = row.Cells["column_item_id"].Value.ToString();
+                bool isUpdated = HelperSql.ItemUpdate(connection, itemId, "Fire-Tec");
+                if (isUpdated)
+                {
+                    HelperSql.HistoryUpdate(connection, itemId, ClientId);
+                    MessageBox.Show("Item Returned");
+                }
+                else { MessageBox.Show("Failed to return the item."); }
+                LoadClient();
+                LoadInventory();
+            }
+            //Replace Item
+            else if (ReturnReplace == 2)
+            {
+                //lock the item type that is shown when a replacment is being done to match the item type of the item being replaced
+                string itemType = row.Cells["column_item_type"].Value.ToString().ToLower();
+                SetItemType(itemType);
+
+                dataGridViewClient.Enabled = false;
+
+                dueDate = row.Cells["column_due_date"].Value.ToString();
+                string SelectedSerial = row.Cells["column_serial_number"].Value.ToString();
+                ItemIdClient = row.Cells["column_item_id"].Value.ToString();
+                labelOldItem.Text = SelectedSerial;
+                labelTypeOfItem.Text = row.Cells["column_item_type"].Value.ToString();
+            }
+            //update client activity
+            RefreshClientActivity();
+        }
+
+        private void comboBoxItemType_SelectedIndexChanged(object sender, EventArgs e)
+        {
             LoadInventory();
         }
 
-        private void NewRentalModuleForm_Load(object sender, EventArgs e)
+        private void textBoxSearchBar_TextChanged(object sender, EventArgs e)
         {
+            LoadInventory();
+        }
 
+        private void btnEditNotes_Click(object sender, EventArgs e)
+        {
+            textBoxNotes.ReadOnly = false;
+            buttonSaveNotes.Enabled = true;
+            textBoxNotes.Focus();
+        }
+
+        private void btnSaveNotes_Click(object sender, EventArgs e)
+        {
+            textBoxNotes.ReadOnly = true;
+            buttonSaveNotes.Enabled = false;
+
+            string query = "UPDATE tbClients SET Notes = @Notes WHERE DriversLicenseNumber = @DriversLicenseNumber";
+            var command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@Notes", textBoxNotes.Text);
+            command.Parameters.AddWithValue("@DriversLicenseNumber", license);
+            try
+            {
+                connection.Open();
+                command.ExecuteNonQuery();
+                MessageBox.Show("Note has been successfully saved");
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
         }
 
         private void btnProfile_Click(object sender, EventArgs e)
@@ -423,19 +423,6 @@ namespace InventoryManagmentSystem
             HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
         }
 
-        private void RefreshClientActivity()
-        {
-            foreach (DataGridViewRow row in dataGridViewClient.Rows)
-            {
-                if (row.Cells["column_item_type"].Value != null && row.Cells["column_item_type"].Value.ToString() != "boots")
-                {
-                    // Client Has items other than boots
-                    HelperSql.ClientUpdateActivity(connection, ClientId, true);
-                    return;
-                }
-            }
-            // Client has boots or nohting
-            HelperSql.ClientUpdateActivity(connection, ClientId, false);
-        }
+       
     }
 }

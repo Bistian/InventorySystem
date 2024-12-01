@@ -630,7 +630,7 @@
             this.buttonEditNotes.TabIndex = 122;
             this.buttonEditNotes.Text = "Edit Notes";
             this.buttonEditNotes.UseVisualStyleBackColor = false;
-            this.buttonEditNotes.Click += new System.EventHandler(this.buttonEditNotes_Click);
+            this.buttonEditNotes.Click += new System.EventHandler(this.btnEditNotes_Click);
             // 
             // buttonSaveNotes
             // 
@@ -643,7 +643,7 @@
             this.buttonSaveNotes.TabIndex = 123;
             this.buttonSaveNotes.Text = "Save Notes";
             this.buttonSaveNotes.UseVisualStyleBackColor = false;
-            this.buttonSaveNotes.Click += new System.EventHandler(this.buttonSaveNotes_Click);
+            this.buttonSaveNotes.Click += new System.EventHandler(this.btnSaveNotes_Click);
             // 
             // panelReplace
             // 
