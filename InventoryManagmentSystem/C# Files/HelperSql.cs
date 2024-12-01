@@ -8,6 +8,7 @@ using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using static InventoryManagmentSystem.Academy.AcademyForm;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
@@ -129,6 +130,46 @@ namespace InventoryManagmentSystem
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return items;
+        }
+
+        public static void BootsFindAllInStock(SqlConnection connection, DataGridView grid)
+        {
+            string query = $@"
+                SELECT 
+                    i.Id, i.ItemType, b.Brand, i.SerialNumber, b.Size, b.ManufactureDate, i.Condition, i.Location, b.Material 
+                FROM tbBoots AS b
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = b.ItemId
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(
+                        ++index,
+                        reader[0].ToString(), // id
+                        reader[1], // type
+                        reader[2], // brand
+                        reader[3], // serial
+                        reader[4], // size
+                        reader[5], // MDF
+                        reader[6], // condition
+                        reader[7], // location
+                        reader[8], // material
+                        "Color"
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally { connection.Close(); }
         }
 
         public static bool BootsInsert(SqlConnection connection,
@@ -912,6 +953,46 @@ namespace InventoryManagmentSystem
             return items;
         }
 
+        public static void HelmetFindAllInStock(SqlConnection connection, DataGridView grid)
+        {
+            string query = $@"
+                SELECT 
+                    i.Id, i.ItemType, h.Brand, i.SerialNumber, h.ManufactureDate, i.Condition, i.Location, h.Color 
+                FROM tbHelmets AS h
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = h.ItemId
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(
+                        ++index,
+                        reader[0].ToString(), // id
+                        reader[1], // type
+                        reader[2], // brand
+                        reader[3], // serial
+                        "Size",
+                        reader[4], // MDF
+                        reader[5], // condition
+                        reader[6], // location
+                        "Material",
+                        reader[7] // color
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally { connection.Close(); }
+        }
+
         public static bool HelmetInsert(SqlConnection connection,
             string itemId, string brand, string acquisition, string manufacture, string color)
         {
@@ -1687,6 +1768,46 @@ namespace InventoryManagmentSystem
             return list;
         }
 
+        public static void JacketFindAllInStock(SqlConnection connection, DataGridView grid)
+        {
+            string query = $@"
+                SELECT 
+                    i.Id, i.ItemType, j.Brand, i.SerialNumber, j.Size, j.ManufactureDate, i.Condition, i.Location
+                FROM tbJackets AS j
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = j.ItemId
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(
+                        ++index,
+                        reader[0].ToString(), // id
+                        reader[1], // type
+                        reader[2], // brand
+                        reader[3], // serial
+                        reader[4], // size
+                        reader[5], // MDF
+                        reader[6], // condition
+                        reader[7], // location
+                        "Material",
+                        "Color"
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally { connection.Close(); }
+        }
+
         public static bool JacketInsert(SqlConnection connection,
            string itemId, string brand, string acquisition, string manufacture, string size)
         {
@@ -1823,6 +1944,46 @@ namespace InventoryManagmentSystem
             return items;
         }
 
+        public static void MaskFindAllInStock(SqlConnection connection, DataGridView grid)
+        {
+            string query = $@"
+                SELECT 
+                    i.Id, i.ItemType, m.Brand, i.SerialNumber, m.Size, m.ManufactureDate, i.Condition, i.Location
+                FROM tbMasks AS m
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = m.ItemId
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(
+                        ++index,
+                        reader[0].ToString(), // id
+                        reader[1], // type
+                        reader[2], // brand
+                        reader[3], // serial
+                        reader[4], // size
+                        reader[5], // MDF
+                        reader[6], // condition
+                        reader[7], // location
+                        "Material",
+                        "Color"
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally { connection.Close(); }
+        }
+
         public static bool MaskInsert(SqlConnection connection,
            string itemId, string brand, string acquisition, string manufacture, string size)
         {
@@ -1957,6 +2118,46 @@ namespace InventoryManagmentSystem
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return items;
+        }
+
+        public static void PantsFindAllInStock(SqlConnection connection, DataGridView grid)
+        {
+            string query = $@"
+                SELECT 
+                    i.Id, i.ItemType, p.Brand, i.SerialNumber, p.Size, p.ManufactureDate, i.Condition, i.Location
+                FROM tbPants AS p
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = p.ItemId
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(
+                        ++index,
+                        reader[0].ToString(), // id
+                        reader[1], // type
+                        reader[2], // brand
+                        reader[3], // serial
+                        reader[4], // size
+                        reader[5], // MDF
+                        reader[6], // condition
+                        reader[7], // location
+                        "Material",
+                        "Color"
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally { connection.Close(); }
         }
 
         public static bool PantsInsert(SqlConnection connection,
