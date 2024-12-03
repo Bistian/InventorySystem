@@ -51,19 +51,14 @@
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.scOuter = new System.Windows.Forms.SplitContainer();
-            this.scInner = new System.Windows.Forms.SplitContainer();
-            this.btnToggleFilter = new System.Windows.Forms.Button();
             this.btnAddUser = new InventoryManagmentSystem.CustomButton();
             this.btnSave = new System.Windows.Forms.Button();
             this.TopPanel = new System.Windows.Forms.Panel();
+            this.btn_filters = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scOuter)).BeginInit();
-            this.scOuter.Panel1.SuspendLayout();
             this.scOuter.Panel2.SuspendLayout();
             this.scOuter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scInner)).BeginInit();
-            this.scInner.Panel2.SuspendLayout();
-            this.scInner.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnAddUser)).BeginInit();
             this.TopPanel.SuspendLayout();
             this.SuspendLayout();
@@ -268,7 +263,6 @@
             this.dataGridViewImageColumn1.ReadOnly = true;
             this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewImageColumn1.Width = 125;
             // 
             // dataGridViewImageColumn2
             // 
@@ -277,17 +271,12 @@
             this.dataGridViewImageColumn2.MinimumWidth = 6;
             this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
             this.dataGridViewImageColumn2.ReadOnly = true;
-            this.dataGridViewImageColumn2.Width = 125;
             // 
             // scOuter
             // 
             this.scOuter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scOuter.Location = new System.Drawing.Point(0, 73);
             this.scOuter.Name = "scOuter";
-            // 
-            // scOuter.Panel1
-            // 
-            this.scOuter.Panel1.Controls.Add(this.scInner);
             // 
             // scOuter.Panel2
             // 
@@ -296,43 +285,12 @@
             this.scOuter.SplitterDistance = 456;
             this.scOuter.TabIndex = 21;
             // 
-            // scInner
-            // 
-            this.scInner.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scInner.Location = new System.Drawing.Point(0, 0);
-            this.scInner.Margin = new System.Windows.Forms.Padding(1);
-            this.scInner.Name = "scInner";
-            // 
-            // scInner.Panel1
-            // 
-            this.scInner.Panel1.AutoScroll = true;
-            // 
-            // scInner.Panel2
-            // 
-            this.scInner.Panel2.Controls.Add(this.btnToggleFilter);
-            this.scInner.Size = new System.Drawing.Size(456, 733);
-            this.scInner.SplitterDistance = 25;
-            this.scInner.TabIndex = 0;
-            // 
-            // btnToggleFilter
-            // 
-            this.btnToggleFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnToggleFilter.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.btnToggleFilter.Location = new System.Drawing.Point(0, 0);
-            this.btnToggleFilter.Margin = new System.Windows.Forms.Padding(1);
-            this.btnToggleFilter.Name = "btnToggleFilter";
-            this.btnToggleFilter.Size = new System.Drawing.Size(25, 728);
-            this.btnToggleFilter.TabIndex = 0;
-            this.btnToggleFilter.Text = "Toggle Filter";
-            this.btnToggleFilter.UseVisualStyleBackColor = true;
-            this.btnToggleFilter.Click += new System.EventHandler(this.btnToggleFilter_Click);
-            // 
             // btnAddUser
             // 
             this.btnAddUser.Image = ((System.Drawing.Image)(resources.GetObject("btnAddUser.Image")));
             this.btnAddUser.ImageHover = ((System.Drawing.Image)(resources.GetObject("btnAddUser.ImageHover")));
             this.btnAddUser.ImageNormal = ((System.Drawing.Image)(resources.GetObject("btnAddUser.ImageNormal")));
-            this.btnAddUser.Location = new System.Drawing.Point(115, 0);
+            this.btnAddUser.Location = new System.Drawing.Point(1283, 4);
             this.btnAddUser.Margin = new System.Windows.Forms.Padding(0, 0, 2, 2);
             this.btnAddUser.Name = "btnAddUser";
             this.btnAddUser.Size = new System.Drawing.Size(82, 64);
@@ -343,8 +301,9 @@
             // 
             // btnSave
             // 
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.btnSave.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnSave.Location = new System.Drawing.Point(3, 3);
+            this.btnSave.Location = new System.Drawing.Point(1171, 7);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(109, 60);
             this.btnSave.TabIndex = 25;
@@ -355,6 +314,7 @@
             // TopPanel
             // 
             this.TopPanel.BackColor = System.Drawing.Color.Maroon;
+            this.TopPanel.Controls.Add(this.btn_filters);
             this.TopPanel.Controls.Add(this.btnSave);
             this.TopPanel.Controls.Add(this.btnAddUser);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -364,9 +324,21 @@
             this.TopPanel.Size = new System.Drawing.Size(1370, 73);
             this.TopPanel.TabIndex = 20;
             // 
+            // btn_filters
+            // 
+            this.btn_filters.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.btn_filters.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btn_filters.Location = new System.Drawing.Point(28, 7);
+            this.btn_filters.Name = "btn_filters";
+            this.btn_filters.Size = new System.Drawing.Size(109, 60);
+            this.btn_filters.TabIndex = 26;
+            this.btn_filters.Text = "Filters";
+            this.btn_filters.UseVisualStyleBackColor = true;
+            this.btn_filters.Click += new System.EventHandler(this.Btn_Filter_Click);
+            // 
             // InventoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(1370, 806);
@@ -379,13 +351,9 @@
             this.Name = "InventoryForm";
             this.Text = "InventoryForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).EndInit();
-            this.scOuter.Panel1.ResumeLayout(false);
             this.scOuter.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scOuter)).EndInit();
             this.scOuter.ResumeLayout(false);
-            this.scInner.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.scInner)).EndInit();
-            this.scInner.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnAddUser)).EndInit();
             this.TopPanel.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -397,8 +365,6 @@
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
         private System.Windows.Forms.SplitContainer scOuter;
-        private System.Windows.Forms.SplitContainer scInner;
-        private System.Windows.Forms.Button btnToggleFilter;
         private System.Windows.Forms.DataGridViewTextBoxColumn Num;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_item_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_size;
@@ -417,5 +383,6 @@
         private CustomButton btnAddUser;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Panel TopPanel;
+        private System.Windows.Forms.Button btn_filters;
     }
 }

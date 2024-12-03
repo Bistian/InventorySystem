@@ -33,9 +33,8 @@ namespace InventoryManagmentSystem
       
         private void InitSearchContainer()
         {
-
-            int innerWidth = this.scInner.Width;
-            btnToggleFilter.Text = "<";
+            int innerWidth = this.scOuter.Panel1.Width;
+            
 
             // Show selected items.
             var list = new List<string>() { "SerialNumber", "Condition", "Location", "Size", "Color", "Material" };
@@ -47,7 +46,7 @@ namespace InventoryManagmentSystem
 
             searchForm = new SearchForm(dataGridInv, this);
             searchForm.TopLevel = false;
-            this.scInner.Panel1.Controls.Add(searchForm);
+            scOuter.Panel1.Controls.Add(searchForm);
             searchForm.Dock = DockStyle.Fill;
             searchForm.AutoScroll = true;
             ToggleFilter();
@@ -209,32 +208,33 @@ namespace InventoryManagmentSystem
 
         private void ToggleFilter()
         {
-            if (btnToggleFilter.Text == ">")
+            if (btn_filters.Text == "Open Filters")
             {
                 searchForm.Visible = true;
-                scOuter.SplitterDistance = (int)(searchForm.panel_item_type.Width * 1.3);
-                scInner.SplitterDistance = (int)(scInner.Width * 1.15);
-                btnToggleFilter.Text = "<";
+                scOuter.Panel1.Visible = true;
+                scOuter.SplitterDistance = searchForm.panel_item_type.Width;
+                btn_filters.Text = "Close Filters";
             }
             else
             {
                 searchForm.Visible = false;
+                scOuter.Panel1.Visible = false;
                 // Calculate the desired splitter distance
-                int minInnerWidth = scOuter.Panel1MinSize + scInner.Panel1MinSize + scInner.SplitterWidth;
+                int minInnerWidth = scOuter.Panel1MinSize + scOuter.Panel1.Width + scOuter.Panel1.Width;
 
                 // Ensure the splitter distance is within the valid range
-                int maxSplitterDistance = scInner.Width - scInner.Panel2MinSize;
-                int minSplitterDistance = scInner.Panel1MinSize;
+                int maxSplitterDistance = scOuter.Panel1.Width - scOuter.Panel1.Width;
+                int minSplitterDistance = scOuter.Panel1.Width;
 
                 // Clamp the desired splitter distance within the valid range
                 int validSplitterDistance = Math.Max(minSplitterDistance, Math.Min(minInnerWidth, maxSplitterDistance));
 
                 // Set the splitter distance
-                scInner.SplitterDistance = validSplitterDistance;
+                scOuter.SplitterDistance = validSplitterDistance;
 
                 // Clamp outer no inner min
-                scOuter.SplitterDistance = (int)(minInnerWidth * 1.15);
-                btnToggleFilter.Text = ">";
+                scOuter.SplitterDistance = 0;
+                btn_filters.Text = "Open Filters";
             }
         }
 
@@ -341,6 +341,11 @@ namespace InventoryManagmentSystem
                 HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
                 positionY += lineHeight + ExtraLineSpace;
             }
+        }
+
+        private void Btn_Filter_Click(object sender, EventArgs e)
+        {
+            ToggleFilter();
         }
     }
 }
