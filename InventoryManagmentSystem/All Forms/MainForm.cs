@@ -25,6 +25,9 @@ namespace InventoryManagmentSystem
         {
 
             InitializeComponent();
+
+            this.WindowState = FormWindowState.Maximized; // Maximizes the form to full screen
+
             offColor = Color.Transparent;
             onColor = Color.DarkGray;
             if (databaseCreation != null)
