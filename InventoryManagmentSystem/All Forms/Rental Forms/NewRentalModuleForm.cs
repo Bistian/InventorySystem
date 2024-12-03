@@ -32,7 +32,6 @@ namespace InventoryManagmentSystem
         {
             InitializeComponent();
 
-
             if (clientName != null)
             {
                 labelProfileName.Text = clientName;
@@ -218,21 +217,25 @@ namespace InventoryManagmentSystem
 
         private void SetItemType(string itemType)
         {
-            if (itemType == "helmet")
+            if (itemType == "jacket")
             {
                 cbItemType.SelectedIndex = 0;
             }
-            if (itemType == "jacket")
+            else if (itemType == "pants")
             {
                 cbItemType.SelectedIndex = 1;
             }
-            if (itemType == "pants")
+            else if (itemType == "boots")
             {
                 cbItemType.SelectedIndex = 2;
             }
-            if (itemType == "boots")
+            else if (itemType == "helmet")
             {
                 cbItemType.SelectedIndex = 3;
+            }
+            else if(itemType == "mask")
+            {
+                cbItemType.SelectedIndex = 4;
             }
         }
 
@@ -265,7 +268,7 @@ namespace InventoryManagmentSystem
                     return;
                 }
                 bool isUpdated = false;
-                string itemId = row.Cells["ItemIdInv"].Value.ToString();
+                string itemId = row.Cells["column_id_inv"].Value.ToString();
                 if (cbItemType.Text == "boots")
                 {
                     isUpdated = HelperSql.ItemUpdateBoots(connection, itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
@@ -287,9 +290,9 @@ namespace InventoryManagmentSystem
             }
             else if (ReturnReplace == 2)
             {
-                ReplacmentSerial = row.Cells["Serial"].Value.ToString();
+                ReplacmentSerial = row.Cells["column_serial_inv"].Value.ToString();
                 labelReplacmentItem.Text = ReplacmentSerial;
-                ItemIdInventory = row.Cells["ItemIdInv"].Value.ToString();
+                ItemIdInventory = row.Cells["column_id_inv"].Value.ToString();
 
                 HelperSql.ItemUpdate(connection, ItemIdClient, "Fire-Tec");
                 HelperSql.HistoryUpdate(connection, ItemIdClient, ClientId);

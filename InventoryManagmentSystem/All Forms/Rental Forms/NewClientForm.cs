@@ -113,7 +113,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void PopulateAcademyList()
         {
-            academyList = HelperSql.AcademyFindAll(connection);
+            academyList = HelperSql.AcademyFillComboBox(connection, cbAcademy);
             foreach(var academy in academyList)
             {
                 cbAcademy.Items.Add(academy.GetColumnValue("Name"));
