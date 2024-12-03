@@ -23,12 +23,7 @@ namespace InventoryManagmentSystem
             "Notes", "FireTecRepresentative"
         };
 
-        public static void AcademyFillComboBox(SqlCommand command, ComboBox box)
-        {
-
-        }
-
-        public static List<Item> AcademyFindAll(SqlConnection connection)
+        public static List<Item> AcademyFillComboBox(SqlConnection connection, ComboBox box)
         {
             var list = new List<Item>();
             string query = "SELECT * FROM tbAcademies";
@@ -49,6 +44,34 @@ namespace InventoryManagmentSystem
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return list;
+        }
+
+        public static void AcademyFindAll(SqlConnection connection, DataGridView grid)
+        {
+            string query = "SELECT Id, Name, ContactName, Email, Phone, Street, City, State, Zip FROM tbAcademies";
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int count = 0;
+                while(reader.Read())
+                {
+                    grid.Rows.Add(count++,
+                        reader[0],
+                        reader[1],
+                        reader[2],
+                        reader[3],
+                        reader[4],
+                        reader[5],
+                        reader[6],
+                        reader[7],
+                        reader[8]
+                    );
+                }
+            }
+            catch (Exception ex) { Console.WriteLine( ex.Message); }
+            finally { connection.Close(); }
         }
 
         private static void AddParameterFromDictionary(SqlCommand command, Dictionary<string, string> dict, string key)
