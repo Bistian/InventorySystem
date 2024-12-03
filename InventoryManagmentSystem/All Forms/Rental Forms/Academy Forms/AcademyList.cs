@@ -59,7 +59,6 @@ namespace InventoryManagmentSystem.Academy
                 int count = 1;
                 while (reader.Read())
                 {
-                    Console.WriteLine(reader["Name"]);
                     dataGridAcademies.Rows.Add(count++,
                     reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6], reader[7], reader[8]);
                 }
