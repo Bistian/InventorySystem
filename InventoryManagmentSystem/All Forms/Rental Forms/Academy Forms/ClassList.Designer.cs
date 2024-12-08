@@ -28,16 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClassList));
             this.panelTop = new System.Windows.Forms.Panel();
+            this.checkInactive = new System.Windows.Forms.CheckBox();
+            this.checkActive = new System.Windows.Forms.CheckBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.labelAcademyName = new System.Windows.Forms.Label();
             this.labelSearch = new System.Windows.Forms.Label();
             this.searchBar = new System.Windows.Forms.TextBox();
             this.dataGridClasses = new System.Windows.Forms.DataGridView();
+            this.checkBoth = new System.Windows.Forms.CheckBox();
             this.column_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_academy_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_academy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_start_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,6 +54,9 @@
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.checkBoth);
+            this.panelTop.Controls.Add(this.checkInactive);
+            this.panelTop.Controls.Add(this.checkActive);
             this.panelTop.Controls.Add(this.btnSave);
             this.panelTop.Controls.Add(this.labelAcademyName);
             this.panelTop.Controls.Add(this.labelSearch);
@@ -60,6 +67,30 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(666, 27);
             this.panelTop.TabIndex = 26;
+            // 
+            // checkInactive
+            // 
+            this.checkInactive.AutoSize = true;
+            this.checkInactive.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkInactive.Location = new System.Drawing.Point(187, 5);
+            this.checkInactive.Name = "checkInactive";
+            this.checkInactive.Size = new System.Drawing.Size(64, 17);
+            this.checkInactive.TabIndex = 25;
+            this.checkInactive.Text = "Inactive";
+            this.checkInactive.UseVisualStyleBackColor = true;
+            this.checkInactive.CheckedChanged += new System.EventHandler(this.CheckBox_Checked_Changed);
+            // 
+            // checkActive
+            // 
+            this.checkActive.AutoSize = true;
+            this.checkActive.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkActive.Location = new System.Drawing.Point(125, 5);
+            this.checkActive.Name = "checkActive";
+            this.checkActive.Size = new System.Drawing.Size(56, 17);
+            this.checkActive.TabIndex = 24;
+            this.checkActive.Text = "Active";
+            this.checkActive.UseVisualStyleBackColor = true;
+            this.checkActive.CheckedChanged += new System.EventHandler(this.CheckBox_Checked_Changed);
             // 
             // btnSave
             // 
@@ -116,18 +147,19 @@
             this.dataGridClasses.AllowUserToResizeRows = false;
             this.dataGridClasses.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridClasses.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.MediumBlue;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridClasses.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.MediumBlue;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridClasses.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridClasses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridClasses.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.column_number,
             this.column_id,
+            this.column_academy_id,
             this.column_academy,
             this.column_name,
             this.column_start_date,
@@ -149,6 +181,18 @@
             this.dataGridClasses.TabIndex = 27;
             this.dataGridClasses.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridClasses_CellClick);
             // 
+            // checkBoth
+            // 
+            this.checkBoth.AutoSize = true;
+            this.checkBoth.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkBoth.Location = new System.Drawing.Point(257, 5);
+            this.checkBoth.Name = "checkBoth";
+            this.checkBoth.Size = new System.Drawing.Size(48, 17);
+            this.checkBoth.TabIndex = 26;
+            this.checkBoth.Text = "Both";
+            this.checkBoth.UseVisualStyleBackColor = true;
+            this.checkBoth.CheckedChanged += new System.EventHandler(this.CheckBox_Checked_Changed);
+            // 
             // column_number
             // 
             this.column_number.FillWeight = 25F;
@@ -167,6 +211,13 @@
             this.column_id.ReadOnly = true;
             this.column_id.Visible = false;
             this.column_id.Width = 125;
+            // 
+            // column_academy_id
+            // 
+            this.column_academy_id.HeaderText = "Academy Id";
+            this.column_academy_id.Name = "column_academy_id";
+            this.column_academy_id.ReadOnly = true;
+            this.column_academy_id.Visible = false;
             // 
             // column_academy
             // 
@@ -249,15 +300,19 @@
         private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.TextBox searchBar;
         public System.Windows.Forms.DataGridView dataGridClasses;
+        private System.Windows.Forms.Label labelAcademyName;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.CheckBox checkActive;
+        private System.Windows.Forms.CheckBox checkInactive;
+        private System.Windows.Forms.CheckBox checkBoth;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_academy_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_academy;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_start_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_end_date;
         private System.Windows.Forms.DataGridViewCheckBoxColumn column_finished;
         private System.Windows.Forms.DataGridViewImageColumn column_update;
-        private System.Windows.Forms.Label labelAcademyName;
-        private System.Windows.Forms.Button btnSave;
     }
 }

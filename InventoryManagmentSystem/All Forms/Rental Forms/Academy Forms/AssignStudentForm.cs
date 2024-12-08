@@ -95,7 +95,7 @@ namespace InventoryManagmentSystem.Academy
             }
 
             classList.Clear();
-            classList = HelperSql.ClassListByAcademy(connection, academyId);
+            classList = HelperSql.ClassFindByAcademy(connection, academyId);
             cbClasses.Items.Clear();
             foreach (var item in classList)
             {

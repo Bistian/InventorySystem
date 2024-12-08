@@ -431,7 +431,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             cbClass.Items.Clear();
 
             var academyId = academyList[index].GetColumnValue("Id");
-            classList = HelperSql.ClassListByAcademy(connection, academyId);
+            classList = HelperSql.ClassFindByAcademy(connection, academyId);
             if(classList == null) { return; }
             string currClass;
             foreach(var item in classList)

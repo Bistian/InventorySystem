@@ -391,7 +391,41 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
-        public static List<Item> ClassListByAcademy(SqlConnection connection, string AcademyId)
+        public static void ClassFindAll(SqlConnection connection, DataGridView grid)
+        {
+            grid.Rows.Clear();
+            string query = $@"
+                SELECT c.*, a.Name as AcademyName
+                FROM tbClasses as c 
+                Join tbAcademies as a ON c.AcademyId = a.Id
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int count = 1;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(
+                        reader["Id"], 
+                        reader["AcademyId"],
+                        count,
+                        reader["AcademyName"],
+                        reader["Name"],
+                        reader["StartDate"],
+                        reader["EndDate"],
+                        reader["IsFinished"]
+                    );
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+        }
+
+        public static List<Item> ClassFindByAcademy(SqlConnection connection, string AcademyId)
         {
             var list = new List<Item>();
             string[] columns = { "Id", "AcademyId", "Name", "StartDate", "EndDate", "IsFinished" };
@@ -438,6 +472,39 @@ namespace InventoryManagmentSystem
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return null;
+        }
+
+        public static void ClassFindByStatus(SqlConnection connection, DataGridView grid, bool active)
+        {
+            grid.Rows.Clear();
+            string query = $@"
+                SELECT c.*, a.Name AS AcademyName FROM tbClasses as c
+                JOIN tbAcademies AS a ON a.Id = c.AcademyId
+                WHERE IsFinished = @IsFinished";
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@IsFinished", active);
+                SqlDataReader reader = command.ExecuteReader();
+                int count = 0;
+                while (reader.Read())
+                {
+                    count++;
+                    grid.Rows.Add(
+                        reader["Id"],
+                        reader["AcademyId"],
+                        count,
+                        reader["AcademyName"],
+                        reader["Name"],
+                        reader["StartDate"],
+                        reader["EndDate"],
+                        reader["IsFinished"]
+                    );
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
         }
 
         public static List<Item> ClientFindAll(SqlConnection connection)
