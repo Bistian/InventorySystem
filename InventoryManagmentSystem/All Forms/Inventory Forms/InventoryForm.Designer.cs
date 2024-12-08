@@ -297,7 +297,7 @@
             this.btnAddUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnAddUser.TabIndex = 17;
             this.btnAddUser.TabStop = false;
-            this.btnAddUser.Click += new System.EventHandler(this.UsersButton_Click_1);
+            this.btnAddUser.Click += new System.EventHandler(this.Btn_Users_Click);
             // 
             // btnSave
             // 
@@ -309,7 +309,7 @@
             this.btnSave.TabIndex = 25;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.Btn_Save_Click);
             // 
             // TopPanel
             // 

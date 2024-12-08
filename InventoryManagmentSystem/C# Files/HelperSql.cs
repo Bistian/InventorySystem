@@ -1108,6 +1108,7 @@ namespace InventoryManagmentSystem
         /// <param name="uuid"></param>
         public static bool ItemDelete(SqlConnection connection, string uuid)
         {
+            // Find item
             string query = $"SELECT ItemType FROM tbItems WHERE Id=@Id";
             string itemType = "";
             try
@@ -1115,14 +1116,19 @@ namespace InventoryManagmentSystem
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Id", uuid.ToString());
-                itemType = command.ExecuteReader().ToString();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    itemType = reader["ItemType"].ToString();
+                }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
 
             if (itemType == "") { return false; }
             string table = HelperFunctions.MakeTableFromItemType(itemType);
-
+            
+            // Delete from specific table
             query = $"DELETE FROM {table} WHERE ItemId=@ItemId";
             try
             {
@@ -1138,6 +1144,7 @@ namespace InventoryManagmentSystem
             }
             finally { connection.Close(); }
 
+            // Delete from items table
             query = "DELETE FROM tbItems WHERE Id=@Id";
             try
             {

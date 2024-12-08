@@ -7,8 +7,6 @@ using InventoryManagmentSystem.Rental_Forms;
 using InventoryManagmentSystem.All_Forms;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace InventoryManagmentSystem
 {
@@ -23,7 +21,7 @@ namespace InventoryManagmentSystem
         private SearchForm searchForm;
         public string ItemTypeGlobal;
 
-        public InventoryForm(string ItemType)
+        public InventoryForm()
         {
             InitializeComponent();
             string[] columns = { "column_acquisition_date", "column_manufacture_date" };
@@ -33,9 +31,6 @@ namespace InventoryManagmentSystem
       
         private void InitSearchContainer()
         {
-            int innerWidth = this.scOuter.Panel1.Width;
-            
-
             // Show selected items.
             var list = new List<string>() { "SerialNumber", "Condition", "Location", "Size", "Color", "Material" };
             Action<List<string[]>> callback = (filters) =>
@@ -74,7 +69,7 @@ namespace InventoryManagmentSystem
                 }
                 else if (colName == "column_delete")
                 {
-                    DeleteItem(itemId, ItemType);
+                    DeleteItem(itemId);
                 }
                 else
                 {
@@ -157,48 +152,26 @@ namespace InventoryManagmentSystem
             itemForm.Close();
         }
         
-        private void DeleteItem(string itemId, string itemType)
+        private void DeleteItem(string itemId)
         {
             //Deleting from item specific tables
             string message = "Are you sure you want to delete this item?";
             string title = "Delete Record";
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return; }
-            string table = "tb" + CapitalizeFirstLetter(itemType);
-            if(itemType == "jacket" || itemType == "helmet" || itemType == "mask")
-            {
-                table += "s";
-            }
-            string query = $"DELETE FROM {table} WHERE ItemId = '{itemId}'";
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                command.ExecuteNonQuery();
-                MessageBox.Show("Item has been successfully deleted");
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show("Failed to delete the item.");
-            }
-            finally { connection.Close(); }
 
+            bool isDeleted = HelperSql.ItemDelete(connection, itemId);
 
-            //Deleting From tbItems
-            query = $"DELETE FROM tbItems WHERE Id = '{itemId}'";
-            try
+            if (isDeleted)
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                command.ExecuteNonQuery();
-                MessageBox.Show("Item has been successfully deleted");
+                message = "Item deleted succesfully";
+                MessageBox.Show(message, "Deleted", MessageBoxButtons.OK);
+                dataGridInv.Rows.Clear();
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show("Failed to delete the item.");
+                message = "Failed to delete item";
+                MessageBox.Show(message, "Fail", MessageBoxButtons.OK);
             }
-            finally { connection.Close(); }
         }
 
         private string GetCellValueAsString(DataGridViewCellEventArgs e, string cellName)
@@ -238,30 +211,6 @@ namespace InventoryManagmentSystem
             }
         }
 
-        public string CapitalizeFirstLetter(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-                return input;
-
-            return char.ToUpper(input[0]) + input.Substring(1);
-        }
-
-        private void UsersButton_Click_1(object sender, EventArgs e)
-        {
-            NewItemForm ModForm = new NewItemForm();
-            ModForm.ShowDialog();
-        }
-
-        private void btnToggleFilter_Click(object sender, EventArgs e)
-        {
-            ToggleFilter();
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            HelperFunctions.PdfSaveDocument(WriteListToPdf);
-        }
-
         private void WriteListToPdf(PdfDocument document)
         {
             /* Format 
@@ -286,12 +235,12 @@ namespace InventoryManagmentSystem
             int lineHeight = (int)fontTitle.Height;
 
             // Title add caps and s to de end.
-            if(ItemTypeGlobal == null)
+            if (ItemTypeGlobal == null)
             {
                 string message = "Nothing Selected";
                 string header = "Failed Save";
                 MessageBox.Show(message, header, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return; 
+                return;
             }
             string title = char.ToUpper(ItemTypeGlobal[0]) + ItemTypeGlobal.Substring(1);
             if (!title.EndsWith("s"))
@@ -341,6 +290,22 @@ namespace InventoryManagmentSystem
                 HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
                 positionY += lineHeight + ExtraLineSpace;
             }
+        }
+
+        private void Btn_Users_Click(object sender, EventArgs e)
+        {
+            NewItemForm ModForm = new NewItemForm();
+            ModForm.ShowDialog();
+        }
+
+        private void Btn_ToggleFilter_Click(object sender, EventArgs e)
+        {
+            ToggleFilter();
+        }
+
+        private void Btn_Save_Click(object sender, EventArgs e)
+        {
+            HelperFunctions.PdfSaveDocument(WriteListToPdf);
         }
 
         private void Btn_Filter_Click(object sender, EventArgs e)
