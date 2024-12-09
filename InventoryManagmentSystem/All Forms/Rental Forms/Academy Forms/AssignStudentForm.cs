@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using static InventoryManagmentSystem.Academy.AcademyForm;
-using static System.Net.Mime.MediaTypeNames;
-using System.Text.RegularExpressions;
 
 namespace InventoryManagmentSystem.Academy
 {
@@ -15,13 +12,12 @@ namespace InventoryManagmentSystem.Academy
         SqlConnection connection = new SqlConnection(connectionString);
         Dictionary<string, string> academyMap = new Dictionary<string, string>();
         List<Item> classList;
-        List<Item> academyList;
         AcademyForm parent = null;
 
         public AssignStudentForm(AcademyForm parent)
         {
             InitializeComponent();
-            PopulateAcademyList();
+            academyMap = HelperSql.AcademyListNames(connection);
             classList = new List<Item>();
             foreach (var value in academyMap.Values)
             {
@@ -30,14 +26,6 @@ namespace InventoryManagmentSystem.Academy
             if (parent != null)
             {
                 this.parent = parent;
-            }
-        }
-        private void PopulateAcademyList()
-        {
-            academyList = HelperSql.AcademyFindAll(connection);
-            foreach (var academy in academyList)
-            {
-                cbAcademy.Items.Add(academy.GetColumnValue("Name"));
             }
         }
 
@@ -49,15 +37,14 @@ namespace InventoryManagmentSystem.Academy
             string query = @"
                 UPDATE tbClients
                 SET IdClass=@IdClass, Academy=@Academy
-                WHERE Id=@Id
+                WHERE DriversLicenseNumber=@DriversLicenseNumber
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
             string Id = string.Empty;
-            string ClassName = Regex.Replace(cbClasses.Text, @"\s\d{1,2}/\d{1,2}/\d{4}\s-\s\d{1,2}/\d{1,2}/\d{4}$", "");
             foreach (var item in classList)
             {
-                if (item.GetColumnValue("Name") == ClassName)
+                if (item.GetColumnValue("Name") == cbClasses.Text)
                 {
                     Id = item.GetColumnValue("Id");
                     break;
@@ -72,7 +59,7 @@ namespace InventoryManagmentSystem.Academy
             {
                 SqlCommand command = new SqlCommand(query, connection);
                 connection.Open();
-                command.Parameters.AddWithValue("@Id", parent.ClientId);
+                command.Parameters.AddWithValue("@DriversLicenseNumber", parent.drivers);
                 command.Parameters.AddWithValue("@IdClass", Id);
                 command.Parameters.AddWithValue("@Academy", cbAcademy.Text);
                 command.ExecuteNonQuery();
@@ -80,7 +67,7 @@ namespace InventoryManagmentSystem.Academy
 
                 parent.LoadProfile(parent.drivers,parent.currentUser);
                 this.Dispose();
-                MessageBox.Show("IAcademy Successfully Updated!.");
+
                 return true;
             }
             catch (Exception ex)
@@ -93,34 +80,31 @@ namespace InventoryManagmentSystem.Academy
 
         private void cbAcademy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbClasses.Enabled = true;
-            int index = cbAcademy.SelectedIndex;
-            if (index == -1) { return; }
+            string academyId = "";
+            foreach (var key in academyMap.Keys)
+            {
+                if (academyMap[key] == cbAcademy.Text)
+                {
+                    academyId = key;
+                }
+            }
 
-            string name = cbAcademy.Text;
-            if (classList != null) { classList.Clear(); }
+            if (academyId == "")
+            {
+                return;
+            }
+
+            classList.Clear();
+            classList = HelperSql.ClassFindByAcademy(connection, academyId);
             cbClasses.Items.Clear();
-
-            var academyId = academyList[index].GetColumnValue("Id");
-            classList = HelperSql.ClassListByAcademy(connection, academyId);
-            if (classList == null) { return; }
-            string currClass;
             foreach (var item in classList)
             {
-                string startDate = item.GetColumnValue("StartDate");
-                string endDate = item.GetColumnValue("EndDate");
-                var StartDateFinal = DateTime.Parse(startDate);
-                var startyear = StartDateFinal.Year;
-                var startmonth = StartDateFinal.Month;
-                var startday = StartDateFinal.Day;
+                cbClasses.Items.Add(item.GetColumnValue("Name"));
+            }
 
-                var EndDateFinal = DateTime.Parse(endDate);
-                var endyear = EndDateFinal.Year;
-                var endmonth = EndDateFinal.Month;
-                var endday = EndDateFinal.Day;
-
-                currClass = item.GetColumnValue("Name") + $" {startmonth}/{startday}/{startyear} - {endmonth}/{endday}/{endyear}";
-                cbClasses.Items.Add(currClass);
+            if (cbClasses.Items.Count > 0)
+            {
+                cbClasses.Enabled = true;
             }
         }
 
@@ -139,7 +123,6 @@ namespace InventoryManagmentSystem.Academy
                 Console.WriteLine(ex.Message);
                 return;
             }
-            
         }
     }
 }

@@ -219,7 +219,7 @@ namespace InventoryManagmentSystem
             }
             else if (formType == "InventoryForm")
             {
-                childForm = new InventoryForm(ItemType);
+                childForm = new InventoryForm();
             }
 
 

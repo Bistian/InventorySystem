@@ -17,6 +17,8 @@ namespace InventoryManagmentSystem.Rental_Forms
         private string tableName = "";
         private string itemType = "";
 
+        Item item;
+
         public NewItemForm()
         {
             InitializeComponent();
@@ -52,6 +54,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         {
             InitializeComponent();
 
+            this.item = item;
             isUpdate = true;
             itemType = item.GetColumnValue("ItemType");
 
@@ -245,7 +248,12 @@ namespace InventoryManagmentSystem.Rental_Forms
             string title = "Update Item";
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return false; }
             string noSpaceSerial = tbSerialNumber.Text.Replace(" ", string.Empty);
-            var item = HelperSql.ItemFindBySerialNumber(connection, cbItemType.Text, noSpaceSerial.ToUpper());
+
+
+            var NewItem = HelperSql.ItemFindById(connection, item.GetColumnValue("Id"));
+
+
+
             bool isUpdated = false;
             if (itemType == "boots") 
             {
@@ -255,7 +263,8 @@ namespace InventoryManagmentSystem.Rental_Forms
                     cbSize.Text,
                     cbMaterial.Text, 
                     cbCondition.Text,
-                    dtManufacture.Value.Date.ToString());
+                    dtManufacture.Value.Date.ToString(),
+                    tbSerialNumber.Text);
             }
             else if (itemType == "helmet") 
             {
@@ -264,7 +273,8 @@ namespace InventoryManagmentSystem.Rental_Forms
                     cbBrand.Text, 
                     dtManufacture.Value.Date.ToString(),
                     cbCondition.Text,
-                    cbColor.Text); 
+                    cbColor.Text,
+                    tbSerialNumber.Text); 
             }
             else if (itemType == "jacket") 
             {
@@ -273,7 +283,8 @@ namespace InventoryManagmentSystem.Rental_Forms
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
                     cbCondition.Text,
-                    cbSize.Text);
+                    cbSize.Text,
+                    tbSerialNumber.Text);
             }
             else if (itemType == "mask")
             {
@@ -293,6 +304,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                     cbCondition.Text,
                     cbSize.Text);
             }
+
 
             if (isUpdated)
             {
@@ -369,7 +381,6 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (isUpdate)
             {
                 cbItemType.Enabled = false;
-                tbSerialNumber.Enabled = false;
             }
 
             else if (cbItemType.SelectedIndex == -1)
@@ -517,7 +528,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             form.close = true;
             form.ShowDialog();
             HelperSql.BrandsFillComboBox(connection, cbItemType.Text.ToLower(), cbBrand);
-            cbBrand.SelectedIndex = cbBrand.Items.Count - 1;
+            cbBrand.SelectedIndex = - 1;
         }
 
         private void ClearButton_Click(object sender, EventArgs e)

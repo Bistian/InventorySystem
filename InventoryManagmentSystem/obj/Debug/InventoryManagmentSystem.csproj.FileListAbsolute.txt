@@ -395,3 +395,4 @@ C:\Users\sebas\OneDrive\Desktop\Code\InventorySystem\InventoryManagmentSystem\bi
 C:\Users\sebas\OneDrive\Desktop\Code\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.csproj.CopyComplete
 C:\Users\sebas\OneDrive\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.All_Forms.FilterForm.resources
 C:\Users\sebas\OneDrive\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\Inventor.6444D061.Up2Date
+C:\Users\sebas\OneDrive\Desktop\Work\InventorySystem\InventoryManagmentSystem\obj\Debug\InventoryManagmentSystem.All_Forms.SearchForm.resources

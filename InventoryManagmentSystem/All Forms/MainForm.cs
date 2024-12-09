@@ -25,6 +25,9 @@ namespace InventoryManagmentSystem
         {
 
             InitializeComponent();
+
+            this.WindowState = FormWindowState.Maximized; // Maximizes the form to full screen
+
             offColor = Color.Transparent;
             onColor = Color.DarkGray;
             if (databaseCreation != null)
@@ -74,7 +77,7 @@ namespace InventoryManagmentSystem
         {
             OpenNavBar("Inv");
             ColorTabSwitch("Inv");
-            openChildForm(new InventoryForm(null));
+            openChildForm(new InventoryForm());
         }
 
         private void btnTools_Click(object sender, EventArgs e)
@@ -167,7 +170,7 @@ namespace InventoryManagmentSystem
         private void ButtonRentalInv_Click(object sender, EventArgs e)
         {
             ColorTabSwitch("RentalsInv", false);
-            openChildForm(new InventoryForm(null));
+            openChildForm(new InventoryForm());
         }
 
         private void customButton1_Click(object sender, EventArgs e)

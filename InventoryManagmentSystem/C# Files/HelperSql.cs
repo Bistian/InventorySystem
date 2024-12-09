@@ -8,7 +8,9 @@ using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using static InventoryManagmentSystem.Academy.AcademyForm;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace InventoryManagmentSystem
@@ -22,12 +24,7 @@ namespace InventoryManagmentSystem
             "Notes", "FireTecRepresentative"
         };
 
-        public static void AcademyFillComboBox(SqlCommand command, ComboBox box)
-        {
-
-        }
-
-        public static List<Item> AcademyFindAll(SqlConnection connection)
+        public static List<Item> AcademyFillComboBox(SqlConnection connection, ComboBox box)
         {
             var list = new List<Item>();
             string query = "SELECT * FROM tbAcademies";
@@ -47,6 +44,34 @@ namespace InventoryManagmentSystem
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return list;
+        }
+
+        public static void AcademyFindAll(SqlConnection connection, DataGridView grid)
+        {
+            string query = "SELECT Id, Name, ContactName, Email, Phone, Street, City, State, Zip FROM tbAcademies";
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int count = 0;
+                while(reader.Read())
+                {
+                    grid.Rows.Add(count++,
+                        reader[0],
+                        reader[1],
+                        reader[2],
+                        reader[3],
+                        reader[4],
+                        reader[5],
+                        reader[6],
+                        reader[7],
+                        reader[8]
+                    );
+                }
+            }
+            catch (Exception ex) { Console.WriteLine( ex.Message); }
+            finally { connection.Close(); }
         }
 
         private static void AddParameterFromDictionary(SqlCommand command, Dictionary<string, string> dict, string key)
@@ -129,6 +154,46 @@ namespace InventoryManagmentSystem
             return items;
         }
 
+        public static void BootsFindAllInStock(SqlConnection connection, DataGridView grid)
+        {
+            string query = $@"
+                SELECT 
+                    i.Id, i.ItemType, b.Brand, i.SerialNumber, b.Size, b.ManufactureDate, i.Condition, i.Location, b.Material 
+                FROM tbBoots AS b
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = b.ItemId
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(
+                        ++index,
+                        reader[0].ToString(), // id
+                        reader[1], // type
+                        reader[2], // brand
+                        reader[3], // serial
+                        reader[4], // size
+                        reader[5], // MDF
+                        reader[6], // condition
+                        reader[7], // location
+                        reader[8], // material
+                        "Color"
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally { connection.Close(); }
+        }
+
         public static bool BootsInsert(SqlConnection connection,
             string itemId, string brand, string acquisition, string manufacture, string size, string material)
         {
@@ -160,7 +225,7 @@ namespace InventoryManagmentSystem
         /// </summary>
         /// <returns>Bool was successfull or not.</returns>
         public static bool BootsUpdate(SqlConnection connection,
-            string itemId, string brand, string size, string material,string condition, string manufacture)
+            string itemId, string brand, string size, string material,string condition, string manufacture, string SerialNumber)
         {
             Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
@@ -183,6 +248,11 @@ namespace InventoryManagmentSystem
             {
                 fieldsToUpdate.Add("condition", condition);
             }
+            if (!string.IsNullOrEmpty(SerialNumber))
+            {
+                fieldsToUpdate.Add("SerialNumber", SerialNumber);
+            }
+
             int count = fieldsToUpdate.Count;
             if (count == 0) { return false; }
 
@@ -219,11 +289,12 @@ namespace InventoryManagmentSystem
                 command.ExecuteNonQuery();
 
 
-                 query = $"UPDATE tbItems SET Condition = @Condition " +
+                 query = $"UPDATE tbItems SET Condition = @Condition, SerialNumber = @SerialNumber " +
                     $"WHERE Cast(Id AS NVARCHAR(50)) = @ItemId";
 
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Condition", condition); 
+                command.Parameters.AddWithValue("@Condition", condition);
+                command.Parameters.AddWithValue("@SerialNumber", SerialNumber);
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
 
@@ -324,14 +395,47 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
-        public static List<Item> ClassListByAcademy(SqlConnection connection, string AcademyId)
+        public static void ClassFindAll(SqlConnection connection, DataGridView grid)
+        {
+            grid.Rows.Clear();
+            string query = $@"
+                SELECT c.*, a.Name as AcademyName
+                FROM tbClasses as c 
+                Join tbAcademies as a ON c.AcademyId = a.Id
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int count = 1;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(
+                        reader["Id"], 
+                        reader["AcademyId"],
+                        count,
+                        reader["AcademyName"],
+                        reader["Name"],
+                        reader["StartDate"],
+                        reader["EndDate"],
+                        reader["IsFinished"]
+                    );
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+        }
+
+        public static List<Item> ClassFindByAcademy(SqlConnection connection, string AcademyId)
         {
             var list = new List<Item>();
             string[] columns = { "Id", "AcademyId", "Name", "StartDate", "EndDate", "IsFinished" };
             string query = $"SELECT * FROM tbClasses WHERE AcademyId = @AcademyId";
             try
             {
-                connection.Close();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@AcademyId", AcademyId.ToString());
                 connection.Open();
@@ -370,6 +474,39 @@ namespace InventoryManagmentSystem
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return null;
+        }
+
+        public static void ClassFindByStatus(SqlConnection connection, DataGridView grid, bool active)
+        {
+            grid.Rows.Clear();
+            string query = $@"
+                SELECT c.*, a.Name AS AcademyName FROM tbClasses as c
+                JOIN tbAcademies AS a ON a.Id = c.AcademyId
+                WHERE IsFinished = @IsFinished";
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@IsFinished", active);
+                SqlDataReader reader = command.ExecuteReader();
+                int count = 0;
+                while (reader.Read())
+                {
+                    count++;
+                    grid.Rows.Add(
+                        reader["Id"],
+                        reader["AcademyId"],
+                        count,
+                        reader["AcademyName"],
+                        reader["Name"],
+                        reader["StartDate"],
+                        reader["EndDate"],
+                        reader["IsFinished"]
+                    );
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
         }
 
         public static List<Item> ClientFindAll(SqlConnection connection)
@@ -905,6 +1042,46 @@ namespace InventoryManagmentSystem
             return items;
         }
 
+        public static void HelmetFindAllInStock(SqlConnection connection, DataGridView grid)
+        {
+            string query = $@"
+                SELECT 
+                    i.Id, i.ItemType, h.Brand, i.SerialNumber, h.ManufactureDate, i.Condition, i.Location, h.Color 
+                FROM tbHelmets AS h
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = h.ItemId
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(
+                        ++index,
+                        reader[0].ToString(), // id
+                        reader[1], // type
+                        reader[2], // brand
+                        reader[3], // serial
+                        "Size",
+                        reader[4], // MDF
+                        reader[5], // condition
+                        reader[6], // location
+                        "Material",
+                        reader[7] // color
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally { connection.Close(); }
+        }
+
         public static bool HelmetInsert(SqlConnection connection,
             string itemId, string brand, string acquisition, string manufacture, string color)
         {
@@ -930,7 +1107,7 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static bool HelmetUpdate(SqlConnection connection, string itemId, string brand, string manufacture,string condition, string color)
+        public static bool HelmetUpdate(SqlConnection connection, string itemId, string brand, string manufacture,string condition, string color, string SerialNumber)
         {
             var fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
@@ -945,7 +1122,10 @@ namespace InventoryManagmentSystem
             {
                 fieldsToUpdate.Add("color", color);
             }
-
+            if (!string.IsNullOrEmpty(SerialNumber))
+            {
+                fieldsToUpdate.Add("SerialNumber", SerialNumber);
+            }
             int count = fieldsToUpdate.Count;
             if (count == 0) { return false; }
             string query = $"UPDATE tbHelmets SET ";
@@ -974,11 +1154,12 @@ namespace InventoryManagmentSystem
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
 
-                query = $"UPDATE tbItems SET Condition = @Condition " +
+                query = $"UPDATE tbItems SET Condition = @Condition, SerialNumber = @SerialNumber " +
                    $"WHERE Cast(Id AS NVARCHAR(50)) = @ItemId";
 
                 command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Condition", condition);
+                command.Parameters.AddWithValue("@SerialNumber", SerialNumber);
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
                 return true;
@@ -997,6 +1178,7 @@ namespace InventoryManagmentSystem
         /// <param name="uuid"></param>
         public static bool ItemDelete(SqlConnection connection, string uuid)
         {
+            // Find item
             string query = $"SELECT ItemType FROM tbItems WHERE Id=@Id";
             string itemType = "";
             try
@@ -1004,14 +1186,19 @@ namespace InventoryManagmentSystem
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Id", uuid.ToString());
-                itemType = command.ExecuteReader().ToString();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    itemType = reader["ItemType"].ToString();
+                }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
 
             if (itemType == "") { return false; }
             string table = HelperFunctions.MakeTableFromItemType(itemType);
-
+            
+            // Delete from specific table
             query = $"DELETE FROM {table} WHERE ItemId=@ItemId";
             try
             {
@@ -1027,6 +1214,7 @@ namespace InventoryManagmentSystem
             }
             finally { connection.Close(); }
 
+            // Delete from items table
             query = "DELETE FROM tbItems WHERE Id=@Id";
             try
             {
@@ -1217,6 +1405,16 @@ namespace InventoryManagmentSystem
             return ItemFindBy(connection, command);
         }
 
+        public static Item ItemFindById(SqlConnection connection, string Id)
+        {
+            string query = $"SELECT * FROM tbItems WHERE Id = @Id";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@Id", Id);
+            var item = ItemFindBy(connection, command);
+            if (item.Count > 0) { return item[0]; }
+            return null;
+        }
+
         public static List<Item> ItemFindBySearchBar(SqlConnection connection, string searchTerm)
         {
             var items = new List<Item>();
@@ -1269,6 +1467,104 @@ namespace InventoryManagmentSystem
             }
             finally { connection.Close(); }
             return uuid;
+        }
+
+        public static bool ItemLoadDatagrid(SqlConnection connection, DataGridView grid, string condition)
+        {
+            string query = $@"
+                SELECT 
+                    i.Id, 
+                    i.ItemType,
+                    i.SerialNumber,
+                    COALESCE(
+                        b.Brand, 
+                        h.Brand,
+                        j.Brand,
+                        m.Brand,
+                        p.Brand
+                    ),
+                    COALESCE(b.Size, j.Size, p.Size, m.Size) AS size,
+                    COALESCE(
+                        b.AcquisitionDate, 
+                        h.AcquisitionDate,
+                        j.AcquisitionDate,
+                        m.AcquisitionDate,
+                        p.AcquisitionDate
+                    ), 
+                    COALESCE(
+                        b.ManufactureDate, 
+                        h.ManufactureDate,
+                        j.ManufactureDate,
+                        m.ManufactureDate,
+                        p.ManufactureDate
+                    ), 
+                    i.Condition, 
+                    i.Location,
+                    c.Name,
+                    b.Material AS material, 
+                    h.Color AS color
+                FROM 
+                    tbItems AS i
+                LEFT JOIN 
+                    tbBoots AS b ON i.Id = b.ItemId
+                LEFT JOIN 
+                    tbHelmets AS h ON i.Id = h.ItemId
+                LEFT JOIN 
+                    tbJackets AS j ON i.Id = j.ItemId
+                LEFT JOIN 
+                    tbMasks AS m ON i.Id = m.ItemId
+                LEFT JOIN 
+                    tbPants AS p ON i.Id = p.ItemId
+                LEFT JOIN 
+                    tbClients AS c ON i.Location = CAST(c.Id AS VARCHAR(36))
+                {condition}
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                var command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                int index = 0;
+                while (reader.Read())
+                {
+                    int row = grid.Rows.Add(
+                        ++index,
+                        //ID
+                        reader[0].ToString(),
+                        //Size
+                        reader[4].ToString(),
+                        //Material
+                        reader[10].ToString(),
+                        //Color
+                        reader[9].ToString(),
+                        //Brand
+                        reader[3].ToString(),
+                        //Condition
+                        reader[7].ToString(),
+                        //SerialNumber
+                        reader[2].ToString(),
+                        //Acquisition Date
+                        reader[6].ToString(),
+                        //Manufacture Date
+                        reader[5].ToString(),
+                        //Location
+                        reader[8].ToString(),
+                        //Item Type
+                        reader[1].ToString(),
+                        //ClientName
+                        reader[11].ToString()
+
+                    );
+                }
+            }
+            catch (Exception ex) 
+            { 
+                Console.WriteLine(ex.Message); 
+                return false; 
+            }
+            finally { connection.Close(); }
+            return true;
         }
 
         public static uint ItemRentCount(SqlConnection connection, string itemType = null)
@@ -1578,6 +1874,46 @@ namespace InventoryManagmentSystem
             return list;
         }
 
+        public static void JacketFindAllInStock(SqlConnection connection, DataGridView grid)
+        {
+            string query = $@"
+                SELECT 
+                    i.Id, i.ItemType, j.Brand, i.SerialNumber, j.Size, j.ManufactureDate, i.Condition, i.Location
+                FROM tbJackets AS j
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = j.ItemId
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(
+                        ++index,
+                        reader[0].ToString(), // id
+                        reader[1], // type
+                        reader[2], // brand
+                        reader[3], // serial
+                        reader[4], // size
+                        reader[5], // MDF
+                        reader[6], // condition
+                        reader[7], // location
+                        "Material",
+                        "Color"
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally { connection.Close(); }
+        }
+
         public static bool JacketInsert(SqlConnection connection,
            string itemId, string brand, string acquisition, string manufacture, string size)
         {
@@ -1603,7 +1939,7 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static bool JacketUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string condition, string size)
+        public static bool JacketUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string condition, string size, string SerialNumber)
         {
             var fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
@@ -1617,6 +1953,10 @@ namespace InventoryManagmentSystem
             if (!string.IsNullOrEmpty(size))
             {
                 fieldsToUpdate.Add("size", size);
+            }
+            if (!string.IsNullOrEmpty(SerialNumber))
+            {
+                fieldsToUpdate.Add("SerialNumber", SerialNumber);
             }
 
             int count = fieldsToUpdate.Count;
@@ -1647,11 +1987,12 @@ namespace InventoryManagmentSystem
                 if (fieldsToUpdate.ContainsKey("size")) { command.Parameters.AddWithValue("@Size", size); }
                 command.ExecuteNonQuery();
 
-                query = $"UPDATE tbItems SET Condition = @Condition " +
+                query = $"UPDATE tbItems SET Condition = @Condition, SerialNumber = @SerialNumber " +
                    $"WHERE Cast(Id AS NVARCHAR(50)) = @ItemId";
 
                 command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Condition", condition);
+                command.Parameters.AddWithValue("@SerialNumber", SerialNumber);
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
                 return true;
@@ -1711,6 +2052,46 @@ namespace InventoryManagmentSystem
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return items;
+        }
+
+        public static void MaskFindAllInStock(SqlConnection connection, DataGridView grid)
+        {
+            string query = $@"
+                SELECT 
+                    i.Id, i.ItemType, m.Brand, i.SerialNumber, m.Size, m.ManufactureDate, i.Condition, i.Location
+                FROM tbMasks AS m
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = m.ItemId
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(
+                        ++index,
+                        reader[0].ToString(), // id
+                        reader[1], // type
+                        reader[2], // brand
+                        reader[3], // serial
+                        reader[4], // size
+                        reader[5], // MDF
+                        reader[6], // condition
+                        reader[7], // location
+                        "Material",
+                        "Color"
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally { connection.Close(); }
         }
 
         public static bool MaskInsert(SqlConnection connection,
@@ -1846,6 +2227,46 @@ namespace InventoryManagmentSystem
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { connection.Close(); }
             return items;
+        }
+
+        public static void PantsFindAllInStock(SqlConnection connection, DataGridView grid)
+        {
+            string query = $@"
+                SELECT 
+                    i.Id, i.ItemType, p.Brand, i.SerialNumber, p.Size, p.ManufactureDate, i.Condition, i.Location
+                FROM tbPants AS p
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = p.ItemId
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                int index = 0;
+                while (reader.Read())
+                {
+                    grid.Rows.Add(
+                        ++index,
+                        reader[0].ToString(), // id
+                        reader[1], // type
+                        reader[2], // brand
+                        reader[3], // serial
+                        reader[4], // size
+                        reader[5], // MDF
+                        reader[6], // condition
+                        reader[7], // location
+                        "Material",
+                        "Color"
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally { connection.Close(); }
         }
 
         public static bool PantsInsert(SqlConnection connection,

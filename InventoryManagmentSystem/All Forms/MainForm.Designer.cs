@@ -61,6 +61,7 @@
             this.panelSettings = new System.Windows.Forms.Panel();
             this.labelSettings = new System.Windows.Forms.Label();
             this.btnSettings = new InventoryManagmentSystem.CustomButton();
+            this.gradientFlowLayoutPanel1 = new InventoryManagmentSystem.GradientFlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.MyLogo)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.RentalsNavBar.SuspendLayout();
@@ -93,7 +94,7 @@
             this.LabelTools.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.LabelTools.Location = new System.Drawing.Point(20, 70);
             this.LabelTools.Name = "LabelTools";
-            this.LabelTools.Size = new System.Drawing.Size(70, 29);
+            this.LabelTools.Size = new System.Drawing.Size(56, 24);
             this.LabelTools.TabIndex = 17;
             this.LabelTools.Text = "Tools";
             this.LabelTools.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -106,7 +107,7 @@
             this.UsersTxt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.UsersTxt.Location = new System.Drawing.Point(19, 70);
             this.UsersTxt.Name = "UsersTxt";
-            this.UsersTxt.Size = new System.Drawing.Size(73, 29);
+            this.UsersTxt.Size = new System.Drawing.Size(58, 24);
             this.UsersTxt.TabIndex = 15;
             this.UsersTxt.Text = "Users";
             this.UsersTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -134,6 +135,7 @@
             // 
             // MainPanel
             // 
+            this.MainPanel.Controls.Add(this.gradientFlowLayoutPanel1);
             this.MainPanel.Controls.Add(this.RentalsNavBar);
             this.MainPanel.Controls.Add(this.flowLayoutNavBar);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -179,7 +181,7 @@
             this.label2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label2.Location = new System.Drawing.Point(20, 70);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 29);
+            this.label2.Size = new System.Drawing.Size(61, 24);
             this.label2.TabIndex = 14;
             this.label2.Text = "Home";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -231,7 +233,7 @@
             this.labelClients.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labelClients.Location = new System.Drawing.Point(12, 70);
             this.labelClients.Name = "labelClients";
-            this.labelClients.Size = new System.Drawing.Size(90, 29);
+            this.labelClients.Size = new System.Drawing.Size(72, 24);
             this.labelClients.TabIndex = 13;
             this.labelClients.Text = "Clients";
             this.labelClients.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -254,7 +256,7 @@
             this.label4.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label4.Location = new System.Drawing.Point(31, 70);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 29);
+            this.label4.Size = new System.Drawing.Size(37, 24);
             this.label4.TabIndex = 9;
             this.label4.Text = "Inv";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -291,7 +293,7 @@
             this.label1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label1.Location = new System.Drawing.Point(20, 70);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 29);
+            this.label1.Size = new System.Drawing.Size(61, 24);
             this.label1.TabIndex = 9;
             this.label1.Text = "Acads";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -344,7 +346,7 @@
             this.labelDashboard.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labelDashboard.Location = new System.Drawing.Point(23, 70);
             this.labelDashboard.Name = "labelDashboard";
-            this.labelDashboard.Size = new System.Drawing.Size(65, 29);
+            this.labelDashboard.Size = new System.Drawing.Size(51, 24);
             this.labelDashboard.TabIndex = 14;
             this.labelDashboard.Text = "Dash";
             this.labelDashboard.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -395,7 +397,7 @@
             this.RentalLable.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.RentalLable.Location = new System.Drawing.Point(12, 70);
             this.RentalLable.Name = "RentalLable";
-            this.RentalLable.Size = new System.Drawing.Size(96, 29);
+            this.RentalLable.Size = new System.Drawing.Size(76, 24);
             this.RentalLable.TabIndex = 13;
             this.RentalLable.Text = "Rentals";
             this.RentalLable.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -468,7 +470,7 @@
             this.labelSettings.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labelSettings.Location = new System.Drawing.Point(10, 70);
             this.labelSettings.Name = "labelSettings";
-            this.labelSettings.Size = new System.Drawing.Size(102, 29);
+            this.labelSettings.Size = new System.Drawing.Size(82, 24);
             this.labelSettings.TabIndex = 17;
             this.labelSettings.Text = "Settings";
             this.labelSettings.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -488,9 +490,19 @@
             this.btnSettings.TabStop = false;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
+            // gradientFlowLayoutPanel1
+            // 
+            this.gradientFlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.gradientFlowLayoutPanel1.EndColor = System.Drawing.Color.MidnightBlue;
+            this.gradientFlowLayoutPanel1.Location = new System.Drawing.Point(1009, 100);
+            this.gradientFlowLayoutPanel1.Name = "gradientFlowLayoutPanel1";
+            this.gradientFlowLayoutPanel1.Size = new System.Drawing.Size(25, 532);
+            this.gradientFlowLayoutPanel1.StartColor = System.Drawing.Color.Maroon;
+            this.gradientFlowLayoutPanel1.TabIndex = 3;
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 651);
             this.Controls.Add(this.MainPanel);
@@ -569,5 +581,6 @@
         private System.Windows.Forms.Panel panelSettings;
         private System.Windows.Forms.Label labelSettings;
         private CustomButton btnSettings;
+        private GradientFlowLayoutPanel gradientFlowLayoutPanel1;
     }
 }

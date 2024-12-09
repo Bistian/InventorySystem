@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static InventoryManagmentSystem.Academy.AcademyForm;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace InventoryManagmentSystem.Academy
 {
@@ -37,7 +38,7 @@ namespace InventoryManagmentSystem.Academy
             dataGridClasses.Columns["column_start_date"].DefaultCellStyle.Format = "d";
             dataGridClasses.Columns["column_end_date"].DefaultCellStyle.Format = "d";
 
-
+            checkBoth.Checked = true;
             LoadClasses();
             initLable();
             this.parent = parent;
@@ -45,45 +46,7 @@ namespace InventoryManagmentSystem.Academy
 
         public void LoadClasses()
         {
-            dataGridClasses.Rows.Clear();
-            string query;
-            if (AcademyId != Guid.Empty)
-            {
-                query = $@"
-                    SELECT c.id, a.Name, c.Name, c.StartDate, c.EndDate, c.IsFinished
-                    FROM tbClasses as c 
-                    Join tbAcademies as a ON c.AcademyId = a.Id
-                    WHERE c.AcademyId ='{AcademyId}'
-                ";
-                HelperFunctions.RemoveLineBreaksFromString(ref query);
-            }
-            else
-            {
-                query = $@"
-                    SELECT c.id, a.Name, c.Name, c.StartDate, c.EndDate, c.IsFinished
-                    FROM tbClasses as c 
-                    Join tbAcademies as a ON c.AcademyId = a.Id
-                ";
-                HelperFunctions.RemoveLineBreaksFromString(ref query);
-            }
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-                int i = 1;
-                while (reader.Read())
-                {
-                    dataGridClasses.Rows.Add(
-                        i++,reader[0], reader[1], reader[2], reader[3], reader[4], reader[5]
-                    );
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
+            HelperSql.ClassFindAll(connection, dataGridClasses);
         }
 
         public void initLable()
@@ -285,6 +248,37 @@ namespace InventoryManagmentSystem.Academy
                 text = $"End: {row.Cells["column_end_date"].Value}";
                 HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
                 positionY += lineHeight + ExtraLineSpace;
+            }
+        }
+
+        private void CheckBox_Checked_Changed(object sender, EventArgs e)
+        {
+            // Cast the sender to a CheckBox
+            var currentCheckBox = sender as System.Windows.Forms.CheckBox;
+
+            if (currentCheckBox != null && currentCheckBox.Checked)
+            {
+                // Uncheck all other checkboxes
+                if (currentCheckBox != checkActive) checkActive.Checked = false;
+                if (currentCheckBox != checkInactive) checkInactive.Checked = false;
+                if (currentCheckBox != checkBoth) checkBoth.Checked = false;
+            }
+            else if (!checkActive.Checked && !checkInactive.Checked && !checkBoth.Checked)
+            {
+                currentCheckBox.Checked = true;
+            }
+
+            if (currentCheckBox.Text == "Active")
+            {
+                HelperSql.ClassFindByStatus(connection, dataGridClasses, true);
+            }
+            else if(currentCheckBox.Text == "Inactive")
+            {
+                HelperSql.ClassFindByStatus(connection, dataGridClasses, false);
+            }
+            else if (currentCheckBox.Text == "Both")
+            {
+                LoadClasses();
             }
         }
     }  

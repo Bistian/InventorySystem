@@ -85,9 +85,10 @@ namespace InventoryManagmentSystem
             }
             return $"{M}/{D}/{Y}";
         }
+
         public static string MakeTableFromItemType(string itemType)
         {
-            return $"tb{char.ToUpper(itemType[0]) + itemType.Substring(1)}";
+            return $"tb{char.ToUpper(itemType[0]) + itemType.Substring(1)}s";
         }
 
         public static void OpenChildForm(Form childForm, ref Panel panel)

@@ -125,6 +125,12 @@
     <Compile Include="All Forms\Rental Forms\Academy Forms\CreateClassForm.Designer.cs">
       <DependentUpon>CreateClassForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="All Forms\SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="All Forms\SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="C# Files\CustomTypes.cs" />
     <Compile Include="C# Files\HelperButton.cs" />
     <Compile Include="C# Files\HelperError.cs" />
@@ -347,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="All Forms\Rental Forms\Academy Forms\CreateClassForm.resx">
       <DependentUpon>CreateClassForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="All Forms\SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Item Classes\CustomButton.resx">
       <DependentUpon>CustomButton.cs</DependentUpon>

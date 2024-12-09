@@ -18,224 +18,35 @@ namespace InventoryManagmentSystem
 
         /// <summary> Key/Value pair list. Key = column name </summary>
         private List<string[]> filterList = new List<string[]>();
-        private FilterForm filterForm;
+        private SearchForm searchForm;
+        public string ItemTypeGlobal;
 
-        public InventoryForm(string ItemType)
+        public InventoryForm()
         {
             InitializeComponent();
-            checkActive.Checked = true;
-            HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
             string[] columns = { "column_acquisition_date", "column_manufacture_date" };
             HelperFunctions.DataGridFormatDate(dataGridInv, columns);
-            HelperSql.ItemFindAllWithSpecifications(connection, dataGridInv);
-            DisplayItems();
-            SetItemType(ItemType);
             InitSearchContainer();
         }
-
-        private void SetItemType(string itemType)
-        {
-            if (itemType == null) { return; }
-            if (cbItemType.Items.Count == 0) { return; }
-
-            int index = cbItemType.Items.IndexOf(itemType);
-            if (index == -1) { return; }
-
-            cbItemType.SelectedIndex = index;
-        }
-
-        /// <summary> Toggle visibility of rows </summary>
-        private void DisplayItems()
-        {
-            foreach(DataGridViewRow row in dataGridInv.Rows)
-            {
-                string condition = row.Cells["column_condition"].Value.ToString();
-                string location = row.Cells["column_location"].Value.ToString();
-                string type = row.Cells["column_item_type"].Value.ToString();
-                if (checkActive.Checked && (location != "Fire-Tec" || condition == "Retired"))
-                {
-                    row.Visible = false;
-                    continue;
-                }
-                if (checkRetired.Checked && condition != "Retired")
-                {
-                    row.Visible = false;
-                    continue;
-                }
-                if (CheckRented.Checked && location == "Fire-Tec")
-                {
-                    row.Visible = false;
-                    continue;
-                }
-
-                if(cbItemType.Text == "")
-                {
-                    row.Visible = true;
-                    continue;
-                }
-
-                if (type != cbItemType.Text)
-                {
-                    row.Visible = false;
-                    continue;
-                }
-
-                bool isSearchBarMatching = SearchBarIsMatching(row);
-                if (!isSearchBarMatching) 
-                {
-                    row.Visible = false;
-                    continue; 
-                }
-
-                if(FilterUseExtra(row))
-                {
-                    row.Visible = true;
-                }
-                else
-                {
-                    row.Visible = false;
-                }
-               
-            }
-        }
-
-        /// <summary> Use Exatra filters </summary>
-        private bool FilterUseExtra(DataGridViewRow row)
-        {
-            if (filterList.Count == 0) { return true; }
-
-            // Check if column to filter exists and if value at least partially matches.
-            foreach (var filter in filterList)
-            {
-                string filterName = filter[0].ToLower();
-                string filterValue = filter[1];
-                string columnName = "";
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    // Get the column name of the current cell
-                    string name = cell.OwningColumn.HeaderText;
-                    string[] splitName = name.Split('_');
-                    if(filterName == splitName[1] + splitName[2])
-                    {
-                        columnName = name;
-                        break;
-                    }
-                }
-
-                if(columnName == "")
-                {
-                    // Someone messed up the name of a column, type != item_type...
-                    return true;
-                }
-
-                string columnValue = row.Cells[columnName].Value.ToString();
-                if (columnValue == string.Empty) { continue; }
-
-                if (!HelperFunctions.IsSubstring(columnValue, filterValue))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
+      
         private void InitSearchContainer()
         {
-            this.scOuter.SplitterDistance = (int)(Width * 0.3);
-
-            int innerWidth = this.scInner.Width;
-            btnToggleFilter.Text = "<";
-
             // Show selected items.
             var list = new List<string>() { "SerialNumber", "Condition", "Location", "Size", "Color", "Material" };
             Action<List<string[]>> callback = (filters) =>
             {
                 filterList.Clear();
                 filterList = filters;
-                DisplayItems();
             };
 
-            filterForm = new FilterForm(this, list, callback);
-            filterForm.TopLevel = false;
-            this.scInner.Panel1.Controls.Add(filterForm);
-            filterForm.Dock = DockStyle.Fill;
-            filterForm.Show();
+            searchForm = new SearchForm(dataGridInv, this);
+            searchForm.TopLevel = false;
+            scOuter.Panel1.Controls.Add(searchForm);
+            searchForm.Dock = DockStyle.Fill;
+            searchForm.AutoScroll = true;
+            searchForm.Show();
+            searchForm.Visible = false;
             ToggleFilter();
-        }
-
-        private bool SearchBarIsMatching(DataGridViewRow row)
-        {
-            if(searchBar.Text.Length == 0) { return true; }
-            string like = searchBar.Text;
-            string serial = row.Cells["column_serial"].Value.ToString();
-            string brand = row.Cells["column_brand"].Value.ToString();
-
-            if (HelperFunctions.IsSubstring(serial, like)) { return true; }
-            if (HelperFunctions.IsSubstring(brand, like)) { return true; }
-
-            string type = row.Cells["column_item_type"].Value.ToString();
-            if (type == "boots")
-            {
-                string size = row.Cells["column_size"].Value.ToString();
-                return size == like ? true : false;
-            }
-            else if (type == "helmet")
-            {
-                string color = row.Cells["column_color"].Value.ToString();
-                return color == like ? true : false;
-            }
-            else if (type == "jacket")
-            {
-                string size = row.Cells["column_size"].Value.ToString();
-                return size == like ? true : false;
-            }
-            else if (type == "mask")
-            {
-                string size = row.Cells["column_size"].Value.ToString();
-                return size == like ? true : false;
-            }
-            else if (type == "pants")
-            {
-                string size = row.Cells["column_size"].Value.ToString();
-                return size == like ? true : false;
-            }
-            return false;
-        }
-
-        private void comboBoxItem_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Reset search bar.
-            searchBar.Text = "";
-            ChangeVisibleColumns();
-            DisplayItems();
-        }
-
-        private void ChangeVisibleColumns()
-        {
-            if (cbItemType.Text == "boots")
-            {
-                dataGridInv.Columns["column_size"].Visible = true;
-                dataGridInv.Columns["column_material"].Visible = true;
-                dataGridInv.Columns["column_color"].Visible = false;
-            }
-            else if (cbItemType.Text == "helmet")
-            {
-                dataGridInv.Columns["column_size"].Visible = false;
-                dataGridInv.Columns["column_material"].Visible = false;
-                dataGridInv.Columns["column_color"].Visible = true;
-            }
-            else if (cbItemType.Text == "jacket" || cbItemType.Text == "pants" || cbItemType.Text == "mask")
-            {
-                dataGridInv.Columns["column_size"].Visible = true;
-                dataGridInv.Columns["column_material"].Visible = false;
-                dataGridInv.Columns["column_color"].Visible = false;
-            }
-        }
-
-        private void searchBar_TextChanged(object sender, EventArgs e)
-        {
-            if (cbItemType.SelectedIndex < 0) { return; }
-            DisplayItems();
         }
 
         private void dataGridInv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -244,32 +55,28 @@ namespace InventoryManagmentSystem
 
             var row = dataGridInv.Rows[e.RowIndex];
             string colName = dataGridInv.Columns[e.ColumnIndex].Name;
-            string itemType = cbItemType.Text.ToLower();
             string ClientId = dataGridInv.Rows[e.RowIndex].Cells["column_location"].Value.ToString();
             string serialNumber = dataGridInv.Rows[e.RowIndex].Cells["column_serial"].Value.ToString();
+            string itemId = dataGridInv.Rows[e.RowIndex].Cells["column_item_id"].Value.ToString();
             try
             {
+               string ItemType = dataGridInv.Rows[e.RowIndex].Cells["column_item_type"].Value.ToString();
                 if (colName == "column_edit")
                 {
-                    if (itemType == "boots") { UpdateBoots(e); }
-                    else if (itemType == "helmet") { UpdateHelmet(e); }
-                    else if (itemType == "jacket" || itemType == "pants" || itemType == "mask") { UpdateJacketOrPantsOrMasks(e); }
-
-                    dataGridInv.Rows.Clear();
-                    HelperSql.ItemFindAllWithSpecifications(connection, dataGridInv);
-                    searchBar.Text = dataGridInv.Rows[e.RowIndex].Cells["column_serial"].Value.ToString();
-                    DisplayItems();
+                    if (ItemType == "boots") { UpdateBoots(e); }
+                    else if (ItemType == "helmet") { UpdateHelmet(e); }
+                    else if (ItemType == "jacket" || ItemType == "pants" || ItemType == "mask") { UpdateJacketOrPantsOrMasks(e); }
+                    //Refresh Data Grid
+                    searchForm.btn_search_Click(sender, e);
                 }
                 else if (colName == "column_delete")
                 {
-                    DeleteItem(serialNumber);
-                    DisplayItems();
+                    DeleteItem(itemId);
                 }
                 else
                 {
                     if(ClientId == "Fire-Tec")
                     {
-                        string itemId = row.Cells["column_item_id"].Value.ToString();
                         var form = new RentalHistoryForm(itemId, string.Empty);
 
                         if(form.IsDisposed) { MessageBox.Show("No history found"); }
@@ -305,8 +112,10 @@ namespace InventoryManagmentSystem
 
         private Item UpdateCreateItem(DataGridViewCellEventArgs e)
         {
+            string ItemType = dataGridInv.Rows[e.RowIndex].Cells["column_item_type"].Value.ToString();
             var item = new Item();
-            item.AddColumn("ItemType", cbItemType.Text);
+            item.AddColumn("ItemType", ItemType);
+            item.AddColumn("Id", GetCellValueAsString(e, "column_item_id"));
             item.AddColumn("SerialNumber", GetCellValueAsString(e, "column_serial"));
             item.AddColumn("Brand", GetCellValueAsString(e, "column_brand"));
             item.AddColumn("Condition", GetCellValueAsString(e, "column_condition"));
@@ -346,47 +155,26 @@ namespace InventoryManagmentSystem
             itemForm.Close();
         }
         
-        private void DeleteItem(string serialNumber)
+        private void DeleteItem(string itemId)
         {
+            //Deleting from item specific tables
             string message = "Are you sure you want to delete this item?";
             string title = "Delete Record";
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return; }
 
-            string query = $"SELECT ItemId FROM tbItems WHERE SerialNumber = '{serialNumber}'";
-            // TODO: Do I really want to delete?
-            Guid uuid;
-            
-            string table = "tb" + CapitalizeFirstLetter(cbItemType.Text);
+            bool isDeleted = HelperSql.ItemDelete(connection, itemId);
 
-            if(cbItemType.Text == "jacket" || cbItemType.Text == "helmet" || cbItemType.Text == "mask")
+            if (isDeleted)
             {
-                table += "s";
+                message = "Item deleted succesfully";
+                MessageBox.Show(message, "Deleted", MessageBoxButtons.OK);
+                dataGridInv.Rows.Clear();
             }
-            try
+            else
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand($"UPDATE tbItems SET Condition = @Condition WHERE SerialNumber LIKE '{serialNumber}'", connection);
-                command.Parameters.AddWithValue("@Condition", "Retired");
-                command.ExecuteNonQuery();
-                connection.Close();
-                MessageBox.Show("Item has been successfully deleted");
+                message = "Failed to delete item";
+                MessageBox.Show(message, "Fail", MessageBoxButtons.OK);
             }
-            catch(Exception ex)
-            {
-                connection.Close();
-                Console.WriteLine(ex.Message);
-                MessageBox.Show("Failed to delete the item.");
-            }
-        }
-
-        static string CapitalizeFirstLetter(string str)
-        {
-            if (string.IsNullOrEmpty(str))
-            {
-                return str;
-            }
-
-            return char.ToUpper(str[0]) + str.Substring(1);
         }
 
         private string GetCellValueAsString(DataGridViewCellEventArgs e, string cellName)
@@ -396,94 +184,34 @@ namespace InventoryManagmentSystem
 
         private void ToggleFilter()
         {
-            if (btnToggleFilter.Text == ">")
+            if (btn_filters.Text == "Open Filters")
             {
-                filterForm.Visible = true;
-                scOuter.SplitterDistance = (int)(Width * 0.3);
-                scInner.SplitterDistance = (int)(scInner.Width * 1.15);
-                btnToggleFilter.Text = "<";
+                searchForm.Visible = true;
+                scOuter.Panel1.Visible = true;
+                scOuter.SplitterDistance = searchForm.panel_item_type.Width;
+                btn_filters.Text = "Close Filters";
             }
             else
             {
-                filterForm.Visible = false;
+                searchForm.Visible = false;
+                scOuter.Panel1.Visible = false;
                 // Calculate the desired splitter distance
-                int minInnerWidth = scOuter.Panel1MinSize + scInner.Panel1MinSize + scInner.SplitterWidth;
+                int minInnerWidth = scOuter.Panel1MinSize + scOuter.Panel1.Width + scOuter.Panel1.Width;
 
                 // Ensure the splitter distance is within the valid range
-                int maxSplitterDistance = scInner.Width - scInner.Panel2MinSize;
-                int minSplitterDistance = scInner.Panel1MinSize;
+                int maxSplitterDistance = scOuter.Panel1.Width - scOuter.Panel1.Width;
+                int minSplitterDistance = scOuter.Panel1.Width;
 
                 // Clamp the desired splitter distance within the valid range
                 int validSplitterDistance = Math.Max(minSplitterDistance, Math.Min(minInnerWidth, maxSplitterDistance));
 
                 // Set the splitter distance
-                scInner.SplitterDistance = validSplitterDistance;
+                scOuter.SplitterDistance = validSplitterDistance;
 
                 // Clamp outer no inner min
-                scOuter.SplitterDistance = (int)(minInnerWidth * 1.15);
-                btnToggleFilter.Text = ">";
+                scOuter.SplitterDistance = 0;
+                btn_filters.Text = "Open Filters";
             }
-        }
-
-        private void checkRetired_Click(object sender, EventArgs e)
-        {
-            if(checkRetired.Checked)
-            {
-                CheckRented.Checked = false;
-                checkActive.Checked = false;
-            }
-            DisplayItems();
-        }
-
-        private void checkActive_Click(object sender, EventArgs e)
-        {
-            if(checkActive.Checked)
-            {
-                checkRetired.Checked = false;
-                CheckRented.Checked = false;
-            }     
-            DisplayItems();
-        }
-
-        private void UsersButton_Click_1(object sender, EventArgs e)
-        {
-            NewItemForm ModForm = new NewItemForm();
-            ModForm.ShowDialog();
-            DisplayItems();
-        }
-
-        private void btnFilter_Click(object sender, EventArgs e)
-        {
-            var names = new List<string> {"Active", "Inactive", "Brand", "Size","Condition"};
-            var filterForm = new FilterForm(this, names, checkedItems =>
-            {
-                foreach(var item in checkedItems)
-                {
-                    filterList.Add(item);
-                }
-            });
-            filterForm.Show();
-        }
-
-        private void btnToggleFilter_Click(object sender, EventArgs e)
-        {
-            ToggleFilter();
-        }
-
-        private void RentedCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            if(CheckRented.Checked)
-            {
-                checkActive.Checked = false;
-                checkRetired.Checked = false;
-
-            }
-            DisplayItems();
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            HelperFunctions.PdfSaveDocument(WriteListToPdf);
         }
 
         private void WriteListToPdf(PdfDocument document)
@@ -510,7 +238,14 @@ namespace InventoryManagmentSystem
             int lineHeight = (int)fontTitle.Height;
 
             // Title add caps and s to de end.
-            string title = char.ToUpper(cbItemType.Text[0]) + cbItemType.Text.Substring(1);
+            if (ItemTypeGlobal == null)
+            {
+                string message = "Nothing Selected";
+                string header = "Failed Save";
+                MessageBox.Show(message, header, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            string title = char.ToUpper(ItemTypeGlobal[0]) + ItemTypeGlobal.Substring(1);
             if (!title.EndsWith("s"))
             {
                 title += "s";
@@ -558,6 +293,27 @@ namespace InventoryManagmentSystem
                 HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
                 positionY += lineHeight + ExtraLineSpace;
             }
+        }
+
+        private void Btn_Users_Click(object sender, EventArgs e)
+        {
+            NewItemForm ModForm = new NewItemForm();
+            ModForm.ShowDialog();
+        }
+
+        private void Btn_ToggleFilter_Click(object sender, EventArgs e)
+        {
+            ToggleFilter();
+        }
+
+        private void Btn_Save_Click(object sender, EventArgs e)
+        {
+            HelperFunctions.PdfSaveDocument(WriteListToPdf);
+        }
+
+        private void Btn_Filter_Click(object sender, EventArgs e)
+        {
+            ToggleFilter();
         }
     }
 }

@@ -57,7 +57,7 @@ namespace InventoryManagmentSystem
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
-            InventoryForm form = new InventoryForm(null);
+            InventoryForm form = new InventoryForm();
             var parentForm = this.ParentForm as MainForm;
             parentForm.openChildForm(form);
             this.Close();

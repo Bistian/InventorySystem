@@ -21,8 +21,25 @@ namespace InventoryManagmentSystem
         {
             InitializeComponent();
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
-            brands = HelperSql.BrandsFindAll(connection);
-            SelectBrands();
+        }
+
+        public void FillDataTable()
+        {
+            if(cbItemType.Text.Length < 1) { return; }
+            dataGrid.Rows.Clear();
+            string query = $"SELECT * FROM tbBrands WHERE ItemType = '{cbItemType.Text.ToLower()}'";
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while(reader.Read())
+                {
+                    dataGrid.Rows.Add( reader[0], reader[1], reader[2]);
+                }
+            }
+            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -48,27 +65,7 @@ namespace InventoryManagmentSystem
                 Console.WriteLine(ex.Message);
             }
             connection.Close();
-            SelectBrands();
-        }
-
-        private void SelectBrands()
-        {
-            dataGrid.Rows.Clear();
-
-            if (brands.Count < 1) { return; }
-            if (cbItemType.SelectedIndex == -1) { return; }
-
-            string itemType = cbItemType.Text;
-
-            int i = 1;
-            foreach (Item item in brands)
-            {
-                string type = item.GetColumnValue("ItemType");
-                if (type != itemType) { continue; }
-
-                dataGrid.Rows.Add(i++, item.GetColumnValue("Brand"));
-            }
-
+            FillDataTable();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -78,14 +75,14 @@ namespace InventoryManagmentSystem
 
             HelperSql.BrandsInsert(connection, cbItemType.Text, tbBrands.Text);
             brands = HelperSql.BrandsFindAll(connection);
-            SelectBrands();
+            FillDataTable();
             tbBrands.Text = "";
             if (close) { this.Close(); }
         }
 
         private void cbItemType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectBrands();
+            FillDataTable();
         }
     }
 }

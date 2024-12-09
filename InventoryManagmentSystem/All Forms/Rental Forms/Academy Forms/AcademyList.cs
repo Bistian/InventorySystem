@@ -1,16 +1,8 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InventoryManagmentSystem.Academy
@@ -20,39 +12,12 @@ namespace InventoryManagmentSystem.Academy
         static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
         AcademyForm parent;
-        List<Item> academyList;
 
         public AcademyList(AcademyForm parent)
         {
             InitializeComponent();
             this.parent = parent;
-            academyList = HelperSql.AcademyFindAll(connection);
-            LoadAcademies();
-        }
-
-        private void LoadAcademies()
-        {
-            dataGridAcademies.Rows.Clear();
-            int count = 1;
-            foreach(var item in academyList)
-            {
-                AddRow(item, count++);
-            }
-        }
-
-        private void AddRow(Item item, int count)
-        {
-            dataGridAcademies.Rows.Add(count,
-                item.GetColumnValue("Id"),
-                item.GetColumnValue("Name"),
-                item.GetColumnValue("ContactName"),
-                item.GetColumnValue("Email"),
-                item.GetColumnValue("Phone"),
-                item.GetColumnValue("Street"),
-                item.GetColumnValue("City"),
-                item.GetColumnValue("State"),
-                item.GetColumnValue("Zip")
-            );
+            HelperSql.AcademyFindAll(connection, dataGridAcademies);
         }
 
         private void UpdateAcademy(DataGridViewRow row)
@@ -73,21 +38,33 @@ namespace InventoryManagmentSystem.Academy
 
         private void searchBar_TextChanged(object sender, EventArgs e)
         {
+            dataGridAcademies.Rows.Clear();
             string searchTerm = searchBar.Text;
             if (string.IsNullOrEmpty(searchTerm)) 
-            { 
-                LoadAcademies();
+            {
+                HelperSql.AcademyFindAll(connection, dataGridAcademies);
                 return;
             }
-
-            int count = 1;
-            foreach(var item in academyList)
+            
+            string query = $@"
+                        SELECT Id, Name, ContactName, Email, Phone, Street, City, State, Zip 
+                        FROM tbAcademies WHERE LOWER(Name) LIKE @searchTerm";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
             {
-                if(item.GetColumnValue("Name") == $"%{searchTerm}%")
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@searchTerm", searchTerm.ToLower() + "%");
+                SqlDataReader reader = command.ExecuteReader();
+                int count = 1;
+                while (reader.Read())
                 {
-                    AddRow(item, count++);
+                    dataGridAcademies.Rows.Add(count++,
+                    reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6], reader[7], reader[8]);
                 }
             }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
         }
 
         private void dataGridAcademies_CellClick(object sender, DataGridViewCellEventArgs e)
