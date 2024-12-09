@@ -17,6 +17,8 @@ namespace InventoryManagmentSystem.Rental_Forms
         private string tableName = "";
         private string itemType = "";
 
+        Item item;
+
         public NewItemForm()
         {
             InitializeComponent();
@@ -52,6 +54,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         {
             InitializeComponent();
 
+            this.item = item;
             isUpdate = true;
             itemType = item.GetColumnValue("ItemType");
 
@@ -246,8 +249,10 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return false; }
             string noSpaceSerial = tbSerialNumber.Text.Replace(" ", string.Empty);
 
-            //TODO This needs to find by item Id not serial numbver
-            var item = HelperSql.ItemFindBySerialNumber(connection, cbItemType.Text, noSpaceSerial.ToUpper());
+
+            var NewItem = HelperSql.ItemFindById(connection, item.GetColumnValue("Id"));
+
+
 
             bool isUpdated = false;
             if (itemType == "boots") 
@@ -268,7 +273,8 @@ namespace InventoryManagmentSystem.Rental_Forms
                     cbBrand.Text, 
                     dtManufacture.Value.Date.ToString(),
                     cbCondition.Text,
-                    cbColor.Text); 
+                    cbColor.Text,
+                    tbSerialNumber.Text); 
             }
             else if (itemType == "jacket") 
             {
@@ -277,7 +283,8 @@ namespace InventoryManagmentSystem.Rental_Forms
                     cbBrand.Text,
                     dtManufacture.Value.Date.ToString(),
                     cbCondition.Text,
-                    cbSize.Text);
+                    cbSize.Text,
+                    tbSerialNumber.Text);
             }
             else if (itemType == "mask")
             {

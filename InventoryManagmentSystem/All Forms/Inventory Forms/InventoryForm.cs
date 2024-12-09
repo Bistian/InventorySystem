@@ -44,9 +44,9 @@ namespace InventoryManagmentSystem
             scOuter.Panel1.Controls.Add(searchForm);
             searchForm.Dock = DockStyle.Fill;
             searchForm.AutoScroll = true;
-            ToggleFilter();
             searchForm.Show();
             searchForm.Visible = false;
+            ToggleFilter();
         }
 
         private void dataGridInv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -66,6 +66,8 @@ namespace InventoryManagmentSystem
                     if (ItemType == "boots") { UpdateBoots(e); }
                     else if (ItemType == "helmet") { UpdateHelmet(e); }
                     else if (ItemType == "jacket" || ItemType == "pants" || ItemType == "mask") { UpdateJacketOrPantsOrMasks(e); }
+                    //Refresh Data Grid
+                    searchForm.btn_search_Click(sender, e);
                 }
                 else if (colName == "column_delete")
                 {
@@ -113,6 +115,7 @@ namespace InventoryManagmentSystem
             string ItemType = dataGridInv.Rows[e.RowIndex].Cells["column_item_type"].Value.ToString();
             var item = new Item();
             item.AddColumn("ItemType", ItemType);
+            item.AddColumn("Id", GetCellValueAsString(e, "column_item_id"));
             item.AddColumn("SerialNumber", GetCellValueAsString(e, "column_serial"));
             item.AddColumn("Brand", GetCellValueAsString(e, "column_brand"));
             item.AddColumn("Condition", GetCellValueAsString(e, "column_condition"));

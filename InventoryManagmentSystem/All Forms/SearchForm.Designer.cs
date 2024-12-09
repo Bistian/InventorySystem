@@ -64,6 +64,7 @@
             this.cb_size_masks = new System.Windows.Forms.ComboBox();
             this.btn_clear_size_masks = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.check_retired = new System.Windows.Forms.CheckBox();
             this.panel_item_type.SuspendLayout();
             this.panel_serial_number.SuspendLayout();
             this.panel_brand.SuspendLayout();
@@ -392,7 +393,7 @@
             // 
             this.btn_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold);
             this.btn_search.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btn_search.Location = new System.Drawing.Point(3, 969);
+            this.btn_search.Location = new System.Drawing.Point(3, 989);
             this.btn_search.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(350, 60);
@@ -405,10 +406,11 @@
             // 
             this.panel_check_box.Controls.Add(this.check_in_stock);
             this.panel_check_box.Controls.Add(this.check_rented);
+            this.panel_check_box.Controls.Add(this.check_retired);
             this.panel_check_box.Location = new System.Drawing.Point(3, 908);
             this.panel_check_box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel_check_box.Name = "panel_check_box";
-            this.panel_check_box.Size = new System.Drawing.Size(350, 53);
+            this.panel_check_box.Size = new System.Drawing.Size(350, 73);
             this.panel_check_box.TabIndex = 23;
             // 
             // check_in_stock
@@ -496,14 +498,27 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(365, 1053);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(419, 1053);
             this.flowLayoutPanel1.TabIndex = 25;
+            // 
+            // check_retired
+            // 
+            this.check_retired.AutoSize = true;
+            this.check_retired.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.check_retired.Location = new System.Drawing.Point(3, 45);
+            this.check_retired.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.check_retired.Name = "check_retired";
+            this.check_retired.Size = new System.Drawing.Size(116, 33);
+            this.check_retired.TabIndex = 2;
+            this.check_retired.Text = "Retired";
+            this.check_retired.UseVisualStyleBackColor = true;
+            this.check_retired.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(365, 1053);
+            this.ClientSize = new System.Drawing.Size(419, 1053);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -572,5 +587,6 @@
         private System.Windows.Forms.ComboBox cb_size_masks;
         private System.Windows.Forms.Button btn_clear_size_masks;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.CheckBox check_retired;
     }
 }

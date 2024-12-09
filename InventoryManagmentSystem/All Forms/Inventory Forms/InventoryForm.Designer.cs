@@ -33,6 +33,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryForm));
             this.dataGridInv = new System.Windows.Forms.DataGridView();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.scOuter = new System.Windows.Forms.SplitContainer();
+            this.btnAddUser = new InventoryManagmentSystem.CustomButton();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.TopPanel = new System.Windows.Forms.Panel();
+            this.btn_filters = new System.Windows.Forms.Button();
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_size = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,13 +55,6 @@
             this.column_client = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.column_delete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.scOuter = new System.Windows.Forms.SplitContainer();
-            this.btnAddUser = new InventoryManagmentSystem.CustomButton();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.TopPanel = new System.Windows.Forms.Panel();
-            this.btn_filters = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scOuter)).BeginInit();
             this.scOuter.Panel2.SuspendLayout();
@@ -127,6 +127,92 @@
             this.dataGridInv.TabIndex = 1;
             this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellClick);
             // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.MinimumWidth = 6;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewImageColumn1.Width = 125;
+            // 
+            // dataGridViewImageColumn2
+            // 
+            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewImageColumn2.HeaderText = "";
+            this.dataGridViewImageColumn2.MinimumWidth = 6;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            this.dataGridViewImageColumn2.ReadOnly = true;
+            this.dataGridViewImageColumn2.Width = 125;
+            // 
+            // scOuter
+            // 
+            this.scOuter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scOuter.Location = new System.Drawing.Point(0, 73);
+            this.scOuter.Name = "scOuter";
+            // 
+            // scOuter.Panel2
+            // 
+            this.scOuter.Panel2.Controls.Add(this.dataGridInv);
+            this.scOuter.Size = new System.Drawing.Size(1370, 733);
+            this.scOuter.SplitterDistance = 456;
+            this.scOuter.TabIndex = 21;
+            // 
+            // btnAddUser
+            // 
+            this.btnAddUser.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnAddUser.Image = ((System.Drawing.Image)(resources.GetObject("btnAddUser.Image")));
+            this.btnAddUser.ImageHover = ((System.Drawing.Image)(resources.GetObject("btnAddUser.ImageHover")));
+            this.btnAddUser.ImageNormal = ((System.Drawing.Image)(resources.GetObject("btnAddUser.ImageNormal")));
+            this.btnAddUser.Location = new System.Drawing.Point(1288, 0);
+            this.btnAddUser.Margin = new System.Windows.Forms.Padding(0, 0, 2, 2);
+            this.btnAddUser.Name = "btnAddUser";
+            this.btnAddUser.Size = new System.Drawing.Size(82, 73);
+            this.btnAddUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnAddUser.TabIndex = 17;
+            this.btnAddUser.TabStop = false;
+            this.btnAddUser.Click += new System.EventHandler(this.Btn_Users_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.btnSave.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnSave.Location = new System.Drawing.Point(1179, 0);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(109, 73);
+            this.btnSave.TabIndex = 25;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.Btn_Save_Click);
+            // 
+            // TopPanel
+            // 
+            this.TopPanel.BackColor = System.Drawing.Color.Maroon;
+            this.TopPanel.Controls.Add(this.btn_filters);
+            this.TopPanel.Controls.Add(this.btnSave);
+            this.TopPanel.Controls.Add(this.btnAddUser);
+            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TopPanel.Location = new System.Drawing.Point(0, 0);
+            this.TopPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.TopPanel.Name = "TopPanel";
+            this.TopPanel.Size = new System.Drawing.Size(1370, 73);
+            this.TopPanel.TabIndex = 20;
+            // 
+            // btn_filters
+            // 
+            this.btn_filters.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.btn_filters.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btn_filters.Location = new System.Drawing.Point(28, 7);
+            this.btn_filters.Name = "btn_filters";
+            this.btn_filters.Size = new System.Drawing.Size(109, 60);
+            this.btn_filters.TabIndex = 26;
+            this.btn_filters.Text = "Filters";
+            this.btn_filters.UseVisualStyleBackColor = true;
+            this.btn_filters.Click += new System.EventHandler(this.Btn_Filter_Click);
+            // 
             // Num
             // 
             this.Num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -142,6 +228,7 @@
             this.column_item_id.MinimumWidth = 6;
             this.column_item_id.Name = "column_item_id";
             this.column_item_id.ReadOnly = true;
+            this.column_item_id.Visible = false;
             this.column_item_id.Width = 125;
             // 
             // column_size
@@ -218,6 +305,7 @@
             this.column_location.MinimumWidth = 6;
             this.column_location.Name = "column_location";
             this.column_location.ReadOnly = true;
+            this.column_location.Visible = false;
             // 
             // column_item_type
             // 
@@ -225,6 +313,7 @@
             this.column_item_type.MinimumWidth = 6;
             this.column_item_type.Name = "column_item_type";
             this.column_item_type.ReadOnly = true;
+            this.column_item_type.Visible = false;
             this.column_item_type.Width = 125;
             // 
             // column_client
@@ -254,91 +343,9 @@
             this.column_delete.Name = "column_delete";
             this.column_delete.ReadOnly = true;
             // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewImageColumn1.HeaderText = "";
-            this.dataGridViewImageColumn1.MinimumWidth = 6;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewImageColumn2
-            // 
-            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewImageColumn2.HeaderText = "";
-            this.dataGridViewImageColumn2.MinimumWidth = 6;
-            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            this.dataGridViewImageColumn2.ReadOnly = true;
-            // 
-            // scOuter
-            // 
-            this.scOuter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scOuter.Location = new System.Drawing.Point(0, 73);
-            this.scOuter.Name = "scOuter";
-            // 
-            // scOuter.Panel2
-            // 
-            this.scOuter.Panel2.Controls.Add(this.dataGridInv);
-            this.scOuter.Size = new System.Drawing.Size(1370, 733);
-            this.scOuter.SplitterDistance = 456;
-            this.scOuter.TabIndex = 21;
-            // 
-            // btnAddUser
-            // 
-            this.btnAddUser.Image = ((System.Drawing.Image)(resources.GetObject("btnAddUser.Image")));
-            this.btnAddUser.ImageHover = ((System.Drawing.Image)(resources.GetObject("btnAddUser.ImageHover")));
-            this.btnAddUser.ImageNormal = ((System.Drawing.Image)(resources.GetObject("btnAddUser.ImageNormal")));
-            this.btnAddUser.Location = new System.Drawing.Point(1283, 4);
-            this.btnAddUser.Margin = new System.Windows.Forms.Padding(0, 0, 2, 2);
-            this.btnAddUser.Name = "btnAddUser";
-            this.btnAddUser.Size = new System.Drawing.Size(82, 64);
-            this.btnAddUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnAddUser.TabIndex = 17;
-            this.btnAddUser.TabStop = false;
-            this.btnAddUser.Click += new System.EventHandler(this.Btn_Users_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.btnSave.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnSave.Location = new System.Drawing.Point(1171, 7);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(109, 60);
-            this.btnSave.TabIndex = 25;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.Btn_Save_Click);
-            // 
-            // TopPanel
-            // 
-            this.TopPanel.BackColor = System.Drawing.Color.Maroon;
-            this.TopPanel.Controls.Add(this.btn_filters);
-            this.TopPanel.Controls.Add(this.btnSave);
-            this.TopPanel.Controls.Add(this.btnAddUser);
-            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopPanel.Location = new System.Drawing.Point(0, 0);
-            this.TopPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(1370, 73);
-            this.TopPanel.TabIndex = 20;
-            // 
-            // btn_filters
-            // 
-            this.btn_filters.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.btn_filters.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btn_filters.Location = new System.Drawing.Point(28, 7);
-            this.btn_filters.Name = "btn_filters";
-            this.btn_filters.Size = new System.Drawing.Size(109, 60);
-            this.btn_filters.TabIndex = 26;
-            this.btn_filters.Text = "Filters";
-            this.btn_filters.UseVisualStyleBackColor = true;
-            this.btn_filters.Click += new System.EventHandler(this.Btn_Filter_Click);
-            // 
             // InventoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(1370, 806);
@@ -365,6 +372,10 @@
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
         private System.Windows.Forms.SplitContainer scOuter;
+        private CustomButton btnAddUser;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Panel TopPanel;
+        private System.Windows.Forms.Button btn_filters;
         private System.Windows.Forms.DataGridViewTextBoxColumn Num;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_item_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_size;
@@ -380,9 +391,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn column_client;
         private System.Windows.Forms.DataGridViewImageColumn column_edit;
         private System.Windows.Forms.DataGridViewImageColumn column_delete;
-        private CustomButton btnAddUser;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Panel TopPanel;
-        private System.Windows.Forms.Button btn_filters;
     }
 }

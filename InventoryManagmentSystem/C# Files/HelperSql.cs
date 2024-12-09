@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using static InventoryManagmentSystem.Academy.AcademyForm;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace InventoryManagmentSystem
@@ -33,10 +34,9 @@ namespace InventoryManagmentSystem
                 var command = new SqlCommand(query, connection);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                var item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    var item = new Item();
                     item.AddByReaderAndColumnArray(reader, columns);
                     list.Add(item);
                 }
@@ -226,7 +226,7 @@ namespace InventoryManagmentSystem
         /// </summary>
         /// <returns>Bool was successfull or not.</returns>
         public static bool BootsUpdate(SqlConnection connection,
-            string itemId, string brand, string size, string material,string condition, string manufacture, string serial)
+            string itemId, string brand, string size, string material,string condition, string manufacture, string SerialNumber)
         {
             Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
@@ -249,9 +249,9 @@ namespace InventoryManagmentSystem
             {
                 fieldsToUpdate.Add("condition", condition);
             }
-            if (!string.IsNullOrEmpty(condition))
+            if (!string.IsNullOrEmpty(SerialNumber))
             {
-                fieldsToUpdate.Add("serial", serial);
+                fieldsToUpdate.Add("SerialNumber", SerialNumber);
             }
 
             int count = fieldsToUpdate.Count;
@@ -277,11 +277,6 @@ namespace InventoryManagmentSystem
             {
                 query += "ManufactureDate = @ManufactureDate";
             }
-            if (fieldsToUpdate.ContainsKey("serial"))
-            {
-                query += "Serial = @Serial";
-                if (--count > 0) { query += ", "; }
-            }
             query += $" WHERE Cast(ItemId AS NVARCHAR(50)) = @ItemId";
             try
             {
@@ -295,11 +290,12 @@ namespace InventoryManagmentSystem
                 command.ExecuteNonQuery();
 
 
-                 query = $"UPDATE tbItems SET Condition = @Condition " +
+                 query = $"UPDATE tbItems SET Condition = @Condition, SerialNumber = @SerialNumber " +
                     $"WHERE Cast(Id AS NVARCHAR(50)) = @ItemId";
 
                 command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Condition", condition); 
+                command.Parameters.AddWithValue("@Condition", condition);
+                command.Parameters.AddWithValue("@SerialNumber", SerialNumber);
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
 
@@ -442,15 +438,13 @@ namespace InventoryManagmentSystem
             string query = $"SELECT * FROM tbClasses WHERE AcademyId = @AcademyId";
             try
             {
-                connection.Close();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@AcademyId", AcademyId.ToString());
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                var item = new Item();
                 while (reader.Read())
                 {
-                    item.Clear();
+                    var item = new Item();
                     item.AddByReaderAndColumnArray(reader, columns);
                     list.Add(item);
                 }
@@ -1118,7 +1112,7 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static bool HelmetUpdate(SqlConnection connection, string itemId, string brand, string manufacture,string condition, string color)
+        public static bool HelmetUpdate(SqlConnection connection, string itemId, string brand, string manufacture,string condition, string color, string SerialNumber)
         {
             var fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
@@ -1133,7 +1127,10 @@ namespace InventoryManagmentSystem
             {
                 fieldsToUpdate.Add("color", color);
             }
-
+            if (!string.IsNullOrEmpty(SerialNumber))
+            {
+                fieldsToUpdate.Add("SerialNumber", SerialNumber);
+            }
             int count = fieldsToUpdate.Count;
             if (count == 0) { return false; }
             string query = $"UPDATE tbHelmets SET ";
@@ -1162,11 +1159,12 @@ namespace InventoryManagmentSystem
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
 
-                query = $"UPDATE tbItems SET Condition = @Condition " +
+                query = $"UPDATE tbItems SET Condition = @Condition, SerialNumber = @SerialNumber " +
                    $"WHERE Cast(Id AS NVARCHAR(50)) = @ItemId";
 
                 command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Condition", condition);
+                command.Parameters.AddWithValue("@SerialNumber", SerialNumber);
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
                 return true;
@@ -1412,6 +1410,16 @@ namespace InventoryManagmentSystem
                 command.Parameters.AddWithValue("@ItemType", itemType);
             }
             return ItemFindBy(connection, command);
+        }
+
+        public static Item ItemFindById(SqlConnection connection, string Id)
+        {
+            string query = $"SELECT * FROM tbItems WHERE Id = @Id";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@Id", Id);
+            var item = ItemFindBy(connection, command);
+            if (item.Count > 0) { return item[0]; }
+            return null;
         }
 
         public static List<Item> ItemFindBySearchBar(SqlConnection connection, string searchTerm)
@@ -1940,7 +1948,7 @@ namespace InventoryManagmentSystem
             return false;
         }
 
-        public static bool JacketUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string condition, string size)
+        public static bool JacketUpdate(SqlConnection connection, string itemId, string brand, string manufacture, string condition, string size, string SerialNumber)
         {
             var fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
@@ -1954,6 +1962,10 @@ namespace InventoryManagmentSystem
             if (!string.IsNullOrEmpty(size))
             {
                 fieldsToUpdate.Add("size", size);
+            }
+            if (!string.IsNullOrEmpty(SerialNumber))
+            {
+                fieldsToUpdate.Add("SerialNumber", SerialNumber);
             }
 
             int count = fieldsToUpdate.Count;
@@ -1984,11 +1996,12 @@ namespace InventoryManagmentSystem
                 if (fieldsToUpdate.ContainsKey("size")) { command.Parameters.AddWithValue("@Size", size); }
                 command.ExecuteNonQuery();
 
-                query = $"UPDATE tbItems SET Condition = @Condition " +
+                query = $"UPDATE tbItems SET Condition = @Condition, SerialNumber = @SerialNumber " +
                    $"WHERE Cast(Id AS NVARCHAR(50)) = @ItemId";
 
                 command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Condition", condition);
+                command.Parameters.AddWithValue("@SerialNumber", SerialNumber);
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
                 command.ExecuteNonQuery();
                 return true;

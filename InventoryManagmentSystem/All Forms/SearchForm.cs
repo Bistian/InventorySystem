@@ -144,27 +144,31 @@ namespace InventoryManagmentSystem.All_Forms
 
             }
             // Search for rented or in stock
-            if (check_in_stock.Checked && !check_rented.Checked)
+            if (check_in_stock.Checked)
             {
                 if (and)
                 {
-                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec')";
+                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
                 else
                 {
-                    query += " WHERE i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                    query += " WHERE (i.Location IS NULL OR i.Location = 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
             }
-            else if (check_rented.Checked && !check_in_stock.Checked)
+            else if (check_rented.Checked)
             {
                 if (and)
                 {
-                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec')";
+                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
                 else
                 {
-                    query += " WHERE i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                    query += " WHERE (i.Location IS NOT NULL AND i.Location != 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
+            }
+            else if (check_retired.Checked)
+            {
+                    query += " AND i.Condition = 'Retired'";
             }
 
             try
@@ -264,27 +268,31 @@ namespace InventoryManagmentSystem.All_Forms
 
             }
             // Search for rented or in stock
-            if (check_in_stock.Checked && !check_rented.Checked)
+            if (check_in_stock.Checked)
             {
                 if (and)
                 {
-                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec')";
+                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
                 else
                 {
-                    query += " WHERE i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                    query += " WHERE (i.Location IS NULL OR i.Location = 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
             }
-            else if (check_rented.Checked && !check_in_stock.Checked)
+            else if (check_rented.Checked)
             {
                 if (and)
                 {
-                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec')";
+                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
                 else
                 {
-                    query += " WHERE i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                    query += " WHERE (i.Location IS NOT NULL AND i.Location != 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
+            }
+            else if (check_retired.Checked)
+            {
+                query += " AND i.Condition = 'Retired'";
             }
 
             try
@@ -380,27 +388,31 @@ namespace InventoryManagmentSystem.All_Forms
 
             }
             // Search for rented or in stock
-            if (check_in_stock.Checked && !check_rented.Checked)
+            if (check_in_stock.Checked)
             {
                 if (and)
                 {
-                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec')";
+                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
                 else
                 {
-                    query += " WHERE i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                    query += " WHERE (i.Location IS NULL OR i.Location = 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
             }
-            else if (check_rented.Checked && !check_in_stock.Checked)
+            else if (check_rented.Checked)
             {
                 if (and)
                 {
-                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec')";
+                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
                 else
                 {
-                    query += " WHERE i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                    query += " WHERE (i.Location IS NOT NULL AND i.Location != 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
+            }
+            else if (check_retired.Checked)
+            {
+                query += " AND i.Condition = 'Retired'";
             }
 
             try
@@ -500,27 +512,31 @@ namespace InventoryManagmentSystem.All_Forms
 
             }
             // Search for rented or in stock
-            if (check_in_stock.Checked && !check_rented.Checked)
+            if (check_in_stock.Checked)
             {
                 if (and)
                 {
-                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec')";
+                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
                 else
                 {
-                    query += " WHERE i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                    query += " WHERE (i.Location IS NULL OR i.Location = 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
             }
-            else if (check_rented.Checked && !check_in_stock.Checked)
+            else if (check_rented.Checked)
             {
                 if (and)
                 {
-                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec')";
+                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
                 else
                 {
-                    query += " WHERE i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                    query += " WHERE (i.Location IS NOT NULL AND i.Location != 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
+            }
+            else if (check_retired.Checked)
+            {
+                query += " AND i.Condition = 'Retired'";
             }
 
             try
@@ -621,27 +637,31 @@ namespace InventoryManagmentSystem.All_Forms
 
             }
             // Search for rented or in stock
-            if (check_in_stock.Checked && !check_rented.Checked)
+            if (check_in_stock.Checked)
             {
                 if (and)
                 {
-                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec')";
+                    query += " AND (i.Location IS NULL OR i.Location = 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
                 else
                 {
-                    query += " WHERE i.Location IS NULL OR i.Location = 'Fire-Tec'";
+                    query += " WHERE (i.Location IS NULL OR i.Location = 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
             }
-            else if (check_rented.Checked && !check_in_stock.Checked)
+            else if (check_rented.Checked)
             {
                 if (and)
                 {
-                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec')";
+                    query += " AND (i.Location IS NOT NULL AND i.Location != 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
                 else
                 {
-                    query += " WHERE i.Location IS NOT NULL AND i.Location != 'Fire-Tec'";
+                    query += " WHERE (i.Location IS NOT NULL AND i.Location != 'Fire-Tec') AND i.Condition != 'Retired'";
                 }
+            }
+            else if (check_retired.Checked)
+            {
+                query += " AND i.Condition = 'Retired'";
             }
 
             try
@@ -774,7 +794,7 @@ namespace InventoryManagmentSystem.All_Forms
             Parent.ItemTypeGlobal = type;
         }
 
-        private void btn_search_Click(object sender, EventArgs e)
+        public void btn_search_Click(object sender, EventArgs e)
         {
             if (cb_item_type.SelectedIndex == -1) { return; }
 
@@ -847,6 +867,11 @@ namespace InventoryManagmentSystem.All_Forms
         }
 
         private void panel_item_type_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
         }
