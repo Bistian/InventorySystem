@@ -226,7 +226,7 @@ namespace InventoryManagmentSystem
         /// </summary>
         /// <returns>Bool was successfull or not.</returns>
         public static bool BootsUpdate(SqlConnection connection,
-            string itemId, string brand, string size, string material,string condition, string manufacture)
+            string itemId, string brand, string size, string material,string condition, string manufacture, string serial)
         {
             Dictionary<string, string> fieldsToUpdate = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(brand))
@@ -249,6 +249,11 @@ namespace InventoryManagmentSystem
             {
                 fieldsToUpdate.Add("condition", condition);
             }
+            if (!string.IsNullOrEmpty(condition))
+            {
+                fieldsToUpdate.Add("serial", serial);
+            }
+
             int count = fieldsToUpdate.Count;
             if (count == 0) { return false; }
 
@@ -271,6 +276,11 @@ namespace InventoryManagmentSystem
             if (fieldsToUpdate.ContainsKey("manufacture"))
             {
                 query += "ManufactureDate = @ManufactureDate";
+            }
+            if (fieldsToUpdate.ContainsKey("serial"))
+            {
+                query += "Serial = @Serial";
+                if (--count > 0) { query += ", "; }
             }
             query += $" WHERE Cast(ItemId AS NVARCHAR(50)) = @ItemId";
             try

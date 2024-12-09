@@ -845,5 +845,10 @@ namespace InventoryManagmentSystem.All_Forms
         {
 
         }
+
+        private void panel_item_type_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

@@ -63,6 +63,7 @@
             this.label_size_masks = new System.Windows.Forms.Label();
             this.cb_size_masks = new System.Windows.Forms.ComboBox();
             this.btn_clear_size_masks = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel_item_type.SuspendLayout();
             this.panel_serial_number.SuspendLayout();
             this.panel_brand.SuspendLayout();
@@ -72,6 +73,7 @@
             this.panel_material.SuspendLayout();
             this.panel_check_box.SuspendLayout();
             this.panel_size_masks.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cb_item_type
@@ -235,18 +237,19 @@
             // 
             this.panel_item_type.Controls.Add(this.label_item_type);
             this.panel_item_type.Controls.Add(this.cb_item_type);
-            this.panel_item_type.Location = new System.Drawing.Point(12, 1);
+            this.panel_item_type.Location = new System.Drawing.Point(3, 4);
             this.panel_item_type.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel_item_type.Name = "panel_item_type";
             this.panel_item_type.Size = new System.Drawing.Size(350, 105);
             this.panel_item_type.TabIndex = 15;
+            this.panel_item_type.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_item_type_Paint);
             // 
             // panel_serial_number
             // 
             this.panel_serial_number.Controls.Add(this.label_serial_number);
             this.panel_serial_number.Controls.Add(this.tb_serial_number);
             this.panel_serial_number.Controls.Add(this.btn_clear_serial);
-            this.panel_serial_number.Location = new System.Drawing.Point(12, 101);
+            this.panel_serial_number.Location = new System.Drawing.Point(3, 117);
             this.panel_serial_number.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel_serial_number.Name = "panel_serial_number";
             this.panel_serial_number.Size = new System.Drawing.Size(350, 105);
@@ -270,7 +273,7 @@
             this.panel_brand.Controls.Add(this.label_brand);
             this.panel_brand.Controls.Add(this.cb_brand);
             this.panel_brand.Controls.Add(this.btn_clear_brand);
-            this.panel_brand.Location = new System.Drawing.Point(12, 206);
+            this.panel_brand.Location = new System.Drawing.Point(3, 230);
             this.panel_brand.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel_brand.Name = "panel_brand";
             this.panel_brand.Size = new System.Drawing.Size(350, 105);
@@ -294,7 +297,7 @@
             this.panel_condition.Controls.Add(this.label_condition);
             this.panel_condition.Controls.Add(this.cb_condition);
             this.panel_condition.Controls.Add(this.btn_clear_condition);
-            this.panel_condition.Location = new System.Drawing.Point(12, 312);
+            this.panel_condition.Location = new System.Drawing.Point(3, 343);
             this.panel_condition.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel_condition.Name = "panel_condition";
             this.panel_condition.Size = new System.Drawing.Size(350, 105);
@@ -318,7 +321,7 @@
             this.panel_size.Controls.Add(this.label_size);
             this.panel_size.Controls.Add(this.tb_size);
             this.panel_size.Controls.Add(this.btn_clear_size);
-            this.panel_size.Location = new System.Drawing.Point(12, 418);
+            this.panel_size.Location = new System.Drawing.Point(3, 456);
             this.panel_size.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel_size.Name = "panel_size";
             this.panel_size.Size = new System.Drawing.Size(350, 105);
@@ -342,7 +345,7 @@
             this.panel_color.Controls.Add(this.label_color);
             this.panel_color.Controls.Add(this.cb_color);
             this.panel_color.Controls.Add(this.btn_clear_color);
-            this.panel_color.Location = new System.Drawing.Point(12, 629);
+            this.panel_color.Location = new System.Drawing.Point(3, 682);
             this.panel_color.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel_color.Name = "panel_color";
             this.panel_color.Size = new System.Drawing.Size(350, 105);
@@ -366,7 +369,7 @@
             this.panel_material.Controls.Add(this.label_material);
             this.panel_material.Controls.Add(this.cb_material);
             this.panel_material.Controls.Add(this.btn_clear_material);
-            this.panel_material.Location = new System.Drawing.Point(12, 735);
+            this.panel_material.Location = new System.Drawing.Point(3, 795);
             this.panel_material.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel_material.Name = "panel_material";
             this.panel_material.Size = new System.Drawing.Size(350, 105);
@@ -389,7 +392,7 @@
             // 
             this.btn_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold);
             this.btn_search.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btn_search.Location = new System.Drawing.Point(12, 902);
+            this.btn_search.Location = new System.Drawing.Point(3, 969);
             this.btn_search.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(350, 60);
@@ -402,7 +405,7 @@
             // 
             this.panel_check_box.Controls.Add(this.check_in_stock);
             this.panel_check_box.Controls.Add(this.check_rented);
-            this.panel_check_box.Location = new System.Drawing.Point(12, 841);
+            this.panel_check_box.Location = new System.Drawing.Point(3, 908);
             this.panel_check_box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel_check_box.Name = "panel_check_box";
             this.panel_check_box.Size = new System.Drawing.Size(350, 53);
@@ -437,7 +440,7 @@
             this.panel_size_masks.Controls.Add(this.label_size_masks);
             this.panel_size_masks.Controls.Add(this.cb_size_masks);
             this.panel_size_masks.Controls.Add(this.btn_clear_size_masks);
-            this.panel_size_masks.Location = new System.Drawing.Point(12, 523);
+            this.panel_size_masks.Location = new System.Drawing.Point(3, 569);
             this.panel_size_masks.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel_size_masks.Name = "panel_size_masks";
             this.panel_size_masks.Size = new System.Drawing.Size(350, 105);
@@ -478,21 +481,30 @@
             this.btn_clear_size_masks.UseVisualStyleBackColor = true;
             this.btn_clear_size_masks.Click += new System.EventHandler(this.btn_clear_size_pants_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.panel_item_type);
+            this.flowLayoutPanel1.Controls.Add(this.panel_serial_number);
+            this.flowLayoutPanel1.Controls.Add(this.panel_brand);
+            this.flowLayoutPanel1.Controls.Add(this.panel_condition);
+            this.flowLayoutPanel1.Controls.Add(this.panel_size);
+            this.flowLayoutPanel1.Controls.Add(this.panel_size_masks);
+            this.flowLayoutPanel1.Controls.Add(this.panel_color);
+            this.flowLayoutPanel1.Controls.Add(this.panel_material);
+            this.flowLayoutPanel1.Controls.Add(this.panel_check_box);
+            this.flowLayoutPanel1.Controls.Add(this.btn_search);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(365, 1053);
+            this.flowLayoutPanel1.TabIndex = 25;
+            // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 1053);
-            this.Controls.Add(this.panel_size_masks);
-            this.Controls.Add(this.panel_check_box);
-            this.Controls.Add(this.btn_search);
-            this.Controls.Add(this.panel_material);
-            this.Controls.Add(this.panel_color);
-            this.Controls.Add(this.panel_size);
-            this.Controls.Add(this.panel_condition);
-            this.Controls.Add(this.panel_brand);
-            this.Controls.Add(this.panel_serial_number);
-            this.Controls.Add(this.panel_item_type);
+            this.ClientSize = new System.Drawing.Size(365, 1053);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -517,6 +529,7 @@
             this.panel_check_box.PerformLayout();
             this.panel_size_masks.ResumeLayout(false);
             this.panel_size_masks.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -558,5 +571,6 @@
         private System.Windows.Forms.Label label_size_masks;
         private System.Windows.Forms.ComboBox cb_size_masks;
         private System.Windows.Forms.Button btn_clear_size_masks;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

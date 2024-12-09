@@ -245,7 +245,10 @@ namespace InventoryManagmentSystem.Rental_Forms
             string title = "Update Item";
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return false; }
             string noSpaceSerial = tbSerialNumber.Text.Replace(" ", string.Empty);
+
+            //TODO This needs to find by item Id not serial numbver
             var item = HelperSql.ItemFindBySerialNumber(connection, cbItemType.Text, noSpaceSerial.ToUpper());
+
             bool isUpdated = false;
             if (itemType == "boots") 
             {
@@ -255,7 +258,8 @@ namespace InventoryManagmentSystem.Rental_Forms
                     cbSize.Text,
                     cbMaterial.Text, 
                     cbCondition.Text,
-                    dtManufacture.Value.Date.ToString());
+                    dtManufacture.Value.Date.ToString(),
+                    tbSerialNumber.Text);
             }
             else if (itemType == "helmet") 
             {
@@ -293,6 +297,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                     cbCondition.Text,
                     cbSize.Text);
             }
+
 
             if (isUpdated)
             {
@@ -369,7 +374,6 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (isUpdate)
             {
                 cbItemType.Enabled = false;
-                tbSerialNumber.Enabled = false;
             }
 
             else if (cbItemType.SelectedIndex == -1)
