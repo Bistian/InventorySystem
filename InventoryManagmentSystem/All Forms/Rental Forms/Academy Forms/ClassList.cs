@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static InventoryManagmentSystem.Academy.AcademyForm;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-
 namespace InventoryManagmentSystem.Academy
 {
     public partial class ClassList : Form
@@ -45,7 +44,29 @@ namespace InventoryManagmentSystem.Academy
 
         public void LoadClasses()
         {
-            HelperSql.ClassFindAll(connection, dataGridClasses);
+            //this function does not work
+            //HelperSql.ClassFindAll(connection, dataGridClasses);
+
+            // SQL
+            int i = 0;
+            dataGridClasses.Rows.Clear();
+            string Query = $"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses";
+            if (AcademyId != Guid.Empty)
+            {
+                Query = $"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses WHERE AcademyId LIKE '%{AcademyId}%'";
+            }
+            SqlCommand command = new SqlCommand(Query, connection);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+
+                i++;
+                dataGridClasses.Rows.Add(i, reader[0], reader[1].ToString(), GetAcademyName((Guid)reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString());
+            }
+            reader.Close();
+            connection.Close();
         }
 
         public void initLable()
@@ -89,7 +110,8 @@ namespace InventoryManagmentSystem.Academy
 
         public void ChangeClassStatus(DataGridViewRow row)
         {
-            bool isFinished = (bool)row.Cells["column_finished"].Value;
+            //this function does not work
+            bool isFinished = Convert.ToBoolean(row.Cells["column_finished"].Value);
             Guid uuid = (Guid)row.Cells["column_id"].Value;
             string query = $@"
                 UPDATE tbClasses
@@ -178,7 +200,12 @@ namespace InventoryManagmentSystem.Academy
             // SQL
             int i = 0;
             dataGridClasses.Rows.Clear();
-            SqlCommand command = new SqlCommand($"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses WHERE Name LIKE '%{searchTerm}%' AND  AcademyId ='{AcademyId}'", connection);
+            string Query = $"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses WHERE Name LIKE '%{searchTerm}%'";
+            if (AcademyId != Guid.Empty)
+            {
+                Query = $"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses WHERE Name LIKE '%{searchTerm}%' AND AcademyId LIKE '%{AcademyId}%'";
+            }
+            SqlCommand command = new SqlCommand(Query, connection);
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
 
@@ -186,7 +213,7 @@ namespace InventoryManagmentSystem.Academy
             {
                 
                 i++;
-                dataGridClasses.Rows.Add(i, reader[0], GetAcademyName((Guid)reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString());
+                dataGridClasses.Rows.Add(i, reader[0], reader[1].ToString(), GetAcademyName((Guid)reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString());
             }
             reader.Close();
             connection.Close();
@@ -269,11 +296,43 @@ namespace InventoryManagmentSystem.Academy
 
             if (currentCheckBox.Text == "Active")
             {
-                HelperSql.ClassFindByStatus(connection, dataGridClasses, true);
+                //this function does not work
+                //HelperSql.ClassFindByStatus(connection, dataGridClasses, true);
+
+                string columnName = "column_finished";
+
+                foreach (DataGridViewRow row in dataGridClasses.Rows)
+                {
+
+                    if (Convert.ToBoolean(row.Cells[columnName].Value))
+                    {
+                        row.Visible = true; // show the row
+                    }
+                    else
+                    {
+                        row.Visible = false; // Hide the row
+                    }
+                }
             }
             else if(currentCheckBox.Text == "Inactive")
             {
-                HelperSql.ClassFindByStatus(connection, dataGridClasses, false);
+                //this function does not work
+                //HelperSql.ClassFindByStatus(connection, dataGridClasses, false);
+
+                string columnName = "column_finished";
+
+                foreach (DataGridViewRow row in dataGridClasses.Rows)
+                {
+                    if (Convert.ToBoolean(row.Cells[columnName].Value))
+                    {
+                        row.Visible = false; // show the row
+                    }
+                    else
+                    {
+                        row.Visible = true; // Hide the row
+                    }
+                }
+
             }
             else if (currentCheckBox.Text == "Both")
             {

@@ -54,7 +54,7 @@
             // 
             this.btnCreateClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateClass.ForeColor = System.Drawing.Color.Black;
-            this.btnCreateClass.Location = new System.Drawing.Point(3, 219);
+            this.btnCreateClass.Location = new System.Drawing.Point(3, 210);
             this.btnCreateClass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateClass.Name = "btnCreateClass";
             this.btnCreateClass.Size = new System.Drawing.Size(191, 50);
@@ -67,12 +67,12 @@
             // 
             this.btnClassList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClassList.ForeColor = System.Drawing.Color.Black;
-            this.btnClassList.Location = new System.Drawing.Point(3, 162);
+            this.btnClassList.Location = new System.Drawing.Point(3, 102);
             this.btnClassList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClassList.Name = "btnClassList";
             this.btnClassList.Size = new System.Drawing.Size(191, 50);
             this.btnClassList.TabIndex = 29;
-            this.btnClassList.Text = "Class List";
+            this.btnClassList.Text = "All Classes";
             this.btnClassList.UseVisualStyleBackColor = true;
             this.btnClassList.Click += new System.EventHandler(this.btnClassList_Click);
             // 
@@ -93,7 +93,7 @@
             // 
             this.btnCreateAcademy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateAcademy.ForeColor = System.Drawing.Color.Black;
-            this.btnCreateAcademy.Location = new System.Drawing.Point(3, 105);
+            this.btnCreateAcademy.Location = new System.Drawing.Point(3, 156);
             this.btnCreateAcademy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateAcademy.Name = "btnCreateAcademy";
             this.btnCreateAcademy.Size = new System.Drawing.Size(191, 50);

@@ -71,7 +71,7 @@ namespace InventoryManagmentSystem
                 }
                 else if (colName == "column_delete")
                 {
-                    DeleteItem(itemId);
+                   // DeleteItem(itemId);
                 }
                 else
                 {
