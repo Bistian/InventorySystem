@@ -31,13 +31,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClassList));
             this.panelTop = new System.Windows.Forms.Panel();
-            this.checkBoth = new System.Windows.Forms.CheckBox();
-            this.checkInactive = new System.Windows.Forms.CheckBox();
-            this.checkActive = new System.Windows.Forms.CheckBox();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.labelAcademyName = new System.Windows.Forms.Label();
+            this.checkActive = new System.Windows.Forms.CheckBox();
+            this.checkInactive = new System.Windows.Forms.CheckBox();
+            this.checkBoth = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.labelSearch = new System.Windows.Forms.Label();
             this.searchBar = new System.Windows.Forms.TextBox();
+            this.btnSave = new System.Windows.Forms.Button();
             this.dataGridClasses = new System.Windows.Forms.DataGridView();
             this.column_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,12 +50,10 @@
             this.column_end_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_finished = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.column_update = new System.Windows.Forms.DataGridViewImageColumn();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panelTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridClasses)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridClasses)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTop
@@ -62,74 +62,83 @@
             this.panelTop.Controls.Add(this.panel1);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1741, 44);
+            this.panelTop.Size = new System.Drawing.Size(1306, 36);
             this.panelTop.TabIndex = 26;
             // 
-            // checkBoth
+            // flowLayoutPanel1
             // 
-            this.checkBoth.AutoSize = true;
-            this.checkBoth.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkBoth.Location = new System.Drawing.Point(310, 4);
-            this.checkBoth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.checkBoth.Name = "checkBoth";
-            this.checkBoth.Size = new System.Drawing.Size(56, 20);
-            this.checkBoth.TabIndex = 26;
-            this.checkBoth.Text = "Both";
-            this.checkBoth.UseVisualStyleBackColor = true;
-            this.checkBoth.CheckedChanged += new System.EventHandler(this.CheckBox_Checked_Changed);
-            // 
-            // checkInactive
-            // 
-            this.checkInactive.AutoSize = true;
-            this.checkInactive.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkInactive.Location = new System.Drawing.Point(227, 4);
-            this.checkInactive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.checkInactive.Name = "checkInactive";
-            this.checkInactive.Size = new System.Drawing.Size(75, 20);
-            this.checkInactive.TabIndex = 25;
-            this.checkInactive.Text = "Inactive";
-            this.checkInactive.UseVisualStyleBackColor = true;
-            this.checkInactive.CheckedChanged += new System.EventHandler(this.CheckBox_Checked_Changed);
-            // 
-            // checkActive
-            // 
-            this.checkActive.AutoSize = true;
-            this.checkActive.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkActive.Location = new System.Drawing.Point(153, 4);
-            this.checkActive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.checkActive.Name = "checkActive";
-            this.checkActive.Size = new System.Drawing.Size(66, 20);
-            this.checkActive.TabIndex = 24;
-            this.checkActive.Text = "Active";
-            this.checkActive.UseVisualStyleBackColor = true;
-            this.checkActive.CheckedChanged += new System.EventHandler(this.CheckBox_Checked_Changed);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSave.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnSave.Location = new System.Drawing.Point(428, 8);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(53, 28);
-            this.btnSave.TabIndex = 23;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.flowLayoutPanel1.Controls.Add(this.labelAcademyName);
+            this.flowLayoutPanel1.Controls.Add(this.checkActive);
+            this.flowLayoutPanel1.Controls.Add(this.checkInactive);
+            this.flowLayoutPanel1.Controls.Add(this.checkBoth);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(640, 36);
+            this.flowLayoutPanel1.TabIndex = 27;
             // 
             // labelAcademyName
             // 
             this.labelAcademyName.AutoSize = true;
             this.labelAcademyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelAcademyName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelAcademyName.Location = new System.Drawing.Point(3, 0);
+            this.labelAcademyName.Location = new System.Drawing.Point(2, 0);
+            this.labelAcademyName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAcademyName.Name = "labelAcademyName";
-            this.labelAcademyName.Size = new System.Drawing.Size(143, 31);
+            this.labelAcademyName.Size = new System.Drawing.Size(117, 26);
             this.labelAcademyName.TabIndex = 22;
             this.labelAcademyName.Text = "Class List";
+            // 
+            // checkActive
+            // 
+            this.checkActive.AutoSize = true;
+            this.checkActive.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkActive.Location = new System.Drawing.Point(124, 3);
+            this.checkActive.Name = "checkActive";
+            this.checkActive.Size = new System.Drawing.Size(56, 17);
+            this.checkActive.TabIndex = 24;
+            this.checkActive.Text = "Active";
+            this.checkActive.UseVisualStyleBackColor = true;
+            this.checkActive.CheckedChanged += new System.EventHandler(this.CheckBox_Checked_Changed);
+            // 
+            // checkInactive
+            // 
+            this.checkInactive.AutoSize = true;
+            this.checkInactive.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkInactive.Location = new System.Drawing.Point(186, 3);
+            this.checkInactive.Name = "checkInactive";
+            this.checkInactive.Size = new System.Drawing.Size(64, 17);
+            this.checkInactive.TabIndex = 25;
+            this.checkInactive.Text = "Inactive";
+            this.checkInactive.UseVisualStyleBackColor = true;
+            this.checkInactive.CheckedChanged += new System.EventHandler(this.CheckBox_Checked_Changed);
+            // 
+            // checkBoth
+            // 
+            this.checkBoth.AutoSize = true;
+            this.checkBoth.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkBoth.Location = new System.Drawing.Point(256, 3);
+            this.checkBoth.Name = "checkBoth";
+            this.checkBoth.Size = new System.Drawing.Size(48, 17);
+            this.checkBoth.TabIndex = 26;
+            this.checkBoth.Text = "Both";
+            this.checkBoth.UseVisualStyleBackColor = true;
+            this.checkBoth.CheckedChanged += new System.EventHandler(this.CheckBox_Checked_Changed);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.labelSearch);
+            this.panel1.Controls.Add(this.searchBar);
+            this.panel1.Controls.Add(this.btnSave);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(942, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(364, 36);
+            this.panel1.TabIndex = 28;
             // 
             // labelSearch
             // 
@@ -137,10 +146,10 @@
             this.labelSearch.AutoSize = true;
             this.labelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSearch.Location = new System.Drawing.Point(5, 7);
+            this.labelSearch.Location = new System.Drawing.Point(4, 6);
             this.labelSearch.Margin = new System.Windows.Forms.Padding(0);
             this.labelSearch.Name = "labelSearch";
-            this.labelSearch.Size = new System.Drawing.Size(115, 31);
+            this.labelSearch.Size = new System.Drawing.Size(94, 26);
             this.labelSearch.TabIndex = 21;
             this.labelSearch.Text = "Search:";
             // 
@@ -148,12 +157,24 @@
             // 
             this.searchBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.searchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBar.Location = new System.Drawing.Point(107, 4);
-            this.searchBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.searchBar.Location = new System.Drawing.Point(80, 3);
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(313, 41);
+            this.searchBar.Size = new System.Drawing.Size(236, 35);
             this.searchBar.TabIndex = 20;
             this.searchBar.TextChanged += new System.EventHandler(this.searchBar_TextChanged);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSave.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnSave.Location = new System.Drawing.Point(321, 6);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(40, 23);
+            this.btnSave.TabIndex = 23;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // dataGridClasses
             // 
@@ -184,21 +205,21 @@
             this.dataGridClasses.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridClasses.EnableHeadersVisualStyles = false;
             this.dataGridClasses.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridClasses.Location = new System.Drawing.Point(0, 44);
-            this.dataGridClasses.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridClasses.Location = new System.Drawing.Point(0, 36);
+            this.dataGridClasses.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridClasses.Name = "dataGridClasses";
             this.dataGridClasses.ReadOnly = true;
             this.dataGridClasses.RowHeadersVisible = false;
             this.dataGridClasses.RowHeadersWidth = 51;
             this.dataGridClasses.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.WindowText;
             this.dataGridClasses.RowTemplate.Height = 40;
-            this.dataGridClasses.Size = new System.Drawing.Size(1741, 791);
+            this.dataGridClasses.Size = new System.Drawing.Size(1306, 642);
             this.dataGridClasses.TabIndex = 27;
             this.dataGridClasses.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridClasses_CellClick);
             // 
             // column_number
             // 
-            this.column_number.FillWeight = 25F;
+            this.column_number.FillWeight = 30F;
             this.column_number.HeaderText = "#";
             this.column_number.MinimumWidth = 6;
             this.column_number.Name = "column_number";
@@ -280,47 +301,24 @@
             this.column_update.Name = "column_update";
             this.column_update.ReadOnly = true;
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.labelAcademyName);
-            this.flowLayoutPanel1.Controls.Add(this.checkActive);
-            this.flowLayoutPanel1.Controls.Add(this.checkInactive);
-            this.flowLayoutPanel1.Controls.Add(this.checkBoth);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(854, 44);
-            this.flowLayoutPanel1.TabIndex = 27;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.labelSearch);
-            this.panel1.Controls.Add(this.searchBar);
-            this.panel1.Controls.Add(this.btnSave);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(1256, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(485, 44);
-            this.panel1.TabIndex = 28;
-            // 
             // ClassList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(1741, 835);
+            this.ClientSize = new System.Drawing.Size(1306, 678);
             this.Controls.Add(this.dataGridClasses);
             this.Controls.Add(this.panelTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ClassList";
             this.Text = "ClassList";
             this.panelTop.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridClasses)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridClasses)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -336,6 +334,8 @@
         private System.Windows.Forms.CheckBox checkActive;
         private System.Windows.Forms.CheckBox checkInactive;
         private System.Windows.Forms.CheckBox checkBoth;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_academy_id;
@@ -345,7 +345,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn column_end_date;
         private System.Windows.Forms.DataGridViewCheckBoxColumn column_finished;
         private System.Windows.Forms.DataGridViewImageColumn column_update;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Panel panel1;
     }
 }

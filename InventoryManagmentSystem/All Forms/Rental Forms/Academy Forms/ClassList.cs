@@ -25,7 +25,6 @@ namespace InventoryManagmentSystem.Academy
         SqlCommand command = new SqlCommand();
         //Creatinng Reader
         SqlDataReader dr2;
-        Dictionary<Guid, string> academyMap = new Dictionary<Guid, string>();
         Guid AcademyId;
         AcademyForm parent;
         AcademyForm.Class selectedClass;

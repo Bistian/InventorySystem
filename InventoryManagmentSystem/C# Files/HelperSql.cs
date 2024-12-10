@@ -54,19 +54,19 @@ namespace InventoryManagmentSystem
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
-                int count = 0;
+                int count = 1;
                 while(reader.Read())
                 {
                     grid.Rows.Add(count++,
-                        reader[0],
-                        reader[1],
-                        reader[2],
-                        reader[3],
-                        reader[4],
-                        reader[5],
-                        reader[6],
-                        reader[7],
-                        reader[8]
+                        reader["Id"],
+                        reader["Name"],
+                        reader["ContactName"],
+                        reader["Email"],
+                        reader["Phone"],
+                        reader["Street"],
+                        reader["City"],
+                        reader["State"],
+                        reader["Zip"]
                     );
                 }
             }
@@ -414,9 +414,9 @@ namespace InventoryManagmentSystem
                 while (reader.Read())
                 {
                     grid.Rows.Add(
+                        count++,
                         reader["Id"], 
                         reader["AcademyId"],
-                        count,
                         reader["AcademyName"],
                         reader["Name"],
                         reader["StartDate"],
