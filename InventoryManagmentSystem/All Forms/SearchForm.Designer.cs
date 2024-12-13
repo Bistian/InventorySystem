@@ -135,6 +135,7 @@
             this.cb_condition.Size = new System.Drawing.Size(265, 66);
             this.cb_condition.Sorted = true;
             this.cb_condition.TabIndex = 4;
+            this.cb_condition.SelectedIndexChanged += new System.EventHandler(this.cb_condition_SelectedIndexChanged);
             // 
             // tb_serial_number
             // 
@@ -144,6 +145,7 @@
             this.tb_serial_number.Name = "tb_serial_number";
             this.tb_serial_number.Size = new System.Drawing.Size(265, 64);
             this.tb_serial_number.TabIndex = 6;
+            this.tb_serial_number.TextChanged += new System.EventHandler(this.tb_serial_number_TextChanged);
             // 
             // tb_size
             // 
@@ -153,6 +155,7 @@
             this.tb_size.Name = "tb_size";
             this.tb_size.Size = new System.Drawing.Size(266, 64);
             this.tb_size.TabIndex = 8;
+            this.tb_size.TextChanged += new System.EventHandler(this.tb_size_TextChanged);
             // 
             // label_size
             // 
@@ -187,6 +190,7 @@
             this.cb_color.Size = new System.Drawing.Size(264, 66);
             this.cb_color.Sorted = true;
             this.cb_color.TabIndex = 9;
+            this.cb_color.SelectedIndexChanged += new System.EventHandler(this.cb_color_SelectedIndexChanged);
             // 
             // label_material
             // 
@@ -210,6 +214,7 @@
             this.cb_material.Size = new System.Drawing.Size(265, 66);
             this.cb_material.Sorted = true;
             this.cb_material.TabIndex = 11;
+            this.cb_material.SelectedIndexChanged += new System.EventHandler(this.cb_material_SelectedIndexChanged);
             // 
             // label_brand
             // 
@@ -233,6 +238,7 @@
             this.cb_brand.Size = new System.Drawing.Size(265, 66);
             this.cb_brand.Sorted = true;
             this.cb_brand.TabIndex = 13;
+            this.cb_brand.SelectedIndexChanged += new System.EventHandler(this.cb_brand_SelectedIndexChanged);
             // 
             // panel_item_type
             // 
@@ -424,6 +430,7 @@
             this.check_in_stock.TabIndex = 0;
             this.check_in_stock.Text = "In Stock";
             this.check_in_stock.UseVisualStyleBackColor = true;
+            this.check_in_stock.CheckedChanged += new System.EventHandler(this.check_in_stock_CheckedChanged);
             // 
             // check_rented
             // 
@@ -436,6 +443,7 @@
             this.check_rented.TabIndex = 1;
             this.check_rented.Text = "Rented";
             this.check_rented.UseVisualStyleBackColor = true;
+            this.check_rented.CheckedChanged += new System.EventHandler(this.check_rented_CheckedChanged);
             // 
             // check_retired
             // 
@@ -482,6 +490,7 @@
             this.cb_size_masks.Name = "cb_size_masks";
             this.cb_size_masks.Size = new System.Drawing.Size(264, 66);
             this.cb_size_masks.TabIndex = 18;
+            this.cb_size_masks.SelectedIndexChanged += new System.EventHandler(this.cb_size_masks_SelectedIndexChanged);
             // 
             // btn_clear_size_masks
             // 

@@ -792,6 +792,7 @@ namespace InventoryManagmentSystem.All_Forms
             }
             InventoryForm Parent = this.Parent as InventoryForm;
             Parent.ItemTypeGlobal = type;
+            btn_search_Click(sender, e);
         }
 
         public void btn_search_Click(object sender, EventArgs e)
@@ -873,7 +874,52 @@ namespace InventoryManagmentSystem.All_Forms
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
+            btn_search_Click(sender, e);
+        }
 
+        private void tb_serial_number_TextChanged(object sender, EventArgs e)
+        {
+            btn_search_Click(sender, e);
+        }
+
+        private void cb_brand_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btn_search_Click(sender, e);
+        }
+
+        private void cb_condition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btn_search_Click(sender, e);
+        }
+
+        private void tb_size_TextChanged(object sender, EventArgs e)
+        {
+            btn_search_Click(sender, e);
+        }
+
+        private void cb_size_masks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btn_search_Click(sender, e);
+        }
+
+        private void cb_color_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btn_search_Click(sender, e);
+        }
+
+        private void cb_material_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btn_search_Click(sender, e);
+        }
+
+        private void check_in_stock_CheckedChanged(object sender, EventArgs e)
+        {
+            btn_search_Click(sender, e);
+        }
+
+        private void check_rented_CheckedChanged(object sender, EventArgs e)
+        {
+            btn_search_Click(sender, e);
         }
     }
 }

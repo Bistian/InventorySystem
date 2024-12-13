@@ -109,23 +109,23 @@ namespace InventoryManagmentSystem
 
             if(selection == "boots")
             {
-                HelperSql.BootsFindAllInStock(connection, dataGridInv);
+                HelperSql.BootsFindAllInStock(connection, dataGridInv, textBoxSearchBar.Text);
             }
             else if (selection == "helmet")
             {
-                HelperSql.HelmetFindAllInStock(connection, dataGridInv);
+                HelperSql.HelmetFindAllInStock(connection, dataGridInv, textBoxSearchBar.Text);
             }
             else if (selection == "jacket")
             {
-                HelperSql.JacketFindAllInStock(connection, dataGridInv);
+                HelperSql.JacketFindAllInStock(connection, dataGridInv, textBoxSearchBar.Text);
             }
             else if (selection == "mask")
             {
-                HelperSql.MaskFindAllInStock(connection, dataGridInv);
+                HelperSql.MaskFindAllInStock(connection, dataGridInv, textBoxSearchBar.Text);
             }
             else if (selection == "pants")
             {
-                HelperSql.PantsFindAllInStock(connection, dataGridInv);
+                HelperSql.PantsFindAllInStock(connection, dataGridInv, textBoxSearchBar.Text);
             }
         }
 

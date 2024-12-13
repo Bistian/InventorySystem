@@ -154,7 +154,7 @@ namespace InventoryManagmentSystem
             return items;
         }
 
-        public static void BootsFindAllInStock(SqlConnection connection, DataGridView grid)
+        public static void BootsFindAllInStock(SqlConnection connection, DataGridView grid, string search)
         {
             string query = $@"
                 SELECT 
@@ -163,11 +163,27 @@ namespace InventoryManagmentSystem
                 LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
                 WHERE i.id = b.ItemId
             ";
+            if(search.Length > 0)
+            {
+                 query = $@"
+                SELECT 
+                    i.Id, i.ItemType, b.Brand, i.SerialNumber, b.Size, b.ManufactureDate, i.Condition, i.Location, b.Material 
+                FROM tbBoots AS b
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = b.ItemId AND i.SerialNumber LIKE @SerialNumber
+            ";
+            }
+
+
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                if (search.Length > 0)
+                {
+                    command.Parameters.AddWithValue("@SerialNumber", $"%{search}%");
+                }
                 SqlDataReader reader = command.ExecuteReader();
                 int index = 0;
                 while (reader.Read())
@@ -1042,7 +1058,7 @@ namespace InventoryManagmentSystem
             return items;
         }
 
-        public static void HelmetFindAllInStock(SqlConnection connection, DataGridView grid)
+        public static void HelmetFindAllInStock(SqlConnection connection, DataGridView grid, string search)
         {
             string query = $@"
                 SELECT 
@@ -1051,11 +1067,25 @@ namespace InventoryManagmentSystem
                 LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
                 WHERE i.id = h.ItemId
             ";
+            if(search.Length > 0)
+            {
+                 query = $@"
+                SELECT 
+                    i.Id, i.ItemType, h.Brand, i.SerialNumber, h.ManufactureDate, i.Condition, i.Location, h.Color 
+                FROM tbHelmets AS h
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = h.ItemId AND i.SerialNumber LIKE @SerialNumber
+            ";
+            }
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                if (search.Length > 0)
+                {
+                    command.Parameters.AddWithValue("@SerialNumber", $"%{search}%");
+                }
                 SqlDataReader reader = command.ExecuteReader();
                 int index = 0;
                 while (reader.Read())
@@ -1874,20 +1904,37 @@ namespace InventoryManagmentSystem
             return list;
         }
 
-        public static void JacketFindAllInStock(SqlConnection connection, DataGridView grid)
+        public static void JacketFindAllInStock(SqlConnection connection, DataGridView grid, string search)
         {
             string query = $@"
-                SELECT 
-                    i.Id, i.ItemType, j.Brand, i.SerialNumber, j.Size, j.ManufactureDate, i.Condition, i.Location
-                FROM tbJackets AS j
-                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
-                WHERE i.id = j.ItemId
-            ";
+                    SELECT 
+                        i.Id, i.ItemType, j.Brand, i.SerialNumber, j.Size, j.ManufactureDate, i.Condition, i.Location
+                    FROM tbJackets AS j
+                    LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                    WHERE i.id = j.ItemId
+                ";
+
+            if (search.Length > 0)
+            {
+                 query = $@"
+                    SELECT 
+                        i.Id, i.ItemType, j.Brand, i.SerialNumber, j.Size, j.ManufactureDate, i.Condition, i.Location
+                    FROM tbJackets AS j
+                    LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                    WHERE i.id = j.ItemId AND i.SerialNumber LIKE @SerialNumber
+                ";
+
+            }
+         
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                if (search.Length > 0)
+                {
+                    command.Parameters.AddWithValue("@SerialNumber", $"%{search}%");
+                }
                 SqlDataReader reader = command.ExecuteReader();
                 int index = 0;
                 while (reader.Read())
@@ -2054,7 +2101,7 @@ namespace InventoryManagmentSystem
             return items;
         }
 
-        public static void MaskFindAllInStock(SqlConnection connection, DataGridView grid)
+        public static void MaskFindAllInStock(SqlConnection connection, DataGridView grid, string search)
         {
             string query = $@"
                 SELECT 
@@ -2063,11 +2110,25 @@ namespace InventoryManagmentSystem
                 LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
                 WHERE i.id = m.ItemId
             ";
+            if(search.Length > 0)
+            {
+                 query = $@"
+                SELECT 
+                    i.Id, i.ItemType, m.Brand, i.SerialNumber, m.Size, m.ManufactureDate, i.Condition, i.Location
+                FROM tbMasks AS m
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = m.ItemId AND i.SerialNumber LIKE @SerialNumber
+            ";
+            }
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                if (search.Length > 0)
+                {
+                    command.Parameters.AddWithValue("@SerialNumber", $"%{search}%");
+                }
                 SqlDataReader reader = command.ExecuteReader();
                 int index = 0;
                 while (reader.Read())
@@ -2229,7 +2290,7 @@ namespace InventoryManagmentSystem
             return items;
         }
 
-        public static void PantsFindAllInStock(SqlConnection connection, DataGridView grid)
+        public static void PantsFindAllInStock(SqlConnection connection, DataGridView grid, string search)
         {
             string query = $@"
                 SELECT 
@@ -2238,11 +2299,25 @@ namespace InventoryManagmentSystem
                 LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
                 WHERE i.id = p.ItemId
             ";
+            if(search.Length > 0)
+            {
+                 query = $@"
+                SELECT 
+                    i.Id, i.ItemType, p.Brand, i.SerialNumber, p.Size, p.ManufactureDate, i.Condition, i.Location
+                FROM tbPants AS p
+                LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
+                WHERE i.id = p.ItemId AND i.SerialNumber LIKE @SerialNumber
+            ";
+            }
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
+                if (search.Length > 0)
+                {
+                    command.Parameters.AddWithValue("@SerialNumber", $"%{search}%");
+                }
                 SqlDataReader reader = command.ExecuteReader();
                 int index = 0;
                 while (reader.Read())
