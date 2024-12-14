@@ -125,7 +125,7 @@
             this.dataGridInv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridInv.Size = new System.Drawing.Size(910, 733);
             this.dataGridInv.TabIndex = 1;
-            this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridInv_CellClick);
+            this.dataGridInv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Cell_Click);
             // 
             // dataGridViewImageColumn1
             // 

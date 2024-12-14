@@ -88,6 +88,10 @@ namespace InventoryManagmentSystem
 
         public static string MakeTableFromItemType(string itemType)
         {
+            if(itemType.ToLower() == "pants" || itemType.ToLower() == "boots")
+            {
+                return $"tb{char.ToUpper(itemType[0]) + itemType.Substring(1)}";
+            }
             return $"tb{char.ToUpper(itemType[0]) + itemType.Substring(1)}s";
         }
 

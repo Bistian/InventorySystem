@@ -49,67 +49,6 @@ namespace InventoryManagmentSystem
             ToggleFilter();
         }
 
-        private void dataGridInv_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) { return; }
-
-            var row = dataGridInv.Rows[e.RowIndex];
-            string colName = dataGridInv.Columns[e.ColumnIndex].Name;
-            string ClientId = dataGridInv.Rows[e.RowIndex].Cells["column_location"].Value.ToString();
-            string serialNumber = dataGridInv.Rows[e.RowIndex].Cells["column_serial"].Value.ToString();
-            string itemId = dataGridInv.Rows[e.RowIndex].Cells["column_item_id"].Value.ToString();
-            try
-            {
-               string ItemType = dataGridInv.Rows[e.RowIndex].Cells["column_item_type"].Value.ToString();
-                if (colName == "column_edit")
-                {
-                    if (ItemType == "boots") { UpdateBoots(e); }
-                    else if (ItemType == "helmet") { UpdateHelmet(e); }
-                    else if (ItemType == "jacket" || ItemType == "pants" || ItemType == "mask") { UpdateJacketOrPantsOrMasks(e); }
-                    //Refresh Data Grid
-                    searchForm.btn_search_Click(sender, e);
-                }
-                else if (colName == "column_delete")
-                {
-                   // DeleteItem(itemId);
-                }
-                else
-                {
-                    if(ClientId == "Fire-Tec")
-                    {
-                        var form = new RentalHistoryForm(itemId, string.Empty);
-
-                        if(form.IsDisposed) { MessageBox.Show("No history found"); }
-                        else
-                        {
-                            var parentForm = this.ParentForm as MainForm;
-                            parentForm.openChildForm(form);
-                        }
-                    }
-                    else
-                    {
-                        var parentForm = this.ParentForm as MainForm;
-                        NewRentalModuleForm Profile = new NewRentalModuleForm(null, "");
-                        try
-                        {
-                            Profile.LoadProfile(ClientId, null);
-                            parentForm.openChildForm(Profile);
-
-                            this.Dispose();
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
         private Item UpdateCreateItem(DataGridViewCellEventArgs e)
         {
             string ItemType = dataGridInv.Rows[e.RowIndex].Cells["column_item_type"].Value.ToString();
@@ -292,6 +231,67 @@ namespace InventoryManagmentSystem
                 text = $"Manufacure Date: {row.Cells["column_manufacture_date"].Value}";
                 HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
                 positionY += lineHeight + ExtraLineSpace;
+            }
+        }
+
+        private void Grid_Cell_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) { return; }
+
+            var row = dataGridInv.Rows[e.RowIndex];
+            string colName = dataGridInv.Columns[e.ColumnIndex].Name;
+            string ClientId = dataGridInv.Rows[e.RowIndex].Cells["column_location"].Value.ToString();
+            string serialNumber = dataGridInv.Rows[e.RowIndex].Cells["column_serial"].Value.ToString();
+            string itemId = dataGridInv.Rows[e.RowIndex].Cells["column_item_id"].Value.ToString();
+            try
+            {
+                string ItemType = dataGridInv.Rows[e.RowIndex].Cells["column_item_type"].Value.ToString();
+                if (colName == "column_edit")
+                {
+                    if (ItemType == "boots") { UpdateBoots(e); }
+                    else if (ItemType == "helmet") { UpdateHelmet(e); }
+                    else if (ItemType == "jacket" || ItemType == "pants" || ItemType == "mask") { UpdateJacketOrPantsOrMasks(e); }
+                    //Refresh Data Grid
+                    searchForm.btn_search_Click(sender, e);
+                }
+                else if (colName == "column_delete")
+                {
+                    DeleteItem(itemId);
+                }
+                else
+                {
+                    if (ClientId == "Fire-Tec")
+                    {
+                        var form = new RentalHistoryForm(itemId, string.Empty);
+
+                        if (form.IsDisposed) { MessageBox.Show("No history found"); }
+                        else
+                        {
+                            var parentForm = this.ParentForm as MainForm;
+                            parentForm.openChildForm(form);
+                        }
+                    }
+                    else
+                    {
+                        var parentForm = this.ParentForm as MainForm;
+                        NewRentalModuleForm Profile = new NewRentalModuleForm(null, "");
+                        try
+                        {
+                            Profile.LoadProfile(ClientId, null);
+                            parentForm.openChildForm(Profile);
+
+                            this.Dispose();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"ERROR Existing Customer Module:{ex.Message}");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
