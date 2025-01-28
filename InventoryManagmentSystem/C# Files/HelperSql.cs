@@ -1202,6 +1202,109 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
+        /// <summary> Finds history of an item or rent history of a item.</summary>
+        public static List<Item> HistoryFindFull(SqlConnection connection, string itemId, string clietId)
+        {
+            string query = @"
+                SELECT h.Id, h.ItemId, h.ClientId, h.RentDate, h.ReturnDate, 
+                    i.ItemType, i.DueDate, i.SerialNumber, i.Condition, i.Location, i.BusinessModel,
+                    c.Name, c.Phone, c.Email, c.Academy, c.DriversLicenseNumber
+                FROM tbHistories AS h
+                JOIN tbItems AS i ON h.itemId = i.Id
+                JOIN tbClients AS c ON h.ClientId = c.Id
+            ";
+            string uuid = "";
+            if (itemId != "")
+            {
+                uuid = itemId;
+                query = $"{query} WHERE h.ItemId = @uuid";
+            }
+            else if (clietId != "")
+            {
+                uuid = clietId;
+                query = $"{query} WHERE h.ClientId = @uuid";
+            }
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+
+            var list = new List<Item>();
+            string[] columns = {
+                    "Id", "ItemId", "ClientId", "RentDate", "ReturnDate",
+                    "ItemType", "DueDate", "SerialNumber", "Condition", "Location", "BusinessModel",
+                    "Name", "Phone", "Email", "Academy", "DriversLicenseNumber"
+            };
+            try
+            {
+                var command = new SqlCommand(query, connection);
+                if (uuid != "")
+                {
+                    command.Parameters.AddWithValue("@uuid", uuid);
+                }
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    var item = new Item();
+                    item.AddByReaderAndColumnArray(reader, columns);
+                    list.Add(item);
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return list;
+        }
+
+        public static bool HistoryInsert(SqlConnection connection, string itemId, string clientId)
+        {
+            string query = "INSERT INTO tbHistories(ItemId, ClientId, RentDate) VALUES(@ItemId, @ClientId, GETDATE())";
+            try
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
+                command.Parameters.AddWithValue("@ClientId", clientId.ToString());
+                connection.Open();
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return false;
+        }
+
+        public static bool HistoryUpdate(SqlConnection connection, string ItemId, string ClientId)
+        {
+            string query = @"
+                UPDATE h1
+                SET h1.ReturnDate = GETDATE()
+                FROM tbHistories AS h1
+                JOIN (
+                    SELECT
+                        ItemId,
+                        ClientId,
+                        MAX(RentDate) AS LastRented
+                    FROM
+                        tbHistories
+                    WHERE
+                        ItemId = @ItemId AND ClientId = @ClientId
+                    GROUP BY
+                        ItemId, ClientId
+                ) AS h2 ON h1.ItemId = h2.ItemId AND h1.ClientId = h2.ClientId AND h1.RentDate = h2.LastRented
+                    WHERE h1.ReturnDate IS NULL;
+            ";
+            HelperFunctions.RemoveLineBreaksFromString(ref query);
+            try
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemId", ItemId.ToString());
+                command.Parameters.AddWithValue("@ClientId", ClientId.ToString());
+                connection.Open();
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return false;
+        }
+
         /// <summary>
         /// Deletes an item from item table.
         /// </summary>
@@ -1742,109 +1845,6 @@ namespace InventoryManagmentSystem
                 command.Parameters.AddWithValue("@Location", location);
                 if (dueDate != null) { command.Parameters.AddWithValue("@DueDate", dueDate); }
                 command.Parameters.AddWithValue("@ItemId", itemId.ToString());
-                connection.Open();
-                command.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close(); }
-            return false;
-        }
-
-        /// <summary> Finds history of an item or rent history of a item.</summary>
-        public static List<Item> HistoryFindFull(SqlConnection connection, string itemId, string clietId)
-        {
-            string query = @"
-                SELECT h.Id, h.ItemId, h.ClientId, h.RentDate, h.ReturnDate, 
-                    i.ItemType, i.DueDate, i.SerialNumber, i.Condition, i.Location, i.BusinessModel,
-                    c.Name, c.Phone, c.Email, c.Academy, c.DriversLicenseNumber
-                FROM tbHistories AS h
-                JOIN tbItems AS i ON h.itemId = i.Id
-                JOIN tbClients AS c ON h.ClientId = c.Id
-            ";
-            string uuid = "";
-            if (itemId != "")
-            {
-                uuid = itemId;
-                query = $"{query} WHERE h.ItemId = @uuid";
-            }
-            else if (clietId != "")
-            {
-                uuid = clietId;
-                query = $"{query} WHERE h.ClientId = @uuid";
-            }
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-
-            var list = new List<Item>();
-            string[] columns = {
-                    "Id", "ItemId", "ClientId", "RentDate", "ReturnDate",
-                    "ItemType", "DueDate", "SerialNumber", "Condition", "Location", "BusinessModel",
-                    "Name", "Phone", "Email", "Academy", "DriversLicenseNumber"
-            };
-            try
-            {
-                var command = new SqlCommand(query, connection);
-                if (uuid != "")
-                {
-                    command.Parameters.AddWithValue("@uuid", uuid);
-                }
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    var item = new Item();
-                    item.AddByReaderAndColumnArray(reader, columns);
-                    list.Add(item);
-                }
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close(); }
-            return list;
-        }
-
-        public static bool HistoryInsert(SqlConnection connection, string itemId, string clientId)
-        {
-            string query = "INSERT INTO tbHistories(ItemId, ClientId, RentDate) VALUES(@ItemId, @ClientId, GETDATE())";
-            try
-            {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", itemId.ToString());
-                command.Parameters.AddWithValue("@ClientId", clientId.ToString());
-                connection.Open();
-                command.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close(); }
-            return false;
-        }
-
-        public static bool HistoryUpdate(SqlConnection connection, string ItemId, string ClientId)
-        {
-            string query = @"
-                UPDATE h1
-                SET h1.ReturnDate = GETDATE()
-                FROM tbHistories AS h1
-                JOIN (
-                    SELECT
-                        ItemId,
-                        ClientId,
-                        MAX(RentDate) AS LastRented
-                    FROM
-                        tbHistories
-                    WHERE
-                        ItemId = @ItemId AND ClientId = @ClientId
-                    GROUP BY
-                        ItemId, ClientId
-                ) AS h2 ON h1.ItemId = h2.ItemId AND h1.ClientId = h2.ClientId AND h1.RentDate = h2.LastRented
-                    WHERE h1.ReturnDate IS NULL;
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            try
-            {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ItemId", ItemId.ToString());
-                command.Parameters.AddWithValue("@ClientId", ClientId.ToString());
                 connection.Open();
                 command.ExecuteNonQuery();
                 return true;

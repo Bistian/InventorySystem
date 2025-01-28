@@ -58,7 +58,7 @@ namespace InventoryManagmentSystem
             return true;
         }
 
-        private void UpdateItem(string clientName, string clientId)
+        private void UpdateItem(string clientName)
         {
             NewRentalModuleForm form = new NewRentalModuleForm(null, clientName);
             var parentForm = this.ParentForm as MainForm;
@@ -120,11 +120,10 @@ namespace InventoryManagmentSystem
             string column = dataGridUsers.Columns[e.ColumnIndex].Name;
 
             string clientName = row.Cells["column_name"].Value.ToString();
-            string clientId = row.Cells["column_id"].Value.ToString();
             string clientLicense = row.Cells["column_drivers_license"].Value.ToString();
             if (column == "column_update")
             {
-                UpdateItem(clientName, clientId);
+                UpdateItem(clientName);
                 return;
             }
             if (DeleteItem(e)) { return; }
