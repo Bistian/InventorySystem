@@ -710,6 +710,27 @@ namespace InventoryManagmentSystem
             return item;
         }
 
+        public static List<string> ClientFindRented(SqlConnection connection, string clientId)
+        {
+            List<string> items = new List<string>();
+
+            string query = "SELECT Id FROM tbItems WHERE Location = @Location";
+            try
+            {
+                var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Location", clientId.ToString());
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    items.Add(reader["Id"].ToString());
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { connection.Close(); }
+            return items;
+        }
+
         public static bool ClientInsert(SqlConnection connection, Dictionary<string, string> client)
         {
             //var exists = ClientFindByDriversLicense(connection, client["DriversLicenseNumber"]);

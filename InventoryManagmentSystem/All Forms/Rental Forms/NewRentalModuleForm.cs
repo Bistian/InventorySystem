@@ -282,8 +282,9 @@ namespace InventoryManagmentSystem
                     MessageBox.Show("Failed to update item.");
                     return;
                 }
-                isUpdated = HelperSql.HistoryInsert(connection, itemId, ClientId);
+                HelperSql.HistoryInsert(connection, itemId, ClientId);
                 MessageBox.Show("assignment has been successfully completed");
+                HelperSql.ClientUpdateActivity(connection, ClientId, true);
                 LoadClient();
                 LoadInventory();
                 RefreshClientActivity();
@@ -324,6 +325,11 @@ namespace InventoryManagmentSystem
                 bool isUpdated = HelperSql.ItemUpdate(connection, itemId, "Fire-Tec");
                 if (isUpdated)
                 {
+                    var items = HelperSql.ClientFindRented(connection, ClientId);
+                    if(items.Count < 1)
+                    {
+                        HelperSql.ClientUpdateActivity(connection, ClientId, false);
+                    }
                     HelperSql.HistoryUpdate(connection, itemId, ClientId);
                     MessageBox.Show("Item Returned");
                 }
