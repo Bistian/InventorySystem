@@ -710,6 +710,24 @@ namespace InventoryManagmentSystem
             return item;
         }
 
+        public static void ClientFixActive(SqlConnection connection)
+        {
+            var clients = ClientFindAll(connection);
+            for(int i = 0; i < clients.Count; ++i)
+            {
+                string id = clients[i].GetColumnValue("Id");
+                var items = ClientFindRented(connection, id);
+                if(items.Count > 0)
+                {
+                    ClientUpdateActivity(connection, id, true);
+                }
+                else
+                {
+                    ClientUpdateActivity(connection, id, false);
+                }
+            }
+        }
+
         public static List<string> ClientFindRented(SqlConnection connection, string clientId)
         {
             List<string> items = new List<string>();

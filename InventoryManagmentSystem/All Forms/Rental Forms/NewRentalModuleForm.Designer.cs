@@ -599,7 +599,7 @@
             this.textBoxNotes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxNotes.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.textBoxNotes.Location = new System.Drawing.Point(2, 28);
-            this.textBoxNotes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxNotes.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNotes.Multiline = true;
             this.textBoxNotes.Name = "textBoxNotes";
             this.textBoxNotes.ReadOnly = true;
@@ -637,7 +637,7 @@
             this.buttonSaveNotes.BackColor = System.Drawing.Color.Lime;
             this.buttonSaveNotes.Enabled = false;
             this.buttonSaveNotes.Location = new System.Drawing.Point(154, 452);
-            this.buttonSaveNotes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonSaveNotes.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSaveNotes.Name = "buttonSaveNotes";
             this.buttonSaveNotes.Size = new System.Drawing.Size(80, 28);
             this.buttonSaveNotes.TabIndex = 123;
@@ -670,7 +670,7 @@
             this.SwapButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SwapButton.Image = ((System.Drawing.Image)(resources.GetObject("SwapButton.Image")));
             this.SwapButton.Location = new System.Drawing.Point(220, 11);
-            this.SwapButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SwapButton.Margin = new System.Windows.Forms.Padding(2);
             this.SwapButton.Name = "SwapButton";
             this.SwapButton.Size = new System.Drawing.Size(82, 41);
             this.SwapButton.TabIndex = 46;
@@ -758,7 +758,7 @@
             this.DatepickerDue.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.DatepickerDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatepickerDue.Location = new System.Drawing.Point(2, 39);
-            this.DatepickerDue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DatepickerDue.Margin = new System.Windows.Forms.Padding(2);
             this.DatepickerDue.Name = "DatepickerDue";
             this.DatepickerDue.Size = new System.Drawing.Size(392, 41);
             this.DatepickerDue.TabIndex = 40;
@@ -780,7 +780,7 @@
             this.splitContainerInventories.BackColor = System.Drawing.Color.Maroon;
             this.splitContainerInventories.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerInventories.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerInventories.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainerInventories.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainerInventories.Name = "splitContainerInventories";
             this.splitContainerInventories.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -805,7 +805,7 @@
             this.panelCustomerInv.Controls.Add(this.labelProfileName);
             this.panelCustomerInv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCustomerInv.Location = new System.Drawing.Point(0, 0);
-            this.panelCustomerInv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelCustomerInv.Margin = new System.Windows.Forms.Padding(2);
             this.panelCustomerInv.Name = "panelCustomerInv";
             this.panelCustomerInv.Size = new System.Drawing.Size(1015, 317);
             this.panelCustomerInv.TabIndex = 119;
@@ -949,7 +949,7 @@
             this.panelFireTecInv.Controls.Add(this.labelFireTecInv);
             this.panelFireTecInv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFireTecInv.Location = new System.Drawing.Point(0, 0);
-            this.panelFireTecInv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelFireTecInv.Margin = new System.Windows.Forms.Padding(2);
             this.panelFireTecInv.Name = "panelFireTecInv";
             this.panelFireTecInv.Size = new System.Drawing.Size(1015, 354);
             this.panelFireTecInv.TabIndex = 119;
@@ -963,7 +963,7 @@
             this.flowLayoutPanel1.Controls.Add(this.labelNewItem);
             this.flowLayoutPanel1.Controls.Add(this.UsersButton);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(106, -2);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(399, 23);
             this.flowLayoutPanel1.TabIndex = 120;
@@ -1081,7 +1081,7 @@
             this.dataGridInv.EnableHeadersVisualStyles = false;
             this.dataGridInv.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridInv.Location = new System.Drawing.Point(0, 31);
-            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridInv.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridInv.Name = "dataGridInv";
             this.dataGridInv.ReadOnly = true;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -1219,7 +1219,7 @@
             this.panel2.Controls.Add(this.flowLayoutPanelProfile);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(278, 677);
             this.panel2.TabIndex = 112;
@@ -1241,7 +1241,7 @@
             // 
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.Location = new System.Drawing.Point(95, 8);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(82, 50);
             this.btnEdit.TabIndex = 2;
@@ -1253,7 +1253,7 @@
             // 
             this.btnClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClass.Location = new System.Drawing.Point(181, 8);
-            this.btnClass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClass.Margin = new System.Windows.Forms.Padding(2);
             this.btnClass.Name = "btnClass";
             this.btnClass.Size = new System.Drawing.Size(82, 50);
             this.btnClass.TabIndex = 1;
@@ -1265,7 +1265,7 @@
             // 
             this.btnProfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProfile.Location = new System.Drawing.Point(10, 8);
-            this.btnProfile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnProfile.Margin = new System.Windows.Forms.Padding(2);
             this.btnProfile.Name = "btnProfile";
             this.btnProfile.Size = new System.Drawing.Size(82, 50);
             this.btnProfile.TabIndex = 0;
@@ -1281,7 +1281,7 @@
             this.panel3.Controls.Add(this.splitContainerInventories);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(278, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1015, 677);
             this.panel3.TabIndex = 120;
@@ -1309,7 +1309,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NewRentalModuleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewRentalModule";
