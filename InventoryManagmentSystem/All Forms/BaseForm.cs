@@ -1,38 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InventoryManagmentSystem.All_Forms
 {
     public partial class BaseForm : Form
     {
-        protected int FontSize { get; } = 11;
-        protected Color FormBackgroudColor { get; } = System.Drawing.Color.Maroon;
+        private int defaul_font = 12;
+        protected int font_size_1; 
+        protected int font_size_2;
+        protected int font_size_3;
 
-        protected BaseForm() 
+        public BaseForm()
         {
-            this.Load += (sender, e) =>
+            InitializeComponent();
+            AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
+            if (!IsInDesignMode())
             {
-                this.Font = new Font(this.Font.FontFamily, FontSize);
-                this.BackColor = FormBackgroudColor;
-            };
+                Program.SettingsManager.SettingsChanged += OnSettingsChanged;
+                ApplySettings();
+            }
         }
 
-        private void InitializeComponent()
+        protected void ApplySettings()
         {
-            this.SuspendLayout();
-            // 
-            // BaseForm
-            // 
-            this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Name = "BaseForm";
-            this.ResumeLayout(false);
+            // Ensure settings are non-null before applying
+            int newFontSize = Program.SettingsManager.GetSetting("SettingsUser.Font.Size", defaul_font);
+            AutoScroll = true;
+            float scaleFactor = newFontSize / defaul_font;
 
+            font_size_3 = newFontSize;
+            font_size_2 = (int)(newFontSize * 1.5);
+            font_size_1 = (int)(newFontSize * 2);
+
+            Font = new Font("Arial", newFontSize);
+            SuspendLayout();
+            Size = new Size((int)(Width * scaleFactor), (int)(Height * scaleFactor));
+            ResumeLayout(true);
+
+        }
+
+        private bool IsInDesignMode()
+        {
+            return LicenseManager.UsageMode == LicenseUsageMode.Designtime || System.Diagnostics.Process.GetCurrentProcess().ProcessName == "devenv";
+        }
+
+        private void OnSettingsChanged(object sender, EventArgs e)
+        {
+            ApplySettings();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            base.OnFormClosed(e);
+            if (!IsInDesignMode())
+            {
+                Program.SettingsManager.SettingsChanged -= OnSettingsChanged; // Avoid memory leaks
+            }
         }
     }
 }
