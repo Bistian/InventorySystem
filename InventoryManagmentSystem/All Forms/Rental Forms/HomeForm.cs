@@ -5,10 +5,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 using System.Drawing;
+using InventoryManagmentSystem.All_Forms;
 
 namespace InventoryManagmentSystem
 {
-    public partial class HomeForm : Form
+    public partial class HomeForm : BaseForm
     {
         public int dueDays;
 
@@ -18,17 +19,50 @@ namespace InventoryManagmentSystem
             PrintRented();
             PrintStock();
             dueDays = SettingsData.Instance.dueDaysFromToday;
-            labelDueDate.Text = $"Due Within {dueDays} Days";
+            label_due_date.Text = $"Due Within {dueDays} Days";
 
             InitTables();
             SetButtonDates();
             InitPastDueCount();
+
+            Scaling();
+            
+
+        }
+
+        private void Scaling()
+        {
+            SetFontButton(btn_past_due, font_size_1, FontStyle.Bold);
+            SetFontButton(btn_rented, font_size_1, FontStyle.Bold);
+            SetFontButton(btn_stock, font_size_1, FontStyle.Bold);
+            SetFontButton(btn_jackets, font_size_2, FontStyle.Regular);
+            SetFontButton(btn_pants, font_size_2, FontStyle.Regular);
+            SetFontButton(btn_helmets, font_size_2, FontStyle.Regular);
+            SetFontButton(btn_stock_jackets, font_size_2, FontStyle.Regular);
+            SetFontButton(btn_stock_pants, font_size_2, FontStyle.Regular);
+            SetFontButton(btn_stock_helmets, font_size_2, FontStyle.Regular);
+            SetFontButton(btn_stock_boots, font_size_2, FontStyle.Regular);
+            SetFontButton(btn_new_customer, font_size_2, FontStyle.Regular);
+            SetFontButton(btn_existing_customer, font_size_2, FontStyle.Regular);
+
+            SetFontLabel(label_due_date, font_size_2, FontStyle.Regular);
+            SetFontLabel(label_past_due, font_size_3, FontStyle.Regular);
+            SetFontLabel(label_date_rented, font_size_3, FontStyle.Regular);
+        }
+
+        private void SetFontButton(System.Windows.Forms.Button target, int size, FontStyle style)
+        {
+            target.Font = new System.Drawing.Font("Arial", size, style);
+        }
+
+        private void SetFontLabel(System.Windows.Forms.Label target, int size, FontStyle style)
+        {
+            target.Font = new System.Drawing.Font("Arial", size, style);
         }
 
         // Get the current connection string
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         //Creating command
-        SqlConnection connection = new SqlConnection(connectionString);
+        SqlConnection connection = new SqlConnection(Program.ConnectionString);
 
         private Form activeForm = null;
 
@@ -83,11 +117,11 @@ namespace InventoryManagmentSystem
         private void SetButtonDates()
         {
             LastRentedDate();
-            dateRented.BackColor = btnRented.BackColor;
-            dateRented.ForeColor = btnRented.ForeColor;
-            int X = (int)(btnRented.Width * 0.02);
-            int Y = (int)(btnRented.Height * 0.8);
-            dateRented.Location = new System.Drawing.Point(X, Y);
+            label_date_rented.BackColor = btn_rented.BackColor;
+            label_date_rented.ForeColor = btn_rented.ForeColor;
+            int X = (int)(btn_rented.Width * 0.02);
+            int Y = (int)(btn_rented.Height * 0.8);
+            label_date_rented.Location = new System.Drawing.Point(X, Y);
         }
 
         private void LastRentedDate()
@@ -109,7 +143,7 @@ namespace InventoryManagmentSystem
                 {
                     date = reader[0].ToString();
                 }
-                dateRented.Text = HelperFunctions.DateCrop(date);
+                label_date_rented.Text = HelperFunctions.DateCrop(date);
             }
             catch (Exception ex) { Console.WriteLine(ex); }
             finally { connection.Close(); }
@@ -117,10 +151,10 @@ namespace InventoryManagmentSystem
 
         private void InitTables()
         {
-            LoadTables(dataGridViewBeforeDue, QueryForRented(), "column_due");
-            LoadTables(dataGridViewPastDue, QueryForPastDue(), "column_due2");
-            HelperFunctions.DataGridHideTime(dataGridViewBeforeDue, "column_due");
-            HelperFunctions.DataGridHideTime(dataGridViewPastDue, "column_due2");
+            LoadTables(grid_before_due, QueryForRented(), "column_due");
+            LoadTables(grid_past_due, QueryForPastDue(), "column_due2");
+            HelperFunctions.DataGridHideTime(grid_before_due, "column_due");
+            HelperFunctions.DataGridHideTime(grid_past_due, "column_due2");
         }
 
         private string LoadTables(DataGridView grid, string query, string columnName)
@@ -163,39 +197,39 @@ namespace InventoryManagmentSystem
         private void PrintRented()
         {
             uint rented = HelperSql.ItemRentCount(connection, "jacket");
-            btnCoats.Text = $"{rented} Coats";
+            btn_jackets.Text = $"{rented} Coats";
             rented = HelperSql.ItemRentCount(connection, "pants");
-            btnPants.Text = $"{rented} Pants";
+            btn_pants.Text = $"{rented} Pants";
             rented = HelperSql.ItemRentCount(connection, "helmet");
-            btnHelmets.Text = $"{rented} Helmets";
+            btn_helmets.Text = $"{rented} Helmets";
         }
 
         public void InitPastDueCount()
         {
-            if (dataGridViewPastDue.Rows.Count > 1)
+            if (grid_past_due.Rows.Count > 1)
             {
-                BtnPastDue.Text = dataGridViewPastDue.RowCount + " Clients Past Due!";
+                btn_past_due.Text = grid_past_due.RowCount + " Clients Past Due!";
             }
-            else if (dataGridViewPastDue.Rows.Count == 1)
+            else if (grid_past_due.Rows.Count == 1)
             {
-                BtnPastDue.Text = dataGridViewPastDue.RowCount + " Client Past Due!";
+                btn_past_due.Text = grid_past_due.RowCount + " Client Past Due!";
             }
-            else if(dataGridViewPastDue.Rows.Count == 0)
+            else if(grid_past_due.Rows.Count == 0)
             {
-                BtnPastDue.Text =  "No Clients Past Due!";
+                btn_past_due.Text =  "No Clients Past Due!";
             }
         }
 
         private void PrintStock()
         {
             var stock = HelperSql.ItemStockCount(connection, "boots");
-            ButtonInStockBoots.Text = $"{stock} Boots";
+            btn_stock_boots.Text = $"{stock} Boots";
             stock = HelperSql.ItemStockCount(connection, "helmet");
-            ButtonInStockHelmets.Text = $"{stock} Helmets";
+            btn_stock_helmets.Text = $"{stock} Helmets";
             stock = HelperSql.ItemStockCount(connection, "jacket");
-            ButtonInStockJackets.Text = $"{stock} Coats";
+            btn_stock_jackets.Text = $"{stock} Coats";
             stock = HelperSql.ItemStockCount(connection, "pants");
-            ButtonInStockPants.Text = $"{stock} Pants";
+            btn_stock_pants.Text = $"{stock} Pants";
         }
 
         private void OpenDockedForm(string formType, string ItemType)
@@ -241,8 +275,8 @@ namespace InventoryManagmentSystem
         private void dataGridViewBeforeDue_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) { return; }
-            DataGridViewRow row = dataGridViewBeforeDue.Rows[e.RowIndex];
-            string column = dataGridViewBeforeDue.Columns[e.ColumnIndex].Name;
+            DataGridViewRow row = grid_before_due.Rows[e.RowIndex];
+            string column = grid_before_due.Columns[e.ColumnIndex].Name;
 
             string clientName = row.Cells["column_rentee"].Value.ToString();
             string clientId = row.Cells["column_id"].Value.ToString();
@@ -266,7 +300,7 @@ namespace InventoryManagmentSystem
         private void dataGridViewPastDue_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) { return; }
-            DataGridViewRow row = dataGridViewPastDue.Rows[e.RowIndex];
+            DataGridViewRow row = grid_past_due.Rows[e.RowIndex];
 
             string clientName = row.Cells["column_rentee2"].Value.ToString();
             string clientId = row.Cells["column_id2"].Value.ToString();

@@ -763,7 +763,7 @@
             this.DatepickerDue.Size = new System.Drawing.Size(392, 41);
             this.DatepickerDue.TabIndex = 40;
             // 
-            // labelDueDate
+            // label_due_date
             // 
             this.labelDueDate.AutoSize = true;
             this.labelDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
