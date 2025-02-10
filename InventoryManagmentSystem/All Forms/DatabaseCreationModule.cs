@@ -1,29 +1,16 @@
-﻿using Microsoft.Office.Interop.Excel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.AxHost;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Configuration;
-using System.Collections;
+using InventoryManagmentSystem.All_Forms;
 
 namespace InventoryManagmentSystem
 {
-    public partial class DatabaseCreationModule : Form
+    public partial class DatabaseCreationModule : BaseForm
     {
         private bool isInit;
-        private string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True";
+        private string connectionString;
 
         public DatabaseCreationModule(bool isInit = true)
         {
@@ -33,6 +20,7 @@ namespace InventoryManagmentSystem
             btnDeleteDatabase.Visible = true;
 #endif
 
+            connectionString = Program.ConnectionString;
             this.isInit = isInit;
             labelName.Visible = false;
 
