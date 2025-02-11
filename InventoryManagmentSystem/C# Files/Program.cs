@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using InventoryManagmentSystem.All_Forms;
+using InventoryManagmentSystem.C__Files;
+using System;
 using System.Data.SqlClient;
-using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -11,26 +11,35 @@ namespace InventoryManagmentSystem
 {
     internal static class Program
     {
+        // Global settings
+        public static SettingsManager SettingsManager { get; private set; }
+        public static string ConnectionString { get; private set; }
+
+        [DllImport("user32.dll")]
+        private static extern bool SetProcessDPIAware();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            #if DEBUG
-            Application.ThreadException += Application_ThreadException;
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            #endif
+            Debug();
 
-            // Get the current connection string
-            string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            // Initialize the settings manager
+            SettingsManager = new SettingsManager();
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            // Initialize settings manager and ensure settings are loaded
+            SettingsManager = new SettingsManager();
+
+            // Get the current connection string
+            ConnectionString = DatabaseConfig.GetConnectionString();
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                // checking if database exists
                 try
                 {
                     connection.Open();
@@ -39,15 +48,18 @@ namespace InventoryManagmentSystem
                 }
                 catch (Exception ex)
                 {
-                    try
-                    {
-                        Console.WriteLine(ex.Message);
-                        Application.Run(new DatabaseCreationModule());
-                    }
-                    catch (Exception e) { Console.WriteLine(e.Message); }
+                    Console.WriteLine(ex.Message);
+                    throw new Exception("Could not connect to database");
                 }    
-                
             }
+        }
+
+        static void Debug()
+        {
+            #if DEBUG
+            Application.ThreadException += Application_ThreadException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            #endif
         }
 
         static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)

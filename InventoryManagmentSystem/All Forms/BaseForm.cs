@@ -15,8 +15,11 @@ namespace InventoryManagmentSystem.All_Forms
         public BaseForm()
         {
             InitializeComponent();
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             AutoScroll = true;
+            FormBorderStyle = FormBorderStyle.Sizable;
+            MinimumSize = new Size(800, 600);
             if (!IsInDesignMode())
             {
                 Program.SettingsManager.SettingsChanged += OnSettingsChanged;
@@ -45,6 +48,31 @@ namespace InventoryManagmentSystem.All_Forms
         private bool IsInDesignMode()
         {
             return LicenseManager.UsageMode == LicenseUsageMode.Designtime || System.Diagnostics.Process.GetCurrentProcess().ProcessName == "devenv";
+        }
+
+        protected void SetFontButton(Button target, int size, FontStyle style)
+        {
+            target.Font = new Font("Arial", size, style);
+        }
+
+        protected void SetFontLabel(Label target, int size, FontStyle style)
+        {
+            target.Font = new Font("Arial", size, style);
+        }
+
+        protected void SetFontGrid(DataGridView target)
+        {
+            // Update the column headers if needed.
+            target.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", font_size_2, FontStyle.Regular);
+
+            foreach (DataGridViewRow row in target.Rows)
+            {
+                if (row.IsNewRow) continue; // Skip the new row placeholder, if present
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    cell.Style.Font = new Font("Arial", font_size_3, FontStyle.Regular);
+                }
+            }
         }
 
         private void OnSettingsChanged(object sender, EventArgs e)

@@ -8,8 +8,7 @@ namespace InventoryManagmentSystem
 {
     public partial class ExistingCustomerModuleForm : Form
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
+        SqlConnection connection = new SqlConnection(Program.ConnectionString);
         List<Item> clients = new List<Item>();
 
         public bool isReturn = false;

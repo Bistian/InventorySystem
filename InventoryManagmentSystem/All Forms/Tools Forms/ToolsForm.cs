@@ -1,25 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
-using System.Windows.Forms.VisualStyles;
-using Microsoft.VisualBasic;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace InventoryManagmentSystem
 {
     public partial class ToolsForm : Form
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+        static readonly string connectionString = Program.ConnectionString;
         SqlConnection connection = new SqlConnection(connectionString);
         #region SQL_Variables
 
@@ -104,7 +93,6 @@ namespace InventoryManagmentSystem
             btnAddItem.Enabled = true;
             btnAddItem.Visible = true;
 
-            string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             SqlConnection connection = new SqlConnection(connectionString);
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
 #endif

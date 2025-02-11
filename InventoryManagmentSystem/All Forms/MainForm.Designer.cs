@@ -34,6 +34,16 @@
             this.MyLogo = new System.Windows.Forms.PictureBox();
             this.BottomPanel = new System.Windows.Forms.Panel();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.flowLayoutNavBar = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelHome = new System.Windows.Forms.Panel();
+            this.labelDashboard = new System.Windows.Forms.Label();
+            this.panelRentals = new System.Windows.Forms.Panel();
+            this.RentalLable = new System.Windows.Forms.Label();
+            this.panelUsers = new System.Windows.Forms.Panel();
+            this.panelTools = new System.Windows.Forms.Panel();
+            this.panelSettings = new System.Windows.Forms.Panel();
+            this.labelSettings = new System.Windows.Forms.Label();
+            this.gradientFlowLayoutPanel1 = new InventoryManagmentSystem.GradientFlowLayoutPanel();
             this.RentalsNavBar = new InventoryManagmentSystem.GradientFlowLayoutPanel();
             this.PanelRentalHome = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,23 +57,19 @@
             this.panelRentalAcademies = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.customButton1 = new InventoryManagmentSystem.CustomButton();
-            this.flowLayoutNavBar = new System.Windows.Forms.FlowLayoutPanel();
-            this.panelHome = new System.Windows.Forms.Panel();
-            this.labelDashboard = new System.Windows.Forms.Label();
             this.HomeButton = new InventoryManagmentSystem.CustomButton();
-            this.panelRentals = new System.Windows.Forms.Panel();
             this.RentalButton = new InventoryManagmentSystem.CustomButton();
-            this.RentalLable = new System.Windows.Forms.Label();
-            this.panelUsers = new System.Windows.Forms.Panel();
             this.UsersButton = new InventoryManagmentSystem.CustomButton();
-            this.panelTools = new System.Windows.Forms.Panel();
             this.btnTools = new InventoryManagmentSystem.CustomButton();
-            this.panelSettings = new System.Windows.Forms.Panel();
-            this.labelSettings = new System.Windows.Forms.Label();
             this.btnSettings = new InventoryManagmentSystem.CustomButton();
-            this.gradientFlowLayoutPanel1 = new InventoryManagmentSystem.GradientFlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.MyLogo)).BeginInit();
             this.MainPanel.SuspendLayout();
+            this.flowLayoutNavBar.SuspendLayout();
+            this.panelHome.SuspendLayout();
+            this.panelRentals.SuspendLayout();
+            this.panelUsers.SuspendLayout();
+            this.panelTools.SuspendLayout();
+            this.panelSettings.SuspendLayout();
             this.RentalsNavBar.SuspendLayout();
             this.PanelRentalHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ButtonRentalHome)).BeginInit();
@@ -73,16 +79,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ButtonRentalInv)).BeginInit();
             this.panelRentalAcademies.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customButton1)).BeginInit();
-            this.flowLayoutNavBar.SuspendLayout();
-            this.panelHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HomeButton)).BeginInit();
-            this.panelRentals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RentalButton)).BeginInit();
-            this.panelUsers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).BeginInit();
-            this.panelTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnTools)).BeginInit();
-            this.panelSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).BeginInit();
             this.SuspendLayout();
             // 
@@ -144,6 +144,122 @@
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(1034, 632);
             this.MainPanel.TabIndex = 0;
+            // 
+            // flowLayoutNavBar
+            // 
+            this.flowLayoutNavBar.BackColor = System.Drawing.Color.Maroon;
+            this.flowLayoutNavBar.Controls.Add(this.MyLogo);
+            this.flowLayoutNavBar.Controls.Add(this.panelHome);
+            this.flowLayoutNavBar.Controls.Add(this.panelRentals);
+            this.flowLayoutNavBar.Controls.Add(this.panelUsers);
+            this.flowLayoutNavBar.Controls.Add(this.panelTools);
+            this.flowLayoutNavBar.Controls.Add(this.panelSettings);
+            this.flowLayoutNavBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutNavBar.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutNavBar.Name = "flowLayoutNavBar";
+            this.flowLayoutNavBar.Size = new System.Drawing.Size(1034, 100);
+            this.flowLayoutNavBar.TabIndex = 0;
+            this.flowLayoutNavBar.WrapContents = false;
+            // 
+            // panelHome
+            // 
+            this.panelHome.BackColor = System.Drawing.Color.Maroon;
+            this.panelHome.Controls.Add(this.labelDashboard);
+            this.panelHome.Controls.Add(this.HomeButton);
+            this.panelHome.Location = new System.Drawing.Point(144, 3);
+            this.panelHome.Name = "panelHome";
+            this.panelHome.Size = new System.Drawing.Size(100, 94);
+            this.panelHome.TabIndex = 12;
+            // 
+            // labelDashboard
+            // 
+            this.labelDashboard.AutoSize = true;
+            this.labelDashboard.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDashboard.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelDashboard.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelDashboard.Location = new System.Drawing.Point(23, 70);
+            this.labelDashboard.Name = "labelDashboard";
+            this.labelDashboard.Size = new System.Drawing.Size(51, 24);
+            this.labelDashboard.TabIndex = 14;
+            this.labelDashboard.Text = "Dash";
+            this.labelDashboard.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panelRentals
+            // 
+            this.panelRentals.BackColor = System.Drawing.Color.Maroon;
+            this.panelRentals.Controls.Add(this.RentalButton);
+            this.panelRentals.Controls.Add(this.RentalLable);
+            this.panelRentals.Location = new System.Drawing.Point(250, 3);
+            this.panelRentals.Name = "panelRentals";
+            this.panelRentals.Size = new System.Drawing.Size(100, 94);
+            this.panelRentals.TabIndex = 15;
+            // 
+            // RentalLable
+            // 
+            this.RentalLable.AutoSize = true;
+            this.RentalLable.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RentalLable.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.RentalLable.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.RentalLable.Location = new System.Drawing.Point(12, 70);
+            this.RentalLable.Name = "RentalLable";
+            this.RentalLable.Size = new System.Drawing.Size(76, 24);
+            this.RentalLable.TabIndex = 13;
+            this.RentalLable.Text = "Rentals";
+            this.RentalLable.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panelUsers
+            // 
+            this.panelUsers.BackColor = System.Drawing.Color.Maroon;
+            this.panelUsers.Controls.Add(this.UsersTxt);
+            this.panelUsers.Controls.Add(this.UsersButton);
+            this.panelUsers.Location = new System.Drawing.Point(356, 3);
+            this.panelUsers.Name = "panelUsers";
+            this.panelUsers.Size = new System.Drawing.Size(100, 94);
+            this.panelUsers.TabIndex = 18;
+            this.panelUsers.Visible = false;
+            // 
+            // panelTools
+            // 
+            this.panelTools.BackColor = System.Drawing.Color.Maroon;
+            this.panelTools.Controls.Add(this.LabelTools);
+            this.panelTools.Controls.Add(this.btnTools);
+            this.panelTools.Location = new System.Drawing.Point(462, 3);
+            this.panelTools.Name = "panelTools";
+            this.panelTools.Size = new System.Drawing.Size(100, 94);
+            this.panelTools.TabIndex = 19;
+            // 
+            // panelSettings
+            // 
+            this.panelSettings.BackColor = System.Drawing.Color.Maroon;
+            this.panelSettings.Controls.Add(this.labelSettings);
+            this.panelSettings.Controls.Add(this.btnSettings);
+            this.panelSettings.Location = new System.Drawing.Point(568, 3);
+            this.panelSettings.Name = "panelSettings";
+            this.panelSettings.Size = new System.Drawing.Size(100, 94);
+            this.panelSettings.TabIndex = 20;
+            // 
+            // labelSettings
+            // 
+            this.labelSettings.AutoSize = true;
+            this.labelSettings.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSettings.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelSettings.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelSettings.Location = new System.Drawing.Point(10, 70);
+            this.labelSettings.Name = "labelSettings";
+            this.labelSettings.Size = new System.Drawing.Size(82, 24);
+            this.labelSettings.TabIndex = 17;
+            this.labelSettings.Text = "Settings";
+            this.labelSettings.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // gradientFlowLayoutPanel1
+            // 
+            this.gradientFlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.gradientFlowLayoutPanel1.EndColor = System.Drawing.Color.MidnightBlue;
+            this.gradientFlowLayoutPanel1.Location = new System.Drawing.Point(1009, 100);
+            this.gradientFlowLayoutPanel1.Name = "gradientFlowLayoutPanel1";
+            this.gradientFlowLayoutPanel1.Size = new System.Drawing.Size(25, 532);
+            this.gradientFlowLayoutPanel1.StartColor = System.Drawing.Color.Maroon;
+            this.gradientFlowLayoutPanel1.TabIndex = 3;
             // 
             // RentalsNavBar
             // 
@@ -312,45 +428,6 @@
             this.customButton1.TabStop = false;
             this.customButton1.Click += new System.EventHandler(this.customButton1_Click);
             // 
-            // flowLayoutNavBar
-            // 
-            this.flowLayoutNavBar.BackColor = System.Drawing.Color.Maroon;
-            this.flowLayoutNavBar.Controls.Add(this.MyLogo);
-            this.flowLayoutNavBar.Controls.Add(this.panelHome);
-            this.flowLayoutNavBar.Controls.Add(this.panelRentals);
-            this.flowLayoutNavBar.Controls.Add(this.panelUsers);
-            this.flowLayoutNavBar.Controls.Add(this.panelTools);
-            this.flowLayoutNavBar.Controls.Add(this.panelSettings);
-            this.flowLayoutNavBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutNavBar.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutNavBar.Name = "flowLayoutNavBar";
-            this.flowLayoutNavBar.Size = new System.Drawing.Size(1034, 100);
-            this.flowLayoutNavBar.TabIndex = 0;
-            this.flowLayoutNavBar.WrapContents = false;
-            // 
-            // panelHome
-            // 
-            this.panelHome.BackColor = System.Drawing.Color.Maroon;
-            this.panelHome.Controls.Add(this.labelDashboard);
-            this.panelHome.Controls.Add(this.HomeButton);
-            this.panelHome.Location = new System.Drawing.Point(144, 3);
-            this.panelHome.Name = "panelHome";
-            this.panelHome.Size = new System.Drawing.Size(100, 94);
-            this.panelHome.TabIndex = 12;
-            // 
-            // labelDashboard
-            // 
-            this.labelDashboard.AutoSize = true;
-            this.labelDashboard.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDashboard.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelDashboard.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.labelDashboard.Location = new System.Drawing.Point(23, 70);
-            this.labelDashboard.Name = "labelDashboard";
-            this.labelDashboard.Size = new System.Drawing.Size(51, 24);
-            this.labelDashboard.TabIndex = 14;
-            this.labelDashboard.Text = "Dash";
-            this.labelDashboard.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // HomeButton
             // 
             this.HomeButton.Image = ((System.Drawing.Image)(resources.GetObject("HomeButton.Image")));
@@ -364,16 +441,6 @@
             this.HomeButton.TabIndex = 10;
             this.HomeButton.TabStop = false;
             this.HomeButton.Click += new System.EventHandler(this.HomeButton_Click);
-            // 
-            // panelRentals
-            // 
-            this.panelRentals.BackColor = System.Drawing.Color.Maroon;
-            this.panelRentals.Controls.Add(this.RentalButton);
-            this.panelRentals.Controls.Add(this.RentalLable);
-            this.panelRentals.Location = new System.Drawing.Point(250, 3);
-            this.panelRentals.Name = "panelRentals";
-            this.panelRentals.Size = new System.Drawing.Size(100, 94);
-            this.panelRentals.TabIndex = 15;
             // 
             // RentalButton
             // 
@@ -389,30 +456,6 @@
             this.RentalButton.TabStop = false;
             this.RentalButton.Click += new System.EventHandler(this.RentalButton_Click);
             // 
-            // RentalLable
-            // 
-            this.RentalLable.AutoSize = true;
-            this.RentalLable.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RentalLable.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.RentalLable.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.RentalLable.Location = new System.Drawing.Point(12, 70);
-            this.RentalLable.Name = "RentalLable";
-            this.RentalLable.Size = new System.Drawing.Size(76, 24);
-            this.RentalLable.TabIndex = 13;
-            this.RentalLable.Text = "Rentals";
-            this.RentalLable.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // panelUsers
-            // 
-            this.panelUsers.BackColor = System.Drawing.Color.Maroon;
-            this.panelUsers.Controls.Add(this.UsersTxt);
-            this.panelUsers.Controls.Add(this.UsersButton);
-            this.panelUsers.Location = new System.Drawing.Point(356, 3);
-            this.panelUsers.Name = "panelUsers";
-            this.panelUsers.Size = new System.Drawing.Size(100, 94);
-            this.panelUsers.TabIndex = 18;
-            this.panelUsers.Visible = false;
-            // 
             // UsersButton
             // 
             this.UsersButton.Image = ((System.Drawing.Image)(resources.GetObject("UsersButton.Image")));
@@ -426,16 +469,6 @@
             this.UsersButton.TabIndex = 14;
             this.UsersButton.TabStop = false;
             this.UsersButton.Click += new System.EventHandler(this.UsersButton_Click);
-            // 
-            // panelTools
-            // 
-            this.panelTools.BackColor = System.Drawing.Color.Maroon;
-            this.panelTools.Controls.Add(this.LabelTools);
-            this.panelTools.Controls.Add(this.btnTools);
-            this.panelTools.Location = new System.Drawing.Point(462, 3);
-            this.panelTools.Name = "panelTools";
-            this.panelTools.Size = new System.Drawing.Size(100, 94);
-            this.panelTools.TabIndex = 19;
             // 
             // btnTools
             // 
@@ -452,29 +485,6 @@
             this.btnTools.TabStop = false;
             this.btnTools.Click += new System.EventHandler(this.btnTools_Click);
             // 
-            // panelSettings
-            // 
-            this.panelSettings.BackColor = System.Drawing.Color.Maroon;
-            this.panelSettings.Controls.Add(this.labelSettings);
-            this.panelSettings.Controls.Add(this.btnSettings);
-            this.panelSettings.Location = new System.Drawing.Point(568, 3);
-            this.panelSettings.Name = "panelSettings";
-            this.panelSettings.Size = new System.Drawing.Size(100, 94);
-            this.panelSettings.TabIndex = 20;
-            // 
-            // labelSettings
-            // 
-            this.labelSettings.AutoSize = true;
-            this.labelSettings.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSettings.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSettings.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.labelSettings.Location = new System.Drawing.Point(10, 70);
-            this.labelSettings.Name = "labelSettings";
-            this.labelSettings.Size = new System.Drawing.Size(82, 24);
-            this.labelSettings.TabIndex = 17;
-            this.labelSettings.Text = "Settings";
-            this.labelSettings.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // btnSettings
             // 
             this.btnSettings.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -490,20 +500,11 @@
             this.btnSettings.TabStop = false;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
-            // gradientFlowLayoutPanel1
-            // 
-            this.gradientFlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gradientFlowLayoutPanel1.EndColor = System.Drawing.Color.MidnightBlue;
-            this.gradientFlowLayoutPanel1.Location = new System.Drawing.Point(1009, 100);
-            this.gradientFlowLayoutPanel1.Name = "gradientFlowLayoutPanel1";
-            this.gradientFlowLayoutPanel1.Size = new System.Drawing.Size(25, 532);
-            this.gradientFlowLayoutPanel1.StartColor = System.Drawing.Color.Maroon;
-            this.gradientFlowLayoutPanel1.TabIndex = 3;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1034, 651);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.BottomPanel);
@@ -515,6 +516,17 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.MyLogo)).EndInit();
             this.MainPanel.ResumeLayout(false);
+            this.flowLayoutNavBar.ResumeLayout(false);
+            this.panelHome.ResumeLayout(false);
+            this.panelHome.PerformLayout();
+            this.panelRentals.ResumeLayout(false);
+            this.panelRentals.PerformLayout();
+            this.panelUsers.ResumeLayout(false);
+            this.panelUsers.PerformLayout();
+            this.panelTools.ResumeLayout(false);
+            this.panelTools.PerformLayout();
+            this.panelSettings.ResumeLayout(false);
+            this.panelSettings.PerformLayout();
             this.RentalsNavBar.ResumeLayout(false);
             this.PanelRentalHome.ResumeLayout(false);
             this.PanelRentalHome.PerformLayout();
@@ -528,21 +540,10 @@
             this.panelRentalAcademies.ResumeLayout(false);
             this.panelRentalAcademies.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customButton1)).EndInit();
-            this.flowLayoutNavBar.ResumeLayout(false);
-            this.panelHome.ResumeLayout(false);
-            this.panelHome.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HomeButton)).EndInit();
-            this.panelRentals.ResumeLayout(false);
-            this.panelRentals.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RentalButton)).EndInit();
-            this.panelUsers.ResumeLayout(false);
-            this.panelUsers.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersButton)).EndInit();
-            this.panelTools.ResumeLayout(false);
-            this.panelTools.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnTools)).EndInit();
-            this.panelSettings.ResumeLayout(false);
-            this.panelSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).EndInit();
             this.ResumeLayout(false);
 

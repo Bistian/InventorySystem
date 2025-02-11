@@ -26,8 +26,6 @@ namespace InventoryManagmentSystem
             InitPastDueCount();
 
             Scaling();
-            
-
         }
 
         private void Scaling()
@@ -46,18 +44,13 @@ namespace InventoryManagmentSystem
             SetFontButton(btn_existing_customer, font_size_2, FontStyle.Regular);
 
             SetFontLabel(label_due_date, font_size_2, FontStyle.Regular);
-            SetFontLabel(label_past_due, font_size_3, FontStyle.Regular);
+            SetFontLabel(label_past_due, font_size_2, FontStyle.Regular);
             SetFontLabel(label_date_rented, font_size_3, FontStyle.Regular);
-        }
 
-        private void SetFontButton(System.Windows.Forms.Button target, int size, FontStyle style)
-        {
-            target.Font = new System.Drawing.Font("Arial", size, style);
-        }
-
-        private void SetFontLabel(System.Windows.Forms.Label target, int size, FontStyle style)
-        {
-            target.Font = new System.Drawing.Font("Arial", size, style);
+            Console.WriteLine("Font:" + grid_before_due.RowsDefaultCellStyle.Font);
+            SetFontGrid(grid_before_due);
+            Console.WriteLine("Font:" + grid_before_due.RowsDefaultCellStyle.Font);
+            SetFontGrid(grid_past_due);
         }
 
         // Get the current connection string
@@ -143,7 +136,14 @@ namespace InventoryManagmentSystem
                 {
                     date = reader[0].ToString();
                 }
-                label_date_rented.Text = HelperFunctions.DateCrop(date);
+                if(date != "")
+                {
+                    label_date_rented.Text = HelperFunctions.DateCrop(date);
+                }
+                else
+                {
+                    label_date_rented.Text = date;
+                }
             }
             catch (Exception ex) { Console.WriteLine(ex); }
             finally { connection.Close(); }
@@ -180,6 +180,7 @@ namespace InventoryManagmentSystem
                         );
                 }
                 reader.Close();
+                SetFontGrid(grid);
 
                 string y = closestDate.Year.ToString();
                 string m = closestDate.Month.ToString();
@@ -325,13 +326,6 @@ namespace InventoryManagmentSystem
             OpenDockedForm("NewRentalModuleForm", null);
         }
 
-        private void buttonActiveRental_Click(object sender, EventArgs e)
-        {
-            var parentForm = this.ParentForm as MainForm;
-            OpenDockedForm("ExistingCustomerModuleForm", null);
-            parentForm.ColorTabSwitch("ActiveRentals", false);
-        }
-
         private void btnStock_Click(object sender, EventArgs e)
         {
             OpenDockedForm("RentalForm", "Jacket");
@@ -375,6 +369,13 @@ namespace InventoryManagmentSystem
         private void btnHelmets_Click(object sender, EventArgs e)
         {
             OpenDockedForm("RentalForm", "Helmet");
+        }
+
+        private void Button_Existing_Customer_Click(object sender, EventArgs e)
+        {
+            var parentForm = this.ParentForm as MainForm;
+            OpenDockedForm("ExistingCustomerModuleForm", null);
+            parentForm.ColorTabSwitch("ActiveRentals", false);
         }
     }
 }
