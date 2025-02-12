@@ -161,7 +161,7 @@ namespace InventoryManagmentSystem
                     i.Id, i.ItemType, b.Brand, i.SerialNumber, b.Size, b.ManufactureDate, i.Condition, i.Location, b.Material 
                 FROM tbBoots AS b
                 LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
-                WHERE i.id = b.ItemId
+                WHERE i.id = b.ItemId AND (i.condition = 'Used' OR i.condition = 'New')
             ";
             if(search.Length > 0)
             {
@@ -170,7 +170,7 @@ namespace InventoryManagmentSystem
                     i.Id, i.ItemType, b.Brand, i.SerialNumber, b.Size, b.ManufactureDate, i.Condition, i.Location, b.Material 
                 FROM tbBoots AS b
                 LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
-                WHERE i.id = b.ItemId AND i.SerialNumber LIKE @SerialNumber
+                WHERE i.id = b.ItemId AND i.SerialNumber LIKE @SerialNumber AND (i.condition = 'Used' OR i.condition = 'New')
             ";
             }
 
@@ -1104,7 +1104,7 @@ namespace InventoryManagmentSystem
                     i.Id, i.ItemType, h.Brand, i.SerialNumber, h.ManufactureDate, i.Condition, i.Location, h.Color 
                 FROM tbHelmets AS h
                 LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
-                WHERE i.id = h.ItemId
+                WHERE i.id = h.ItemId AND (i.condition = 'Used' OR i.condition = 'New')
             ";
             if(search.Length > 0)
             {
@@ -1113,7 +1113,7 @@ namespace InventoryManagmentSystem
                     i.Id, i.ItemType, h.Brand, i.SerialNumber, h.ManufactureDate, i.Condition, i.Location, h.Color 
                 FROM tbHelmets AS h
                 LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
-                WHERE i.id = h.ItemId AND i.SerialNumber LIKE @SerialNumber
+                WHERE i.id = h.ItemId AND i.SerialNumber LIKE @SerialNumber AND (i.condition = 'Used' OR i.condition = 'New')
             ";
             }
             HelperFunctions.RemoveLineBreaksFromString(ref query);
@@ -1950,7 +1950,7 @@ namespace InventoryManagmentSystem
                         i.Id, i.ItemType, j.Brand, i.SerialNumber, j.Size, j.ManufactureDate, i.Condition, i.Location
                     FROM tbJackets AS j
                     LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
-                    WHERE i.id = j.ItemId
+                    WHERE i.id = j.ItemId AND (i.condition = 'Used' OR i.condition = 'New')
                 ";
 
             if (search.Length > 0)
@@ -1960,7 +1960,7 @@ namespace InventoryManagmentSystem
                         i.Id, i.ItemType, j.Brand, i.SerialNumber, j.Size, j.ManufactureDate, i.Condition, i.Location
                     FROM tbJackets AS j
                     LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
-                    WHERE i.id = j.ItemId AND i.SerialNumber LIKE @SerialNumber
+                    WHERE i.id = j.ItemId AND i.SerialNumber LIKE @SerialNumber AND (i.condition = 'Used' OR i.condition = 'New')
                 ";
 
             }
@@ -2147,7 +2147,7 @@ namespace InventoryManagmentSystem
                     i.Id, i.ItemType, m.Brand, i.SerialNumber, m.Size, m.ManufactureDate, i.Condition, i.Location
                 FROM tbMasks AS m
                 LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
-                WHERE i.id = m.ItemId
+                WHERE i.id = m.ItemId AND (i.condition = 'Used' OR i.condition = 'New')
             ";
             if(search.Length > 0)
             {
@@ -2156,7 +2156,7 @@ namespace InventoryManagmentSystem
                     i.Id, i.ItemType, m.Brand, i.SerialNumber, m.Size, m.ManufactureDate, i.Condition, i.Location
                 FROM tbMasks AS m
                 LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
-                WHERE i.id = m.ItemId AND i.SerialNumber LIKE @SerialNumber
+                WHERE i.id = m.ItemId AND i.SerialNumber LIKE @SerialNumber AND (i.condition = 'Used' OR i.condition = 'New')
             ";
             }
             HelperFunctions.RemoveLineBreaksFromString(ref query);
@@ -2336,7 +2336,7 @@ namespace InventoryManagmentSystem
                     i.Id, i.ItemType, p.Brand, i.SerialNumber, p.Size, p.ManufactureDate, i.Condition, i.Location
                 FROM tbPants AS p
                 LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
-                WHERE i.id = p.ItemId
+                WHERE i.id = p.ItemId AND (i.condition = 'Used' OR i.condition = 'New')
             ";
             if(search.Length > 0)
             {
@@ -2345,7 +2345,7 @@ namespace InventoryManagmentSystem
                     i.Id, i.ItemType, p.Brand, i.SerialNumber, p.Size, p.ManufactureDate, i.Condition, i.Location
                 FROM tbPants AS p
                 LEFT JOIN tbItems AS i ON i.Location = 'Fire-Tec' OR i.Location IS NULL
-                WHERE i.id = p.ItemId AND i.SerialNumber LIKE @SerialNumber
+                WHERE i.id = p.ItemId AND i.SerialNumber LIKE @SerialNumber AND (i.condition = 'Used' OR i.condition = 'New')
             ";
             }
             HelperFunctions.RemoveLineBreaksFromString(ref query);
