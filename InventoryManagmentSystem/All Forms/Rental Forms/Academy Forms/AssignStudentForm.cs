@@ -37,7 +37,7 @@ namespace InventoryManagmentSystem.Academy
             string query = @"
                 UPDATE tbClients
                 SET IdClass=@IdClass, Academy=@Academy
-                WHERE DriversLicenseNumber=@DriversLicenseNumber
+                WHERE Id=@Id
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
@@ -59,7 +59,7 @@ namespace InventoryManagmentSystem.Academy
             {
                 SqlCommand command = new SqlCommand(query, connection);
                 connection.Open();
-                command.Parameters.AddWithValue("@DriversLicenseNumber", parent.drivers);
+                command.Parameters.AddWithValue("@Id", parent.ClientId);
                 command.Parameters.AddWithValue("@IdClass", Id);
                 command.Parameters.AddWithValue("@Academy", cbAcademy.Text);
                 command.ExecuteNonQuery();

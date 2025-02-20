@@ -19,7 +19,7 @@ namespace InventoryManagmentSystem
 
         private string ReplacmentSerial = "";
         private string dueDate = "";
-        private string ClientId = string.Empty;
+        public string ClientId = string.Empty;
         private string ClassId = string.Empty;
 
         public int ReturnReplace = 0;
