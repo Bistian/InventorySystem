@@ -102,8 +102,8 @@ namespace InventoryManagmentSystem.Academy
             selectedClass.uuid = (Guid)row.Cells["column_id"].Value;
             selectedClass.academyName = row.Cells["column_academy"].Value.ToString();
             selectedClass.name = row.Cells["column_name"].Value.ToString();
-            selectedClass.start = (DateTime)row.Cells["column_start_date"].Value;
-            selectedClass.end = (DateTime)row.Cells["column_end_date"].Value;
+            selectedClass.start = DateTime.Parse(row.Cells["column_start_date"].Value.ToString());
+            selectedClass.end = DateTime.Parse(row.Cells["column_end_date"].Value.ToString());
             HelperFunctions.OpenChildFormToPanel(parent.panelDocker, new CreateClassForm(parent, selectedClass));
             this.Close();
         }
