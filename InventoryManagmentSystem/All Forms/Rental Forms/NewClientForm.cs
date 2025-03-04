@@ -264,8 +264,9 @@ namespace InventoryManagmentSystem.Rental_Forms
             return true;
         }
 
-        public void UpdateClient()
+        public void UpdateClient(object sender, EventArgs e)
         {
+            NewRentalModuleForm parent = this.Parent.Parent as NewRentalModuleForm;
             string message = "Are you sure you want to update this Client?";
             DialogResult messageBox = MessageBox.Show(message, "Update Client", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (messageBox == DialogResult.No) { return; }
@@ -311,6 +312,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
                 command.ExecuteNonQuery();
                 MessageBox.Show("Client has been successfully updated.");
+                parent.btnProfile_Click(sender, e);
             }
             catch (Exception ex)
             {
@@ -354,13 +356,13 @@ namespace InventoryManagmentSystem.Rental_Forms
                 //individual
                 if (comboBoxRentalType.SelectedIndex == 0)
                 {
-                    UpdateClient();
+                    UpdateClient(sender, e);
                     DockedIn.LoadProfile(DockedIn.license, txtBoxCustomerName.Text);
                 }
                 //department
                 else if (comboBoxRentalType.SelectedIndex == 1 || comboBoxRentalType.SelectedIndex == 2)
                 {
-                    UpdateClient();
+                    UpdateClient(sender, e);
                     DockedIn.LoadProfile(DockedIn.license, txtBoxCustomerName.Text);
                 }
                 panelContactInfo.Visible = false;

@@ -392,8 +392,9 @@ namespace InventoryManagmentSystem
             finally { connection.Close(); }
         }
 
-        private void btnProfile_Click(object sender, EventArgs e)
+        public void btnProfile_Click(object sender, EventArgs e)
         {
+           
             labelProfileDrivers.Text = "License Number:";
 
             panelProfileRentalInfo.Visible = true;
@@ -408,10 +409,16 @@ namespace InventoryManagmentSystem
             splitContainerInventories.Visible = true;
             panelRentals.Visible = true;
             AssignStudentForm dockedForm = panel2.Controls.OfType<AssignStudentForm>().FirstOrDefault();
+            NewClientForm dockedForm2 = panel2.Controls.OfType<NewClientForm>().FirstOrDefault();
             if (dockedForm != null)
             {
                 dockedForm.Dispose();
             }
+            if (dockedForm2 != null)
+            {
+                dockedForm2.Dispose();
+            }
+            LoadProfile(ClientId, currentUser);
         }
 
         private void btnClass_Click(object sender, EventArgs e)
@@ -426,7 +433,7 @@ namespace InventoryManagmentSystem
         {
             flowLayoutPanelProfile.Visible = false;
             NewClientForm clientForm = new NewClientForm("Individual", labelProfileName.Text);
-            clientForm.txtBoxDriversLicense.Enabled = false;
+            clientForm.clientId = ClientId;
             cbItemType.Items.Clear();
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
             HelperFunctions.OpenChildFormToPanel(panel2, clientForm);

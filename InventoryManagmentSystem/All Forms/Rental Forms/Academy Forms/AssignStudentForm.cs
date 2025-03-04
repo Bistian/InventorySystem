@@ -12,24 +12,22 @@ namespace InventoryManagmentSystem.Academy
         SqlConnection connection = new SqlConnection(connectionString);
         Dictionary<string, string> academyMap = new Dictionary<string, string>();
         List<Item> classList;
+        List<Item> academyList;
         AcademyForm parent = null;
 
         public AssignStudentForm(AcademyForm parent)
         {
             InitializeComponent();
-            academyMap = HelperSql.AcademyListNames(connection);
+            PopulateAcademyList();
             classList = new List<Item>();
-            foreach (var value in academyMap.Values)
-            {
-                cbAcademy.Items.Add(value);
-            }
+
             if (parent != null)
             {
                 this.parent = parent;
             }
         }
 
-        private bool UpdateClient()
+        private bool UpdateClient(object sender, EventArgs e)
         {
             NewRentalModuleForm parent = this.Parent.Parent as NewRentalModuleForm;
 
@@ -65,7 +63,7 @@ namespace InventoryManagmentSystem.Academy
                 command.ExecuteNonQuery();
                 connection.Close();
 
-                parent.LoadProfile(parent.drivers,parent.currentUser);
+                parent.btnProfile_Click(sender, e);
                 this.Dispose();
 
                 return true;
@@ -78,32 +76,44 @@ namespace InventoryManagmentSystem.Academy
             }
         }
 
+        private void PopulateAcademyList()
+        {
+            academyList = HelperSql.AcademyFillComboBox(connection, cbAcademy);
+            foreach (var academy in academyList)
+            {
+                cbAcademy.Items.Add(academy.GetColumnValue("Name"));
+            }
+        }
+
         private void cbAcademy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string academyId = "";
-            foreach (var key in academyMap.Keys)
-            {
-                if (academyMap[key] == cbAcademy.Text)
-                {
-                    academyId = key;
-                }
-            }
+            int index = cbAcademy.SelectedIndex;
+            if (index == -1) { return; }
 
-            if (academyId == "")
-            {
-                return;
-            }
-
-            classList.Clear();
-            classList = HelperSql.ClassFindByAcademy(connection, academyId);
+            string name = cbAcademy.Text;
+            if(classList != null) { classList.Clear(); }
             cbClasses.Items.Clear();
-            foreach (var item in classList)
-            {
-                cbClasses.Items.Add(item.GetColumnValue("Name"));
-            }
 
-            if (cbClasses.Items.Count > 0)
+            var academyId = academyList[index].GetColumnValue("Id");
+            classList = HelperSql.ClassFindByAcademy(connection, academyId);
+            if(classList == null) { return; }
+            string currClass;
+            foreach(var item in classList)
             {
+                string startDate = item.GetColumnValue("StartDate");
+                string endDate = item.GetColumnValue("EndDate");
+                var StartDateFinal = DateTime.Parse(startDate);
+                var startyear = StartDateFinal.Year;
+                var startmonth = StartDateFinal.Month;
+                var startday = StartDateFinal.Day;
+
+                var EndDateFinal = DateTime.Parse(endDate);
+                var endyear = EndDateFinal.Year;
+                var endmonth = EndDateFinal.Month;
+                var endday = EndDateFinal.Day;
+
+                currClass = item.GetColumnValue("Name") + $" {startmonth}/{startday}/{startyear} - {endmonth}/{endday}/{endyear}";
+                cbClasses.Items.Add(currClass);
                 cbClasses.Enabled = true;
             }
         }
@@ -114,7 +124,8 @@ namespace InventoryManagmentSystem.Academy
             {
                 if (cbAcademy.SelectedIndex < 0) { throw new Exception("Academy needs to be filled."); }
                 if (cbClasses.SelectedIndex < 0) { throw new Exception("Academy needs to be filled."); }
-                UpdateClient();
+                UpdateClient(sender,e);
+                
 
             }
             catch (Exception ex)
