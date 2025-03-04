@@ -21,6 +21,8 @@ namespace InventoryManagmentSystem
 
         private void btn_save(object sender, EventArgs e)
         {
+            decimal value = numeric_font_text.Value;
+            ScaleAllControls(this, (float)value);
             _settingsManager.SetSetting("SettingsUser.Font.Size", numeric_font_text.Value);
             _settingsManager.SaveSettings(); // This triggers the SettingsChanged event
             MessageBox.Show("Settings saved! All forms updated.");

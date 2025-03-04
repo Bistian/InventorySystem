@@ -15,6 +15,7 @@ namespace InventoryManagmentSystem
 
         public HomeForm()
         {
+            this.AutoScaleMode = AutoScaleMode.Font;
             InitializeComponent();
             PrintRented();
             PrintStock();
@@ -24,6 +25,9 @@ namespace InventoryManagmentSystem
             InitTables();
             SetButtonDates();
             InitPastDueCount();
+
+            float scale = ScaleFactor(font_size_1);
+            ScaleAllControls(this, scale);
 
             Scaling();
         }
@@ -288,7 +292,7 @@ namespace InventoryManagmentSystem
             try
             {
                 Profile.LoadProfile(clientId, clientName);
-                parentForm.openChildForm(Profile);
+                parentForm.OpenChildForm(Profile);
 
                 this.Dispose();
             }
@@ -311,7 +315,7 @@ namespace InventoryManagmentSystem
             try
             {
                 Profile.LoadProfile(clientId, clientName);
-                parentForm.openChildForm(Profile);
+                parentForm.OpenChildForm(Profile);
 
                 this.Dispose();
             }
@@ -375,7 +379,7 @@ namespace InventoryManagmentSystem
         {
             var parentForm = this.ParentForm as MainForm;
             OpenDockedForm("ExistingCustomerModuleForm", null);
-            parentForm.ColorTabSwitch("ActiveRentals", false);
+            parentForm.ColorTabSwitch("Clients");
         }
     }
 }

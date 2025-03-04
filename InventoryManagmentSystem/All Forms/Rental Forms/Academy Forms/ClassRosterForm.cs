@@ -114,7 +114,7 @@ namespace InventoryManagmentSystem.Academy
             try
             {
                 Profile.LoadProfile(licence, clientName);
-                parentForm.openChildForm(Profile);
+                parentForm.OpenChildForm(Profile);
                 this.parent.Dispose();
             }
             catch (Exception ex)

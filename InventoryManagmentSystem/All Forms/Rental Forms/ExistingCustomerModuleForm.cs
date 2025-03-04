@@ -64,7 +64,7 @@ namespace InventoryManagmentSystem
             try
             {
                 form.UpdateProfile();
-                parentForm.openChildForm(form);
+                parentForm.OpenChildForm(form);
             }
             catch (Exception ex)
             {
@@ -138,7 +138,7 @@ namespace InventoryManagmentSystem
             try
             {
                 Profile.LoadProfile(clientLicense,clientName);
-                parentForm.openChildForm(Profile);
+                parentForm.OpenChildForm(Profile);
 
                 this.Dispose();
             }

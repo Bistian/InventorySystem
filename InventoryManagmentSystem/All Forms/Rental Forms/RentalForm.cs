@@ -278,7 +278,7 @@ namespace InventoryManagmentSystem
             try
             {
                 Profile.LoadProfile(clientId, clientName);
-                parentForm.openChildForm(Profile);
+                parentForm.OpenChildForm(Profile);
 
                 this.Dispose();
             }
@@ -303,7 +303,7 @@ namespace InventoryManagmentSystem
             try
             {
                 Profile.LoadProfile(clientId, clientName);
-                parentForm.openChildForm(Profile);
+                parentForm.OpenChildForm(Profile);
 
                 this.Dispose();
             }

@@ -2,10 +2,11 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using InventoryManagmentSystem.All_Forms;
 
 namespace InventoryManagmentSystem
 {
-    public partial class MainForm : Form
+    public partial class MainForm : BaseForm
     {
         //colors
         Color offColor = Color.Transparent;
@@ -18,19 +19,78 @@ namespace InventoryManagmentSystem
         public MainForm(Form databaseCreation = null)
         {
 
+            this.AutoScaleMode = AutoScaleMode.Font;
             InitializeComponent();
 
             this.WindowState = FormWindowState.Maximized; // Maximizes the form to full screen
 
             offColor = Color.Transparent;
             onColor = Color.DarkGray;
-            if (databaseCreation != null)
+            databaseCreation?.Dispose();
+
+            panel_main.Dock = DockStyle.Fill;
+            panel_main.AutoScroll = true;
+            panel_main.AutoScrollMinSize = panel_main.DisplayRectangle.Size;
+            FormBorderStyle = FormBorderStyle.Sizable;
+            AutoScroll = true;
+
+            float scale = ScaleFactor(font_size_1);
+            ScaleAllControls(this, scale);
+            Scaling();
+            button_rentals.BackColor = offColor;
+        }
+
+        private void Scaling()
+        {
+            SetFontLabel(label_academy, font_size_1, FontStyle.Regular);
+            SetFontLabel(label_clients, font_size_1, FontStyle.Regular);
+            SetFontLabel(label_dashboard, font_size_1, FontStyle.Regular);
+            SetFontLabel(label_home, font_size_1, FontStyle.Regular);
+            SetFontLabel(label_inv, font_size_1, FontStyle.Regular);
+            SetFontLabel(label_rentals, font_size_1, FontStyle.Regular);
+            SetFontLabel(label_settings, font_size_1, FontStyle.Regular);
+            SetFontLabel(label_tools, font_size_1, FontStyle.Regular);
+            SetFontLabel(label_users, font_size_1, FontStyle.Regular);
+
+            SetFontPanel(panel_button_dash, font_size_1,FontStyle.Regular);
+            SetFontFlowLayoutPanel(flow_layout_panel_top, font_size_1, FontStyle.Regular);
+        }
+
+        public void ColorTabSwitch(string tab)
+        {
+            //check to see which nav bar is being clicked on
+            switch(tab.ToLower())
             {
-                databaseCreation.Dispose();
+                case "dash": { panel_button_dash.BackColor = onColor; break; }
+                case "rentals": { panel_button_rentals.BackColor = onColor; break; }
+                case "users": { panel_button_users.BackColor = onColor; break; }
+                case "tools": { panel_button_tools.BackColor = onColor; break; }
+                case "settings": { panel_button_settings.BackColor = onColor; break; }
+                case "home": { panel_button_home.BackColor = onColor; break; }
+                case "clients": { panel_button_clients.BackColor = onColor; break; }
+                case "inv": { panel_button_inv.BackColor = onColor; break; }
+                case "academy": { panel_button_academies.BackColor = onColor; break; }
+                default: { Console.WriteLine("Failed to change color"); break; }
             }
         }
 
-        public void openChildForm(Form childForm)
+        public void OpenNavBar(string tab)
+        {
+            //set all secondary nav bars visability to false before opening the needed one
+            flow_layout_panel_left.Visible = false;
+
+
+            if (tab == "Rentals")
+            {
+                flow_layout_panel_left.Visible = true;
+            }
+            else if (tab == "Service Center")
+            {
+
+            }
+        }
+
+        public void OpenChildForm(Form childForm)
         {
             if (activeForm != null)
             {
@@ -40,143 +100,84 @@ namespace InventoryManagmentSystem
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
-            MainPanel.Controls.Add(childForm);
-            MainPanel.Tag = childForm;
+            panel_center.Controls.Add(childForm);
+            panel_center.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
         }
 
-        private void UsersButton_Click(object sender, EventArgs e)
-        {
-            ColorTabSwitch("Users", true);
-            openChildForm(new UserForm());
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            OpenNavBar("Rentals");
-            ColorTabSwitch("Rentals", true);
-            openChildForm(new HomeForm());
-        }
-
-        private void DepatmensButton_Click(object sender, EventArgs e)
-        {
-            OpenNavBar("Dept");
-            ColorTabSwitch("Dept");
-            openChildForm(new DepartmentForm());
-        }
-
-        private void InventoryButton_Click(object sender, EventArgs e)
-        {
-            OpenNavBar("Inv");
-            ColorTabSwitch("Inv");
-            openChildForm(new InventoryForm());
-        }
-
-        private void btnTools_Click(object sender, EventArgs e)
-        {
-            OpenNavBar("Tools");
-            ColorTabSwitch("Tools");
-            openChildForm(new ToolsForm());
-        }
-
-        private void HomeButton_Click(object sender, EventArgs e)
-        {
-            OpenNavBar("Home");
-            ColorTabSwitch("Home");
-            openChildForm(new Dashboard());
-        }
-
-        private void RentalButton_Click(object sender, EventArgs e)
+        private void MainFormLoad(object sender, EventArgs e)
         {
             OpenNavBar("Rentals");
             ColorTabSwitch("Rentals");
-            ColorTabSwitch("RentalHome", false);
-            openChildForm(new HomeForm());
+            OpenChildForm(new HomeForm());
         }
 
-        public void ColorTabSwitch(string tab, bool isPrimary = true)
+        private void Button_Users_Click(object sender, EventArgs e)
         {
-            //check to see which nav bar is being clicked on
-            if (isPrimary)
-            {
-                 // Set all colors to normal.
-                panelHome.BackColor = offColor;
-                panelRentals.BackColor = offColor;
-                panelUsers.BackColor = offColor;
-                panelTools.BackColor = offColor;
-                panelSettings.BackColor = offColor;
-
-                // Pick one tab and set it to the clicked color.
-                if (tab == "Home") { panelHome.BackColor = onColor; }
-                else if (tab == "Rentals") { panelRentals.BackColor = onColor; }
-                else if (tab == "Users") { panelUsers.BackColor = onColor; }
-                else if (tab == "Tools") { panelTools.BackColor = onColor; }
-                else if (tab == "Settings") { panelSettings.BackColor = onColor; }
-            }
-
-            //Secondary Nav Bar
-            else
-            {
-                //Set colors back to normal
-                PanelRentalHome.BackColor = offColor;
-                panelActiveRentals.BackColor = offColor;
-                panelRentalInv.BackColor = offColor;
-                panelRentalAcademies.BackColor = offColor;
-
-                //Pick one tab and set it to the clicked color
-                if (tab == "RentalHome") { PanelRentalHome.BackColor = onColor; }
-                else if (tab == "ActiveRentals") { panelActiveRentals.BackColor = onColor; }
-                else if (tab == "RentalsInv") { panelRentalInv.BackColor = onColor; }
-                else if (tab == "RentalsAcademy") { panelRentalAcademies.BackColor = onColor; }
-            }
+            ColorTabSwitch("Users");
+            ColorTabSwitch("Users");
+            OpenChildForm(new UserForm());
         }
 
-        public void OpenNavBar(string tab)
+        private void Button_Depatmens_Click(object sender, EventArgs e)
         {
-            //set all secondary nav bars visability to false before opening the needed one
-            RentalsNavBar.Visible = false;
-
-
-            if(tab == "Rentals") 
-            {
-                RentalsNavBar.Visible = true;
-            }
-            else if (tab == "Service Center")
-            {
-
-            }
+            OpenNavBar("Dept");
+            ColorTabSwitch("Dept");
+            OpenChildForm(new DepartmentForm());
         }
 
-        private void ButtonRentalHome_Click(object sender, EventArgs e)
+        private void Button_Tools_Click(object sender, EventArgs e)
         {
-            ColorTabSwitch("RentalHome", false);
-            openChildForm(new HomeForm());
+            OpenNavBar("Tools");
+            ColorTabSwitch("Tools");
+            OpenChildForm(new ToolsForm());
         }
 
-        private void ButtonActiveRentals_Click(object sender, EventArgs e)
+        private void Button_Dash_Click(object sender, EventArgs e)
         {
-            ColorTabSwitch("ActiveRentals", false);
-            openChildForm(new ExistingCustomerModuleForm());
+            OpenNavBar("Dash");
+            ColorTabSwitch("Dash");
+            OpenChildForm(new Dashboard());
         }
 
-        private void ButtonRentalInv_Click(object sender, EventArgs e)
+        private void Button_Rental_Click(object sender, EventArgs e)
         {
-            ColorTabSwitch("RentalsInv", false);
-            openChildForm(new InventoryForm());
+            OpenNavBar("Rentals");
+            ColorTabSwitch("Rentals");
+            ColorTabSwitch("RentalHome");
+            OpenChildForm(new HomeForm());
         }
 
-        private void customButton1_Click(object sender, EventArgs e)
+        private void Button_Home_Click(object sender, EventArgs e)
         {
-            ColorTabSwitch("RentalsAcademy", false);
-            openChildForm(new AcademyForm());
+            ColorTabSwitch("Home");
+            OpenChildForm(new HomeForm());
         }
 
-        private void btnSettings_Click(object sender, EventArgs e)
+        private void Button_Clients_Click(object sender, EventArgs e)
+        {
+            ColorTabSwitch("Clients");
+            OpenChildForm(new ExistingCustomerModuleForm());
+        }
+
+        private void Button_Inv_Click(object sender, EventArgs e)
+        {
+            ColorTabSwitch("Inv");
+            OpenChildForm(new InventoryForm());
+        }
+
+        private void Button_Academy_Click(object sender, EventArgs e)
+        {
+            ColorTabSwitch("Academy");
+            OpenChildForm(new AcademyForm());
+        }
+
+        private void Button_Settings_Click(object sender, EventArgs e)
         {
             OpenNavBar("Settings");
             ColorTabSwitch("Settings");
-            openChildForm(new SettingsForm());
+            OpenChildForm(new SettingsForm());
         }
     }
 }

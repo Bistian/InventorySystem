@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.table_layout_panel_main = new System.Windows.Forms.TableLayoutPanel();
             this.table_layout_panel_right = new System.Windows.Forms.TableLayoutPanel();
             this.grid_past_due = new System.Windows.Forms.DataGridView();
@@ -244,12 +244,12 @@
             this.grid_before_due.Margin = new System.Windows.Forms.Padding(0);
             this.grid_before_due.Name = "grid_before_due";
             this.grid_before_due.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_before_due.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_before_due.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.grid_before_due.RowHeadersVisible = false;
             this.grid_before_due.RowHeadersWidth = 51;
             this.grid_before_due.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -604,6 +604,9 @@
             // 
             // panel_form
             // 
+            this.panel_form.AutoScroll = true;
+            this.panel_form.AutoSize = true;
+            this.panel_form.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel_form.BackColor = System.Drawing.SystemColors.Desktop;
             this.panel_form.Controls.Add(this.table_layout_panel_main);
             this.panel_form.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -621,7 +624,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "HomeForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "HomeForm";
             this.table_layout_panel_main.ResumeLayout(false);
             this.table_layout_panel_right.ResumeLayout(false);
@@ -639,6 +642,7 @@
             this.panel_form.ResumeLayout(false);
             this.panel_form.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

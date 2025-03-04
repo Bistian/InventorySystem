@@ -32,7 +32,6 @@
             this.labelHome = new System.Windows.Forms.Label();
             this.tbDueDays = new System.Windows.Forms.TextBox();
             this.labelDueDays = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
             this.label_font_text = new System.Windows.Forms.Label();
             this.panelHome = new System.Windows.Forms.Panel();
             this.label_font_title = new System.Windows.Forms.Label();
@@ -85,13 +84,6 @@
             this.labelDueDays.TabIndex = 3;
             this.labelDueDays.Text = "Due days";
             // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(0, 0);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 4;
-            // 
             // label_font_text
             // 
             this.label_font_text.AutoSize = true;
@@ -108,12 +100,11 @@
             this.panelHome.Controls.Add(this.labelDueDays);
             this.panelHome.Controls.Add(this.labelHome);
             this.panelHome.Controls.Add(this.tbDueDays);
-            this.panelHome.Controls.Add(this.btnSave);
             this.panelHome.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelHome.Location = new System.Drawing.Point(0, 0);
             this.panelHome.Margin = new System.Windows.Forms.Padding(2);
             this.panelHome.Name = "panelHome";
-            this.panelHome.Size = new System.Drawing.Size(195, 450);
+            this.panelHome.Size = new System.Drawing.Size(195, 600);
             this.panelHome.TabIndex = 7;
             // 
             // label_font_title
@@ -156,7 +147,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.numeric_font_title);
             this.Controls.Add(this.numeric_font_text);
@@ -182,7 +173,6 @@
         private System.Windows.Forms.Label labelHome;
         private System.Windows.Forms.TextBox tbDueDays;
         private System.Windows.Forms.Label labelDueDays;
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label label_font_text;
         private System.Windows.Forms.Panel panelHome;
         private System.Windows.Forms.Label label_font_title;

@@ -30,13 +30,15 @@ namespace InventoryManagmentSystem.All_Forms
         protected void ApplySettings()
         {
             // Ensure settings are non-null before applying
-            int newFontSize = Program.SettingsManager.GetSetting("SettingsUser.Font.Size", defaul_font);
+            int newFontSize = Program.SettingsManager.GetSetting("SettingsUser.Font.Size", font_size_3);
             AutoScroll = true;
             float scaleFactor = newFontSize / defaul_font;
 
+            SettingsData.Instance.fontSize = font_size_3;
+
             font_size_3 = newFontSize;
             font_size_2 = (int)(newFontSize * 1.5);
-            font_size_1 = (int)(newFontSize * 2);
+            font_size_1 = newFontSize * 2;
 
             Font = new Font("Arial", newFontSize);
             SuspendLayout();
@@ -50,6 +52,37 @@ namespace InventoryManagmentSystem.All_Forms
             return LicenseManager.UsageMode == LicenseUsageMode.Designtime || System.Diagnostics.Process.GetCurrentProcess().ProcessName == "devenv";
         }
 
+        // In BaseForm, or in your settings changed event handler:
+        private void ResizeWindowFromSettings()
+        {
+            // Baseline design-time values
+            float designReferenceFontSize = 12.0f; // For example, the design-time value of font_size_1
+            Size designClientSize = new Size(800, 600); // The design-time client size of your form
+
+            // Get the new font size from your settings JSON.
+            // This is font_size_1 loaded from your JSON.
+            float newFontSize = Program.SettingsManager.GetSetting("SettingsUser.Font.size", 12);
+
+            // Calculate the scale factor based on the reference font size
+            float scaleFactor = newFontSize / designReferenceFontSize;
+
+            // Compute new dimensions based on the scale factor
+            int newWidth = (int)(designClientSize.Width * scaleFactor);
+            int newHeight = (int)(designClientSize.Height * scaleFactor);
+
+            // Enforce the minimum size if necessary
+            newWidth = Math.Max(newWidth, MinimumSize.Width);
+            newHeight = Math.Max(newHeight, MinimumSize.Height);
+
+            // Set the form's client size and update auto-scroll area.
+            // Note: Changing ClientSize here means the inner area of the window will adjust.
+            this.ClientSize = new Size(newWidth, newHeight);
+            this.AutoScrollMinSize = this.DisplayRectangle.Size;
+
+            // Force a layout update if needed.
+            this.PerformLayout();
+        }
+
         protected void SetFontButton(Button target, int size, FontStyle style)
         {
             target.Font = new Font("Arial", size, style);
@@ -58,6 +91,34 @@ namespace InventoryManagmentSystem.All_Forms
         protected void SetFontLabel(Label target, int size, FontStyle style)
         {
             target.Font = new Font("Arial", size, style);
+        }
+
+        protected void SetFontPanel(Panel target, int size, FontStyle style)
+        {
+            target.Font = new Font("Arial", size, style);
+        }
+
+        protected void SetFontFlowLayoutPanel(FlowLayoutPanel target, int size, FontStyle style)
+        {
+            target.Font = new Font("Arial", size, style);
+        }
+
+        protected float ScaleFactor(float newFont)
+        {
+            return newFont / font_size_1;
+        }
+
+        protected void ScaleAllControls(Control control, float scaleFactor)
+        {
+            control.SuspendLayout();
+
+            // Scale the control itself
+            control.Scale(new SizeF(scaleFactor, scaleFactor));
+            foreach (Control child in control.Controls)
+            {
+                ScaleAllControls(child, scaleFactor);
+            }
+            control.ResumeLayout();
         }
 
         protected void SetFontGrid(DataGridView target)

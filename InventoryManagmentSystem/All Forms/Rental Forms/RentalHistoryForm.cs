@@ -59,7 +59,7 @@ namespace InventoryManagmentSystem
         {
             InventoryForm form = new InventoryForm();
             var parentForm = this.ParentForm as MainForm;
-            parentForm.openChildForm(form);
+            parentForm.OpenChildForm(form);
             this.Close();
         }
 

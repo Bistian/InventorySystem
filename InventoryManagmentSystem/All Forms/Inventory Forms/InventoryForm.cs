@@ -268,7 +268,7 @@ namespace InventoryManagmentSystem
                         else
                         {
                             var parentForm = this.ParentForm as MainForm;
-                            parentForm.openChildForm(form);
+                            parentForm.OpenChildForm(form);
                         }
                     }
                     else
@@ -278,7 +278,7 @@ namespace InventoryManagmentSystem
                         try
                         {
                             Profile.LoadProfile(ClientId, null);
-                            parentForm.openChildForm(Profile);
+                            parentForm.OpenChildForm(Profile);
 
                             this.Dispose();
                         }
