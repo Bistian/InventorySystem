@@ -378,10 +378,10 @@ namespace InventoryManagmentSystem
             textBoxNotes.ReadOnly = true;
             buttonSaveNotes.Enabled = false;
 
-            string query = "UPDATE tbClients SET Notes = @Notes WHERE DriversLicenseNumber = @DriversLicenseNumber";
+            string query = "UPDATE tbClients SET Notes = @Notes WHERE Id = @ClientId";
             var command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@Notes", textBoxNotes.Text);
-            command.Parameters.AddWithValue("@DriversLicenseNumber", license);
+            command.Parameters.AddWithValue("@ClientId", ClientId);
             try
             {
                 connection.Open();
