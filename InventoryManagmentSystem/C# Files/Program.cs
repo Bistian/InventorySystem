@@ -1,10 +1,15 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using static InventoryManagmentSystem.Academy.AcademyForm;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.Windows.Forms.VisualStyles;
 
 
 namespace InventoryManagmentSystem
@@ -35,6 +40,7 @@ namespace InventoryManagmentSystem
                 {
                     connection.Open();
                     connection.Close();
+                    UpdateClassActivity(connection);
                     Application.Run(new MainForm());
                 }
                 catch (Exception ex)
@@ -61,5 +67,26 @@ namespace InventoryManagmentSystem
             MessageBox.Show($"An unhandled exception occurred: {exception?.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        static void UpdateClassActivity(SqlConnection connection)
+        {
+            string query = "UPDATE TBCLASSES " +
+                           "SET isFinished = 1 " +
+                           "WHERE endDate <= CAST(GETDATE() AS DATE); ";
+
+            var command = new SqlCommand(query, connection);
+            try
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            connection.Close();
+        }
     }
+
 }
