@@ -145,24 +145,6 @@
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="All Forms\DatabaseConfig.cs" />
-    <Compile Include="All Forms\FilterForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="All Forms\FilterForm.Designer.cs">
-      <DependentUpon>FilterForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="All Forms\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="All Forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="All Forms\MainPanel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="All Forms\MainPanel.Designer.cs">
-      <DependentUpon>MainPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="All Forms\Rental Forms\Academy Forms\AcademyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -376,12 +358,6 @@
     <Compile Include="All Forms\Rental Forms\ReturnOrReplacecs.Designer.cs">
       <DependentUpon>ReturnOrReplacecs.cs</DependentUpon>
     </Compile>
-    <Compile Include="All Forms\xDeprecatedx\SetSelectionModuleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="All Forms\xDeprecatedx\SetSelectionModuleForm.Designer.cs">
-      <DependentUpon>SetSelectionModuleForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="C# Files\SettingsData.cs" />
     <Compile Include="All Forms\Settings\SettingsForm.cs">
       <SubType>Form</SubType>
@@ -415,15 +391,6 @@
     </Compile>
     <EmbeddedResource Include="All Forms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="All Forms\FilterForm.resx">
-      <DependentUpon>FilterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="All Forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="All Forms\MainPanel.resx">
-      <DependentUpon>MainPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="All Forms\Rental Forms\Academy Forms\AcademyForm.resx">
       <DependentUpon>AcademyForm.cs</DependentUpon>
@@ -530,9 +497,6 @@
     <EmbeddedResource Include="All Forms\Rental Forms\ReturnOrReplacecs.resx">
       <DependentUpon>ReturnOrReplacecs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="All Forms\xDeprecatedx\SetSelectionModuleForm.resx">
-      <DependentUpon>SetSelectionModuleForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="All Forms\Settings\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -592,6 +556,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FireTECLogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
