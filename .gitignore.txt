@@ -1,1 +1,19 @@
-C:\Users\sebas\Desktop\InventorySystem\InventoryManagmentSystem\bin\Debug\Database
+# Visual Studio files to ignore
+.vs/
+*.suo
+*.user
+*.cache
+*.csproj.user
+
+# Build output
+bin/
+obj/
+
+# NuGet Packages
+packages/
+*.nupkg
+project.lock.json
+
+# Other
+*.log
+*.tmp
