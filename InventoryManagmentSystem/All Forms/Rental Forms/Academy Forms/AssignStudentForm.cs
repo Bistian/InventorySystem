@@ -108,13 +108,16 @@ namespace InventoryManagmentSystem.Academy
                 var startday = StartDateFinal.Day;
 
                 var EndDateFinal = DateTime.Parse(endDate);
-                var endyear = EndDateFinal.Year;
-                var endmonth = EndDateFinal.Month;
-                var endday = EndDateFinal.Day;
+                if (EndDateFinal > DateTime.Now)
+                {
+                    var endyear = EndDateFinal.Year;
+                    var endmonth = EndDateFinal.Month;
+                    var endday = EndDateFinal.Day;
 
-                currClass = item.GetColumnValue("Name") + $" {startmonth}/{startday}/{startyear} - {endmonth}/{endday}/{endyear}";
-                cbClasses.Items.Add(currClass);
-                cbClasses.Enabled = true;
+                    currClass = item.GetColumnValue("Name") + $" {startmonth}/{startday}/{startyear} - {endmonth}/{endday}/{endyear}";
+                    cbClasses.Items.Add(currClass);
+                    cbClasses.Enabled = true;
+                }
             }
         }
 
