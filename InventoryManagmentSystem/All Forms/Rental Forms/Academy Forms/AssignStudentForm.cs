@@ -98,7 +98,8 @@ namespace InventoryManagmentSystem.Academy
             classList = HelperSql.ClassFindByAcademy(connection, academyId);
             if(classList == null) { return; }
             string currClass;
-            foreach(var item in classList)
+            cbClasses.Enabled = true;
+            foreach (var item in classList)
             {
                 string startDate = item.GetColumnValue("StartDate");
                 string endDate = item.GetColumnValue("EndDate");
@@ -116,7 +117,6 @@ namespace InventoryManagmentSystem.Academy
 
                     currClass = item.GetColumnValue("Name") + $" {startmonth}/{startday}/{startyear} - {endmonth}/{endday}/{endyear}";
                     cbClasses.Items.Add(currClass);
-                    cbClasses.Enabled = true;
                 }
             }
         }
