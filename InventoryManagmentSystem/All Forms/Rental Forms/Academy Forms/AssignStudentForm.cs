@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace InventoryManagmentSystem.Academy
 {
@@ -36,19 +38,21 @@ namespace InventoryManagmentSystem.Academy
                 UPDATE tbClients
                 SET IdClass=@IdClass, Academy=@Academy
                 WHERE Id=@Id
-            ";
+            "
+            ;
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
-            string Id = string.Empty;
+
+            string ClassId = string.Empty;
             foreach (var item in classList)
             {
-                if (item.GetColumnValue("Name") == cbClasses.Text)
+                if (item.GetColumnValue("Name") == Regex.Replace(cbClasses.Text, @"\d{1,2}/\d{1,2}/\d{4}\s*-\s*\d{1,2}/\d{1,2}/\d{4}", "").Trim())
                 {
-                    Id = item.GetColumnValue("Id");
+                    ClassId = item.GetColumnValue("Id");
                     break;
                 }
             }
-            if (Id == string.Empty)
+            if (ClassId == string.Empty)
             {
                 return false;
             }
@@ -58,7 +62,7 @@ namespace InventoryManagmentSystem.Academy
                 SqlCommand command = new SqlCommand(query, connection);
                 connection.Open();
                 command.Parameters.AddWithValue("@Id", parent.ClientId);
-                command.Parameters.AddWithValue("@IdClass", Id);
+                command.Parameters.AddWithValue("@IdClass", ClassId);
                 command.Parameters.AddWithValue("@Academy", cbAcademy.Text);
                 command.ExecuteNonQuery();
                 connection.Close();

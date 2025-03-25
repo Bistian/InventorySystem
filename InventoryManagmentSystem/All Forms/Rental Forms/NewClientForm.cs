@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace InventoryManagmentSystem.Rental_Forms
@@ -228,7 +229,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             string classId = string.Empty;
             foreach(var item in classList)
             {
-                if (item.GetColumnValue("Name") == cbClass.Text)
+                if (item.GetColumnValue("Name") == Regex.Replace(cbClass.Text, @"\d{1,2}/\d{1,2}/\d{4}\s*-\s*\d{1,2}/\d{1,2}/\d{4}", "").Trim())
                 {
                     classId = item.GetColumnValue("Id");
                     break;
