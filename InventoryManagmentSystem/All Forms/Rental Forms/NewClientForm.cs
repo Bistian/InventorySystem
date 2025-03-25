@@ -18,7 +18,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         private List<Item> academyList;
         private List<Item> classList;
         private bool ExistingUser;
-        private Item client;
+        private Item client = null;
 
         public NewClientForm(string rentalType = null, string clientName = null)
         {
@@ -462,13 +462,19 @@ namespace InventoryManagmentSystem.Rental_Forms
             {
                 check_box_disable_drivers.Text = "Enable";
                 txtBoxDriversLicense.Visible = false;
-                txtBoxDriversLicense.Text = "N/A";
+                if (client != null)
+                {
+                    txtBoxDriversLicense.Text = "N/A";
+                }
             }
             else
             {
                 check_box_disable_drivers.Text = "Disable";
                 txtBoxDriversLicense.Visible = true;
-                txtBoxDriversLicense.Text = client.GetColumnValue("DriversLicenseNumber");
+                if (client != null)
+                {
+                    txtBoxDriversLicense.Text = client.GetColumnValue("DriversLicenseNumber");
+                }
             }
         }
     }
