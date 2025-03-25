@@ -11,14 +11,14 @@ namespace InventoryManagmentSystem.Rental_Forms
 {
     public partial class NewClientForm : Form
     {
-
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
+        private static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+        private SqlConnection connection = new SqlConnection(connectionString);
 
         public string clientId = string.Empty;
-        List<Item> academyList;
-        List<Item> classList;
-        bool ExistingUser;
+        private List<Item> academyList;
+        private List<Item> classList;
+        private bool ExistingUser;
+        private Item client;
 
         public NewClientForm(string rentalType = null, string clientName = null)
         {
@@ -37,10 +37,11 @@ namespace InventoryManagmentSystem.Rental_Forms
         public void AutoFillFields(string type, string clientName)
         {
             RentalTypeSelector(type);
-            var client = HelperSql.ClientFindByName(connection, clientName);
-            if(client.Count() == 0) { return; }
+            client = HelperSql.ClientFindByName(connection, clientName);
+            if (client.Count() == 0) { return; }
 
             txtBoxCustomerName.Text = client.GetColumnValue("Name");
+            txtBoxDriversLicense.Text = client.GetColumnValue("DriversLicenseNumber");
             maskPhone.Text = client.GetColumnValue("Phone");
             txtBoxEmail.Text = client.GetColumnValue("Email");
             textBoxChest.Text = client.GetColumnValue("Chest");
@@ -75,7 +76,6 @@ namespace InventoryManagmentSystem.Rental_Forms
             cbRep.SelectedIndex = -1;
             cbAcademy.SelectedIndex = -1;
             cbClass.SelectedIndex = -1;
-
         }
 
         /// <summary> Safety checks. </summary>
@@ -116,7 +116,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         private void PopulateAcademyList()
         {
             academyList = HelperSql.AcademyFillComboBox(connection, cbAcademy);
-            foreach(var academy in academyList)
+            foreach (var academy in academyList)
             {
                 cbAcademy.Items.Add(academy.GetColumnValue("Name"));
             }
@@ -157,7 +157,6 @@ namespace InventoryManagmentSystem.Rental_Forms
                 cbAcademy.SelectedIndex = -1;
 
                 panelRentalInfo.Dock = DockStyle.Bottom;
-
             }
             //Department
             else if (type == "Departments")
@@ -188,7 +187,6 @@ namespace InventoryManagmentSystem.Rental_Forms
 
                 Point point = new Point(panelAddress.Location.X, panelAddress.Location.Y + panelAddress.Size.Height);
                 panelRentalInfo.Location = point;
-
             }
             //Academy
             else if (type == "Academies")
@@ -199,7 +197,6 @@ namespace InventoryManagmentSystem.Rental_Forms
                 labelRentalInfo.Visible = false;
                 LableCustomerName.Text = "Point Of Contact";
                 labelDriversLicense.Text = "Academy Name";
-
 
                 //default values
                 textBoxChest.Text = "N/A";
@@ -227,7 +224,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         {
             var client = new Dictionary<string, string>();
             string classId = string.Empty;
-            foreach(var item in classList)
+            foreach (var item in classList)
             {
                 if (item.GetColumnValue("Name") == Regex.Replace(cbClass.Text, @"\d{1,2}/\d{1,2}/\d{4}\s*-\s*\d{1,2}/\d{1,2}/\d{4}", "").Trim())
                 {
@@ -252,9 +249,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             client["Weight"] = textBoxWeight.Text;
 
             bool inserted = HelperSql.ClientInsert(connection, client);
-            if(inserted == false) { return false; }
-
-           
+            if (inserted == false) { return false; }
 
             //hiding input panels
             panelFinalize.Visible = false;
@@ -321,7 +316,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
             connection.Close();
         }
-       
+
         private void ButtonContinue_Click(object sender, EventArgs e)
         {
             if (!AllFieldsValid())
@@ -378,14 +373,14 @@ namespace InventoryManagmentSystem.Rental_Forms
         {
             Clear();
         }
-        
+
         private void comboBoxGender_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbGender.Text == "Male")
+            if (cbGender.Text == "Male")
             {
                 panelHips.Visible = false;
                 textBoxHips.Text = "N/A";
-            } 
+            }
             else
             {
                 panelHips.Visible = true;
@@ -400,9 +395,9 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void checkBoxMeasure_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBoxMeasure.Checked)
+            if (checkBoxMeasure.Checked)
             {
-                panelMeasurments.Visible=false;
+                panelMeasurments.Visible = false;
             }
             else
             {
@@ -412,7 +407,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void checkAcademy_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkAcademy.Checked)
+            if (checkAcademy.Checked)
             {
                 panelAcademy.Visible = false;
                 cbAcademy.Text = "N/A";
@@ -432,14 +427,14 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (index == -1) { return; }
 
             string name = cbAcademy.Text;
-            if(classList != null) { classList.Clear(); }
+            if (classList != null) { classList.Clear(); }
             cbClass.Items.Clear();
 
             var academyId = academyList[index].GetColumnValue("Id");
             classList = HelperSql.ClassFindByAcademy(connection, academyId);
-            if(classList == null) { return; }
+            if (classList == null) { return; }
             string currClass;
-            foreach(var item in classList)
+            foreach (var item in classList)
             {
                 string startDate = item.GetColumnValue("StartDate");
                 string endDate = item.GetColumnValue("EndDate");
@@ -449,7 +444,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 var startday = StartDateFinal.Day;
 
                 var EndDateFinal = DateTime.Parse(endDate);
-                if(EndDateFinal > DateTime.Now)
+                if (EndDateFinal > DateTime.Now)
                 {
                     var endyear = EndDateFinal.Year;
                     var endmonth = EndDateFinal.Month;
@@ -463,10 +458,17 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
+            if (check_box_disable_drivers.Checked)
             {
-                panelLicence.Visible = false;
+                check_box_disable_drivers.Text = "Enable";
+                txtBoxDriversLicense.Visible = false;
                 txtBoxDriversLicense.Text = "N/A";
+            }
+            else
+            {
+                check_box_disable_drivers.Text = "Disable";
+                txtBoxDriversLicense.Visible = true;
+                txtBoxDriversLicense.Text = client.GetColumnValue("DriversLicenseNumber");
             }
         }
     }

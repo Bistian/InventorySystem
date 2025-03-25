@@ -11,8 +11,8 @@ namespace InventoryManagmentSystem
 {
     public partial class NewRentalModuleForm : Form
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
+        private static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+        private SqlConnection connection = new SqlConnection(connectionString);
 
         private string ItemIdClient = string.Empty;
         private string ItemIdInventory = string.Empty;
@@ -98,7 +98,6 @@ namespace InventoryManagmentSystem
                 dataGridInv.Columns["column_material_inv"].Visible = false;
                 dataGridInv.Columns["column_color_inv"].Visible = true;
                 dataGridInv.Columns["column_size_inv"].Visible = true;
-
             }
             else
             {
@@ -107,7 +106,7 @@ namespace InventoryManagmentSystem
                 dataGridInv.Columns["column_size_inv"].Visible = true;
             }
 
-            if(selection == "boots")
+            if (selection == "boots")
             {
                 HelperSql.BootsFindAllInStock(connection, dataGridInv, textBoxSearchBar.Text);
             }
@@ -166,8 +165,8 @@ namespace InventoryManagmentSystem
             {
                 string startDate = item.GetColumnValue("StartDate");
                 string endDate = item.GetColumnValue("EndDate");
-                labelClientClass.Text = item.GetColumnValue("Name") + 
-                    "\n Start Date " + startDate + 
+                labelClientClass.Text = item.GetColumnValue("Name") +
+                    "\n Start Date " + startDate +
                     "\n End Date " + endDate;
             }
 
@@ -237,7 +236,7 @@ namespace InventoryManagmentSystem
             {
                 cbItemType.SelectedIndex = 3;
             }
-            else if(itemType == "mask")
+            else if (itemType == "mask")
             {
                 cbItemType.SelectedIndex = 4;
             }
@@ -252,7 +251,6 @@ namespace InventoryManagmentSystem
 
         private void NewRentalModuleForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private void dataGridInv_CellClick_1(object sender, DataGridViewCellEventArgs e)
@@ -264,7 +262,6 @@ namespace InventoryManagmentSystem
             {
                 string message = "Are you sure you want to assign this item to " + labelProfileName.Text;
                 if (!HelperFunctions.YesNoMessageBox(message, "Rent")) { return; }
-
 
                 if (DateTime.Today >= DatepickerDue.Value.Date && cbItemType.Text != "boots")
                 {
@@ -310,7 +307,6 @@ namespace InventoryManagmentSystem
                 cbItemType.Enabled = true;
                 dataGridViewClient.Enabled = true;
                 MessageBox.Show("Item Replaced!");
-
             }
         }
 
@@ -330,7 +326,7 @@ namespace InventoryManagmentSystem
                 if (isUpdated)
                 {
                     var items = HelperSql.ClientFindRented(connection, ClientId);
-                    if(items.Count < 1)
+                    if (items.Count < 1)
                     {
                         HelperSql.ClientUpdateActivity(connection, ClientId, false);
                     }
@@ -398,7 +394,6 @@ namespace InventoryManagmentSystem
 
         public void btnProfile_Click(object sender, EventArgs e)
         {
-           
             labelProfileDrivers.Text = "License Number:";
 
             panelProfileRentalInfo.Visible = true;
@@ -442,7 +437,5 @@ namespace InventoryManagmentSystem
             HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
             HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
         }
-
-       
     }
 }
