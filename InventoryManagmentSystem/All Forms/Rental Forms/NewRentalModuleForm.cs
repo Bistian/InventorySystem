@@ -164,7 +164,11 @@ namespace InventoryManagmentSystem
             var item = HelperSql.ClassFindByClassId(connection, ClassId);
             if (item != null)
             {
-                labelClientClass.Text = item.GetColumnValue("Name");
+                string startDate = item.GetColumnValue("StartDate");
+                string endDate = item.GetColumnValue("EndDate");
+                labelClientClass.Text = item.GetColumnValue("Name") + 
+                    "\n Start Date " + startDate + 
+                    "\n End Date " + endDate;
             }
 
             labelProfileDrivers.Text = "License Number:";
@@ -262,9 +266,9 @@ namespace InventoryManagmentSystem
                 if (!HelperFunctions.YesNoMessageBox(message, "Rent")) { return; }
 
 
-                if (DateTime.Today == DatepickerDue.Value.Date && cbItemType.Text != "boots")
+                if (DateTime.Today >= DatepickerDue.Value.Date && cbItemType.Text != "boots")
                 {
-                    MessageBox.Show("Please select a due date");
+                    MessageBox.Show("Please select a valid due date");
                     return;
                 }
                 bool isUpdated = false;
