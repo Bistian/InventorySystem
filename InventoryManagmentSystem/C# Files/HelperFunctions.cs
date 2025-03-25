@@ -19,9 +19,9 @@ namespace InventoryManagmentSystem
             return target.ToLower().IndexOf(substring.ToLower()) != -1;
         }
 
-        public static void DataGridFormatDate(DataGridView grid, string[] columns)
+        public static void DataGridFormatDateColumns(DataGridView grid, string[] columns)
         {
-            foreach(string col in columns)
+            foreach (string col in columns)
             {
                 grid.Columns[col].ValueType = typeof(DateTime);
             }
@@ -41,7 +41,7 @@ namespace InventoryManagmentSystem
             };
         }
 
-        public static void DataGridHideTime(DataGridView grid, string columnName)
+        public static void DataGridFormatDateColumn(DataGridView grid, string columnName)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace InventoryManagmentSystem
                 }
                 grid.Columns[columnName].DefaultCellStyle.Format = "d";
             }
-            catch(Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
         }
 
         public static string DateCrop(string date, string format = null)
@@ -63,7 +63,7 @@ namespace InventoryManagmentSystem
             string Y = d.Year.ToString();
             string M = d.Month.ToString();
             string D = d.Day.ToString();
-            if(format == "YYYY/MM/DD")
+            if (format == "YYYY/MM/DD")
             {
                 return $"{Y}/{M}/{D}";
             }
@@ -88,7 +88,7 @@ namespace InventoryManagmentSystem
 
         public static string MakeTableFromItemType(string itemType)
         {
-            if(itemType.ToLower() == "pants" || itemType.ToLower() == "boots")
+            if (itemType.ToLower() == "pants" || itemType.ToLower() == "boots")
             {
                 return $"tb{char.ToUpper(itemType[0]) + itemType.Substring(1)}";
             }

@@ -119,14 +119,14 @@ namespace InventoryManagmentSystem
         {
             LoadTables(dataGridViewBeforeDue, QueryForRented(), "column_due");
             LoadTables(dataGridViewPastDue, QueryForPastDue(), "column_due2");
-            HelperFunctions.DataGridHideTime(dataGridViewBeforeDue, "column_due");
-            HelperFunctions.DataGridHideTime(dataGridViewPastDue, "column_due2");
+            HelperFunctions.DataGridFormatDateColumn(dataGridViewBeforeDue, "column_due");
+            HelperFunctions.DataGridFormatDateColumn(dataGridViewPastDue, "column_due2");
         }
 
         private string LoadTables(DataGridView grid, string query, string columnName)
         {
             // Change the styling for the date column.
-            HelperFunctions.DataGridHideTime(grid, columnName);
+            HelperFunctions.DataGridFormatDateColumn(grid, columnName);
             grid.Rows.Clear();
             try
             {

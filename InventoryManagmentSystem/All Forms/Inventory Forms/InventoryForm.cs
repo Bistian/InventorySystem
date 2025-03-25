@@ -12,12 +12,12 @@ namespace InventoryManagmentSystem
 {
     public partial class InventoryForm : BaseForm
     {
-
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
+        private static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+        private SqlConnection connection = new SqlConnection(connectionString);
 
         /// <summary> Key/Value pair list. Key = column name </summary>
         private List<string[]> filterList = new List<string[]>();
+
         private SearchForm searchForm;
         public string ItemTypeGlobal;
 
@@ -25,10 +25,10 @@ namespace InventoryManagmentSystem
         {
             InitializeComponent();
             string[] columns = { "column_acquisition_date", "column_manufacture_date" };
-            HelperFunctions.DataGridFormatDate(dataGridInv, columns);
+            HelperFunctions.DataGridFormatDateColumns(dataGridInv, columns);
             InitSearchContainer();
         }
-      
+
         private void InitSearchContainer()
         {
             // Show selected items.
@@ -77,7 +77,6 @@ namespace InventoryManagmentSystem
 
         private void UpdateHelmet(DataGridViewCellEventArgs e)
         {
-
             var item = UpdateCreateItem(e);
             NewItemForm itemForm = new NewItemForm(item);
             itemForm.SaveButton.Enabled = true;
@@ -93,7 +92,7 @@ namespace InventoryManagmentSystem
             itemForm.ShowDialog();
             itemForm.Close();
         }
-        
+
         private void DeleteItem(string itemId)
         {
             //Deleting from item specific tables
@@ -155,7 +154,7 @@ namespace InventoryManagmentSystem
 
         private void WriteListToPdf(PdfDocument document)
         {
-            /* Format 
+            /* Format
                 Brand: Muffin
                 Serial: 123456
                 Condition: Used

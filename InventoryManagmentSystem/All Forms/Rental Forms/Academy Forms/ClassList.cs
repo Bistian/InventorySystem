@@ -13,29 +13,29 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static InventoryManagmentSystem.Academy.AcademyForm;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+
 namespace InventoryManagmentSystem.Academy
 {
     public partial class ClassList : Form
     {
+        private static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+        private SqlConnection connection = new SqlConnection(connectionString);
 
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
         //Creating command
-        SqlCommand command = new SqlCommand();
+        private SqlCommand command = new SqlCommand();
+
         //Creatinng Reader
-        SqlDataReader dr2;
-        Guid AcademyId;
-        AcademyForm parent;
-        AcademyForm.Class selectedClass;
+        private SqlDataReader dr2;
+
+        private Guid AcademyId;
+        private AcademyForm parent;
+        private AcademyForm.Class selectedClass;
 
         public ClassList(AcademyForm parent)
         {
             this.parent = parent;
             InitializeComponent();
             AcademyId = parent.AcademyId;
-            dataGridClasses.Columns["column_start_date"].DefaultCellStyle.Format = "d";
-            dataGridClasses.Columns["column_end_date"].DefaultCellStyle.Format = "d";
-
             checkBoth.Checked = true;
             LoadClasses();
             initLable();
@@ -44,9 +44,6 @@ namespace InventoryManagmentSystem.Academy
 
         public void LoadClasses()
         {
-            //this function does not work
-            //HelperSql.ClassFindAll(connection, dataGridClasses);
-
             // SQL
             int i = 0;
             dataGridClasses.Rows.Clear();
@@ -61,12 +58,13 @@ namespace InventoryManagmentSystem.Academy
 
             while (reader.Read())
             {
-
                 i++;
                 dataGridClasses.Rows.Add(i, reader[0], reader[1].ToString(), GetAcademyName((Guid)reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString());
             }
             reader.Close();
             connection.Close();
+            HelperFunctions.DataGridFormatDateColumn(dataGridClasses, "column_start_date");
+            HelperFunctions.DataGridFormatDateColumn(dataGridClasses, "column_end_date");
         }
 
         public void initLable()
@@ -143,13 +141,12 @@ namespace InventoryManagmentSystem.Academy
             {
                 ChangeClassStatus(row);
             }
-            else if(column == "column_update")
+            else if (column == "column_update")
             {
                 UpdateClass(row);
             }
-            else if(column == "column_finished")
+            else if (column == "column_finished")
             {
-
             }
             else
             {
@@ -164,7 +161,6 @@ namespace InventoryManagmentSystem.Academy
             SqlConnection connection2 = new SqlConnection(connectionString);
             //Creating command
             SqlCommand command2 = new SqlCommand();
-
 
             string AcademyName = "";
             string query = $@"
@@ -211,7 +207,6 @@ namespace InventoryManagmentSystem.Academy
 
             while (reader.Read())
             {
-                
                 i++;
                 dataGridClasses.Rows.Add(i, reader[0], reader[1].ToString(), GetAcademyName((Guid)reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString());
             }
@@ -244,7 +239,7 @@ namespace InventoryManagmentSystem.Academy
             positionY += lineHeight + ExtraLineSpace;
 
             XFont font = new XFont("Arial", 12, XFontStyle.Regular);
-            foreach(DataGridViewRow row in dataGridClasses.Rows)
+            foreach (DataGridViewRow row in dataGridClasses.Rows)
             {
                 if (!row.Visible)
                 {
@@ -303,7 +298,6 @@ namespace InventoryManagmentSystem.Academy
 
                 foreach (DataGridViewRow row in dataGridClasses.Rows)
                 {
-
                     if (Convert.ToBoolean(row.Cells[columnName].Value))
                     {
                         row.Visible = true; // show the row
@@ -314,7 +308,7 @@ namespace InventoryManagmentSystem.Academy
                     }
                 }
             }
-            else if(currentCheckBox.Text == "Inactive")
+            else if (currentCheckBox.Text == "Inactive")
             {
                 //this function does not work
                 //HelperSql.ClassFindByStatus(connection, dataGridClasses, false);
@@ -332,12 +326,11 @@ namespace InventoryManagmentSystem.Academy
                         row.Visible = true; // Hide the row
                     }
                 }
-
             }
             else if (currentCheckBox.Text == "Both")
             {
                 LoadClasses();
             }
         }
-    }  
+    }
 }

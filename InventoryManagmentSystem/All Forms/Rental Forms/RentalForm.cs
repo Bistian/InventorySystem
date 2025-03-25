@@ -82,8 +82,8 @@ namespace InventoryManagmentSystem
         {
             LoadTables(dataGridRented, QueryForRented(), "column_rented_due_date");
             LoadTables(dataGridPastDue, QueryForPastDue(), "column_past_due_due_date");
-            HelperFunctions.DataGridHideTime(dataGridRented, "column_rented_due_date");
-            HelperFunctions.DataGridHideTime(dataGridPastDue, "column_past_due_due_date");
+            HelperFunctions.DataGridFormatDateColumn(dataGridRented, "column_rented_due_date");
+            HelperFunctions.DataGridFormatDateColumn(dataGridPastDue, "column_past_due_due_date");
         }
 
         private string QuerySwitch(string itemType, string sign)
@@ -105,7 +105,7 @@ namespace InventoryManagmentSystem
         private void LoadTables(DataGridView grid, string query, string columnName)
         {
             // Change the styling for the date column.
-            HelperFunctions.DataGridHideTime(grid, columnName);
+            HelperFunctions.DataGridFormatDateColumn(grid, columnName);
             grid.Rows.Clear();
             try
             {
