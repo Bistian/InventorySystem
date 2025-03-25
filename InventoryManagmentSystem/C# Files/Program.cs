@@ -11,7 +11,6 @@ using static InventoryManagmentSystem.Academy.AcademyForm;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Windows.Forms.VisualStyles;
 
-
 namespace InventoryManagmentSystem
 {
     internal static class Program
@@ -20,18 +19,17 @@ namespace InventoryManagmentSystem
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
-            #if DEBUG
+#if DEBUG
             Application.ThreadException += Application_ThreadException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            #endif
+#endif
 
             // Get the current connection string
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -51,26 +49,25 @@ namespace InventoryManagmentSystem
                         Application.Run(new DatabaseCreationModule());
                     }
                     catch (Exception e) { Console.WriteLine(e.Message); }
-                }    
-                
+                }
             }
         }
 
-        static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             MessageBox.Show($"An unhandled exception occurred: {e.Exception.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Exception exception = e.ExceptionObject as Exception;
             MessageBox.Show($"An unhandled exception occurred: {exception?.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        static void UpdateClassActivity(SqlConnection connection)
+        private static void UpdateClassActivity(SqlConnection connection)
         {
             string query = "UPDATE TBCLASSES " +
-                           "SET isFinished = 1 " +
+                           "SET isFinished = 'true' " +
                            "WHERE endDate <= CAST(GETDATE() AS DATE); ";
 
             var command = new SqlCommand(query, connection);
@@ -79,7 +76,6 @@ namespace InventoryManagmentSystem
                 if (connection.State == ConnectionState.Open) { connection.Close(); }
                 connection.Open();
                 command.ExecuteNonQuery();
-
             }
             catch (Exception ex)
             {
@@ -88,5 +84,4 @@ namespace InventoryManagmentSystem
             connection.Close();
         }
     }
-
 }
