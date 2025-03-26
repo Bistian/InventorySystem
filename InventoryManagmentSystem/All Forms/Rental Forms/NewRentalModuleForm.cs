@@ -164,10 +164,16 @@ namespace InventoryManagmentSystem
             if (item != null)
             {
                 string startDate = item.GetColumnValue("StartDate");
+                string startFormatted = DateTime.Parse(startDate).ToString("yyyy/MM/dd");
+                startFormatted = HelperFunctions.DateCrop(startFormatted, "mm/dd/yyyy");
+
                 string endDate = item.GetColumnValue("EndDate");
+                string endFormatted = DateTime.Parse(endDate).ToString("yyyy/MM/dd");
+                endFormatted = HelperFunctions.DateCrop(endFormatted, "mm/dd/yyyy");
+
                 labelClientClass.Text = item.GetColumnValue("Name") +
-                    "\n Start Date " + startDate +
-                    "\n End Date " + endDate;
+                    "\n Start Date " + startFormatted +
+                    "\n End Date " + endFormatted;
             }
 
             labelProfileDrivers.Text = "License Number:";
