@@ -462,10 +462,8 @@ namespace InventoryManagmentSystem.Rental_Forms
             {
                 check_box_disable_drivers.Text = "Enable";
                 txtBoxDriversLicense.Visible = false;
-                if (client != null)
-                {
-                    txtBoxDriversLicense.Text = "N/A";
-                }
+                txtBoxDriversLicense.Text = "N/A";
+                
             }
             else
             {
