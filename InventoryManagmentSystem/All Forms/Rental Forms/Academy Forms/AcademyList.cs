@@ -4,6 +4,7 @@ using System;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace InventoryManagmentSystem.Academy
 {
@@ -111,7 +112,7 @@ namespace InventoryManagmentSystem.Academy
             int positionY = startY;
             int ExtraLineSpace = 10;
 
-            XFont fontTitle = new XFont("Arial", 16, XFontStyle.Bold);
+            XFont fontTitle = new XFont("Arial", 16, XFontStyleEx.Bold);
             double maxPageHeight = page.Height.Point;
             int lineHeight = (int)fontTitle.Height;
 
@@ -119,7 +120,7 @@ namespace InventoryManagmentSystem.Academy
             HelperFunctions.PdfWriteLine(graphics, fontTitle, text, positionY);
             positionY += lineHeight + ExtraLineSpace;
 
-            XFont font = new XFont("Arial", 12, XFontStyle.Regular);
+            XFont font = new XFont("Arial", 12, XFontStyleEx.Regular);
             foreach (DataGridViewRow row in dataGridAcademies.Rows)
             {
                 if (!row.Visible)

@@ -171,7 +171,7 @@ namespace InventoryManagmentSystem
             int positionY = startY;
             int ExtraLineSpace = 10;
 
-            XFont fontTitle = new XFont("Arial", 16, XFontStyle.Bold);
+            XFont fontTitle = new XFont("Arial", 16, XFontStyleEx.Bold);
             double maxPageHeight = page.Height.Point;
             int lineHeight = (int)fontTitle.Height;
 
@@ -192,7 +192,7 @@ namespace InventoryManagmentSystem
             positionY += lineHeight + ExtraLineSpace;
 
             string text = "";
-            XFont font = new XFont("Arial", 12, XFontStyle.Regular);
+            XFont font = new XFont("Arial", 12, XFontStyleEx.Regular);
             foreach (DataGridViewRow row in dataGridInv.Rows)
             {
                 if (!row.Visible)

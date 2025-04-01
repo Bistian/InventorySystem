@@ -159,7 +159,7 @@ namespace InventoryManagmentSystem
                 // =========== Add Title ===========
 
                 // Format title
-                XFont fontTitle = new XFont(font, 18, XFontStyle.Bold);
+                XFont fontTitle = new XFont(font, 18, XFontStyleEx.Bold);
                 XStringFormat formatLabel = new XStringFormat();
                 formatLabel.Alignment = XStringAlignment.Near;
 
@@ -173,8 +173,8 @@ namespace InventoryManagmentSystem
 
 
                 // =========== Add Fields ===========
-                XFont clientLabel = new XFont(font, 16, XFontStyle.Bold);
-                XFont fontLabel = new XFont(font, 12, XFontStyle.Bold);
+                XFont clientLabel = new XFont(font, 16, XFontStyleEx.Bold);
+                XFont fontLabel = new XFont(font, 12, XFontStyleEx.Bold);
 
                 
                 graphics.DrawString(
