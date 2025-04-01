@@ -7,11 +7,11 @@
       "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\rental forms\\newclientform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\all forms\\rental forms\\newclientform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\inventorymanagmentsystem\\all forms\\rental forms\\newclientform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\rental forms\\newclientform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|c:\\users\\sebas\\onedrive\\desktop\\work\\inventorysystem\\inventorymanagmentsystem\\all forms\\rental forms\\newrentalmoduleform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\inventorymanagmentsystem\\all forms\\rental forms\\newrentalmoduleform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{6236F310-736F-44C3-9BED-07F4307F8977}|InventoryManagmentSystem\\InventoryManagmentSystem.csproj|solutionrelative:inventorymanagmentsystem\\all forms\\rental forms\\newrentalmoduleform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -58,8 +58,7 @@
               "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\NewClientForm.cs [Design]",
               "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\Rental Forms\\NewClientForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T17:15:39.498Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-03-28T17:15:39.498Z"
             },
             {
               "$type": "Document",
@@ -70,8 +69,7 @@
               "ToolTip": "C:\\Users\\sebas\\OneDrive\\Desktop\\Work\\InventorySystem\\InventoryManagmentSystem\\All Forms\\Rental Forms\\NewRentalModuleForm.cs [Design]",
               "RelativeToolTip": "InventoryManagmentSystem\\All Forms\\Rental Forms\\NewRentalModuleForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T16:19:12.184Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-03-28T16:19:12.184Z"
             },
             {
               "$type": "Document",
