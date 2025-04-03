@@ -189,6 +189,7 @@
     <Compile Include="All Forms\SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="C# Files\ComboBoxItem.cs" />
     <Compile Include="C# Files\CustomTypes.cs" />
     <Compile Include="C# Files\HelperButton.cs" />
     <Compile Include="C# Files\HelperError.cs" />

@@ -4,7 +4,9 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using InventoryManagmentSystem.C__Files;
 using static System.Net.Mime.MediaTypeNames;
+
 
 namespace InventoryManagmentSystem.Academy
 {
@@ -43,16 +45,10 @@ namespace InventoryManagmentSystem.Academy
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
 
-            string ClassId = string.Empty;
-            foreach (var item in classList)
-            {
-                if (item.GetColumnValue("Name") == Regex.Replace(cbClasses.Text, @"\d{1,2}/\d{1,2}/\d{4}\s*-\s*\d{1,2}/\d{1,2}/\d{4}", "").Trim())
-                {
-                    ClassId = item.GetColumnValue("Id");
-                    break;
-                }
-            }
-            if (ClassId == string.Empty)
+            ComboBoxItem Class = (ComboBoxItem)cbClasses.SelectedItem;
+           
+
+            if (Class.ID == string.Empty)
             {
                 return false;
             }
@@ -62,7 +58,7 @@ namespace InventoryManagmentSystem.Academy
                 SqlCommand command = new SqlCommand(query, connection);
                 connection.Open();
                 command.Parameters.AddWithValue("@Id", parent.ClientId);
-                command.Parameters.AddWithValue("@IdClass", ClassId);
+                command.Parameters.AddWithValue("@IdClass", Class.ID);
                 command.Parameters.AddWithValue("@Academy", cbAcademy.Text);
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -120,7 +116,7 @@ namespace InventoryManagmentSystem.Academy
                     var endday = EndDateFinal.Day;
 
                     currClass = item.GetColumnValue("Name") + $" {startmonth}/{startday}/{startyear} - {endmonth}/{endday}/{endyear}";
-                    cbClasses.Items.Add(currClass);
+                    cbClasses.Items.Add(new ComboBoxItem(item.GetColumnValue("Id"), currClass));
                 }
             }
         }
