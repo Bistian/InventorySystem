@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryManagmentSystem.C__Files;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -224,13 +225,13 @@ namespace InventoryManagmentSystem.Rental_Forms
         {
             var client = new Dictionary<string, string>();
             string classId = string.Empty;
-            foreach (var item in classList)
+            ComboBoxItem Class = (ComboBoxItem)cbClass.SelectedItem;
+            classId = Class.ID;
+
+
+            if (Class.ID == string.Empty)
             {
-                if (item.GetColumnValue("Name") == Regex.Replace(cbClass.Text, @"\d{1,2}/\d{1,2}/\d{4}\s*-\s*\d{1,2}/\d{1,2}/\d{4}", "").Trim())
-                {
-                    classId = item.GetColumnValue("Id");
-                    break;
-                }
+                return false;
             }
             client["IdClass"] = classId == string.Empty ? null : classId.ToString();
             client["Address"] = $"{txtBoxStreet.Text} {textBoxCity.Text} {textBoxState.Text} {textBoxZip.Text}";
@@ -434,6 +435,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             classList = HelperSql.ClassFindByAcademy(connection, academyId);
             if (classList == null) { return; }
             string currClass;
+            cbClass.Enabled = true;
             foreach (var item in classList)
             {
                 string startDate = item.GetColumnValue("StartDate");
@@ -451,7 +453,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                     var endday = EndDateFinal.Day;
 
                     currClass = item.GetColumnValue("Name") + $" {startmonth}/{startday}/{startyear} - {endmonth}/{endday}/{endyear}";
-                    cbClass.Items.Add(currClass);
+                    cbClass.Items.Add(new ComboBoxItem(item.GetColumnValue("Id"), currClass));
                 }
             }
         }
