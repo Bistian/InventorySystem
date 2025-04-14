@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static InventoryManagmentSystem.Academy.AcademyForm;
 
 namespace InventoryManagmentSystem.Rental_Forms
 {
@@ -275,7 +276,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                     "SET Name = @Name,Phone = @Phone,Email = " +
                     "@Email,Academy = @Academy,DriversLicenseNumber = @DriversLicenseNumber," +
                     "Address = @Address,FireTecRepresentative = @FireTecRepresentative, " +
-                    "Chest=@Chest, Sleeve=@Sleeve, Waist=@Waist, Inseam=@Inseam, Hips=@Hips, Weight=@Weight, Height=@Height " +
+                    "Chest=@Chest, Sleeve=@Sleeve, Waist=@Waist, Inseam=@Inseam, Hips=@Hips, Weight=@Weight, Height=@Height, IdClass=@ClassId " +
                     $"WHERE Id LIKE @Id";
 
             string address = txtBoxStreet.Text + " " + textBoxCity.Text + " " + textBoxState.Text + " " + textBoxZip.Text;
@@ -306,6 +307,12 @@ namespace InventoryManagmentSystem.Rental_Forms
                 command.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
                 command.Parameters.AddWithValue("@Height", textBoxHeight.Text);
                 command.Parameters.AddWithValue("@Id", clientId);
+
+                string classId = string.Empty;
+                ComboBoxItem Class = (ComboBoxItem)cbClass.SelectedItem;
+                classId = Class.ID;
+
+                command.Parameters.AddWithValue("@ClassId", classId);
 
                 command.ExecuteNonQuery();
                 MessageBox.Show("Client has been successfully updated.");
