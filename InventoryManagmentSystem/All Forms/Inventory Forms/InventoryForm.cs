@@ -12,12 +12,12 @@ namespace InventoryManagmentSystem
 {
     public partial class InventoryForm : BaseForm
     {
-
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
+        private static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+        private SqlConnection connection = new SqlConnection(connectionString);
 
         /// <summary> Key/Value pair list. Key = column name </summary>
         private List<string[]> filterList = new List<string[]>();
+
         private SearchForm searchForm;
         public string ItemTypeGlobal;
 
@@ -28,7 +28,7 @@ namespace InventoryManagmentSystem
             HelperFunctions.DataGridFormatDate(dataGridInv, columns);
             InitSearchContainer();
         }
-      
+
         private void InitSearchContainer()
         {
             // Show selected items.
@@ -77,7 +77,6 @@ namespace InventoryManagmentSystem
 
         private void UpdateHelmet(DataGridViewCellEventArgs e)
         {
-
             var item = UpdateCreateItem(e);
             NewItemForm itemForm = new NewItemForm(item);
             itemForm.SaveButton.Enabled = true;
@@ -93,7 +92,7 @@ namespace InventoryManagmentSystem
             itemForm.ShowDialog();
             itemForm.Close();
         }
-        
+
         private void DeleteItem(string itemId)
         {
             //Deleting from item specific tables
@@ -155,7 +154,7 @@ namespace InventoryManagmentSystem
 
         private void WriteListToPdf(PdfDocument document)
         {
-            /* Format 
+            /* Format
                 Brand: Muffin
                 Serial: 123456
                 Condition: Used
@@ -172,7 +171,7 @@ namespace InventoryManagmentSystem
             int positionY = startY;
             int ExtraLineSpace = 10;
 
-            XFont fontTitle = new XFont("Arial", 16, XFontStyle.Bold);
+            XFont fontTitle = new XFont("Arial", 16, XFontStyleEx.Bold);
             double maxPageHeight = page.Height.Point;
             int lineHeight = (int)fontTitle.Height;
 
@@ -193,7 +192,7 @@ namespace InventoryManagmentSystem
             positionY += lineHeight + ExtraLineSpace;
 
             string text = "";
-            XFont font = new XFont("Arial", 12, XFontStyle.Regular);
+            XFont font = new XFont("Arial", 12, XFontStyleEx.Regular);
             foreach (DataGridViewRow row in dataGridInv.Rows)
             {
                 if (!row.Visible)

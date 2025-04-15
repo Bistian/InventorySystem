@@ -26,9 +26,9 @@ namespace InventoryManagmentSystem
             LableClientName.Text = currClient;
             lableRentalOption.Text = RentalOption;
 
-            if(RentalOption == "Full Set")
+            if (RentalOption == "Full Set")
             {
-                if(DayNight == "Day")
+                if (DayNight == "Day")
                 {
                     labelAmount.Text = "$708";
                 }
@@ -42,7 +42,7 @@ namespace InventoryManagmentSystem
                 Item3.Text = "Pants";
                 Item4.Text = "Boots";
             }
-            else if(RentalOption == "Set Helmet Only")
+            else if (RentalOption == "Set Helmet Only")
             {
                 if (DayNight == "Day")
                 {
@@ -148,7 +148,7 @@ namespace InventoryManagmentSystem
 
                 // Add a new page to the PDF
                 PdfPage page = document.AddPage();
-                
+
                 // Get the graphics object of the PDF page
                 XGraphics graphics = XGraphics.FromPdfPage(page);
 
@@ -159,24 +159,22 @@ namespace InventoryManagmentSystem
                 // =========== Add Title ===========
 
                 // Format title
-                XFont fontTitle = new XFont(font, 18, XFontStyle.Bold);
+                XFont fontTitle = new XFont(font, 18, XFontStyleEx.Bold);
                 XStringFormat formatLabel = new XStringFormat();
                 formatLabel.Alignment = XStringAlignment.Near;
 
                 graphics.DrawString(
-                    labelFormTitle.Text, 
-                    fontTitle, 
+                    labelFormTitle.Text,
+                    fontTitle,
                     XBrushes.Black,
                     new XRect(50, yPosition, 100, fontTitle.Height), formatLabel);
 
                 yPosition += (int)fontTitle.Height + 10;
 
-
                 // =========== Add Fields ===========
-                XFont clientLabel = new XFont(font, 16, XFontStyle.Bold);
-                XFont fontLabel = new XFont(font, 12, XFontStyle.Bold);
+                XFont clientLabel = new XFont(font, 16, XFontStyleEx.Bold);
+                XFont fontLabel = new XFont(font, 12, XFontStyleEx.Bold);
 
-                
                 graphics.DrawString(
                         LableClientName.Text,
                         fontLabel,
@@ -210,9 +208,9 @@ namespace InventoryManagmentSystem
                 yPosition += (int)fontLabel.Height + 10;
 
                 graphics.DrawString(
-                    "Price = " + labelAmount.Text, 
-                    fontLabel, 
-                    XBrushes.Black, 
+                    "Price = " + labelAmount.Text,
+                    fontLabel,
+                    XBrushes.Black,
                     new XRect(50, yPosition, 100, fontLabel.Height), formatLabel);
 
                 document.Save(saveFileDialog.FileName);

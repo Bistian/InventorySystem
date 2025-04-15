@@ -19,16 +19,18 @@ namespace InventoryManagmentSystem.Academy
 {
     public partial class ClassRosterForm : Form
     {
-
-
         #region SQL_Variables
+
         //Database Path
         // Get the current connection string
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
+        private static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+
+        private SqlConnection connection = new SqlConnection(connectionString);
+
         #endregion SQL_Variables
 
-        AcademyForm parent;
+        private AcademyForm parent;
+
         public ClassRosterForm(AcademyForm parent)
         {
             InitializeComponent();
@@ -42,10 +44,10 @@ namespace InventoryManagmentSystem.Academy
             if (parent.ClassId != Guid.Empty)
             {
                 string query = $@"
-                    SELECT a.Name, c.Name 
-                    FROM tbClasses AS c 
-                    JOIN tbAcademies AS a 
-                        ON a.Id = c.AcademyId 
+                    SELECT a.Name, c.Name
+                    FROM tbClasses AS c
+                    JOIN tbAcademies AS a
+                        ON a.Id = c.AcademyId
                     WHERE c.Id = '{parent.ClassId}'";
                 HelperFunctions.RemoveLineBreaksFromString(ref query);
 
@@ -160,7 +162,7 @@ namespace InventoryManagmentSystem.Academy
             int positionY = startY;
             int ExtraLineSpace = 10;
 
-            XFont fontTitle = new XFont("Arial", 16, XFontStyle.Bold);
+            XFont fontTitle = new XFont("Arial", 16, XFontStyleEx.Bold);
             double maxPageHeight = page.Height.Point;
             int lineHeight = (int)fontTitle.Height;
 
@@ -168,7 +170,7 @@ namespace InventoryManagmentSystem.Academy
             HelperFunctions.PdfWriteLine(graphics, fontTitle, text, positionY);
             positionY += lineHeight + ExtraLineSpace;
 
-            XFont font = new XFont("Arial", 12, XFontStyle.Regular);
+            XFont font = new XFont("Arial", 12, XFontStyleEx.Regular);
             foreach (DataGridViewRow row in dataGridStudents.Rows)
             {
                 if (!row.Visible)

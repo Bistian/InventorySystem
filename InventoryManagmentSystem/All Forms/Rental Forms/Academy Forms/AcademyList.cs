@@ -9,9 +9,9 @@ namespace InventoryManagmentSystem.Academy
 {
     public partial class AcademyList : Form
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
-        AcademyForm parent;
+        private static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+        private SqlConnection connection = new SqlConnection(connectionString);
+        private AcademyForm parent;
 
         public AcademyList(AcademyForm parent)
         {
@@ -40,14 +40,14 @@ namespace InventoryManagmentSystem.Academy
         {
             dataGridAcademies.Rows.Clear();
             string searchTerm = searchBar.Text;
-            if (string.IsNullOrEmpty(searchTerm)) 
+            if (string.IsNullOrEmpty(searchTerm))
             {
                 HelperSql.AcademyFindAll(connection, dataGridAcademies);
                 return;
             }
-            
+
             string query = $@"
-                        SELECT Id, Name, ContactName, Email, Phone, Street, City, State, Zip 
+                        SELECT Id, Name, ContactName, Email, Phone, Street, City, State, Zip
                         FROM tbAcademies WHERE LOWER(Name) LIKE @searchTerm";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
             try
@@ -111,7 +111,7 @@ namespace InventoryManagmentSystem.Academy
             int positionY = startY;
             int ExtraLineSpace = 10;
 
-            XFont fontTitle = new XFont("Arial", 16, XFontStyle.Bold);
+            XFont fontTitle = new XFont("Arial", 16, XFontStyleEx.Bold);
             double maxPageHeight = page.Height.Point;
             int lineHeight = (int)fontTitle.Height;
 
@@ -119,7 +119,7 @@ namespace InventoryManagmentSystem.Academy
             HelperFunctions.PdfWriteLine(graphics, fontTitle, text, positionY);
             positionY += lineHeight + ExtraLineSpace;
 
-            XFont font = new XFont("Arial", 12, XFontStyle.Regular);
+            XFont font = new XFont("Arial", 12, XFontStyleEx.Regular);
             foreach (DataGridViewRow row in dataGridAcademies.Rows)
             {
                 if (!row.Visible)
@@ -154,8 +154,7 @@ namespace InventoryManagmentSystem.Academy
                 text = $"Address: {row.Cells["column_street"].Value}, {row.Cells["column_city"].Value}, {row.Cells["column_state"].Value}, {row.Cells["column_zip"].Value}";
                 HelperFunctions.PdfWriteLine(graphics, font, text, positionY);
                 positionY += lineHeight + ExtraLineSpace;
-
             }
-        }       
+        }
     }
 }

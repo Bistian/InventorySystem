@@ -484,10 +484,9 @@
     <EmbeddedResource Include="All Forms\xDeprecatedx\WorkOrderModuleForm.resx">
       <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include=".vs\InventoryManagmentSystem.csproj.dtbcache.json" />
     <None Include="app.config" />
     <None Include="app.manifest" />
-    <None Include="Config Files\packages.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -497,7 +496,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="settings.json" />
+    <None Include="settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Config Files\App.config" />
@@ -521,8 +522,8 @@
     <None Include="Resources\close.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include=".vs\" />
     <Folder Include="bin\" />
-    <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -534,6 +535,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
+    <PackageReference Include="PdfSharp">
+      <Version>6.1.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
