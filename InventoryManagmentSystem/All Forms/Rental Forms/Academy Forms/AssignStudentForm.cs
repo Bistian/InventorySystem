@@ -78,7 +78,7 @@ namespace InventoryManagmentSystem.Academy
 
         private void PopulateAcademyList()
         {
-            academyList = HelperSql.AcademyFillComboBox(connection, cbAcademy);
+            academyList = HelperSql.AcademyFillComboBox(cbAcademy);
             foreach (var academy in academyList)
             {
                 cbAcademy.Items.Add(academy.GetColumnValue("Name"));
@@ -95,7 +95,7 @@ namespace InventoryManagmentSystem.Academy
             cbClasses.Items.Clear();
 
             var academyId = academyList[index].GetColumnValue("Id");
-            classList = HelperSql.ClassFindByAcademy(connection, academyId);
+            classList = HelperSql.ClassFindByAcademy(academyId);
             if(classList == null) { return; }
             string currClass;
             cbClasses.Enabled = true;

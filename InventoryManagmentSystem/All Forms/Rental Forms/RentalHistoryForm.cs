@@ -1,27 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InventoryManagmentSystem
 {
     public partial class RentalHistoryForm : Form
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
         List<Item> historyList;
 
         public RentalHistoryForm(string itemId, string clientId)
         {
             InitializeComponent();
-            historyList = HelperSql.HistoryFindFull(connection, itemId, clientId);
+            historyList = HelperSql.HistoryFindFull(itemId, clientId);
             if (historyList.Count == 0) { this.Close(); return; }
             LoadDataGrid();
         }
@@ -51,7 +41,7 @@ namespace InventoryManagmentSystem
             if (!choice) { return; }
 
             historyList.Clear();
-            historyList = HelperSql.HistoryFindFull(connection, itemId, clientId);
+            historyList = HelperSql.HistoryFindFull(itemId, clientId);
             LoadDataGrid();
         }
 

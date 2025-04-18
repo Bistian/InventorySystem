@@ -19,13 +19,6 @@ namespace InventoryManagmentSystem
 {
     public partial class ToolsForm : Form
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
-        #region SQL_Variables
-
-        //Creating command
-        SqlCommand command = new SqlCommand();
-        #endregion SQL_Variables
         // Colors
         Color offColor = Color.Transparent;
         Color onColor = Color.DarkGoldenrod;
@@ -106,7 +99,7 @@ namespace InventoryManagmentSystem
 
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             SqlConnection connection = new SqlConnection(connectionString);
-            HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
+            HelperSql.ItemTypeLoadComboBox(cbItemType);
 #endif
         }
 
@@ -135,22 +128,21 @@ namespace InventoryManagmentSystem
                     WHERE ItemId IS NULL;
                 ";
                 HelperFunctions.RemoveLineBreaksFromString(ref query);
-                try
+                using (var connection = new SqlConnection(Program.ConnectionString))
+                using (var command = new SqlCommand(query, connection))
                 {
-                    SqlCommand command = new SqlCommand(query, connection);
-                    connection.Open();
-                    int rowsAffected = command.ExecuteNonQuery(); connection.Close();
-                    if (rowsAffected < 1)
+                    try
                     {
-                        //HelperSql.ItemDelete(connection, uuid);
-                        break;
+                        connection.Open();
+                        int rowsAffected = command.ExecuteNonQuery(); connection.Close();
+                        if (rowsAffected < 1)
+                        {
+                            //HelperSql.ItemDelete(connection, uuid);
+                            break;
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    //HelperSql.ItemDelete(connection, uuid);
-                    Console.WriteLine(ex.Message);
-                    connection.Close();
+                    catch (Exception ex) { Console.WriteLine(ex.Message); }
+                    finally { connection.Close(); }
                 }
             }
             Console.WriteLine("Gaje likes minors!");
@@ -168,23 +160,23 @@ namespace InventoryManagmentSystem
                 "WHERE tbItems.Id = tbBoots.itemId ";
 
 
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
+                try
+                {
+                    if (connection.State == ConnectionState.Open) { connection.Close(); }
+                    connection.Open();
 
 
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyBootsCondition()
@@ -196,23 +188,19 @@ namespace InventoryManagmentSystem
                 "WHERE tbItems.Id = tbBoots.itemId ";
 
 
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyBootsDueDate()
@@ -224,23 +212,19 @@ namespace InventoryManagmentSystem
                 "WHERE tbItems.Id = tbBoots.itemId ";
 
 
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyBootsLocation()
@@ -252,23 +236,19 @@ namespace InventoryManagmentSystem
                 "WHERE tbItems.Id = tbBoots.itemId ";
 
 
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyBoots()
@@ -298,23 +278,19 @@ namespace InventoryManagmentSystem
                 "WHERE tbItems.Id = tbJackets.itemId ";
 
 
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyJacketsCondition()
@@ -325,24 +301,19 @@ namespace InventoryManagmentSystem
                 "FROM tbJackets " +
                 "WHERE tbItems.Id = tbJackets.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyJacketsDueDate()
@@ -353,24 +324,19 @@ namespace InventoryManagmentSystem
                 "FROM tbJackets " +
                 "WHERE tbItems.Id = tbJackets.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyJacketsLocation()
@@ -381,24 +347,19 @@ namespace InventoryManagmentSystem
                 "FROM tbJackets " +
                 "WHERE tbItems.Id = tbJackets.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyJackets()
@@ -427,24 +388,19 @@ namespace InventoryManagmentSystem
                 "FROM tbPants " +
                 "WHERE tbItems.Id = tbPants.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyPantsCondition()
@@ -455,24 +411,19 @@ namespace InventoryManagmentSystem
                 "FROM tbPants " +
                 "WHERE tbItems.Id = tbPants.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyPantsDueDate()
@@ -483,24 +434,19 @@ namespace InventoryManagmentSystem
                 "FROM tbPants " +
                 "WHERE tbItems.Id = tbPants.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyPantsLocation()
@@ -511,24 +457,19 @@ namespace InventoryManagmentSystem
                 "FROM tbPants " +
                 "WHERE tbItems.Id = tbPants.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyPants()
@@ -557,24 +498,19 @@ namespace InventoryManagmentSystem
                 "FROM tbMasks " +
                 "WHERE tbItems.Id = tbMasks.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyMasksCondition()
@@ -585,24 +521,19 @@ namespace InventoryManagmentSystem
                 "FROM tbMasks " +
                 "WHERE tbItems.Id = tbMasks.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyMasksDueDate()
@@ -613,24 +544,19 @@ namespace InventoryManagmentSystem
                 "FROM tbMasks " +
                 "WHERE tbItems.Id = tbMasks.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyMasksLocation()
@@ -641,24 +567,19 @@ namespace InventoryManagmentSystem
                 "FROM tbMasks " +
                 "WHERE tbItems.Id = tbMasks.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyMasks()
@@ -687,24 +608,19 @@ namespace InventoryManagmentSystem
                 "FROM tbHelmets " +
                 "WHERE tbItems.Id = tbHelmets.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyHelmetCondition()
@@ -715,24 +631,19 @@ namespace InventoryManagmentSystem
                 "FROM tbHelmets " +
                 "WHERE tbItems.Id = tbHelmets.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyHelmetDueDate()
@@ -743,24 +654,19 @@ namespace InventoryManagmentSystem
                 "FROM tbHelmets " +
                 "WHERE tbItems.Id = tbHelmets.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyHelmetLocation()
@@ -771,24 +677,19 @@ namespace InventoryManagmentSystem
                 "FROM tbHelmets " +
                 "WHERE tbItems.Id = tbHelmets.itemId ";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool CopyHelmet()
@@ -815,24 +716,19 @@ namespace InventoryManagmentSystem
             string query = "Delete FROM tbItems " +
                 "WHERE  SerialNumber IS NULL";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool SetActivity()
@@ -841,23 +737,19 @@ namespace InventoryManagmentSystem
                            "SET isActive = 1 " +
                            "WHERE isActive IS NULL";
 
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool UpdateLocation()
@@ -868,23 +760,19 @@ namespace InventoryManagmentSystem
                "INNER JOIN tbClients AS C " +
                "ON I.Location = C.DriversLicenseNumber";
 
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool UpdateAcqsitionDatesJacket()
@@ -893,23 +781,19 @@ namespace InventoryManagmentSystem
                            "SET AcquisitionDate = GETDATE() " +
                            "WHERE AcquisitionDate IS NULL";
 
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool UpdateAcqsitionDatesPants()
@@ -918,23 +802,19 @@ namespace InventoryManagmentSystem
                            "SET AcquisitionDate = GETDATE() " +
                            "WHERE AcquisitionDate IS NULL";
 
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool UpdateAcqsitionDatesHelmet()
@@ -943,23 +823,19 @@ namespace InventoryManagmentSystem
                            "SET AcquisitionDate = GETDATE() " +
                            "WHERE AcquisitionDate IS NULL";
 
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool UpdateAcqsitionDatesBoots()
@@ -968,23 +844,19 @@ namespace InventoryManagmentSystem
                            "SET AcquisitionDate = GETDATE() " +
                            "WHERE AcquisitionDate IS NULL";
 
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool UpdateAcqsitionDatesMask()
@@ -993,23 +865,19 @@ namespace InventoryManagmentSystem
                            "SET AcquisitionDate = GETDATE() " +
                            "WHERE AcquisitionDate IS NULL";
 
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private bool UpdateAllAcquisitions()
@@ -1039,23 +907,19 @@ namespace InventoryManagmentSystem
             string query = "UPDATE tbItems " +
                             " SET ItemType = LOWER(ItemType); ";
 
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -1110,24 +974,19 @@ namespace InventoryManagmentSystem
                            "WHERE CAST(location AS VARCHAR(36)) NOT IN(SELECT CAST(Id AS VARCHAR(36)) FROM tbClients)" +
                            "AND CAST(location AS VARCHAR(36)) NOT IN(SELECT CAST(DriversLicenseNumber AS VARCHAR(36)) FROM tbClients)";
 
-
-            command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-
-
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
 
         private void BtnLocationUpdate_Click(object sender, EventArgs e)

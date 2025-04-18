@@ -1,33 +1,13 @@
-﻿using Microsoft.Office.Interop.Excel;
-using PdfSharp.Drawing;
+﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static InventoryManagmentSystem.Academy.AcademyForm;
 
 namespace InventoryManagmentSystem.Academy
 {
     public partial class ClassRosterForm : Form
     {
-
-
-        #region SQL_Variables
-        //Database Path
-        // Get the current connection string
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
-        #endregion SQL_Variables
-
         AcademyForm parent;
         public ClassRosterForm(AcademyForm parent)
         {
@@ -49,21 +29,21 @@ namespace InventoryManagmentSystem.Academy
                     WHERE c.Id = '{parent.ClassId}'";
                 HelperFunctions.RemoveLineBreaksFromString(ref query);
 
-                try
+                using (var connection = new SqlConnection(Program.ConnectionString))
+                using (var command = new SqlCommand(query, connection))
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(query, connection);
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
+                    try
                     {
-                        labelTitle.Text = $"{reader[0]} {reader[1]} Student List";
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            labelTitle.Text = $"{reader[0]} {reader[1]} Student List";
+                        }
                     }
+                    catch (Exception ex) { Console.WriteLine(ex.Message); }
+                    finally { connection.Close(); }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                connection.Close();
             }
             else
             {
@@ -74,30 +54,29 @@ namespace InventoryManagmentSystem.Academy
         private void LoadStudents()
         {
             string query = $"SELECT DriversLicenseNumber, Name, Phone, Email FROM tbClients WHERE IdClass = '{parent.ClassId}'";
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-                int index = 0;
-                while (reader.Read())
+                try
                 {
-                    ++index;
-                    dataGridStudents.Rows.Add(index, reader[0], reader[1], reader[2], reader[3]);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    int index = 0;
+                    while (reader.Read())
+                    {
+                        ++index;
+                        dataGridStudents.Rows.Add(index, reader[0], reader[1], reader[2], reader[3]);
+                    }
                 }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
         }
 
         private void dataGridStudents_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) { return; }
             DataGridViewRow row = dataGridStudents.Rows[e.RowIndex];
-            string column = dataGridStudents.Columns[e.ColumnIndex].Name;
             if (e.RowIndex < 0) { return; }
 
             string clientName = row.Cells["column_student"].Value.ToString();
@@ -131,17 +110,25 @@ namespace InventoryManagmentSystem.Academy
             // SQL
             int i = 0;
             dataGridStudents.Rows.Clear();
-            SqlCommand command = new SqlCommand($"SELECT DriversLicenseNumber, Name, Phone, Email FROM tbClients WHERE Name LIKE '%{searchTerm}%' AND  IdClass ='{this.parent.ClassId}'", connection);
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
+            string query = $"SELECT DriversLicenseNumber, Name, Phone, Email FROM tbClients WHERE Name LIKE '%{searchTerm}%' AND  IdClass ='{this.parent.ClassId}'";
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                i++;
-                dataGridStudents.Rows.Add(i, reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString());
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        i++;
+                        dataGridStudents.Rows.Add(i, reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString());
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            reader.Close();
-            connection.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)

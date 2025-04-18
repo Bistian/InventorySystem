@@ -4,21 +4,18 @@ using System;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace InventoryManagmentSystem.Academy
 {
     public partial class AcademyList : Form
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
         AcademyForm parent;
 
         public AcademyList(AcademyForm parent)
         {
             InitializeComponent();
             this.parent = parent;
-            HelperSql.AcademyFindAll(connection, dataGridAcademies);
+            HelperSql.AcademyFindAll(dataGridAcademies);
         }
 
         private void UpdateAcademy(DataGridViewRow row)
@@ -43,7 +40,7 @@ namespace InventoryManagmentSystem.Academy
             string searchTerm = searchBar.Text;
             if (string.IsNullOrEmpty(searchTerm)) 
             {
-                HelperSql.AcademyFindAll(connection, dataGridAcademies);
+                HelperSql.AcademyFindAll(dataGridAcademies);
                 return;
             }
             
@@ -51,21 +48,24 @@ namespace InventoryManagmentSystem.Academy
                         SELECT Id, Name, ContactName, Email, Phone, Street, City, State, Zip 
                         FROM tbAcademies WHERE LOWER(Name) LIKE @searchTerm";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@searchTerm", searchTerm.ToLower() + "%");
-                SqlDataReader reader = command.ExecuteReader();
-                int count = 1;
-                while (reader.Read())
+                try
                 {
-                    dataGridAcademies.Rows.Add(count++,
-                    reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6], reader[7], reader[8]);
+                    connection.Open();
+                    command.Parameters.AddWithValue("@searchTerm", searchTerm.ToLower() + "%");
+                    SqlDataReader reader = command.ExecuteReader();
+                    int count = 1;
+                    while (reader.Read())
+                    {
+                        dataGridAcademies.Rows.Add(count++,
+                        reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6], reader[7], reader[8]);
+                    }
                 }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close(); }
         }
 
         private void dataGridAcademies_CellClick(object sender, DataGridViewCellEventArgs e)

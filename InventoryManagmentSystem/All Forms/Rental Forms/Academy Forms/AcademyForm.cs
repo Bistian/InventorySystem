@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -33,9 +30,6 @@ namespace InventoryManagmentSystem.Academy
             public DateTime start;
             public DateTime end;
         }
-
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
 
         public AcademyForm()
         {

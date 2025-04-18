@@ -1,23 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
-using System.Linq;
-using System.Configuration;
-using Microsoft.Office.Interop.Excel;
 
 namespace InventoryManagmentSystem
 {
     public partial class ExcelImportForm : Form
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
-
         Excel.Application excelApp = null;
         Excel.Workbook workbook = null;
         Excel.Worksheet worksheet = null;
@@ -42,7 +34,6 @@ namespace InventoryManagmentSystem
             workbook.Close();
             excelApp.Quit();
             CloseBackgroundExcel();
-            connection.Close();
         }
 
         private void ExcelImport_Load(object sender, EventArgs e)
@@ -183,19 +174,22 @@ namespace InventoryManagmentSystem
                 WHERE TABLE_NAME = '{tableName}' 
                 ORDER BY ORDINAL_POSITION";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader dataReader = command.ExecuteReader();
-                while (dataReader.Read())
+                try
                 {
-                    listTableColumns.Add(dataReader.GetString(0));
+                    connection.Open();
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        listTableColumns.Add(dataReader.GetString(0));
+                    }
+                    tableColumnSerial = listTableColumns[3];
                 }
-                tableColumnSerial = listTableColumns[3];
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close(); }
         }
 
         /// <summary>
@@ -227,8 +221,7 @@ namespace InventoryManagmentSystem
                     }
                 }
 
-                var uuid = HelperSql.ItemInsertAndGetUuid(connection, 
-                    row[0].ToString(), row[2].ToString(), row[5].ToString(), "Rent");
+                var uuid = HelperSql.ItemInsertAndGetUuid(row[0].ToString(), row[2].ToString(), row[5].ToString(), "Rent");
 
                 if (uuid == "") { return; }
 
@@ -236,49 +229,15 @@ namespace InventoryManagmentSystem
                 bool isInserted = false;
                 if(isPants)
                 {
-                    isInserted = HelperSql.PantsInsert(connection, uuid,
+                    isInserted = HelperSql.PantsInsert(uuid,
                         row[1].ToString(), today.ToString(), row[4].ToString(), row[3].ToString());
                 }
 
                 if(!isInserted)
                 {
-                    HelperSql.ItemDelete(connection, uuid);
+                    HelperSql.ItemDelete(uuid);
                     return;
                 }
-
-               /* string query = $"INSERT INTO {table} " +
-                    $"(ItemId, Brand, SerialNumber, Location, Condition, ManufactureDate, DueDate, Size) " +
-                    $"VALUES ('{uuid}','{row[1]}','{row[2]}','{row[7]}','{row[5]}','{row[4]}',@date,'{row[3]}')";*/
-                
-                /*try
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(query, connection);
-
-                    SqlParameter parameter = new SqlParameter("@date", SqlDbType.Date);
-                    if (row[6] == null)
-                    {
-                        parameter.Value = DBNull.Value;
-                    }
-                    else
-                    {
-                        parameter.Value = row[6];
-                    }
-                    command.Parameters.Add(parameter);
-
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-                catch (Exception ex)
-                {
-                    connection.Close();
-                    #if DEBUG
-                        Console.WriteLine($"Error Row {i}");
-                        Console.WriteLine(ex.ToString());
-                    #endif
-                    // If I cannot connect the item, I need to delete it.
-                    HelperSql.ItemDelete(connection, uuid);
-                }*/
             }
         }
 
@@ -309,33 +268,26 @@ namespace InventoryManagmentSystem
                     "(ItemId, Brand, SerialNumber, Location, Condition, ManufactureDate, DueDate, Size, [Material]) " +
                     "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @Condition, @ManufactureDate, @DueDate, @Size, @Material)";
 
-                try
+                using (var connection = new SqlConnection(Program.ConnectionString))
+                using (var command = new SqlCommand(query, connection))
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(query, connection);
+                    try
+                    {
+                        connection.Open();
+                        //command.Parameters.AddWithValue("@ItemId", uuid);
+                        command.Parameters.AddWithValue("@Brand", row[1]);
+                        command.Parameters.AddWithValue("@SerialNumber", row[2]);
+                        command.Parameters.AddWithValue("@Location", row[8]);
+                        command.Parameters.AddWithValue("@Condition", row[5]);
+                        command.Parameters.AddWithValue("@ManufactureDate", row[4]);
+                        command.Parameters.AddWithValue("@DueDate", row[7] ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@Size", row[6]);
+                        command.Parameters.AddWithValue("@Material", row[3]);
 
-                    //command.Parameters.AddWithValue("@ItemId", uuid);
-                    command.Parameters.AddWithValue("@Brand", row[1]);
-                    command.Parameters.AddWithValue("@SerialNumber", row[2]);
-                    command.Parameters.AddWithValue("@Location", row[8]);
-                    command.Parameters.AddWithValue("@Condition", row[5]);
-                    command.Parameters.AddWithValue("@ManufactureDate", row[4]);
-                    command.Parameters.AddWithValue("@DueDate", row[7] ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@Size", row[6]);
-                    command.Parameters.AddWithValue("@Material", row[3]);
-
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-                catch (Exception ex)
-                {
-                    connection.Close();
-                    #if DEBUG
-                    Console.WriteLine($"Error Row {i}");
-                    Console.WriteLine(ex.ToString());
-                    #endif
-                    // If I cannot connect the item, I need to delete it.
-                    //HelperSql.ItemDelete(connection, uuid);
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex) { Console.WriteLine(ex.Message); }
+                    finally { connection.Close(); }
                 }
             }
         }
@@ -368,32 +320,25 @@ namespace InventoryManagmentSystem
                     "(ItemId, Brand, SerialNumber, Location, Condition, ManufactureDate, DueDate, Color) " +
                     "VALUES (@ItemId, @Brand, @SerialNumber, @Location, @Condition, @ManufactureDate, @DueDate, @Color)";
 
-                try
+                using (var connection = new SqlConnection(Program.ConnectionString))
+                using (var command = new SqlCommand(query, connection))
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(query, connection);
+                    try
+                    {
+                        connection.Open();
+                        //command.Parameters.AddWithValue("@ItemId", uuid);
+                        command.Parameters.AddWithValue("@Brand", row[1]);
+                        command.Parameters.AddWithValue("@SerialNumber", row[2]);
+                        command.Parameters.AddWithValue("@Location", row[7]);
+                        command.Parameters.AddWithValue("@Condition", row[5]);
+                        command.Parameters.AddWithValue("@ManufactureDate", row[4]);
+                        command.Parameters.AddWithValue("@DueDate", row[6] ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@Color", row[3]);
 
-                    //command.Parameters.AddWithValue("@ItemId", uuid);
-                    command.Parameters.AddWithValue("@Brand", row[1]);
-                    command.Parameters.AddWithValue("@SerialNumber", row[2]);
-                    command.Parameters.AddWithValue("@Location", row[7]);
-                    command.Parameters.AddWithValue("@Condition", row[5]);
-                    command.Parameters.AddWithValue("@ManufactureDate", row[4]);
-                    command.Parameters.AddWithValue("@DueDate", row[6] ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@Color", row[3]);
-
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
-                catch (Exception ex)
-                {
-                    connection.Close();
-                    #if DEBUG
-                    Console.WriteLine($"Error Row {i}");
-                    Console.WriteLine(ex.ToString());
-                    #endif
-                    // If I cannot connect the item, I need to delete it.
-                    //HelperSql.ItemDelete(connection, uuid);
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex) { Console.WriteLine(ex.Message); }
+                    finally { connection.Close(); }
                 }
             }
         }
@@ -491,19 +436,22 @@ namespace InventoryManagmentSystem
                 ELSE CAST(0 AS BIT) 
                 END";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader dataReader = command.ExecuteReader();
-                if (dataReader.HasRows)
+                try
                 {
-                    dataReader.Read();
-                    result = dataReader.GetBoolean(0);
+                    connection.Open();
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    if (dataReader.HasRows)
+                    {
+                        dataReader.Read();
+                        result = dataReader.GetBoolean(0);
+                    }
                 }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close(); }
             return result;
         }
 
@@ -581,7 +529,6 @@ namespace InventoryManagmentSystem
             worksheet = null;
             workbook = null;
             excelApp = null;
-            connection.Close();
             listExcelColumns.Clear();
             listTableColumns.Clear();
             headerRow = -1;

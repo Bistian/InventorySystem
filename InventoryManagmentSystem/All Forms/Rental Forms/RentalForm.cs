@@ -1,25 +1,12 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
+﻿using System;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InventoryManagmentSystem
 {
     public partial class RentalForm : Form
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
-
         //Makes date red if it is less than this number.
         int daysForWarning = 14;
 
@@ -107,29 +94,29 @@ namespace InventoryManagmentSystem
             // Change the styling for the date column.
             HelperFunctions.DataGridFormatDateColumn(grid, columnName);
             grid.Rows.Clear();
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-                int i = 0;
-                while (reader.Read())
+                try
                 {
-                    ++i;
-                    grid.Rows.Add(i,
-                        reader[0].ToString(),
-                        reader[1].ToString(),
-                        reader[2].ToString(),
-                        reader[3].ToString()
-                        );
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    int i = 0;
+                    while (reader.Read())
+                    {
+                        ++i;
+                        grid.Rows.Add(i,
+                            reader[0].ToString(),
+                            reader[1].ToString(),
+                            reader[2].ToString(),
+                            reader[3].ToString()
+                            );
+                    }
+                    reader.Close();
                 }
-                reader.Close();
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally { connection.Close(); }
         }
 
         // Check if rented due date is getting closer and turns date red.
@@ -187,17 +174,21 @@ namespace InventoryManagmentSystem
                 "SELECT COUNT(*) FROM tbClients " +
                 "WHERE Name ='" + rentee + "'");
 
-            var command = new SqlCommand(query, connection);
-            connection.Open();
-
-            // If there are no matches with that name, return.
-            if ((int)command.ExecuteScalar() <= 0)
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                connection.Close();
-                return;
+                try
+                {
+                    // If there are no matches with that name, return.
+                    if ((int)command.ExecuteScalar() <= 0)
+                    {
+                        connection.Close();
+                        return;
+                    }
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            connection.Close();
-
             // Show the details of the row in a new form or dialog
             DialogBoxClient dialogBoxClient = new DialogBoxClient(rentee);
             dialogBoxClient.ShowDialog();

@@ -1,8 +1,7 @@
 ﻿using InventoryManagmentSystem.Academy;
 using InventoryManagmentSystem.Rental_Forms;
-using Microsoft.VisualBasic.Devices;
+using Microsoft.Office.Interop.Excel;
 using System;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,9 +10,6 @@ namespace InventoryManagmentSystem
 {
     public partial class NewRentalModuleForm : Form
     {
-        private static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        private SqlConnection connection = new SqlConnection(connectionString);
-
         private string ItemIdClient = string.Empty;
         private string ItemIdInventory = string.Empty;
 
@@ -40,14 +36,14 @@ namespace InventoryManagmentSystem
             {
                 panelButtons.Visible = false;
                 NewClientForm clientForm = new NewClientForm(rentalType, clientName);
-                HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
+                HelperSql.ItemTypeLoadComboBox(cbItemType);
                 HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
             }
 
-            HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
+            HelperSql.ItemTypeLoadComboBox(cbItemType);
 
             dataGridInv.Columns["column_mfd_inv"].DefaultCellStyle.Format = "d";
-            HelperSql.ItemLoadDatagrid(connection, dataGridInv, "WHERE i.Condition = 'Active'");
+            HelperSql.ItemLoadDatagrid(dataGridInv, "WHERE i.Condition = 'Active'");
         }
 
         private void LoadClient()
@@ -56,10 +52,10 @@ namespace InventoryManagmentSystem
             dataGridViewClient.Columns["column_due_date"].DefaultCellStyle.Format = "d";
             dataGridViewClient.Columns["column_manufacture_date"].DefaultCellStyle.Format = "d";
 
-            var items = HelperSql.ItemFindByClientId(connection, ClientId);
+            var items = HelperSql.ItemFindByClientId(ClientId);
             if (items.Count == 0)
             {
-                items = HelperSql.ItemFindByClientId(connection, drivers);
+                items = HelperSql.ItemFindByClientId(drivers);
             }
             if (items == null) { return; }
 
@@ -108,32 +104,32 @@ namespace InventoryManagmentSystem
 
             if (selection == "boots")
             {
-                HelperSql.BootsFindAllInStock(connection, dataGridInv, textBoxSearchBar.Text);
+                HelperSql.BootsFindAllInStock(dataGridInv, textBoxSearchBar.Text);
             }
             else if (selection == "helmet")
             {
-                HelperSql.HelmetFindAllInStock(connection, dataGridInv, textBoxSearchBar.Text);
+                HelperSql.HelmetFindAllInStock(dataGridInv, textBoxSearchBar.Text);
             }
             else if (selection == "jacket")
             {
-                HelperSql.JacketFindAllInStock(connection, dataGridInv, textBoxSearchBar.Text);
+                HelperSql.JacketFindAllInStock(dataGridInv, textBoxSearchBar.Text);
             }
             else if (selection == "mask")
             {
-                HelperSql.MaskFindAllInStock(connection, dataGridInv, textBoxSearchBar.Text);
+                HelperSql.MaskFindAllInStock(dataGridInv, textBoxSearchBar.Text);
             }
             else if (selection == "pants")
             {
-                HelperSql.PantsFindAllInStock(connection, dataGridInv, textBoxSearchBar.Text);
+                HelperSql.PantsFindAllInStock(dataGridInv, textBoxSearchBar.Text);
             }
         }
 
         public void LoadProfile(string clientId, string Name)
         {
-            var client = HelperSql.ClientFindById(connection, clientId);
+            var client = HelperSql.ClientFindById(clientId);
             if (client.IsEmpty())
             {
-                client = HelperSql.ClientFindByDriversLicense(connection, clientId, Name);
+                client = HelperSql.ClientFindByDriversLicense(clientId, Name);
             }
             if (client.Count() == 0)
             {
@@ -160,7 +156,7 @@ namespace InventoryManagmentSystem
             drivers = client.GetColumnValue("DriversLicenseNumber");
             license = labelClientDrivers.Text;
 
-            var item = HelperSql.ClassFindByClassId(connection, ClassId);
+            var item = HelperSql.ClassFindByClassId(ClassId);
             if (item != null)
             {
                 string startDate = item.GetColumnValue("StartDate");
@@ -216,12 +212,12 @@ namespace InventoryManagmentSystem
                 if (row.Cells["column_item_type"].Value != null && row.Cells["column_item_type"].Value.ToString() != "boots")
                 {
                     // Client Has items other than boots
-                    HelperSql.ClientUpdateActivity(connection, ClientId, true);
+                    HelperSql.ClientUpdateActivity(ClientId, true);
                     return;
                 }
             }
             // Client has boots or nohting
-            HelperSql.ClientUpdateActivity(connection, ClientId, false);
+            HelperSql.ClientUpdateActivity(ClientId, false);
         }
 
         private void SetItemType(string itemType)
@@ -278,20 +274,20 @@ namespace InventoryManagmentSystem
                 string itemId = row.Cells["column_id_inv"].Value.ToString();
                 if (cbItemType.Text == "boots")
                 {
-                    isUpdated = HelperSql.ItemUpdateBoots(connection, itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
+                    isUpdated = HelperSql.ItemUpdateBoots(itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
                 }
                 else
                 {
-                    isUpdated = HelperSql.ItemUpdate(connection, itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
+                    isUpdated = HelperSql.ItemUpdate(itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
                 }
                 if (!isUpdated)
                 {
                     MessageBox.Show("Failed to update item.");
                     return;
                 }
-                HelperSql.HistoryInsert(connection, itemId, ClientId);
+                HelperSql.HistoryInsert(itemId, ClientId);
                 MessageBox.Show("assignment has been successfully completed");
-                HelperSql.ClientUpdateActivity(connection, ClientId, true);
+                HelperSql.ClientUpdateActivity(ClientId, true);
                 LoadClient();
                 LoadInventory();
                 RefreshClientActivity();
@@ -302,10 +298,10 @@ namespace InventoryManagmentSystem
                 labelReplacmentItem.Text = ReplacmentSerial;
                 ItemIdInventory = row.Cells["column_id_inv"].Value.ToString();
 
-                HelperSql.ItemUpdate(connection, ItemIdClient, "Fire-Tec");
-                HelperSql.HistoryUpdate(connection, ItemIdClient, ClientId);
-                HelperSql.ItemUpdate(connection, ItemIdInventory, ClientId.ToString(), dueDate);
-                HelperSql.HistoryInsert(connection, ItemIdInventory, ClientId);
+                HelperSql.ItemUpdate(ItemIdClient, "Fire-Tec");
+                HelperSql.HistoryUpdate(ItemIdClient, ClientId);
+                HelperSql.ItemUpdate(ItemIdInventory, ClientId.ToString(), dueDate);
+                HelperSql.HistoryInsert(ItemIdInventory, ClientId);
 
                 LoadClient();
                 LoadInventory();
@@ -328,15 +324,15 @@ namespace InventoryManagmentSystem
             if (ReturnReplace == 1)
             {
                 string itemId = row.Cells["column_item_id"].Value.ToString();
-                bool isUpdated = HelperSql.ItemUpdate(connection, itemId, "Fire-Tec");
+                bool isUpdated = HelperSql.ItemUpdate(itemId, "Fire-Tec");
                 if (isUpdated)
                 {
-                    var items = HelperSql.ClientFindRented(connection, ClientId);
+                    var items = HelperSql.ClientFindRented(ClientId);
                     if (items.Count < 1)
                     {
-                        HelperSql.ClientUpdateActivity(connection, ClientId, false);
+                        HelperSql.ClientUpdateActivity(ClientId, false);
                     }
-                    HelperSql.HistoryUpdate(connection, itemId, ClientId);
+                    HelperSql.HistoryUpdate(itemId, ClientId);
                     MessageBox.Show("Item Returned");
                 }
                 else { MessageBox.Show("Failed to return the item."); }
@@ -385,17 +381,21 @@ namespace InventoryManagmentSystem
             buttonSaveNotes.Enabled = false;
 
             string query = "UPDATE tbClients SET Notes = @Notes WHERE Id = @ClientId";
-            var command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@Notes", textBoxNotes.Text);
-            command.Parameters.AddWithValue("@ClientId", ClientId);
-            try
+            
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                connection.Open();
-                command.ExecuteNonQuery();
-                MessageBox.Show("Note has been successfully saved");
+                try
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Notes", textBoxNotes.Text);
+                    command.Parameters.AddWithValue("@ClientId", ClientId);
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("Note has been successfully saved");
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { connection.Close(); }
         }
 
         public void btnProfile_Click(object sender, EventArgs e)
@@ -440,7 +440,7 @@ namespace InventoryManagmentSystem
             NewClientForm clientForm = new NewClientForm("Individual", labelProfileName.Text);
             clientForm.clientId = ClientId;
             cbItemType.Items.Clear();
-            HelperSql.ItemTypeLoadComboBox(connection, cbItemType);
+            HelperSql.ItemTypeLoadComboBox(cbItemType);
             HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
         }
     }

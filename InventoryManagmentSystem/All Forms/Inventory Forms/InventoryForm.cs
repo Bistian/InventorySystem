@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using System.Configuration;
 using InventoryManagmentSystem.Rental_Forms;
 using InventoryManagmentSystem.All_Forms;
 using PdfSharp.Pdf;
@@ -12,9 +10,6 @@ namespace InventoryManagmentSystem
 {
     public partial class InventoryForm : BaseForm
     {
-        private static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        private SqlConnection connection = new SqlConnection(connectionString);
-
         /// <summary> Key/Value pair list. Key = column name </summary>
         private List<string[]> filterList = new List<string[]>();
 
@@ -100,7 +95,7 @@ namespace InventoryManagmentSystem
             string title = "Delete Record";
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return; }
 
-            bool isDeleted = HelperSql.ItemDelete(connection, itemId);
+            bool isDeleted = HelperSql.ItemDelete(itemId);
 
             if (isDeleted)
             {

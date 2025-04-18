@@ -1,10 +1,7 @@
-﻿using Microsoft.Office.Interop.Excel;
-using System;
-using System.Configuration;
+﻿using System;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace InventoryManagmentSystem
 {
@@ -24,11 +21,6 @@ namespace InventoryManagmentSystem
             SetButtonDates();
             InitPastDueCount();
         }
-
-        // Get the current connection string
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        //Creating command
-        SqlConnection connection = new SqlConnection(connectionString);
 
         private Form activeForm = null;
 
@@ -99,20 +91,23 @@ namespace InventoryManagmentSystem
                 ORDER BY DueDate ASC;            
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-                string date = "";
-                while (reader.Read())
+                try
                 {
-                    date = reader[0].ToString();
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    string date = "";
+                    while (reader.Read())
+                    {
+                        date = reader[0].ToString();
+                    }
+                    dateRented.Text = HelperFunctions.DateCrop(date);
                 }
-                dateRented.Text = HelperFunctions.DateCrop(date);
+                catch (Exception ex) { Console.WriteLine(ex); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex) { Console.WriteLine(ex); }
-            finally { connection.Close(); }
         }
 
         private void InitTables()
@@ -128,10 +123,12 @@ namespace InventoryManagmentSystem
             // Change the styling for the date column.
             HelperFunctions.DataGridFormatDateColumn(grid, columnName);
             grid.Rows.Clear();
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
+            {
+                try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
                 int i = 0;
                 DateTime closestDate = new DateTime();
@@ -158,15 +155,16 @@ namespace InventoryManagmentSystem
                 return "??/??/????";
             }
             finally { connection.Close(); }
+            }
         }
 
         private void PrintRented()
         {
-            uint rented = HelperSql.ItemRentCount(connection, "jacket");
+            uint rented = HelperSql.ItemRentCount("jacket");
             btnCoats.Text = $"{rented} Coats";
-            rented = HelperSql.ItemRentCount(connection, "pants");
+            rented = HelperSql.ItemRentCount("pants");
             btnPants.Text = $"{rented} Pants";
-            rented = HelperSql.ItemRentCount(connection, "helmet");
+            rented = HelperSql.ItemRentCount("helmet");
             btnHelmets.Text = $"{rented} Helmets";
         }
 
@@ -188,13 +186,13 @@ namespace InventoryManagmentSystem
 
         private void PrintStock()
         {
-            var stock = HelperSql.ItemStockCount(connection, "boots");
+            var stock = HelperSql.ItemStockCount("boots");
             ButtonInStockBoots.Text = $"{stock} Boots";
-            stock = HelperSql.ItemStockCount(connection, "helmet");
+            stock = HelperSql.ItemStockCount("helmet");
             ButtonInStockHelmets.Text = $"{stock} Helmets";
-            stock = HelperSql.ItemStockCount(connection, "jacket");
+            stock = HelperSql.ItemStockCount("jacket");
             ButtonInStockJackets.Text = $"{stock} Coats";
-            stock = HelperSql.ItemStockCount(connection, "pants");
+            stock = HelperSql.ItemStockCount("pants");
             ButtonInStockPants.Text = $"{stock} Pants";
         }
 

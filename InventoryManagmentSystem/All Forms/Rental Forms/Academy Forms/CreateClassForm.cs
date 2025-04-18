@@ -1,14 +1,8 @@
 ﻿using InventoryManagmentSystem.Academy;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static InventoryManagmentSystem.Academy.AcademyForm;
 
@@ -16,8 +10,6 @@ namespace InventoryManagmentSystem
 {
     public partial class CreateClassForm : Form
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
         Dictionary<string, string> academyMap = new Dictionary<string, string>();
 
         private bool isUpdate = false;
@@ -67,7 +59,7 @@ namespace InventoryManagmentSystem
 
         private void LoadAcademies()
         {
-            academyMap = HelperSql.AcademyListNames(connection);
+            academyMap = HelperSql.AcademyListNames();
             foreach(var item in academyMap.Values)
             {
                 cbAcademy.Items.Add(item);
@@ -91,23 +83,22 @@ namespace InventoryManagmentSystem
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
             int found = 0;
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                SqlCommand command = new SqlCommand(@query, connection);
-                command.Parameters.AddWithValue("@AcademyId", academyId);
-                command.Parameters.AddWithValue("@Name", tbClassName.Text);
-                command.Parameters.AddWithValue("@Start", dpStartDate.Value.Date);
-                command.Parameters.AddWithValue("@End", dpEndDate.Value.Date);
-                connection.Open();
-                object result = command.ExecuteScalar();
-                if (result != null) { found = 1; }
+                try
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@AcademyId", academyId);
+                    command.Parameters.AddWithValue("@Name", tbClassName.Text);
+                    command.Parameters.AddWithValue("@Start", dpStartDate.Value.Date);
+                    command.Parameters.AddWithValue("@End", dpEndDate.Value.Date);
+                    object result = command.ExecuteScalar();
+                    if (result != null) { found = 1; }
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); found = -1; }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                found = -1;
-            }
-            connection.Close();
             return found;
         }
 
@@ -135,22 +126,21 @@ namespace InventoryManagmentSystem
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
             bool isAdded = true;
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@AcademyId", academyId);
-                command.Parameters.AddWithValue("@Name", tbClassName.Text);
-                command.Parameters.AddWithValue("@Start", dpStartDate.Value.Date);
-                command.Parameters.AddWithValue("@End", dpEndDate.Value.Date);
-                connection.Open();
-                command.ExecuteNonQuery();
+                try
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@AcademyId", academyId);
+                    command.Parameters.AddWithValue("@Name", tbClassName.Text);
+                    command.Parameters.AddWithValue("@Start", dpStartDate.Value.Date);
+                    command.Parameters.AddWithValue("@End", dpEndDate.Value.Date);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); isAdded = false; }
+                finally { connection.Close(); }
             }
-            catch (Exception ex) 
-            { 
-                Console.WriteLine(ex.Message);
-                isAdded =  false;
-            }
-            connection.Close();
 
             if (isAdded)
             {
@@ -177,22 +167,19 @@ namespace InventoryManagmentSystem
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
             bool isDeleted = true;
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Name", row.Cells["column_name"].Value);
-                command.Parameters.AddWithValue("@StartDate", row.Cells["column_start_date"].Value);
-                command.Parameters.AddWithValue("@EndDate", row.Cells["column_end_date"].Value);
-                connection.Open();
-                int rowsAffected = command.ExecuteNonQuery();
-                Console.WriteLine($"Rows Deleted: {rowsAffected}");
+                try
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Name", row.Cells["column_name"].Value);
+                    command.Parameters.AddWithValue("@StartDate", row.Cells["column_start_date"].Value);
+                    command.Parameters.AddWithValue("@EndDate", row.Cells["column_end_date"].Value);
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); isDeleted = false; }
+                finally { connection.Close(); }
             }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                isDeleted =  false;
-            }
-            connection.Close();
             return isDeleted;
         }
 
@@ -209,23 +196,21 @@ namespace InventoryManagmentSystem
 
             bool isUpdated = true;
             bool isFinished = (bool)row.Cells["column_finished"].Value;
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Finished", (!isFinished));
-                command.Parameters.AddWithValue("@Name", row.Cells["column_name"].Value);
-                command.Parameters.AddWithValue("@Start", row.Cells["column_start_date"].Value);
-                command.Parameters.AddWithValue("@End", row.Cells["column_end_date"].Value);
-                connection.Open();
-                command.ExecuteNonQuery();
-
-            }   
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-                isUpdated = false;
+                try
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Finished", (!isFinished));
+                    command.Parameters.AddWithValue("@Name", row.Cells["column_name"].Value);
+                    command.Parameters.AddWithValue("@Start", row.Cells["column_start_date"].Value);
+                    command.Parameters.AddWithValue("@End", row.Cells["column_end_date"].Value);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); isUpdated = false; }
+                finally { connection.Close(); }
             }
-            connection.Close();
             return isUpdated;
         }
 
@@ -237,24 +222,23 @@ namespace InventoryManagmentSystem
                 Where Id=@Id
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Name", tbClassName.Text);
-                command.Parameters.AddWithValue("@Start", dpStartDate.Value);
-                command.Parameters.AddWithValue("@End", dpEndDate.Value);
-                command.Parameters.AddWithValue("@Id", editingClass.uuid);
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
+                try
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Name", tbClassName.Text);
+                    command.Parameters.AddWithValue("@Start", dpStartDate.Value);
+                    command.Parameters.AddWithValue("@End", dpEndDate.Value);
+                    command.Parameters.AddWithValue("@Id", editingClass.uuid);
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                connection.Close();
-                return false;
-            }
+            return false;
         }
         
         private void btnAdd_Click(object sender, EventArgs e)

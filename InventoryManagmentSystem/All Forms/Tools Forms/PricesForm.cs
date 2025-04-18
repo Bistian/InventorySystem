@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -15,13 +16,6 @@ namespace InventoryManagmentSystem
 {
     public partial class PricesForm : Form
     {
-        #region SQL_Variables
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
-        SqlCommand command = new SqlCommand();
-        SqlDataReader dataReader;
-        #endregion SQL_Variables
-
         public PricesForm()
         {
             InitializeComponent();
@@ -34,26 +28,26 @@ namespace InventoryManagmentSystem
             dataGridView1.Rows.Clear();
             int i = 0;
             string query = "SELECT * FROM tbPrices";
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                command = new SqlCommand(query, connection);
-                connection.Open();
-                dataReader = command.ExecuteReader();
-                while (dataReader.Read())
+                try
                 {
-                    dataGridView1.Rows.Add(i++,
-                        dataReader[0].ToString(),
-                        dataReader[1].ToString(),
-                        dataReader[2].ToString(),
-                        dataReader[3].ToString(),
-                        dataReader[4].ToString());
+                    connection.Open();
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        dataGridView1.Rows.Add(i++,
+                            dataReader[0].ToString(),
+                            dataReader[1].ToString(),
+                            dataReader[2].ToString(),
+                            dataReader[3].ToString(),
+                            dataReader[4].ToString());
+                    }
                 }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
         }
 
         private void ResetFields()
@@ -74,15 +68,15 @@ namespace InventoryManagmentSystem
             }
 
             // Allow only one decimal point
-            if (e.KeyChar == '.' && ((TextBox)sender).Text.Contains('.'))
+            if (e.KeyChar == '.' && ((System.Windows.Forms.TextBox)sender).Text.Contains('.'))
             {
                 e.Handled = true; // Ignore the input character
             }
 
             // Allow up to two decimal places
-            if (char.IsDigit(e.KeyChar) && ((TextBox)sender).Text.Contains('.'))
+            if (char.IsDigit(e.KeyChar) && ((System.Windows.Forms.TextBox)sender).Text.Contains('.'))
             {
-                string textBoxText = ((TextBox)sender).Text;
+                string textBoxText = ((System.Windows.Forms.TextBox)sender).Text;
                 int decimalIndex = textBoxText.IndexOf('.');
 
                 // Check if there are already two decimal places
@@ -97,20 +91,19 @@ namespace InventoryManagmentSystem
         {
             bool found = false;
             string query = "SELECT * FROM tbPrices WHERE Name=@Name";
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Name", tbName.Text);
-                connection.Open();
-                object result = command.ExecuteScalar();
-                if (result != null) { found = true; }
+                try
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Name", tbName.Text);
+                    object result = command.ExecuteScalar();
+                    if (result != null) { found = true; }
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
-
             return found;
         }
 
@@ -124,23 +117,23 @@ namespace InventoryManagmentSystem
                            "SET Name=@Name, Boots=@Boots, Helmet=@Helmet, Jacket=@Jacket, Mask=@Mask, Pants=@Pants " +
                            "WHERE Name=@Name";
 
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Name", tbName.Text);
-                command.Parameters.AddWithValue("@Boots", tbBoots.Text);
-                command.Parameters.AddWithValue("@Helmet", tbHelmet.Text);
-                command.Parameters.AddWithValue("@Jacket", tbJacket.Text);
-                command.Parameters.AddWithValue("@Mask", tbJacket.Text);
-                command.Parameters.AddWithValue("@Pants", tbPants.Text);
-                connection.Open();
-                command.ExecuteNonQuery();
+                try
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Name", tbName.Text);
+                    command.Parameters.AddWithValue("@Boots", tbBoots.Text);
+                    command.Parameters.AddWithValue("@Helmet", tbHelmet.Text);
+                    command.Parameters.AddWithValue("@Jacket", tbJacket.Text);
+                    command.Parameters.AddWithValue("@Mask", tbJacket.Text);
+                    command.Parameters.AddWithValue("@Pants", tbPants.Text);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
             LoadTable();
         }
 
@@ -154,18 +147,18 @@ namespace InventoryManagmentSystem
 
             string query = "DELETE FROM tbPrices WHERE Name=@Name";
             string name = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Name", name);
-                connection.Open();
-                command.ExecuteNonQuery();
+                try
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Name", name);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
             LoadTable();
         }
 
@@ -185,22 +178,22 @@ namespace InventoryManagmentSystem
             string query = "INSERT INTO tbPrices (Name, Boots, Helmet, Jacket, Mask, Pants) " +
                            "VALUES (@Name, @Boots, @Helmet, @Jacket, @Mask, @Pants)";
 
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Name", tbName.Text);
-                command.Parameters.AddWithValue("@Boots", tbBoots.Text);
-                command.Parameters.AddWithValue("@Helmets", tbHelmet.Text);
-                command.Parameters.AddWithValue("@Jackets", tbJacket.Text);
-                command.Parameters.AddWithValue("@Pants", tbPants.Text);
-                connection.Open();
-                command.ExecuteNonQuery();
+                try
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Name", tbName.Text);
+                    command.Parameters.AddWithValue("@Boots", tbBoots.Text);
+                    command.Parameters.AddWithValue("@Helmets", tbHelmet.Text);
+                    command.Parameters.AddWithValue("@Jackets", tbJacket.Text);
+                    command.Parameters.AddWithValue("@Pants", tbPants.Text);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
             LoadTable();
         }
 

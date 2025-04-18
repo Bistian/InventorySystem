@@ -1,30 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace InventoryManagmentSystem.All_Forms
 {
     public partial class SearchForm : BaseForm
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
-        Form Parent;
-        DataGridView grid;
+        private Form Parent;
+        private DataGridView grid;
+
         public SearchForm(DataGridView grid, Form parent)
         {
             InitializeComponent();
-            HelperSql.ItemTypeLoadComboBox(connection, cb_item_type);
+            HelperSql.ItemTypeLoadComboBox(cb_item_type);
 
             panel_serial_number.Visible = false;
             panel_size.Visible = false;
@@ -76,11 +64,11 @@ namespace InventoryManagmentSystem.All_Forms
             // Removed client name due to table error
             // JOIN tbClients AS c ON i.Location = c.Id
             string query = @"
-                SELECT 
-                    b.ItemId, b.Size, b.Material, b.Brand, 
-                    i.Condition, i.SerialNumber, b.ManufactureDate, 
+                SELECT
+                    b.ItemId, b.Size, b.Material, b.Brand,
+                    i.Condition, i.SerialNumber, b.ManufactureDate,
                     b.AcquisitionDate, i.Location, i.ItemType
-                FROM tbBoots AS b 
+                FROM tbBoots AS b
                 JOIN tbItems AS i ON b.ItemId = i.Id";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
@@ -141,7 +129,6 @@ namespace InventoryManagmentSystem.All_Forms
                     and = true;
                     query += $" WHERE i.Condition = '{cb_condition.Text}'";
                 }
-
             }
             // Search for rented or in stock
             if (check_in_stock.Checked)
@@ -168,44 +155,47 @@ namespace InventoryManagmentSystem.All_Forms
             }
             else if (check_retired.Checked)
             {
-                    query += " AND i.Condition = 'Retired'";
+                query += " AND i.Condition = 'Retired'";
             }
 
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                if (tb_serial_number.Text.Length > 0)
+                try
                 {
-                    command.Parameters.AddWithValue("@SerialNumber", $"%{tb_serial_number.Text}%");
+                    connection.Open();
+                    if (tb_serial_number.Text.Length > 0)
+                    {
+                        command.Parameters.AddWithValue("@SerialNumber", $"%{tb_serial_number.Text}%");
+                    }
+                    if (tb_size.Text.Length > 0)
+                    {
+                        command.Parameters.AddWithValue("@Size", tb_size.Text);
+                    }
+                    SqlDataReader reader = command.ExecuteReader();
+                    grid.Rows.Clear();
+                    int index = 0;
+                    while (reader.Read())
+                    {
+                        grid.Rows.Add(++index,
+                            reader[0], // Item ID
+                            reader[1], // Size
+                            "Color",
+                            reader[2], // Material
+                            reader[3], // Brand
+                            reader[4], // Condition
+                            reader[5], // Serial Number
+                            reader[6], // MFD
+                            reader[7], // Acqusition
+                            reader[8], // Location
+                            reader[9] // Type
+                                      // reader[11] // Client
+                        );
+                    }
                 }
-                if (tb_size.Text.Length > 0)
-                {
-                    command.Parameters.AddWithValue("@Size", tb_size.Text);
-                }
-                SqlDataReader reader = command.ExecuteReader();
-                grid.Rows.Clear();
-                int index = 0;
-                while (reader.Read())
-                {
-                    grid.Rows.Add(++index,
-                        reader[0], // Item ID
-                        reader[1], // Size
-                        "Color",
-                        reader[2], // Material
-                        reader[3], // Brand
-                        reader[4], // Condition
-                        reader[5], // Serial Number
-                        reader[6], // MFD
-                        reader[7], // Acqusition
-                        reader[8], // Location
-                        reader[9] // Type
-                                  // reader[11] // Client
-                    );
-                }
+                catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
-            finally { connection.Close(); }
         }
 
         private void SearchHelmets()
@@ -213,11 +203,11 @@ namespace InventoryManagmentSystem.All_Forms
             // Removed client name due to table error
             // JOIN tbClients AS c ON i.Location = c.Id
             string query = @"
-                SELECT 
-                    h.ItemId, h.Color, h.Brand, 
-                    i.Condition, i.SerialNumber, h.ManufactureDate, 
+                SELECT
+                    h.ItemId, h.Color, h.Brand,
+                    i.Condition, i.SerialNumber, h.ManufactureDate,
                     h.AcquisitionDate, i.Location, i.ItemType
-                FROM tbHelmets AS h 
+                FROM tbHelmets AS h
                 JOIN tbItems AS i ON h.ItemId = i.Id ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
@@ -265,7 +255,6 @@ namespace InventoryManagmentSystem.All_Forms
                     and = true;
                     query += $" WHERE i.Condition = '{cb_condition.Text}'";
                 }
-
             }
             // Search for rented or in stock
             if (check_in_stock.Checked)
@@ -295,37 +284,40 @@ namespace InventoryManagmentSystem.All_Forms
                 query += " AND i.Condition = 'Retired'";
             }
 
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                if (tb_serial_number.Text.Length > 0)
+                try
                 {
-                    command.Parameters.AddWithValue("@SerialNumber", $"%{tb_serial_number.Text}%");
+                    connection.Open();
+                    if (tb_serial_number.Text.Length > 0)
+                    {
+                        command.Parameters.AddWithValue("@SerialNumber", $"%{tb_serial_number.Text}%");
+                    }
+                    SqlDataReader reader = command.ExecuteReader();
+                    grid.Rows.Clear();
+                    int index = 0;
+                    while (reader.Read())
+                    {
+                        grid.Rows.Add(++index,
+                            reader[0], // Item ID
+                            "Size",
+                            reader[1], // Color
+                            "Material",
+                            reader[2], // Brand
+                            reader[3], // Condition
+                            reader[4], // Serial Number
+                            reader[5], // MFD
+                            reader[6], // Acqusition
+                            reader[7], // Location
+                            reader[8] // Type
+                                      // reader[11] // Client
+                        );
+                    }
                 }
-                SqlDataReader reader = command.ExecuteReader();
-                grid.Rows.Clear();
-                int index = 0;
-                while (reader.Read())
-                {
-                    grid.Rows.Add(++index,
-                        reader[0], // Item ID
-                        "Size",
-                        reader[1], // Color
-                        "Material",
-                        reader[2], // Brand
-                        reader[3], // Condition
-                        reader[4], // Serial Number
-                        reader[5], // MFD
-                        reader[6], // Acqusition
-                        reader[7], // Location
-                        reader[8] // Type
-                                  // reader[11] // Client
-                    );
-                }
+                catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
-            finally { connection.Close(); }
         }
 
         private void SearchJackets()
@@ -333,11 +325,11 @@ namespace InventoryManagmentSystem.All_Forms
             // Removed client name due to table error
             // JOIN tbClients AS c ON i.Location = c.Id
             string query = @"
-                SELECT 
-                    j.ItemId, j.Size, j.Brand, 
-                    i.Condition, i.SerialNumber, j.ManufactureDate, 
+                SELECT
+                    j.ItemId, j.Size, j.Brand,
+                    i.Condition, i.SerialNumber, j.ManufactureDate,
                     j.AcquisitionDate, i.Location, i.ItemType
-                FROM tbJackets AS j 
+                FROM tbJackets AS j
                 JOIN tbItems AS i ON j.ItemId = i.Id ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
@@ -385,7 +377,6 @@ namespace InventoryManagmentSystem.All_Forms
                     and = true;
                     query += $" WHERE i.Condition = '{cb_condition.Text}'";
                 }
-
             }
             // Search for rented or in stock
             if (check_in_stock.Checked)
@@ -414,11 +405,12 @@ namespace InventoryManagmentSystem.All_Forms
             {
                 query += " AND i.Condition = 'Retired'";
             }
-
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
+            {
+                try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
                 if (tb_serial_number.Text.Length > 0)
                 {
                     command.Parameters.AddWithValue("@SerialNumber", $"%{tb_serial_number.Text}%");
@@ -450,6 +442,7 @@ namespace InventoryManagmentSystem.All_Forms
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             finally { connection.Close(); }
+            }
         }
 
         private void SearchMasks()
@@ -457,11 +450,11 @@ namespace InventoryManagmentSystem.All_Forms
             // Removed client name due to table error
             // JOIN tbClients AS c ON i.Location = c.Id
             string query = @"
-                SELECT 
-                    m.ItemId, m.Size, m.Brand, 
-                    i.Condition, i.SerialNumber, m.ManufactureDate, 
+                SELECT
+                    m.ItemId, m.Size, m.Brand,
+                    i.Condition, i.SerialNumber, m.ManufactureDate,
                     m.AcquisitionDate, i.Location, i.ItemType
-                FROM tbMasks AS m 
+                FROM tbMasks AS m
                 JOIN tbItems AS i ON m.ItemId = i.Id ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
@@ -509,7 +502,6 @@ namespace InventoryManagmentSystem.All_Forms
                     and = true;
                     query += $" WHERE i.Condition = '{cb_condition.Text}'";
                 }
-
             }
             // Search for rented or in stock
             if (check_in_stock.Checked)
@@ -538,11 +530,12 @@ namespace InventoryManagmentSystem.All_Forms
             {
                 query += " AND i.Condition = 'Retired'";
             }
-
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
+            {
+                try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
                 if (tb_serial_number.Text.Length > 0)
                 {
                     command.Parameters.AddWithValue("@SerialNumber", $"%{tb_serial_number.Text}%");
@@ -574,6 +567,7 @@ namespace InventoryManagmentSystem.All_Forms
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             finally { connection.Close(); }
+            }
         }
 
         private void SearchPants()
@@ -581,11 +575,11 @@ namespace InventoryManagmentSystem.All_Forms
             // Removed client name due to table error
             // JOIN tbClients AS c ON i.Location = c.Id
             string query = @"
-                SELECT 
-                    p.ItemId, p.Size, p.Brand, 
-                    i.Condition, i.SerialNumber, p.ManufactureDate, 
+                SELECT
+                    p.ItemId, p.Size, p.Brand,
+                    i.Condition, i.SerialNumber, p.ManufactureDate,
                     p.AcquisitionDate, i.Location, i.ItemType
-                FROM tbPants AS p 
+                FROM tbPants AS p
                 JOIN tbItems AS i ON p.ItemId = i.Id ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
@@ -598,8 +592,7 @@ namespace InventoryManagmentSystem.All_Forms
 
             if (cb_brand.SelectedIndex != -1)
             {
-
-                if(and)
+                if (and)
                 {
                     query += $" AND p.Brand = '{cb_brand.Text}'";
                 }
@@ -634,7 +627,6 @@ namespace InventoryManagmentSystem.All_Forms
                     and = true;
                     query += $" WHERE i.Condition = '{cb_condition.Text}'";
                 }
-
             }
             // Search for rented or in stock
             if (check_in_stock.Checked)
@@ -664,10 +656,12 @@ namespace InventoryManagmentSystem.All_Forms
                 query += " AND i.Condition = 'Retired'";
             }
 
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
+            {
+                try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
                 if (tb_serial_number.Text.Length > 0)
                 {
                     command.Parameters.AddWithValue("@SerialNumber", $"%{tb_serial_number.Text}%");
@@ -699,6 +693,7 @@ namespace InventoryManagmentSystem.All_Forms
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             finally { connection.Close(); }
+            }
         }
 
         private void TbSizeKeyPress(object sender, KeyPressEventArgs e)
@@ -754,7 +749,7 @@ namespace InventoryManagmentSystem.All_Forms
             }
             string type = cb_item_type.Text;
             ChangeVisibleColumns();
-            HelperSql.BrandsFillComboBox(connection, type, cb_brand);
+            HelperSql.BrandsFillComboBox(type, cb_brand);
             if (type == "boots")
             {
                 panel_color.Visible = false;
@@ -864,12 +859,10 @@ namespace InventoryManagmentSystem.All_Forms
 
         private void SearchForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private void panel_item_type_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

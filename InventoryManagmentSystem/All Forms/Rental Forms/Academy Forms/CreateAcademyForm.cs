@@ -1,24 +1,12 @@
 ﻿using InventoryManagmentSystem.Academy;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InventoryManagmentSystem
 {
     public partial class CreateAcademyForm : Form
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
-
         AcademyForm parent;
         AcademyForm.Academy academy;
         bool isUpdate = false;
@@ -87,21 +75,20 @@ namespace InventoryManagmentSystem
             HelperFunctions.RemoveLineBreaksFromString(ref query);
 
             bool exists = false;
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Name", tbAcademyName.Text);
-                command.Parameters.AddWithValue("@State", cbState.SelectedItem.ToString());
-                connection.Open();
-                object result = command.ExecuteScalar();
-                if (result != null) { exists = true; }
+                try
+                {
+                    command.Parameters.AddWithValue("@Name", tbAcademyName.Text);
+                    command.Parameters.AddWithValue("@State", cbState.SelectedItem.ToString());
+                    connection.Open();
+                    object result = command.ExecuteScalar();
+                    if (result != null) { exists = true; }
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                exists = true;
-            }
-            connection.Close();
             return exists;
         }
 
@@ -116,28 +103,25 @@ namespace InventoryManagmentSystem
 
             bool isAdded = false;
 
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Name", tbAcademyName.Text);
-                command.Parameters.AddWithValue("@ContactName", tbContactName.Text);
-                command.Parameters.AddWithValue("@Email", tbEmail.Text);
-                command.Parameters.AddWithValue("@Phone", tbPhone.Text);
-                command.Parameters.AddWithValue("@Street", tbStreet.Text);
-                command.Parameters.AddWithValue("@City", tbCity.Text);
-                command.Parameters.AddWithValue("@State", cbState.SelectedItem.ToString());
-                command.Parameters.AddWithValue("@Zip", tbZip.Text);
-
-
-                connection.Open();
-                command.ExecuteNonQuery();
-                isAdded = true;
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                connection.Close();
+                try
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Name", tbAcademyName.Text);
+                    command.Parameters.AddWithValue("@ContactName", tbContactName.Text);
+                    command.Parameters.AddWithValue("@Email", tbEmail.Text);
+                    command.Parameters.AddWithValue("@Phone", tbPhone.Text);
+                    command.Parameters.AddWithValue("@Street", tbStreet.Text);
+                    command.Parameters.AddWithValue("@City", tbCity.Text);
+                    command.Parameters.AddWithValue("@State", cbState.SelectedItem.ToString());
+                    command.Parameters.AddWithValue("@Zip", tbZip.Text);
+                    command.ExecuteNonQuery();
+                    isAdded = true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
             return isAdded;
         }
@@ -182,30 +166,29 @@ namespace InventoryManagmentSystem
                 WHERE Id = @Id
             ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Id", academy.uuid);
-                command.Parameters.AddWithValue("@Name", tbAcademyName.Text);
-                command.Parameters.AddWithValue("@ContactName", tbContactName.Text);
-                command.Parameters.AddWithValue("@Email", tbEmail.Text);
-                command.Parameters.AddWithValue("@Phone", tbPhone.Text);
-                command.Parameters.AddWithValue("@Street", tbStreet.Text);
-                command.Parameters.AddWithValue("@City", tbCity.Text);
-                command.Parameters.AddWithValue("@State", cbState.Text);
-                command.Parameters.AddWithValue("@Zip", tbZip.Text);
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
-                return true;
-            }
-            catch(Exception ex)
-            {
-                connection.Close();
-                Console.WriteLine($"Could not update {ex.Message}");
+                try
+                {
+                    command.Parameters.AddWithValue("@Id", academy.uuid);
+                    command.Parameters.AddWithValue("@Name", tbAcademyName.Text);
+                    command.Parameters.AddWithValue("@ContactName", tbContactName.Text);
+                    command.Parameters.AddWithValue("@Email", tbEmail.Text);
+                    command.Parameters.AddWithValue("@Phone", tbPhone.Text);
+                    command.Parameters.AddWithValue("@Street", tbStreet.Text);
+                    command.Parameters.AddWithValue("@City", tbCity.Text);
+                    command.Parameters.AddWithValue("@State", cbState.Text);
+                    command.Parameters.AddWithValue("@Zip", tbZip.Text);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
                 return false;
-            }
-            
+            }            
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

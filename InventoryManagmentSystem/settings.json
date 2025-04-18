@@ -1,0 +1,33 @@
+{
+  "ConnectionStrings": {
+    "Local": "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={filePath};Integrated Security=True;Connect Timeout=30",
+    "Remote": "Data Source=your-aws-endpoint;Initial Catalog=YourDatabase;User ID=YourUsername;Password=YourPassword;Connect Timeout=30"
+  },
+  "Environment": "Local",
+  "Presets": {
+    "Themes": {
+      "Dark": {
+        "FontColor": "White",
+        "BackgroundColor": "Black"
+      },
+      "Firetec": {
+        "BackColor": "Control",
+        "BackgroundColor1": "Maroon",
+        "BackgroundColor2": "MidnightBlue",
+        "ButtonColor": "WindowText",
+        "FontColor": "ControlText",
+        "ForeColor": "Window",
+        "Table": {
+          "BackgroundColor": "Control",
+          "GridColor": "ControlDarkDark"
+        }
+      }
+    }
+  },
+  "SettingsUser": {
+    "Font": {
+      "Size": 12,
+      "Style": "Arial"
+    }
+  }
+}

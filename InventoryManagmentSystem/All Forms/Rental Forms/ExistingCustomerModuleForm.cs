@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -8,8 +7,6 @@ namespace InventoryManagmentSystem
 {
     public partial class ExistingCustomerModuleForm : Form
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionString);
         List<Item> clients = new List<Item>();
 
         public bool isReturn = false;
@@ -17,7 +14,7 @@ namespace InventoryManagmentSystem
         public ExistingCustomerModuleForm()
         {
             InitializeComponent();
-            HelperSql.ClientLoadToDataGrid(connection, dataGridUsers);
+            HelperSql.ClientLoadToDataGrid(dataGridUsers);
             cbActive.Checked = true;
         }
 
@@ -28,7 +25,7 @@ namespace InventoryManagmentSystem
             string message = "Do you want to delete this Client?";
 
             string id = dataGridUsers.Rows[e.RowIndex].Cells[1].Value.ToString();
-            var rentedItems = HelperSql.ItemFindByClientId(connection, id);
+            var rentedItems = HelperSql.ItemFindByClientId(id);
             if (rentedItems.Count > 0)
             {
                 message = "Client did not return all items, cannot be deleted";
@@ -40,20 +37,18 @@ namespace InventoryManagmentSystem
 
             string query = "DELETE FROM tbClients WHERE Name=@Name";
             string name = dataGridUsers.Rows[e.RowIndex].Cells[0].Value.ToString();
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                var command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Name", name);
-                connection.Open();
-                command.ExecuteNonQuery();
-                LoadClients();
+                try
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Name", name);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
-
             LoadClients();
             return true;
         }
@@ -161,7 +156,7 @@ namespace InventoryManagmentSystem
             var clients = new List<Item>();
             dataGridUsers.Rows.Clear();
 
-            clients = HelperSql.ClientFindBySearchBar(connection, searchTerm, cbActive.Checked, cbInactive.Checked);
+            clients = HelperSql.ClientFindBySearchBar(searchTerm, cbActive.Checked, cbInactive.Checked);
             if (clients == null) { return; }
 
             uint count = 1;
@@ -180,7 +175,7 @@ namespace InventoryManagmentSystem
             var clients = new List<Item>();
             dataGridUsers.Rows.Clear();
 
-            clients = HelperSql.ClientFindBySearchBar(connection, searchTerm, cbActive.Checked, cbInactive.Checked);
+            clients = HelperSql.ClientFindBySearchBar(searchTerm, cbActive.Checked, cbInactive.Checked);
             if (clients == null) { return; }
 
             uint count = 1;
@@ -199,7 +194,7 @@ namespace InventoryManagmentSystem
             var clients = new List<Item>();
             dataGridUsers.Rows.Clear();
 
-            clients = HelperSql.ClientFindBySearchBar(connection, searchTerm, cbActive.Checked, cbInactive.Checked);
+            clients = HelperSql.ClientFindBySearchBar(searchTerm, cbActive.Checked, cbInactive.Checked);
             if (clients == null) { return; }
 
             uint count = 1;

@@ -1,12 +1,7 @@
-﻿using Microsoft.VisualBasic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryManagmentSystem
 {
@@ -14,14 +9,16 @@ namespace InventoryManagmentSystem
     {
         private static SettingsData instance;
         private string filePath;
+
         /// <summary>
-        /// If a variable has get or set, it will be added to the config file. 
+        /// If a variable has get or set, it will be added to the config file.
         /// Add variables that are not to be tracked here.
         /// </summary>
         private Dictionary<string, bool> untrackedProperties = new Dictionary<string, bool> {
             // Add more variables to be left out of the config file.
             {"Instance", true },
         };
+
         /// <summary>
         /// For a variable to be written on the config file, it needs to be here with its default value.
         /// </summary>
@@ -31,24 +28,33 @@ namespace InventoryManagmentSystem
             { "dueDaysFromToday", "14" },
             { "fontSize", "12" },
         };
+
         /// <summary>
         /// Current values of settings' variables.
         /// </summary>
         public Dictionary<string, string> currentData;
+
         /// <summary>
         /// Used to filter items based on their due date in relation to today.
         /// </summary>
-        public int dueDaysFromToday { get; set; }
+        public int dueDaysFromToday
+        {
+            get; set;
+        }
+
         /// <summary>
         /// Size of the letters.
         /// </summary>
-        public float fontSize { get; set; }
-        
+        public float fontSize
+        {
+            get; set;
+        }
+
         public static SettingsData Instance
         {
             get
             {
-                if(instance == null)
+                if (instance == null)
                 {
                     instance = new SettingsData();
                     string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -108,7 +114,7 @@ namespace InventoryManagmentSystem
 
             return data;
         }
-       
+
         public void RevertToDefault()
         {
             currentData = defaultData;
@@ -122,7 +128,7 @@ namespace InventoryManagmentSystem
                 UpdateCurrentData();
                 UpdateSettingsFile(currentData);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -164,7 +170,7 @@ namespace InventoryManagmentSystem
                 }
             }
         }
-        
+
         private void UpdateFieldsUsingTextFile()
         {
             if (!File.Exists(filePath))
@@ -202,6 +208,5 @@ namespace InventoryManagmentSystem
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
-
     }
 }

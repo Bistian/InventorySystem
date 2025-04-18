@@ -1,54 +1,58 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using static InventoryManagmentSystem.Academy.AcademyForm;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
-using System.Windows.Forms.VisualStyles;
+using System.Runtime.InteropServices;
+using InventoryManagmentSystem.Config_Files;
 
 namespace InventoryManagmentSystem
 {
     internal static class Program
     {
+        // Global settings
+        public static SettingsManager SettingsManager
+        {
+            get; private set;
+        }
+
+        public static string ConnectionString
+        {
+            get; private set;
+        }
+
+        [DllImport("user32.dll")]
+        private static extern bool SetProcessDPIAware();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         private static void Main()
         {
-#if DEBUG
-            Application.ThreadException += Application_ThreadException;
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-#endif
+            Debug();
 
-            // Get the current connection string
-            string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            // Initialize the settings manager (this will load settings or create the file if missing)
+            SettingsManager = new SettingsManager();
+
+            // Get the current connection string
+            ConnectionString = DatabaseConfig.GetConnectionString();
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                // checking if database exists
                 try
                 {
                     connection.Open();
                     connection.Close();
-                    UpdateClassActivity(connection);
                     Application.Run(new MainForm());
                 }
                 catch (Exception ex)
                 {
-                    try
-                    {
-                        Console.WriteLine(ex.Message);
-                        Application.Run(new DatabaseCreationModule());
-                    }
-                    catch (Exception e) { Console.WriteLine(e.Message); }
+                    Console.WriteLine(ex.Message);
+                    throw new Exception("Could not connect to database");
                 }
             }
         }
@@ -64,6 +68,7 @@ namespace InventoryManagmentSystem
             MessageBox.Show($"An unhandled exception occurred: {exception?.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        // Hack to normalize class activities
         private static void UpdateClassActivity(SqlConnection connection)
         {
             string query = "UPDATE TBCLASSES " +
@@ -82,6 +87,14 @@ namespace InventoryManagmentSystem
                 MessageBox.Show(ex.Message);
             }
             connection.Close();
+        }
+
+        private static void Debug()
+        {
+#if DEBUG
+            Application.ThreadException += Application_ThreadException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+#endif
         }
     }
 }

@@ -1,21 +1,16 @@
 ﻿using InventoryManagmentSystem.C__Files;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using static InventoryManagmentSystem.Academy.AcademyForm;
+
 
 namespace InventoryManagmentSystem.Rental_Forms
 {
     public partial class NewClientForm : Form
     {
-        private static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        private SqlConnection connection = new SqlConnection(connectionString);
-
         public string clientId = string.Empty;
         private List<Item> academyList;
         private List<Item> classList;
@@ -39,7 +34,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         public void AutoFillFields(string type, string clientName)
         {
             RentalTypeSelector(type);
-            client = HelperSql.ClientFindByName(connection, clientName);
+            client = HelperSql.ClientFindByName(clientName);
             if (client.Count() == 0) { return; }
 
             txtBoxCustomerName.Text = client.GetColumnValue("Name");
@@ -117,7 +112,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void PopulateAcademyList()
         {
-            academyList = HelperSql.AcademyFillComboBox(connection, cbAcademy);
+            academyList = HelperSql.AcademyFillComboBox(cbAcademy);
             foreach (var academy in academyList)
             {
                 cbAcademy.Items.Add(academy.GetColumnValue("Name"));
@@ -187,7 +182,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
                 panelContactInfo.Visible = true;
 
-                Point point = new Point(panelAddress.Location.X, panelAddress.Location.Y + panelAddress.Size.Height);
+                var point = new System.Drawing.Point(panelAddress.Location.X, panelAddress.Location.Y + panelAddress.Size.Height);
                 panelRentalInfo.Location = point;
             }
             //Academy
@@ -217,7 +212,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
                 panelContactInfo.Visible = true;
 
-                Point point = new Point(panelAddress.Location.X, panelAddress.Location.Y + panelAddress.Size.Height);
+                var point = new System.Drawing.Point(panelAddress.Location.X, panelAddress.Location.Y + panelAddress.Size.Height);
                 panelRentalInfo.Location = point;
             }
         }
@@ -250,7 +245,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             client["Height"] = textBoxHeight.Text;
             client["Weight"] = textBoxWeight.Text;
 
-            bool inserted = HelperSql.ClientInsert(connection, client);
+            bool inserted = HelperSql.ClientInsert(client);
             if (inserted == false) { return false; }
 
             //hiding input panels
@@ -280,49 +275,48 @@ namespace InventoryManagmentSystem.Rental_Forms
                     $"WHERE Id LIKE @Id";
 
             string address = txtBoxStreet.Text + " " + textBoxCity.Text + " " + textBoxState.Text + " " + textBoxZip.Text;
-            var command = new SqlCommand(query, connection);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                if (connection.State == ConnectionState.Open) { connection.Close(); }
-                connection.Open();
-                command.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
-                command.Parameters.AddWithValue("@Phone", maskPhone.Text);
-                command.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
-                if (comboBoxRentalType.SelectedIndex == 0)
+                try
                 {
-                    command.Parameters.AddWithValue("@Academy", cbAcademy.Text);
+                    connection.Open();
+                    command.Parameters.AddWithValue("@Name", txtBoxCustomerName.Text);
+                    command.Parameters.AddWithValue("@Phone", maskPhone.Text);
+                    command.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
+                    if (comboBoxRentalType.SelectedIndex == 0)
+                    {
+                        command.Parameters.AddWithValue("@Academy", cbAcademy.Text);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@Academy", txtBoxDriversLicense.Text);
+                    }
+                    command.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
+                    command.Parameters.AddWithValue("@Address", address);
+                    command.Parameters.AddWithValue("@FireTecRepresentative", cbRep.Text);
+                    command.Parameters.AddWithValue("@Chest", textBoxChest.Text);
+                    command.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
+                    command.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
+                    command.Parameters.AddWithValue("@Inseam", textBoxInseam.Text);
+                    command.Parameters.AddWithValue("@Hips", textBoxHips.Text);
+                    command.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
+                    command.Parameters.AddWithValue("@Height", textBoxHeight.Text);
+                    command.Parameters.AddWithValue("@Id", clientId);
+
+                    string classId = string.Empty;
+                    ComboBoxItem Class = (ComboBoxItem)cbClass.SelectedItem;
+                    classId = Class.ID;
+
+                    command.Parameters.AddWithValue("@ClassId", classId);
+
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("Client has been successfully updated.");
+                    parent.btnProfile_Click(sender, e);
                 }
-                else
-                {
-                    command.Parameters.AddWithValue("@Academy", txtBoxDriversLicense.Text);
-                }
-                command.Parameters.AddWithValue("@DriversLicenseNumber", txtBoxDriversLicense.Text);
-                command.Parameters.AddWithValue("@Address", address);
-                command.Parameters.AddWithValue("@FireTecRepresentative", cbRep.Text);
-                command.Parameters.AddWithValue("@Chest", textBoxChest.Text);
-                command.Parameters.AddWithValue("@Sleeve", textBoxSleeve.Text);
-                command.Parameters.AddWithValue("@Waist", textBoxWaist.Text);
-                command.Parameters.AddWithValue("@Inseam", textBoxInseam.Text);
-                command.Parameters.AddWithValue("@Hips", textBoxHips.Text);
-                command.Parameters.AddWithValue("@Weight", textBoxWeight.Text);
-                command.Parameters.AddWithValue("@Height", textBoxHeight.Text);
-                command.Parameters.AddWithValue("@Id", clientId);
-
-                string classId = string.Empty;
-                ComboBoxItem Class = (ComboBoxItem)cbClass.SelectedItem;
-                classId = Class.ID;
-
-                command.Parameters.AddWithValue("@ClassId", classId);
-
-                command.ExecuteNonQuery();
-                MessageBox.Show("Client has been successfully updated.");
-                parent.btnProfile_Click(sender, e);
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            connection.Close();
         }
 
         private void ButtonContinue_Click(object sender, EventArgs e)
@@ -439,7 +433,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             cbClass.Items.Clear();
 
             var academyId = academyList[index].GetColumnValue("Id");
-            classList = HelperSql.ClassFindByAcademy(connection, academyId);
+            classList = HelperSql.ClassFindByAcademy(academyId);
             if (classList == null) { return; }
             string currClass;
             cbClass.Enabled = true;

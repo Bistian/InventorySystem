@@ -1,32 +1,16 @@
-﻿using PdfSharp.Drawing;
+﻿using Microsoft.Office.Interop.Excel;
+using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static InventoryManagmentSystem.Academy.AcademyForm;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-using PdfSharp.Drawing;
 
 namespace InventoryManagmentSystem.Academy
 {
     public partial class ClassList : Form
     {
-        private static string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        private SqlConnection connection = new SqlConnection(connectionString);
-
         //Creating command
         private SqlCommand command = new SqlCommand();
-
-        //Creatinng Reader
-        private SqlDataReader dr2;
 
         private Guid AcademyId;
         private AcademyForm parent;
@@ -48,22 +32,30 @@ namespace InventoryManagmentSystem.Academy
             // SQL
             int i = 0;
             dataGridClasses.Rows.Clear();
-            string Query = $"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses";
+            string query = $"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses";
             if (AcademyId != Guid.Empty)
             {
-                Query = $"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses WHERE AcademyId LIKE '%{AcademyId}%'";
+                query = $"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses WHERE AcademyId LIKE '%{AcademyId}%'";
             }
-            SqlCommand command = new SqlCommand(Query, connection);
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                i++;
-                dataGridClasses.Rows.Add(i, reader[0], reader[1].ToString(), GetAcademyName((Guid)reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString());
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        i++;
+                        dataGridClasses.Rows.Add(i, reader[0], reader[1].ToString(), GetAcademyName((Guid)reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString());
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
+
             }
-            reader.Close();
-            connection.Close();
             HelperFunctions.DataGridFormatDateColumn(dataGridClasses, "column_start_date");
             HelperFunctions.DataGridFormatDateColumn(dataGridClasses, "column_end_date");
         }
@@ -73,22 +65,21 @@ namespace InventoryManagmentSystem.Academy
             if (parent.AcademyId != Guid.Empty)
             {
                 string query = $"SELECT Name FROM tbAcademies WHERE Id = '{parent.AcademyId}'";
-
-                try
+                using (var connection = new SqlConnection(Program.ConnectionString))
+                using (var command = new SqlCommand(query, connection))
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(query, connection);
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
+                    try
                     {
-                        labelAcademyName.Text = $"{reader[0]} class list";
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            labelAcademyName.Text = $"{reader[0]} class list";
+                        }
                     }
+                    catch (Exception ex) { Console.WriteLine(ex.Message); }
+                    finally { connection.Close(); }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                connection.Close();
             }
             else
             {
@@ -117,17 +108,17 @@ namespace InventoryManagmentSystem.Academy
                 SET IsFinished='{!isFinished}'
                 WHERE Id='{uuid}'
             ";
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-                command.ExecuteNonQuery();
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            connection.Close();
             LoadClasses();
         }
 
@@ -159,32 +150,27 @@ namespace InventoryManagmentSystem.Academy
 
         private string GetAcademyName(Guid SearchId)
         {
-            SqlConnection connection2 = new SqlConnection(connectionString);
-            //Creating command
-            SqlCommand command2 = new SqlCommand();
-
             string AcademyName = "";
             string query = $@"
                     SELECT Name FROM tbAcademies WHERE Id = '{SearchId}'
                     ";
             HelperFunctions.RemoveLineBreaksFromString(ref query);
-            try
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                command2 = new SqlCommand(query, connection2);
-                connection2.Open();
-                dr2 = command2.ExecuteReader();
-                while (dr2.Read())
+                try
                 {
-                    AcademyName = dr2[0].ToString();
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        AcademyName = reader[0].ToString();
+                    }
+                    reader.Close();
+                    connection.Close();
                 }
-                dr2.Close();
-                connection2.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                dr2.Close();
-                connection2.Close();
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
             return AcademyName;
         }
@@ -197,22 +183,28 @@ namespace InventoryManagmentSystem.Academy
             // SQL
             int i = 0;
             dataGridClasses.Rows.Clear();
-            string Query = $"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses WHERE Name LIKE '%{searchTerm}%'";
+            string query = $"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses WHERE Name LIKE '%{searchTerm}%'";
             if (AcademyId != Guid.Empty)
             {
-                Query = $"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses WHERE Name LIKE '%{searchTerm}%' AND AcademyId LIKE '%{AcademyId}%'";
+                query = $"SELECT Id, AcademyId, Name, StartDate, EndDate, IsFinished FROM tbClasses WHERE Name LIKE '%{searchTerm}%' AND AcademyId LIKE '%{AcademyId}%'";
             }
-            SqlCommand command = new SqlCommand(Query, connection);
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
+            using (var connection = new SqlConnection(Program.ConnectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                i++;
-                dataGridClasses.Rows.Add(i, reader[0], reader[1].ToString(), GetAcademyName((Guid)reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString());
+                try
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        i++;
+                        dataGridClasses.Rows.Add(i, reader[0], reader[1].ToString(), GetAcademyName((Guid)reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString());
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally { connection.Close(); }
             }
-            reader.Close();
-            connection.Close();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
