@@ -1,0 +1,38 @@
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace InventoryManagmentSystem.Database.Entities
+{
+    public class Pants
+    {
+        [Column("id")]
+        public Guid Id
+        {
+            get; set;
+        }
+
+        [Column("size")]
+        public string Size
+        {
+            get; set;
+        }
+
+        [Column("created_at")]
+        public DateTime CreatedAt
+        {
+            get; set;
+        }
+
+        [Column("updated_at")]
+        public DateTime UpdatedAt
+        {
+            get; set;
+        }
+
+        [ForeignKey(nameof(Id))]
+        public Item Item
+        {
+            get; set;
+        }
+    }
+}
