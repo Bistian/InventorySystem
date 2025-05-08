@@ -1,28 +1,28 @@
-﻿using InventoryManagmentSystem.Academy;
+﻿using InventoryManagmentSystem.Database.Types;
 using InventoryManagmentSystem.Rental_Forms;
-using Microsoft.Office.Interop.Excel;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace InventoryManagmentSystem
 {
     public partial class NewRentalModuleForm : Form
     {
-        private string ItemIdClient = string.Empty;
-        private string ItemIdInventory = string.Empty;
+        private Guid ItemIdGridClient = Guid.Empty;
+        private Guid ItemIdGridInventory = Guid.Empty;
 
-        private string ReplacmentSerial = "";
-        private string dueDate = "";
-        public string ClientId = string.Empty;
-        private string ClassId = string.Empty;
+        private string ReplacementSerial = "";
+        private string DueDate = "";
+        private Guid? ClassId = null;
 
+        public Guid ClientId = Guid.Empty;
         public int ReturnReplace = 0;
-        public string license = "";
-        public string drivers = string.Empty;
+        public string Drivers = string.Empty;
         public bool ExistingUser = false;
-        public string currentUser = "";
+        public string CurrentUser = "";
 
         public NewRentalModuleForm(string rentalType = null, string clientName = null)
         {
@@ -36,14 +36,38 @@ namespace InventoryManagmentSystem
             {
                 panelButtons.Visible = false;
                 NewClientForm clientForm = new NewClientForm(rentalType, clientName);
-                HelperSql.ItemTypeLoadComboBox(cbItemType);
+                Program.ItemService.LoadComboBoxWithItemTypes(cbItemType);
                 HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
             }
 
-            HelperSql.ItemTypeLoadComboBox(cbItemType);
+            Program.ItemService.LoadComboBoxWithItemTypes(cbItemType);
 
             dataGridInv.Columns["column_mfd_inv"].DefaultCellStyle.Format = "d";
-            HelperSql.ItemLoadDatagrid(dataGridInv, "WHERE i.Condition = 'Active'");
+            FillGrid();
+        }
+
+        private void FillGrid()
+        {
+            var items = Program.ItemService.FindWhere(i => i.Condition != ItemConditions.Retired);
+            int index = 0;
+            foreach(var i in items)
+            {
+                dataGridInv.Rows.Add(
+                    ++index,
+                    i.Id,
+                    i.Size,
+                    i.Material,
+                    i.Color,
+                    i.Brand,
+                    i.Condition,
+                    i.SerialNumber,
+                    "Acquisition Date",
+                    i.ManufacturedAt,
+                    i.IdClient,
+                    i.Type,
+                    "Client Name"
+                );
+            }
         }
 
         private void LoadClient()
@@ -52,24 +76,21 @@ namespace InventoryManagmentSystem
             dataGridViewClient.Columns["column_due_date"].DefaultCellStyle.Format = "d";
             dataGridViewClient.Columns["column_manufacture_date"].DefaultCellStyle.Format = "d";
 
-            var items = HelperSql.ItemFindByClientId(ClientId);
-            if (items.Count == 0)
-            {
-                items = HelperSql.ItemFindByClientId(drivers);
-            }
+            var items = Program.ItemService.FindByClientId(ClientId);
             if (items == null) { return; }
 
             dataGridViewClient.Rows.Clear();
             foreach (var item in items)
             {
                 dataGridViewClient.Rows.Add(
-                    item.GetColumnValue("ItemType"),
-                    item.GetColumnValue("DueDate"),
-                    item.GetColumnValue("Brand"),
-                    item.GetColumnValue("SerialNumber"),
-                    item.GetColumnValue("Size"),
-                    item.GetColumnValue("ManufactureDate"),
-                    item.GetColumnValue("Id"));
+                    item.Type,
+                    item.DueDate,
+                    item.Brand,
+                    item.SerialNumber,
+                    item.Size,
+                    item.ManufacturedAt,
+                    item.Id
+                );
             }
         }
 
@@ -102,72 +123,181 @@ namespace InventoryManagmentSystem
                 dataGridInv.Columns["column_size_inv"].Visible = true;
             }
 
+            List<ItemFull> items = new List<ItemFull>();
             if (selection == "boots")
             {
-                HelperSql.BootsFindAllInStock(dataGridInv, textBoxSearchBar.Text);
+                if(textBoxSearchBar.Text.Length > 0)
+                {
+                    items = Program.ItemService.FindWhere(i =>
+                        i.IdClient == null &&
+                        i.Condition != ItemConditions.Retired &&
+                        i.Type == ItemTypes.Boots && 
+                        i.SerialNumber.Contains(textBoxSearchBar.Text)
+                    );
+                }
+                else
+                {
+                    items = Program.ItemService.FindWhere(i =>
+                        i.IdClient == null &&
+                        i.Condition != ItemConditions.Retired &&
+                        i.Type == ItemTypes.Boots
+                    );
+                }
             }
             else if (selection == "helmet")
             {
-                HelperSql.HelmetFindAllInStock(dataGridInv, textBoxSearchBar.Text);
+                if (textBoxSearchBar.Text.Length > 0)
+                {
+                    items = Program.ItemService.FindWhere(i =>
+                        i.IdClient == null &&
+                        i.Condition != ItemConditions.Retired &&
+                        i.Type == ItemTypes.Helmet &&
+                        i.SerialNumber.Contains(textBoxSearchBar.Text)
+                    );
+                }
+                else
+                {
+                    items = Program.ItemService.FindWhere(i =>
+                        i.IdClient == null &&
+                        i.Condition != ItemConditions.Retired &&
+                        i.Type == ItemTypes.Helmet
+                    );
+                }
             }
             else if (selection == "jacket")
             {
-                HelperSql.JacketFindAllInStock(dataGridInv, textBoxSearchBar.Text);
+                if (textBoxSearchBar.Text.Length > 0)
+                {
+                    items = Program.ItemService.FindWhere(i =>
+                        i.IdClient == null &&
+                        i.Condition != ItemConditions.Retired &&
+                        i.Type == ItemTypes.Jacket &&
+                        i.SerialNumber.Contains(textBoxSearchBar.Text)
+                    );
+                }
+                else
+                {
+                    items = Program.ItemService.FindWhere(i =>
+                        i.IdClient == null &&
+                        i.Condition != ItemConditions.Retired &&
+                        i.Type == ItemTypes.Jacket
+                    );
+                }
             }
             else if (selection == "mask")
             {
-                HelperSql.MaskFindAllInStock(dataGridInv, textBoxSearchBar.Text);
+                if (textBoxSearchBar.Text.Length > 0)
+                {
+                    items = Program.ItemService.FindWhere(i =>
+                        i.IdClient == null &&
+                        i.Condition != ItemConditions.Retired &&
+                        i.Type == ItemTypes.Mask &&
+                        i.SerialNumber.Contains(textBoxSearchBar.Text)
+                    );
+                }
+                else
+                {
+                    items = Program.ItemService.FindWhere(i =>
+                        i.IdClient == null &&
+                        i.Condition != ItemConditions.Retired &&
+                        i.Type == ItemTypes.Mask
+                    );
+                }
             }
             else if (selection == "pants")
             {
-                HelperSql.PantsFindAllInStock(dataGridInv, textBoxSearchBar.Text);
+                if (textBoxSearchBar.Text.Length > 0)
+                {
+                    items = Program.ItemService.FindWhere(i =>
+                        i.IdClient == null &&
+                        i.Condition != ItemConditions.Retired &&
+                        i.Type == ItemTypes.Pants &&
+                        i.SerialNumber.Contains(textBoxSearchBar.Text)
+                    );
+                }
+                else
+                {
+                    items = Program.ItemService.FindWhere(i =>
+                        i.IdClient == null &&
+                        i.Condition != ItemConditions.Retired &&
+                        i.Type == ItemTypes.Pants
+                    );
+                }
+            }
+
+            int index = 0;
+            foreach (var i in items)
+            {
+                dataGridInv.Rows.Add(
+                    ++index,
+                    i.Id,
+                    i.Type,
+                    i.Brand,
+                    i.SerialNumber,
+                    i.Size,
+                    i.ManufacturedAt,
+                    i.Condition,
+                    i.IdClient,
+                    i.Material
+                );
             }
         }
 
-        public void LoadProfile(string clientId, string Name)
+        public void LoadProfile(string clientId, string name)
         {
-            var client = HelperSql.ClientFindById(clientId);
-            if (client.IsEmpty())
-            {
-                client = HelperSql.ClientFindByDriversLicense(clientId, Name);
-            }
-            if (client.Count() == 0)
-            {
-                Console.WriteLine("Client not found.");
-                return;
-            }
+            // TODO: This is legacy, driver License was used as id before.
+            Guid id = Guid.Parse(clientId);
+            var client = Program.ClientService.FindById(id);
 
-            labelProfileName.Text = client.GetColumnValue("Name");
-            labelClientPhone.Text = client.GetColumnValue("Phone");
-            labelClientEmail.Text = client.GetColumnValue("Email");
-            lableRentalInfo.Text = client.GetColumnValue("Academy");
-            labelClientDrivers.Text = client.GetColumnValue("DriversLicenseNumber");
-            labelClientAddress.Text = client.GetColumnValue("Address");
-            labelClientChest.Text = client.GetColumnValue("Chest");
-            labelClientSleeve.Text = client.GetColumnValue("Sleeve");
-            labelClientWaist.Text = client.GetColumnValue("Waist");
-            labelClientInseam.Text = client.GetColumnValue("Inseam");
-            labelClientHips.Text = client.GetColumnValue("Hips");
-            labelClientHeight.Text = client.GetColumnValue("Height");
-            labelClientWeight.Text = client.GetColumnValue("Weight");
-            textBoxNotes.Text = client.GetColumnValue("Notes");
-            ClientId = client.GetColumnValue("Id");
-            ClassId = client.GetColumnValue("IdClass");
-            drivers = client.GetColumnValue("DriversLicenseNumber");
-            license = labelClientDrivers.Text;
-
-            var item = HelperSql.ClassFindByClassId(ClassId);
-            if (item != null)
+            if (client == null)
             {
-                string startDate = item.GetColumnValue("StartDate");
+                // This is legacy, from when driver License was used as id
+                client = Program.ClientService.FindByDriverLicense(clientId, name);
+                if (client == null)
+                {
+                    Console.WriteLine("Client not found.");
+                    return;
+                }
+            }
+            ClientId = client.Id;
+            Drivers = client.DriverLicense;
+
+            labelProfileName.Text = client.Name;
+            labelClientPhone.Text = client.PhoneNumber;
+            labelClientEmail.Text = client.Email;
+            labelClientDrivers.Text = client.DriverLicense;
+
+            var student = Program.StudentService.FindByIdClient(id);
+            var classEntity = Program.ClassService.FindById(student.IdClass);
+            var academy = Program.AcademyService.FindById(classEntity.IdAcademy);
+            lableRentalInfo.Text = academy.Name;
+
+            
+            labelClientAddress.Text = Program.AddressService.Location(client.IdAddress);
+
+            var measurement = Program.MeasurementService.FindById(client.IdMeasurement);
+            labelClientChest.Text = measurement.Chest;
+            labelClientSleeve.Text = measurement.Sleeve;
+            labelClientWaist.Text = measurement.Waist;
+            labelClientInseam.Text = measurement.Inseam;
+            labelClientHips.Text = measurement.Hips;
+            labelClientHeight.Text = measurement.Height;
+            labelClientWeight.Text = measurement.Weight;
+
+            //textBoxNotes.Text = client.GetColumnValue("Notes");
+
+
+            if (classEntity != null)
+            {
+                string startDate = classEntity.StartAt.Date.ToString();
                 string startFormatted = DateTime.Parse(startDate).ToString("yyyy/MM/dd");
                 startFormatted = HelperFunctions.DateCrop(startFormatted, "mm/dd/yyyy");
 
-                string endDate = item.GetColumnValue("EndDate");
+                string endDate = classEntity.EndAt.Date.ToString();
                 string endFormatted = DateTime.Parse(endDate).ToString("yyyy/MM/dd");
                 endFormatted = HelperFunctions.DateCrop(endFormatted, "mm/dd/yyyy");
 
-                labelClientClass.Text = item.GetColumnValue("Name") +
+                labelClientClass.Text = classEntity.Name +
                     "\n Start Date " + startFormatted +
                     "\n End Date " + endFormatted;
             }
@@ -177,7 +307,6 @@ namespace InventoryManagmentSystem
             panelProfileRentalInfo.Visible = true;
             panelProfileMeasurments.Visible = true;
             flowLayoutPanelProfile.Visible = true;
-            license = labelProfileName.Text;
 
             panelButtons.Visible = true;
             panelButtons.AutoScroll = false;
@@ -197,7 +326,6 @@ namespace InventoryManagmentSystem
             flowLayoutPanelProfile.Visible = true;
             panelProfileRentalInfo.Visible = false;
             panelProfileMeasurments.Visible = false;
-            license = labelProfileName.Text;
             flowLayoutPanelProfile.Visible = false;
             flowLayoutPanelProfile.AutoScroll = false;
             splitContainerInventories.Visible = true;
@@ -212,12 +340,12 @@ namespace InventoryManagmentSystem
                 if (row.Cells["column_item_type"].Value != null && row.Cells["column_item_type"].Value.ToString() != "boots")
                 {
                     // Client Has items other than boots
-                    HelperSql.ClientUpdateActivity(ClientId, true);
+                    Program.ClientService.Activity(ClientId, true);
                     return;
                 }
             }
             // Client has boots or nohting
-            HelperSql.ClientUpdateActivity(ClientId, false);
+            Program.ClientService.Activity(ClientId, false);
         }
 
         private void SetItemType(string itemType)
@@ -270,38 +398,41 @@ namespace InventoryManagmentSystem
                     MessageBox.Show("Please select a valid due date");
                     return;
                 }
-                bool isUpdated = false;
-                string itemId = row.Cells["column_id_inv"].Value.ToString();
-                if (cbItemType.Text == "boots")
-                {
-                    isUpdated = HelperSql.ItemUpdateBoots(itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
-                }
-                else
-                {
-                    isUpdated = HelperSql.ItemUpdate(itemId, ClientId.ToString(), DatepickerDue.Value.ToString());
-                }
+
+                var itemId = Guid.Parse(row.Cells["column_id_inv"].Value.ToString());
+                var item = Program.ItemService.FindById(itemId);
+                var rental = Program.RentalService.FindActiveByIdItem(itemId);
+                item.IdClient = ClientId;
+                item.DueDate = DatepickerDue.Value.Date;
+                bool isUpdated = Program.ItemService.Update(item);
                 if (!isUpdated)
                 {
                     MessageBox.Show("Failed to update item.");
                     return;
                 }
-                HelperSql.HistoryInsert(itemId, ClientId);
-                MessageBox.Show("assignment has been successfully completed");
-                HelperSql.ClientUpdateActivity(ClientId, true);
+
+                Program.RentalService.Return(rental);
+
+                MessageBox.Show("Rental completed!");
+                Program.ClientService.Activity(ClientId, true);
                 LoadClient();
                 LoadInventory();
                 RefreshClientActivity();
             }
             else if (ReturnReplace == 2)
             {
-                ReplacmentSerial = row.Cells["column_serial_inv"].Value.ToString();
-                labelReplacmentItem.Text = ReplacmentSerial;
-                ItemIdInventory = row.Cells["column_id_inv"].Value.ToString();
+                labelReplacmentItem.Text = row.Cells["column_serial_inv"].Value.ToString();
+                ItemIdGridInventory = Guid.Parse(row.Cells["column_id_inv"].Value.ToString());
 
-                HelperSql.ItemUpdate(ItemIdClient, "Fire-Tec");
-                HelperSql.HistoryUpdate(ItemIdClient, ClientId);
-                HelperSql.ItemUpdate(ItemIdInventory, ClientId.ToString(), dueDate);
-                HelperSql.HistoryInsert(ItemIdInventory, ClientId);
+                // Return what I rented by mistake
+                Program.ItemService.Return(ItemIdGridClient);
+                var returning = Program.RentalService.FindActiveByIdItem(ItemIdGridClient);
+                returning.ReturnedAt = DateTime.Now.Date;
+                Program.RentalService.Update(returning);
+
+                // Rent the right thing
+                Program.ItemService.Rent(ItemIdGridInventory, ClientId, DateTime.Parse(DueDate));
+                Program.RentalService.Add(ClientId, ItemIdGridInventory, "Notes", DateTime.Now.Date, DateTime.Parse(DueDate));
 
                 LoadClient();
                 LoadInventory();
@@ -320,26 +451,34 @@ namespace InventoryManagmentSystem
             ModForm.ShowDialog();
 
             DataGridViewRow row = dataGridViewClient.Rows[e.RowIndex];
-            //Return Item
+            //Return Item2
             if (ReturnReplace == 1)
             {
-                string itemId = row.Cells["column_item_id"].Value.ToString();
-                bool isUpdated = HelperSql.ItemUpdate(itemId, "Fire-Tec");
-                if (isUpdated)
+                var itemId = Guid.Parse(row.Cells["column_item_id"].Value.ToString());
+                
+                Program.ItemService.Return(itemId);
+                var returning = Program.RentalService.FindActiveByIdItem(itemId);
+                if(returning == null)
                 {
-                    var items = HelperSql.ClientFindRented(ClientId);
-                    if (items.Count < 1)
-                    {
-                        HelperSql.ClientUpdateActivity(ClientId, false);
-                    }
-                    HelperSql.HistoryUpdate(itemId, ClientId);
-                    MessageBox.Show("Item Returned");
+                    Console.WriteLine("This item was not rented or does not exist.");
+                    return;
                 }
-                else { MessageBox.Show("Failed to return the item."); }
+
+                Program.RentalService.Return(returning);
+
+                // Check if client still has items rented
+                var items = Program.ItemService.FindByClientId(ClientId);
+                if (items.Count < 1)
+                {
+                    Program.ClientService.Activity(ClientId, false);
+                }
+
+                MessageBox.Show("Item Returned");
+
                 LoadClient();
                 LoadInventory();
             }
-            //Replace Item
+            //Replace Item2
             else if (ReturnReplace == 2)
             {
                 //lock the item type that is shown when a replacment is being done to match the item type of the item being replaced
@@ -348,9 +487,9 @@ namespace InventoryManagmentSystem
 
                 dataGridViewClient.Enabled = false;
 
-                dueDate = row.Cells["column_due_date"].Value.ToString();
+                DueDate = row.Cells["column_due_date"].Value.ToString();
                 string SelectedSerial = row.Cells["column_serial_number"].Value.ToString();
-                ItemIdClient = row.Cells["column_item_id"].Value.ToString();
+                ItemIdGridClient = Guid.Parse(row.Cells["column_item_id"].Value.ToString());
                 labelOldItem.Text = SelectedSerial;
                 labelTypeOfItem.Text = row.Cells["column_item_type"].Value.ToString();
             }
@@ -405,7 +544,6 @@ namespace InventoryManagmentSystem
             panelProfileRentalInfo.Visible = true;
             panelProfileMeasurments.Visible = true;
             flowLayoutPanelProfile.Visible = true;
-            license = labelProfileName.Text;
 
             panelButtons.Visible = true;
             panelButtons.AutoScroll = false;
@@ -423,7 +561,7 @@ namespace InventoryManagmentSystem
             {
                 dockedForm2.Dispose();
             }
-            LoadProfile(ClientId, currentUser);
+            LoadProfile(ClientId.ToString(), CurrentUser);
         }
 
         private void btnClass_Click(object sender, EventArgs e)
@@ -438,9 +576,9 @@ namespace InventoryManagmentSystem
         {
             flowLayoutPanelProfile.Visible = false;
             NewClientForm clientForm = new NewClientForm("Individual", labelProfileName.Text);
-            clientForm.clientId = ClientId;
+            clientForm.clientId = ClientId.ToString();
             cbItemType.Items.Clear();
-            HelperSql.ItemTypeLoadComboBox(cbItemType);
+            Program.ItemService.LoadComboBoxWithItemTypes(cbItemType);
             HelperFunctions.OpenChildFormToPanel(panel2, clientForm);
         }
     }

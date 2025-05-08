@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryManagmentSystem.Database.Types;
+using System;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
@@ -160,11 +161,11 @@ namespace InventoryManagmentSystem
 
         private void PrintRented()
         {
-            uint rented = HelperSql.ItemRentCount("jacket");
+            int rented = Program.ItemService.RentCount(ItemTypes.Jacket);
             btnCoats.Text = $"{rented} Coats";
-            rented = HelperSql.ItemRentCount("pants");
+            rented = Program.ItemService.RentCount(ItemTypes.Pants);
             btnPants.Text = $"{rented} Pants";
-            rented = HelperSql.ItemRentCount("helmet");
+            rented = Program.ItemService.RentCount(ItemTypes.Helmet);
             btnHelmets.Text = $"{rented} Helmets";
         }
 
@@ -186,13 +187,13 @@ namespace InventoryManagmentSystem
 
         private void PrintStock()
         {
-            var stock = HelperSql.ItemStockCount("boots");
+            var stock = Program.ItemService.StockCount(ItemTypes.Boots);
             ButtonInStockBoots.Text = $"{stock} Boots";
-            stock = HelperSql.ItemStockCount("helmet");
+            stock = Program.ItemService.StockCount(ItemTypes.Helmet);
             ButtonInStockHelmets.Text = $"{stock} Helmets";
-            stock = HelperSql.ItemStockCount("jacket");
+            stock = Program.ItemService.StockCount(ItemTypes.Jacket);
             ButtonInStockJackets.Text = $"{stock} Coats";
-            stock = HelperSql.ItemStockCount("pants");
+            stock = Program.ItemService.StockCount(ItemTypes.Pants);
             ButtonInStockPants.Text = $"{stock} Pants";
         }
 

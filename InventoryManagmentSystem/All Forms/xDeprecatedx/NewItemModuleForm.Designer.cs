@@ -82,7 +82,7 @@
             this.NewItemTxt.Text = "Select an item to add";
             this.NewItemTxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // Helmet
+            // Jacket
             // 
             this.Helmet.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Helmet.Location = new System.Drawing.Point(12, 127);
@@ -115,7 +115,7 @@
             this.Pants.UseVisualStyleBackColor = true;
             this.Pants.Click += new System.EventHandler(this.Pants_Click);
             // 
-            // Boots
+            // Jackect
             // 
             this.Boots.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Boots.Location = new System.Drawing.Point(597, 127);

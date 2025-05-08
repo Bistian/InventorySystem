@@ -16,7 +16,7 @@ namespace InventoryManagmentSystem
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="currClient">Client Name</param>
+        /// <param name="currClient">Client Location</param>
         /// <param name="DayNight">Period</param>
         /// <param name="RentalOption">Rental Selection</param>
         public WorkOrderModuleForm(string currClient, string DayNight, string RentalOption)
@@ -107,7 +107,7 @@ namespace InventoryManagmentSystem
             if (printDialog.ShowDialog() != DialogResult.OK)
                 return;
 
-            // Create a PrintDocument and set its properties
+            // Add a PrintDocument and set its properties
             PrintDocument printDocument = new PrintDocument();
             printDocument.DocumentName = "My Form";
             printDocument.PrinterSettings = printDialog.PrinterSettings;
@@ -117,7 +117,7 @@ namespace InventoryManagmentSystem
             // Print the document
             printDocument.Print();*/
 
-            /*    // Create a new PrintDocument object
+            /*    // Add a new PrintDocument object
                 PrintDocument pd = new PrintDocument();
 
                 // Set the PrintPage event handler
@@ -143,7 +143,7 @@ namespace InventoryManagmentSystem
             saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // Create a new PDF document
+                // Add a new PDF document
                 PdfDocument document = new PdfDocument();
 
                 // Add a new page to the PDF

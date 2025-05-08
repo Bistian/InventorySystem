@@ -53,7 +53,7 @@ namespace InventoryManagmentSystem
             }
         }
 
-        // Creates a new user in the database.
+        // Creates a new user in the _database.
         private void CreateNewUser()
         {
             try
@@ -84,7 +84,7 @@ namespace InventoryManagmentSystem
             }
         }
         
-        // Update an existing user in the database.
+        // Update an existing user in the _database.
         private void UpdateUser()
         {
             try

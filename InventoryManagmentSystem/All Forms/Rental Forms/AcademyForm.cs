@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 
-namespace InventoryManagmentSystem.Academy
+namespace InventoryManagmentSystem
 {
     public partial class AcademyForm : Form
     {

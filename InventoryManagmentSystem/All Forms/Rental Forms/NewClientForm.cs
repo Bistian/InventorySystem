@@ -1,9 +1,8 @@
 ﻿using InventoryManagmentSystem.C__Files;
-using Microsoft.Office.Interop.Excel;
+using InventoryManagmentSystem.Database.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Windows.Forms;
 
 
@@ -12,16 +11,15 @@ namespace InventoryManagmentSystem.Rental_Forms
     public partial class NewClientForm : Form
     {
         public string clientId = string.Empty;
-        private List<Item> academyList;
-        private List<Item> classList;
+        private List<Academy> academyList;
+        private List<Class> classList;
         private bool ExistingUser;
-        private Item client = null;
+        private Client client = null;
 
         public NewClientForm(string rentalType = null, string clientName = null)
         {
             InitializeComponent();
             PopulateAcademyList();
-            classList = new List<Item>();
             comboBoxRentalType.SelectedIndex = 0;
             maskPhone.Mask = "000-000-0000";
             if (clientName != null)
@@ -34,23 +32,42 @@ namespace InventoryManagmentSystem.Rental_Forms
         public void AutoFillFields(string type, string clientName)
         {
             RentalTypeSelector(type);
-            client = HelperSql.ClientFindByName(clientName);
-            if (client.Count() == 0) { return; }
+            client = Program.ClientService.FindByName(clientName);
+            if (client == null) { return; }
 
-            txtBoxCustomerName.Text = client.GetColumnValue("Name");
-            txtBoxDriversLicense.Text = client.GetColumnValue("DriversLicenseNumber");
-            maskPhone.Text = client.GetColumnValue("Phone");
-            txtBoxEmail.Text = client.GetColumnValue("Email");
-            textBoxChest.Text = client.GetColumnValue("Chest");
-            textBoxSleeve.Text = client.GetColumnValue("Sleeve");
-            textBoxWaist.Text = client.GetColumnValue("Waist");
-            textBoxInseam.Text = client.GetColumnValue("Inseam");
-            textBoxHips.Text = client.GetColumnValue("Hips");
-            textBoxWeight.Text = client.GetColumnValue("Weight");
-            textBoxHeight.Text = client.GetColumnValue("Height");
-            cbAcademy.Text = client.GetColumnValue("Academy");
-            cbRep.Text = client.GetColumnValue("FireTecRepresentative");
-            cbClass.Text = client.GetColumnValue("IdClass");
+            txtBoxCustomerName.Text = client.Name;
+            txtBoxDriversLicense.Text = client.DriverLicense;
+            maskPhone.Text = client.PhoneNumber;
+            txtBoxEmail.Text = client.Email;
+
+            var measurements = Program.MeasurementService.FindById(client.IdMeasurement);
+            textBoxChest.Text = measurements.Chest;
+            textBoxSleeve.Text = measurements.Sleeve;
+            textBoxWaist.Text = measurements.Waist;
+            textBoxInseam.Text = measurements.Inseam;
+            textBoxHips.Text = measurements.Hips;
+            textBoxWeight.Text = measurements.Weight;
+            textBoxHeight.Text = measurements.Height;
+
+            var student = Program.StudentService.FindByIdClient(client.Id);
+            if(student == null)
+            {
+                Program.StudentService.Add(client.Id);
+            }
+            else
+            {
+                if(student.IdClass != null)
+                {
+                    var classEntity = Program.ClassService.FindById(student.IdClass);
+                    cbClass.Text = classEntity.Name;
+                    var academy = Program.AcademyService.FindById(classEntity.IdAcademy);
+                    cbAcademy.Text = academy.Name;
+                }
+            }
+
+            // TODO: Add table for FireTec representatives
+            //cbRep.Text = client.GetColumnValue("FireTecRepresentative");
+            cbRep.Visible = false;
         }
 
         public void Clear()
@@ -112,10 +129,10 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void PopulateAcademyList()
         {
-            academyList = HelperSql.AcademyFillComboBox(cbAcademy);
+            academyList = Program.AcademyService.FindAll();
             foreach (var academy in academyList)
             {
-                cbAcademy.Items.Add(academy.GetColumnValue("Name"));
+                cbAcademy.Items.Add(academy.Name);
             }
         }
 
@@ -219,34 +236,52 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private bool SaveClient()
         {
-            var client = new Dictionary<string, string>();
-            string classId = string.Empty;
             ComboBoxItem Class = (ComboBoxItem)cbClass.SelectedItem;
-            classId = Class.ID;
-
-
+            string classId = Class.ID;
             if (Class.ID == string.Empty)
             {
                 return false;
             }
-            client["IdClass"] = classId == string.Empty ? null : classId.ToString();
-            client["Address"] = $"{txtBoxStreet.Text} {textBoxCity.Text} {textBoxState.Text} {textBoxZip.Text}";
-            client["Name"] = txtBoxCustomerName.Text;
-            client["Phone"] = maskPhone.Text;
-            client["Email"] = txtBoxEmail.Text;
-            client["DriversLicenseNumber"] = txtBoxDriversLicense.Text;
-            client["FireTecRepresentative"] = cbRep.Text;
-            client["Academy"] = cbAcademy.Text;
-            client["Chest"] = textBoxChest.Text;
-            client["Sleeve"] = textBoxSleeve.Text;
-            client["Waist"] = textBoxWaist.Text;
-            client["Inseam"] = textBoxInseam.Text;
-            client["Hips"] = textBoxHips.Text;
-            client["Height"] = textBoxHeight.Text;
-            client["Weight"] = textBoxWeight.Text;
 
-            bool inserted = HelperSql.ClientInsert(client);
-            if (inserted == false) { return false; }
+            // TODO: Text Box for address number
+            var address = Program.AddressService.Add(
+                txtBoxStreet.Text,
+                "default", //txtBoxNumber.Text,
+                textBoxCity.Text,
+                textBoxState.Text,
+                textBoxZip.Text
+            );
+
+            // TODO: Text Box for gender
+            var measurement = Program.MeasurementService.Add(
+                textBoxChest.Text, 
+                "Male", 
+                textBoxHeight.Text, 
+                textBoxHips.Text, 
+                textBoxInseam.Text, 
+                textBoxSleeve.Text, 
+                textBoxWaist.Text, 
+                textBoxWeight.Text
+            );
+
+            Guid? classUuid = null;
+            if(classId != null)
+            {
+                classUuid = Guid.Parse(classId);
+            }
+            // TODO: Table for FireTec employees (needed for FireTec Representatives cbRep.Text)
+            var newClient = Program.ClientService.Add(
+                address.Id, 
+                Guid.Empty, 
+                measurement.Id, 
+                txtBoxDriversLicense.Text, 
+                txtBoxEmail.Text, 
+                txtBoxCustomerName.Text, 
+                maskPhone.Text,
+                classUuid
+            );
+
+            if (newClient == null) { return false; }
 
             //hiding input panels
             panelFinalize.Visible = false;
@@ -328,8 +363,8 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
 
             NewRentalModuleForm DockedIn = this.Parent.Parent as NewRentalModuleForm;
-            DockedIn.currentUser = txtBoxCustomerName.Text;
-            DockedIn.license = txtBoxDriversLicense.Text;
+            DockedIn.CurrentUser = txtBoxCustomerName.Text;
+            DockedIn.Drivers = txtBoxDriversLicense.Text;
             panelRentalType.Visible = false;
 
             if (ExistingUser == false)
@@ -340,12 +375,12 @@ namespace InventoryManagmentSystem.Rental_Forms
                     //individual
                     if (comboBoxRentalType.SelectedIndex == 0)
                     {
-                        DockedIn.LoadProfile(DockedIn.license, txtBoxCustomerName.Text);
+                        DockedIn.LoadProfile(DockedIn.Drivers, txtBoxCustomerName.Text);
                     }
                     //department
                     else if (comboBoxRentalType.SelectedIndex == 1 || comboBoxRentalType.SelectedIndex == 2)
                     {
-                        DockedIn.LoadProfile(DockedIn.license, txtBoxCustomerName.Text);
+                        DockedIn.LoadProfile(DockedIn.Drivers, txtBoxCustomerName.Text);
                     }
                 }
             }
@@ -355,13 +390,13 @@ namespace InventoryManagmentSystem.Rental_Forms
                 if (comboBoxRentalType.SelectedIndex == 0)
                 {
                     UpdateClient(sender, e);
-                    DockedIn.LoadProfile(DockedIn.license, txtBoxCustomerName.Text);
+                    DockedIn.LoadProfile(DockedIn.Drivers, txtBoxCustomerName.Text);
                 }
                 //department
                 else if (comboBoxRentalType.SelectedIndex == 1 || comboBoxRentalType.SelectedIndex == 2)
                 {
                     UpdateClient(sender, e);
-                    DockedIn.LoadProfile(DockedIn.license, txtBoxCustomerName.Text);
+                    DockedIn.LoadProfile(DockedIn.Drivers, txtBoxCustomerName.Text);
                 }
                 panelContactInfo.Visible = false;
                 panelAddress.Visible = false;
@@ -432,29 +467,27 @@ namespace InventoryManagmentSystem.Rental_Forms
             if (classList != null) { classList.Clear(); }
             cbClass.Items.Clear();
 
-            var academyId = academyList[index].GetColumnValue("Id");
-            classList = HelperSql.ClassFindByAcademy(academyId);
+            var academyId = academyList[index].Id;
+            classList = Program.ClassService.FindByIdAcademy(academyId);
             if (classList == null) { return; }
             string currClass;
             cbClass.Enabled = true;
             foreach (var item in classList)
             {
-                string startDate = item.GetColumnValue("StartDate");
-                string endDate = item.GetColumnValue("EndDate");
-                var StartDateFinal = DateTime.Parse(startDate);
-                var startyear = StartDateFinal.Year;
-                var startmonth = StartDateFinal.Month;
-                var startday = StartDateFinal.Day;
+                var startDate = item.StartAt;
+                var endDate = item.EndAt;
+                var startyear = startDate.Year;
+                var startmonth = startDate.Month;
+                var startday = startDate.Day;
 
-                var EndDateFinal = DateTime.Parse(endDate);
-                if (EndDateFinal > DateTime.Now)
+                if (endDate > DateTime.Now)
                 {
-                    var endyear = EndDateFinal.Year;
-                    var endmonth = EndDateFinal.Month;
-                    var endday = EndDateFinal.Day;
+                    var endyear = endDate.Year;
+                    var endmonth = endDate.Month;
+                    var endday = endDate.Day;
 
-                    currClass = item.GetColumnValue("Name") + $" {startmonth}/{startday}/{startyear} - {endmonth}/{endday}/{endyear}";
-                    cbClass.Items.Add(new ComboBoxItem(item.GetColumnValue("Id"), currClass));
+                    currClass = item.Name + $" {startmonth}/{startday}/{startyear} - {endmonth}/{endday}/{endyear}";
+                    cbClass.Items.Add(new ComboBoxItem(item.Id.ToString(), currClass));
                 }
             }
         }
@@ -474,7 +507,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 txtBoxDriversLicense.Visible = true;
                 if (client != null)
                 {
-                    txtBoxDriversLicense.Text = client.GetColumnValue("DriversLicenseNumber");
+                    txtBoxDriversLicense.Text = client.DriverLicense;
                 }
             }
         }

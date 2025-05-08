@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InventoryManagmentSystem.Database.Entities;
+using InventoryManagmentSystem.Services;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -7,15 +9,15 @@ namespace InventoryManagmentSystem
 {
     public partial class ExistingCustomerModuleForm : Form
     {
-        List<Item> clients = new List<Item>();
+        List<Client> clients = new List<Client>();
 
         public bool isReturn = false;
 
         public ExistingCustomerModuleForm()
         {
             InitializeComponent();
-            HelperSql.ClientLoadToDataGrid(dataGridUsers);
-            cbActive.Checked = true;
+            Program.ClientService.LoadToDataGrid(dataGridUsers);
+            check_box_active.Checked = true;
         }
 
         private bool DeleteItem(DataGridViewCellEventArgs e)
@@ -25,7 +27,9 @@ namespace InventoryManagmentSystem
             string message = "Do you want to delete this Client?";
 
             string id = dataGridUsers.Rows[e.RowIndex].Cells[1].Value.ToString();
-            var rentedItems = HelperSql.ItemFindByClientId(id);
+            
+            var rentedItems = Program.ItemService.FindByClientId(Guid.Parse(id));
+            
             if (rentedItems.Count > 0)
             {
                 message = "Client did not return all items, cannot be deleted";
@@ -35,20 +39,15 @@ namespace InventoryManagmentSystem
             DialogResult result = MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.No) { return true; }
 
-            string query = "DELETE FROM tbClients WHERE Name=@Name";
-            string name = dataGridUsers.Rows[e.RowIndex].Cells[0].Value.ToString();
-            using (var connection = new SqlConnection(Program.ConnectionString))
-            using (var command = new SqlCommand(query, connection))
+            var client = Program.ClientService.FindById(Guid.Parse(id)); ;
+            var isDeleted = Program.ClientService.Delete(client);
+            if(isDeleted) 
             {
-                try
-                {
-                    connection.Open();
-                    command.Parameters.AddWithValue("@Name", name);
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
-                finally { connection.Close(); }
+                message = "Client cound not be deleted";
+                MessageBox.Show(message, "Can't delete", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
+
             LoadClients();
             return true;
         }
@@ -77,16 +76,15 @@ namespace InventoryManagmentSystem
             dataGridUsers.Rows.Clear();
             foreach (var client in clients)
             {
-                bool isActive = Boolean.Parse(client.GetColumnValue("IsActive"));
-                if (cbActive.Checked && cbInactive.Checked)
+                if (check_box_active.Checked && check_box_inactive.Checked)
                 {
                     AddClientToGrid(client, count);
                 }
-                else if (cbActive.Checked && isActive)
+                else if (check_box_active.Checked && client.IsActive)
                 {
                     AddClientToGrid(client, count);
                 }
-                else if (cbInactive.Checked && !isActive)
+                else if (check_box_inactive.Checked && !client.IsActive)
                 {
                     AddClientToGrid(client, count);
                 }
@@ -94,18 +92,17 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private void AddClientToGrid(Item client, uint count)
+        private void AddClientToGrid(Client client, uint count)
         {
             dataGridUsers.Rows.Add(
                 count,
-                client.GetColumnValue("Id"),
-                client.GetColumnValue("Name"),
-                client.GetColumnValue("Phone"),
-                client.GetColumnValue("Email"),
-                client.GetColumnValue("Academy"),
-                client.GetColumnValue("Address"),
-                client.GetColumnValue("DriversLicenseNumber"));
-
+                client.Id,
+                client.Name,
+                client.PhoneNumber,
+                client.Email,
+                "Academy ID",
+                "Address",
+                client.DriverLicense);
         }
 
         private void dataGridUsers_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -153,10 +150,10 @@ namespace InventoryManagmentSystem
             }
             string searchTerm = searchBar.Text;
             if (string.IsNullOrEmpty(searchTerm)) { LoadClients(); }
-            var clients = new List<Item>();
+            var clients = new List<Client>();
             dataGridUsers.Rows.Clear();
 
-            clients = HelperSql.ClientFindBySearchBar(searchTerm, cbActive.Checked, cbInactive.Checked);
+            clients = Program.ClientService.FindBySearchBar(searchTerm, check_box_active.Checked, check_box_inactive.Checked);
             if (clients == null) { return; }
 
             uint count = 1;
@@ -172,10 +169,9 @@ namespace InventoryManagmentSystem
         {
             string searchTerm = searchBar.Text;
             if (string.IsNullOrEmpty(searchTerm)) { LoadClients(); }
-            var clients = new List<Item>();
             dataGridUsers.Rows.Clear();
 
-            clients = HelperSql.ClientFindBySearchBar(searchTerm, cbActive.Checked, cbInactive.Checked);
+            clients = Program.ClientService.FindBySearchBar(searchTerm, check_box_active.Checked, check_box_inactive.Checked);
             if (clients == null) { return; }
 
             uint count = 1;
@@ -191,10 +187,9 @@ namespace InventoryManagmentSystem
         {
             string searchTerm = searchBar.Text;
             if (string.IsNullOrEmpty(searchTerm)) { LoadClients(); }
-            var clients = new List<Item>();
             dataGridUsers.Rows.Clear();
 
-            clients = HelperSql.ClientFindBySearchBar(searchTerm, cbActive.Checked, cbInactive.Checked);
+            clients = Program.ClientService.FindBySearchBar(searchTerm, check_box_active.Checked, check_box_inactive.Checked);
             if (clients == null) { return; }
 
             uint count = 1;

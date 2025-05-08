@@ -1,4 +1,4 @@
-﻿using InventoryManagmentSystem.Academy;
+﻿using InventoryManagmentSystem.Database.Entities;
 using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -8,7 +8,9 @@ namespace InventoryManagmentSystem
     public partial class CreateAcademyForm : Form
     {
         AcademyForm parent;
-        AcademyForm.Academy academy;
+        Academy academy;
+        Address address;
+        Contact contact;
         bool isUpdate = false;
 
         public CreateAcademyForm(AcademyForm parent) 
@@ -17,12 +19,14 @@ namespace InventoryManagmentSystem
             this.parent = parent;
 
         }
-        public CreateAcademyForm(AcademyForm parent, AcademyForm.Academy academy)
+        public CreateAcademyForm(AcademyForm parent, Guid academyId)
         {
             InitializeComponent();
             isUpdate = true;
             this.parent = parent;
-            this.academy = academy;
+            academy = Program.AcademyService.FindById(academyId);
+            address = Program.AddressService.FindById(academy.IdAddress);
+            contact = Program.ContactService.FindById(academy.IdContact);
             InitUpdate();
         }
 
@@ -30,14 +34,14 @@ namespace InventoryManagmentSystem
         {
             labelTitle.Text = "Update Academy";
             btnAdd.Text = "Update";
-            tbAcademyName.Text = academy.name;
-            tbContactName.Text = academy.contactName;
-            tbEmail.Text = academy.email;
-            tbPhone.Text = academy.phone;
-            tbStreet.Text = academy.street;
-            tbCity.Text = academy.city;
-            cbState.Text = academy.state;
-            tbZip.Text = academy.zip;
+            tbAcademyName.Text = academy.Name;
+            tbContactName.Text = "contact";
+            tbEmail.Text = "email";
+            tbPhone.Text = "phone";
+            tbStreet.Text = "street";
+            tbCity.Text = "city";
+            cbState.Text = "state";
+            tbZip.Text = "zip";
 
             btnResetName.Visible = true;
             btnResetName.Enabled = true;
@@ -158,46 +162,13 @@ namespace InventoryManagmentSystem
             }
         }
 
-        private bool UpdateAcademy()
-        {
-            string query = @"
-                Update tbAcademies
-                SET Name = @Name, Email = @Email, Phone = @Phone, Street = @Street, City = @City, State = @State, Zip = @Zip, ContactName = @ContactName
-                WHERE Id = @Id
-            ";
-            HelperFunctions.RemoveLineBreaksFromString(ref query);
-            using (var connection = new SqlConnection(Program.ConnectionString))
-            using (var command = new SqlCommand(query, connection))
-            {
-                try
-                {
-                    command.Parameters.AddWithValue("@Id", academy.uuid);
-                    command.Parameters.AddWithValue("@Name", tbAcademyName.Text);
-                    command.Parameters.AddWithValue("@ContactName", tbContactName.Text);
-                    command.Parameters.AddWithValue("@Email", tbEmail.Text);
-                    command.Parameters.AddWithValue("@Phone", tbPhone.Text);
-                    command.Parameters.AddWithValue("@Street", tbStreet.Text);
-                    command.Parameters.AddWithValue("@City", tbCity.Text);
-                    command.Parameters.AddWithValue("@State", cbState.Text);
-                    command.Parameters.AddWithValue("@Zip", tbZip.Text);
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                    return true;
-                }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
-                finally { connection.Close(); }
-                return false;
-            }            
-        }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (!AddErrorCheck()) { return; }
 
             if (isUpdate)
             {
-                if(!UpdateAcademy()) { return; }
+                Program.AcademyService.Update(academy);
                 HelperFunctions.OpenChildFormToPanel(parent.panelDocker, new AcademyList(parent));
                 this.Close();
             }
@@ -219,38 +190,38 @@ namespace InventoryManagmentSystem
 
         private void btnResetName_Click(object sender, EventArgs e)
         {
-            tbAcademyName.Text = academy.name;
+            tbAcademyName.Text = academy.Name;
         }
 
         private void btnResetEmail_Click(object sender, EventArgs e)
         {
-            tbEmail.Text = academy.email;
+            tbEmail.Text = contact.Email;
         }
 
         private void btnResetPhone_Click(object sender, EventArgs e)
         {
-            tbPhone.Text = academy.phone;
+            tbPhone.Text = contact.PhoneNumber;
         }
 
         private void btnResetStreet_Click(object sender, EventArgs e)
         {
-            tbStreet.Text = academy.street;
+            tbStreet.Text = address.Street;
         }
 
         private void btnResetCity_Click(object sender, EventArgs e)
         {
-            tbCity.Text = academy.city;
+            tbCity.Text = address.City;
         }
 
         private void btnResetZip_Click(object sender, EventArgs e)
         {
-            tbZip.Text = academy.zip;
-            cbState.Text = academy.state;
+            tbZip.Text = address.Zip;
+            cbState.Text = address.State;
         }
 
         private void btnResetContactName_Click(object sender, EventArgs e)
         {
-            tbContactName.Text = academy.contactName;
+            tbContactName.Text = contact.Name;
         }
     }
 }

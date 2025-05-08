@@ -1,4 +1,4 @@
-﻿namespace InventoryManagmentSystem.Academy
+﻿namespace InventoryManagmentSystem
 {
     partial class AcademyForm
     {

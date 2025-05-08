@@ -88,7 +88,7 @@ namespace InventoryManagmentSystem
         /// </summary>
         /// <param name="grid">Which table you are going to render.</param>
         /// <param name="query">SQL code for the table.</param>
-        /// <param name="columnName">Name of the column as it is in Edit Columns.</param>
+        /// <param name="columnName">Location of the column as it is in Edit Columns.</param>
         private void LoadTables(DataGridView grid, string query, string columnName)
         {
             // Change the styling for the date column.

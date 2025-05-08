@@ -33,8 +33,8 @@ namespace InventoryManagmentSystem
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExistingCustomerModuleForm));
             this.InventoryPanel = new System.Windows.Forms.Panel();
-            this.cbInactive = new System.Windows.Forms.CheckBox();
-            this.cbActive = new System.Windows.Forms.CheckBox();
+            this.check_box_inactive = new System.Windows.Forms.CheckBox();
+            this.check_box_active = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.searchBar = new System.Windows.Forms.TextBox();
             this.dataGridUsers = new System.Windows.Forms.DataGridView();
@@ -55,8 +55,8 @@ namespace InventoryManagmentSystem
             // InventoryPanel
             // 
             this.InventoryPanel.BackColor = System.Drawing.Color.Maroon;
-            this.InventoryPanel.Controls.Add(this.cbInactive);
-            this.InventoryPanel.Controls.Add(this.cbActive);
+            this.InventoryPanel.Controls.Add(this.check_box_inactive);
+            this.InventoryPanel.Controls.Add(this.check_box_active);
             this.InventoryPanel.Controls.Add(this.label1);
             this.InventoryPanel.Controls.Add(this.searchBar);
             this.InventoryPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -66,31 +66,31 @@ namespace InventoryManagmentSystem
             this.InventoryPanel.Size = new System.Drawing.Size(1500, 75);
             this.InventoryPanel.TabIndex = 24;
             // 
-            // cbInactive
+            // check_box_inactive
             // 
-            this.cbInactive.AutoSize = true;
-            this.cbInactive.ForeColor = System.Drawing.SystemColors.Window;
-            this.cbInactive.Location = new System.Drawing.Point(540, 38);
-            this.cbInactive.Margin = new System.Windows.Forms.Padding(6);
-            this.cbInactive.Name = "cbInactive";
-            this.cbInactive.Size = new System.Drawing.Size(118, 29);
-            this.cbInactive.TabIndex = 21;
-            this.cbInactive.Text = "Inactive";
-            this.cbInactive.UseVisualStyleBackColor = true;
-            this.cbInactive.CheckedChanged += new System.EventHandler(this.cbInactive_CheckedChanged);
+            this.check_box_inactive.AutoSize = true;
+            this.check_box_inactive.ForeColor = System.Drawing.SystemColors.Window;
+            this.check_box_inactive.Location = new System.Drawing.Point(540, 38);
+            this.check_box_inactive.Margin = new System.Windows.Forms.Padding(6);
+            this.check_box_inactive.Name = "cbInactive";
+            this.check_box_inactive.Size = new System.Drawing.Size(118, 29);
+            this.check_box_inactive.TabIndex = 21;
+            this.check_box_inactive.Text = "Inactive";
+            this.check_box_inactive.UseVisualStyleBackColor = true;
+            this.check_box_inactive.CheckedChanged += new System.EventHandler(this.cbInactive_CheckedChanged);
             // 
-            // cbActive
+            // check_box_active
             // 
-            this.cbActive.AutoSize = true;
-            this.cbActive.ForeColor = System.Drawing.SystemColors.Window;
-            this.cbActive.Location = new System.Drawing.Point(540, 6);
-            this.cbActive.Margin = new System.Windows.Forms.Padding(6);
-            this.cbActive.Name = "cbActive";
-            this.cbActive.Size = new System.Drawing.Size(103, 29);
-            this.cbActive.TabIndex = 20;
-            this.cbActive.Text = "Active";
-            this.cbActive.UseVisualStyleBackColor = true;
-            this.cbActive.CheckedChanged += new System.EventHandler(this.cbActive_CheckedChanged);
+            this.check_box_active.AutoSize = true;
+            this.check_box_active.ForeColor = System.Drawing.SystemColors.Window;
+            this.check_box_active.Location = new System.Drawing.Point(540, 6);
+            this.check_box_active.Margin = new System.Windows.Forms.Padding(6);
+            this.check_box_active.Name = "cbActive";
+            this.check_box_active.Size = new System.Drawing.Size(103, 29);
+            this.check_box_active.TabIndex = 20;
+            this.check_box_active.Text = "Active";
+            this.check_box_active.UseVisualStyleBackColor = true;
+            this.check_box_active.CheckedChanged += new System.EventHandler(this.cbActive_CheckedChanged);
             // 
             // label1
             // 
@@ -263,8 +263,8 @@ namespace InventoryManagmentSystem
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox searchBar;
         private System.Windows.Forms.DataGridView dataGridUsers;
-        private System.Windows.Forms.CheckBox cbInactive;
-        private System.Windows.Forms.CheckBox cbActive;
+        private System.Windows.Forms.CheckBox check_box_inactive;
+        private System.Windows.Forms.CheckBox check_box_active;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_count;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_name;

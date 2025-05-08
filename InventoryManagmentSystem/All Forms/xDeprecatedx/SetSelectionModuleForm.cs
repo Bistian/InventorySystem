@@ -355,7 +355,7 @@ namespace InventoryManagmentSystem
             {
                 if (DateTime.Today != DatepickerDue.Value.Date)
                 {
-                    // Helmet
+                    // Jacket
                     if (dataGridInv.Rows[e.RowIndex].Cells["Type"].Value.ToString() == "Helmet")
                     {
                         itemType = 1;
@@ -454,7 +454,7 @@ namespace InventoryManagmentSystem
         {
             if (MessageBox.Show("Are you sure you want to return this item", "Return", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                // Helmet
+                // Jacket
                 if (dataGridViewClient.Rows[e.RowIndex].Cells["Item"].Value.ToString() == "Helmet")
                 {
                     itemType = 1;

@@ -5,7 +5,7 @@ using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
-namespace InventoryManagmentSystem.Academy
+namespace InventoryManagmentSystem
 {
     public partial class ClassList : Form
     {

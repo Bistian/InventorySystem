@@ -1,16 +1,16 @@
-﻿using InventoryManagmentSystem.Academy;
+﻿using InventoryManagmentSystem.Database.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
-using static InventoryManagmentSystem.Academy.AcademyForm;
 
 namespace InventoryManagmentSystem
 {
     public partial class CreateClassForm : Form
     {
         Dictionary<string, string> academyMap = new Dictionary<string, string>();
+        List<Academy> academies;
 
         private bool isUpdate = false;
         AcademyForm parent;
@@ -59,11 +59,13 @@ namespace InventoryManagmentSystem
 
         private void LoadAcademies()
         {
-            academyMap = HelperSql.AcademyListNames();
-            foreach(var item in academyMap.Values)
+            academies = Program.AcademyService.FindAll();
+            var map = new Dictionary<string, string>();
+            foreach(var a in academies)
             {
-                cbAcademy.Items.Add(item);
+                map.Add(a.Id.ToString(), a.Name);
             }
+            cbAcademy.Items.Add(map);
         }
 
         /// <summary>

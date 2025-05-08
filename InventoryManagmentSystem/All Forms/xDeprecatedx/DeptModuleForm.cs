@@ -43,7 +43,7 @@ namespace InventoryManagmentSystem
             }
         }
 
-        // Helper function: adds new item to database.
+        // Helper function: adds new item to _database.
         private void CreateItem()
         {
             try
@@ -73,7 +73,7 @@ namespace InventoryManagmentSystem
             }
         }
 
-        // Helper function: updates existing item in the database.
+        // Helper function: updates existing item in the _database.
         private void UpdateItem()
         {
             try

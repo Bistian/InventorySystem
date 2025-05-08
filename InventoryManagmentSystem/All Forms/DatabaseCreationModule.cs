@@ -84,9 +84,9 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// Ask user to find a database file localy.
+        /// Ask user to find a _database file localy.
         /// </summary>
-        /// <returns>Name of the database.</returns>
+        /// <returns>Location of the _database.</returns>
         private string ChooseDatabaseFile()
         {
             var dialogBox = new OpenFileDialog();
@@ -104,12 +104,12 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// Get file path for new database.
+        /// Get file path for new _database.
         /// </summary>
         /// <returns>string file path</returns>
         private string GetNewDatabasePath()
         {
-            // Open dialog box to create a new database.
+            // Open dialog box to create a new _database.
             var saveDialog = new SaveFileDialog();
             saveDialog.Filter = "SQL Server database files| *.mdf";
 
@@ -400,14 +400,14 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// Create a new database and its tables.
+        /// Add a new _database and its tables.
         /// </summary>
         /// <param name="connectionString"></param>
         private bool CreateDatabase(string filePath)
         {
             string databaseName = Path.GetFileNameWithoutExtension(filePath);
 
-            // Create the new database file
+            // Add the new _database file
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string query = $@"
@@ -504,9 +504,9 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// Detaching a database releases its data and log files from the SQL Server instance.
-        /// Detaching the database allows you to maintain a backup of the database files before deleting them permanently.
-        /// It also ensures that the database is not actively used or accessed by any active connections or processes.
+        /// Detaching a _database releases its data and log files from the SQL Server instance.
+        /// Detaching the _database allows you to maintain a backup of the _database files before deleting them permanently.
+        /// It also ensures that the _database is not actively used or accessed by any active connections or processes.
         /// </summary>
         /// <param name="databaseName"></param>
         private void DetachDatabase(string databaseName)
@@ -518,7 +518,7 @@ namespace InventoryManagmentSystem
                 {
                     connection.Open();
 
-                    // Detach the database
+                    // Detach the _database
                     string detachCommand = $"EXEC sp_detach_db @dbname = N'{fileName}'";
                     using (SqlCommand command = new SqlCommand(detachCommand, connection))
                     {
@@ -536,7 +536,7 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// Deletes the database.
+        /// Deletes the _database.
         /// </summary>
         /// <param name="databaseName"></param>
         private void DropDatabase(string databaseName)
@@ -548,7 +548,7 @@ namespace InventoryManagmentSystem
                 {
                     connection.Open();
 
-                    // Drop the database
+                    // Drop the _database
                     string dropCommand = $"USE master; DROP DATABASE {fileName}";
                     using (SqlCommand command = new SqlCommand(dropCommand, connection))
                     {
@@ -565,7 +565,7 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// Used by devs to delete a database.
+        /// Used by devs to delete a _database.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

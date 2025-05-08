@@ -454,7 +454,7 @@
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
-            // Item
+            // Item2
             // 
             this.Item.HeaderText = "Item";
             this.Item.MinimumWidth = 6;

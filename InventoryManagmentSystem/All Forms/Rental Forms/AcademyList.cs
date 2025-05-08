@@ -1,11 +1,12 @@
-﻿using PdfSharp.Drawing;
+﻿using InventoryManagmentSystem.Database.Entities;
+using InventoryManagmentSystem.Database.Types;
+using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
-namespace InventoryManagmentSystem.Academy
+namespace InventoryManagmentSystem
 {
     public partial class AcademyList : Form
     {
@@ -15,22 +16,35 @@ namespace InventoryManagmentSystem.Academy
         {
             InitializeComponent();
             this.parent = parent;
-            HelperSql.AcademyFindAll(dataGridAcademies);
+            LoadDataGrid();
+        }
+
+        private void LoadDataGrid()
+        {
+            var academies = Program.AcademyService.FindAllFull();
+            int index = 0;
+            foreach (AcademyFull a in academies)
+            {
+                dataGridAcademies.Rows.Add(
+                    ++index,
+                    a.Id,
+                    a.AcademyName,
+                    a.ContactName,
+                    a.ContactEmail,
+                    a.ContactPhone,
+                    a.Street,
+                    a.City,
+                    a.State,
+                    a.Zip
+                );
+            }
         }
 
         private void UpdateAcademy(DataGridViewRow row)
         {
             dataGridAcademies.Visible = false;
-            AcademyForm.Academy academy = new AcademyForm.Academy();
-            academy.uuid = new Guid(row.Cells["column_id"].Value.ToString());
-            academy.name = row.Cells["column_name"].Value.ToString();
-            academy.email = row.Cells["column_email"].Value.ToString();
-            academy.phone = row.Cells["column_phone"].Value.ToString();
-            academy.street = row.Cells["column_street"].Value.ToString();
-            academy.city = row.Cells["column_city"].Value.ToString();
-            academy.state = row.Cells["column_state"].Value.ToString();
-            academy.zip = row.Cells["column_zip"].Value.ToString();
-            HelperFunctions.OpenChildFormToPanel(parent.panelDocker, new CreateAcademyForm(parent, academy));
+            var academyId = Guid.Parse(row.Cells["column_id"].Value.ToString());
+            HelperFunctions.OpenChildFormToPanel(parent.panelDocker, new CreateAcademyForm(parent, academyId));
             this.Close();
         }
 
@@ -40,7 +54,7 @@ namespace InventoryManagmentSystem.Academy
             string searchTerm = searchBar.Text;
             if (string.IsNullOrEmpty(searchTerm)) 
             {
-                HelperSql.AcademyFindAll(dataGridAcademies);
+                LoadDataGrid();
                 return;
             }
             
