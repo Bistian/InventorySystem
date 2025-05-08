@@ -25,7 +25,7 @@ namespace InventoryManagmentSystem.C__Files
 
             public override string ToString()
             {
-                return Name; // Ensures only "Name" is displayed in the ComboBox
+                return Name; // Ensures only "Location" is displayed in the ComboBox
             }
         
     }

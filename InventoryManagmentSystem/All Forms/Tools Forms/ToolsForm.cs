@@ -99,7 +99,7 @@ namespace InventoryManagmentSystem
 
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             SqlConnection connection = new SqlConnection(connectionString);
-            HelperSql.ItemTypeLoadComboBox(cbItemType);
+            Program.ItemService.LoadComboBoxWithItemTypes(cbItemType);
 #endif
         }
 

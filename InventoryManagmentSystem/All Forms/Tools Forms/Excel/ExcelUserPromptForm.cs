@@ -52,7 +52,7 @@ namespace InventoryManagmentSystem
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            // Create a new PromptEventArgs object with the selected worksheet and row.
+            // Add a new PromptEventArgs object with the selected worksheet and row.
             var arguments = new PromptEventArg
             {
                 selectedWorksheet = comboBoxColumns.Text,

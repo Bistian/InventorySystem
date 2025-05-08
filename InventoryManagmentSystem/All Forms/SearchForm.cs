@@ -12,7 +12,7 @@ namespace InventoryManagmentSystem.All_Forms
         public SearchForm(DataGridView grid, Form parent)
         {
             InitializeComponent();
-            HelperSql.ItemTypeLoadComboBox(cb_item_type);
+            Program.ItemService.LoadComboBoxWithItemTypes(cb_item_type);
 
             panel_serial_number.Visible = false;
             panel_size.Visible = false;
@@ -178,7 +178,7 @@ namespace InventoryManagmentSystem.All_Forms
                     while (reader.Read())
                     {
                         grid.Rows.Add(++index,
-                            reader[0], // Item ID
+                            reader[0], // Item2 ID
                             reader[1], // Size
                             "Color",
                             reader[2], // Material
@@ -300,7 +300,7 @@ namespace InventoryManagmentSystem.All_Forms
                     while (reader.Read())
                     {
                         grid.Rows.Add(++index,
-                            reader[0], // Item ID
+                            reader[0], // Item2 ID
                             "Size",
                             reader[1], // Color
                             "Material",
@@ -425,7 +425,7 @@ namespace InventoryManagmentSystem.All_Forms
                 while (reader.Read())
                 {
                     grid.Rows.Add(++index,
-                        reader[0], // Item ID
+                        reader[0], // Item2 ID
                         reader[1], // Size
                         "Color",
                         "Material",
@@ -550,7 +550,7 @@ namespace InventoryManagmentSystem.All_Forms
                 while (reader.Read())
                 {
                     grid.Rows.Add(++index,
-                        reader[0], // Item ID
+                        reader[0], // Item2 ID
                         reader[1], // Size
                         "Color",
                         "Material",
@@ -676,7 +676,7 @@ namespace InventoryManagmentSystem.All_Forms
                 while (reader.Read())
                 {
                     grid.Rows.Add(++index,
-                        reader[0], // Item ID
+                        reader[0], // Item2 ID
                         reader[1], // Size
                         "Color",
                         "Material",
@@ -749,7 +749,8 @@ namespace InventoryManagmentSystem.All_Forms
             }
             string type = cb_item_type.Text;
             ChangeVisibleColumns();
-            HelperSql.BrandsFillComboBox(type, cb_brand);
+
+            Program.BrandService.FillComboBox(cb_brand, type);
             if (type == "boots")
             {
                 panel_color.Visible = false;

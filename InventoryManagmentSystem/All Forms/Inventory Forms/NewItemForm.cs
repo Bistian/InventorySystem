@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryManagmentSystem.Database.Types;
+using System;
 using System.Windows.Forms;
 
 namespace InventoryManagmentSystem.Rental_Forms
@@ -10,7 +11,7 @@ namespace InventoryManagmentSystem.Rental_Forms
         private string tableName = "";
         private string itemType = "";
 
-        Item item;
+        ItemFull item;
 
         public NewItemForm()
         {
@@ -43,32 +44,32 @@ namespace InventoryManagmentSystem.Rental_Forms
         }
 
         // Init Update
-        public NewItemForm(Item item)
+        public NewItemForm(ItemFull item)
         {
             InitializeComponent();
 
             this.item = item;
             isUpdate = true;
-            itemType = item.GetColumnValue("ItemType");
+            itemType = item.Type;
 
             cbCondition.SelectedIndex = -1;
             
-            cbCondition.Text = item.GetColumnValue("Condition");
+            cbCondition.Text = item.Condition;
             cbCondition.Items.Add("Retired");
             cbCondition.Items.Add("Used");
 
-            HelperSql.BrandsFillComboBox(cbItemType.Text.ToLower(), cbBrand);
+            Program.BrandService.FillComboBox(cbBrand, cbItemType.Text);
             ManageFieldsAvailability();
             InitializeItemType();
             GetTableName();
             ExtractItemToForm(item);
         }
 
-        private void ExtractItemToForm(Item item)
+        private void ExtractItemToForm(ItemFull item)
         {
             // Extract condition
             cbCondition.SelectedIndex = -1;
-            string element = item.GetColumnValue("Condition");
+            string element = item.Condition;
             if(element.Length != 0)
             {
                 if (element == "New")
@@ -80,7 +81,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 {
                     for (int i = 0; i < cbCondition.Items.Count; ++i)
                     {
-                        if (cbCondition.Items[i].ToString() == item.GetColumnValue("Condition"))
+                        if (cbCondition.Items[i].ToString() == item.Condition)
                         {
                             cbCondition.SelectedIndex = i;
                             break;
@@ -90,11 +91,11 @@ namespace InventoryManagmentSystem.Rental_Forms
             }
 
             // Extract serial number
-            tbSerialNumber.Text = item.GetColumnValue("SerialNumber");
+            tbSerialNumber.Text = item.SerialNumber;
 
             // Extract brand
             cbBrand.SelectedIndex = -1;
-            element = item.GetColumnValue("Brand");
+            element = item.Brand;
             if (element.Length != 0)
             {
                 for (int i = 0; i < cbBrand.Items.Count; ++i)
@@ -109,7 +110,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
             // Extract size
             cbSize.SelectedIndex = -1;
-            element = item.GetColumnValue("Size");
+            element = item.Size;
             for (int i = 0; i < cbSize.Items.Count; ++i)
             {
                 if (cbSize.Items[i].ToString() == element)
@@ -121,7 +122,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
             // Extract color
             cbColor.SelectedIndex = -1;
-            element = item.GetColumnValue("Color");
+            element = item.Color;
             for (int i = 0; i < cbColor.Items.Count; ++i)
             {
                 if (cbColor.Items[i].ToString() == element)
@@ -133,7 +134,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
             // Extract material
             cbMaterial.SelectedIndex = -1;
-            element = item.GetColumnValue("Material");
+            element = item.Material;
             for (int i = 0; i < cbMaterial.Items.Count; ++i)
             {
                 if (cbMaterial.Items[i].ToString() == element)
@@ -143,14 +144,8 @@ namespace InventoryManagmentSystem.Rental_Forms
                 }
             }
 
-            // Extract acquisition date
-            DateTime selectedDate;
-            DateTime.TryParse(item.GetColumnValue("AcquisitionDate"), out selectedDate);
-            dtAcquisition.Value = selectedDate;
-
             // Extract manufacture date
-            DateTime.TryParse(item.GetColumnValue("ManufactureDate"), out selectedDate);
-            dtManufacture.Value = selectedDate;
+            dtManufacture.Value = item.ManufacturedAt;
         }
 
         private bool SelectTableAndAddItem(string uuid)
@@ -198,7 +193,7 @@ namespace InventoryManagmentSystem.Rental_Forms
                 return false;
             }
 
-            var item = HelperSql.ItemFindBySerialNumber(itemType, noSpaceSerial.ToUpper());
+            var item = Program.ItemService.FindBySerialNumber(itemType, noSpaceSerial);
             if (item != null)
             {
                 message = "Item already exists, do you want to update it?";
@@ -207,21 +202,62 @@ namespace InventoryManagmentSystem.Rental_Forms
                 UpdateItem();
                 return false;
             }
-       
-            string uuid = HelperSql.ItemInsertAndGetUuid(cbItemType.Text, noSpaceSerial.ToUpper(), cbCondition.Text, "Rent"); ;
-            if (uuid == "")
+
+            var brand = Program.BrandService.FindByNameAndType(cbBrand.Text, cbItemType.Text);
+            if(brand == null)
             {
-                Console.WriteLine("ERROR: UUID not found.");
+                Console.WriteLine("Brand is needed to create an item.");
                 return false;
             }
 
-            bool wasAdded = SelectTableAndAddItem(uuid);
-            if (!wasAdded)
+            var newItem = Program.ItemService.Add(
+                brand.Id, 
+                noSpaceSerial.ToUpper(), 
+                cbItemType.Text, 
+                cbCondition.Text, 
+                ItemConditions.New, 
+                new DateTime()
+            );
+            if(newItem == null)
             {
-                // If item was not added to the specific table, delete from Items Table.
-                HelperSql.ItemDelete(uuid);
-                MessageBox.Show("Could not save the item.");
+                Console.WriteLine("Failed to create the item.");
                 return false;
+            }
+
+            switch (newItem.Type)
+            {
+                case "Boots":
+                    {
+                        decimal size = decimal.Parse(cbSize.Text);
+                        Program.ItemService.AddBoots(newItem.Id, size, cbMaterial.Text);
+                        break;
+                    }
+                case "Helmet":
+                    {
+                        Program.ItemService.AddHelmet(newItem.Id, cbColor.Text);
+                        break;
+                    }
+                case "Jacket":
+                    {
+                        Program.ItemService.AddJacket(newItem.Id, cbSize.Text);
+                        break;
+                    }
+                case "Mask":
+                    {
+                        Program.ItemService.AddMask(newItem.Id, cbSize.Text);
+                        break;
+                    }
+                case "Pants":
+                    {
+                        Program.ItemService.AddPants(newItem.Id, cbSize.Text);
+                        break;
+                    }
+                default:
+                    {
+                        Console.WriteLine("Did not find complemt table. Item will not be added");
+                        Program.ItemService.Delete(newItem.Id, newItem.Type);
+                        return false;
+                    }
             }
 
             MessageBox.Show("Item has been successfully saved.");
@@ -235,60 +271,9 @@ namespace InventoryManagmentSystem.Rental_Forms
             string message = "Are you sure you want to update this Item?";
             string title = "Update Item";
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return false; }
-            string noSpaceSerial = tbSerialNumber.Text.Replace(" ", string.Empty);
 
-
-            var NewItem = HelperSql.ItemFindById(item.GetColumnValue("Id"));
-
-
-
-            bool isUpdated = false;
-            if (itemType == "boots") 
-            {
-                isUpdated = HelperSql.BootsUpdate(item.GetColumnValue("Id"),
-                    cbBrand.Text,
-                    cbSize.Text,
-                    cbMaterial.Text, 
-                    cbCondition.Text,
-                    dtManufacture.Value.Date.ToString(),
-                    tbSerialNumber.Text);
-            }
-            else if (itemType == "helmet") 
-            {
-                isUpdated = HelperSql.HelmetUpdate(item.GetColumnValue("Id"),
-                    cbBrand.Text, 
-                    dtManufacture.Value.Date.ToString(),
-                    cbCondition.Text,
-                    cbColor.Text,
-                    tbSerialNumber.Text); 
-            }
-            else if (itemType == "jacket") 
-            {
-                isUpdated = HelperSql.JacketUpdate(item.GetColumnValue("Id"),
-                    cbBrand.Text,
-                    dtManufacture.Value.Date.ToString(),
-                    cbCondition.Text,
-                    cbSize.Text,
-                    tbSerialNumber.Text);
-            }
-            else if (itemType == "mask")
-            {
-                isUpdated = HelperSql.MaskUpdate(item.GetColumnValue("Id"),
-                    cbBrand.Text,
-                    dtManufacture.Value.Date.ToString(),
-                    cbCondition.Text,
-                    cbSize.Text);
-            }
-            else if (itemType == "pants")
-            {
-                isUpdated = HelperSql.PantsUpdate(item.GetColumnValue("Id"),
-                    cbBrand.Text,
-                    dtManufacture.Value.Date.ToString(),
-                    cbCondition.Text,
-                    cbSize.Text);
-            }
-
-
+            bool isUpdated = Program.ItemService.Update(item);
+            
             if (isUpdated)
             {
                 MessageBox.Show("Item has been successfully updated.");
@@ -348,7 +333,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void InitializeItemType()
         {
-            HelperSql.ItemTypeLoadComboBox(cbItemType);
+            Program.ItemService.LoadComboBoxWithItemTypes(cbItemType);
             for (int i = 0; i < cbItemType.Items.Count; ++i)
             {
                 if (cbItemType.Items[i].ToString() == itemType)
@@ -510,7 +495,7 @@ namespace InventoryManagmentSystem.Rental_Forms
             form.cbItemType.Text = cbItemType.Text;
             form.close = true;
             form.ShowDialog();
-            HelperSql.BrandsFillComboBox(cbItemType.Text.ToLower(), cbBrand);
+            Program.BrandService.FillComboBox(cbBrand, cbItemType.Text);
             cbBrand.SelectedIndex = - 1;
         }
 
@@ -521,7 +506,7 @@ namespace InventoryManagmentSystem.Rental_Forms
 
         private void cbItemType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            HelperSql.BrandsFillComboBox(cbItemType.Text.ToLower(), cbBrand);
+            Program.BrandService.FillComboBox(cbBrand, cbItemType.Text);
             LoadSizes();
             ManageFieldsAvailability();
         }

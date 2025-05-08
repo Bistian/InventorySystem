@@ -136,7 +136,7 @@ namespace InventoryManagmentSystem
                 return;
             }
 
-            // Create a new PDF document
+            // Add a new PDF document
             PdfDocument document = new PdfDocument();
             action.Invoke(document);
 

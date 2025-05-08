@@ -27,7 +27,7 @@ namespace InventoryManagmentSystem.All_Forms
             callbackFunction = callback;
             nameList = columnNames;
 
-            // Create and add checkboxes dynamically.
+            // Add and add checkboxes dynamically.
             int Y = 10;
             foreach (var name in columnNames)
             {

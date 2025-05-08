@@ -5,6 +5,7 @@ using InventoryManagmentSystem.Rental_Forms;
 using InventoryManagmentSystem.All_Forms;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
+using InventoryManagmentSystem.Database.Types;
 
 namespace InventoryManagmentSystem
 {
@@ -44,20 +45,21 @@ namespace InventoryManagmentSystem
             ToggleFilter();
         }
 
-        private Item UpdateCreateItem(DataGridViewCellEventArgs e)
+        private ItemFull UpdateCreateItem(DataGridViewCellEventArgs e)
         {
             string ItemType = dataGridInv.Rows[e.RowIndex].Cells["column_item_type"].Value.ToString();
-            var item = new Item();
-            item.AddColumn("ItemType", ItemType);
-            item.AddColumn("Id", GetCellValueAsString(e, "column_item_id"));
-            item.AddColumn("SerialNumber", GetCellValueAsString(e, "column_serial"));
-            item.AddColumn("Brand", GetCellValueAsString(e, "column_brand"));
-            item.AddColumn("Condition", GetCellValueAsString(e, "column_condition"));
-            item.AddColumn("ManufactureDate", GetCellValueAsString(e, "column_manufacture_date"));
-            item.AddColumn("AcquisitionDate", GetCellValueAsString(e, "column_acquisition_date"));
-            item.AddColumn("Size", GetCellValueAsString(e, "column_size"));
-            item.AddColumn("Color", GetCellValueAsString(e, "column_color"));
-            item.AddColumn("Material", GetCellValueAsString(e, "column_material"));
+            ItemFull item = new ItemFull()
+            {
+                Id = Guid.Parse(GetCellValueAsString(e, "column_item_id")),
+                Type = ItemType,
+                SerialNumber = GetCellValueAsString(e, "column_serial"),
+                Brand = GetCellValueAsString(e, "column_brand"),
+                Condition = GetCellValueAsString(e, "column_condition"),
+                ManufacturedAt = DateTime.Parse(GetCellValueAsString(e, "column_manufacture_date")),
+                Size = GetCellValueAsString(e, "column_size"),
+                Color = GetCellValueAsString(e, "column_color"),
+                Material = GetCellValueAsString(e, "column_material"),
+            };
             return item;
         }
 
@@ -95,7 +97,12 @@ namespace InventoryManagmentSystem
             string title = "Delete Record";
             if (!HelperFunctions.YesNoMessageBox(message, title)) { return; }
 
-            bool isDeleted = HelperSql.ItemDelete(itemId);
+            var item = Program.ItemService.FindById(Guid.Parse(itemId));
+            if(item == null) {
+                Console.WriteLine("Invalid Item Id");
+                return; 
+            }
+            bool isDeleted = Program.ItemService.Delete(item.Id, item.Type);
 
             if (isDeleted)
             {

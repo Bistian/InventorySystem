@@ -5,6 +5,9 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using InventoryManagmentSystem.Config_Files;
+using Microsoft.Extensions.DependencyInjection;
+using InventoryManagmentSystem.Database;
+using InventoryManagmentSystem.Services;
 
 namespace InventoryManagmentSystem
 {
@@ -15,8 +18,73 @@ namespace InventoryManagmentSystem
         {
             get; private set;
         }
-
         public static string ConnectionString
+        {
+            get; private set;
+        }
+
+        // Global Services
+        public static AcademyService AcademyService
+        {
+            get; private set; 
+        }
+        public static AddressService AddressService
+        {
+            get; private set;
+        }
+        public static BootsService BootsService
+        {
+            get; private set;
+        }
+        public static BrandService BrandService
+        {
+            get; private set;
+        }
+        public static ClassService ClassService
+        {
+            get; private set;
+        }
+        public static ClientService ClientService
+        {
+            get; private set; 
+        }
+        public static ContactService ContactService
+        {
+            get; private set;
+        }
+        public static FireDepartmentService FireDepartmentService
+        {
+            get; private set;
+        }
+        public static HelmetService HelmetService
+        {
+            get; private set;
+        }
+        public static ItemService ItemService
+        {
+            get; private set;
+        }
+        public static JacketService JacketService
+        {
+            get; private set;
+        }
+        public static MaskService MaskService
+        {
+            get; private set;
+        }
+        public static MeasurementService MeasurementService
+        {
+            get; private set;
+        }
+        public static PantsService PantsService
+        {
+            get; private set;
+        }
+        public static RentalService RentalService
+        {
+            get; private set;
+        }
+        public static StudentService StudentService
         {
             get; private set;
         }
@@ -35,26 +103,45 @@ namespace InventoryManagmentSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Initialize the settings manager (this will load settings or create the file if missing)
+            // 1) Load JSON‐based settings
             SettingsManager = new SettingsManager();
 
-            // Get the current connection string
+            // 2) Get the current connection string
             ConnectionString = DatabaseConfig.GetConnectionString();
 
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                try
-                {
-                    connection.Open();
-                    connection.Close();
-                    Application.Run(new MainForm());
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    throw new Exception("Could not connect to database");
-                }
-            }
+            // 3) Dependency Injection container
+            var services = new ServiceCollection();
+            services.AddSingleton(SettingsManager);
+
+            var database = new AppDbContext(ConnectionString);
+            AcademyService = new AcademyService(database);
+            AddressService = new AddressService(database);
+            BootsService = new BootsService(database);
+            BrandService = new BrandService(database);
+            ClassService = new ClassService(database);
+            ClientService = new ClientService(database);
+            ContactService = new ContactService(database);
+            FireDepartmentService = new FireDepartmentService(database);
+            HelmetService = new HelmetService(database);
+            ItemService = new ItemService(database);
+            JacketService = new JacketService(database);
+            MaskService = new MaskService(database);
+            MeasurementService = new MeasurementService(database);
+            PantsService = new PantsService(database);
+            RentalService = new RentalService(database);
+            StudentService = new StudentService(database);
+
+            // 4) register your AppDbContext with the runtime string
+            services.AddScoped<AppDbContext>(serviceProvider =>
+             new AppDbContext(DatabaseConfig.GetConnectionString())
+            );
+
+            // 5) register your services
+            services.AddScoped<MainForm>();
+
+            var provider = services.BuildServiceProvider();
+
+            Application.Run(new MainForm());
         }
 
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)

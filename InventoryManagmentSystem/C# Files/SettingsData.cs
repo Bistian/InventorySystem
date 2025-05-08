@@ -70,7 +70,7 @@ namespace InventoryManagmentSystem
         {
             try
             {
-                // Create or overwrite the text file at the specified path
+                // Add or overwrite the text file at the specified path
                 using (StreamWriter writer = File.CreateText(filePath))
                 {
                     // Write the data in the specified format
@@ -191,7 +191,7 @@ namespace InventoryManagmentSystem
         {
             try
             {
-                // Create or overwrite the text file at the specified path
+                // Add or overwrite the text file at the specified path
                 using (StreamWriter writer = File.CreateText(filePath))
                 {
                     // Write the data in the specified format

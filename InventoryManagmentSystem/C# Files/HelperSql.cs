@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using static InventoryManagmentSystem.Academy.AcademyForm;
+using static InventoryManagmentSystem.AcademyForm;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
@@ -103,7 +103,7 @@ namespace InventoryManagmentSystem
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        // Create a map with the uuid as a key and the name as a value.
+                        // Add a map with the uuid as a key and the name as a value.
                         map.Add(reader[0].ToString(), reader[1].ToString());
                     }
                 }
@@ -1843,7 +1843,7 @@ namespace InventoryManagmentSystem
                             reader[5].ToString(),
                             //Location
                             reader[8].ToString(),
-                            //Item Type
+                            //Item2 Type
                             reader[1].ToString(),
                             //ClientName
                             reader[11].ToString()

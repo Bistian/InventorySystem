@@ -216,14 +216,14 @@
             this.NameColumn.Name = "NameColumn";
             this.NameColumn.ReadOnly = true;
             // 
-            // Boots
+            // Jackect
             // 
             this.Boots.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Boots.HeaderText = "Boots";
             this.Boots.Name = "Boots";
             this.Boots.ReadOnly = true;
             // 
-            // Helmets
+            // Jacket
             // 
             this.Helmets.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Helmets.HeaderText = "Helmets";

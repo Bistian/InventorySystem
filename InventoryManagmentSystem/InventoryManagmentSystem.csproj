@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -50,6 +51,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -141,46 +148,46 @@
     <Compile Include="All Forms\FilterForm.Designer.cs">
       <DependentUpon>FilterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\AcademyForm.cs">
+    <Compile Include="All Forms\Rental Forms\AcademyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\AcademyForm.Designer.cs">
+    <Compile Include="All Forms\Rental Forms\AcademyForm.Designer.cs">
       <DependentUpon>AcademyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\AcademyList.cs">
+    <Compile Include="All Forms\Rental Forms\AcademyList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\AcademyList.Designer.cs">
+    <Compile Include="All Forms\Rental Forms\AcademyList.Designer.cs">
       <DependentUpon>AcademyList.cs</DependentUpon>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\AssignStudentForm.cs">
+    <Compile Include="All Forms\Rental Forms\AssignStudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\AssignStudentForm.Designer.cs">
+    <Compile Include="All Forms\Rental Forms\AssignStudentForm.Designer.cs">
       <DependentUpon>AssignStudentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\ClassList.cs">
+    <Compile Include="All Forms\Rental Forms\ClassList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\ClassList.Designer.cs">
+    <Compile Include="All Forms\Rental Forms\ClassList.Designer.cs">
       <DependentUpon>ClassList.cs</DependentUpon>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\ClassRosterForm.cs">
+    <Compile Include="All Forms\Rental Forms\ClassRosterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\ClassRosterForm.Designer.cs">
+    <Compile Include="All Forms\Rental Forms\ClassRosterForm.Designer.cs">
       <DependentUpon>ClassRosterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\CreateAcademyForm.cs">
+    <Compile Include="All Forms\Rental Forms\CreateAcademyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\CreateAcademyForm.Designer.cs">
+    <Compile Include="All Forms\Rental Forms\CreateAcademyForm.Designer.cs">
       <DependentUpon>CreateAcademyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\CreateClassForm.cs">
+    <Compile Include="All Forms\Rental Forms\CreateClassForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="All Forms\Rental Forms\Academy Forms\CreateClassForm.Designer.cs">
+    <Compile Include="All Forms\Rental Forms\CreateClassForm.Designer.cs">
       <DependentUpon>CreateClassForm.cs</DependentUpon>
     </Compile>
     <Compile Include="All Forms\SearchForm.cs">
@@ -306,6 +313,29 @@
     <Compile Include="All Forms\Rental Forms\NewRentalModuleForm.Designer.cs">
       <DependentUpon>NewRentalModuleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Database\AppDbContext.cs" />
+    <Compile Include="Database\Entities\Academy.cs" />
+    <Compile Include="Database\Entities\Address.cs" />
+    <Compile Include="Database\Entities\Boots.cs" />
+    <Compile Include="Database\Entities\Brand.cs" />
+    <Compile Include="Database\Entities\Class.cs" />
+    <Compile Include="Database\Entities\Client.cs" />
+    <Compile Include="Database\Entities\Contact.cs" />
+    <Compile Include="Database\Entities\FireDepartment.cs" />
+    <Compile Include="Database\Entities\Helmet.cs" />
+    <Compile Include="Database\Entities\Item2.cs" />
+    <Compile Include="Database\Entities\ItemType.cs" />
+    <Compile Include="Database\Entities\Jacket.cs" />
+    <Compile Include="Database\Entities\Mask.cs" />
+    <Compile Include="Database\Entities\Measurement.cs" />
+    <Compile Include="Database\Entities\Pants.cs" />
+    <Compile Include="Database\Entities\Rental.cs" />
+    <Compile Include="Database\Entities\Student.cs" />
+    <Compile Include="Types\AcademyFull.cs" />
+    <Compile Include="Types\BusinessModels.cs" />
+    <Compile Include="Types\ItemConditions.cs" />
+    <Compile Include="Types\ItemFull.cs" />
+    <Compile Include="Types\ItemTypes.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -392,28 +422,46 @@
     <Compile Include="All Forms\xDeprecatedx\WorkOrderModuleForm.Designer.cs">
       <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\EF\ClientRepository .cs" />
+    <Compile Include="Repositories\Interfaces\IClientRepository.cs" />
+    <Compile Include="Services\AcademyService.cs" />
+    <Compile Include="Services\AddressService.cs" />
+    <Compile Include="Services\BootsService.cs" />
+    <Compile Include="Services\BrandService.cs" />
+    <Compile Include="Services\ClassService.cs" />
+    <Compile Include="Services\ClientService.cs" />
+    <Compile Include="Services\ContactService.cs" />
+    <Compile Include="Services\FireDepartmentService.cs" />
+    <Compile Include="Services\HelmetService.cs" />
+    <Compile Include="Services\ItemService.cs" />
+    <Compile Include="Services\JacketService.cs" />
+    <Compile Include="Services\MaskService.cs" />
+    <Compile Include="Services\MeasurementService.cs" />
+    <Compile Include="Services\PantsService.cs" />
+    <Compile Include="Services\RentalService.cs" />
+    <Compile Include="Services\StudentService.cs" />
     <EmbeddedResource Include="All Forms\FilterForm.resx">
       <DependentUpon>FilterForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="All Forms\Rental Forms\Academy Forms\AcademyForm.resx">
+    <EmbeddedResource Include="All Forms\Rental Forms\AcademyForm.resx">
       <DependentUpon>AcademyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="All Forms\Rental Forms\Academy Forms\AcademyList.resx">
+    <EmbeddedResource Include="All Forms\Rental Forms\AcademyList.resx">
       <DependentUpon>AcademyList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="All Forms\Rental Forms\Academy Forms\AssignStudentForm.resx">
+    <EmbeddedResource Include="All Forms\Rental Forms\AssignStudentForm.resx">
       <DependentUpon>AssignStudentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="All Forms\Rental Forms\Academy Forms\ClassList.resx">
+    <EmbeddedResource Include="All Forms\Rental Forms\ClassList.resx">
       <DependentUpon>ClassList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="All Forms\Rental Forms\Academy Forms\ClassRosterForm.resx">
+    <EmbeddedResource Include="All Forms\Rental Forms\ClassRosterForm.resx">
       <DependentUpon>ClassRosterForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="All Forms\Rental Forms\Academy Forms\CreateAcademyForm.resx">
+    <EmbeddedResource Include="All Forms\Rental Forms\CreateAcademyForm.resx">
       <DependentUpon>CreateAcademyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="All Forms\Rental Forms\Academy Forms\CreateClassForm.resx">
+    <EmbeddedResource Include="All Forms\Rental Forms\CreateClassForm.resx">
       <DependentUpon>CreateClassForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="All Forms\SearchForm.resx">
@@ -518,6 +566,7 @@
     <EmbeddedResource Include="All Forms\xDeprecatedx\WorkOrderModuleForm.resx">
       <DependentUpon>WorkOrderModuleForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -565,5 +614,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
 </Project>

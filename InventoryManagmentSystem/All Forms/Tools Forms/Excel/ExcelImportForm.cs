@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using InventoryManagmentSystem.Database.Types;
 
 namespace InventoryManagmentSystem
 {
@@ -65,7 +66,7 @@ namespace InventoryManagmentSystem
 
             excelFileName = openFileDialog.FileName;
 
-            // Create a new Excel application object and open the selected workbook.
+            // Add a new Excel application object and open the selected workbook.
             excelApp = new Excel.Application();
             excelApp.Visible = false;
             workbook = excelApp.Workbooks.Open(excelFileName);
@@ -131,7 +132,7 @@ namespace InventoryManagmentSystem
         /// Find the table being used based on the item type.
         /// </summary>
         /// <param name="itemType"></param>
-        /// <returns>Table Name or empty string if no table was found</returns>
+        /// <returns>Table Location or empty string if no table was found</returns>
         private string FindTableName()
         {
             // Find the type to know which table to use.
@@ -168,7 +169,7 @@ namespace InventoryManagmentSystem
         /// <param name="tableName"></param>
         private void FindNamesOfColumnsOnTable(string tableName)
         {
-            // Find the names of all columns on the database table.
+            // Find the names of all columns on the _database table.
             string query = $@"
                 SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS 
                 WHERE TABLE_NAME = '{tableName}' 
@@ -221,7 +222,7 @@ namespace InventoryManagmentSystem
                     }
                 }
 
-                var uuid = HelperSql.ItemInsertAndGetUuid(row[0].ToString(), row[2].ToString(), row[5].ToString(), "Rent");
+                var uuid = HelperSql.ItemInsertAndGetUuid(row[0].ToString(), row[2].ToString(), row[5].ToString(), BusinessModels.Rent);
 
                 if (uuid == "") { return; }
 
@@ -235,7 +236,7 @@ namespace InventoryManagmentSystem
 
                 if(!isInserted)
                 {
-                    HelperSql.ItemDelete(uuid);
+                    //Program.ItemService.Delete(null);
                     return;
                 }
             }
@@ -344,7 +345,7 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// Using standar Excel files, update the database.
+        /// Using standar Excel files, update the _database.
         /// </summary>
         /// <param name="tableName"></param>
         private void UpdateDatabase(string tableName)
@@ -482,7 +483,7 @@ namespace InventoryManagmentSystem
         }
 
         /// <summary>
-        /// Convert a value from Excel into the appropriate data type to fit the database column.
+        /// Convert a value from Excel into the appropriate data type to fit the _database column.
         /// </summary>
         /// <param name="value"></param>
         /// <param name="targetType"></param>
