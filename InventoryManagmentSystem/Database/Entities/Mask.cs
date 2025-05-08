@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InventoryManagmentSystem.Database.Entities
 {
-    internal class Mask
+    public class Mask
     {
         [Column("id")]
         public Guid Id
@@ -30,7 +30,7 @@ namespace InventoryManagmentSystem.Database.Entities
         }
 
         [ForeignKey(nameof(Id))]
-        public Item Item
+        public Item2 Item
         {
             get; set;
         }

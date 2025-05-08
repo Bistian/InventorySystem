@@ -30,7 +30,7 @@ namespace InventoryManagmentSystem.Database.Entities
         }
 
         [ForeignKey(nameof(Id))]
-        public Item Item
+        public Item2 Item
         {
             get; set;
         }

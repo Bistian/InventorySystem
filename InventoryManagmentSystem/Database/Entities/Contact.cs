@@ -12,13 +12,19 @@ namespace InventoryManagmentSystem.Database.Entities
         }
 
         [Column("name")]
-        public Guid Name
+        public string Name
         {
             get; set;
         }
 
         [Column("email")]
-        public Guid Email
+        public string Email
+        {
+            get; set;
+        }
+
+        [Column("phone_number")]
+        public string PhoneNumber
         {
             get; set;
         }

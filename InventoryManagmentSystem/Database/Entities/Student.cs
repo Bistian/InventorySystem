@@ -12,7 +12,7 @@ namespace InventoryManagmentSystem.Database.Entities
         }
 
         [Column("id_class")]
-        public Guid IdClass
+        public Guid? IdClass
         {
             get; set;
         }

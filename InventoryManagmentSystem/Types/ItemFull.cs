@@ -1,78 +1,58 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace InventoryManagmentSystem.Database.Entities
+namespace InventoryManagmentSystem.Database.Types
 {
-    public class Item
+    public class ItemFull
     {
-        [Column("id")]
         public Guid Id
         {
             get; set;
         }
-
-        [Column("id_brand")]
         public Guid IdBrand
         {
             get; set;
         }
-
-        [Column("id_client")]
         public Guid? IdClient
         {
             get; set;
         }
-
-        [Column("serial_number")]
         public string SerialNumber
         {
             get; set;
         }
-
-        [Column("type")]
         public string Type
         {
             get; set;
         }
-
-        [Column("condition")]
+        public string Brand
+        {
+            get; set;
+        }
         public string Condition
         {
             get; set;
         }
-
-        [Column("business_model")]
         public string BusinessModel
         {
             get; set;
         }
-
-        [Column("manufactured_at")]
-        public string ManufacturedAt
+        public DateTime? DueDate
         {
             get; set;
         }
-
-        [Column("created_at")]
-        public DateTime CreatedAt
+        public DateTime ManufacturedAt
         {
             get; set;
         }
-
-        [Column("updated_at")]
-        public DateTime UpdatedAt
+        public string Size
         {
             get; set;
         }
-
-        [ForeignKey(nameof(IdBrand))]
-        public Brand Brand
+        public string Material
         {
             get; set;
         }
-
-        [ForeignKey(nameof(IdClient))]
-        public Client Client
+        public string Color
         {
             get; set;
         }

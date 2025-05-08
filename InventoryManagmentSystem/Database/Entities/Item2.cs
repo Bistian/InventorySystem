@@ -1,54 +1,62 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InventoryManagmentSystem.Database.Entities
 {
-    public class Rental
+    public class Item2
     {
+        [Key]
         [Column("id")]
         public Guid Id
         {
             get; set;
         }
 
+        [Column("id_brand")]
+        public Guid IdBrand
+        {
+            get; set;
+        }
+
         [Column("id_client")]
-        public Guid IdClient
+        public Guid? IdClient
         {
             get; set;
         }
 
-        [Column("id_item")]
-        public Guid IdItem
+        [Column("serial_number")]
+        public string SerialNumber
         {
             get; set;
         }
 
-        [Column("id_representative")]
-        public Guid? IdRepresentative
+        [Column("type")]
+        public string Type
         {
             get; set;
         }
 
-        [Column("notes")]
-        public string Notes
+        [Column("condition")]
+        public string Condition
         {
             get; set;
         }
 
-        [Column("rented_at")]
-        public DateTime RentedAt
+        [Column("business_model")]
+        public string BusinessModel
         {
             get; set;
         }
 
-        [Column("returned_at")]
-        public DateTime? ReturnedAt
+        [Column("manufactured_at")]
+        public DateTime ManufacturedAt
         {
             get; set;
         }
 
         [Column("due_date")]
-        public DateTime DueDate
+        public DateTime? DueDate
         {
             get; set;
         }
@@ -65,22 +73,16 @@ namespace InventoryManagmentSystem.Database.Entities
             get; set;
         }
 
+        [ForeignKey(nameof(IdBrand))]
+        public Brand Brand
+        {
+            get; set;
+        }
+
         [ForeignKey(nameof(IdClient))]
         public Client Client
         {
             get; set;
         }
-
-        [ForeignKey(nameof(IdItem))]
-        public Item2 Item
-        {
-            get; set;
-        }
-
-        //[ForeignKey(nameof(IdRepresentative))]
-        //public Representative Representative
-        //{
-        //    get; set;
-        //}
     }
 }

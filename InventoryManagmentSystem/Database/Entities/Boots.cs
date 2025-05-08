@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace InventoryManagmentSystem.Database.Entities
 {
@@ -11,7 +15,7 @@ namespace InventoryManagmentSystem.Database.Entities
             get; set;
         }
 
-        [Column("size", TypeName = "numeric(4,1)")]
+        [Column("size")]
         public decimal Size
         {
             get; set;
@@ -36,7 +40,7 @@ namespace InventoryManagmentSystem.Database.Entities
         }
 
         [ForeignKey(nameof(Id))]
-        public Item Item
+        public Item2 Item
         {
             get; set;
         }

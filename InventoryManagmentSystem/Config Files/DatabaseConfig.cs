@@ -2,13 +2,14 @@
 {
     internal class DatabaseConfig
     {
-        // Use your local database path for testing
-        private static string filePath = @"C:\Code\Projects\dataReal (1).mdf";
-
+        // Use your local _database path for testing
+        private static string filePath = @"C:\Code\Projects\dataReal_1.mdf";
+        //private static string filePath = @"C:\Users\ferna\firetec_local.mdf";
+        
         /// <summary>
-        /// Get connection string to access database
+        /// Get connection string to access _database
         /// </summary>
-        /// <param name="customFilePath">Give a dynamic file path for database</param>
+        /// <param name="customFilePath">Give a dynamic file path for _database</param>
         /// <returns></returns>
         public static string GetConnectionString(string customFilePath = null)
         {
