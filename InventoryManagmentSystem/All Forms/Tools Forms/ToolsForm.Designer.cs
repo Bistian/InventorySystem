@@ -38,6 +38,7 @@
             this.tbUuid = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.BtnLocationUpdate = new System.Windows.Forms.Button();
+            this.ButtonCopyData = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnImport
@@ -95,7 +96,7 @@
             // btnAddItem
             // 
             this.btnAddItem.Enabled = false;
-            this.btnAddItem.Location = new System.Drawing.Point(16, 420);
+            this.btnAddItem.Location = new System.Drawing.Point(13, 511);
             this.btnAddItem.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(100, 28);
@@ -112,7 +113,7 @@
             this.cbItemType.FormattingEnabled = true;
             this.cbItemType.Items.AddRange(new object[] {
             "Detached UUID"});
-            this.cbItemType.Location = new System.Drawing.Point(16, 386);
+            this.cbItemType.Location = new System.Drawing.Point(13, 477);
             this.cbItemType.Margin = new System.Windows.Forms.Padding(4);
             this.cbItemType.Name = "cbItemType";
             this.cbItemType.Size = new System.Drawing.Size(100, 24);
@@ -122,7 +123,7 @@
             // tbUuid
             // 
             this.tbUuid.Enabled = false;
-            this.tbUuid.Location = new System.Drawing.Point(17, 354);
+            this.tbUuid.Location = new System.Drawing.Point(14, 445);
             this.tbUuid.Margin = new System.Windows.Forms.Padding(4);
             this.tbUuid.Name = "tbUuid";
             this.tbUuid.Size = new System.Drawing.Size(99, 22);
@@ -131,7 +132,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(17, 255);
+            this.button1.Location = new System.Drawing.Point(13, 373);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
@@ -142,7 +143,7 @@
             // 
             // BtnLocationUpdate
             // 
-            this.BtnLocationUpdate.Location = new System.Drawing.Point(17, 291);
+            this.BtnLocationUpdate.Location = new System.Drawing.Point(13, 409);
             this.BtnLocationUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.BtnLocationUpdate.Name = "BtnLocationUpdate";
             this.BtnLocationUpdate.Size = new System.Drawing.Size(100, 28);
@@ -151,12 +152,24 @@
             this.BtnLocationUpdate.UseVisualStyleBackColor = true;
             this.BtnLocationUpdate.Click += new System.EventHandler(this.BtnLocationUpdate_Click);
             // 
+            // ButtonCopyData
+            // 
+            this.ButtonCopyData.Location = new System.Drawing.Point(16, 226);
+            this.ButtonCopyData.Margin = new System.Windows.Forms.Padding(4);
+            this.ButtonCopyData.Name = "ButtonCopyData";
+            this.ButtonCopyData.Size = new System.Drawing.Size(118, 74);
+            this.ButtonCopyData.TabIndex = 12;
+            this.ButtonCopyData.Text = "Data Copy";
+            this.ButtonCopyData.UseVisualStyleBackColor = true;
+            this.ButtonCopyData.Click += new System.EventHandler(this.ButtonCopyData_Click);
+            // 
             // ToolsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.ButtonCopyData);
             this.Controls.Add(this.BtnLocationUpdate);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tbUuid);
@@ -187,5 +200,6 @@
         private System.Windows.Forms.TextBox tbUuid;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button BtnLocationUpdate;
+        private System.Windows.Forms.Button ButtonCopyData;
     }
 }
