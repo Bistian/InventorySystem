@@ -1135,6 +1135,8 @@ namespace InventoryManagmentSystem
             UpdateItemLocation();
         }
 
+
+        //TODO need to still do addresses and contact tables before testing is possible
         private bool CopyAcademies()
         {
             Guid id_address = Guid.NewGuid();
@@ -1176,9 +1178,46 @@ namespace InventoryManagmentSystem
 
         }
 
+        private bool CopyContacts()
+        {
+            DateTime date = DateTime.Now;
+
+            string query = $@"
+               INSERT INTO firetec_local.dbo.contacts (name, email, phone_number, created_at, updated_at)
+               SELECT Name, Email, Phone, @date, @date
+               FROM dataReal.dbo.tbAcademies;
+            ";
+
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                // Use parameters to avoid SQL injection & formatting issues
+                command.Parameters.AddWithValue("@date", date);
+
+                try
+                {
+                    if (connection.State == ConnectionState.Open)
+                        connection.Close();
+
+                    connection.Open();
+
+                    command.ExecuteNonQuery();
+
+                    connection.Close();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    connection.Close();
+                    return false;
+                }
+            }
+
+        }
         private void ButtonCopyData_Click(object sender, EventArgs e)
         {
-            CopyAcademies();
+            //CopyAcademies();
+            CopyContacts();
         }
     }
 }
