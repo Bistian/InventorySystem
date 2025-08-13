@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
-using System.Windows.Forms.VisualStyles;
-using Microsoft.VisualBasic;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
+using SmartyStreets.USStreetApi;
+using SmartyStreets;
+
+
 
 namespace InventoryManagmentSystem
 {
@@ -37,6 +32,15 @@ namespace InventoryManagmentSystem
         {
             InitializeComponent();
             devInitAddItem();
+        }
+
+        struct Address
+        {
+            string street;
+            string number;
+            string city;
+            string state;
+            string zip;
         }
 
         public void openChildForm(Form childForm)
@@ -1214,10 +1218,152 @@ namespace InventoryManagmentSystem
             }
 
         }
+
+
+        private int countAddresses()
+        {
+            string query = "SELECT COUNT(*) FROM tbClients";
+
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                try
+                {
+                    if (connection.State == ConnectionState.Open)
+                        connection.Close();
+
+                    connection.Open();
+
+                    // ExecuteScalar returns an object, cast to int
+                    int count = (int)command.ExecuteScalar();
+
+                    connection.Close();
+
+                    return count;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    connection.Close();
+                    return -1; // indicate error
+                }
+            }
+        }
+
+        public class AddressParser
+    {
+        private readonly Client client;
+
+        public AddressParser(string authId, string authToken)
+        {
+            var credentials = new StaticCredentials(authId, authToken);
+            client = new ClientBuilder(credentials).BuildUsStreetApiClient();
+        }
+
+        public async Task<ParsedAddress> ParseAsync(string rawAddress)
+        {
+            var lookup = new Lookup { Street = rawAddress };
+
+            await client.SendAsync(lookup);
+
+            if (lookup.Result.Count == 0)
+                return null; // No results found
+
+            var result = lookup.Result[0];
+            var c = result.Components;
+
+            return new ParsedAddress
+            {
+                PrimaryNumber = c.PrimaryNumber,
+                StreetName = c.StreetName,
+                StreetSuffix = c.StreetSuffix,
+                City = c.CityName,
+                State = c.State,
+                ZipCode = c.ZipCode,
+                Plus4Code = c.Plus4Code,
+                DeliveryLine = result.DeliveryLine1,
+                LastLine = result.LastLine,
+                DpvMatchCode = result.Analysis?.DpvMatchCode
+            };
+        }
+    }
+
+        public class ParsedAddress
+    {
+        public string PrimaryNumber
+        {
+            get; set;
+        }
+        public string StreetName
+        {
+            get; set;
+        }
+        public string StreetSuffix
+        {
+            get; set;
+        }
+        public string City
+        {
+            get; set;
+        }
+        public string State
+        {
+            get; set;
+        }
+        public string ZipCode
+        {
+            get; set;
+        }
+        public string Plus4Code
+        {
+            get; set;
+        }
+        public string DeliveryLine
+        {
+            get; set;
+        }
+        public string LastLine
+        {
+            get; set;
+        }
+        public string DpvMatchCode
+        {
+            get; set;
+        }
+}
+
+
+
+        private async void Parseaddress(string Unedited)
+        {
+            // Instantiate with your credentials
+            var parser = new AddressParser("88065888-0efa-1a05-2a12-0a0cac807335", "FaphEwaRZ4CO1eQyFRyo");
+
+            // Parse an address string
+            var parsed = await parser.ParseAsync(Unedited);
+
+            // Use the parsed results
+            if (parsed != null)
+            {
+                Console.WriteLine($"Street: {parsed.PrimaryNumber} {parsed.StreetName} {parsed.StreetSuffix}");
+                Console.WriteLine($"City: {parsed.City}");
+                Console.WriteLine($"State: {parsed.State}");
+                Console.WriteLine($"Zip: {parsed.ZipCode}-{parsed.Plus4Code}");
+                Console.WriteLine($"DPV Match: {parsed.DpvMatchCode}");
+            }
+            else
+            {
+                Console.WriteLine("Address could not be parsed.");
+            }
+
+        }
         private void ButtonCopyData_Click(object sender, EventArgs e)
         {
-            //CopyAcademies();
-            CopyContacts();
+            //TODO CopyAcademies();
+            //CopyContacts();
+
+            //Parseaddress("365 Nw Biltmore st Port StvLucie Fl 34983");
+
+            countAddresses();
         }
     }
 }
